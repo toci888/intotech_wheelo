@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3A19DB4A-BD73-4AE3-88C2-6AF36B200133}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Toci.Driver.Bll.Porsche</RootNamespace>
+    <AssemblyName>Toci.Driver.Bll.Porsche</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Association\AssociationCalculations.cs" />
+    <Compile Include="Association\AssociationEntity.cs" />
+    <Compile Include="Association\AssociationTmtw.cs" />
+    <Compile Include="Association\AssociationTmtwBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\UserService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Toci.Driver.Common.Gatekeeper.Interfaces\Toci.Driver.Common.Gatekeeper.Interfaces.csproj">
+      <Project>{27c99ade-e0e6-4432-98fd-9f6bbf9b1039}</Project>
+      <Name>Toci.Driver.Common.Gatekeeper.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Toci.Driver.Bll.Porsche.Interfaces.csproj">
+      <Project>{be933daf-27f8-4129-bb90-12633a667271}</Project>
+      <Name>Toci.Driver.Bll.Porsche.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Toci.Driver.Common.Gatekeeper\Toci.Driver.Common.Gatekeeper.csproj">
+      <Project>{10fcbe5c-8b00-4b7e-80b0-9066d18fe8a0}</Project>
+      <Name>Toci.Driver.Common.Gatekeeper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Toci.Driver.Dal.Invitation.Interfaces\Toci.Driver.Dal.Invitation.Interfaces.csproj">
+      <Project>{6307169e-918c-43c4-802b-7f035296c0af}</Project>
+      <Name>Toci.Driver.Dal.Invitation.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Toci.Driver.Dal\Toci.Wheelo.Dal.Anathema.csproj">
+      <Project>{12db987c-2e2d-4eff-9a6b-f59e6c5e0b50}</Project>
+      <Name>Toci.Wheelo.Dal.Anathema</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

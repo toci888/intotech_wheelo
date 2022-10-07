@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wheelo.Nfs.Database.Persistence", "Wheelo.Nfs.Database.Persistence\Wheelo.Nfs.Database.Persistence.csproj", "{4972EA99-37C8-4FB0-B965-E1A534E4B722}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wheelo.Common", "Wheelo.Common", "{274274C7-194C-4825-B5E0-567559EE6CB1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wheelo.ApiGateway", "Wheelo.ApiGateway", "{EAE3DE2F-ADDC-499D-81B2-468B44389E76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wheelo.Center", "Wheelo.Center", "{2C31471E-489C-45B8-AC11-E08D3213ACA0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wheelo.Core", "Wheelo.Core", "{760937ED-E3EE-430D-99CF-710D17ED1329}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wheelo.Infrastructure", "Wheelo.Infrastructure", "{84F9953B-68DA-4CA5-BD58-8E7071F032FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wheelo.MortalCombat.Database.Interfaces", "..\Wheelo.MortalCombat.Database.Interfaces\Wheelo.MortalCombat.Database.Interfaces.csproj", "{034A4473-C789-4D8F-8236-DF2C591A1567}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wheelo.MortalCombat.Database", "..\Wheelo.MortalCombat.Database\Wheelo.MortalCombat.Database.csproj", "{7E443707-9C7C-4FB1-AD84-E330EA20A1AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wheelo.Tests", "Wheelo.Tests", "{ABA49B58-9E3B-4F2F-92E7-DF45191BFAE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wheelo.Test", "..\..\Wheelo.Tests\Wheelo.Test\Wheelo.Test.csproj", "{8E2B58E3-28F3-4258-9A88-515DF759E85F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4972EA99-37C8-4FB0-B965-E1A534E4B722}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4972EA99-37C8-4FB0-B965-E1A534E4B722}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4972EA99-37C8-4FB0-B965-E1A534E4B722}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4972EA99-37C8-4FB0-B965-E1A534E4B722}.Release|Any CPU.Build.0 = Release|Any CPU
+		{034A4473-C789-4D8F-8236-DF2C591A1567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{034A4473-C789-4D8F-8236-DF2C591A1567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{034A4473-C789-4D8F-8236-DF2C591A1567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{034A4473-C789-4D8F-8236-DF2C591A1567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E443707-9C7C-4FB1-AD84-E330EA20A1AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E443707-9C7C-4FB1-AD84-E330EA20A1AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E443707-9C7C-4FB1-AD84-E330EA20A1AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E443707-9C7C-4FB1-AD84-E330EA20A1AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E2B58E3-28F3-4258-9A88-515DF759E85F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E2B58E3-28F3-4258-9A88-515DF759E85F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E2B58E3-28F3-4258-9A88-515DF759E85F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E2B58E3-28F3-4258-9A88-515DF759E85F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4972EA99-37C8-4FB0-B965-E1A534E4B722} = {274274C7-194C-4825-B5E0-567559EE6CB1}
+		{034A4473-C789-4D8F-8236-DF2C591A1567} = {274274C7-194C-4825-B5E0-567559EE6CB1}
+		{7E443707-9C7C-4FB1-AD84-E330EA20A1AC} = {274274C7-194C-4825-B5E0-567559EE6CB1}
+		{8E2B58E3-28F3-4258-9A88-515DF759E85F} = {ABA49B58-9E3B-4F2F-92E7-DF45191BFAE8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6178615-65F3-416C-AD3D-55B9660A9A4A}
+	EndGlobalSection
+EndGlobal
