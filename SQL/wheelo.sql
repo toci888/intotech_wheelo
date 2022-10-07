@@ -141,7 +141,3 @@ create table Cars
     AvailableSeats int not null,
 	DateWhen timestamp default now()
 );
-
-
-
-

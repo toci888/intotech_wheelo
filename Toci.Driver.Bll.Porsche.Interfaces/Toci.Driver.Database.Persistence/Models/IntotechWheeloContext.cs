@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Toci.Driver.Database.Persistence.Models
 {
-    public partial class TociWheeloContext : DbContext
+    public partial class IntotechWheeloContext : DbContext
     {
-        public TociWheeloContext()
+        public IntotechWheeloContext()
         {
         }
 
-        public TociWheeloContext(DbContextOptions<TociWheeloContext> options)
+        public IntotechWheeloContext(DbContextOptions<IntotechWheeloContext> options)
             : base(options)
         {
         }
@@ -38,7 +38,7 @@ namespace Toci.Driver.Database.Persistence.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("Host=localhost;Database=Toci.Wheelo;Username=postgres;Password=beatka");
+                optionsBuilder.UseNpgsql("Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka");
             }
         }
 
