@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common.Bll.Interfaces\Toci.Common.Bll.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common.Bll\Toci.Common.Bll.csproj" />
+    <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common.Database.Interfaces\Toci.Common.Database.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common.Database\Toci.Common.Database.csproj" />
+    <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common\Toci.Common.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

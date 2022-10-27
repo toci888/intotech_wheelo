@@ -44,6 +44,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toci.Common.Microservices.I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toci.ExcelLibrary.Extensions", "..\..\toci_common\Toci.Common\Toci.ExcelLibrary.Extensions\Toci.ExcelLibrary.Extensions.csproj", "{5A2D5A03-8EB0-4E42-AF69-62C2B2EC3242}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech", "Intotech", "{66179D80-4651-4A88-BD8D-83766DC4B059}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Bll.Persistence.Interfaces", "Intotech.Wheelo.Bll.Persistence.Interfaces\Intotech.Wheelo.Bll.Persistence.Interfaces.csproj", "{937804BB-FFA7-4427-AFEC-5E19B667C5E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Bll.Persistence", "Intotech.Wheelo.Bll.Persistence\Intotech.Wheelo.Bll.Persistence.csproj", "{2632C2CE-C949-422B-B536-3616BA262C46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -188,6 +194,22 @@ Global
 		{5A2D5A03-8EB0-4E42-AF69-62C2B2EC3242}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A2D5A03-8EB0-4E42-AF69-62C2B2EC3242}.Release|x64.ActiveCfg = Release|Any CPU
 		{5A2D5A03-8EB0-4E42-AF69-62C2B2EC3242}.Release|x64.Build.0 = Release|Any CPU
+		{937804BB-FFA7-4427-AFEC-5E19B667C5E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{937804BB-FFA7-4427-AFEC-5E19B667C5E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{937804BB-FFA7-4427-AFEC-5E19B667C5E5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{937804BB-FFA7-4427-AFEC-5E19B667C5E5}.Debug|x64.Build.0 = Debug|Any CPU
+		{937804BB-FFA7-4427-AFEC-5E19B667C5E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{937804BB-FFA7-4427-AFEC-5E19B667C5E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{937804BB-FFA7-4427-AFEC-5E19B667C5E5}.Release|x64.ActiveCfg = Release|Any CPU
+		{937804BB-FFA7-4427-AFEC-5E19B667C5E5}.Release|x64.Build.0 = Release|Any CPU
+		{2632C2CE-C949-422B-B536-3616BA262C46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2632C2CE-C949-422B-B536-3616BA262C46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2632C2CE-C949-422B-B536-3616BA262C46}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2632C2CE-C949-422B-B536-3616BA262C46}.Debug|x64.Build.0 = Debug|Any CPU
+		{2632C2CE-C949-422B-B536-3616BA262C46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2632C2CE-C949-422B-B536-3616BA262C46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2632C2CE-C949-422B-B536-3616BA262C46}.Release|x64.ActiveCfg = Release|Any CPU
+		{2632C2CE-C949-422B-B536-3616BA262C46}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
