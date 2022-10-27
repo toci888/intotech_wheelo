@@ -8,8 +8,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Persistence.Interfaces
 {
-    public interface ICarLogic : ILogicBase<Car>
+    public interface ICarsBrandLogic : ILogicBase<Carsbrand>
     {
-        //??
     }
 }
