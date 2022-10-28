@@ -141,3 +141,18 @@ create table Cars
     AvailableSeats int not null,
 	DateWhen timestamp default now()
 );
+
+create table WorkTrip
+(
+	id serial primary key,
+    IdUser int references users (id),
+    FromLongitude decimal,
+    FromLatitude decimal,
+    FromStreet text,
+    ToLongitude decimal,
+    ToLatitude decimal,
+    ToStreet text,
+    FromHour time, -- 0 60 -> 1 
+    ToHour time,
+    AcceptableDistance decimal
+);

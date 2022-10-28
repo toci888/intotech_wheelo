@@ -54,11 +54,21 @@
       <Project>{27c99ade-e0e6-4432-98fd-9f6bbf9b1039}</Project>
       <Name>Toci.Driver.Common.Gatekeeper.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Intotech.Wheelo.Bll.Persistence.Interfaces\Intotech.Wheelo.Bll.Persistence.Interfaces.csproj">
+      <Project>{937804bb-ffa7-4427-afec-5e19b667c5e5}</Project>
+      <Name>Intotech.Wheelo.Bll.Persistence.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Toci.Driver.Dal.Invitation.Interfaces\Toci.Driver.Dal.Invitation.Interfaces.csproj">
       <Project>{6307169e-918c-43c4-802b-7f035296c0af}</Project>
       <Name>Toci.Driver.Dal.Invitation.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj">
+      <Project>{f3ff1397-b4d7-4130-97be-31df7dd190ea}</Project>
+      <Name>Toci.Driver.Database.Persistence</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Association\SourceDestinationCollocating\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
