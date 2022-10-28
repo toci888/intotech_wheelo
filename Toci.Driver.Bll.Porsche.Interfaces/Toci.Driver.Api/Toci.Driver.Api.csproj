@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
    
     <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common.Bll.Interfaces\Toci.Common.Bll.Interfaces.csproj" />
     <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common.Bll\Toci.Common.Bll.csproj" />
@@ -24,6 +20,8 @@
     <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common.Microservices\Toci.Common.Microservices.csproj" />
     <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common\Toci.Common.csproj" />
     <ProjectReference Include="..\..\Toci.Driver.Common.Gatekeeper.Interfaces\Toci.Driver.Common.Gatekeeper.Interfaces.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Bll.Persistence.Interfaces\Intotech.Wheelo.Bll.Persistence.Interfaces.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Bll.Persistence\Intotech.Wheelo.Bll.Persistence.csproj" />
     <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Toci.Driver.Bll.Porsche.Interfaces.csproj" />
     <ProjectReference Include="..\Toci.Driver.Bll.Porsche\Toci.Driver.Bll.Porsche.csproj" />
     <ProjectReference Include="..\Toci.Driver.Common.Gatekeeper\Toci.Driver.Common.Gatekeeper.csproj" />
