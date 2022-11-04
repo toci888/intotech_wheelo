@@ -47,14 +47,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Toci.Driver.Common.Gatekeeper.Interfaces\Toci.Driver.Common.Gatekeeper.Interfaces.csproj">
-      <Project>{27c99ade-e0e6-4432-98fd-9f6bbf9b1039}</Project>
-      <Name>Toci.Driver.Common.Gatekeeper.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Toci.Driver.Common.Gatekeeper\Toci.Driver.Common.Gatekeeper.csproj">
-      <Project>{10fcbe5c-8b00-4b7e-80b0-9066d18fe8a0}</Project>
-      <Name>Toci.Driver.Common.Gatekeeper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Toci.Driver.Dal.Invitation.Interfaces\Toci.Driver.Dal.Invitation.Interfaces.csproj">
       <Project>{6307169e-918c-43c4-802b-7f035296c0af}</Project>
       <Name>Toci.Driver.Dal.Invitation.Interfaces</Name>

@@ -161,11 +161,5 @@
       <LastGenOutput>DriverModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Toci.Driver.Common.Gatekeeper.Interfaces\Toci.Driver.Common.Gatekeeper.Interfaces.csproj">
-      <Project>{27c99ade-e0e6-4432-98fd-9f6bbf9b1039}</Project>
-      <Name>Toci.Driver.Common.Gatekeeper.Interfaces</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
