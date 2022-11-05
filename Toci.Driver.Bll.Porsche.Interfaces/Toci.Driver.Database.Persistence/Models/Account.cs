@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace Toci.Driver.Database.Persistence.Models
 {
     public partial class Account
@@ -32,7 +30,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public string Password { get; set; }
         public int? Emailconfirmed { get; set; }
         public int? Idgeographicregion { get; set; }
-        public DateTime? Datewhen { get; set; }
+        public DateTime? Createdat { get; set; }
         public int Idrole { get; set; }
         public string Token { get; set; }
 

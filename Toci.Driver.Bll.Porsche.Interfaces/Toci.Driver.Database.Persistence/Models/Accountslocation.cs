@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace Toci.Driver.Database.Persistence.Models
 {
     public partial class Accountslocation
@@ -15,7 +13,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public string Streetto { get; set; }
         public string Cityfrom { get; set; }
         public string Cityto { get; set; }
-        public DateTime? Datewhen { get; set; }
+        public DateTime? Createdat { get; set; }
 
         public virtual Account IdaccountsNavigation { get; set; }
     }

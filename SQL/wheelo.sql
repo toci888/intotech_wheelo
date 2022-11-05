@@ -4,6 +4,7 @@ drop view VInvitations;
 drop view VAccountsCollocations;
 drop view VFriendSuggestions;
 
+drop table WorkTrip;
 drop table Cars;
 drop table CarsModels;
 drop table CarsBrands;
@@ -16,6 +17,7 @@ drop table AccountsLocations;
 drop table Accounts;
 drop table Roles;
 drop table GeographicRegion;
+
 
 create table GeographicRegion
 (
@@ -42,7 +44,7 @@ create table Accounts
 	Password text not null,
 	EmailConfirmed int default 0,
 	IdGeographicRegion int references GeographicRegion(Id),
-	DateWhen timestamp default now(),
+	CreatedAt timestamp default now(),
 	IdRole int references roles(id) default 1 not null,
 	Token text
 );
@@ -57,7 +59,7 @@ create table AccountsLocations
 	StreetTo text,
 	CityFrom text,
 	CityTo text,
-	DateWhen timestamp default now()
+	CreatedAt timestamp default now()
 );
 
 create table AccountsWorkTime
@@ -73,7 +75,7 @@ create table FriendSuggestions
 	Id serial primary key,
 	IdAccount int references Accounts(Id) not null,
 	IdSuggested int references Accounts(Id) not null,
-	DateWhen timestamp default now()
+	CreatedAt timestamp default now()
 );
 
 create or replace view VFriendSuggestions as
@@ -89,7 +91,7 @@ create table Invitations
 	Id serial primary key,
 	IdAccount int references Accounts(Id) not null,
 	IdInvited int references Accounts(Id) not null,
-	DateWhen timestamp default now()
+	CreatedAt timestamp default now()
 );
 
 -- todo poprawic do zaproszen
@@ -105,7 +107,7 @@ create table Friends
 	Id serial primary key,
 	IdAccount int references Accounts(Id) not null,
 	IdFriend int references Accounts(Id) not null,
-	DateWhen timestamp default now()
+	CreatedAt timestamp default now()
 );
 
 -- todo poprawic do Friends
@@ -120,7 +122,7 @@ create table AccountsCollocations
 	Id serial primary key,
 	IdAccount int references Accounts(Id) not null,
 	IdCollocated int references Accounts(Id) not null,
-	DateWhen timestamp default now()
+	CreatedAt timestamp default now()
 );
 
 -- todo poprawic do AccountsCollocations
@@ -150,7 +152,7 @@ create table Cars
 	IdCarsBrands int references CarsBrands(Id) not null,
 	IdCarsModels int references CarsModels(Id) not null,
     AvailableSeats int not null,
-	DateWhen timestamp default now()
+	CreatedAt timestamp default now()
 );
 
 create table WorkTrip

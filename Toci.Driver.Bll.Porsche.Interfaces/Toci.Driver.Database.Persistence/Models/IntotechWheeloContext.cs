@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-
-#nullable disable
 
 namespace Toci.Driver.Database.Persistence.Models
 {
@@ -53,8 +52,9 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Datewhen)
-                    .HasColumnName("datewhen")
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
                     .HasDefaultValueSql("now()");
 
                 entity.Property(e => e.Email)
@@ -109,7 +109,7 @@ namespace Toci.Driver.Database.Persistence.Models
             {
                 entity.HasNoKey();
 
-                entity.ToTable("accountroles");
+                entity.ToView("accountroles");
 
                 entity.Property(e => e.Email).HasColumnName("email");
 
@@ -134,8 +134,9 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Datewhen)
-                    .HasColumnName("datewhen")
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
                     .HasDefaultValueSql("now()");
 
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
@@ -169,8 +170,9 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Coordinatesto).HasColumnName("coordinatesto");
 
-                entity.Property(e => e.Datewhen)
-                    .HasColumnName("datewhen")
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
                     .HasDefaultValueSql("now()");
 
                 entity.Property(e => e.Idaccounts).HasColumnName("idaccounts");
@@ -213,8 +215,9 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Availableseats).HasColumnName("availableseats");
 
-                entity.Property(e => e.Datewhen)
-                    .HasColumnName("datewhen")
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
                     .HasDefaultValueSql("now()");
 
                 entity.Property(e => e.Idaccounts).HasColumnName("idaccounts");
@@ -274,8 +277,9 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Datewhen)
-                    .HasColumnName("datewhen")
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
                     .HasDefaultValueSql("now()");
 
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
@@ -301,8 +305,9 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Datewhen)
-                    .HasColumnName("datewhen")
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
                     .HasDefaultValueSql("now()");
 
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
@@ -346,8 +351,9 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Datewhen)
-                    .HasColumnName("datewhen")
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
                     .HasDefaultValueSql("now()");
 
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
@@ -380,7 +386,7 @@ namespace Toci.Driver.Database.Persistence.Models
             {
                 entity.HasNoKey();
 
-                entity.ToTable("vaccountscollocations");
+                entity.ToView("vaccountscollocations");
 
                 entity.Property(e => e.Accountid).HasColumnName("accountid");
 
@@ -399,7 +405,7 @@ namespace Toci.Driver.Database.Persistence.Models
             {
                 entity.HasNoKey();
 
-                entity.ToTable("vfriends");
+                entity.ToView("vfriends");
 
                 entity.Property(e => e.Accountid).HasColumnName("accountid");
 
@@ -418,7 +424,7 @@ namespace Toci.Driver.Database.Persistence.Models
             {
                 entity.HasNoKey();
 
-                entity.ToTable("vfriendsuggestions");
+                entity.ToView("vfriendsuggestions");
 
                 entity.Property(e => e.Accountid).HasColumnName("accountid");
 
@@ -437,7 +443,7 @@ namespace Toci.Driver.Database.Persistence.Models
             {
                 entity.HasNoKey();
 
-                entity.ToTable("vinvitations");
+                entity.ToView("vinvitations");
 
                 entity.Property(e => e.Accountid).HasColumnName("accountid");
 
@@ -460,9 +466,7 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Acceptabledistance).HasColumnName("acceptabledistance");
 
-                entity.Property(e => e.Fromhour)
-                    .HasColumnType("time without time zone")
-                    .HasColumnName("fromhour");
+                entity.Property(e => e.Fromhour).HasColumnName("fromhour");
 
                 entity.Property(e => e.Fromlatitude).HasColumnName("fromlatitude");
 
@@ -472,9 +476,7 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
-                entity.Property(e => e.Tohour)
-                    .HasColumnType("time without time zone")
-                    .HasColumnName("tohour");
+                entity.Property(e => e.Tohour).HasColumnName("tohour");
 
                 entity.Property(e => e.Tolatitude).HasColumnName("tolatitude");
 

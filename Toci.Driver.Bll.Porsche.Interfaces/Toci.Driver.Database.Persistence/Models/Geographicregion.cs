@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace Toci.Driver.Database.Persistence.Models
 {
     public partial class Geographicregion
