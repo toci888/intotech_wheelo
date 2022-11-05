@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 namespace Toci.Driver.Database.Persistence.Models
 {
-    public partial class Userslocation
+    public partial class Accountslocation
     {
         public int Id { get; set; }
-        public int Idusers { get; set; }
+        public int Idaccounts { get; set; }
         public string Coordinatesfrom { get; set; }
         public string Coordinatesto { get; set; }
         public string Streetfrom { get; set; }
@@ -17,6 +17,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public string Cityto { get; set; }
         public DateTime? Datewhen { get; set; }
 
-        public virtual User IdusersNavigation { get; set; }
+        public virtual Account IdaccountsNavigation { get; set; }
     }
 }

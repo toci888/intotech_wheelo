@@ -8,7 +8,7 @@ namespace Toci.Driver.Database.Persistence.Models
     public partial class Worktrip
     {
         public int Id { get; set; }
-        public int? Iduser { get; set; }
+        public int? Idaccount { get; set; }
         public decimal? Fromlongitude { get; set; }
         public decimal? Fromlatitude { get; set; }
         public string Fromstreet { get; set; }
@@ -19,6 +19,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public TimeSpan? Tohour { get; set; }
         public decimal? Acceptabledistance { get; set; }
 
-        public virtual User IduserNavigation { get; set; }
+        public virtual Account IdaccountNavigation { get; set; }
     }
 }

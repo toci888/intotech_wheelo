@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Toci.Driver.Database.Persistence.Models
 {
-    public partial class Userscollocation
+    public partial class Accountscollocation
     {
         public int Id { get; set; }
-        public int Iduser { get; set; }
+        public int Idaccount { get; set; }
         public int Idcollocated { get; set; }
         public DateTime? Datewhen { get; set; }
 
-        public virtual User IdcollocatedNavigation { get; set; }
-        public virtual User IduserNavigation { get; set; }
+        public virtual Account IdaccountNavigation { get; set; }
+        public virtual Account IdcollocatedNavigation { get; set; }
     }
 }

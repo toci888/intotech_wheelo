@@ -8,11 +8,11 @@ namespace Toci.Driver.Database.Persistence.Models
     public partial class Friend
     {
         public int Id { get; set; }
-        public int Iduser { get; set; }
+        public int Idaccount { get; set; }
         public int Idfriend { get; set; }
         public DateTime? Datewhen { get; set; }
 
-        public virtual User IdfriendNavigation { get; set; }
-        public virtual User IduserNavigation { get; set; }
+        public virtual Account IdaccountNavigation { get; set; }
+        public virtual Account IdfriendNavigation { get; set; }
     }
 }

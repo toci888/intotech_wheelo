@@ -12,6 +12,8 @@
 
   <ItemGroup>
    
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Microservices\Intotech.Common.Microservices.csproj" />
+   
     <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common.Bll.Interfaces\Toci.Common.Bll.Interfaces.csproj" />
     <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common.Bll\Toci.Common.Bll.csproj" />
     <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common.Database.Interfaces\Toci.Common.Database.Interfaces.csproj" />

@@ -17,7 +17,7 @@ builder.Services.AddScoped<IFriendLogic, FriendLogic>();
 builder.Services.AddScoped<IFriendSuggestionLogic, FriendSuggestionLogic>();
 builder.Services.AddScoped<IGeographicRegionLogic, GeographicRegionLogic>();
 builder.Services.AddScoped<IInvitationLogic, InvitationLogic>();
-builder.Services.AddScoped<IUserLogic, UserLogic>();
+builder.Services.AddScoped<IAccountLogic, AccountLogic>();
 builder.Services.AddScoped<IUsersCollocationLogic, UsersCollocationLogic>();
 builder.Services.AddScoped<IUsersLocationLogic, UsersLocationLogic>();
 builder.Services.AddScoped<IUsersWorkTimeLogic, UsersWorkTimeLogic>();
@@ -25,6 +25,7 @@ builder.Services.AddScoped<IVfriendLogic, VfriendLogic>();
 builder.Services.AddScoped<IVfriendSuggestionLogic, VfriendSuggestionLogic>();
 builder.Services.AddScoped<IVinvitationLogic, VinvitationLogic>();
 builder.Services.AddScoped<IVusersCollocationLogic, VusersCollocationLogic>();
+builder.Services.AddScoped<IAccountLogic, AccountLogic>();
 
 var app = builder.Build();
 

@@ -1,15 +1,15 @@
-﻿using Intotech.Wheelo.Bll.Persistence.Interfaces;
+﻿using Intotech.Common.Microservices;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Toci.Common.Microservices;
 using Toci.Driver.Database.Persistence.Models;
 
-namespace Toci.Driver.Api.Controllers
+namespace Toci.Driver.Api.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class CarController : ApiControllerBase<ICarLogic, Car>
 {
-    [ApiController]
-    public class CarController : ApiControllerBase<ICarLogic, Car>
+    public CarController(ICarLogic logic) : base(logic)
     {
-        public CarController(ICarLogic logic) : base(logic)
-        {
-        }
     }
 }

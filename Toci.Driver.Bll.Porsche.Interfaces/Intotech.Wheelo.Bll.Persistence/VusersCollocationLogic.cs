@@ -8,7 +8,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Persistence
 {
-    public class VusersCollocationLogic : Logic<Vuserscollocation>, IVusersCollocationLogic
+    public class VusersCollocationLogic : Logic<Vaccountscollocation>, IVusersCollocationLogic
     {
     }
 }

@@ -17,6 +17,11 @@ namespace Toci.Driver.Database.Persistence.Models
         {
         }
 
+        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Accountrole> Accountroles { get; set; }
+        public virtual DbSet<Accountscollocation> Accountscollocations { get; set; }
+        public virtual DbSet<Accountslocation> Accountslocations { get; set; }
+        public virtual DbSet<Accountsworktime> Accountsworktimes { get; set; }
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<Carsbrand> Carsbrands { get; set; }
         public virtual DbSet<Carsmodel> Carsmodels { get; set; }
@@ -24,14 +29,11 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Friendsuggestion> Friendsuggestions { get; set; }
         public virtual DbSet<Geographicregion> Geographicregions { get; set; }
         public virtual DbSet<Invitation> Invitations { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Userscollocation> Userscollocations { get; set; }
-        public virtual DbSet<Userslocation> Userslocations { get; set; }
-        public virtual DbSet<Usersworktime> Usersworktimes { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Vaccountscollocation> Vaccountscollocations { get; set; }
         public virtual DbSet<Vfriend> Vfriends { get; set; }
         public virtual DbSet<Vfriendsuggestion> Vfriendsuggestions { get; set; }
         public virtual DbSet<Vinvitation> Vinvitations { get; set; }
-        public virtual DbSet<Vuserscollocation> Vuserscollocations { get; set; }
         public virtual DbSet<Worktrip> Worktrips { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -45,6 +47,164 @@ namespace Toci.Driver.Database.Persistence.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Account>(entity =>
+            {
+                entity.ToTable("accounts");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Datewhen)
+                    .HasColumnName("datewhen")
+                    .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasColumnName("email");
+
+                entity.Property(e => e.Emailconfirmed)
+                    .HasColumnName("emailconfirmed")
+                    .HasDefaultValueSql("0");
+
+                entity.Property(e => e.Idgeographicregion).HasColumnName("idgeographicregion");
+
+                entity.Property(e => e.Idrole)
+                    .HasColumnName("idrole")
+                    .HasDefaultValueSql("1");
+
+                entity.Property(e => e.Login)
+                    .IsRequired()
+                    .HasColumnName("login");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnName("name");
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasColumnName("password");
+
+                entity.Property(e => e.Phone)
+                    .IsRequired()
+                    .HasColumnName("phone");
+
+                entity.Property(e => e.Surname)
+                    .IsRequired()
+                    .HasColumnName("surname");
+
+                entity.Property(e => e.Token).HasColumnName("token");
+
+                entity.HasOne(d => d.IdgeographicregionNavigation)
+                    .WithMany(p => p.Accounts)
+                    .HasForeignKey(d => d.Idgeographicregion)
+                    .HasConstraintName("accounts_idgeographicregion_fkey");
+
+                entity.HasOne(d => d.IdroleNavigation)
+                    .WithMany(p => p.Accounts)
+                    .HasForeignKey(d => d.Idrole)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("accounts_idrole_fkey");
+            });
+
+            modelBuilder.Entity<Accountrole>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("accountroles");
+
+                entity.Property(e => e.Email).HasColumnName("email");
+
+                entity.Property(e => e.Emailconfirmed).HasColumnName("emailconfirmed");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name).HasColumnName("name");
+
+                entity.Property(e => e.Password).HasColumnName("password");
+
+                entity.Property(e => e.Rolename).HasColumnName("rolename");
+
+                entity.Property(e => e.Surname).HasColumnName("surname");
+
+                entity.Property(e => e.Token).HasColumnName("token");
+            });
+
+            modelBuilder.Entity<Accountscollocation>(entity =>
+            {
+                entity.ToTable("accountscollocations");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Datewhen)
+                    .HasColumnName("datewhen")
+                    .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Idcollocated).HasColumnName("idcollocated");
+
+                entity.HasOne(d => d.IdaccountNavigation)
+                    .WithMany(p => p.AccountscollocationIdaccountNavigations)
+                    .HasForeignKey(d => d.Idaccount)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("accountscollocations_idaccount_fkey");
+
+                entity.HasOne(d => d.IdcollocatedNavigation)
+                    .WithMany(p => p.AccountscollocationIdcollocatedNavigations)
+                    .HasForeignKey(d => d.Idcollocated)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("accountscollocations_idcollocated_fkey");
+            });
+
+            modelBuilder.Entity<Accountslocation>(entity =>
+            {
+                entity.ToTable("accountslocations");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Cityfrom).HasColumnName("cityfrom");
+
+                entity.Property(e => e.Cityto).HasColumnName("cityto");
+
+                entity.Property(e => e.Coordinatesfrom).HasColumnName("coordinatesfrom");
+
+                entity.Property(e => e.Coordinatesto).HasColumnName("coordinatesto");
+
+                entity.Property(e => e.Datewhen)
+                    .HasColumnName("datewhen")
+                    .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Idaccounts).HasColumnName("idaccounts");
+
+                entity.Property(e => e.Streetfrom).HasColumnName("streetfrom");
+
+                entity.Property(e => e.Streetto).HasColumnName("streetto");
+
+                entity.HasOne(d => d.IdaccountsNavigation)
+                    .WithMany(p => p.Accountslocations)
+                    .HasForeignKey(d => d.Idaccounts)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("accountslocations_idaccounts_fkey");
+            });
+
+            modelBuilder.Entity<Accountsworktime>(entity =>
+            {
+                entity.ToTable("accountsworktime");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Idaccounts).HasColumnName("idaccounts");
+
+                entity.Property(e => e.Workendhour).HasColumnName("workendhour");
+
+                entity.Property(e => e.Workstarthour).HasColumnName("workstarthour");
+
+                entity.HasOne(d => d.IdaccountsNavigation)
+                    .WithMany(p => p.Accountsworktimes)
+                    .HasForeignKey(d => d.Idaccounts)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("accountsworktime_idaccounts_fkey");
+            });
+
             modelBuilder.Entity<Car>(entity =>
             {
                 entity.ToTable("cars");
@@ -57,11 +217,17 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasColumnName("datewhen")
                     .HasDefaultValueSql("now()");
 
+                entity.Property(e => e.Idaccounts).HasColumnName("idaccounts");
+
                 entity.Property(e => e.Idcarsbrands).HasColumnName("idcarsbrands");
 
                 entity.Property(e => e.Idcarsmodels).HasColumnName("idcarsmodels");
 
-                entity.Property(e => e.Idusers).HasColumnName("idusers");
+                entity.HasOne(d => d.IdaccountsNavigation)
+                    .WithMany(p => p.Cars)
+                    .HasForeignKey(d => d.Idaccounts)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("cars_idaccounts_fkey");
 
                 entity.HasOne(d => d.IdcarsbrandsNavigation)
                     .WithMany(p => p.Cars)
@@ -74,12 +240,6 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasForeignKey(d => d.Idcarsmodels)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("cars_idcarsmodels_fkey");
-
-                entity.HasOne(d => d.IdusersNavigation)
-                    .WithMany(p => p.Cars)
-                    .HasForeignKey(d => d.Idusers)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("cars_idusers_fkey");
             });
 
             modelBuilder.Entity<Carsbrand>(entity =>
@@ -118,21 +278,21 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasColumnName("datewhen")
                     .HasDefaultValueSql("now()");
 
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
                 entity.Property(e => e.Idfriend).HasColumnName("idfriend");
 
-                entity.Property(e => e.Iduser).HasColumnName("iduser");
+                entity.HasOne(d => d.IdaccountNavigation)
+                    .WithMany(p => p.FriendIdaccountNavigations)
+                    .HasForeignKey(d => d.Idaccount)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("friends_idaccount_fkey");
 
                 entity.HasOne(d => d.IdfriendNavigation)
                     .WithMany(p => p.FriendIdfriendNavigations)
                     .HasForeignKey(d => d.Idfriend)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("friends_idfriend_fkey");
-
-                entity.HasOne(d => d.IduserNavigation)
-                    .WithMany(p => p.FriendIduserNavigations)
-                    .HasForeignKey(d => d.Iduser)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("friends_iduser_fkey");
             });
 
             modelBuilder.Entity<Friendsuggestion>(entity =>
@@ -145,21 +305,21 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasColumnName("datewhen")
                     .HasDefaultValueSql("now()");
 
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
                 entity.Property(e => e.Idsuggested).HasColumnName("idsuggested");
 
-                entity.Property(e => e.Iduser).HasColumnName("iduser");
+                entity.HasOne(d => d.IdaccountNavigation)
+                    .WithMany(p => p.FriendsuggestionIdaccountNavigations)
+                    .HasForeignKey(d => d.Idaccount)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("friendsuggestions_idaccount_fkey");
 
                 entity.HasOne(d => d.IdsuggestedNavigation)
                     .WithMany(p => p.FriendsuggestionIdsuggestedNavigations)
                     .HasForeignKey(d => d.Idsuggested)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("friendsuggestions_idsuggested_fkey");
-
-                entity.HasOne(d => d.IduserNavigation)
-                    .WithMany(p => p.FriendsuggestionIduserNavigations)
-                    .HasForeignKey(d => d.Iduser)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("friendsuggestions_iduser_fkey");
             });
 
             modelBuilder.Entity<Geographicregion>(entity =>
@@ -190,140 +350,49 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasColumnName("datewhen")
                     .HasDefaultValueSql("now()");
 
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
                 entity.Property(e => e.Idinvited).HasColumnName("idinvited");
 
-                entity.Property(e => e.Iduser).HasColumnName("iduser");
+                entity.HasOne(d => d.IdaccountNavigation)
+                    .WithMany(p => p.InvitationIdaccountNavigations)
+                    .HasForeignKey(d => d.Idaccount)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("invitations_idaccount_fkey");
 
                 entity.HasOne(d => d.IdinvitedNavigation)
                     .WithMany(p => p.InvitationIdinvitedNavigations)
                     .HasForeignKey(d => d.Idinvited)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("invitations_idinvited_fkey");
-
-                entity.HasOne(d => d.IduserNavigation)
-                    .WithMany(p => p.InvitationIduserNavigations)
-                    .HasForeignKey(d => d.Iduser)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("invitations_iduser_fkey");
             });
 
-            modelBuilder.Entity<User>(entity =>
+            modelBuilder.Entity<Role>(entity =>
             {
-                entity.ToTable("users");
+                entity.ToTable("roles");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Datewhen)
-                    .HasColumnName("datewhen")
-                    .HasDefaultValueSql("now()");
-
-                entity.Property(e => e.Email)
-                    .IsRequired()
-                    .HasColumnName("email");
-
-                entity.Property(e => e.Idgeographicregion).HasColumnName("idgeographicregion");
-
-                entity.Property(e => e.Login)
-                    .IsRequired()
-                    .HasColumnName("login");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name");
-
-                entity.Property(e => e.Password)
-                    .IsRequired()
-                    .HasColumnName("password");
-
-                entity.Property(e => e.Phone)
-                    .IsRequired()
-                    .HasColumnName("phone");
-
-                entity.Property(e => e.Surname)
-                    .IsRequired()
-                    .HasColumnName("surname");
-
-                entity.HasOne(d => d.IdgeographicregionNavigation)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.Idgeographicregion)
-                    .HasConstraintName("users_idgeographicregion_fkey");
+                entity.Property(e => e.Name).HasColumnName("name");
             });
 
-            modelBuilder.Entity<Userscollocation>(entity =>
+            modelBuilder.Entity<Vaccountscollocation>(entity =>
             {
-                entity.ToTable("userscollocations");
+                entity.HasNoKey();
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.ToTable("vaccountscollocations");
 
-                entity.Property(e => e.Datewhen)
-                    .HasColumnName("datewhen")
-                    .HasDefaultValueSql("now()");
+                entity.Property(e => e.Accountid).HasColumnName("accountid");
 
-                entity.Property(e => e.Idcollocated).HasColumnName("idcollocated");
+                entity.Property(e => e.Name).HasColumnName("name");
 
-                entity.Property(e => e.Iduser).HasColumnName("iduser");
+                entity.Property(e => e.Suggestedaccountid).HasColumnName("suggestedaccountid");
 
-                entity.HasOne(d => d.IdcollocatedNavigation)
-                    .WithMany(p => p.UserscollocationIdcollocatedNavigations)
-                    .HasForeignKey(d => d.Idcollocated)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("userscollocations_idcollocated_fkey");
+                entity.Property(e => e.Suggestedname).HasColumnName("suggestedname");
 
-                entity.HasOne(d => d.IduserNavigation)
-                    .WithMany(p => p.UserscollocationIduserNavigations)
-                    .HasForeignKey(d => d.Iduser)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("userscollocations_iduser_fkey");
-            });
+                entity.Property(e => e.Suggestedsurname).HasColumnName("suggestedsurname");
 
-            modelBuilder.Entity<Userslocation>(entity =>
-            {
-                entity.ToTable("userslocations");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Cityfrom).HasColumnName("cityfrom");
-
-                entity.Property(e => e.Cityto).HasColumnName("cityto");
-
-                entity.Property(e => e.Coordinatesfrom).HasColumnName("coordinatesfrom");
-
-                entity.Property(e => e.Coordinatesto).HasColumnName("coordinatesto");
-
-                entity.Property(e => e.Datewhen)
-                    .HasColumnName("datewhen")
-                    .HasDefaultValueSql("now()");
-
-                entity.Property(e => e.Idusers).HasColumnName("idusers");
-
-                entity.Property(e => e.Streetfrom).HasColumnName("streetfrom");
-
-                entity.Property(e => e.Streetto).HasColumnName("streetto");
-
-                entity.HasOne(d => d.IdusersNavigation)
-                    .WithMany(p => p.Userslocations)
-                    .HasForeignKey(d => d.Idusers)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("userslocations_idusers_fkey");
-            });
-
-            modelBuilder.Entity<Usersworktime>(entity =>
-            {
-                entity.ToTable("usersworktime");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Idusers).HasColumnName("idusers");
-
-                entity.Property(e => e.Workendhour).HasColumnName("workendhour");
-
-                entity.Property(e => e.Workstarthour).HasColumnName("workstarthour");
-
-                entity.HasOne(d => d.IdusersNavigation)
-                    .WithMany(p => p.Usersworktimes)
-                    .HasForeignKey(d => d.Idusers)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("usersworktime_idusers_fkey");
+                entity.Property(e => e.Surname).HasColumnName("surname");
             });
 
             modelBuilder.Entity<Vfriend>(entity =>
@@ -332,17 +401,17 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.ToTable("vfriends");
 
+                entity.Property(e => e.Accountid).HasColumnName("accountid");
+
                 entity.Property(e => e.Name).HasColumnName("name");
+
+                entity.Property(e => e.Suggestedaccountid).HasColumnName("suggestedaccountid");
 
                 entity.Property(e => e.Suggestedname).HasColumnName("suggestedname");
 
                 entity.Property(e => e.Suggestedsurname).HasColumnName("suggestedsurname");
 
-                entity.Property(e => e.Suggesteduserid).HasColumnName("suggesteduserid");
-
                 entity.Property(e => e.Surname).HasColumnName("surname");
-
-                entity.Property(e => e.Userid).HasColumnName("userid");
             });
 
             modelBuilder.Entity<Vfriendsuggestion>(entity =>
@@ -351,17 +420,17 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.ToTable("vfriendsuggestions");
 
+                entity.Property(e => e.Accountid).HasColumnName("accountid");
+
                 entity.Property(e => e.Name).HasColumnName("name");
+
+                entity.Property(e => e.Suggestedaccountid).HasColumnName("suggestedaccountid");
 
                 entity.Property(e => e.Suggestedname).HasColumnName("suggestedname");
 
                 entity.Property(e => e.Suggestedsurname).HasColumnName("suggestedsurname");
 
-                entity.Property(e => e.Suggesteduserid).HasColumnName("suggesteduserid");
-
                 entity.Property(e => e.Surname).HasColumnName("surname");
-
-                entity.Property(e => e.Userid).HasColumnName("userid");
             });
 
             modelBuilder.Entity<Vinvitation>(entity =>
@@ -370,36 +439,17 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.ToTable("vinvitations");
 
+                entity.Property(e => e.Accountid).HasColumnName("accountid");
+
                 entity.Property(e => e.Name).HasColumnName("name");
+
+                entity.Property(e => e.Suggestedaccountid).HasColumnName("suggestedaccountid");
 
                 entity.Property(e => e.Suggestedname).HasColumnName("suggestedname");
 
                 entity.Property(e => e.Suggestedsurname).HasColumnName("suggestedsurname");
 
-                entity.Property(e => e.Suggesteduserid).HasColumnName("suggesteduserid");
-
                 entity.Property(e => e.Surname).HasColumnName("surname");
-
-                entity.Property(e => e.Userid).HasColumnName("userid");
-            });
-
-            modelBuilder.Entity<Vuserscollocation>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("vuserscollocations");
-
-                entity.Property(e => e.Name).HasColumnName("name");
-
-                entity.Property(e => e.Suggestedname).HasColumnName("suggestedname");
-
-                entity.Property(e => e.Suggestedsurname).HasColumnName("suggestedsurname");
-
-                entity.Property(e => e.Suggesteduserid).HasColumnName("suggesteduserid");
-
-                entity.Property(e => e.Surname).HasColumnName("surname");
-
-                entity.Property(e => e.Userid).HasColumnName("userid");
             });
 
             modelBuilder.Entity<Worktrip>(entity =>
@@ -420,7 +470,7 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Fromstreet).HasColumnName("fromstreet");
 
-                entity.Property(e => e.Iduser).HasColumnName("iduser");
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
                 entity.Property(e => e.Tohour)
                     .HasColumnType("time without time zone")
@@ -432,10 +482,10 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Tostreet).HasColumnName("tostreet");
 
-                entity.HasOne(d => d.IduserNavigation)
+                entity.HasOne(d => d.IdaccountNavigation)
                     .WithMany(p => p.Worktrips)
-                    .HasForeignKey(d => d.Iduser)
-                    .HasConstraintName("worktrip_iduser_fkey");
+                    .HasForeignKey(d => d.Idaccount)
+                    .HasConstraintName("worktrip_idaccount_fkey");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -1,18 +1,20 @@
+drop view AccountRoles;
 drop view VFriends;
 drop view VInvitations;
-drop view VUsersCollocations;
+drop view VAccountsCollocations;
 drop view VFriendSuggestions;
 
 drop table Cars;
 drop table CarsModels;
 drop table CarsBrands;
-drop table UsersCollocations;
-drop table UsersWorkTime;
+drop table AccountsCollocations;
+drop table AccountsWorkTime;
 drop table FriendSuggestions;
 drop table Friends;
 drop table Invitations;
-drop table UsersLocations;
-drop table Users;
+drop table AccountsLocations;
+drop table Accounts;
+drop table Roles;
 drop table GeographicRegion;
 
 create table GeographicRegion
@@ -23,7 +25,13 @@ create table GeographicRegion
 	Name text
 );
 
-create table Users
+create table Roles
+(
+	id serial primary key,
+	name text
+);
+
+create table Accounts
 (
 	Id serial primary key,
 	Name text not null,
@@ -32,14 +40,17 @@ create table Users
 	Email text not null,
 	Login text not null,
 	Password text not null,
+	EmailConfirmed int default 0,
 	IdGeographicRegion int references GeographicRegion(Id),
-	DateWhen timestamp default now()
+	DateWhen timestamp default now(),
+	IdRole int references roles(id) default 1 not null,
+	Token text
 );
 
-create table UsersLocations
+create table AccountsLocations
 (
 	Id serial primary key,
-	IdUsers int references Users(Id) not null,
+	IdAccounts int references Accounts(Id) not null,
 	CoordinatesFrom text,
 	CoordinatesTo text,
 	StreetFrom text,
@@ -49,10 +60,10 @@ create table UsersLocations
 	DateWhen timestamp default now()
 );
 
-create table UsersWorkTime
+create table AccountsWorkTime
 (
 	Id serial primary key,
-	IdUsers int references Users(Id) not null,
+	IdAccounts int references Accounts(Id) not null,
 	WorkStartHour text,
 	WorkEndHour text
 );
@@ -60,64 +71,64 @@ create table UsersWorkTime
 create table FriendSuggestions
 (
 	Id serial primary key,
-	IdUser int references Users(Id) not null,
-	IdSuggested int references Users(Id) not null,
+	IdAccount int references Accounts(Id) not null,
+	IdSuggested int references Accounts(Id) not null,
 	DateWhen timestamp default now()
 );
 
 create or replace view VFriendSuggestions as
-select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as UserId, U2.Id as SuggestedUserId
+select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, U2.Id as SuggestedAccountId
 from FriendSuggestions 
-join Users U1 on U1.Id = FriendSuggestions.IdUser 
-join Users U2 on U2.Id = FriendSuggestions.IdSuggested ;
+join Accounts U1 on U1.Id = FriendSuggestions.IdAccount 
+join Accounts U2 on U2.Id = FriendSuggestions.IdSuggested ;
 
 select * from VFriendSuggestions;
 
 create table Invitations
 (
 	Id serial primary key,
-	IdUser int references Users(Id) not null,
-	IdInvited int references Users(Id) not null,
+	IdAccount int references Accounts(Id) not null,
+	IdInvited int references Accounts(Id) not null,
 	DateWhen timestamp default now()
 );
 
 -- todo poprawic do zaproszen
 create or replace view VInvitations as
-select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as UserId, U2.Id as SuggestedUserId
+select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, U2.Id as SuggestedAccountId
 from FriendSuggestions 
-join Users U1 on U1.Id = FriendSuggestions.IdUser 
-join Users U2 on U2.Id = FriendSuggestions.IdSuggested ;
+join Accounts U1 on U1.Id = FriendSuggestions.IdAccount 
+join Accounts U2 on U2.Id = FriendSuggestions.IdSuggested ;
 
 --friends
 create table Friends
 (
 	Id serial primary key,
-	IdUser int references Users(Id) not null,
-	IdFriend int references Users(Id) not null,
+	IdAccount int references Accounts(Id) not null,
+	IdFriend int references Accounts(Id) not null,
 	DateWhen timestamp default now()
 );
 
 -- todo poprawic do Friends
 create or replace view VFriends as
-select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as UserId, U2.Id as SuggestedUserId
+select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, U2.Id as SuggestedAccountId
 from FriendSuggestions 
-join Users U1 on U1.Id = FriendSuggestions.IdUser 
-join Users U2 on U2.Id = FriendSuggestions.IdSuggested ;
+join Accounts U1 on U1.Id = FriendSuggestions.IdAccount 
+join Accounts U2 on U2.Id = FriendSuggestions.IdSuggested ;
 
-create table UsersCollocations
+create table AccountsCollocations
 (
 	Id serial primary key,
-	IdUser int references Users(Id) not null,
-	IdCollocated int references Users(Id) not null,
+	IdAccount int references Accounts(Id) not null,
+	IdCollocated int references Accounts(Id) not null,
 	DateWhen timestamp default now()
 );
 
--- todo poprawic do UsersCollocations
-create or replace view VUsersCollocations as
-select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as UserId, U2.Id as SuggestedUserId
+-- todo poprawic do AccountsCollocations
+create or replace view VAccountsCollocations as
+select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, U2.Id as SuggestedAccountId
 from FriendSuggestions 
-join Users U1 on U1.Id = FriendSuggestions.IdUser 
-join Users U2 on U2.Id = FriendSuggestions.IdSuggested ;
+join Accounts U1 on U1.Id = FriendSuggestions.IdAccount 
+join Accounts U2 on U2.Id = FriendSuggestions.IdSuggested ;
 
 create table CarsBrands
 (
@@ -135,7 +146,7 @@ create table CarsModels
 create table Cars
 (
     Id serial primary key,
-	IdUsers int references Users(Id) not null,
+	IdAccounts int references Accounts(Id) not null,
 	IdCarsBrands int references CarsBrands(Id) not null,
 	IdCarsModels int references CarsModels(Id) not null,
     AvailableSeats int not null,
@@ -145,7 +156,7 @@ create table Cars
 create table WorkTrip
 (
 	id serial primary key,
-    IdUser int references users (id),
+    IdAccount int references Accounts (id),
     FromLongitude decimal,
     FromLatitude decimal,
     FromStreet text,
@@ -156,3 +167,10 @@ create table WorkTrip
     ToHour time,
     AcceptableDistance decimal
 );
+
+create or replace view AccountRoles as
+select Accounts.id, Accounts.Name, Accounts.Surname, Accounts.email, Accounts.password, Accounts.emailConfirmed, Accounts.token , Roles.name as RoleName
+from Accounts
+join Roles on Roles.id = Accounts.idRole;
+
+select * from AccountRoles

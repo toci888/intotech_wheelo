@@ -8,7 +8,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Persistence
 {
-    public class UsersWorkTimeLogic : Logic<Usersworktime>, IUsersWorkTimeLogic
+    public class UsersWorkTimeLogic : Logic<Accountsworktime>, IUsersWorkTimeLogic
     {
     }
 }
