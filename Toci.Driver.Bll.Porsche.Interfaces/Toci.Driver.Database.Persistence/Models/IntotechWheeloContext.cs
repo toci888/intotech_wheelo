@@ -32,6 +32,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Vfriendsuggestion> Vfriendsuggestions { get; set; }
         public virtual DbSet<Vinvitation> Vinvitations { get; set; }
         public virtual DbSet<Vuserscollocation> Vuserscollocations { get; set; }
+        public virtual DbSet<Worktrip> Worktrips { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -399,6 +400,42 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Surname).HasColumnName("surname");
 
                 entity.Property(e => e.Userid).HasColumnName("userid");
+            });
+
+            modelBuilder.Entity<Worktrip>(entity =>
+            {
+                entity.ToTable("worktrip");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Acceptabledistance).HasColumnName("acceptabledistance");
+
+                entity.Property(e => e.Fromhour)
+                    .HasColumnType("time without time zone")
+                    .HasColumnName("fromhour");
+
+                entity.Property(e => e.Fromlatitude).HasColumnName("fromlatitude");
+
+                entity.Property(e => e.Fromlongitude).HasColumnName("fromlongitude");
+
+                entity.Property(e => e.Fromstreet).HasColumnName("fromstreet");
+
+                entity.Property(e => e.Iduser).HasColumnName("iduser");
+
+                entity.Property(e => e.Tohour)
+                    .HasColumnType("time without time zone")
+                    .HasColumnName("tohour");
+
+                entity.Property(e => e.Tolatitude).HasColumnName("tolatitude");
+
+                entity.Property(e => e.Tolongitude).HasColumnName("tolongitude");
+
+                entity.Property(e => e.Tostreet).HasColumnName("tostreet");
+
+                entity.HasOne(d => d.IduserNavigation)
+                    .WithMany(p => p.Worktrips)
+                    .HasForeignKey(d => d.Iduser)
+                    .HasConstraintName("worktrip_iduser_fkey");
             });
 
             OnModelCreatingPartial(modelBuilder);

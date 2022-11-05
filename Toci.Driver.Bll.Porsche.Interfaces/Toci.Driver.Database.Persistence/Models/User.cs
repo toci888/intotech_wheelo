@@ -20,6 +20,7 @@ namespace Toci.Driver.Database.Persistence.Models
             UserscollocationIduserNavigations = new HashSet<Userscollocation>();
             Userslocations = new HashSet<Userslocation>();
             Usersworktimes = new HashSet<Usersworktime>();
+            Worktrips = new HashSet<Worktrip>();
         }
 
         public int Id { get; set; }
@@ -44,5 +45,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual ICollection<Userscollocation> UserscollocationIduserNavigations { get; set; }
         public virtual ICollection<Userslocation> Userslocations { get; set; }
         public virtual ICollection<Usersworktime> Usersworktimes { get; set; }
+        public virtual ICollection<Worktrip> Worktrips { get; set; }
     }
 }

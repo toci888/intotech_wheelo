@@ -53,10 +53,6 @@
       <Project>{27c99ade-e0e6-4432-98fd-9f6bbf9b1039}</Project>
       <Name>Toci.Driver.Common.Gatekeeper.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Toci.Driver.Bll.Porsche.Interfaces.csproj">
-      <Project>{be933daf-27f8-4129-bb90-12633a667271}</Project>
-      <Name>Toci.Driver.Bll.Porsche.Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Toci.Driver.Common.Gatekeeper\Toci.Driver.Common.Gatekeeper.csproj">
       <Project>{10fcbe5c-8b00-4b7e-80b0-9066d18fe8a0}</Project>
       <Name>Toci.Driver.Common.Gatekeeper</Name>
