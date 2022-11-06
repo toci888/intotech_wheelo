@@ -23,6 +23,8 @@
     <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common\Toci.Common.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Persistence.Interfaces\Intotech.Wheelo.Bll.Persistence.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Persistence\Intotech.Wheelo.Bll.Persistence.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Porsche.Interfaces.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Bll.Porsche\Intotech.Wheelo.Bll.Porsche.csproj" />
     <ProjectReference Include="..\Toci.Driver.Dal.Invitation.Interfaces\Toci.Driver.Dal.Invitation.Interfaces.csproj" />
     <ProjectReference Include="..\Toci.Driver.Dal\Toci.Wheelo.Dal.Anathema.csproj" />
     <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
