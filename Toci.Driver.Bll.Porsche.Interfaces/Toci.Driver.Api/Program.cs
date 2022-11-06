@@ -3,9 +3,16 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5105); // to listen for incoming http connection on port 5001
+    options.ListenAnyIP(7105, configure => configure.UseHttps()); // to listen for incoming https connection on port 7001
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddCors(x => x.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader())); //Angular Localhost
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -36,6 +43,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); // Angular Localhost
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -43,3 +52,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
