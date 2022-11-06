@@ -1,5 +1,9 @@
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Intotech.Wheelo.Bll.Porsche.Interfaces.PersistenceAggregation;
+using Intotech.Wheelo.Bll.Porsche.PersistenceAggregation;
+using Toci.Driver.Bll.Porsche.Association;
+using Toci.Driver.Bll.Porsche.Interfaces.Association;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +30,9 @@ builder.Services.AddScoped<IVfriendSuggestionLogic, VfriendSuggestionLogic>();
 builder.Services.AddScoped<IVinvitationLogic, VinvitationLogic>();
 builder.Services.AddScoped<IVusersCollocationLogic, VusersCollocationLogic>();
 builder.Services.AddScoped<IAccountLogic, AccountLogic>();
+// -------
+builder.Services.AddScoped<IAssociationCalculations, AssociationCalculations>();
+builder.Services.AddScoped<IAccountCollocationMatch<IUsersLocationLogic, IUsersCollocationLogic>, AccountCollocationMatch>();
 
 var app = builder.Build();
 
