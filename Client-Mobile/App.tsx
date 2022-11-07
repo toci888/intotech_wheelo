@@ -1,9 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
-import { Apply } from "./Apply";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import axios from 'axios';
+import { environment } from "./environment";
 
 const queryClient = new QueryClient();
 
@@ -11,9 +11,10 @@ export default function App() {
   const [users, setUsers] = useState([]);
 
   const getData = async () => {
-    const res = await fetch('http://192.168.1.96:5105/api/Account/Select');
-    const data = await res.json();
-    setUsers(data);
+    // const res = await axios.get(environment.apiUrl + 'api/Account/Select');
+    const res = await fetch(environment.apiUrl + 'api/Account/Select');
+    
+    setUsers(await res.json());
   };
 
   return (
