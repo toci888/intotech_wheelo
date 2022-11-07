@@ -7,9 +7,9 @@ namespace Toci.Driver.Database.Persistence.Models
     {
         public int Id { get; set; }
         public int Idaccounts { get; set; }
-        public string Workstarthour { get; set; }
-        public string Workendhour { get; set; }
+        public TimeOnly? Workstarthour { get; set; }
+        public TimeOnly? Workendhour { get; set; }
 
-        public virtual Account IdaccountsNavigation { get; set; }
+        public virtual Account IdaccountsNavigation { get; set; } = null!;
     }
 }

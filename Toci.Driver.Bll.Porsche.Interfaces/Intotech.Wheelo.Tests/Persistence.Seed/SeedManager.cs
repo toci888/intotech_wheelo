@@ -1,4 +1,6 @@
 using Intotech.Common.Tests;
+using Intotech.Wheelo.Bll.Persistence;
+using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Tests.Persistence.Seed;
 
@@ -9,5 +11,13 @@ public class SeedManager
     public void SeedAllDb()
     {
         new SeedRole().Insert();
+    }
+
+    [TestMethod]
+    public void LongLat()
+    {
+        //Logic<Testcoordinate> logicCoord = new Logic<Testcoordinate>();
+
+        //Testcoordinate element = logicCoord.Select(m => true).First();
     }
 }

@@ -16,24 +16,24 @@ namespace Toci.Driver.Database.Persistence.Models
         {
         }
 
-        public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<Accountrole> Accountroles { get; set; }
-        public virtual DbSet<Accountscollocation> Accountscollocations { get; set; }
-        public virtual DbSet<Accountslocation> Accountslocations { get; set; }
-        public virtual DbSet<Accountsworktime> Accountsworktimes { get; set; }
-        public virtual DbSet<Car> Cars { get; set; }
-        public virtual DbSet<Carsbrand> Carsbrands { get; set; }
-        public virtual DbSet<Carsmodel> Carsmodels { get; set; }
-        public virtual DbSet<Friend> Friends { get; set; }
-        public virtual DbSet<Friendsuggestion> Friendsuggestions { get; set; }
-        public virtual DbSet<Geographicregion> Geographicregions { get; set; }
-        public virtual DbSet<Invitation> Invitations { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Vaccountscollocation> Vaccountscollocations { get; set; }
-        public virtual DbSet<Vfriend> Vfriends { get; set; }
-        public virtual DbSet<Vfriendsuggestion> Vfriendsuggestions { get; set; }
-        public virtual DbSet<Vinvitation> Vinvitations { get; set; }
-        public virtual DbSet<Worktrip> Worktrips { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; } = null!;
+        public virtual DbSet<Accountrole> Accountroles { get; set; } = null!;
+        public virtual DbSet<Accountscollocation> Accountscollocations { get; set; } = null!;
+        public virtual DbSet<Accountslocation> Accountslocations { get; set; } = null!;
+        public virtual DbSet<Accountsworktime> Accountsworktimes { get; set; } = null!;
+        public virtual DbSet<Car> Cars { get; set; } = null!;
+        public virtual DbSet<Carsbrand> Carsbrands { get; set; } = null!;
+        public virtual DbSet<Carsmodel> Carsmodels { get; set; } = null!;
+        public virtual DbSet<Friend> Friends { get; set; } = null!;
+        public virtual DbSet<Friendsuggestion> Friendsuggestions { get; set; } = null!;
+        public virtual DbSet<Geographicregion> Geographicregions { get; set; } = null!;
+        public virtual DbSet<Invitation> Invitations { get; set; } = null!;
+        public virtual DbSet<Role> Roles { get; set; } = null!;
+        public virtual DbSet<Vaccountscollocation> Vaccountscollocations { get; set; } = null!;
+        public virtual DbSet<Vfriend> Vfriends { get; set; } = null!;
+        public virtual DbSet<Vfriendsuggestion> Vfriendsuggestions { get; set; } = null!;
+        public virtual DbSet<Vinvitation> Vinvitations { get; set; } = null!;
+        public virtual DbSet<Worktrip> Worktrips { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -57,9 +57,7 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasColumnName("createdat")
                     .HasDefaultValueSql("now()");
 
-                entity.Property(e => e.Email)
-                    .IsRequired()
-                    .HasColumnName("email");
+                entity.Property(e => e.Email).HasColumnName("email");
 
                 entity.Property(e => e.Emailconfirmed)
                     .HasColumnName("emailconfirmed")
@@ -71,25 +69,15 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasColumnName("idrole")
                     .HasDefaultValueSql("1");
 
-                entity.Property(e => e.Login)
-                    .IsRequired()
-                    .HasColumnName("login");
+                entity.Property(e => e.Login).HasColumnName("login");
 
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name");
+                entity.Property(e => e.Name).HasColumnName("name");
 
-                entity.Property(e => e.Password)
-                    .IsRequired()
-                    .HasColumnName("password");
+                entity.Property(e => e.Password).HasColumnName("password");
 
-                entity.Property(e => e.Phone)
-                    .IsRequired()
-                    .HasColumnName("phone");
+                entity.Property(e => e.Phone).HasColumnName("phone");
 
-                entity.Property(e => e.Surname)
-                    .IsRequired()
-                    .HasColumnName("surname");
+                entity.Property(e => e.Surname).HasColumnName("surname");
 
                 entity.Property(e => e.Token).HasColumnName("token");
 
@@ -166,16 +154,20 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Cityto).HasColumnName("cityto");
 
-                entity.Property(e => e.Coordinatesfrom).HasColumnName("coordinatesfrom");
-
-                entity.Property(e => e.Coordinatesto).HasColumnName("coordinatesto");
-
                 entity.Property(e => e.Createdat)
                     .HasColumnType("timestamp without time zone")
                     .HasColumnName("createdat")
                     .HasDefaultValueSql("now()");
 
                 entity.Property(e => e.Idaccounts).HasColumnName("idaccounts");
+
+                entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
+
+                entity.Property(e => e.Latitudeto).HasColumnName("latitudeto");
+
+                entity.Property(e => e.Longitudefrom).HasColumnName("longitudefrom");
+
+                entity.Property(e => e.Longitudeto).HasColumnName("longitudeto");
 
                 entity.Property(e => e.Streetfrom).HasColumnName("streetfrom");
 
