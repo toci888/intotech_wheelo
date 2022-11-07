@@ -21,5 +21,13 @@ module.exports = {
     'linebreak-style': ['error', 'windows'],
     quotes: ['warn', 'single'],
     semi: ['error', 'always'],
+    'padding-line-between-statements': [
+      1,
+      {
+        blankLine: 'always',
+        prev: '*',
+        next: 'return'
+      }
+    ]
   },
 };

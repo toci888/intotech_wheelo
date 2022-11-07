@@ -8,16 +8,25 @@ import { environment } from './environment';
 const queryClient = new QueryClient();
 
 export default function App() {
+
   const [users, setUsers] = useState([]);
 
   const getData = async () => {
     // const res = await axios.get(environment.apiUrl + 'api/Account/Select');
-    const res = await fetch(environment.apiUrl + 'api/Account/Select');
+    // const res = await fetch(environment.apiUrl + 'api/Account/Select');
+    const res = await fetch('https://localhost:7105/api/Account/Select');
     
     setUsers(await res.json());
   };
 
+
+  if (getData != null) {
+    return true;
+  }
+  
+
   return (
+    
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your app!</Text>
       <QueryClientProvider client={queryClient}>
