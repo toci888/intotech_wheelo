@@ -11,4 +11,3 @@ public interface IAccountLogic : ILogicBase<Accountrole>
     public IEnumerable<Account> GetAll();
     public int ResetPassword(int userId, string password);
 }
-
