@@ -458,23 +458,32 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Acceptabledistance).HasColumnName("acceptabledistance");
 
+                entity.Property(e => e.Cityfrom).HasColumnName("cityfrom");
+
+                entity.Property(e => e.Cityto).HasColumnName("cityto");
+
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
+                    .HasDefaultValueSql("now()");
+
                 entity.Property(e => e.Fromhour).HasColumnName("fromhour");
-
-                entity.Property(e => e.Fromlatitude).HasColumnName("fromlatitude");
-
-                entity.Property(e => e.Fromlongitude).HasColumnName("fromlongitude");
-
-                entity.Property(e => e.Fromstreet).HasColumnName("fromstreet");
 
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
+                entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
+
+                entity.Property(e => e.Latitudeto).HasColumnName("latitudeto");
+
+                entity.Property(e => e.Longitudefrom).HasColumnName("longitudefrom");
+
+                entity.Property(e => e.Longitudeto).HasColumnName("longitudeto");
+
+                entity.Property(e => e.Streetfrom).HasColumnName("streetfrom");
+
+                entity.Property(e => e.Streetto).HasColumnName("streetto");
+
                 entity.Property(e => e.Tohour).HasColumnName("tohour");
-
-                entity.Property(e => e.Tolatitude).HasColumnName("tolatitude");
-
-                entity.Property(e => e.Tolongitude).HasColumnName("tolongitude");
-
-                entity.Property(e => e.Tostreet).HasColumnName("tostreet");
 
                 entity.HasOne(d => d.IdaccountNavigation)
                     .WithMany(p => p.Worktrips)

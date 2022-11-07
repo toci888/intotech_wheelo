@@ -23,16 +23,16 @@ namespace Toci.Driver.Bll.Porsche.Association
             {
 
 
-                bool isInRange = AssociationCalculations.CalculateAssociation((double)subject.Fromlongitude.Value,
-                    (double)subject.Fromlatitude.Value, (double)candidateSubject.Fromlongitude.Value,
-                    (double)candidateSubject.Fromlatitude.Value,
+                bool isInRange = AssociationCalculations.CalculateAssociation((double)subject.Longitudefrom.Value,
+                    (double)subject.Latitudefrom.Value, (double)candidateSubject.Longitudefrom.Value,
+                    (double)candidateSubject.Latitudefrom.Value,
                     (double)subject.Acceptabledistance.Value);
 
                 if (isInRange)
                 {
-                    bool isInRangeTo = AssociationCalculations.CalculateAssociation((double)subject.Tolongitude.Value,
-                        (double)subject.Tolatitude.Value, (double)candidateSubject.Tolongitude.Value,
-                        (double)candidateSubject.Tolatitude.Value,
+                    bool isInRangeTo = AssociationCalculations.CalculateAssociation((double)subject.Longitudeto.Value,
+                        (double)subject.Latitudeto.Value, (double)candidateSubject.Longitudeto.Value,
+                        (double)candidateSubject.Latitudeto.Value,
                         (double)subject.Acceptabledistance.Value);
 
                     if (isInRangeTo)

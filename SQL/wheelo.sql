@@ -162,15 +162,18 @@ create table WorkTrip
 (
 	id serial primary key,
     IdAccount int references Accounts (id),
-    FromLatitude decimal,
-	FromLongitude decimal,
-    FromStreet text,
-    ToLatitude decimal,
-	ToLongitude decimal,
-    ToStreet text,
+    LatitudeFrom decimal,
+	LongitudeFrom decimal,
+	LatitudeTo decimal,
+	LongitudeTo decimal,
+	StreetFrom text,
+	StreetTo text,
+	CityFrom text,
+	CityTo text,
     FromHour time, -- 0 60 -> 1 
     ToHour time,
-    AcceptableDistance decimal
+    AcceptableDistance decimal,
+	CreatedAt timestamp default now()
 );
 -- drop table TestCoordinates;
 --create table TestCoordinates

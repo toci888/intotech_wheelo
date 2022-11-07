@@ -11,6 +11,8 @@ public class SeedManager
     public void SeedAllDb()
     {
         new SeedRole().Insert();
+        new SeedAccount().Insert();
+        new SeedWorktrip().Insert();
     }
 
     [TestMethod]
