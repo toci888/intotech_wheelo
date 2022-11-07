@@ -1,9 +1,9 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { StatusBar } from 'expo-status-bar';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import axios from 'axios';
-import { environment } from "./environment";
+import { environment } from './environment';
 
 const queryClient = new QueryClient();
 
@@ -21,14 +21,14 @@ export default function App() {
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your app!</Text>
       <QueryClientProvider client={queryClient}>
-        <Button onPress={getData} title="Learn More"></Button>
+        <Button onPress={getData} title='Learn More'></Button>
         <View>
           {users.map((user: any) => (
             <Text key={user.name}>{user.name} {user.email}</Text>
           ))}
         </View>
       </QueryClientProvider>
-      <StatusBar style="auto" />
+      <StatusBar style='auto' />
     </View>
   );
 }
@@ -36,8 +36,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
