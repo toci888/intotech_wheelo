@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -16,8 +16,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll.Interfaces\Intotech.Common.Bll.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll\Intotech.Common.Bll.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Database.Interfaces\Intotech.Common.Database.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Microservices.Interfaces\Intotech.Common.Microservices.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Microservices\Intotech.Common.Microservices.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Tests\Intotech.Common.Tests.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common\Intotech.Common.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.ExcelLibrary.Extensions\Intotech.ExcelLibrary.Extensions.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Bll.Models\Intotech.Wheelo.Bll.Models.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Bll.Persistence.Interfaces\Intotech.Wheelo.Bll.Persistence.Interfaces.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Bll.Persistence\Intotech.Wheelo.Bll.Persistence.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Porsche.Interfaces.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Bll.Porsche\Intotech.Wheelo.Bll.Porsche.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Api\Toci.Driver.Api.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Dal.Invitation.Interfaces\Toci.Driver.Dal.Invitation.Interfaces.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Dal\Toci.Wheelo.Dal.Anathema.csproj" />
     <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Ui.Api.Interfaces\Toci.Driver.Ui.Api.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

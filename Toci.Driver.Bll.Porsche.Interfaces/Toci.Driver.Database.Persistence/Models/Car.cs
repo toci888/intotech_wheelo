@@ -12,8 +12,8 @@ namespace Toci.Driver.Database.Persistence.Models
         public int Availableseats { get; set; }
         public DateTime? Createdat { get; set; }
 
-        public virtual Account IdaccountsNavigation { get; set; }
-        public virtual Carsbrand IdcarsbrandsNavigation { get; set; }
-        public virtual Carsmodel IdcarsmodelsNavigation { get; set; }
+        public virtual Account IdaccountsNavigation { get; set; } = null!;
+        public virtual Carsbrand IdcarsbrandsNavigation { get; set; } = null!;
+        public virtual Carsmodel IdcarsmodelsNavigation { get; set; } = null!;
     }
 }

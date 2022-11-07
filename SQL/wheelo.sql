@@ -49,12 +49,15 @@ create table Accounts
 	Token text
 );
 
+-- 50.05463180727613, 17.80014622135593
 create table AccountsLocations
 (
 	Id serial primary key,
 	IdAccounts int references Accounts(Id) not null,
-	CoordinatesFrom text,
-	CoordinatesTo text,
+	LatitudeFrom decimal,
+	LongitudeFrom decimal,
+	LatitudeTo decimal,
+	LongitudeTo decimal,
 	StreetFrom text,
 	StreetTo text,
 	CityFrom text,
@@ -66,8 +69,8 @@ create table AccountsWorkTime
 (
 	Id serial primary key,
 	IdAccounts int references Accounts(Id) not null,
-	WorkStartHour text,
-	WorkEndHour text
+	WorkStartHour time,
+	WorkEndHour time
 );
 
 create table FriendSuggestions
@@ -159,20 +162,28 @@ create table WorkTrip
 (
 	id serial primary key,
     IdAccount int references Accounts (id),
-    FromLongitude decimal,
     FromLatitude decimal,
+	FromLongitude decimal,
     FromStreet text,
-    ToLongitude decimal,
     ToLatitude decimal,
+	ToLongitude decimal,
     ToStreet text,
     FromHour time, -- 0 60 -> 1 
     ToHour time,
     AcceptableDistance decimal
 );
+-- drop table TestCoordinates;
+--create table TestCoordinates
+--(
+	--FromLongitude decimal,
+	--FromLatitude decimal
+--);
 
+--insert into TestCoordinates(FromLongitude, FromLatitude) values (50.05463180727613, 17.80014622135593);
+--select * from TestCoordinates;
 create or replace view AccountRoles as
 select Accounts.id, Accounts.Name, Accounts.Surname, Accounts.email, Accounts.password, Accounts.emailConfirmed, Accounts.token , Roles.name as RoleName
 from Accounts
 join Roles on Roles.id = Accounts.idRole;
 
-select * from AccountRoles
+--select * from AccountRoles

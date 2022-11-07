@@ -12,7 +12,7 @@ namespace Toci.Driver.Database.Persistence.Models
         }
 
         public int Id { get; set; }
-        public string Brand { get; set; }
+        public string? Brand { get; set; }
 
         public virtual ICollection<Car> Cars { get; set; }
         public virtual ICollection<Carsmodel> Carsmodels { get; set; }

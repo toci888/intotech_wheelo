@@ -22,20 +22,20 @@ namespace Toci.Driver.Database.Persistence.Models
         }
 
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public string Name { get; set; } = null!;
+        public string Surname { get; set; } = null!;
+        public string Phone { get; set; } = null!;
+        public string Email { get; set; } = null!;
+        public string Login { get; set; } = null!;
+        public string Password { get; set; } = null!;
         public int? Emailconfirmed { get; set; }
         public int? Idgeographicregion { get; set; }
         public DateTime? Createdat { get; set; }
         public int Idrole { get; set; }
-        public string Token { get; set; }
+        public string? Token { get; set; }
 
-        public virtual Geographicregion IdgeographicregionNavigation { get; set; }
-        public virtual Role IdroleNavigation { get; set; }
+        public virtual Geographicregion? IdgeographicregionNavigation { get; set; }
+        public virtual Role IdroleNavigation { get; set; } = null!;
         public virtual ICollection<Accountscollocation> AccountscollocationIdaccountNavigations { get; set; }
         public virtual ICollection<Accountscollocation> AccountscollocationIdcollocatedNavigations { get; set; }
         public virtual ICollection<Accountslocation> Accountslocations { get; set; }

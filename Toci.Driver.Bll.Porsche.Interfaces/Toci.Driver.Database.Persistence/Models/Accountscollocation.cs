@@ -10,7 +10,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public int Idcollocated { get; set; }
         public DateTime? Createdat { get; set; }
 
-        public virtual Account IdaccountNavigation { get; set; }
-        public virtual Account IdcollocatedNavigation { get; set; }
+        public virtual Account IdaccountNavigation { get; set; } = null!;
+        public virtual Account IdcollocatedNavigation { get; set; } = null!;
     }
 }
