@@ -19,12 +19,6 @@ export default function App() {
     setUsers(await res.json());
   };
 
-
-  if (getData != null) {
-    return true;
-  }
-  
-
   return (
     
     <View style={styles.container}>
