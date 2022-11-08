@@ -1,0 +1,3 @@
+﻿1. Check your IP
+2. Go to Toci.Driver.Api -> Properties -> Debug -> Open Debug launch profiles UI -> Toci.Driver.Api -> App Url ex. http://Ipv4:PortOfApi
+3. Check environment in client app
