@@ -13,7 +13,7 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
         {
             List<Worktrip> worktripList = new List<Worktrip>();
 
-            Worktrip wt = new Worktrip() { Idaccount = 2, Latitudefrom = (decimal)52.23151900096433, Longitudefrom = (decimal)21.083137973493866 }; //52.23151900096433, 21.083137973493866
+            Worktrip wt = new Worktrip() { Idaccount = 2, Latitudefrom = 52.23151900096433, Longitudefrom = 21.083137973493866 }; //52.23151900096433, 21.083137973493866
 
             worktripList.Add(wt);
 

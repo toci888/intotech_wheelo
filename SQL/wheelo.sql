@@ -3,7 +3,7 @@ drop view VFriends;
 drop view VInvitations;
 drop view VAccountsCollocations;
 drop view VFriendSuggestions;
-
+--select * from  WorkTrip;
 drop table WorkTrip;
 drop table Cars;
 drop table CarsModels;
@@ -17,7 +17,7 @@ drop table AccountsLocations;
 drop table Accounts;
 drop table Roles;
 drop table GeographicRegion;
-
+--select * from Accounts;
 
 create table GeographicRegion
 (
@@ -162,17 +162,17 @@ create table WorkTrip
 (
 	id serial primary key,
     IdAccount int references Accounts (id),
-    LatitudeFrom decimal,
-	LongitudeFrom decimal,
-	LatitudeTo decimal,
-	LongitudeTo decimal,
+    LatitudeFrom double precision,
+	LongitudeFrom double precision,
+	LatitudeTo double precision,
+	LongitudeTo double precision,
 	StreetFrom text,
 	StreetTo text,
 	CityFrom text,
 	CityTo text,
     FromHour time, -- 0 60 -> 1 
     ToHour time,
-    AcceptableDistance decimal,
+    AcceptableDistance double precision,
 	CreatedAt timestamp default now()
 );
 -- drop table TestCoordinates;
@@ -189,4 +189,5 @@ select Accounts.id, Accounts.Name, Accounts.Surname, Accounts.email, Accounts.pa
 from Accounts
 join Roles on Roles.id = Accounts.idRole;
 
+--select * from accounts;
 --select * from AccountRoles
