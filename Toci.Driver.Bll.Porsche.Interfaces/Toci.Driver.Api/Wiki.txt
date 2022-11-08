@@ -4,5 +4,5 @@
 3. Check environment in client app
 
 
-Git skip files with IP:
+Git skip files with IP (include environment.ts and launchSettings.json files):
 git update-index --assume-unchanged <file>
