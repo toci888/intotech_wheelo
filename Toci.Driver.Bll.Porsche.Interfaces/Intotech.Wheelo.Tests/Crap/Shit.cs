@@ -19,7 +19,7 @@ namespace Intotech.Wheelo.Tests.Crap
 
             Collocator collocator = new Collocator(new WorkTripLogic(), new UsersCollocationLogic(), new AssociationCalculations());
 
-            for(int i = 2; i < 18; i++)
+            for(int i = 1; i < 23; i++)
                 collocator.Collocate(i);
 
         }
