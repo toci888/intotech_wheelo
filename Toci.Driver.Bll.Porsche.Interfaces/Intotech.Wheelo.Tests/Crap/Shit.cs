@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Toci.Driver.Bll.Porsche.Association;
 
 namespace Intotech.Wheelo.Tests.Crap
 {
@@ -12,13 +13,14 @@ namespace Intotech.Wheelo.Tests.Crap
     public class Shit
     {
         [TestMethod]
-        public void doopa()
+        public void CalcCollocations()
         {
             //double longitude = 50.05463180727613;
 
-            Collocator collocator = new Collocator(new WorkTripLogic(), new UsersCollocationLogic());
+            Collocator collocator = new Collocator(new WorkTripLogic(), new UsersCollocationLogic(), new AssociationCalculations());
 
-            collocator.Collocate(2);
+            for(int i = 2; i < 18; i++)
+                collocator.Collocate(i);
 
         }
     }

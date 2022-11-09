@@ -127,6 +127,10 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasColumnName("createdat")
                     .HasDefaultValueSql("now()");
 
+                entity.Property(e => e.Distancefrom).HasColumnName("distancefrom");
+
+                entity.Property(e => e.Distanceto).HasColumnName("distanceto");
+
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
                 entity.Property(e => e.Idcollocated).HasColumnName("idcollocated");
@@ -381,6 +385,10 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.ToView("vaccountscollocations");
 
                 entity.Property(e => e.Accountid).HasColumnName("accountid");
+
+                entity.Property(e => e.Distancefrom).HasColumnName("distancefrom");
+
+                entity.Property(e => e.Distanceto).HasColumnName("distanceto");
 
                 entity.Property(e => e.Name).HasColumnName("name");
 

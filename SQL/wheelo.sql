@@ -122,24 +122,30 @@ from FriendSuggestions
 join Accounts U1 on U1.Id = FriendSuggestions.IdAccount 
 join Accounts U2 on U2.Id = FriendSuggestions.IdSuggested ;
 
+--select * from AccountsCollocations;
+
 create table AccountsCollocations
 (
 	Id serial primary key,
 	IdAccount int references Accounts(Id) not null,
 	IdCollocated int references Accounts(Id) not null,
+	DistanceFrom numeric,
+	DistanceTo numeric,
 	CreatedAt timestamp default now()
 );
 
---select * from AccountsCollocations;
+create or replace view VAccountsCollocations as
+select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
+U2.Id as SuggestedAccountId, ac.DistanceFrom, ac.DistanceTo
+from AccountsCollocations ac
+join Accounts U1 on U1.Id = ac.IdAccount 
+join Accounts U2 on U2.Id = ac.IdCollocated ;
+
+
+--select * from VAccountsCollocations;
 --select * from worktrip;
 --update worktrip set acceptabledistance = 500;
 
--- todo poprawic do AccountsCollocations
-create or replace view VAccountsCollocations as
-select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, U2.Id as SuggestedAccountId
-from FriendSuggestions 
-join Accounts U1 on U1.Id = FriendSuggestions.IdAccount 
-join Accounts U2 on U2.Id = FriendSuggestions.IdSuggested ;
 
 create table CarsBrands
 (
@@ -182,6 +188,8 @@ create table WorkTrip
 	
 	CreatedAt timestamp default now()
 );
+
+
 -- drop table TestCoordinates;
 --create table TestCoordinates
 --(

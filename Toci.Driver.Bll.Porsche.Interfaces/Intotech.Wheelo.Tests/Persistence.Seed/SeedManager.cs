@@ -1,5 +1,6 @@
 using Intotech.Common.Tests;
 using Intotech.Wheelo.Bll.Persistence;
+using Intotech.Wheelo.Tests.Crap;
 using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Tests.Persistence.Seed;
@@ -13,6 +14,8 @@ public class SeedManager
         new SeedRole().Insert();
         new SeedAccount().Insert();
         new SeedWorktrip().Insert();
+
+        new Shit().CalcCollocations();
     }
 
     [TestMethod]

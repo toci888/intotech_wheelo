@@ -8,6 +8,8 @@ namespace Toci.Driver.Database.Persistence.Models
         public int Id { get; set; }
         public int Idaccount { get; set; }
         public int Idcollocated { get; set; }
+        public decimal? Distancefrom { get; set; }
+        public decimal? Distanceto { get; set; }
         public DateTime? Createdat { get; set; }
 
         public virtual Account IdaccountNavigation { get; set; } = null!;
