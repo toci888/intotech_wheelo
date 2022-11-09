@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Intotech.Wheelo.Bll.Persistence;
+using Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +14,12 @@ namespace Intotech.Wheelo.Tests.Crap
         [TestMethod]
         public void doopa()
         {
-            double longitude = 50.05463180727613;
+            //double longitude = 50.05463180727613;
+
+            Collocator collocator = new Collocator(new WorkTripLogic(), new UsersCollocationLogic());
+
+            collocator.Collocate(2);
+
         }
     }
 }
