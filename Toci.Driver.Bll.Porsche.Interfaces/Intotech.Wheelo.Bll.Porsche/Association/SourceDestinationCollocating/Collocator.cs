@@ -30,7 +30,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
             double distance = baseWorktrip.Acceptabledistance.Value / DistanceDivisor;
 
-            List<Worktrip> collocations = FirstLogic.Select(worktrip => worktrip.Idaccount != accountId &&
+            List<Worktrip> collocations = FirstLogic.Select(worktrip => worktrip.Idaccount.Value != accountId &&
                 baseWorktrip.Fromhour.Value.IsBetween(worktrip.Fromhour.Value.AddMinutes(-MinutesInterval), worktrip.Fromhour.Value.AddMinutes(MinutesInterval)) &&
                 baseWorktrip.Tohour.Value.IsBetween(worktrip.Tohour.Value.AddMinutes(-MinutesInterval), worktrip.Tohour.Value.AddMinutes(MinutesInterval)) &&
                 (baseWorktrip.Latitudefrom.Value - distance) <= worktrip.Latitudefrom.Value &&
@@ -54,7 +54,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
                 decimal distanceTo = (decimal)AssociationCalculation.DistanceInKmBetweenEarthCoordinates(baseWorktrip.Latitudeto.Value,
                     baseWorktrip.Longitudeto.Value, worktrip.Latitudeto.Value, worktrip.Longitudeto.Value) * DistanceNormalize;
 
-                SecondLogic.Insert(new Accountscollocation() { Idaccount = baseWorktrip.Id, 
+                SecondLogic.Insert(new Accountscollocation() { Idaccount = baseWorktrip.Idaccount.Value, 
                     Idcollocated = worktrip.Idaccount.Value, Distancefrom = distanceFrom, Distanceto = distanceTo
                 });
             }
