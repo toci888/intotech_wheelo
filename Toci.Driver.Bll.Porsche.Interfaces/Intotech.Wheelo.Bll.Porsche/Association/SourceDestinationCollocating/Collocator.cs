@@ -12,7 +12,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 {
     public class Collocator : TwoAggrLogicBase<IWorkTripLogic, IUsersCollocationLogic>, ICollocator<IWorkTripLogic, IUsersCollocationLogic>
     {
-        private const double DistanceDivisor = 100; // todo make sure about this
+        private const double DistanceDivisor = 100000; // todo make sure about this
         private const int MinutesInterval = 15;
         public Collocator(IWorkTripLogic firstLogic, IUsersCollocationLogic secondLogic) : base(firstLogic, secondLogic)
         {
@@ -27,10 +27,15 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             List<Worktrip> collocations = FirstLogic.Select(worktrip => worktrip.Idaccount != accountId &&
                 baseWorktrip.Fromhour.Value.IsBetween(worktrip.Fromhour.Value.AddMinutes(-MinutesInterval), worktrip.Fromhour.Value.AddMinutes(MinutesInterval)) &&
                 baseWorktrip.Tohour.Value.IsBetween(worktrip.Tohour.Value.AddMinutes(-MinutesInterval), worktrip.Tohour.Value.AddMinutes(MinutesInterval)) &&
-                (baseWorktrip.Latitudefrom.Value - distance) >= worktrip.Latitudefrom.Value &&
-                (baseWorktrip.Latitudefrom.Value + distance) <= worktrip.Latitudefrom.Value// &&
-                //(baseWorktrip.Longitudefrom.Value + distance) <= worktrip.Longitudefrom.Value &&
-                //(baseWorktrip.Longitudefrom.Value - distance) >= worktrip.Longitudefrom.Value
+                (baseWorktrip.Latitudefrom.Value - distance) <= worktrip.Latitudefrom.Value &&
+                (baseWorktrip.Latitudefrom.Value + distance) >= worktrip.Latitudefrom.Value &&
+                (baseWorktrip.Longitudefrom.Value + distance) >= worktrip.Longitudefrom.Value &&
+                (baseWorktrip.Longitudefrom.Value - distance) <= worktrip.Longitudefrom.Value &&
+
+                (baseWorktrip.Latitudeto.Value - distance) <= worktrip.Latitudeto.Value &&
+                (baseWorktrip.Latitudeto.Value + distance) >= worktrip.Latitudeto.Value &&
+                (baseWorktrip.Longitudeto.Value + distance) >= worktrip.Longitudeto.Value &&
+                (baseWorktrip.Longitudeto.Value - distance) <= worktrip.Longitudeto.Value
             ).ToList();
             //52.245876327341477
             // 52.222476545789547

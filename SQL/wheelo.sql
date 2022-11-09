@@ -4,6 +4,8 @@ drop view VInvitations;
 drop view VAccountsCollocations;
 drop view VFriendSuggestions;
 --select * from  WorkTrip;
+--select * from  Accounts;
+--select * from AccountsCollocations;
 drop table WorkTrip;
 drop table Cars;
 drop table CarsModels;
@@ -128,6 +130,10 @@ create table AccountsCollocations
 	CreatedAt timestamp default now()
 );
 
+--select * from AccountsCollocations;
+--select * from worktrip;
+--update worktrip set acceptabledistance = 500;
+
 -- todo poprawic do AccountsCollocations
 create or replace view VAccountsCollocations as
 select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, U2.Id as SuggestedAccountId
@@ -173,6 +179,7 @@ create table WorkTrip
     FromHour time, -- 0 60 -> 1 
     ToHour time,
     AcceptableDistance double precision,
+	
 	CreatedAt timestamp default now()
 );
 -- drop table TestCoordinates;
