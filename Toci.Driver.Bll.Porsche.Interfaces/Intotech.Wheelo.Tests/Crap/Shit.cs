@@ -17,7 +17,8 @@ namespace Intotech.Wheelo.Tests.Crap
         {
             //double longitude = 50.05463180727613;
 
-            Collocator collocator = new Collocator(new WorkTripLogic(), new UsersCollocationLogic(), new AssociationCalculations());
+            Collocator collocator = new Collocator(new WorkTripLogic(), new UsersCollocationLogic(), 
+                new AssociationCalculations(), new VusersCollocationLogic());
 
             for(int i = 1; i < 23; i++)
                 collocator.Collocate(i);
