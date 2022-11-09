@@ -1,22 +1,24 @@
 ﻿using Intotech.Common.Microservices;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.PersistenceAggregation;
 using Microsoft.AspNetCore.Mvc;
+using Toci.Driver.Database.Persistence.Models;
 
 namespace Toci.Driver.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AccountCollocationController : ApiSimpleControllerBase<IAccountCollocationMatch<IUsersLocationLogic, IUsersCollocationLogic>>
+    public class AccountCollocationController : ApiSimpleControllerBase<ICollocator<IWorkTripLogic, IUsersCollocationLogic>>
     {
-        public AccountCollocationController(IAccountCollocationMatch<IUsersLocationLogic, IUsersCollocationLogic> logic) : base(logic)
+        public AccountCollocationController(ICollocator<IWorkTripLogic, IUsersCollocationLogic> logic) : base(logic)
         {
         }
 
         [HttpPost("make-match")]
-        public bool MakeMatch(int idFirst, int idSecond)
+        public List<Vaccountscollocation> MakeMatch(int accountId)
         {
-            return Logic.TryCollocate(idFirst, idSecond);
+            return Logic.Collocate(accountId);
         }
     }
 }

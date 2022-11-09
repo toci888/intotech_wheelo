@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating
 {
@@ -11,6 +12,8 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCo
         where TWorktripLogic : IWorkTripLogic
         where TAccountsCollocationsLogic : IUsersCollocationLogic
     {
-        void Collocate(int accountId);
+        List<Vaccountscollocation> Collocate(int accountId);
+
+        List<Vaccountscollocation> AddWorkTrip(Worktrip worktrip);
     }
 }

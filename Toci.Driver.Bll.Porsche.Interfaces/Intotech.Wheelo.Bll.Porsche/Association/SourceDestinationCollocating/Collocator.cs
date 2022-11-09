@@ -18,13 +18,16 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
         private const int DistanceNormalize = 1000;
 
         protected IAssociationCalculations AssociationCalculation;
+        protected IVusersCollocationLogic AccountCollocationLogic;
 
-        public Collocator(IWorkTripLogic firstLogic, IUsersCollocationLogic secondLogic, IAssociationCalculations associationCalculations) : base(firstLogic, secondLogic)
+        public Collocator(IWorkTripLogic firstLogic, IUsersCollocationLogic secondLogic, 
+            IAssociationCalculations associationCalculations, IVusersCollocationLogic accountCollocationLogic) : base(firstLogic, secondLogic)
         {
             AssociationCalculation = associationCalculations;
+            AccountCollocationLogic = accountCollocationLogic;
         }
 
-        public virtual void Collocate(int accountId)
+        public virtual List<Vaccountscollocation> Collocate(int accountId)
         {
             Worktrip baseWorktrip = FirstLogic.Select(m => m.Idaccount == accountId).First();
 
@@ -58,6 +61,15 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
                     Idcollocated = worktrip.Idaccount.Value, Distancefrom = distanceFrom, Distanceto = distanceTo
                 });
             }
+
+            return AccountCollocationLogic.Select(m => m.Accountid == accountId).ToList();
+        }
+
+        public virtual List<Vaccountscollocation> AddWorkTrip(Worktrip worktrip)
+        {
+            Worktrip wt = FirstLogic.Insert(worktrip);
+
+            return Collocate(wt.Idaccount.Value);
         }
     }
 }
