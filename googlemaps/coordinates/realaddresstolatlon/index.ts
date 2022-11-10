@@ -6,6 +6,8 @@
 
 // @ts-nocheck TODO remove when fixed
 
+import GeogLocDataParser from "./geoglocparser";
+
 let map: google.maps.Map;
 let marker: google.maps.Marker;
 let geocoder: google.maps.Geocoder;
@@ -24,6 +26,7 @@ function initMap(): void {
 
   inputText.type = "text";
   inputText.placeholder = "Enter a location";
+  inputText.value = "niemodlinska 20, opole";
 
   const submitButton = document.createElement("input");
 
@@ -93,7 +96,10 @@ function geocode(request: google.maps.GeocoderRequest): void {
       map.setCenter(results[0].geometry.location);
       marker.setPosition(results[0].geometry.location);
 
-      console.log("Coordinates: ", results[0].geometry.location.lat(), results[0].geometry.location.lng());
+      console.log("Coordinates :) ", results[0].geometry.location.lat(), results[0].geometry.location.lng());
+
+      console.log(new GeogLocDataParser().ParseGeogLocResult(results));
+
       console.log("adres: ", "ulica: " + results[0].address_components[0].long_name, "Miasto: " + results[0].address_components[1].long_name, "Kod pocztowy: " + results[0].address_components[5].long_name);
 
       marker.setMap(map);
