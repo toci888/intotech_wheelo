@@ -22,6 +22,7 @@ const queryClient = new QueryClient();
 
 export default function App() {
   const [users, setUsers] = useState([]);
+  const [geoLocation, setGeoLocation] = useState([]);
 
   const getData = async () => {
     // const res = await axios.get(environment.apiUrl + 'api/Account/Select');

@@ -1,15 +1,26 @@
 import React from 'react';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { GooglePlaceData, GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { StyleSheet, Text, View } from 'react-native';
+import {  GeogLocDataParser } from './public/bll/geoglocparser';
+import { GeogLocModel } from './public/models/geoglocmodel';
+
+async function GetLatitudeLongitude(data: GooglePlaceData)
+{
+    const res = await fetch("https://maps.googleapis.com/maps/api/place/details/json?place_id=" + data.place_id + "&key=AIzaSyDxVQqaiKE1L6N9Etv9SUgKsEHfPr9Et40");
+    const resJson = await res.json();
+
+    const model: GeogLocModel = new GeogLocDataParser().ParseGeogLocResult(resJson);
+}
 
 export const GooglePlacesInput = () => {
   return (
     <View style={styles.textInputContainer}>
       <Text>Hello</Text>
       <GooglePlacesAutocomplete
-        placeholder="Search"
-        onPress={(data, details = null) => {
-          console.log(data, details);
+        placeholder="Type address here"
+        onPress={(data, details = null) =>  {
+
+          GetLatitudeLongitude(data);
         }}
         query={{
           key: 'AIzaSyDxVQqaiKE1L6N9Etv9SUgKsEHfPr9Et40',
