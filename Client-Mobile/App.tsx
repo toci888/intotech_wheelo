@@ -7,18 +7,18 @@ import {
   Button,
   SafeAreaView,
   Dimensions,
+  TextInput,
 } from 'react-native';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import axios from 'axios';
 import { environment } from './environment';
-import MapView, { Marker } from 'react-native-maps';
 import * as React from 'react';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import { GooglePlacesInput } from './GooglePlacesInput';
+import { GooglePlacesInput } from './src/Components/Map/GooglePlacesInput';
 // import {apiKey} from './config'; // your google cloud api key
 // import {Input} from '@rneui/themed';
 
-const queryClient = new QueryClient();
+
 
 export default function App() {
   const [users, setUsers] = useState([]);
@@ -31,47 +31,25 @@ export default function App() {
     setUsers(await res.json());
   };
 
+  const [text, onChangeText] = React.useState('text');
+
   return (
-    // <View style={styles.container}>
-    //   <Text>Open up App.tsx to start working on your app!</Text>
-    //   <QueryClientProvider client={queryClient}>
-    //     <Button onPress={getData} title='Learn More'></Button>
-    //     <View>
-    //       {users.map((user: any) => (
-    //         <Text key={user.name}>{user.name} {user.email}</Text>
-    //       ))}
-    //     </View>
-    //   </QueryClientProvider>
-    //   <StatusBar style='auto' />
-    // </View>
-    // <SafeAreaView>
-    //   <GooglePlacesAutocomplete
-    //     placeholder="Type a place"
-    //     onPress={(data, details = null) => console.log(data, details)}
-    //     query={{key: 'AIzaSyDxVQqaiKE1L6N9Etv9SUgKsEHfPr9Et40'}}
-    //     fetchDetails={true}
-    //     onFail={error => console.log(error)}
-    //     onNotFound={() => console.log('no results')}
-    //     currentLocation={true}
-    //     currentLocationLabel="Your location!" // add a simple label
-    //   />
-    // </SafeAreaView>
-    <View style={styles.container}>
-      {/* <MapView
-        initialRegion={region}
-        style={styles.map}
-      /> */}
-      <GooglePlacesInput />
-    </View>
+  //     <Button onPress={getData} title='Learn More'></Button>
+  //     <View>
+  //       {users.map((user: any) => (
+  //         <Text key={user.name}>{user.name} {user.email}</Text>
+  //       ))}
+  //     </View>
+    <QueryClientProvider client={new QueryClient}>
+      <View style={styles.container}>
+        <TextInput style={{flex:.5}} onChangeText={onChangeText} value={text}/>
+        <GooglePlacesInput inputText='zxc' minLength={4}/>
+        <GooglePlacesInput inputText='asd' minLength={4}/>
+        <StatusBar style='auto' />
+      </View>
+    </QueryClientProvider>
   );
 }
-
-const region = {
-  latitude: 137.78825,
-  longitude: -122.4324,
-  latitudeDelta: 0.0922,
-  longitudeDelta: 0.0421,
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -119,20 +97,4 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     height: 20,
   },
-  map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-  },
 });
-
-// import * as React from 'react';
-// import MapView from 'react-native-maps';
-// import { StyleSheet, Text, View, Dimensions } from 'react-native';
-
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <MapView style={styles.map} />
-//     </View>
-//   );
-// }

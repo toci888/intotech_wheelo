@@ -1,15 +1,15 @@
-import { Address } from './Address';
+import { Address } from './address';
 import { Coordinates } from './coordinates';
 
-export type GeogLocModel = {
+export type GeographicLocationModel = {
   Coordinates: Coordinates,
   Address: Address;
 }
 
-export function createGeogLocModel(
+export function createGeographicLocationModel(
   Coordinates: Coordinates,
   Address: Address
-): GeogLocModel {
+): GeographicLocationModel {
   return {
     Coordinates,
     Address
