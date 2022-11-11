@@ -5,17 +5,15 @@ import {
 } from 'react-native-google-places-autocomplete';
 import { StyleSheet, Text, View } from 'react-native';
 import { GeogLocDataParser } from './public/bll/geoglocparser';
-import { GeogLocModel } from './public/models/geoglocmodel';
+import { GeogLocModel } from './public/models/geogLocalizationModel';
+import { Coordinates, createCoordinates } from './public/models/coordinates';
+import { GOOGLE_MAPS_API_KEY } from './constants/constants';
 
-async function GetLatitudeLongitude(data: GooglePlaceData) {
-  const res = await fetch(
-    'https://maps.googleapis.com/maps/api/place/details/json?place_id=' +
-      data.place_id +
-      '&key=AIzaSyDxVQqaiKE1L6N9Etv9SUgKsEHfPr9Et40'
-  );
-  const resJson = await res.json();
+async function GetLatitudeLongitude(data: GooglePlaceData, coordinates: Coordinates) {
 
-  const model: GeogLocModel = new GeogLocDataParser().ParseGeogLocResult(resJson);
+  const model: GeogLocModel = new GeogLocDataParser().ParseGeogLocResult(data, coordinates);
+
+  return model;
 }
 
 export const GooglePlacesInput = () => {
@@ -23,21 +21,30 @@ export const GooglePlacesInput = () => {
     <View style={styles.textInputContainer}>
       <Text>Hello</Text>
       <GooglePlacesAutocomplete
-        placeholder="Type address here"
-        onPress={(data, details = null) => {
-          GetLatitudeLongitude(data);
-        }}
+        GooglePlacesDetailsQuery={{ fields: 'formatted_address,geometry' }}
+        fetchDetails={true} // you need this to fetch the details object onPress
+        placeholder="Search"
         query={{
-          key: 'AIzaSyDxVQqaiKE1L6N9Etv9SUgKsEHfPr9Et40',
-          language: 'en',
+          key: GOOGLE_MAPS_API_KEY,
+          language: 'pl',
         }}
+        onPress={(data: any, details: any = null) => {
+          const coordinates = createCoordinates(details.geometry.location.lat, details.geometry.location.lng);
+          if (coordinates.type === 'Success') {
+            console.log(data);
+            console.log("detailsHERE", details);
+            GetLatitudeLongitude(data, coordinates.coordinates);
+          } else {
+            return Error('Podane wartości są niepoprawne');
+          }
+
+        }}
+        onFail={(error) => console.error(error)}
       />
     </View>
   );
 };
-//https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJrTLr-GyuEmsRBfy61i59si0&key=AIzaSyDxVQqaiKE1L6N9Etv9SUgKsEHfPr9Et40
-//EhxLb3JkZWNraWVnbywgUG96bmHFhCwgUG9sYW5kIi4qLAoUChIJGX5Lii9FBEcRtPGGCAQKaioSFAoSCbcK4ezSRARHEdG_NAOYMeqk
-//https://maps.googleapis.com/maps/api/place/details/json?place_id=EhxLb3JkZWNraWVnbywgUG96bmHFhCwgUG9sYW5kIi4qLAoUChIJGX5Lii9FBEcRtPGGCAQKaioSFAoSCbcK4ezSRARHEdG_NAOYMeqk=AIzaSyDxVQqaiKE1L6N9Etv9SUgKsEHfPr9Et40
+
 const styles = StyleSheet.create({
   textInputContainer: {
     backgroundColor: 'grey',
@@ -52,24 +59,3 @@ const styles = StyleSheet.create({
     color: '#1faadb',
   },
 });
-
-{
-  /* <GooglePlacesAutocomplete
-        placeholder="Search"
-        onPress={(data, details = null) => {
-          // 'details' is provided when fetchDetails = true
-          console.log(data, details);
-        }}
-        query={{
-          key: "AIzaSyDxVQqaiKE1L6N9Etv9SUgKsEHfPr9Et40",
-          language: "en",
-        }}
-        requestUrl={{
-          useOnPlatform: "web", // or "all"
-          url: "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api", // or any proxy server that hits https://maps.googleapis.com/maps/api
-          headers: {
-            Authorization: `an auth token`, // if required for your proxy
-          },
-        }}
-      /> */
-}

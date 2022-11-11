@@ -1,0 +1,6 @@
+Naming convention:
+camelCase:
+
+
+PascalCase:
+Classess

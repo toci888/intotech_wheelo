@@ -1,5 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,14 +7,14 @@ import {
   Button,
   SafeAreaView,
   Dimensions,
-} from "react-native";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-import axios from "axios";
-import { environment } from "./environment";
-import MapView, { Marker } from "react-native-maps";
-import * as React from "react";
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { GooglePlacesInput } from "./GooglePlacesInput";
+} from 'react-native';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import axios from 'axios';
+import { environment } from './environment';
+import MapView, { Marker } from 'react-native-maps';
+import * as React from 'react';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { GooglePlacesInput } from './googlePlacesInput';
 // import {apiKey} from './config'; // your google cloud api key
 // import {Input} from '@rneui/themed';
 
@@ -26,7 +26,7 @@ export default function App() {
 
   const getData = async () => {
     // const res = await axios.get(environment.apiUrl + 'api/Account/Select');
-    const res = await fetch(environment.apiUrl + "api/Account/Select");
+    const res = await fetch(environment.apiUrl + 'api/Account/Select');
 
     setUsers(await res.json());
   };
@@ -76,16 +76,16 @@ const region = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: "20%",
-    backgroundColor: "gray",
+    paddingTop: '20%',
+    backgroundColor: 'gray',
     // alignItems: "center",
     // justifyContent: 'center',
   },
   textInputContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   textInput: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
     height: 44,
     borderRadius: 5,
     paddingVertical: 5,
@@ -94,34 +94,34 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   poweredContainer: {
-    justifyContent: "flex-end",
-    alignItems: "center",
+    justifyContent: 'flex-end',
+    alignItems: 'center',
     borderBottomRightRadius: 5,
     borderBottomLeftRadius: 5,
-    borderColor: "#c8c7cc",
+    borderColor: '#c8c7cc',
     borderTopWidth: 0.5,
   },
   powered: {},
   listView: {},
   row: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
     padding: 13,
     height: 44,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   separator: {
     height: 0.5,
-    backgroundColor: "#c8c7cc",
+    backgroundColor: '#c8c7cc',
   },
   description: {},
   loader: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
     height: 20,
   },
   map: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
   },
 });
 

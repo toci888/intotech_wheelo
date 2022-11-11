@@ -1,55 +1,64 @@
-import { GeogLocModel } from '../models/geoglocmodel';
+import { Address } from './../models/Address';
+import { Coordinates } from '../models/coordinates';
+import { createGeogLocModel, GeogLocModel } from '../models/geogLocalizationModel';
 
 export class GeogLocDataParser {
-  constructor() {}
 
   Mapper = [
     {
-      route: (json, model: GeogLocModel) => {
-        model.Street = json.long_name;
+      0: (json: any, model: Address) => {
+        console.log("TUU", json);
+        console.log("TUU", json['value']);
+        console.log("model", model);
+        model.Street = json['value'];
 
         return model;
       },
     },
     {
-      street_number: (json, model: GeogLocModel) => {
-        model.HouseNumber = json.long_name;
+      12: (json: any, model: Address) => {
+        model.HouseNumber = json.value;
 
         return model;
       },
     },
     {
-      postal_code: (json, model: GeogLocModel) => {
-        model.PostCode = json.long_name;
+      15: (json: any, model: Address) => {
+        model.PostCode = json.value;
 
         return model;
       },
     },
     {
-      locality: (json, model: GeogLocModel) => {
-        model.City = json.long_name;
+      22: (json: any, model: Address) => {
+        model.City = json.value;
         
         return model;
       },
     },
   ];
 
-  model: GeogLocModel = new GeogLocModel();
+  address = new Address();
 
-  ParseGeogLocResult(result: any) {
-    result.result.address_components.forEach((element) => {
+  ParseGeogLocResult(result: any, coordinates: Coordinates) { //google.maps.places.PlacesDetailsResponse
+    // console.log("RESULT:");
+    // console.log(result);
+    // console.log("coordinates");
+    // console.log(coordinates);
+    
+    result.terms.forEach((element) => {
       this.Mapper.forEach((mapEl) => {
-        if (mapEl[element.types[0]] !== undefined) {
-          this.model = mapEl[element.types[0]](element, this.model);
+        if (mapEl[element.offset] !== undefined) {
+          this.address = mapEl[element.offset](element, this.address);
         }
       });
     });
 
-    console.log("geometry", result.result.geometry);
+    const GeogLocalization = createGeogLocModel(coordinates, this.address);
 
-    this.model.Latitude = result.result.geometry.location.lat;
-    this.model.Longitude = result.result.geometry.location.lng;
+    console.log("GeogLocalization");
+    console.log(GeogLocalization);
 
-    return this.model;
+    return GeogLocalization;
   }
 }
