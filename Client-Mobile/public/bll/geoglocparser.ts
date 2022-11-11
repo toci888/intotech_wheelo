@@ -5,59 +5,26 @@ import { createGeogLocModel, GeogLocModel } from '../models/geogLocalizationMode
 export class GeogLocDataParser {
 
   Mapper = [
-    {
-      0: (json: any, model: Address) => {
-        console.log("TUU", json);
-        console.log("TUU", json['value']);
-        console.log("model", model);
-        model.Street = json['value'];
-
-        return model;
-      },
-    },
-    {
-      12: (json: any, model: Address) => {
-        model.HouseNumber = json.value;
-
-        return model;
-      },
-    },
-    {
-      15: (json: any, model: Address) => {
-        model.PostCode = json.value;
-
-        return model;
-      },
-    },
-    {
-      22: (json: any, model: Address) => {
-        model.City = json.value;
-        
-        return model;
-      },
-    },
+    {"route": (json, model: Address) => { model.Street = json.long_name; return model; } },
+        {"street_number": (json, model: Address) => { model.HouseNumber = json.long_name; return model; } },
+        {"postal_code": (json, model: Address) => { model.PostCode = json.long_name; return model; } },
+        {"locality": (json, model: Address) => { model.City = json.long_name; return model; } },
   ];
 
   address = new Address();
 
-  ParseGeogLocResult(result: any, coordinates: Coordinates) { //google.maps.places.PlacesDetailsResponse
-    // console.log("RESULT:");
-    // console.log(result);
-    // console.log("coordinates");
-    // console.log(coordinates);
-    
-    result.terms.forEach((element) => {
+  ParseGeogLocResult(data: any, coordinates: Coordinates) { //google.maps.places.PlacesDetailsResponse
+
+    data.result.address_components.forEach((element) => {
       this.Mapper.forEach((mapEl) => {
-        if (mapEl[element.offset] !== undefined) {
-          this.address = mapEl[element.offset](element, this.address);
+        if (mapEl[element.types[0]] !== undefined)
+        {
+            this.address = mapEl[element.types[0]](element, this.address);
         }
       });
     });
 
     const GeogLocalization = createGeogLocModel(coordinates, this.address);
-
-    console.log("GeogLocalization");
-    console.log(GeogLocalization);
 
     return GeogLocalization;
   }

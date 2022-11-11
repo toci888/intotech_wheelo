@@ -14,7 +14,7 @@ import { environment } from './environment';
 import MapView, { Marker } from 'react-native-maps';
 import * as React from 'react';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import { GooglePlacesInput } from './googlePlacesInput';
+import { GooglePlacesInput } from './GooglePlacesInput';
 // import {apiKey} from './config'; // your google cloud api key
 // import {Input} from '@rneui/themed';
 

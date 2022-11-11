@@ -48,9 +48,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.ExcelLibrary.Exten
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Microservices.Interfaces", "..\..\Intotech.Common\Intotech.Common.Microservices.Interfaces\Intotech.Common.Microservices.Interfaces.csproj", "{D5B0B8CE-4CB2-42C1-898D-C63DB309B61A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Tests", "Intotech.Wheelo.Tests\Intotech.Wheelo.Tests.csproj", "{1E14C2C2-EDAE-4732-9267-B1F6889DB0D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Tests", "Intotech.Wheelo.Tests\Intotech.Wheelo.Tests.csproj", "{1E14C2C2-EDAE-4732-9267-B1F6889DB0D7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Tests", "..\..\Intotech.Common\Intotech.Common.Tests\Intotech.Common.Tests.csproj", "{436BB7D5-5E9A-4CE5-AD0C-EFDD106DACC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.Chat", "Intotech.Wheelo.Chat", "{07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{4B31F6CD-BAE5-4416-9A7E-7CD74459E6A7}"
+	ProjectSection(SolutionItems) = preProject
+		Wheelo.Chat.sql = Wheelo.Chat.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -234,6 +241,7 @@ Global
 		{4234C2E5-8C5F-47BA-9DDF-C3E96D73A94B} = {61CCF297-620A-40F2-9052-7A5396FA48E4}
 		{D5B0B8CE-4CB2-42C1-898D-C63DB309B61A} = {61CCF297-620A-40F2-9052-7A5396FA48E4}
 		{436BB7D5-5E9A-4CE5-AD0C-EFDD106DACC3} = {61CCF297-620A-40F2-9052-7A5396FA48E4}
+		{4B31F6CD-BAE5-4416-9A7E-7CD74459E6A7} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {958786F8-D2E4-4AAC-949D-3CD908D8AE36}
