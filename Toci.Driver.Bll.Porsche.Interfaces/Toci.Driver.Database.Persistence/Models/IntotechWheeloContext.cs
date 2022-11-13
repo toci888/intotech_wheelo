@@ -35,6 +35,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Vfriend> Vfriends { get; set; } = null!;
         public virtual DbSet<Vfriendsuggestion> Vfriendsuggestions { get; set; } = null!;
         public virtual DbSet<Vinvitation> Vinvitations { get; set; } = null!;
+        public virtual DbSet<Vtripsparticipant> Vtripsparticipants { get; set; } = null!;
         public virtual DbSet<Worktrip> Worktrips { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -395,6 +396,12 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Idinitiatoraccount).HasColumnName("idinitiatoraccount");
 
+                entity.Property(e => e.Iscurrent)
+                    .HasColumnName("iscurrent")
+                    .HasDefaultValueSql("false");
+
+                entity.Property(e => e.Leftseats).HasColumnName("leftseats");
+
                 entity.Property(e => e.Summary).HasColumnName("summary");
 
                 entity.Property(e => e.Tohour).HasColumnName("tohour");
@@ -521,6 +528,41 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Suggestedsurname).HasColumnName("suggestedsurname");
 
                 entity.Property(e => e.Surname).HasColumnName("surname");
+            });
+
+            modelBuilder.Entity<Vtripsparticipant>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vtripsparticipants");
+
+                entity.Property(e => e.Accountid).HasColumnName("accountid");
+
+                entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+
+                entity.Property(e => e.Iscurrent).HasColumnName("iscurrent");
+
+                entity.Property(e => e.Leftseats).HasColumnName("leftseats");
+
+                entity.Property(e => e.Name).HasColumnName("name");
+
+                entity.Property(e => e.Suggestedaccountid).HasColumnName("suggestedaccountid");
+
+                entity.Property(e => e.Suggestedname).HasColumnName("suggestedname");
+
+                entity.Property(e => e.Suggestedsurname).HasColumnName("suggestedsurname");
+
+                entity.Property(e => e.Summary).HasColumnName("summary");
+
+                entity.Property(e => e.Surname).HasColumnName("surname");
+
+                entity.Property(e => e.Tohour).HasColumnName("tohour");
+
+                entity.Property(e => e.Tripdate)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("tripdate");
+
+                entity.Property(e => e.Tripid).HasColumnName("tripid");
             });
 
             modelBuilder.Entity<Worktrip>(entity =>

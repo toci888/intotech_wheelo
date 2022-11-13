@@ -1,3 +1,4 @@
+drop view VTripsParticipants;
 drop table TripParticipants;
 drop table Trips;
 drop view AccountRoles;
@@ -215,10 +216,12 @@ create table Trips
 	id serial primary key,
     IdInitiatorAccount int references Accounts (id), -- person, who initiated the trip, who drives his/her car
 	TripDate timestamp,
+	IsCurrent bool default false,
 	FromHour time, -- 0 60 -> 1 
     ToHour time,
 	Summary text,
-	CreatedAt Timestamp default now()
+	CreatedAt Timestamp default now(),
+	LeftSeats int
 );
 
 create table TripParticipants
@@ -229,3 +232,10 @@ create table TripParticipants
 	CreatedAt Timestamp default now()
 );
 
+create or replace view VTripsParticipants as
+select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
+U2.Id as SuggestedAccountId, tr.TripDate, tr.Summary, tr.id as tripId, tr.IsCurrent, tr.FromHour, tr.ToHour,
+tr.LeftSeats
+from Trips tr join TripParticipants tp on tr.id = tp.IdTrip
+join Accounts U1 on U1.Id = tr.IdInitiatorAccount 
+join Accounts U2 on U2.Id = tp.IdAccount ;
