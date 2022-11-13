@@ -1,3 +1,5 @@
+drop table TripParticipants;
+drop table Trips;
 drop view AccountRoles;
 drop view VFriends;
 drop view VInvitations;
@@ -207,3 +209,23 @@ join Roles on Roles.id = Accounts.idRole;
 
 --select * from accounts;
 --select * from AccountRoles
+
+create table Trips
+(
+	id serial primary key,
+    IdInitiatorAccount int references Accounts (id), -- person, who initiated the trip, who drives his/her car
+	TripDate timestamp,
+	FromHour time, -- 0 60 -> 1 
+    ToHour time,
+	Summary text,
+	CreatedAt Timestamp default now()
+);
+
+create table TripParticipants
+(
+	id serial primary key,
+	IdTrip int references Trips (id), --1 => 2
+	IdAccount int references Accounts (id),
+	CreatedAt Timestamp default now()
+);
+

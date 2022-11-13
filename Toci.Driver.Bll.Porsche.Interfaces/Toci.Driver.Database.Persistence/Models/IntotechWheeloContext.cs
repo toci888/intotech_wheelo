@@ -29,6 +29,8 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Geographicregion> Geographicregions { get; set; } = null!;
         public virtual DbSet<Invitation> Invitations { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
+        public virtual DbSet<Trip> Trips { get; set; } = null!;
+        public virtual DbSet<Tripparticipant> Tripparticipants { get; set; } = null!;
         public virtual DbSet<Vaccountscollocation> Vaccountscollocations { get; set; } = null!;
         public virtual DbSet<Vfriend> Vfriends { get; set; } = null!;
         public virtual DbSet<Vfriendsuggestion> Vfriendsuggestions { get; set; } = null!;
@@ -376,6 +378,61 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name).HasColumnName("name");
+            });
+
+            modelBuilder.Entity<Trip>(entity =>
+            {
+                entity.ToTable("trips");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
+                    .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+
+                entity.Property(e => e.Idinitiatoraccount).HasColumnName("idinitiatoraccount");
+
+                entity.Property(e => e.Summary).HasColumnName("summary");
+
+                entity.Property(e => e.Tohour).HasColumnName("tohour");
+
+                entity.Property(e => e.Tripdate)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("tripdate");
+
+                entity.HasOne(d => d.IdinitiatoraccountNavigation)
+                    .WithMany(p => p.Trips)
+                    .HasForeignKey(d => d.Idinitiatoraccount)
+                    .HasConstraintName("trips_idinitiatoraccount_fkey");
+            });
+
+            modelBuilder.Entity<Tripparticipant>(entity =>
+            {
+                entity.ToTable("tripparticipants");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
+                    .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Idtrip).HasColumnName("idtrip");
+
+                entity.HasOne(d => d.IdaccountNavigation)
+                    .WithMany(p => p.Tripparticipants)
+                    .HasForeignKey(d => d.Idaccount)
+                    .HasConstraintName("tripparticipants_idaccount_fkey");
+
+                entity.HasOne(d => d.IdtripNavigation)
+                    .WithMany(p => p.Tripparticipants)
+                    .HasForeignKey(d => d.Idtrip)
+                    .HasConstraintName("tripparticipants_idtrip_fkey");
             });
 
             modelBuilder.Entity<Vaccountscollocation>(entity =>
