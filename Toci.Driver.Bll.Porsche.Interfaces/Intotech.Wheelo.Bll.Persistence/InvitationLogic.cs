@@ -8,7 +8,28 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Persistence
 {
+
+    /*
+    create or replace view VInvitations as
+select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, U2.Id as SuggestedAccountId
+from Invitations 
+join Accounts U1 on U1.Id = Invitations.IdAccount 
+join Accounts U2 on U2.Id = Invitations.IdInvited ; */
+
     public class InvitationLogic : Logic<Invitation>, IInvitationLogic
     {
+        protected IVinvitationLogic VInvitationLogic;
+
+        public InvitationLogic(IVinvitationLogic iVinvitationLogic)
+        {
+            VInvitationLogic = iVinvitationLogic;
+        }
+
+        public virtual Vinvitation InviteToFriends(int invitingAccountId, int invitedAccountId)
+        {
+            Insert(new Invitation() { Idaccount = invitingAccountId, Idinvited = invitedAccountId });
+
+            return VInvitationLogic.Select(m => m.Accountid == invitingAccountId).FirstOrDefault();
+        }
     }
 }

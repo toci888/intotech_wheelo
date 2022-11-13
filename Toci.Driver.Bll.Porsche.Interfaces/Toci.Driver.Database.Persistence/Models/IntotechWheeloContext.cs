@@ -386,6 +386,10 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Accountid).HasColumnName("accountid");
 
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat");
+
                 entity.Property(e => e.Distancefrom).HasColumnName("distancefrom");
 
                 entity.Property(e => e.Distanceto).HasColumnName("distanceto");
@@ -446,6 +450,10 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.ToView("vinvitations");
 
                 entity.Property(e => e.Accountid).HasColumnName("accountid");
+
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat");
 
                 entity.Property(e => e.Name).HasColumnName("name");
 

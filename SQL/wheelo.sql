@@ -101,10 +101,11 @@ create table Invitations
 
 -- todo poprawic do zaproszen
 create or replace view VInvitations as
-select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, U2.Id as SuggestedAccountId
-from FriendSuggestions 
-join Accounts U1 on U1.Id = FriendSuggestions.IdAccount 
-join Accounts U2 on U2.Id = FriendSuggestions.IdSuggested ;
+select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, 
+U1.Id as AccountId, U2.Id as SuggestedAccountId, Invitations.CreatedAt
+from Invitations 
+join Accounts U1 on U1.Id = Invitations.IdAccount 
+join Accounts U2 on U2.Id = Invitations.IdInvited ;
 
 --friends
 create table Friends

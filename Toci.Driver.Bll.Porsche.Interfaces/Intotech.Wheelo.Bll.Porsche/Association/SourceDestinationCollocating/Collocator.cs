@@ -20,7 +20,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
         protected IAssociationCalculations AssociationCalculation;
         protected IVusersCollocationLogic AccountCollocationLogic;
 
-        public Collocator(IWorkTripLogic firstLogic, IUsersCollocationLogic secondLogic, 
+        public Collocator(IWorkTripLogic firstLogic, IUsersCollocationLogic secondLogic,
             IAssociationCalculations associationCalculations, IVusersCollocationLogic accountCollocationLogic) : base(firstLogic, secondLogic)
         {
             AssociationCalculation = associationCalculations;
@@ -51,13 +51,13 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             // 52.222476545789547
             foreach (Worktrip worktrip in collocations)
             {
-                decimal distanceFrom = (decimal)AssociationCalculation.DistanceInKmBetweenEarthCoordinates(baseWorktrip.Latitudefrom.Value, 
+                decimal distanceFrom = (decimal)AssociationCalculation.DistanceInKmBetweenEarthCoordinates(baseWorktrip.Latitudefrom.Value,
                     baseWorktrip.Longitudefrom.Value, worktrip.Latitudefrom.Value, worktrip.Longitudefrom.Value) * DistanceNormalize;
 
                 decimal distanceTo = (decimal)AssociationCalculation.DistanceInKmBetweenEarthCoordinates(baseWorktrip.Latitudeto.Value,
                     baseWorktrip.Longitudeto.Value, worktrip.Latitudeto.Value, worktrip.Longitudeto.Value) * DistanceNormalize;
 
-                SecondLogic.Insert(new Accountscollocation() { Idaccount = baseWorktrip.Idaccount.Value, 
+                SecondLogic.Insert(new Accountscollocation() { Idaccount = baseWorktrip.Idaccount.Value,
                     Idcollocated = worktrip.Idaccount.Value, Distancefrom = distanceFrom, Distanceto = distanceTo
                 });
             }
@@ -70,6 +70,11 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             Worktrip wt = FirstLogic.Insert(worktrip);
 
             return Collocate(wt.Idaccount.Value);
+        }
+
+        public virtual List<Vaccountscollocation> GetUserAssociations(int accountId)
+        {
+            return AccountCollocationLogic.Select(m => m.Accountid == accountId || m.Suggestedaccountid == accountId).ToList();
         }
     }
 }

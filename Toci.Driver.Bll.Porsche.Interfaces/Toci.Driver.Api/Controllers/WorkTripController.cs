@@ -16,7 +16,7 @@ namespace Toci.Driver.Api.Controllers
         }
 
         [HttpPost]
-        [Route("AddWorkTrip")]
+        [Route("add-work-trip")]
         public List<Vaccountscollocation> AddWorkTrip(WorktripDto wt)
         {
             wt.Fromhour = new TimeOnly(wt.IFromHour, wt.IFromMinute);
@@ -24,5 +24,13 @@ namespace Toci.Driver.Api.Controllers
 
             return Logic.AddWorkTrip(wt);
         }
+
+        [HttpGet]
+        [Route("associated-users")]
+        public List<Vaccountscollocation> GetAssociatedUsers(int accountId)
+        {
+            return Logic.GetUserAssociations(accountId);
+        }
+
     }
 }

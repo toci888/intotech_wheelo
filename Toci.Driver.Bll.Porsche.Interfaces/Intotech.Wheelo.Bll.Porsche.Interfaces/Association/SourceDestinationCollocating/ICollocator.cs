@@ -15,5 +15,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCo
         List<Vaccountscollocation> Collocate(int accountId);
 
         List<Vaccountscollocation> AddWorkTrip(Worktrip worktrip);
+
+        List<Vaccountscollocation> GetUserAssociations(int accountId);
     }
 }

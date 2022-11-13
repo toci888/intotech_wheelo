@@ -10,5 +10,6 @@ namespace Intotech.Wheelo.Bll.Persistence
 {
     public class FriendLogic : Logic<Friend>, IFriendLogic
     {
+        // powielenie di z invitation i stworzenie Vfriend
     }
 }
