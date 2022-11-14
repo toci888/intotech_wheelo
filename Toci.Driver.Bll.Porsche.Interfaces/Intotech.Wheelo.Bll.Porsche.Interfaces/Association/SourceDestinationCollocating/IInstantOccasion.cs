@@ -10,5 +10,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCo
     public interface IInstantOccasion
     {
         List<Trip> FindOccasionalTrips(int accountId, TimeOnly timeFromTo, bool fromTo);
+
+        int AddOccasion(int tripId, int occasionAccountId);
     }
 }

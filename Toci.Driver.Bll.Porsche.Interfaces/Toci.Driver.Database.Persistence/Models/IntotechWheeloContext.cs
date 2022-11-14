@@ -429,6 +429,10 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Idtrip).HasColumnName("idtrip");
 
+                entity.Property(e => e.Isoccasion)
+                    .HasColumnName("isoccasion")
+                    .HasDefaultValueSql("false");
+
                 entity.HasOne(d => d.IdaccountNavigation)
                     .WithMany(p => p.Tripparticipants)
                     .HasForeignKey(d => d.Idaccount)
@@ -539,6 +543,8 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Fromhour).HasColumnName("fromhour");
 
                 entity.Property(e => e.Iscurrent).HasColumnName("iscurrent");
+
+                entity.Property(e => e.Isoccasion).HasColumnName("isoccasion");
 
                 entity.Property(e => e.Leftseats).HasColumnName("leftseats");
 

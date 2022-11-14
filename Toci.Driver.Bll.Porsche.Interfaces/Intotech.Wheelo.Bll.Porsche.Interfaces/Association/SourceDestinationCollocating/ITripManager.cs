@@ -9,11 +9,17 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCo
 {
     public interface ITripManager
     {
-        Trip CreateTrip(Trip trip);
+        Trip CreateTrip(Trip trip, List<int> accountIds);
         int AddTripParticipant(int tripId, int accountId);
 
-        // get trip by owner/trip id? 
+        bool SetTripNotCurrent(int tripId, int inititatorAccountId);
 
-        List<Vtripsparticipant> GetTripParticipants(DateOnly tripDate, int accountId);
+        List<Trip> GetAllTrips(int accountId);
+
+        Trip GetTrip(int tripId);
+
+        List<Trip> GetInitiatorTrips(int inititatorAccountId);
+
+        List<Vtripsparticipant> GetTripParticipants(int accountId);
     }
 }

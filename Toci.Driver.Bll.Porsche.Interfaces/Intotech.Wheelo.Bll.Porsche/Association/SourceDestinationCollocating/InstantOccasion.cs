@@ -15,16 +15,30 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
         protected IUsersCollocationLogic UsersCollocationLogic;
         protected ITripLogic TripsLogic;
+        protected ITripparticipantLogic TripparticipantLogic;
 
-        public InstantOccasion(IUsersCollocationLogic usersCollocationLogic, ITripLogic tripsLogic)
+        public InstantOccasion(IUsersCollocationLogic usersCollocationLogic, ITripLogic tripsLogic, 
+            ITripparticipantLogic tripparticipantLogic)
         {
             UsersCollocationLogic = usersCollocationLogic;
             TripsLogic = tripsLogic;
+            TripparticipantLogic = tripparticipantLogic;
+        }
+
+        public virtual int AddOccasion(int tripId, int occasionAccountId)
+        {
+            return TripparticipantLogic.Insert(new Tripparticipant() 
+            { 
+                Idaccount = occasionAccountId, 
+                Idtrip = tripId,
+                Isoccasion = true
+            }).Id;
         }
 
         public virtual List<Trip> FindOccasionalTrips(int accountId, TimeOnly timeFromTo, bool fromTo) // from to true => from, false => to
         {
-            List<int> accountCollocations = UsersCollocationLogic.Select(m => m.Idaccount == accountId).Select(m => m.Idcollocated).ToList();
+            List<int> accountCollocations = UsersCollocationLogic.Select(m => m.Idaccount == accountId).
+                Select(m => m.Idcollocated).ToList();
 
             if (fromTo)
             {
@@ -39,5 +53,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
                 m.Tohour.Value.IsBetween(timeFromTo.AddMinutes(-timeInterval), timeFromTo.AddMinutes(timeInterval)) &&
                 m.Tripdate == new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)).ToList();
         }
+
+
     }
 }

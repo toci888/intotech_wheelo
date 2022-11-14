@@ -18,5 +18,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public TimeOnly? Fromhour { get; set; }
         public TimeOnly? Tohour { get; set; }
         public int? Leftseats { get; set; }
+        public bool? Isoccasion { get; set; }
     }
 }

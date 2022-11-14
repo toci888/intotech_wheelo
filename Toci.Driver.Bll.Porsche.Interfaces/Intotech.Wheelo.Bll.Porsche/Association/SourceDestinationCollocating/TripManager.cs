@@ -28,15 +28,47 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             return TripparticipantLogic.Insert(new Tripparticipant() { Idtrip = tripId, Idaccount = accountId }).Id;
         }
 
-        public Trip CreateTrip(Trip trip)
+        public virtual Trip CreateTrip(Trip trip, List<int> accountIds)
         {
+            trip.Iscurrent = true;
 
-            throw new NotImplementedException();
+            //trip.Summary
+            //trip.Leftseats
+
+            return TripLogic.Insert(trip);
         }
 
-        public List<Vtripsparticipant> GetTripParticipants(DateOnly tripDate, int accountId)
+        public virtual List<Trip> GetAllTrips(int accountId)
         {
-            return VTripparticipantLogic.Select(m => m.Accountid == accountId && m.Tripdate == tripDate).ToList();
+            List<int> tripsIds = TripparticipantLogic.Select(m => m.Idaccount == accountId).Select(m => m.Idtrip.Value).ToList();
+
+            return TripLogic.Select(m => tripsIds.Contains(m.Id)).ToList();
+        }
+
+        public virtual List<Trip> GetInitiatorTrips(int inititatorAccountId)
+        {
+            return TripLogic.Select(m => m.Idinitiatoraccount == inititatorAccountId).ToList(); 
+        }
+
+        public virtual Trip GetTrip(int tripId)
+        {
+            return TripLogic.Select(m => m.Id == tripId).First();
+        }
+
+        public virtual List<Vtripsparticipant> GetTripParticipants(int accountId)
+        {
+            int tripId = VTripparticipantLogic.Select(m => m.Accountid.Value == accountId && m.Iscurrent.Value).First().Tripid.Value;
+
+            return VTripparticipantLogic.Select(m => m.Tripid == tripId).ToList();
+        }
+
+        public virtual bool SetTripNotCurrent(int tripId, int inititatorAccountId)
+        {
+            Trip trip = TripLogic.Select(m => m.Id == tripId && m.Idinitiatoraccount == inititatorAccountId).First();
+
+            trip.Iscurrent = false;
+
+            return TripLogic.Update(trip).Id > 0;
         }
     }
 }
