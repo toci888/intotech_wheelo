@@ -10,5 +10,6 @@ namespace Intotech.Wheelo.Bll.Persistence
 {
     public class VTripsParticipantsLogic : Logic<Vtripsparticipant>, IVTripsParticipantsLogic
     {
+
     }
 }

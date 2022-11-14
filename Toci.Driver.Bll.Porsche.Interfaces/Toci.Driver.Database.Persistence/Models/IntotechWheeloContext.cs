@@ -406,9 +406,7 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Tohour).HasColumnName("tohour");
 
-                entity.Property(e => e.Tripdate)
-                    .HasColumnType("timestamp without time zone")
-                    .HasColumnName("tripdate");
+                entity.Property(e => e.Tripdate).HasColumnName("tripdate");
 
                 entity.HasOne(d => d.IdinitiatoraccountNavigation)
                     .WithMany(p => p.Trips)
@@ -558,9 +556,7 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Tohour).HasColumnName("tohour");
 
-                entity.Property(e => e.Tripdate)
-                    .HasColumnType("timestamp without time zone")
-                    .HasColumnName("tripdate");
+                entity.Property(e => e.Tripdate).HasColumnName("tripdate");
 
                 entity.Property(e => e.Tripid).HasColumnName("tripid");
             });

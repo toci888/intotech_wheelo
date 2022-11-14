@@ -11,7 +11,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public string? Suggestedsurname { get; set; }
         public int? Accountid { get; set; }
         public int? Suggestedaccountid { get; set; }
-        public DateTime? Tripdate { get; set; }
+        public DateOnly? Tripdate { get; set; }
         public string? Summary { get; set; }
         public int? Tripid { get; set; }
         public bool? Iscurrent { get; set; }

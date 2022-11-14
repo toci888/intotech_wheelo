@@ -13,5 +13,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCo
         int AddTripParticipant(int tripId, int accountId);
 
         // get trip by owner/trip id? 
+
+        List<Vtripsparticipant> GetTripParticipants(DateOnly tripDate, int accountId);
     }
 }

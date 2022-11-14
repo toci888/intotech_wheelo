@@ -13,11 +13,14 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
     {
         protected ITripLogic TripLogic;
         protected ITripparticipantLogic TripparticipantLogic;
+        protected IVTripsParticipantsLogic VTripparticipantLogic;
 
-        public TripManager(ITripLogic tripLogic, ITripparticipantLogic tripparticipantLogic)
+        public TripManager(ITripLogic tripLogic, ITripparticipantLogic tripparticipantLogic, 
+            IVTripsParticipantsLogic vTripparticipantLogic)
         {
             TripLogic = tripLogic;
             TripparticipantLogic = tripparticipantLogic;
+            VTripparticipantLogic = vTripparticipantLogic;
         }
 
         public int AddTripParticipant(int tripId, int accountId)
@@ -29,6 +32,11 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
         {
 
             throw new NotImplementedException();
+        }
+
+        public List<Vtripsparticipant> GetTripParticipants(DateOnly tripDate, int accountId)
+        {
+            return VTripparticipantLogic.Select(m => m.Accountid == accountId && m.Tripdate == tripDate).ToList();
         }
     }
 }

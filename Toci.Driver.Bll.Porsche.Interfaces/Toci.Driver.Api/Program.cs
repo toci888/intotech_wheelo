@@ -40,10 +40,15 @@ builder.Services.AddScoped<IVinvitationLogic, VinvitationLogic>();
 builder.Services.AddScoped<IVusersCollocationLogic, VusersCollocationLogic>();
 builder.Services.AddScoped<IAccountLogic, AccountLogic>();
 builder.Services.AddScoped<IWorkTripLogic, WorkTripLogic>();
+builder.Services.AddScoped<ITripLogic, TripLogic>();
+builder.Services.AddScoped<ITripparticipantLogic, TripparticipantLogic>();
+builder.Services.AddScoped<IVTripsParticipantsLogic, VTripsParticipantsLogic>();
+
 // -------
 builder.Services.AddScoped<IAssociationCalculations, AssociationCalculations>();
 builder.Services.AddScoped<IAccountCollocationMatch<IUsersLocationLogic, IUsersCollocationLogic>, AccountCollocationMatch>();
 builder.Services.AddScoped<ICollocator<IWorkTripLogic, IUsersCollocationLogic>, Collocator>();
+builder.Services.AddScoped<ITripManager, TripManager>();
 
 var app = builder.Build();
 

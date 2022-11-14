@@ -12,7 +12,7 @@ namespace Toci.Driver.Database.Persistence.Models
 
         public int Id { get; set; }
         public int? Idinitiatoraccount { get; set; }
-        public DateTime? Tripdate { get; set; }
+        public DateOnly? Tripdate { get; set; }
         public bool? Iscurrent { get; set; }
         public TimeOnly? Fromhour { get; set; }
         public TimeOnly? Tohour { get; set; }
