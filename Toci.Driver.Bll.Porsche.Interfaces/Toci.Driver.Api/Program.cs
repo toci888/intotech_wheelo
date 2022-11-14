@@ -49,6 +49,7 @@ builder.Services.AddScoped<IAssociationCalculations, AssociationCalculations>();
 builder.Services.AddScoped<IAccountCollocationMatch<IUsersLocationLogic, IUsersCollocationLogic>, AccountCollocationMatch>();
 builder.Services.AddScoped<ICollocator<IWorkTripLogic, IUsersCollocationLogic>, Collocator>();
 builder.Services.AddScoped<ITripManager, TripManager>();
+builder.Services.AddScoped<IInstantOccasion, InstantOccasion>();
 
 var app = builder.Build();
 
