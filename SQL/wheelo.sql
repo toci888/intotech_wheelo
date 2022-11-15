@@ -208,9 +208,10 @@ create table WorkTrip
 
 create or replace view AccountsCarsLocations as 
 select acc.id as accountId, acc.name, acc.surname, acc.phone, acc.email, acl.streetfrom, acl.streetto, acl.cityfrom, acl.cityto,
-c.RegistrationPlate, c.AvailableSeats, cb.Brand, cm.Model
+c.RegistrationPlate, c.AvailableSeats, cb.Brand, cm.Model, col.name as colour, col.rgb
 from Accounts acc join WorkTrip acl on acc.id = acl.IdAccount
 join cars c on acc.id = c.IdAccounts
+join Colours col on c.IdColours = col.id 
 join CarsBrands cb on c.IdCarsBrands = cb.id
 join CarsModels cm on c.IdCarsModels = cm.id;
 
