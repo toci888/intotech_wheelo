@@ -7,7 +7,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Tests.Persistence.Seed
 {
-    internal class SeedAutomaticCars : SeedLogic<Carsbrand>
+    public class SeedAutomaticCars : SeedLogic<Carsbrand>
     {
         public override void Insert()
         {
@@ -15,7 +15,7 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
 
             CarsTxtParser carsTxtParser = new CarsTxtParser();
 
-            List<string> cars = carsTxtParser.GetCarsBrands("");
+            List<string> cars = carsTxtParser.GetCarsBrands();
 
             foreach (string item in cars)
             {

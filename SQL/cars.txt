@@ -1,5 +1,5 @@
 abarth-logoABARTH
-ALFA ROMEO
+Alfa romeo
 alpina-logoALPINA
 alpine-logoALPINE
 Aston Martin-LogoASTON MARTIN
@@ -17,7 +17,7 @@ DS-LogoDS
 Ferrari-LogoFERRARI
 Ford-LogoFORD
 Fiat-LogoFIAT
-hondaHONDA
+honda-HONDA
 Hyundai-LogoHYUNDAI
 Infiniti-LogoINFINITI
 Jaguar-LogoJAGUAR
@@ -47,6 +47,6 @@ suzuki-logoSUZUKI
 Skoda-LogoSKODA
 Tata-LogoTATA
 toyota-logoTOYOTA
-Volkswagen logo 2019svgVOLKSWAGEN
+Volkswagen
 volvo-logoVOLVO
 Lada-LogoWAZ LADA

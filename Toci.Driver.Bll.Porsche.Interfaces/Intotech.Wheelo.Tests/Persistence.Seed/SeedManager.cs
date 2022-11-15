@@ -11,6 +11,7 @@ public class SeedManager
     [TestMethod]
     public void SeedAllDb()
     {
+        new SeedAutomaticCars().Insert();
         new SeedRole().Insert();
         new SeedAccount().Insert();
         new SeedWorktrip().Insert();
