@@ -9,6 +9,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public int Idaccounts { get; set; }
         public int Idcarsbrands { get; set; }
         public int Idcarsmodels { get; set; }
+        public string? Registrationplate { get; set; }
         public int Availableseats { get; set; }
         public DateTime? Createdat { get; set; }
 

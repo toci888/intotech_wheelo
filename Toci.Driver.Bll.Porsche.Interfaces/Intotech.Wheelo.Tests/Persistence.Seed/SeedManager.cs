@@ -14,6 +14,9 @@ public class SeedManager
         new SeedRole().Insert();
         new SeedAccount().Insert();
         new SeedWorktrip().Insert();
+        new SeedCarsbrand().Insert();
+        new SeedCarsModels().Insert();
+        new SeedCars().Insert();
 
         new Shit().CalcCollocations();
     }

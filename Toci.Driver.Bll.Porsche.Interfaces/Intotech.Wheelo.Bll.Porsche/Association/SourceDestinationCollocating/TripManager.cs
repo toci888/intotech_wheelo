@@ -14,13 +14,15 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
         protected ITripLogic TripLogic;
         protected ITripparticipantLogic TripparticipantLogic;
         protected IVTripsParticipantsLogic VTripparticipantLogic;
+        protected IAccountsCarsLocationLogic VAccountsCarsLocationLogic;
 
         public TripManager(ITripLogic tripLogic, ITripparticipantLogic tripparticipantLogic, 
-            IVTripsParticipantsLogic vTripparticipantLogic)
+            IVTripsParticipantsLogic vTripparticipantLogic, IAccountsCarsLocationLogic vAccountsCarsLocationLogic)
         {
             TripLogic = tripLogic;
             TripparticipantLogic = tripparticipantLogic;
             VTripparticipantLogic = vTripparticipantLogic;
+            VAccountsCarsLocationLogic = vAccountsCarsLocationLogic;
         }
 
         public int AddTripParticipant(int tripId, int accountId)
@@ -32,10 +34,19 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
         {
             trip.Iscurrent = true;
 
-            //trip.Summary
-            //trip.Leftseats
+            Accountscarslocation accountscarslocation = VAccountsCarsLocationLogic.Select(m => m.Accountid == trip.Idinitiatoraccount).First();
 
-            return TripLogic.Insert(trip);
+            //trip.Summary
+            trip.Leftseats = accountscarslocation.Availableseats - accountIds.Count();
+
+            Trip newTrip = TripLogic.Insert(trip);
+
+            foreach (int accountId in accountIds)
+            {
+                TripparticipantLogic.Insert(new Tripparticipant() { Idaccount = accountId, Idtrip = newTrip.Id, Isoccasion = false });
+            }
+
+            return newTrip;
         }
 
         public virtual List<Trip> GetAllTrips(int accountId)

@@ -18,6 +18,7 @@ namespace Toci.Driver.Database.Persistence.Models
 
         public virtual DbSet<Account> Accounts { get; set; } = null!;
         public virtual DbSet<Accountrole> Accountroles { get; set; } = null!;
+        public virtual DbSet<Accountscarslocation> Accountscarslocations { get; set; } = null!;
         public virtual DbSet<Accountscollocation> Accountscollocations { get; set; } = null!;
         public virtual DbSet<Accountslocation> Accountslocations { get; set; } = null!;
         public virtual DbSet<Accountsworktime> Accountsworktimes { get; set; } = null!;
@@ -117,6 +118,39 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Surname).HasColumnName("surname");
 
                 entity.Property(e => e.Token).HasColumnName("token");
+            });
+
+            modelBuilder.Entity<Accountscarslocation>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("accountscarslocations");
+
+                entity.Property(e => e.Accountid).HasColumnName("accountid");
+
+                entity.Property(e => e.Availableseats).HasColumnName("availableseats");
+
+                entity.Property(e => e.Brand).HasColumnName("brand");
+
+                entity.Property(e => e.Cityfrom).HasColumnName("cityfrom");
+
+                entity.Property(e => e.Cityto).HasColumnName("cityto");
+
+                entity.Property(e => e.Email).HasColumnName("email");
+
+                entity.Property(e => e.Model).HasColumnName("model");
+
+                entity.Property(e => e.Name).HasColumnName("name");
+
+                entity.Property(e => e.Phone).HasColumnName("phone");
+
+                entity.Property(e => e.Registrationplate).HasColumnName("registrationplate");
+
+                entity.Property(e => e.Streetfrom).HasColumnName("streetfrom");
+
+                entity.Property(e => e.Streetto).HasColumnName("streetto");
+
+                entity.Property(e => e.Surname).HasColumnName("surname");
             });
 
             modelBuilder.Entity<Accountscollocation>(entity =>
@@ -224,6 +258,8 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Idcarsbrands).HasColumnName("idcarsbrands");
 
                 entity.Property(e => e.Idcarsmodels).HasColumnName("idcarsmodels");
+
+                entity.Property(e => e.Registrationplate).HasColumnName("registrationplate");
 
                 entity.HasOne(d => d.IdaccountsNavigation)
                     .WithMany(p => p.Cars)
@@ -451,10 +487,6 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.ToView("vaccountscollocations");
 
                 entity.Property(e => e.Accountid).HasColumnName("accountid");
-
-                entity.Property(e => e.Createdat)
-                    .HasColumnType("timestamp without time zone")
-                    .HasColumnName("createdat");
 
                 entity.Property(e => e.Distancefrom).HasColumnName("distancefrom");
 

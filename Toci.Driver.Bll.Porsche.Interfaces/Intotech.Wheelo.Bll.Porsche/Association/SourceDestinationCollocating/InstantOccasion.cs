@@ -27,6 +27,14 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
         public virtual int AddOccasion(int tripId, int occasionAccountId)
         {
+            Trip trip = TripsLogic.Select(m => m.Id == tripId).First();
+
+            if (trip.Leftseats > 0)
+            {
+                trip.Leftseats--;
+                TripsLogic.Update(trip);
+            }
+
             return TripparticipantLogic.Insert(new Tripparticipant() 
             { 
                 Idaccount = occasionAccountId, 
