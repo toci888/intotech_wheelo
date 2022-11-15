@@ -25,6 +25,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Car> Cars { get; set; } = null!;
         public virtual DbSet<Carsbrand> Carsbrands { get; set; } = null!;
         public virtual DbSet<Carsmodel> Carsmodels { get; set; } = null!;
+        public virtual DbSet<Colour> Colours { get; set; } = null!;
         public virtual DbSet<Friend> Friends { get; set; } = null!;
         public virtual DbSet<Friendsuggestion> Friendsuggestions { get; set; } = null!;
         public virtual DbSet<Geographicregion> Geographicregions { get; set; } = null!;
@@ -136,6 +137,8 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Cityto).HasColumnName("cityto");
 
+                entity.Property(e => e.Colour).HasColumnName("colour");
+
                 entity.Property(e => e.Email).HasColumnName("email");
 
                 entity.Property(e => e.Model).HasColumnName("model");
@@ -145,6 +148,8 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Phone).HasColumnName("phone");
 
                 entity.Property(e => e.Registrationplate).HasColumnName("registrationplate");
+
+                entity.Property(e => e.Rgb).HasColumnName("rgb");
 
                 entity.Property(e => e.Streetfrom).HasColumnName("streetfrom");
 
@@ -259,6 +264,8 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Idcarsmodels).HasColumnName("idcarsmodels");
 
+                entity.Property(e => e.Idcolours).HasColumnName("idcolours");
+
                 entity.Property(e => e.Registrationplate).HasColumnName("registrationplate");
 
                 entity.HasOne(d => d.IdaccountsNavigation)
@@ -278,6 +285,12 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasForeignKey(d => d.Idcarsmodels)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("cars_idcarsmodels_fkey");
+
+                entity.HasOne(d => d.IdcoloursNavigation)
+                    .WithMany(p => p.Cars)
+                    .HasForeignKey(d => d.Idcolours)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("cars_idcolours_fkey");
             });
 
             modelBuilder.Entity<Carsbrand>(entity =>
@@ -304,6 +317,17 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasForeignKey(d => d.Idcarsbrands)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("carsmodels_idcarsbrands_fkey");
+            });
+
+            modelBuilder.Entity<Colour>(entity =>
+            {
+                entity.ToTable("colours");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name).HasColumnName("name");
+
+                entity.Property(e => e.Rgb).HasColumnName("rgb");
             });
 
             modelBuilder.Entity<Friend>(entity =>

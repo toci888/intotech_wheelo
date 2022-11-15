@@ -12,6 +12,7 @@ drop view VFriendSuggestions;
 drop view AccountsCarsLocations;
 drop table WorkTrip;
 drop table Cars;
+drop table Colours;
 drop table CarsModels;
 drop table CarsBrands;
 drop table AccountsCollocations;
@@ -165,12 +166,20 @@ create table CarsModels
     Model text
 );
 
+create table Colours
+(
+	id serial primary key,
+	Name text,
+	Rgb text
+);
+
 create table Cars
 (
     Id serial primary key,
 	IdAccounts int references Accounts(Id) not null,
 	IdCarsBrands int references CarsBrands(Id) not null,
 	IdCarsModels int references CarsModels(Id) not null,
+	IdColours int references Colours(id) not null,
 	RegistrationPlate text,
     AvailableSeats int not null,
 	CreatedAt timestamp default now()
