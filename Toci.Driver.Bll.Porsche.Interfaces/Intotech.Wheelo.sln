@@ -18,6 +18,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{A662B894-F584-4249-902F-47612C3E8E94}"
 	ProjectSection(SolutionItems) = preProject
 		..\SQL\cars.txt = ..\SQL\cars.txt
+		..\SQL\colours.txt = ..\SQL\colours.txt
 		..\SQL\wheelo.sql = ..\SQL\wheelo.sql
 	EndProjectSection
 EndProject
