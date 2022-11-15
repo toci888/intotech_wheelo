@@ -19,8 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{A662B894-F58
 	ProjectSection(SolutionItems) = preProject
 		..\SQL\cars.txt = ..\SQL\cars.txt
 		..\SQL\colours.txt = ..\SQL\colours.txt
-		..\SQL\wheelo.sql = ..\SQL\wheelo.sql
 		..\SQL\morecars.txt = ..\SQL\morecars.txt
+		..\SQL\wheelo.sql = ..\SQL\wheelo.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech", "Intotech", "{66179D80-4651-4A88-BD8D-83766DC4B059}"
@@ -64,9 +64,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{4B31F6CD-BAE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CarsModelsXmls", "CarsModelsXmls", "{51BED2FE-11DB-4E9C-B6E6-F4611B6A4EAE}"
 	ProjectSection(SolutionItems) = preProject
-		Abarth.txt = Abarth.txt
-		Acura.txt = Acura.txt
-		Alfa romeo.txt = Alfa romeo.txt
+		..\SQL\CarsModelsXmls\Abarth.txt = ..\SQL\CarsModelsXmls\Abarth.txt
+		..\SQL\CarsModelsXmls\Acura.txt = ..\SQL\CarsModelsXmls\Acura.txt
+		..\SQL\CarsModelsXmls\Alfa romeo.txt = ..\SQL\CarsModelsXmls\Alfa romeo.txt
 	EndProjectSection
 EndProject
 Global
