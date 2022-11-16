@@ -67,6 +67,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CarsModelsXmls", "CarsModel
 		..\SQL\CarsModelsXmls\Abarth.txt = ..\SQL\CarsModelsXmls\Abarth.txt
 		..\SQL\CarsModelsXmls\Acura.txt = ..\SQL\CarsModelsXmls\Acura.txt
 		..\SQL\CarsModelsXmls\Alfa romeo.txt = ..\SQL\CarsModelsXmls\Alfa romeo.txt
+		Ferrari.txt = Ferrari.txt
+		Fiat.txt = Fiat.txt
+		Ford.txt = Ford.txt
+		FSO.txt = FSO.txt
+		GAZ.txt = GAZ.txt
+		GMC.txt = GMC.txt
+		Honda.txt = Honda.txt
+		Hummer.txt = Hummer.txt
+		Hyundai.txt = Hyundai.txt
+		Infiniti.txt = Infiniti.txt
+		Isuzu.txt = Isuzu.txt
+		IVECO.txt = IVECO.txt
+		Jaguar.txt = Jaguar.txt
+		Jeep.txt = Jeep.txt
+		Kia.txt = Kia.txt
+		Lamborghini.txt = Lamborghini.txt
+		Lancia.txt = Lancia.txt
+		Land Rover.txt = Land Rover.txt
+		Lexus.txt = Lexus.txt
 	EndProjectSection
 EndProject
 Global
