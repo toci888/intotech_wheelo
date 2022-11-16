@@ -186,6 +186,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CarsModelsXmls", "CarsModel
 		..\SQL\CarsModelsXmls\ZIŁ.txt = ..\SQL\CarsModelsXmls\ZIŁ.txt
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.Cmc", "Intotech.Wheelo.Cmc", "{D34BE5B1-9625-4499-AD6D-618951CA5060}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Bll.Bentley.Interfaces", "Intotech.Wheelo.Bll.Bentley.Interfaces\Intotech.Wheelo.Bll.Bentley.Interfaces.csproj", "{35622B2F-3723-47E0-9134-8F1A482B64C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Bll.Bentley", "Intotech.Wheelo.Bll.Bentley\Intotech.Wheelo.Bll.Bentley.csproj", "{E7690F8C-9644-432A-8399-C0E7672EC300}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -354,6 +360,22 @@ Global
 		{436BB7D5-5E9A-4CE5-AD0C-EFDD106DACC3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{436BB7D5-5E9A-4CE5-AD0C-EFDD106DACC3}.Release|x64.ActiveCfg = Release|Any CPU
 		{436BB7D5-5E9A-4CE5-AD0C-EFDD106DACC3}.Release|x64.Build.0 = Release|Any CPU
+		{35622B2F-3723-47E0-9134-8F1A482B64C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35622B2F-3723-47E0-9134-8F1A482B64C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35622B2F-3723-47E0-9134-8F1A482B64C3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{35622B2F-3723-47E0-9134-8F1A482B64C3}.Debug|x64.Build.0 = Debug|Any CPU
+		{35622B2F-3723-47E0-9134-8F1A482B64C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35622B2F-3723-47E0-9134-8F1A482B64C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35622B2F-3723-47E0-9134-8F1A482B64C3}.Release|x64.ActiveCfg = Release|Any CPU
+		{35622B2F-3723-47E0-9134-8F1A482B64C3}.Release|x64.Build.0 = Release|Any CPU
+		{E7690F8C-9644-432A-8399-C0E7672EC300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7690F8C-9644-432A-8399-C0E7672EC300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7690F8C-9644-432A-8399-C0E7672EC300}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E7690F8C-9644-432A-8399-C0E7672EC300}.Debug|x64.Build.0 = Debug|Any CPU
+		{E7690F8C-9644-432A-8399-C0E7672EC300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7690F8C-9644-432A-8399-C0E7672EC300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7690F8C-9644-432A-8399-C0E7672EC300}.Release|x64.ActiveCfg = Release|Any CPU
+		{E7690F8C-9644-432A-8399-C0E7672EC300}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -370,6 +392,8 @@ Global
 		{436BB7D5-5E9A-4CE5-AD0C-EFDD106DACC3} = {61CCF297-620A-40F2-9052-7A5396FA48E4}
 		{4B31F6CD-BAE5-4416-9A7E-7CD74459E6A7} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
 		{51BED2FE-11DB-4E9C-B6E6-F4611B6A4EAE} = {A662B894-F584-4249-902F-47612C3E8E94}
+		{35622B2F-3723-47E0-9134-8F1A482B64C3} = {D34BE5B1-9625-4499-AD6D-618951CA5060}
+		{E7690F8C-9644-432A-8399-C0E7672EC300} = {D34BE5B1-9625-4499-AD6D-618951CA5060}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {958786F8-D2E4-4AAC-949D-3CD908D8AE36}
