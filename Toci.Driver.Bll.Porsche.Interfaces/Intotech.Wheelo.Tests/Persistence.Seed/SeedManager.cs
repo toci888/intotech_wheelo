@@ -11,12 +11,15 @@ public class SeedManager
     [TestMethod]
     public void SeedAllDb()
     {
-        new SeedAutomaticCars().Insert();
+        // new SeedAutomaticCars().Insert();
+        new CarsXmlParser().Insert();
+        new SeedCarsModelsParser().Insert();
+        new ColourTxtParser().Insert();
         new SeedRole().Insert();
         new SeedAccount().Insert();
         new SeedWorktrip().Insert();
-        new SeedCarsbrand().Insert();
-        new SeedCarsModels().Insert();
+        //new SeedCarsbrand().Insert();
+        //new SeedCarsModels().Insert();
         new SeedCars().Insert();
 
         new Shit().CalcCollocations();

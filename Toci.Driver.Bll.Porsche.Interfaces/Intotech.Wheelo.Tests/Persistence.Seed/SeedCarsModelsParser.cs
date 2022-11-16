@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 using Toci.Driver.Database.Persistence.Models;
 
@@ -31,12 +32,33 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
                 {
                     string xmlCandidate = File.ReadAllText("../../../../../SQL/CarsModelsXmls/" + car.Brand + ".txt");
 
-                    select resultXmlEntity = xmlSerializer.Deserialize(new FileStream("../../../../../SQL/CarsModelsXmls/" + car.Brand + ".txt", FileMode.Open)) as select;
+                    select resultXmlEntity = null;
+                    FileStream stream = null;
+
+                    try
+                    {
+                        //stream = new FileStream("../../../../../SQL/CarsModelsXmls/" + car.Brand + ".txt", FileMode.Open);
+                        StringReader strRead = new StringReader(xmlCandidate);
+                        resultXmlEntity = xmlSerializer.Deserialize(strRead) as select;
+                    }
+                    catch (Exception ex)
+                    {
+                        //string robbieMadeAMistake = File.ReadAllText("../../../../../SQL/CarsModelsXmls/" + car.Brand + ".txt");
+                        xmlCandidate = "<select>" + xmlCandidate + "</select>";
+
+                        StringReader strRead = new StringReader(xmlCandidate);
+
+                        resultXmlEntity = xmlSerializer.Deserialize(strRead) as select;
+                    }
 
                     foreach (selectOption carXml in resultXmlEntity.option)
                     {
                         CarsmodelEntities.Add(new Carsmodel() { Idcarsbrands = car.Id, Model = carXml.Value });
                     }
+                }
+                else
+                {
+                    Console.WriteLine(car.Brand + " ist nicht gefunden ! xd");
                 }
             }
 

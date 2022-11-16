@@ -173,6 +173,8 @@ create table Colours
 	Rgb text
 );
 
+select * from colours;
+
 create table Cars
 (
     Id serial primary key,
@@ -265,3 +267,10 @@ join Accounts U2 on U2.Id = tp.IdAccount ;
 
 --select * from VTripsParticipants;
 
+--select * from colours;
+
+--delete from CarsBrands;
+
+--select * from CarsBrands;
+
+--select * from CarsModels;
