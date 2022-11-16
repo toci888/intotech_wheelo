@@ -153,6 +153,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CarsModelsXmls", "CarsModel
 		..\SQL\CarsModelsXmls\Plymouth.txt = ..\SQL\CarsModelsXmls\Plymouth.txt
 		..\SQL\CarsModelsXmls\Pontiac.txt = ..\SQL\CarsModelsXmls\Pontiac.txt
 		..\SQL\CarsModelsXmls\Porsche.txt = ..\SQL\CarsModelsXmls\Porsche.txt
+		Renault.txt = Renault.txt
+		..\SQL\CarsModelsXmls\Renault.txt = ..\SQL\CarsModelsXmls\Renault.txt
+		Rolls-Royce.txt = Rolls-Royce.txt
+		..\SQL\CarsModelsXmls\Rolls-Royce.txt = ..\SQL\CarsModelsXmls\Rolls-Royce.txt
+		Rover.txt = Rover.txt
+		..\SQL\CarsModelsXmls\Rover.txt = ..\SQL\CarsModelsXmls\Rover.txt
+		Saab.txt = Saab.txt
+		..\SQL\CarsModelsXmls\Saab.txt = ..\SQL\CarsModelsXmls\Saab.txt
+		SEAT.txt = SEAT.txt
+		..\SQL\CarsModelsXmls\SEAT.txt = ..\SQL\CarsModelsXmls\SEAT.txt
+		Skoda.txt = Skoda.txt
+		..\SQL\CarsModelsXmls\Skoda.txt = ..\SQL\CarsModelsXmls\Skoda.txt
+		Smart.txt = Smart.txt
+		..\SQL\CarsModelsXmls\Smart.txt = ..\SQL\CarsModelsXmls\Smart.txt
+		SsangYong.txt = SsangYong.txt
+		..\SQL\CarsModelsXmls\SsangYong.txt = ..\SQL\CarsModelsXmls\SsangYong.txt
+		Subaru.txt = Subaru.txt
+		..\SQL\CarsModelsXmls\Subaru.txt = ..\SQL\CarsModelsXmls\Subaru.txt
+		Suzuki.txt = Suzuki.txt
+		..\SQL\CarsModelsXmls\Suzuki.txt = ..\SQL\CarsModelsXmls\Suzuki.txt
+		Tata.txt = Tata.txt
+		..\SQL\CarsModelsXmls\Tata.txt = ..\SQL\CarsModelsXmls\Tata.txt
 	EndProjectSection
 EndProject
 Global
