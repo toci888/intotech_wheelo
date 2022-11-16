@@ -43,6 +43,7 @@ builder.Services.AddScoped<IWorkTripLogic, WorkTripLogic>();
 builder.Services.AddScoped<ITripLogic, TripLogic>();
 builder.Services.AddScoped<ITripparticipantLogic, TripparticipantLogic>();
 builder.Services.AddScoped<IVTripsParticipantsLogic, VTripsParticipantsLogic>();
+builder.Services.AddScoped<IAccountsCarsLocationLogic, AccountsCarsLocationLogic>();
 
 // -------
 builder.Services.AddScoped<IAssociationCalculations, AssociationCalculations>();
