@@ -153,6 +153,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CarsModelsXmls", "CarsModel
 		..\SQL\CarsModelsXmls\Plymouth.txt = ..\SQL\CarsModelsXmls\Plymouth.txt
 		..\SQL\CarsModelsXmls\Pontiac.txt = ..\SQL\CarsModelsXmls\Pontiac.txt
 		..\SQL\CarsModelsXmls\Porsche.txt = ..\SQL\CarsModelsXmls\Porsche.txt
+		..\SQL\CarsModelsXmls\Tatra.txt = ..\SQL\CarsModelsXmls\Tatra.txt
+		..\SQL\CarsModelsXmls\Tesla.txt = ..\SQL\CarsModelsXmls\Tesla.txt
+		..\SQL\CarsModelsXmls\Toyota.txt = ..\SQL\CarsModelsXmls\Toyota.txt
+		..\SQL\CarsModelsXmls\Trabant.txt = ..\SQL\CarsModelsXmls\Trabant.txt
+		..\SQL\CarsModelsXmls\Volkswagen.txt = ..\SQL\CarsModelsXmls\Volkswagen.txt
+		..\SQL\CarsModelsXmls\Volvo.txt = ..\SQL\CarsModelsXmls\Volvo.txt
+		..\SQL\CarsModelsXmls\Wartburg.txt = ..\SQL\CarsModelsXmls\Wartburg.txt
+		..\SQL\CarsModelsXmls\Zastava.txt = ..\SQL\CarsModelsXmls\Zastava.txt
+		..\SQL\CarsModelsXmls\ZIŁ.txt = ..\SQL\CarsModelsXmls\ZIŁ.txt
 	EndProjectSection
 EndProject
 Global
