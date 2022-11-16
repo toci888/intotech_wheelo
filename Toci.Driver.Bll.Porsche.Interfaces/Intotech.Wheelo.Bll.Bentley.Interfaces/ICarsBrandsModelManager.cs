@@ -7,8 +7,10 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Bentley.Interfaces
 {
-    public interface ICarsBrandsManager
+    public interface ICarsBrandsModelManager
     {
         List<Carsbrand> GetCarsBrandsForWildcard(string beginning);
+
+        List<Carsmodel> GetModelsForBrandForWildcard(int carBrand, string beginning);
     }
 }
