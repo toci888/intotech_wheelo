@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -12,8 +12,14 @@
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Database.Interfaces\Intotech.Common.Database.Interfaces.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common\Intotech.Common.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Bll.Models\Intotech.Wheelo.Bll.Models.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces\Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Social.Bll.Lamborgini\Intotech.Wheelo.Social.Bll.Lamborgini.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Social.Bll.Persistence.Interfaces\Intotech.Wheelo.Social.Bll.Persistence.Interfaces.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Social.Bll.Persistence\Intotech.Wheelo.Social.Bll.Persistence.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Social.Bll.Pontiac.Interfaces\Intotech.Wheelo.Social.Bll.Pontiac.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Social.Database.Persistence\Intotech.Wheelo.Social.Database.Persistence.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
