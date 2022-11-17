@@ -13,8 +13,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IColourLogic, ColourLogic>();
+builder.Services.AddScoped<ICarsBrandLogic, CarsBrandLogic>();
+builder.Services.AddScoped<ICarsModelLogic, CarsModelLogic>();
+
 
 builder.Services.AddScoped<IColourManager, ColourManager>();
+builder.Services.AddScoped<ICarsBrandsModelManager, CarsBrandModelManager>();
 
 var app = builder.Build();
 

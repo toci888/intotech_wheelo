@@ -19,5 +19,13 @@ namespace Intotech.Wheelo.Cmc.Api.Controllers
 		{
 			return Logic.GetCarsBrandsForWildcard(beginning);
 		}
+		//224
+
+		[HttpGet]
+		[Route("get-cars-models-for-wildcard")]
+		public List<Carsmodel> GetCarsModelsForWildcard(int brandId, string beginning)
+		{
+			return Logic.GetModelsForBrandForWildcard(brandId, beginning);
+		}
 	}
 }
