@@ -45,6 +45,8 @@ create table Accounts
 	Id serial primary key,
 	Name text not null,
 	Surname text not null,
+	Gender int not null,
+	Pesel text,
 	Phone text not null,
 	Email text not null,
 	Login text not null,

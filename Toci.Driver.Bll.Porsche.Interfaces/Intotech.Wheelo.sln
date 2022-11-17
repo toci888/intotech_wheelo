@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{A662B894-F58
 		..\SQL\cars.txt = ..\SQL\cars.txt
 		..\SQL\colours.txt = ..\SQL\colours.txt
 		..\SQL\morecars.txt = ..\SQL\morecars.txt
+		..\SQL\rescue.sql = ..\SQL\rescue.sql
+		..\SQL\social.sql = ..\SQL\social.sql
 		..\SQL\wheelo.sql = ..\SQL\wheelo.sql
 	EndProjectSection
 EndProject
@@ -189,6 +191,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Bentley", "Intotech.Wheelo.Bll.Bentley\Intotech.Wheelo.Bll.Bentley.csproj", "{E7690F8C-9644-432A-8399-C0E7672EC300}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Cmc.Api", "Intotech.Wheelo.Cmc.Api\Intotech.Wheelo.Cmc.Api.csproj", "{E5148A6E-293C-4E65-B323-743247B96A3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.Social", "Intotech.Wheelo.Social", "{36E8836E-455B-44CA-ADD6-5E0C90D5D38B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Social.Database.Persistence", "Intotech.Wheelo.Social.Database.Persistence\Intotech.Wheelo.Social.Database.Persistence.csproj", "{EDEBF1A0-509D-4C1C-AE47-AD996CFC4111}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Social.Bll.Persistence.Interfaces", "Intotech.Wheelo.Social.Bll.Persistence.Interfaces\Intotech.Wheelo.Social.Bll.Persistence.Interfaces.csproj", "{F2D25DF2-8A33-4194-A9FE-992AB9685B05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Social.Bll.Persistence", "Intotech.Wheelo.Social.Bll.Persistence\Intotech.Wheelo.Social.Bll.Persistence.csproj", "{3E82B28D-537E-4D32-82B7-289880EAFD2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -366,6 +376,30 @@ Global
 		{E5148A6E-293C-4E65-B323-743247B96A3B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E5148A6E-293C-4E65-B323-743247B96A3B}.Release|x64.ActiveCfg = Release|Any CPU
 		{E5148A6E-293C-4E65-B323-743247B96A3B}.Release|x64.Build.0 = Release|Any CPU
+		{EDEBF1A0-509D-4C1C-AE47-AD996CFC4111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDEBF1A0-509D-4C1C-AE47-AD996CFC4111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDEBF1A0-509D-4C1C-AE47-AD996CFC4111}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EDEBF1A0-509D-4C1C-AE47-AD996CFC4111}.Debug|x64.Build.0 = Debug|Any CPU
+		{EDEBF1A0-509D-4C1C-AE47-AD996CFC4111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDEBF1A0-509D-4C1C-AE47-AD996CFC4111}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDEBF1A0-509D-4C1C-AE47-AD996CFC4111}.Release|x64.ActiveCfg = Release|Any CPU
+		{EDEBF1A0-509D-4C1C-AE47-AD996CFC4111}.Release|x64.Build.0 = Release|Any CPU
+		{F2D25DF2-8A33-4194-A9FE-992AB9685B05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2D25DF2-8A33-4194-A9FE-992AB9685B05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2D25DF2-8A33-4194-A9FE-992AB9685B05}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F2D25DF2-8A33-4194-A9FE-992AB9685B05}.Debug|x64.Build.0 = Debug|Any CPU
+		{F2D25DF2-8A33-4194-A9FE-992AB9685B05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2D25DF2-8A33-4194-A9FE-992AB9685B05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2D25DF2-8A33-4194-A9FE-992AB9685B05}.Release|x64.ActiveCfg = Release|Any CPU
+		{F2D25DF2-8A33-4194-A9FE-992AB9685B05}.Release|x64.Build.0 = Release|Any CPU
+		{3E82B28D-537E-4D32-82B7-289880EAFD2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E82B28D-537E-4D32-82B7-289880EAFD2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E82B28D-537E-4D32-82B7-289880EAFD2A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3E82B28D-537E-4D32-82B7-289880EAFD2A}.Debug|x64.Build.0 = Debug|Any CPU
+		{3E82B28D-537E-4D32-82B7-289880EAFD2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E82B28D-537E-4D32-82B7-289880EAFD2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E82B28D-537E-4D32-82B7-289880EAFD2A}.Release|x64.ActiveCfg = Release|Any CPU
+		{3E82B28D-537E-4D32-82B7-289880EAFD2A}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -385,6 +419,9 @@ Global
 		{35622B2F-3723-47E0-9134-8F1A482B64C3} = {D34BE5B1-9625-4499-AD6D-618951CA5060}
 		{E7690F8C-9644-432A-8399-C0E7672EC300} = {D34BE5B1-9625-4499-AD6D-618951CA5060}
 		{E5148A6E-293C-4E65-B323-743247B96A3B} = {D34BE5B1-9625-4499-AD6D-618951CA5060}
+		{EDEBF1A0-509D-4C1C-AE47-AD996CFC4111} = {36E8836E-455B-44CA-ADD6-5E0C90D5D38B}
+		{F2D25DF2-8A33-4194-A9FE-992AB9685B05} = {36E8836E-455B-44CA-ADD6-5E0C90D5D38B}
+		{3E82B28D-537E-4D32-82B7-289880EAFD2A} = {36E8836E-455B-44CA-ADD6-5E0C90D5D38B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {958786F8-D2E4-4AAC-949D-3CD908D8AE36}
