@@ -32,9 +32,7 @@
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Porsche\Intotech.Wheelo.Bll.Porsche.csproj" />
     <ProjectReference Include="..\Toci.Driver.Api\Toci.Driver.Api.csproj" />
     <ProjectReference Include="..\Toci.Driver.Dal.Invitation.Interfaces\Toci.Driver.Dal.Invitation.Interfaces.csproj" />
-    <ProjectReference Include="..\Toci.Driver.Dal\Toci.Wheelo.Dal.Anathema.csproj" />
     <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
-    <ProjectReference Include="..\Toci.Driver.Ui.Api.Interfaces\Toci.Driver.Ui.Api.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

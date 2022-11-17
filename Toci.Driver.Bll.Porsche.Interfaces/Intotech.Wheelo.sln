@@ -5,10 +5,6 @@ VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toci.Driver.Dal.Invitation.Interfaces", "Toci.Driver.Dal.Invitation.Interfaces\Toci.Driver.Dal.Invitation.Interfaces.csproj", "{6307169E-918C-43C4-802B-7F035296C0AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toci.Wheelo.Dal.Anathema", "Toci.Driver.Dal\Toci.Wheelo.Dal.Anathema.csproj", "{12DB987C-2E2D-4EFF-9A6B-F59E6C5E0B50}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toci.Driver.Ui.Api.Interfaces", "Toci.Driver.Ui.Api.Interfaces\Toci.Driver.Ui.Api.Interfaces.csproj", "{F1D08ED3-1BBB-42B2-A1AB-361450BA0ED5}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{61CCF297-620A-40F2-9052-7A5396FA48E4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toci.Driver.Api", "Toci.Driver.Api\Toci.Driver.Api.csproj", "{CC8F734F-78EC-48CF-8EF5-710FFCE78DEC}"
@@ -188,9 +184,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CarsModelsXmls", "CarsModel
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.Cmc", "Intotech.Wheelo.Cmc", "{D34BE5B1-9625-4499-AD6D-618951CA5060}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Bll.Bentley.Interfaces", "Intotech.Wheelo.Bll.Bentley.Interfaces\Intotech.Wheelo.Bll.Bentley.Interfaces.csproj", "{35622B2F-3723-47E0-9134-8F1A482B64C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Bentley.Interfaces", "Intotech.Wheelo.Bll.Bentley.Interfaces\Intotech.Wheelo.Bll.Bentley.Interfaces.csproj", "{35622B2F-3723-47E0-9134-8F1A482B64C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Bll.Bentley", "Intotech.Wheelo.Bll.Bentley\Intotech.Wheelo.Bll.Bentley.csproj", "{E7690F8C-9644-432A-8399-C0E7672EC300}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Bentley", "Intotech.Wheelo.Bll.Bentley\Intotech.Wheelo.Bll.Bentley.csproj", "{E7690F8C-9644-432A-8399-C0E7672EC300}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -208,22 +204,6 @@ Global
 		{6307169E-918C-43C4-802B-7F035296C0AF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6307169E-918C-43C4-802B-7F035296C0AF}.Release|x64.ActiveCfg = Release|Any CPU
 		{6307169E-918C-43C4-802B-7F035296C0AF}.Release|x64.Build.0 = Release|Any CPU
-		{12DB987C-2E2D-4EFF-9A6B-F59E6C5E0B50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{12DB987C-2E2D-4EFF-9A6B-F59E6C5E0B50}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{12DB987C-2E2D-4EFF-9A6B-F59E6C5E0B50}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{12DB987C-2E2D-4EFF-9A6B-F59E6C5E0B50}.Debug|x64.Build.0 = Debug|Any CPU
-		{12DB987C-2E2D-4EFF-9A6B-F59E6C5E0B50}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{12DB987C-2E2D-4EFF-9A6B-F59E6C5E0B50}.Release|Any CPU.Build.0 = Release|Any CPU
-		{12DB987C-2E2D-4EFF-9A6B-F59E6C5E0B50}.Release|x64.ActiveCfg = Release|Any CPU
-		{12DB987C-2E2D-4EFF-9A6B-F59E6C5E0B50}.Release|x64.Build.0 = Release|Any CPU
-		{F1D08ED3-1BBB-42B2-A1AB-361450BA0ED5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1D08ED3-1BBB-42B2-A1AB-361450BA0ED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1D08ED3-1BBB-42B2-A1AB-361450BA0ED5}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{F1D08ED3-1BBB-42B2-A1AB-361450BA0ED5}.Debug|x64.Build.0 = Debug|Any CPU
-		{F1D08ED3-1BBB-42B2-A1AB-361450BA0ED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1D08ED3-1BBB-42B2-A1AB-361450BA0ED5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F1D08ED3-1BBB-42B2-A1AB-361450BA0ED5}.Release|x64.ActiveCfg = Release|Any CPU
-		{F1D08ED3-1BBB-42B2-A1AB-361450BA0ED5}.Release|x64.Build.0 = Release|Any CPU
 		{CC8F734F-78EC-48CF-8EF5-710FFCE78DEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CC8F734F-78EC-48CF-8EF5-710FFCE78DEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC8F734F-78EC-48CF-8EF5-710FFCE78DEC}.Debug|x64.ActiveCfg = Debug|Any CPU
