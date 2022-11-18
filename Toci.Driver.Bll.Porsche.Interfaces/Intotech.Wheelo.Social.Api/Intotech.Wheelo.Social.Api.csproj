@@ -25,6 +25,8 @@
     <ProjectReference Include="..\Intotech.Wheelo.Social.Bll.Lamborgini\Intotech.Wheelo.Social.Bll.Lamborgini.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Social.Bll.Persistence.Interfaces\Intotech.Wheelo.Social.Bll.Persistence.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Social.Bll.Persistence\Intotech.Wheelo.Social.Bll.Persistence.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Social.Bll.Pontiac.Interfaces\Intotech.Wheelo.Social.Bll.Pontiac.Interfaces.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Social.Bll.Pontiac\Intotech.Wheelo.Social.Bll.Pontiac.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Social.Database.Persistence\Intotech.Wheelo.Social.Database.Persistence.csproj" />
     <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
   </ItemGroup>

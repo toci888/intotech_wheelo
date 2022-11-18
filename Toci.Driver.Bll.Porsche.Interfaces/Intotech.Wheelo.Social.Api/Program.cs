@@ -2,6 +2,10 @@ using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Social.Bll.Lamborgini;
 using Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces;
+using Intotech.Wheelo.Social.Bll.Persistence;
+using Intotech.Wheelo.Social.Bll.Persistence.Interfaces;
+using Intotech.Wheelo.Social.Bll.Pontiac;
+using Intotech.Wheelo.Social.Bll.Pontiac.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +17,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IAccountLogic, AccountLogic>();
+builder.Services.AddScoped<IGroupMemberLogic, GroupMemberLogic>();
+builder.Services.AddScoped<IGroupLogic, GroupLogic>();
+
 
 builder.Services.AddScoped<IAccountBll, AccountBll>();
+
+builder.Services.AddScoped<IGroupManager, GroupManager>(); 
 
 var app = builder.Build();
 
