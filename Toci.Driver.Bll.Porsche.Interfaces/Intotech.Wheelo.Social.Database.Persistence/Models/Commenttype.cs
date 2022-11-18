@@ -9,5 +9,7 @@ public partial class Commenttype
 
     public string? Type { get; set; }
 
-    public virtual ICollection<Comment> Comments { get; } = new List<Comment>();
+    public virtual ICollection<Groupspostscomment> Groupspostscomments { get; } = new List<Groupspostscomment>();
+
+    public virtual ICollection<Usercomment> Usercomments { get; } = new List<Usercomment>();
 }

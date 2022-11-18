@@ -16,9 +16,9 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
     {
         protected IAccountBll AccountLogic;
         protected IGroupLogic GroupLogic;
-        protected IGroupMemberLogic GroupMemberLogic;
+        protected IGroupmemberLogic GroupMemberLogic;
 
-        public GroupManager(IAccountBll accountLogic, IGroupLogic groupLogic, IGroupMemberLogic groupMemberLogic)
+        public GroupManager(IAccountBll accountLogic, IGroupLogic groupLogic, IGroupmemberLogic groupMemberLogic)
         {
             AccountLogic = accountLogic;
             GroupLogic = groupLogic;

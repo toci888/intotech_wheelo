@@ -11,7 +11,7 @@ using Intotech.Wheelo.Social.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Social.Bll.Persistence
 {
-    public class CommentLogic : Logic<Comment>, ICommentLogic
+    public class GroupspostLogic : Logic<Groupspost>, IGroupspostLogic
     {
 
     }

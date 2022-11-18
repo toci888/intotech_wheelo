@@ -17,7 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IAccountLogic, AccountLogic>();
-builder.Services.AddScoped<IGroupMemberLogic, GroupMemberLogic>();
+builder.Services.AddScoped<IGroupmemberLogic, GroupmemberLogic>();
 builder.Services.AddScoped<IGroupLogic, GroupLogic>();
 
 
