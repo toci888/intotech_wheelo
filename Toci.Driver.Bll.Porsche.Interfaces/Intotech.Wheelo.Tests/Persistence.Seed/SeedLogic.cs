@@ -9,6 +9,8 @@ public abstract class SeedLogic<TModel> : SeedBase<TModel> where TModel : class
 {
     protected override DbContext GetEfHandle()
     {
-        return new IntotechWheeloContext();
+
+            return new IntotechWheeloContext();
+
     }
 }

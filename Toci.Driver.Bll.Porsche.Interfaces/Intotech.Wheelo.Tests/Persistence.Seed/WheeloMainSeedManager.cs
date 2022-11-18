@@ -6,7 +6,7 @@ using Toci.Driver.Database.Persistence.Models;
 namespace Intotech.Wheelo.Tests.Persistence.Seed;
 
 [TestClass]
-public class SeedManager
+public class WheeloMainSeedManager
 {
     [TestMethod]
     public void SeedAllDb()
