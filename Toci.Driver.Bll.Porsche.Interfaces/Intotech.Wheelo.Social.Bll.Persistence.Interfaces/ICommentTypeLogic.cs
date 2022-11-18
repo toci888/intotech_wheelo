@@ -7,7 +7,7 @@ using Intotech.Wheelo.Social.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Social.Bll.Persistence.Interfaces
 {
-    public interface IcommentType : ILogicBase<Commenttype>
+    public interface ICommentTypeLogic : ILogicBase<Commenttype>
     {
         
     }
