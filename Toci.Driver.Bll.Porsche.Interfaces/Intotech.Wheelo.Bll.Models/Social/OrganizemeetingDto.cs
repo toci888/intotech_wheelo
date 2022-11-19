@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Intotech.Common;
 using Intotech.Wheelo.Social.Database.Persistence.Models;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,7 @@ namespace Intotech.Wheelo.Bll.Models.Social
 
         public static OrganizemeetingDto MapperFill(Organizemeeting orM)
         {
-            MapperConfiguration config = new MapperConfiguration(cfg => 
-                cfg.CreateMap<Organizemeeting, OrganizemeetingDto>());
-
-            Mapper mapper = new Mapper(config);
-
-            OrganizemeetingDto organizemeetingDto = mapper.Map<OrganizemeetingDto>(orM);
-
-            return organizemeetingDto;
+            return DtoModelMapper.Map<OrganizemeetingDto, Organizemeeting>(orM);
         }
     }
 }
