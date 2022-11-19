@@ -11,5 +11,8 @@ namespace Toci.Driver.Database.Persistence.Models
         public string? Suggestedsurname { get; set; }
         public int? Accountid { get; set; }
         public int? Suggestedaccountid { get; set; }
+        public string? Suggestedfriendname { get; set; }
+        public string? Suggestedfriendsurname { get; set; }
+        public int? Suggestedfriendid { get; set; }
     }
 }

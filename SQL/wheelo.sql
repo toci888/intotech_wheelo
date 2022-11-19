@@ -59,7 +59,7 @@ create table Accounts
 );
 
 -- 50.05463180727613, 17.80014622135593
-create table AccountsLocations
+create table AccountsLocations -- deprecated ? 
 (
 	Id serial primary key,
 	IdAccounts int references Accounts(Id) not null,
@@ -87,14 +87,17 @@ create table FriendSuggestions
 	Id serial primary key,
 	IdAccount int references Accounts(Id) not null,
 	IdSuggested int references Accounts(Id) not null,
+	IdSuggestedFriend int references Accounts(Id) not null,
 	CreatedAt timestamp default now()
 );
 
 create or replace view VFriendSuggestions as
-select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, U2.Id as SuggestedAccountId
+select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
+U2.Id as SuggestedAccountId, U3.Name as SuggestedFriendName, U3.Surname as SuggestedFriendSurname, U3.Id as SuggestedFriendId
 from FriendSuggestions 
 join Accounts U1 on U1.Id = FriendSuggestions.IdAccount 
-join Accounts U2 on U2.Id = FriendSuggestions.IdSuggested ;
+join Accounts U2 on U2.Id = FriendSuggestions.IdSuggested
+join Accounts U3 on U3.Id = FriendSuggestions.IdSuggestedFriend ;
 
 select * from VFriendSuggestions;
 
@@ -106,7 +109,7 @@ create table Invitations
 	CreatedAt timestamp default now()
 );
 
--- todo poprawic do zaproszen
+
 create or replace view VInvitations as
 select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, 
 U1.Id as AccountId, U2.Id as SuggestedAccountId, Invitations.CreatedAt
@@ -123,12 +126,13 @@ create table Friends
 	CreatedAt timestamp default now()
 );
 
--- todo poprawic do Friends
+
 create or replace view VFriends as
-select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, U2.Id as SuggestedAccountId
-from FriendSuggestions 
-join Accounts U1 on U1.Id = FriendSuggestions.IdAccount 
-join Accounts U2 on U2.Id = FriendSuggestions.IdSuggested ;
+select U1.Name, U1.Surname, U2.Name as FriendName, U2.Surname as FriendSurname, U1.Id as AccountId, 
+U2.Id as FriendAccountId
+from Friends 
+join Accounts U1 on U1.Id = Friends.IdAccount 
+join Accounts U2 on U2.Id = Friends.IdFriend ;
 
 --select * from AccountsCollocations;
 

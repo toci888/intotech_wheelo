@@ -68,6 +68,8 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasColumnName("emailconfirmed")
                     .HasDefaultValueSql("0");
 
+                entity.Property(e => e.Gender).HasColumnName("gender");
+
                 entity.Property(e => e.Idgeographicregion).HasColumnName("idgeographicregion");
 
                 entity.Property(e => e.Idrole)
@@ -79,6 +81,8 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Name).HasColumnName("name");
 
                 entity.Property(e => e.Password).HasColumnName("password");
+
+                entity.Property(e => e.Pesel).HasColumnName("pesel");
 
                 entity.Property(e => e.Phone).HasColumnName("phone");
 
@@ -373,6 +377,8 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Idsuggested).HasColumnName("idsuggested");
 
+                entity.Property(e => e.Idsuggestedfriend).HasColumnName("idsuggestedfriend");
+
                 entity.HasOne(d => d.IdaccountNavigation)
                     .WithMany(p => p.FriendsuggestionIdaccountNavigations)
                     .HasForeignKey(d => d.Idaccount)
@@ -384,6 +390,12 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasForeignKey(d => d.Idsuggested)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("friendsuggestions_idsuggested_fkey");
+
+                entity.HasOne(d => d.IdsuggestedfriendNavigation)
+                    .WithMany(p => p.FriendsuggestionIdsuggestedfriendNavigations)
+                    .HasForeignKey(d => d.Idsuggestedfriend)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("friendsuggestions_idsuggestedfriend_fkey");
             });
 
             modelBuilder.Entity<Geographicregion>(entity =>
@@ -535,13 +547,13 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Accountid).HasColumnName("accountid");
 
+                entity.Property(e => e.Friendaccountid).HasColumnName("friendaccountid");
+
+                entity.Property(e => e.Friendname).HasColumnName("friendname");
+
+                entity.Property(e => e.Friendsurname).HasColumnName("friendsurname");
+
                 entity.Property(e => e.Name).HasColumnName("name");
-
-                entity.Property(e => e.Suggestedaccountid).HasColumnName("suggestedaccountid");
-
-                entity.Property(e => e.Suggestedname).HasColumnName("suggestedname");
-
-                entity.Property(e => e.Suggestedsurname).HasColumnName("suggestedsurname");
 
                 entity.Property(e => e.Surname).HasColumnName("surname");
             });
@@ -557,6 +569,12 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Name).HasColumnName("name");
 
                 entity.Property(e => e.Suggestedaccountid).HasColumnName("suggestedaccountid");
+
+                entity.Property(e => e.Suggestedfriendid).HasColumnName("suggestedfriendid");
+
+                entity.Property(e => e.Suggestedfriendname).HasColumnName("suggestedfriendname");
+
+                entity.Property(e => e.Suggestedfriendsurname).HasColumnName("suggestedfriendsurname");
 
                 entity.Property(e => e.Suggestedname).HasColumnName("suggestedname");
 
