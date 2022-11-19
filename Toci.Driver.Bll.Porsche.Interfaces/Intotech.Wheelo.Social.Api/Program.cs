@@ -17,8 +17,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IAccountLogic, AccountLogic>();
-builder.Services.AddScoped<IGroupmemberLogic, GroupmemberLogic>();
+builder.Services.AddScoped<ICommentLogic, CommentLogic>();
+builder.Services.AddScoped<ICommenttypeLogic, CommenttypeLogic>();
 builder.Services.AddScoped<IGroupLogic, GroupLogic>();
+builder.Services.AddScoped<IGroupmemberLogic, GroupmemberLogic>();
+builder.Services.AddScoped<IGroupspostLogic, GroupspostLogic>();
+builder.Services.AddScoped<IGroupspostscommentLogic, GroupspostscommentLogic>();
+builder.Services.AddScoped<IMeetingskippedaccountLogic, MeetingskippedaccountLogic>();
+builder.Services.AddScoped<IOrganizemeetingLogic, OrganizemeetingLogic>();
+builder.Services.AddScoped<IUsercommentLogic, UsercommentLogic>();
+
 
 
 builder.Services.AddScoped<IAccountBll, AccountBll>();
