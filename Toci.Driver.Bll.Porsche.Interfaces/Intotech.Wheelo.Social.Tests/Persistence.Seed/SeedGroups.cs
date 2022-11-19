@@ -14,7 +14,11 @@ namespace Intotech.Wheelo.Social.Tests.Persistence.Seed
         {
             List<Group> groups = new List<Group>()
             {
-                new Group() { Idaccountcreated = 1, Name = "Herosi Toci"}
+                new Group() { Idaccountcreated = 1, Name = "Herosi Toci"},
+                new Group() { Idaccountcreated = 14, Name = "Praca Fiat"},
+                new Group() { Idaccountcreated = 11, Name = "Fuu Foo"},
+                new Group() { Idaccountcreated = 12, Name = "Polowanie na czarownice"},
+                new Group() { Idaccountcreated = 25, Name = "Szybka strzała"}
             };
 
             InsertCollection(groups);
