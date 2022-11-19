@@ -173,7 +173,11 @@ public partial class IntotechWheeloSocialContext : DbContext
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
+            entity.Property(e => e.Idaccount).HasColumnName("idaccount");
             entity.Property(e => e.Idgroups).HasColumnName("idgroups");
+            entity.Property(e => e.Isover)
+                .HasDefaultValueSql("false")
+                .HasColumnName("isover");
             entity.Property(e => e.Meetingdate)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("meetingdate");

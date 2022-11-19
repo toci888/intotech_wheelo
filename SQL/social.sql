@@ -67,7 +67,9 @@ create table OrganizeMeeting
 (
 	id serial primary key,
 	IdGroups int references Groups(id) not null,
+	IdAccount int not null,
 	MeetingDate timestamp not null,
+	IsOver bool default false,
 	Name text not null,
 	CreatedAt timestamp default now()
 );

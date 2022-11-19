@@ -9,7 +9,11 @@ public partial class Organizemeeting
 
     public int Idgroups { get; set; }
 
+    public int Idaccount { get; set; }
+
     public DateTime Meetingdate { get; set; }
+
+    public bool? Isover { get; set; }
 
     public string Name { get; set; } = null!;
 
