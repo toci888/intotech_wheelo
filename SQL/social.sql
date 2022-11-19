@@ -79,6 +79,7 @@ create table MeetingSkippedAccounts
 	id serial primary key,
 	IdGroups int references Groups(id) not null,
 	IdOrganizeMeeting int references OrganizeMeeting(id) not null,
+	IdAccount int not null,
 	CreatedAt timestamp default now()
 );
 

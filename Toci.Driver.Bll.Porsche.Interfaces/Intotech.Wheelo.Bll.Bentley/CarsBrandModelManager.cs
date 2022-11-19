@@ -21,7 +21,7 @@ namespace Intotech.Wheelo.Bll.Bentley
         }
         public virtual List<Carsbrand> GetCarsBrandsForWildcard(string beginning)
         {
-            return CarsBrandLogic.Select(m => m.Brand.StartsWith(beginning)).ToList();
+            return CarsBrandLogic.Select(m => m.Brand.ToLower().StartsWith(beginning.ToLower())).ToList();
         }
 
         public virtual List<Carsmodel> GetModelsForBrandForWildcard(int carBrand, string beginning)

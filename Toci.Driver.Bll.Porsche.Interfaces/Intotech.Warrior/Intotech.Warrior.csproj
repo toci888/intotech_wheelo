@@ -16,6 +16,7 @@
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Tests\Intotech.Common.Tests.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common\Intotech.Common.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.ExcelLibrary.Extensions\Intotech.ExcelLibrary.Extensions.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.ReflectiveTools\Intotech.ReflectiveTools.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Bentley.Interfaces\Intotech.Wheelo.Bll.Bentley.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Bentley\Intotech.Wheelo.Bll.Bentley.csproj" />

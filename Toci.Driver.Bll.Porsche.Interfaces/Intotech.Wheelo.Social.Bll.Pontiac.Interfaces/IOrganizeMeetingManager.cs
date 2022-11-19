@@ -11,5 +11,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac.Interfaces
     public interface IOrganizeMeetingManager
     {
         OrganizemeetingDto GetMeetingForUser(int accountId);
+
+        OrganizemeetingDto OrganizeMeeting(CreateMeetingDto meeting);
     }
 }

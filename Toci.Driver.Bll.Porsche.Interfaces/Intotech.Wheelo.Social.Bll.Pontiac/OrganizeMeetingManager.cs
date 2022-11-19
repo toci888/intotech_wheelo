@@ -1,4 +1,5 @@
-﻿using Intotech.Wheelo.Bll.Models.Social;
+﻿using Intotech.Common;
+using Intotech.Wheelo.Bll.Models.Social;
 using Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces;
 using Intotech.Wheelo.Social.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Social.Bll.Pontiac.Interfaces;
@@ -16,19 +17,43 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
     {
         protected IAccountBll AccountManager;
         protected IOrganizemeetingLogic OrganizemeetingLogic;
+        protected IMeetingskippedaccountLogic MeetingskippedaccountLogic;
 
-        public OrganizeMeetingManager(IAccountBll accountManager, IOrganizemeetingLogic organizemeetingLogic)
+        public OrganizeMeetingManager(IAccountBll accountManager, IOrganizemeetingLogic organizemeetingLogic,
+            IMeetingskippedaccountLogic meetingskippedaccountLogic)
         {
             AccountManager = accountManager;
             OrganizemeetingLogic = organizemeetingLogic;
+            MeetingskippedaccountLogic = meetingskippedaccountLogic;
         }
 
         public virtual OrganizemeetingDto GetMeetingForUser(int accountId)
         {
             Organizemeeting orgM = OrganizemeetingLogic.Select(m => m.Idaccount == accountId && m.Isover == false).First();
 
-            OrganizemeetingDto result = OrganizemeetingDto.MapperFill(orgM);
+            OrganizemeetingDto result = DtoModelMapper.Map<OrganizemeetingDto, Organizemeeting>(orgM);
 
+            return GetMeetingDto(accountId, result);
+        }
+
+        public virtual OrganizemeetingDto OrganizeMeeting(CreateMeetingDto meeting)
+        {
+            Organizemeeting organizedMeeting = OrganizemeetingLogic.Insert(meeting);
+
+            foreach (int accountId in meeting.MeetingMissAccounts)
+            {
+                MeetingskippedaccountLogic.Insert(new Meetingskippedaccount() { 
+                    Idgroups = organizedMeeting.Idgroups,
+                    Idorganizemeeting = organizedMeeting.Id,
+                    Idaccount = accountId
+                });
+            }
+
+            return GetMeetingDto(organizedMeeting.Idaccount, DtoModelMapper.Map<OrganizemeetingDto, Organizemeeting>(organizedMeeting));
+        }
+
+        protected virtual OrganizemeetingDto GetMeetingDto(int accountId, OrganizemeetingDto result)
+        {
             Accountrole accR = AccountManager.GetUserAccounts(accountId);
 
             result.OrganizerEmail = accR.Email;

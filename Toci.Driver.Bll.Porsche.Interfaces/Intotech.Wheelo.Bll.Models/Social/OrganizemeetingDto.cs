@@ -15,10 +15,5 @@ namespace Intotech.Wheelo.Bll.Models.Social
         public string OrganizerSurname { get; set; }
         public string OrganizerEmail { get; set; }
         public string OrganizerPhone { get; set; }
-
-        public static OrganizemeetingDto MapperFill(Organizemeeting orM)
-        {
-            return DtoModelMapper.Map<OrganizemeetingDto, Organizemeeting>(orM);
-        }
     }
 }
