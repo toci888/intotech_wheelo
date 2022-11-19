@@ -16,6 +16,7 @@ namespace Intotech.Wheelo.Social.Tests.Persistence.Seed
         {
             new SeedGroups().Insert();
             new SeedGroupMembers().Insert();
+            new SeedOrganizeMeeting().Insert();
         }
     }
 }

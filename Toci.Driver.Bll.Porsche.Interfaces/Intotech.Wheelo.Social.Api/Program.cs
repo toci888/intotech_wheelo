@@ -31,7 +31,8 @@ builder.Services.AddScoped<IUsercommentLogic, UsercommentLogic>();
 
 builder.Services.AddScoped<IAccountBll, AccountBll>();
 
-builder.Services.AddScoped<IGroupManager, GroupManager>(); 
+builder.Services.AddScoped<IGroupManager, GroupManager>();
+builder.Services.AddScoped<IOrganizeMeetingManager, OrganizeMeetingManager>();
 
 var app = builder.Build();
 
