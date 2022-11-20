@@ -15,6 +15,7 @@ import { environment } from './environment';
 import * as React from 'react';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { GooglePlacesInput } from './src/Components/Map/GooglePlacesInput';
+import { Footer } from './src/Components/Map/Footer/Footer';
 // import {apiKey} from './config'; // your google cloud api key
 // import {Input} from '@rneui/themed';
 
@@ -34,18 +35,19 @@ export default function App() {
   const [text, onChangeText] = React.useState('text');
 
   return (
-  //     <Button onPress={getData} title='Learn More'></Button>
-  //     <View>
-  //       {users.map((user: any) => (
-  //         <Text key={user.name}>{user.name} {user.email}</Text>
-  //       ))}
-  //     </View>
     <QueryClientProvider client={new QueryClient}>
+      {/* <Button onPress={getData} title='Learn More'></Button>
+      <View>
+        {users.map((user: any) => (
+          <Text key={user.name}>{user.name} {user.email}</Text>
+        ))}
+      </View> */}
       <View style={styles.container}>
         <TextInput style={{flex:.5}} onChangeText={onChangeText} value={text}/>
         <GooglePlacesInput inputText='zxc' minLength={4}/>
         <GooglePlacesInput inputText='asd' minLength={4}/>
         <StatusBar style='auto' />
+        <Footer />
       </View>
     </QueryClientProvider>
   );
