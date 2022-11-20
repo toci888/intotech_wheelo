@@ -8,10 +8,14 @@ using System.Reflection;
 using Toci.Driver.Database.Persistence.Models;
 
 
-//Console.WriteLine("Warrior is seeding your dbs....");
+Console.WriteLine("Warrior is seeding your dbs....");
+
+SeedAccount sa = new SeedAccount();
+
+sa.Insert();
 
 //new WheeloMainSeedManager().SeedAllDb();
-new SocialSeedManager().SeedAllDb();
+//new SocialSeedManager().SeedAllDb();
 
 //TypeScriptModelsGenerator typeScriptModelsGenerator = new TypeScriptModelsGenerator();
 

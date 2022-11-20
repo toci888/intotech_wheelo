@@ -11,28 +11,39 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
     public class SeedAccount : SeedLogic<Account>
     {
         protected List<string> Surnames = new List<string>();
+        protected List<string> Names = new List<string>();
 
         // zad 1 - wczytac z pliku surnames txt do listy Surnames pojedyncze nazwiska per element listy
         // zad 2 - names
         protected void PopulateSurnames()
         {
-            string surnames = File.ReadAllText(@"C:\Users\bzapa\source\repos\toci888\intotech_wheelo\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Tests\Persistence.Seed\RawData\surnames.txt");
+            string surnames = File.ReadAllText(@"../../../../Intotech.Wheelo.Tests/Persistence.Seed/RawData/surnames.txt");
 
-            Surnames = surnames.Split("\n").ToList();
+            Surnames = surnames.Split("\n").Select(m => m.Trim()).ToList();
+        }
+
+        protected void PopulateNames()
+        {
+            string names = File.ReadAllText(@"../../../../Intotech.Wheelo.Tests/Persistence.Seed/RawData/names.txt");
+
+            Names = names.Split("\n").Select(m => m.Trim()).ToList();
         }
 
         public override void Insert()
         {
             PopulateSurnames();
+            PopulateNames();
 
             List<Account> accounts = new List<Account>()
             {
                 new Account() { Name = "Bartek", Surname = "Zapart", Gender = 1, Phone = "12343256", Email = "bzapart@gmail.com", Login = "ghostrider", Password="beatka", Token = "cntgfu347frgwhu293", Idrole = 2 }
             };
 
+            Random rnd = new Random();
+
             for (int i = 0; i < 50; i++)
             {
-                accounts.Add(new Account() { Name = StringUtils.GetRandomText(10), Surname = StringUtils.GetRandomText(8), Gender = i % 2 + 1, Phone = "12343256", Password = StringUtils.GetRandomText(10), Email = StringUtils.GetRandomText(12), Login = StringUtils.GetRandomText(7), Token = StringUtils.GetRandomText(18), Idrole = 2 });
+                accounts.Add(new Account() { Name = Names[rnd.Next(0, Names.Count - 1)], Surname = Surnames[rnd.Next(0, Surnames.Count - 1)], Gender = i % 2 + 1, Phone = "12343256", Password = StringUtils.GetRandomText(10), Email = StringUtils.GetRandomText(12), Login = StringUtils.GetRandomText(7), Token = StringUtils.GetRandomText(18), Idrole = 2 });
             }
 
             InsertCollection(accounts);
