@@ -10,9 +10,11 @@ using Toci.Driver.Database.Persistence.Models;
 
 Console.WriteLine("Warrior is seeding your dbs....");
 
-SeedAccount sa = new SeedAccount();
+//SeedAccount sa = new SeedAccount();
 
-sa.Insert();
+new SeedTrip().Insert();
+
+//sa.Insert();
 
 //new WheeloMainSeedManager().SeedAllDb();
 //new SocialSeedManager().SeedAllDb();
