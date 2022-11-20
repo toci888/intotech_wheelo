@@ -11,6 +11,8 @@ public partial class Meetingskippedaccount
 
     public int Idorganizemeeting { get; set; }
 
+    public int Idaccount { get; set; }
+
     public DateTime? Createdat { get; set; }
 
     public virtual Group IdgroupsNavigation { get; set; } = null!;

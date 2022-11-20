@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intotech.Wheelo.Social.Database.Persistence.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,12 +8,12 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Models.Social
 {
-    public class GroupMemebersDto 
+    public class GroupMemberAddDto : Groupmember
     {
-        public int GroupId { get; set; }
-
         public string GroupName { get; set; }
 
-        public List<Accountrole> GroupMembers { get; set; }
+        public Accountrole AddedMember { get; set; }
+
+        public Accountrole MemberWhoAdded { get; set; }
     }
 }

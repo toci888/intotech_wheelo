@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common.Bll.Interfaces\Toci.Common.Bll.Interfaces.csproj" />
-    <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common.Bll\Toci.Common.Bll.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll.Interfaces\Intotech.Common.Bll.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll\Intotech.Common.Bll.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common\Intotech.Common.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Persistence\Intotech.Wheelo.Bll.Persistence.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Porsche.Interfaces.csproj" />
   </ItemGroup>

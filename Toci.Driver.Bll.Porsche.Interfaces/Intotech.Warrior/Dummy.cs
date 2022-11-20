@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Toci.Driver.Database.Persistence.Models;
+using TypeLite;
 
-namespace Intotech.Wheelo.Bll.Models.Social
+namespace Intotech.Warrior
 {
-    public class GroupMemebersDto 
+    [TsClass(Name = "Dummy", Module = "Intotech.Warrior.Dummy")]
+    public class Dummy
     {
         public int GroupId { get; set; }
 
         public string GroupName { get; set; }
 
-        public List<Accountrole> GroupMembers { get; set; }
+        public List<int> GroupMembers { get; set; }
     }
 }
