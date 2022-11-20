@@ -10,8 +10,21 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
 {
     public class SeedAccount : SeedLogic<Account>
     {
+        protected List<string> Surnames = new List<string>();
+
+        // zad 1 - wczytac z pliku surnames txt do listy Surnames pojedyncze nazwiska per element listy
+        // zad 2 - names
+        protected void PopulateSurnames()
+        {
+            string surnames = File.ReadAllText(@"C:\Users\bzapa\source\repos\toci888\intotech_wheelo\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Tests\Persistence.Seed\RawData\surnames.txt");
+
+            Surnames = surnames.Split("\n").ToList();
+        }
+
         public override void Insert()
         {
+            PopulateSurnames();
+
             List<Account> accounts = new List<Account>()
             {
                 new Account() { Name = "Bartek", Surname = "Zapart", Gender = 1, Phone = "12343256", Email = "bzapart@gmail.com", Login = "ghostrider", Password="beatka", Token = "cntgfu347frgwhu293", Idrole = 2 }
