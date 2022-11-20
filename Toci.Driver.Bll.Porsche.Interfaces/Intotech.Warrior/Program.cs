@@ -11,11 +11,11 @@ using Toci.Driver.Database.Persistence.Models;
 //Console.WriteLine("Warrior is seeding your dbs....");
 
 //new WheeloMainSeedManager().SeedAllDb();
-//new SocialSeedManager().SeedAllDb();
+new SocialSeedManager().SeedAllDb();
 
-TypeScriptModelsGenerator typeScriptModelsGenerator = new TypeScriptModelsGenerator();
+//TypeScriptModelsGenerator typeScriptModelsGenerator = new TypeScriptModelsGenerator();
 
-typeScriptModelsGenerator.Generate(Assembly.GetAssembly(typeof(Tripparticipant)));
+//typeScriptModelsGenerator.Generate(Assembly.GetAssembly(typeof(Tripparticipant)));
 
 //TypeScriptGenerator tsg = new TypeScriptGenerator();
 

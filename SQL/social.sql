@@ -1,4 +1,3 @@
--- komentarze, grupy, chodzmy na piwo
 
 -- run once for migration
 drop table Comments;
@@ -9,6 +8,7 @@ drop table OrganizeMeeting;
 drop table CommentTypes;
 drop table GroupMembers;
 drop table Groups;
+
 
 drop table UserComments;
 drop table MeetingSkippedAccounts;
@@ -31,8 +31,9 @@ create table Groups
 create table GroupMembers
 (
 	id serial primary key,
-	IdGroups int references Groups(id) not null,
+	IdGroups int references Groups(id),
 	IdAccount int not null,
+	IdAccountWhoAdded int not null,
 	Level int not null,
 	CreatedAt timestamp default now()
 );

@@ -7,13 +7,15 @@ public partial class Groupmember
 {
     public int Id { get; set; }
 
-    public int Idgroups { get; set; }
+    public int? Idgroups { get; set; }
 
     public int Idaccount { get; set; }
+
+    public int Idaccountwhoadded { get; set; }
 
     public int Level { get; set; }
 
     public DateTime? Createdat { get; set; }
 
-    public virtual Group IdgroupsNavigation { get; set; } = null!;
+    public virtual Group? IdgroupsNavigation { get; set; }
 }

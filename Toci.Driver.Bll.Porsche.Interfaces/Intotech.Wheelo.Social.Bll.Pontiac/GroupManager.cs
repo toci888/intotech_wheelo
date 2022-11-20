@@ -1,4 +1,5 @@
-﻿using Intotech.Wheelo.Bll.Models.Social;
+﻿using Intotech.Common;
+using Intotech.Wheelo.Bll.Models.Social;
 using Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces;
 using Intotech.Wheelo.Social.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Social.Bll.Pontiac.Interfaces;
@@ -25,6 +26,22 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
             GroupMemberLogic = groupMemberLogic;
         }
 
+        public virtual GroupMemberAddDto AddMemberToGroup(Groupmember model)
+        {
+            Groupmember memberAdded = GroupMemberLogic.Insert(model);
+
+            GroupMemberAddDto groupMemberAddDto = DtoModelMapper.Map<GroupMemberAddDto, Groupmember>(memberAdded);
+
+            groupMemberAddDto.MemberWhoAdded = AccountLogic.GetUserAccounts(memberAdded.Idaccountwhoadded);
+            groupMemberAddDto.AddedMember = AccountLogic.GetUserAccounts(memberAdded.Idaccount);
+
+            Group group = GroupLogic.Select(m => m.Id == memberAdded.Idgroups).First();
+
+            groupMemberAddDto.GroupName = group.Name;
+
+            return groupMemberAddDto;
+        }
+
         public virtual GroupMemebersDto GetGroupWithMembers(int groupId)
         {
             GroupMemebersDto result = new GroupMemebersDto();
@@ -37,15 +54,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
             result.GroupName = group.Name;
             result.GroupId = group.Id;
 
-            result.GroupMembers = new List<Account>();
-
-            foreach (Accountrole accountrole in accountroles)
-            {
-                result.GroupMembers.Add(new Account() { 
-                    Email = accountrole.Email, 
-                    Name = accountrole.Name, 
-                    Surname = accountrole.Surname }); //TODO
-            }
+            result.GroupMembers = accountroles;
 
             return result;
         }

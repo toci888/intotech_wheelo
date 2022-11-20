@@ -75,12 +75,12 @@ public partial class IntotechWheeloSocialContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
             entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+            entity.Property(e => e.Idaccountwhoadded).HasColumnName("idaccountwhoadded");
             entity.Property(e => e.Idgroups).HasColumnName("idgroups");
             entity.Property(e => e.Level).HasColumnName("level");
 
             entity.HasOne(d => d.IdgroupsNavigation).WithMany(p => p.Groupmembers)
                 .HasForeignKey(d => d.Idgroups)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("groupmembers_idgroups_fkey");
         });
 
