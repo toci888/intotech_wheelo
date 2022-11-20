@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -12,12 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll.Interfaces\Intotech.Common.Bll.Interfaces.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll\Intotech.Common.Bll.csproj" />
-    <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common.Bll.Interfaces\Toci.Common.Bll.Interfaces.csproj" />
-    <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common.Bll\Toci.Common.Bll.csproj" />
-    <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common.Database.Interfaces\Toci.Common.Database.Interfaces.csproj" />
-    <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common.Database\Toci.Common.Database.csproj" />
-    <ProjectReference Include="..\..\..\toci_common\Toci.Common\Toci.Common\Toci.Common.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Database.Interfaces\Intotech.Common.Database.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common\Intotech.Common.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Models\Intotech.Wheelo.Bll.Models.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Persistence.Interfaces\Intotech.Wheelo.Bll.Persistence.Interfaces.csproj" />
     <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
