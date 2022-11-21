@@ -106,6 +106,7 @@ create table Invitations
 	Id serial primary key,
 	IdAccount int references Accounts(Id) not null,
 	IdInvited int references Accounts(Id) not null,
+	origin int, -- 1 => Acconts collocations, 2 => friend suggestion
 	CreatedAt timestamp default now()
 );
 

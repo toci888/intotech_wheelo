@@ -21,6 +21,7 @@ public class WheeloMainSeedManager
         //new SeedCarsbrand().Insert();
         //new SeedCarsModels().Insert();
         new SeedCars().Insert();
+        new SeedFriendSuggestion().Insert();
 
         new Shit().CalcCollocations();
     }

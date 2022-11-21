@@ -12,11 +12,13 @@ Console.WriteLine("Warrior is seeding your dbs....");
 
 //SeedAccount sa = new SeedAccount();
 
-new SeedTrip().Insert();
+//new SeedTrip().Insert();
 
 //sa.Insert();
+new SeedFriendSuggestion().Insert();
 
 //new WheeloMainSeedManager().SeedAllDb();
+
 //new SocialSeedManager().SeedAllDb();
 
 //TypeScriptModelsGenerator typeScriptModelsGenerator = new TypeScriptModelsGenerator();

@@ -431,6 +431,8 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Idinvited).HasColumnName("idinvited");
 
+                entity.Property(e => e.Origin).HasColumnName("origin");
+
                 entity.HasOne(d => d.IdaccountNavigation)
                     .WithMany(p => p.InvitationIdaccountNavigations)
                     .HasForeignKey(d => d.Idaccount)
