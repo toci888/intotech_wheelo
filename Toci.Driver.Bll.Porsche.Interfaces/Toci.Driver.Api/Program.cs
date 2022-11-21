@@ -55,6 +55,7 @@ builder.Services.AddScoped<ITripManager, TripManager>();
 builder.Services.AddScoped<IInstantOccasion, InstantOccasion>();
 builder.Services.AddScoped<IFriendsSuggestionsService, FriendsSuggestionsService>();
 builder.Services.AddScoped<IFriendsService, FriendsService>();
+builder.Services.AddScoped<IInvitationService, InvitationService>();
 
 var app = builder.Build();
 

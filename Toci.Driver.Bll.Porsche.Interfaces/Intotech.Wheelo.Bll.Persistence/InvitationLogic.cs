@@ -18,18 +18,6 @@ join Accounts U2 on U2.Id = Invitations.IdInvited ; */
 
     public class InvitationLogic : Logic<Invitation>, IInvitationLogic
     {
-        protected IVinvitationLogic VInvitationLogic;
-
-        public InvitationLogic(IVinvitationLogic iVinvitationLogic)
-        {
-            VInvitationLogic = iVinvitationLogic;
-        }
-
-        public virtual Vinvitation InviteToFriends(int invitingAccountId, int invitedAccountId)
-        {
-            Insert(new Invitation() { Idaccount = invitingAccountId, Idinvited = invitedAccountId });
-
-            return VInvitationLogic.Select(m => m.Accountid == invitingAccountId).FirstOrDefault();
-        }
+        
     }
 }

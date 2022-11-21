@@ -5,5 +5,5 @@ namespace Intotech.Wheelo.Bll.Persistence.Interfaces;
 
 public interface IInvitationLogic : ILogicBase<Invitation>
 {
-    Vinvitation InviteToFriends(int invitingAccountId, int invitedAccountId);
+
 }

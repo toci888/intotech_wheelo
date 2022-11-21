@@ -10,5 +10,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa
     public interface IInvitationService
     {
         List<Vinvitation> GetInvitedAccounts(int accountId);
+        Vinvitation InviteToFriends(int invitingAccountId, int invitedAccountId);
+
     }
 }
