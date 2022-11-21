@@ -9,6 +9,6 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa
 {
     public interface IFriendsService
     {
-        List<Vfriend> GetVfriends(string username, string password);
+        List<Vfriend> GetVfriends(int accountId);
     }
 }

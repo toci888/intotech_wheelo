@@ -18,9 +18,9 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
             VfriendLogic = vfriendLogic;
         }
 
-        public List<Vfriend> GetVfriends(string username, string password)
+        public List<Vfriend> GetVfriends(int accountId)
         {
-            return VfriendLogic.Select(m => m.Friendsurname == username).ToList();
+            return VfriendLogic.Select(m => m.Accountid == accountId).ToList();
         }
     }
 }
