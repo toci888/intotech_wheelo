@@ -17,9 +17,9 @@ Console.WriteLine("Warrior is seeding your dbs....");
 //sa.Insert();
 //new SeedFriendSuggestion().Insert();
 
-new WheeloMainSeedManager().SeedAllDb();
+//new WheeloMainSeedManager().SeedAllDb();
 
-new SocialSeedManager().SeedAllDb();
+//new SocialSeedManager().SeedAllDb();
 
 //TypeScriptModelsGenerator typeScriptModelsGenerator = new TypeScriptModelsGenerator();
 
@@ -28,5 +28,5 @@ new SocialSeedManager().SeedAllDb();
 //TypeScriptGenerator tsg = new TypeScriptGenerator();
 
 //tsg.GenerateTsModels(Assembly.GetAssembly(typeof(Dummy)));
-
+new SeedInvitation().Insert();
 Console.WriteLine("Warrior is done !");
