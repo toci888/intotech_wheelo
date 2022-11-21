@@ -3,7 +3,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.PersistenceAggregation;
+using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
 using Intotech.Wheelo.Bll.Porsche.PersistenceAggregation;
+using Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa;
 using Toci.Driver.Bll.Porsche.Association;
 using Toci.Driver.Bll.Porsche.Interfaces.Association;
 
@@ -51,6 +53,7 @@ builder.Services.AddScoped<IAccountCollocationMatch<IUsersLocationLogic, IUsersC
 builder.Services.AddScoped<ICollocator<IWorkTripLogic, IUsersCollocationLogic>, Collocator>();
 builder.Services.AddScoped<ITripManager, TripManager>();
 builder.Services.AddScoped<IInstantOccasion, InstantOccasion>();
+builder.Services.AddScoped<IFriendsSuggestionsService, FriendsSuggestionsService>();
 
 var app = builder.Build();
 
