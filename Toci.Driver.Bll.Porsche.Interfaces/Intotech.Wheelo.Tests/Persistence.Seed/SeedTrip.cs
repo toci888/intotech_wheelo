@@ -19,9 +19,9 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
                 Tohour = new TimeOnly(16, 0),
                 Idinitiatoraccount = 1,
                 Iscurrent = true,
-                Leftseats = 1, 
-                Tripdate = new DateOnly(2022, 11, 21)
-            });
+                Leftseats = 1,
+                Tripdate = new DateOnly(2022, 11, DateTime.Now.Day + 1)
+            }) ;
 
             // ?
 
