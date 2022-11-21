@@ -11,6 +11,7 @@ namespace Toci.Driver.Api.Controllers
     {
         public InvitationsController(IInvitationLogic logic) : base(logic)
         {
+            
         }
 
         [HttpPost]
