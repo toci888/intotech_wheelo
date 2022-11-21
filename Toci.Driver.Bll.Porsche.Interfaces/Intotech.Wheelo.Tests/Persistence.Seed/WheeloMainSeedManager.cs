@@ -25,6 +25,7 @@ public class WheeloMainSeedManager
         new SeedFriends().Insert();
         new SeedTrip().Insert();
         new SeedTripParticipants().Insert();
+        new SeedInvitation().Insert();
 
         new Shit().CalcCollocations();
     }
