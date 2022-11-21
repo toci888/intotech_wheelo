@@ -22,6 +22,18 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
             list.Add(new Friendsuggestion() { Idaccount = 7, Idsuggested = 15, Idsuggestedfriend = 16 });
             list.Add(new Friendsuggestion() { Idaccount = 8, Idsuggested = 25, Idsuggestedfriend = 26 });
             list.Add(new Friendsuggestion() { Idaccount = 9, Idsuggested = 35, Idsuggestedfriend = 36 });
+           
+            list.Add(new Friendsuggestion() { Idaccount = 10, Idsuggested = 14, Idsuggestedfriend = 25 });
+            list.Add(new Friendsuggestion() { Idaccount = 11, Idsuggested = 15, Idsuggestedfriend = 23 });
+            list.Add(new Friendsuggestion() { Idaccount = 12, Idsuggested = 14, Idsuggestedfriend = 23 });
+            list.Add(new Friendsuggestion() { Idaccount = 13, Idsuggested = 14, Idsuggestedfriend = 23 });
+            list.Add(new Friendsuggestion() { Idaccount = 14, Idsuggested = 14, Idsuggestedfriend = 23 });
+            list.Add(new Friendsuggestion() { Idaccount = 15, Idsuggested = 14, Idsuggestedfriend = 23 });
+            list.Add(new Friendsuggestion() { Idaccount = 16, Idsuggested = 14, Idsuggestedfriend = 23 });
+            list.Add(new Friendsuggestion() { Idaccount = 17, Idsuggested = 34, Idsuggestedfriend = 23 });
+            list.Add(new Friendsuggestion() { Idaccount = 18, Idsuggested = 17, Idsuggestedfriend = 23 });
+            list.Add(new Friendsuggestion() { Idaccount = 19, Idsuggested = 4, Idsuggestedfriend = 23 });
+            list.Add(new Friendsuggestion() { Idaccount = 20, Idsuggested = 5, Idsuggestedfriend = 43 });
 
 
             InsertCollection(list);
