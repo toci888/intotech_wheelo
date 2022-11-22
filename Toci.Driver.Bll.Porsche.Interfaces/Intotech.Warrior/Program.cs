@@ -21,6 +21,7 @@ Console.WriteLine("Warrior is seeding your dbs....");
 
 //new SocialSeedManager().SeedAllDb();
 new SeedTrip().Insert();
+new SeedTripParticipants().Insert();
 //TypeScriptModelsGenerator typeScriptModelsGenerator = new TypeScriptModelsGenerator();
 
 //typeScriptModelsGenerator.Generate(Assembly.GetAssembly(typeof(Tripparticipant)));

@@ -1,3 +1,7 @@
+--migration 22.11
+drop view VCarOwner;
+
+
 drop view VTripsParticipants;
 drop table TripParticipants;
 drop table Trips;
@@ -11,6 +15,7 @@ drop view VFriendSuggestions;
 --select * from AccountsCollocations;
 drop view AccountsCarsLocations;
 drop table WorkTrip;
+drop view VCarOwner;
 drop table Cars;
 drop table Colours;
 drop table CarsModels;
@@ -25,7 +30,7 @@ drop table Accounts;
 drop table Roles;
 drop table GeographicRegion;
 --select * from Accounts;
-
+--select * from Cars;
 create table GeographicRegion
 (
 	Id serial primary key,
@@ -99,17 +104,17 @@ join Accounts U1 on U1.Id = FriendSuggestions.IdAccount
 join Accounts U2 on U2.Id = FriendSuggestions.IdSuggested
 join Accounts U3 on U3.Id = FriendSuggestions.IdSuggestedFriend ;
 
-select * from VFriendSuggestions;
+--select * from VFriendSuggestions where accountid = 2;
 
 create table Invitations
 (
 	Id serial primary key,
 	IdAccount int references Accounts(Id) not null,
 	IdInvited int references Accounts(Id) not null,
-	origin int, -- 1 => Acconts collocations, 2 => friend suggestion
+	origin int,
 	CreatedAt timestamp default now()
 );
-
+select * from VInvitations;
 
 create or replace view VInvitations as
 select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, 
@@ -135,6 +140,8 @@ from Friends
 join Accounts U1 on U1.Id = Friends.IdAccount 
 join Accounts U2 on U2.Id = Friends.IdFriend ;
 
+select * from VFriends;
+
 --select * from AccountsCollocations;
 
 create table AccountsCollocations
@@ -146,7 +153,7 @@ create table AccountsCollocations
 	DistanceTo numeric,
 	CreatedAt timestamp default now()
 );
-
+--select * from VAccountsCollocations;
 create or replace view VAccountsCollocations as
 select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
 U2.Id as SuggestedAccountId, ac.DistanceFrom, ac.DistanceTo
@@ -179,8 +186,9 @@ create table Colours
 	Name text,
 	Rgb text
 );
-
-select * from colours;
+--select * from carsbrands;
+--select * from carsmodels where idcarsbrands = 6;
+--select * from colours;
 
 create table Cars
 (
@@ -194,7 +202,14 @@ create table Cars
 	CreatedAt timestamp default now()
 );
 
+create or replace view VCarOwner as
+select ac.name, ac.surname, cr.registrationplate, crb.brand, crm.model, cr.AvailableSeats, co.name as colour, co.rgb
+from Accounts ac join Cars cr on ac.id = cr.idaccounts
+join CarsBrands crb on cr.IdCarsBrands = crb.id
+join CarsModels crm on cr.IdCarsModels = crm.id
+join Colours co on co.id = cr.IdColours;
 
+--select * from VCarOwner;
 
 create table WorkTrip
 (
@@ -273,7 +288,8 @@ join Accounts U1 on U1.Id = tr.IdInitiatorAccount
 join Accounts U2 on U2.Id = tp.IdAccount ;
 
 --select * from VTripsParticipants;
-
+--select * from Friends;
+--select * from trips;
 --select * from colours;
 
 --delete from CarsBrands;
