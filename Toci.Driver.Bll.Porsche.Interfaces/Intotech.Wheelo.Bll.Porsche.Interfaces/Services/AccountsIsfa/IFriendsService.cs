@@ -10,5 +10,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa
     public interface IFriendsService
     {
         List<Vfriend> GetVfriends(int accountId);
+
+        bool Unfriend(int accountId, int idFriendToRemove);
     }
 }
