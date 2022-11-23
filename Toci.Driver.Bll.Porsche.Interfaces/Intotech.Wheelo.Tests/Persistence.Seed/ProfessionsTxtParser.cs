@@ -22,6 +22,14 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
                 if (!profession.Contains(HerebyDoc))
                 {
                     string[] elements = profession.Split(" ");
+
+                    if (elements.Length > 1)
+                    {
+                        List<string> occPieces = elements.ToList();
+                        occPieces.RemoveAt(0);
+
+                        ModelsEntities.Add(new Occupation() { Name = string.Join(" ", occPieces.ToArray()) });
+                    }
                 }
             }
 

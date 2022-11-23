@@ -15,6 +15,7 @@ public class WheeloMainSeedManager
         new CarsXmlParser().Insert();
         new SeedCarsModelsParser().Insert();
         new ColourTxtParser().Insert();
+        new ProfessionsTxtParser().Insert();
         new SeedRole().Insert();
         new SeedAccount().Insert();
         new SeedWorktrip().Insert();
