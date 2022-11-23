@@ -34,6 +34,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Trip> Trips { get; set; } = null!;
         public virtual DbSet<Tripparticipant> Tripparticipants { get; set; } = null!;
         public virtual DbSet<Vaccountscollocation> Vaccountscollocations { get; set; } = null!;
+        public virtual DbSet<Vcarowner> Vcarowners { get; set; } = null!;
         public virtual DbSet<Vfriend> Vfriends { get; set; } = null!;
         public virtual DbSet<Vfriendsuggestion> Vfriendsuggestions { get; set; } = null!;
         public virtual DbSet<Vinvitation> Vinvitations { get; set; } = null!;
@@ -537,6 +538,29 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Suggestedname).HasColumnName("suggestedname");
 
                 entity.Property(e => e.Suggestedsurname).HasColumnName("suggestedsurname");
+
+                entity.Property(e => e.Surname).HasColumnName("surname");
+            });
+
+            modelBuilder.Entity<Vcarowner>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vcarowner");
+
+                entity.Property(e => e.Availableseats).HasColumnName("availableseats");
+
+                entity.Property(e => e.Brand).HasColumnName("brand");
+
+                entity.Property(e => e.Colour).HasColumnName("colour");
+
+                entity.Property(e => e.Model).HasColumnName("model");
+
+                entity.Property(e => e.Name).HasColumnName("name");
+
+                entity.Property(e => e.Registrationplate).HasColumnName("registrationplate");
+
+                entity.Property(e => e.Rgb).HasColumnName("rgb");
 
                 entity.Property(e => e.Surname).HasColumnName("surname");
             });
