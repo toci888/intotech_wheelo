@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{A662B894-F58
 	ProjectSection(SolutionItems) = preProject
 		..\SQL\cars.txt = ..\SQL\cars.txt
 		..\SQL\colours.txt = ..\SQL\colours.txt
+		..\SQL\geog_azg.sql = ..\SQL\geog_azg.sql
 		..\SQL\morecars.txt = ..\SQL\morecars.txt
 		..\SQL\rescue.sql = ..\SQL\rescue.sql
 		..\SQL\social.sql = ..\SQL\social.sql

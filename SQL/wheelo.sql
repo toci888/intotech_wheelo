@@ -1,6 +1,4 @@
 --migration 22.11
-drop view VCarOwner;
-
 
 drop view VTripsParticipants;
 drop table TripParticipants;
@@ -29,14 +27,53 @@ drop table AccountsLocations;
 drop table Accounts;
 drop table Roles;
 drop table GeographicRegion;
+
+
+drop table AccountMetadata;
+drop table StatisticsTrips;
+drop view VTripsParticipants;
+drop table TripParticipants;
+drop table Trips;
+drop view AccountRoles;
+drop view VFriends;
+drop view VInvitations;
+drop view VAccountsCollocations;
+drop view VFriendSuggestions;
+--select * from  WorkTrip;
+--select * from  Accounts;
+--select * from AccountsCollocations;
+drop view AccountsCarsLocations;
+drop table WorkTrip;
+drop view VCarOwner;
+drop table Cars;
+drop table Colours;
+drop table CarsModels;
+drop table CarsBrands;
+drop table AccountsCollocations;
+drop table AccountsWorkTime;
+drop table FriendSuggestions;
+drop table Friends;
+drop table Invitations;
+drop table AccountsLocations;
+drop table Accounts;
+drop table Roles;
+drop table Occupations;
+drop table GeographicRegion;
 --select * from Accounts;
 --select * from Cars;
+
 create table GeographicRegion
 (
 	Id serial primary key,
 	IdParent int references GeographicRegion(Id),
 	IdShit int,
 	Name text
+);
+
+create table Occupations
+(
+	id serial primary key,
+	name text
 );
 
 create table Roles
@@ -286,6 +323,24 @@ tr.LeftSeats, tp.IsOccasion
 from Trips tr join TripParticipants tp on tr.id = tp.IdTrip
 join Accounts U1 on U1.Id = tr.IdInitiatorAccount 
 join Accounts U2 on U2.Id = tp.IdAccount ;
+
+create table StatisticsTrips
+(
+	id serial primary key,
+	TripDate date unique,
+	TripCars int not null,
+	TripPeople int not null,
+	IdGeographicRegion int references GeographicRegion(Id)
+);
+
+create table AccountMetadata
+(
+	id serial primary key,
+	IdAccount int references Accounts(id),
+	IsSmoker bool default false,
+	IsWithAnimals bool default false,
+	metaJson text
+);
 
 --select * from VTripsParticipants;
 --select * from Friends;

@@ -17,6 +17,7 @@ namespace Toci.Driver.Database.Persistence.Models
         }
 
         public virtual DbSet<Account> Accounts { get; set; } = null!;
+        public virtual DbSet<Accountmetadatum> Accountmetadata { get; set; } = null!;
         public virtual DbSet<Accountrole> Accountroles { get; set; } = null!;
         public virtual DbSet<Accountscarslocation> Accountscarslocations { get; set; } = null!;
         public virtual DbSet<Accountscollocation> Accountscollocations { get; set; } = null!;
@@ -30,7 +31,9 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Friendsuggestion> Friendsuggestions { get; set; } = null!;
         public virtual DbSet<Geographicregion> Geographicregions { get; set; } = null!;
         public virtual DbSet<Invitation> Invitations { get; set; } = null!;
+        public virtual DbSet<Occupation> Occupations { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
+        public virtual DbSet<Statisticstrip> Statisticstrips { get; set; } = null!;
         public virtual DbSet<Trip> Trips { get; set; } = null!;
         public virtual DbSet<Tripparticipant> Tripparticipants { get; set; } = null!;
         public virtual DbSet<Vaccountscollocation> Vaccountscollocations { get; set; } = null!;
@@ -101,6 +104,30 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasForeignKey(d => d.Idrole)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("accounts_idrole_fkey");
+            });
+
+            modelBuilder.Entity<Accountmetadatum>(entity =>
+            {
+                entity.ToTable("accountmetadata");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Issmoker)
+                    .HasColumnName("issmoker")
+                    .HasDefaultValueSql("false");
+
+                entity.Property(e => e.Iswithanimals)
+                    .HasColumnName("iswithanimals")
+                    .HasDefaultValueSql("false");
+
+                entity.Property(e => e.Metajson).HasColumnName("metajson");
+
+                entity.HasOne(d => d.IdaccountNavigation)
+                    .WithMany(p => p.Accountmetadata)
+                    .HasForeignKey(d => d.Idaccount)
+                    .HasConstraintName("accountmetadata_idaccount_fkey");
             });
 
             modelBuilder.Entity<Accountrole>(entity =>
@@ -447,6 +474,15 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasConstraintName("invitations_idinvited_fkey");
             });
 
+            modelBuilder.Entity<Occupation>(entity =>
+            {
+                entity.ToTable("occupations");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name).HasColumnName("name");
+            });
+
             modelBuilder.Entity<Role>(entity =>
             {
                 entity.ToTable("roles");
@@ -454,6 +490,29 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name).HasColumnName("name");
+            });
+
+            modelBuilder.Entity<Statisticstrip>(entity =>
+            {
+                entity.ToTable("statisticstrips");
+
+                entity.HasIndex(e => e.Tripdate, "statisticstrips_tripdate_key")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Idgeographicregion).HasColumnName("idgeographicregion");
+
+                entity.Property(e => e.Tripcars).HasColumnName("tripcars");
+
+                entity.Property(e => e.Tripdate).HasColumnName("tripdate");
+
+                entity.Property(e => e.Trippeople).HasColumnName("trippeople");
+
+                entity.HasOne(d => d.IdgeographicregionNavigation)
+                    .WithMany(p => p.Statisticstrips)
+                    .HasForeignKey(d => d.Idgeographicregion)
+                    .HasConstraintName("statisticstrips_idgeographicregion_fkey");
             });
 
             modelBuilder.Entity<Trip>(entity =>

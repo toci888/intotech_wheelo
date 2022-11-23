@@ -9,6 +9,7 @@ namespace Toci.Driver.Database.Persistence.Models
         {
             Accounts = new HashSet<Account>();
             InverseIdparentNavigation = new HashSet<Geographicregion>();
+            Statisticstrips = new HashSet<Statisticstrip>();
         }
 
         public int Id { get; set; }
@@ -19,5 +20,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual Geographicregion? IdparentNavigation { get; set; }
         public virtual ICollection<Account> Accounts { get; set; }
         public virtual ICollection<Geographicregion> InverseIdparentNavigation { get; set; }
+        public virtual ICollection<Statisticstrip> Statisticstrips { get; set; }
     }
 }
