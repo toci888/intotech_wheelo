@@ -1,5 +1,5 @@
-import { Address } from './Address';
-import { Coordinates } from './Coordinates';
+import { Address } from './address';
+import { Coordinates } from './coordinates';
 
 export type GeographicLocationModel = {
   Coordinates: Coordinates,
