@@ -12,7 +12,6 @@ const chatClient = StreamChat.getInstance(CHAT_API_KEY);
 const Stack = createStackNavigator();
 
 export const ChatScreen = () => {
-  console.log("XXX", CHAT_API_KEY);
   const { clientIsReady } = useChatClient();
 
   if (!clientIsReady) {
@@ -21,13 +20,13 @@ export const ChatScreen = () => {
 
   return (
     <OverlayProvider>
-    <Chat client={chatClient}>
-      <Stack.Navigator>
-        <Stack.Screen name="ChannelListScreen" component={ChannelListScreen} />
-        <Stack.Screen name="ChannelScreen" component={ChannelScreen} />
-        <Stack.Screen name="ThreadScreen" component={ThreadScreen} />
-      </Stack.Navigator>
-    </Chat>
+      <Chat client={chatClient}>
+        <Stack.Navigator>
+          <Stack.Screen name="ChannelListScreen" component={ChannelListScreen} />
+          <Stack.Screen name="ChannelScreen" component={ChannelScreen} />
+          <Stack.Screen name="ThreadScreen" component={ThreadScreen} />
+        </Stack.Navigator>
+      </Chat>
     </OverlayProvider>
   );
 };
