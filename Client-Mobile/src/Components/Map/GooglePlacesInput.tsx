@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { StyleSheet, View } from 'react-native';
-import { createCoordinates } from '../../Models/coordinates';
 import { GOOGLE_MAPS_API_KEY } from '../../Constants/constants';
-import { createAddress } from '../../Models/address';
-import { createGeographicLocationModel } from '../../Models/geographicLocationModel';
+import { createCoordinates } from '../../Models/Coordinates';
+import { createAddress } from '../../Models/Address';
+import { createGeographicLocationModel } from '../../Models/GeographicLocationModel';
 
 type TGoogleInput = {
   inputText: string;
