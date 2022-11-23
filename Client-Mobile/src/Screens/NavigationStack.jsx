@@ -90,6 +90,7 @@ export const NavigationStack = () => {
           <Stack.Screen name="ChannelListScreen" component={ChannelListScreen} />
           <Stack.Screen name="ChannelScreen" component={ChannelScreen} />
           <Stack.Screen name="ThreadScreen" component={ThreadScreen} />
+          {/* <Stack.Screen name="ChatScreen" component={ChatScreen} /> */}
         </Stack.Navigator>
       </Chat>
     </OverlayProvider>

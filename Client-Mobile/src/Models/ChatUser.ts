@@ -2,9 +2,9 @@ import { Platform } from "react-native";
 
 export const chatApiKey = 'g9qa6ucyf3ff';
 
-let chatUserId;
-let chatUserToken;
-let chatUserName;
+let chatUserId: string;
+let chatUserToken: string;
+let chatUserName: string;
 
 if(Platform.OS === 'ios') {
     chatUserId = 'testUser1';
