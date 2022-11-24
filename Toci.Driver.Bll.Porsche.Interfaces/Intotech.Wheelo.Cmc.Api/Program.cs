@@ -15,10 +15,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IColourLogic, ColourLogic>();
 builder.Services.AddScoped<ICarsBrandLogic, CarsBrandLogic>();
 builder.Services.AddScoped<ICarsModelLogic, CarsModelLogic>();
+builder.Services.AddScoped<IOccupationLogic, OccupationLogic>();
 
 
 builder.Services.AddScoped<IColourManager, ColourManager>();
 builder.Services.AddScoped<ICarsBrandsModelManager, CarsBrandModelManager>();
+builder.Services.AddScoped<IOccupationsService, OccupationsService>();
 
 var app = builder.Build();
 
