@@ -6,7 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Feather } from '@expo/vector-icons'; 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export const Login = (props: any) => {
+export const GoogleMapsInputsScreen = (props: any) => {
   const [users, setUsers] = useState([]);
 
   const getData = async () => {
