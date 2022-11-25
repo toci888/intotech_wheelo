@@ -12,7 +12,7 @@ npm i --legacy-peer-deps
 npm i react-native-google-places-autocomplete
 npm install @unimodules/core
 
-!
+! 
 
 expo whoami
 expo login
