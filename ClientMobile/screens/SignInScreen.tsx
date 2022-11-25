@@ -7,11 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { Screen } from "../components/Screen";
 import { ModalHeader } from "../components/ModalHeader";
-import { GoogleButton } from "../components/GoogleButton";
-import { FacebookButton } from "../components/FacebookButton";
-import { AppleButton } from "../components/AppleButton";
 import { PasswordInput } from "../components/PasswordInput";
-import { OrDivider } from "../components/OrDivider";
 import { useAuth } from "../hooks/useAuth";
 
 export const SignInScreen = () => {
@@ -21,10 +17,10 @@ export const SignInScreen = () => {
   return (
     <KeyboardAwareScrollView bounces={false}>
       <Screen>
-        <ModalHeader text="JPApartments" xShown />
+        <ModalHeader text="WHEELO" xShown />
         <View style={styles.container}>
           <Text category={"h5"} style={styles.header}>
-            Sign In
+            Zaloguj się
           </Text>
           <Formik
             initialValues={{
@@ -32,8 +28,14 @@ export const SignInScreen = () => {
               password: "",
             }}
             validationSchema={yup.object().shape({
-              email: yup.string().email().required("Your email is required."),
-              password: yup.string().required("A password is required."),
+              email: yup.string().email().required("Email jest wymagany."),
+              password: yup
+                .string()
+                .required("Hasło jest wymagane..")
+                .matches(
+                  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                  "Min. 8 znaków, min. jedna wielka litera, min. jedna mała litera, min. jedna cyfra oraz jeden znak specjalny"
+                ),
             })}
             onSubmit={async (values) => {
               await nativeLogin(values);
@@ -53,7 +55,7 @@ export const SignInScreen = () => {
                     style={styles.input}
                     value={values.email}
                     onChangeText={handleChange("email")}
-                    placeholder="Your Email Address"
+                    placeholder="Wpisz swój email"
                     autoCapitalize="none"
                     keyboardType="email-address"
                     textContentType="emailAddress"
@@ -70,8 +72,8 @@ export const SignInScreen = () => {
                     style={styles.input}
                     value={values.password}
                     onChangeText={handleChange("password")}
-                    placeholder="Your Password"
-                    label="Password"
+                    placeholder="Twoje hasło"
+                    label="Hasło"
                     onBlur={() => setFieldTouched("password")}
                     caption={
                       touched.password && errors.password
@@ -88,7 +90,7 @@ export const SignInScreen = () => {
                     onPress={() => navigation.navigate("ForgotPassword")}
                   >
                     <Text category={"c1"} status={"info"}>
-                      Forgot your password?
+                      Zapomniałeś hasła?
                     </Text>
                   </TouchableOpacity>
 
@@ -96,24 +98,8 @@ export const SignInScreen = () => {
                     style={styles.signInButton}
                     onPress={() => handleSubmit()}
                   >
-                    Sign In
+                    Zaloguj
                   </Button>
-
-                  <OrDivider style={styles.orContainer} />
-                  <GoogleButton
-                    text="Continue with Google"
-                    style={styles.button}
-                    onPress={async () => await googleAuth()}
-                  />
-                  <FacebookButton
-                    text="Continue with Facebook"
-                    style={styles.button}
-                    onPress={async () => await facebookAuth()}
-                  />
-                  <AppleButton
-                    type="sign-in"
-                    onPress={async () => await appleAuth()}
-                  />
                 </>
               );
             }}

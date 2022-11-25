@@ -5,7 +5,6 @@ import { Text, Button } from "@ui-kitten/components";
 import { Screen } from "../components/Screen";
 import { SignUpAndSignInButtons } from "../components/SignUpAndSignInButtons";
 import { theme } from "../theme";
-import { ButtonList } from "../components/ButtonList";
 import { useUser } from "../hooks/useUser";
 
 export const AccountScreen = () => {
@@ -115,58 +114,16 @@ export const AccountScreen = () => {
           ) : (
             <>
               <Text style={styles.header} category={"h5"}>
-                Renting has never been easier!
+                Witaj!
               </Text>
 
               <SignUpAndSignInButtons />
               <View style={styles.middleContainer}>
-                <Text category={"s1"} style={styles.subheader}>
-                  Are you a property owner or manager?
-                </Text>
-                <Text style={styles.bodyText}>
-                  Visit our website to access our full suite of rental
-                  management tools and start receiving applications in minutes!
-                </Text>
+                <Text style={styles.brandText}>WHEELO</Text>
               </View>
             </>
           )}
         </View>
-        {user ? (
-          <>
-            <ButtonList data={rentingButtons} header={"Renting Made Easy"} />
-            <ButtonList data={accountButtons} header={"My Account"} />
-            <ButtonList
-              data={rentalManagementButtons}
-              header={"Rental Manager Tools"}
-            />
-            <ButtonList data={supportButtons} header={"Support"} />
-            <View
-              style={[
-                styles.specialMarginVertical,
-                styles.defaultMarginHorizontal,
-              ]}
-            >
-              <Button
-                appearance={"ghost"}
-                style={styles.button}
-                onPress={logout}
-              >
-                Sign Out
-              </Button>
-            </View>
-          </>
-        ) : (
-          <>
-            <ButtonList data={firstSignedOutButtons} borderTop />
-            <ButtonList data={supportButtons} header="Support" marginTop />
-            <Text
-              appearance={"hint"}
-              style={[styles.brandText, styles.specialMarginVertical]}
-            >
-              JeremyPersing.com Version 1.0.0
-            </Text>
-          </>
-        )}
       </ScrollView>
     </Screen>
   );
@@ -176,7 +133,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  defaultMarginHorizontal: { marginHorizontal: 10 },
+  defaultMarginHorizontal: { marginHorizontal: 10, marginTop: "40%" },
   userName: {
     textAlign: "center",
     fontWeight: "600",
@@ -193,6 +150,8 @@ const styles = StyleSheet.create({
     marginVertical: 25,
     marginHorizontal: 70,
     fontWeight: "600",
+    fontSize: "44px",
+    color: theme["color-violet"],
   },
   middleContainer: {
     justifyContent: "center",
@@ -208,5 +167,8 @@ const styles = StyleSheet.create({
   specialMarginVertical: { marginTop: 30, marginBottom: 20 },
   brandText: {
     textAlign: "center",
+    color: theme["color-violet"],
+    fontSize: "24px",
+    fontWeight: "700",
   },
 });
