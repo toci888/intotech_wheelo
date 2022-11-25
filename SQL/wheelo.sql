@@ -1,3 +1,41 @@
+--migration 25.11
+
+drop table AccountMetadata;
+drop table Occupations;
+drop table StatisticsTrips;
+drop view VTripsParticipants;
+drop table TripParticipants;
+drop table Trips;
+drop view AccountRoles;
+drop view VFriends;
+drop view VInvitations;
+drop view VAccountsCollocations;
+drop view VFriendSuggestions;
+--select * from  WorkTrip;
+--select * from  Accounts;
+--select * from AccountsCollocations;
+drop view AccountsCarsLocations;
+drop table WorkTrip;
+drop view VCarOwner;
+drop table Cars;
+drop table Colours;
+drop table CarsModels;
+drop table CarsBrands;
+drop table AccountsCollocations;
+drop table AccountsWorkTime;
+drop table FriendSuggestions;
+drop table Friends;
+drop table Invitations cascade;
+drop table AccountsLocations cascade;
+--table OauthParties
+drop table Accounts cascade;
+drop table Roles cascade;
+--drop table Occupations;
+drop table GeographicRegion;
+--select * from Accounts;
+--select * from Cars;
+
+
 --migration 22.11
 
 drop view VTripsParticipants;
@@ -56,6 +94,8 @@ drop table FriendSuggestions;
 drop table Friends;
 drop table Invitations cascade;
 drop table AccountsLocations cascade;
+drop table UserExtraData;
+drop table OauthParties;
 drop table Accounts cascade;
 drop table Roles cascade;
 --drop table Occupations;
@@ -96,6 +136,21 @@ create table Accounts
 	CreatedAt timestamp default now(),
 	IdRole int references roles(id) default 1,
 	Token text
+);
+
+create table OauthParties
+(
+	id serial primary key,
+	name text
+);
+
+create table UserExtraData
+(
+	id serial primary key,
+	idOauthParties int references OauthParties(id),
+	token text,
+	tokenDataJson text,
+	createdat timestamp default now()
 );
 
 -- 50.05463180727613, 17.80014622135593

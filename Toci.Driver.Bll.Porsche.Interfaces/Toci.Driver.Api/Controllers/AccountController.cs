@@ -18,7 +18,7 @@ public class AccountController : ApiControllerBase<IAccountLogic, Accountrole>
 
     [AllowAnonymous]
     [HttpPost("register")]
-    public int RegisterUser([FromBody] Account user)
+    public Accountrole RegisterUser([FromBody] AccountRegisterDto user)
     {
         return Logic.CreateAccount(user);
     }

@@ -1,3 +1,4 @@
+using Intotech.Wheelo.Bll.Models;
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating;
@@ -6,6 +7,8 @@ using Intotech.Wheelo.Bll.Porsche.Interfaces.PersistenceAggregation;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
 using Intotech.Wheelo.Bll.Porsche.PersistenceAggregation;
 using Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa;
+using Microsoft.Extensions.Configuration;
+using System.Net;
 using Toci.Driver.Bll.Porsche.Association;
 using Toci.Driver.Bll.Porsche.Interfaces.Association;
 
@@ -14,6 +17,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(5105); // to listen for incoming http connection on port 5001
+    //http://20.100.196.118:5105
+    //IPAddress.Parse(20.100.196.118"),
     //options.ListenAnyIP(7105, configure => configure.UseHttps()); // to listen for incoming https connection on port 7001
 });
 
@@ -25,6 +30,8 @@ builder.Services.AddCors(x => x.AddPolicy("AllowOrigin", options => options.Allo
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddScoped<AuthenticationSettings, AuthenticationSettings>();
 builder.Services.AddScoped<ICarLogic, CarLogic>();
 builder.Services.AddScoped<ICarsBrandLogic, CarsBrandLogic>();
 builder.Services.AddScoped<ICarsModelLogic, CarsModelLogic>();
@@ -47,6 +54,8 @@ builder.Services.AddScoped<ITripparticipantLogic, TripparticipantLogic>();
 builder.Services.AddScoped<IVTripsParticipantsLogic, VTripsParticipantsLogic>();
 builder.Services.AddScoped<IAccountsCarsLocationLogic, AccountsCarsLocationLogic>();
 
+AuthenticationSettings authenticationSettings = new AuthenticationSettings();
+
 // -------
 builder.Services.AddScoped<IAssociationCalculations, AssociationCalculations>();
 builder.Services.AddScoped<IAccountCollocationMatch<IUsersLocationLogic, IUsersCollocationLogic>, AccountCollocationMatch>();
@@ -56,6 +65,7 @@ builder.Services.AddScoped<IInstantOccasion, InstantOccasion>();
 builder.Services.AddScoped<IFriendsSuggestionsService, FriendsSuggestionsService>();
 builder.Services.AddScoped<IFriendsService, FriendsService>();
 builder.Services.AddScoped<IInvitationService, InvitationService>();
+builder.Services.AddSingleton(authenticationSettings);
 
 var app = builder.Build();
 
@@ -65,6 +75,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+
+app.Configuration.GetSection("Authentication").Bind(authenticationSettings);
 
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); // Angular Localhost
 

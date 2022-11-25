@@ -19,18 +19,25 @@ namespace Intotech.Wheelo.Bll.Persistence
         private readonly AuthenticationSettings _authenticationSettings;
         protected Logic<Account> accountLogic = new Logic<Account>();
 
+        public AccountLogic(AuthenticationSettings authenticationSettings)
+        {
+            _authenticationSettings = authenticationSettings;
+        }
+
         //22CE8D06972A4DEF08FD462C470E60ED1849700D18D96FB472778DB639D1830C
 
-        public int CreateAccount(Account user)
+        public Accountrole CreateAccount(AccountRegisterDto user)
         {
             if (isLoginAlreadyInDb(user.Email))
             {
-                return 0;
+                return null;
             }
 
-            Account newUser = accountLogic.Insert(user);
+            Account acc = new Account() { Email = user.Email, Login = user.Login, Name = user.Name, Password = user.Password, Phone = user.Phone, Surname = user.Surname };
 
-            return newUser.Id;
+            Account newUser = accountLogic.Insert(acc);
+
+            return GenerateJwt(new LoginDto() { Email = newUser.Email, Password = newUser.Password });
         }
 
         public Accountrole GenerateJwt(LoginDto user)
