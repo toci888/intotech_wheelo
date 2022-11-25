@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NavigationStack } from './src/Screens/NavigationStack';
 import { AppProvider } from './src/Hooks/AppContextHook';
+import Footer from './src/Components/Map/Footer/Footer';
 
 export default () => {
   return (
@@ -12,6 +13,7 @@ export default () => {
         <SafeAreaView style={{ flex: 1 }}>
           <NavigationContainer>
             <NavigationStack />
+            <Footer />
           </NavigationContainer>
         </SafeAreaView>
       </GestureHandlerRootView>
