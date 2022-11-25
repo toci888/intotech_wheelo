@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Intotech.Wheelo.Bll.Models;
 using Microsoft.IdentityModel.Tokens;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Common;
 
 namespace Intotech.Wheelo.Bll.Persistence
 {
@@ -18,14 +19,14 @@ namespace Intotech.Wheelo.Bll.Persistence
         private readonly AuthenticationSettings _authenticationSettings;
         protected Logic<Account> accountLogic = new Logic<Account>();
 
+        //22CE8D06972A4DEF08FD462C470E60ED1849700D18D96FB472778DB639D1830C
+
         public int CreateAccount(Account user)
         {
             if (isLoginAlreadyInDb(user.Email))
             {
                 return 0;
             }
-
-            user.Password = HashPassword(user.Password);
 
             Account newUser = accountLogic.Insert(user);
 
@@ -34,8 +35,7 @@ namespace Intotech.Wheelo.Bll.Persistence
 
         public Accountrole GenerateJwt(LoginDto user)
         {
-            string hash = HashPassword(user.Password);
-            Accountrole u = Select(x => x.Email == user.Email && x.Password == hash).FirstOrDefault();
+            Accountrole u = Select(x => x.Email == user.Email && x.Password == user.Password).FirstOrDefault();
 
             if (u is null)
             {
@@ -80,23 +80,6 @@ namespace Intotech.Wheelo.Bll.Persistence
         protected virtual bool isLoginAlreadyInDb(string email)
         {
             return accountLogic.Select(x => x.Email == email).Any();
-        }
-
-        private string HashPassword(string password)
-        {
-            if (password == null)
-            {
-                return null;
-            }
-
-            SHA256 algorithm = SHA256.Create();
-            StringBuilder sb = new StringBuilder();
-            foreach (Byte b in algorithm.ComputeHash(Encoding.UTF8.GetBytes(password)))
-            {
-                sb.Append(b.ToString("X2"));
-            }
-
-            return sb.ToString();
         }
     }
 }

@@ -5,12 +5,19 @@ namespace Toci.Driver.Database.Persistence.Models
 {
     public partial class Worktrip
     {
+        public Worktrip()
+        {
+            Trips = new HashSet<Trip>();
+        }
+
         public int Id { get; set; }
         public int? Idaccount { get; set; }
         public double? Latitudefrom { get; set; }
         public double? Longitudefrom { get; set; }
         public double? Latitudeto { get; set; }
         public double? Longitudeto { get; set; }
+        public int? Idgeographiclocationfrom { get; set; }
+        public int? Idgeographiclocationto { get; set; }
         public string? Streetfrom { get; set; }
         public string? Streetto { get; set; }
         public string? Cityfrom { get; set; }
@@ -21,5 +28,8 @@ namespace Toci.Driver.Database.Persistence.Models
         public DateTime? Createdat { get; set; }
 
         public virtual Account? IdaccountNavigation { get; set; }
+        public virtual Geographicregion? IdgeographiclocationfromNavigation { get; set; }
+        public virtual Geographicregion? IdgeographiclocationtoNavigation { get; set; }
+        public virtual ICollection<Trip> Trips { get; set; }
     }
 }

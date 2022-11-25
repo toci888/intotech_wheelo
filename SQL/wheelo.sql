@@ -30,6 +30,7 @@ drop table GeographicRegion;
 
 
 drop table AccountMetadata;
+drop table Occupations;
 drop table StatisticsTrips;
 drop view VTripsParticipants;
 drop table TripParticipants;
@@ -53,11 +54,11 @@ drop table AccountsCollocations;
 drop table AccountsWorkTime;
 drop table FriendSuggestions;
 drop table Friends;
-drop table Invitations;
-drop table AccountsLocations;
-drop table Accounts;
-drop table Roles;
-drop table Occupations;
+drop table Invitations cascade;
+drop table AccountsLocations cascade;
+drop table Accounts cascade;
+drop table Roles cascade;
+--drop table Occupations;
 drop table GeographicRegion;
 --select * from Accounts;
 --select * from Cars;
@@ -70,11 +71,8 @@ create table GeographicRegion
 	Name text
 );
 
-create table Occupations
-(
-	id serial primary key,
-	name text
-);
+alter table GeographicRegion add column nestLevel int;
+
 
 create table Roles
 (
@@ -96,7 +94,7 @@ create table Accounts
 	EmailConfirmed int default 0,
 	IdGeographicRegion int references GeographicRegion(Id),
 	CreatedAt timestamp default now(),
-	IdRole int references roles(id) default 1 not null,
+	IdRole int references roles(id) default 1,
 	Token text
 );
 
@@ -151,7 +149,8 @@ create table Invitations
 	origin int,
 	CreatedAt timestamp default now()
 );
-select * from VInvitations;
+
+--select * from VInvitations;
 
 create or replace view VInvitations as
 select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, 
@@ -256,6 +255,8 @@ create table WorkTrip
 	LongitudeFrom double precision,
 	LatitudeTo double precision,
 	LongitudeTo double precision,
+	IdGeographicLocationFrom int references GeographicRegion(id),
+	IdGeographicLocationTo int references GeographicRegion(id),
 	StreetFrom text,
 	StreetTo text,
 	CityFrom text,
@@ -298,6 +299,7 @@ create table Trips
 (
 	id serial primary key,
     IdInitiatorAccount int references Accounts (id), -- person, who initiated the trip, who drives his/her car
+	IdWorkTrip int references WorkTrip(id),
 	TripDate date,
 	IsCurrent bool default false,
 	FromHour time, -- 0 60 -> 1 
@@ -332,11 +334,19 @@ create table StatisticsTrips
 	TripPeople int not null,
 	IdGeographicRegion int references GeographicRegion(Id)
 );
+--alter table GeographicRegion add column nestLevel int;
+
+create table Occupations
+(
+	id serial primary key,
+	name text
+);
 
 create table AccountMetadata
 (
 	id serial primary key,
 	IdAccount int references Accounts(id),
+	IdOccupation int references Occupations(id),
 	IsSmoker bool default false,
 	IsWithAnimals bool default false,
 	metaJson text

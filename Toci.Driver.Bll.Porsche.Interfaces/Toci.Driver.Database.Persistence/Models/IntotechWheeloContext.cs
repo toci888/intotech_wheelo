@@ -102,7 +102,6 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.HasOne(d => d.IdroleNavigation)
                     .WithMany(p => p.Accounts)
                     .HasForeignKey(d => d.Idrole)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("accounts_idrole_fkey");
             });
 
@@ -113,6 +112,8 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Idoccupation).HasColumnName("idoccupation");
 
                 entity.Property(e => e.Issmoker)
                     .HasColumnName("issmoker")
@@ -128,6 +129,11 @@ namespace Toci.Driver.Database.Persistence.Models
                     .WithMany(p => p.Accountmetadata)
                     .HasForeignKey(d => d.Idaccount)
                     .HasConstraintName("accountmetadata_idaccount_fkey");
+
+                entity.HasOne(d => d.IdoccupationNavigation)
+                    .WithMany(p => p.Accountmetadata)
+                    .HasForeignKey(d => d.Idoccupation)
+                    .HasConstraintName("accountmetadata_idoccupation_fkey");
             });
 
             modelBuilder.Entity<Accountrole>(entity =>
@@ -438,6 +444,8 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Name).HasColumnName("name");
 
+                entity.Property(e => e.Nestlevel).HasColumnName("nestlevel");
+
                 entity.HasOne(d => d.IdparentNavigation)
                     .WithMany(p => p.InverseIdparentNavigation)
                     .HasForeignKey(d => d.Idparent)
@@ -530,6 +538,8 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Idinitiatoraccount).HasColumnName("idinitiatoraccount");
 
+                entity.Property(e => e.Idworktrip).HasColumnName("idworktrip");
+
                 entity.Property(e => e.Iscurrent)
                     .HasColumnName("iscurrent")
                     .HasDefaultValueSql("false");
@@ -546,6 +556,11 @@ namespace Toci.Driver.Database.Persistence.Models
                     .WithMany(p => p.Trips)
                     .HasForeignKey(d => d.Idinitiatoraccount)
                     .HasConstraintName("trips_idinitiatoraccount_fkey");
+
+                entity.HasOne(d => d.IdworktripNavigation)
+                    .WithMany(p => p.Trips)
+                    .HasForeignKey(d => d.Idworktrip)
+                    .HasConstraintName("trips_idworktrip_fkey");
             });
 
             modelBuilder.Entity<Tripparticipant>(entity =>
@@ -747,6 +762,10 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
+                entity.Property(e => e.Idgeographiclocationfrom).HasColumnName("idgeographiclocationfrom");
+
+                entity.Property(e => e.Idgeographiclocationto).HasColumnName("idgeographiclocationto");
+
                 entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
 
                 entity.Property(e => e.Latitudeto).HasColumnName("latitudeto");
@@ -765,6 +784,16 @@ namespace Toci.Driver.Database.Persistence.Models
                     .WithMany(p => p.Worktrips)
                     .HasForeignKey(d => d.Idaccount)
                     .HasConstraintName("worktrip_idaccount_fkey");
+
+                entity.HasOne(d => d.IdgeographiclocationfromNavigation)
+                    .WithMany(p => p.WorktripIdgeographiclocationfromNavigations)
+                    .HasForeignKey(d => d.Idgeographiclocationfrom)
+                    .HasConstraintName("worktrip_idgeographiclocationfrom_fkey");
+
+                entity.HasOne(d => d.IdgeographiclocationtoNavigation)
+                    .WithMany(p => p.WorktripIdgeographiclocationtoNavigations)
+                    .HasForeignKey(d => d.Idgeographiclocationto)
+                    .HasConstraintName("worktrip_idgeographiclocationto_fkey");
             });
 
             OnModelCreatingPartial(modelBuilder);
