@@ -34,10 +34,10 @@ namespace Intotech.Wheelo.Bll.Persistence
                 return null;
             }
 
-            int gender = user.Name[user.Name.Length - 1] == 'a' ? 2 : 1;
+            int gender = user.Firstname[user.Firstname.Length - 1] == 'a' ? 2 : 1;
 
-            Account acc = new Account() { Email = user.Email, Login = string.IsNullOrEmpty(user.Login) ? user.Email : user.Login, Name = user.Name, 
-                Password = user.Password, Phone = user.Phone, Surname = user.Surname, Gender = gender, Method = user.Method };
+            Account acc = new Account() { Email = user.Email, Name = user.Firstname, 
+                Password = user.Password, Phone = "", Surname = user.Lastname, Gender = gender, Method = user.Method };
 
             Account newUser = accountLogic.Insert(acc);
 

@@ -100,8 +100,28 @@ drop table Accounts cascade;
 drop table Roles cascade;
 --drop table Occupations;
 drop table GeographicRegion;
+drop table SimpleAccount;
+drop table EmailsRegister;
 --select * from Accounts;
 --select * from Cars;
+
+create table EmailsRegister
+(
+	Id serial primary key,
+	email text not null,
+	verificationCode int,
+	isVerified bool default false
+);
+
+create table SimpleAccount
+(
+	Id serial primary key,
+	email text not null,
+	firstname text,
+	lastname text,
+	password text,
+	verificationCode int
+);
 
 create table GeographicRegion
 (
@@ -129,7 +149,6 @@ create table Accounts
 	Pesel text,
 	Phone text not null,
 	Email text not null,
-	Login text not null,
 	Password text not null,
 	EmailConfirmed int default 0,
 	IdGeographicRegion int references GeographicRegion(Id),

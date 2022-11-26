@@ -6,6 +6,8 @@ using Intotech.Common.Microservices;
 using Toci.Driver.Dal.Invitation.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Porsche.Interfaces;
+using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
 
 namespace Toci.Driver.Api.Controllers;
 
@@ -14,11 +16,39 @@ namespace Toci.Driver.Api.Controllers;
 public class AccountController : ApiControllerBase<IAccountLogic, Accountrole>
 {
     protected IGafManager GafManager;
+    protected IWheeloAccountService WheeloAccountService;
 
-    public AccountController(IAccountLogic logic, IGafManager gafManager) : base(logic)
+    public AccountController(IAccountLogic logic, IGafManager gafManager, IWheeloAccountService was) : base(logic)
     {
         GafManager = gafManager;
+        WheeloAccountService = was;
     }
+
+    [HttpPost("new-user-register")]
+    public bool NewEmail(Emailsregister emailsregister)
+    {
+        return true;
+    }
+
+    [HttpPost("simple-register")]
+    public ReturnedResponse<Simpleaccount> SimpleRegister(Simpleaccount sa)
+    {
+        return WheeloAccountService.Register(sa);
+    }
+
+    [HttpPost("simple-login")]
+    public ActionResult<ReturnedResponse<Simpleaccount>> SimpleLogin(LoginDto lDto)
+    {
+        ReturnedResponse<Simpleaccount> sa = WheeloAccountService.Login(lDto);
+
+        if (!sa.IsSuccess)
+        {
+            return NotFound(sa);
+        }
+
+        return sa;
+    }
+
 
     [AllowAnonymous]
     [HttpPost("register")]
@@ -29,7 +59,7 @@ public class AccountController : ApiControllerBase<IAccountLogic, Accountrole>
             return Logic.CreateAccount(user);
         }
 
-        return GafManager.RegisterByMethod(user.Method, user.Token);
+        return GafManager.RegisterByMethod(user.Method, "");
     }
 
     [AllowAnonymous]

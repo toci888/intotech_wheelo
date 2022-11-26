@@ -33,7 +33,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public string? Pesel { get; set; }
         public string Phone { get; set; } = null!;
         public string Email { get; set; } = null!;
-        public string Login { get; set; } = null!;
         public string Password { get; set; } = null!;
         public int? Emailconfirmed { get; set; }
         public int? Idgeographicregion { get; set; }

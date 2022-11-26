@@ -13,6 +13,8 @@ using System.Net;
 using Toci.Driver.Bll.Porsche.Association;
 using Toci.Driver.Bll.Porsche.Interfaces.Association;
 using Intotech.Wheelo.Bll.Porsche.Interfaces;
+using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
+using Intotech.Wheelo.Bll.Porsche.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,6 +58,7 @@ builder.Services.AddScoped<ITripparticipantLogic, TripparticipantLogic>();
 builder.Services.AddScoped<IVTripsParticipantsLogic, VTripsParticipantsLogic>();
 builder.Services.AddScoped<IAccountsCarsLocationLogic, AccountsCarsLocationLogic>();
 builder.Services.AddScoped<IUserExtraDataLogic, UserExtraDataLogic>();
+builder.Services.AddScoped<ISimpleAccountLogic, SimpleAccountLogic>();
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();
 
@@ -69,6 +72,7 @@ builder.Services.AddScoped<IFriendsSuggestionsService, FriendsSuggestionsService
 builder.Services.AddScoped<IFriendsService, FriendsService>();
 builder.Services.AddScoped<IInvitationService, InvitationService>();
 builder.Services.AddScoped<IGafManager, GafManager>();
+builder.Services.AddScoped<IWheeloAccountService, WheeloAccountService>();
 
 builder.Services.AddSingleton(authenticationSettings);
 

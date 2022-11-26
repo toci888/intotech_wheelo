@@ -27,12 +27,15 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Carsbrand> Carsbrands { get; set; } = null!;
         public virtual DbSet<Carsmodel> Carsmodels { get; set; } = null!;
         public virtual DbSet<Colour> Colours { get; set; } = null!;
+        public virtual DbSet<Emailsregister> Emailsregisters { get; set; } = null!;
         public virtual DbSet<Friend> Friends { get; set; } = null!;
         public virtual DbSet<Friendsuggestion> Friendsuggestions { get; set; } = null!;
         public virtual DbSet<Geographicregion> Geographicregions { get; set; } = null!;
         public virtual DbSet<Invitation> Invitations { get; set; } = null!;
+        public virtual DbSet<Oauthparty> Oauthparties { get; set; } = null!;
         public virtual DbSet<Occupation> Occupations { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
+        public virtual DbSet<Simpleaccount> Simpleaccounts { get; set; } = null!;
         public virtual DbSet<Statisticstrip> Statisticstrips { get; set; } = null!;
         public virtual DbSet<Trip> Trips { get; set; } = null!;
         public virtual DbSet<Tripparticipant> Tripparticipants { get; set; } = null!;
@@ -80,8 +83,6 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Idrole)
                     .HasColumnName("idrole")
                     .HasDefaultValueSql("1");
-
-                entity.Property(e => e.Login).HasColumnName("login");
 
                 entity.Property(e => e.Method).HasColumnName("method");
 
@@ -373,6 +374,21 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Rgb).HasColumnName("rgb");
             });
 
+            modelBuilder.Entity<Emailsregister>(entity =>
+            {
+                entity.ToTable("emailsregister");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Email).HasColumnName("email");
+
+                entity.Property(e => e.Isverified)
+                    .HasColumnName("isverified")
+                    .HasDefaultValueSql("false");
+
+                entity.Property(e => e.Verificationcode).HasColumnName("verificationcode");
+            });
+
             modelBuilder.Entity<Friend>(entity =>
             {
                 entity.ToTable("friends");
@@ -487,6 +503,15 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasConstraintName("invitations_idinvited_fkey");
             });
 
+            modelBuilder.Entity<Oauthparty>(entity =>
+            {
+                entity.ToTable("oauthparties");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name).HasColumnName("name");
+            });
+
             modelBuilder.Entity<Occupation>(entity =>
             {
                 entity.ToTable("occupations");
@@ -503,6 +528,23 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name).HasColumnName("name");
+            });
+
+            modelBuilder.Entity<Simpleaccount>(entity =>
+            {
+                entity.ToTable("simpleaccount");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Email).HasColumnName("email");
+
+                entity.Property(e => e.Firstname).HasColumnName("firstname");
+
+                entity.Property(e => e.Lastname).HasColumnName("lastname");
+
+                entity.Property(e => e.Password).HasColumnName("password");
+
+                entity.Property(e => e.Verificationcode).HasColumnName("verificationcode");
             });
 
             modelBuilder.Entity<Statisticstrip>(entity =>
