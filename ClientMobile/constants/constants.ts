@@ -16,10 +16,10 @@ androidHeight += androidNotch;
 
 export const HEADERHEIGHT = Platform.OS === "ios" ? iosHeight : androidHeight;
 
-const serverUrl = "https://apartmentsclone.tk/api";
-const chatUrl = "https://apartmentsclone.tk";
-// const serverUrl = "http://20.100.196.118:5105/api"; //HERE
-// const chatUrl = "http://192.168.30.24:3000";
+// const serverUrl = "https://apartmentsclone.tk/api";
+// const chatUrl = "https://apartmentsclone.tk";
+const serverUrl = "http://20.100.196.118:5105/api"; //HERE
+const chatUrl = "http://192.168.30.24:3000";
 const location = "/location";
 const user = "/Account";
 const property = "/property";
