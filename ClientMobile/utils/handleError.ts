@@ -6,11 +6,7 @@ import { ErrorRes } from "../types/error";
 export const handleError = (error: unknown) => {
   if (axios.isAxiosError(error)) {
     if (error.response?.data.isSuccess === false) {
-      return Alert.alert('Komunikat', error.response.data.errorMessage)
-    }
-
-    if (error.response) {
-      return alert((error.response.data as ErrorRes).detail);
+      return Alert.alert('Komunikat', (error.response.data as ErrorRes).errorMessage);
     }
 
     return alert(error.message);
