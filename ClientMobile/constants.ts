@@ -21,7 +21,7 @@ export const HEADERHEIGHT = Platform.OS === "ios" ? iosHeight : androidHeight;
 const serverUrl = "http://20.100.196.118:5105/api"; //HERE
 const chatUrl = "http://192.168.30.24:3000";
 const location = "/location";
-const user = "/user";
+const user = "/Account";
 const property = "/property";
 const apartment = "/apartment";
 const review = "/review";
@@ -47,8 +47,8 @@ export const endpoints = {
   chat: chatUrl,
   autoComplete: locationEndpoint + "/autocomplete",
   search: locationEndpoint + "/search",
-  register: userEndpoint + "/register",
-  login: userEndpoint + "/login",
+  register: userEndpoint + "/simple-register",
+  login: userEndpoint + "/simple-login",
   facebook: userEndpoint + "/facebook",
   google: userEndpoint + "/google",
   apple: userEndpoint + "/apple",

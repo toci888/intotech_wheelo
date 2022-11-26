@@ -3,6 +3,7 @@ import axios from "axios";
 import { endpoints } from "../constants";
 import { User } from "../types/user";
 import { handleError } from "../utils/handleError";
+import * as Crypto from 'expo-crypto';
 
 type DataRes = { data: User };
 
@@ -13,7 +14,9 @@ export const registerUser = async (
   password: string
 ) => {
   try {
+    password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, password);
     const { data }: DataRes = await axios.post(endpoints.register, {
+      method: 'wheelo',
       email,
       password,
       firstName,
@@ -27,7 +30,9 @@ export const registerUser = async (
 
 export const loginUser = async (email: string, password: string) => {
   try {
+    password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, password);
     const { data }: DataRes = await axios.post(endpoints.login, {
+      method: 'wheelo',
       email,
       password,
     });
@@ -37,10 +42,10 @@ export const loginUser = async (email: string, password: string) => {
   }
 };
 
-export const facebookLoginOrRegister = async (accessToken: string) => {
+export const facebookLoginOrRegister = async (token: string) => {
   try {
     const { data }: DataRes = await axios.post(endpoints.facebook, {
-      accessToken,
+      token, method: 'facebook',
     });
     return data;
   } catch (error) {
@@ -48,10 +53,10 @@ export const facebookLoginOrRegister = async (accessToken: string) => {
   }
 };
 
-export const googleLoginOrRegister = async (accessToken: string) => {
+export const googleLoginOrRegister = async (token: string) => {
   try {
     const { data }: DataRes = await axios.post(endpoints.google, {
-      accessToken,
+      token, method: 'google',
     });
     return data;
   } catch (error) {
@@ -59,10 +64,10 @@ export const googleLoginOrRegister = async (accessToken: string) => {
   }
 };
 
-export const appleLoginOrRegister = async (identityToken: string) => {
+export const appleLoginOrRegister = async (token: string) => {
   try {
     const { data }: DataRes = await axios.post(endpoints.apple, {
-      identityToken,
+      token, method: 'apple',
     });
     return data;
   } catch (error) {
@@ -107,7 +112,7 @@ export const alterPushToken = (
   userID: number,
   op: "add" | "remove",
   pushToken: string,
-  accessToken: string
+  token: string
 ) =>
   axios.patch(
     endpoints.alterPushToken(userID),
@@ -117,7 +122,7 @@ export const alterPushToken = (
     },
     {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${token}`,
       },
     }
   );
@@ -125,14 +130,14 @@ export const alterPushToken = (
 export const alterAllowsNotifications = (
   userID: number,
   allowsNotifications: boolean,
-  accessToken: string
+  token: string
 ) =>
   axios.patch(
     endpoints.allowsNotifications(userID),
     { allowsNotifications },
     {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${token}`,
       },
     }
   );

@@ -1,0 +1,18 @@
+{
+    "common": {
+        "AppName": "Wheelo"
+    },
+    "user": {
+        "firstname": "Imię",
+        "lastname": "Nazwisko",
+        "email": "Email",
+        "password": "Hasło"
+    },
+    "buttons": {
+        "SignUp": "Zarejestruj się",
+        "SignIn": "Zaloguj się"
+    },
+    "forms": {
+        "UnableToAuthorize": "Nie udało się zalogować"
+    }
+}

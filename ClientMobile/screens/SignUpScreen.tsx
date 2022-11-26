@@ -1,3 +1,4 @@
+import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Input, Button, Text } from "@ui-kitten/components";
 import * as yup from "yup";
@@ -26,10 +27,10 @@ export const SignUpScreen = () => {
           </Text>
           <Formik
             initialValues={{
-              firstName: "",
-              lastName: "",
-              email: "",
-              password: "",
+              firstName: "asd",
+              lastName: "qwe",
+              email: "asdf@wp.pl",
+              password: "zxcD@#gry123",
             }}
             validationSchema={yup.object().shape({
               firstName: yup.string().required("Your first name is required."),
