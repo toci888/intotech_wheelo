@@ -32,10 +32,6 @@ export const SignInScreen = () => {
               password: yup
                 .string()
                 .required("Hasło jest wymagane..")
-                .matches(
-                  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                  "Min. 8 znaków, min. jedna wielka litera, min. jedna mała litera, min. jedna cyfra oraz jeden znak specjalny"
-                ),
             })}
             onSubmit={async (values) => {
               await nativeLogin(values);
