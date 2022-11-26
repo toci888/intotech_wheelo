@@ -83,7 +83,6 @@ export const AnimatedListHeader = ({
     >
       <View style={styles.defaultMarginHorizontal}>
         <HeaderInput location={location} />
-        <HeaderInput location={location} />
         <HeaderFilterButtons />
       </View>
       <Divider style={styles.divider} />
