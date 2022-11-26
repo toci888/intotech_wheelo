@@ -11,7 +11,8 @@ public class WheeloMainSeedManager
     [TestMethod]
     public void SeedAllDb()
     {
-        // new SeedAutomaticCars().Insert();
+        //new SeedAutomaticCars().Insert();
+       // new GeoRegionNestLevel().Insert();
         new CarsXmlParser().Insert();
         new SeedCarsModelsParser().Insert();
         new ColourTxtParser().Insert();

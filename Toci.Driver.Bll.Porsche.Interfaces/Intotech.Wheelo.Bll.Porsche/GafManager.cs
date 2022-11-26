@@ -35,7 +35,7 @@ namespace Intotech.Wheelo.Bll.Porsche
                 return GoogleAccountExtraData(dto, token);
             }
 
-            if (method == "facebok")
+            if (method == "facebook")
             {
                 FacebookUserDto dto = new FacebookUserService().GetUserByToken(token);
 
@@ -56,7 +56,18 @@ namespace Intotech.Wheelo.Bll.Porsche
 
         protected virtual Accountrole FacebookAccountExtraData(FacebookUserDto dto, string token)
         {
-            Accountrole accountrole = AccLogic.CreateAccount(new AccountRegisterDto() { Email = dto.email, Name = dto.name });
+            string[] nameSurname = dto.name.Split(" ");
+            string name = string.Empty;
+            string surname = string.Empty;
+
+            if (nameSurname.Length == 2)
+            {
+                name = nameSurname[0];
+                surname= nameSurname[1];
+            }
+
+            Accountrole accountrole = AccLogic.CreateAccount(new AccountRegisterDto() { 
+                Email = dto.email, Name = name, Surname = surname, Phone = string.Empty, Password = string.Empty, Method = "facebook" });
 
             LUserExtraDataLogic.Insert(new Userextradatum() { Idaccount = accountrole.Id, Token = token, Tokendatajson = dto.Json });
 

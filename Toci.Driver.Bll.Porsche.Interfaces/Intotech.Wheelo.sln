@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{A662B894-F58
 		..\SQL\cars.txt = ..\SQL\cars.txt
 		..\SQL\colours.txt = ..\SQL\colours.txt
 		..\SQL\geog_azg.sql = ..\SQL\geog_azg.sql
+		..\SQL\geog_azg.txt = ..\SQL\geog_azg.txt
 		..\SQL\morecars.txt = ..\SQL\morecars.txt
 		..\SQL\professions.txt = ..\SQL\professions.txt
 		..\SQL\rescue.sql = ..\SQL\rescue.sql

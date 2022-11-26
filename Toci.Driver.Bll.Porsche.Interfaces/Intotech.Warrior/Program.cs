@@ -29,7 +29,7 @@ Console.WriteLine("Warrior is seeding your dbs....");
 //sa.Insert();
 //new SeedFriendSuggestion().Insert();
 
-//new WheeloMainSeedManager().SeedAllDb();
+new WheeloMainSeedManager().SeedAllDb();
 
 //new SocialSeedManager().SeedAllDb();
 

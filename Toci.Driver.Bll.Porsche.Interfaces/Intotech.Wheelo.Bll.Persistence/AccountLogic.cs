@@ -11,6 +11,7 @@ using Intotech.Wheelo.Bll.Models;
 using Microsoft.IdentityModel.Tokens;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Common;
+using System.Xml.Linq;
 
 namespace Intotech.Wheelo.Bll.Persistence
 {
@@ -33,7 +34,10 @@ namespace Intotech.Wheelo.Bll.Persistence
                 return null;
             }
 
-            Account acc = new Account() { Email = user.Email, Login = user.Login, Name = user.Name, Password = user.Password, Phone = user.Phone, Surname = user.Surname };
+            int gender = user.Name[user.Name.Length - 1] == 'a' ? 2 : 1;
+
+            Account acc = new Account() { Email = user.Email, Login = string.IsNullOrEmpty(user.Login) ? user.Email : user.Login, Name = user.Name, 
+                Password = user.Password, Phone = user.Phone, Surname = user.Surname, Gender = gender, Method = user.Method };
 
             Account newUser = accountLogic.Insert(acc);
 
