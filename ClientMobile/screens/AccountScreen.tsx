@@ -106,7 +106,7 @@ export const AccountScreen = () => {
           {user ? (
             <>
               <Text style={styles.userName} category={"h4"}>
-                Welcome{user.firstName ? `, ${user.firstName}` : ""}
+                {user.firstName ? `Witaj, ${user.firstName}` : ""}
               </Text>
               <Text style={styles.email} category={"h6"}>
                 {user.email}
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  defaultMarginHorizontal: { marginHorizontal: 10, marginTop: "40%" },
+  defaultMarginHorizontal: { marginHorizontal: 10},
   userName: {
     textAlign: "center",
     fontWeight: "600",
