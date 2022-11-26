@@ -51,3 +51,8 @@ https://jwt.io/
 https://appleid.apple.com/auth/keys
 
 
+
+https://apartmentsclone.tk/api/property/1
+https://api.locationiq.com/v1/search.php?key=pk.95fe8bb8ddbbc10ed656fe23d485c8f0&q&q=Tampa&format=json&dedupe=1&addressdetails=1&matchquality=1&normalizeaddress=1&normalizecity=1
+https://api.locationiq.com/v1/autocomplete.php?key=pk.95fe8bb8ddbbc10ed656fe23d485c8f0&q=polska&limit=10
+
