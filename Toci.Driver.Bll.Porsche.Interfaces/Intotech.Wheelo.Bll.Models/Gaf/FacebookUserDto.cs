@@ -13,6 +13,7 @@ public class FacebookUserDto
         public string name { get; set; }
         public string email { get; set; }
         public Picture picture { get; set; }
+        public string Json { get; set; }
     }
 
     public class Picture

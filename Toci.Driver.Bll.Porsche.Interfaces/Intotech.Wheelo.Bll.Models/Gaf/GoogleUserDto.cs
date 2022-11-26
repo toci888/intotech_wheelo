@@ -16,6 +16,7 @@ namespace Intotech.Wheelo.Bll.Models.Gaf
         public string given_name { get; set; }
         public string picture { get; set; }
         public string locale { get; set; }
+        public string Json { get; set; }
     }
 
 }

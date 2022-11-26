@@ -66,6 +66,7 @@ drop table Accounts;
 drop table Roles;
 drop table GeographicRegion;
 
+drop table OauthParties;
 
 drop table AccountMetadata;
 drop table Occupations;
@@ -95,7 +96,6 @@ drop table Friends;
 drop table Invitations cascade;
 drop table AccountsLocations cascade;
 drop table UserExtraData;
-drop table OauthParties;
 drop table Accounts cascade;
 drop table Roles cascade;
 --drop table Occupations;
@@ -135,19 +135,14 @@ create table Accounts
 	IdGeographicRegion int references GeographicRegion(Id),
 	CreatedAt timestamp default now(),
 	IdRole int references roles(id) default 1,
-	Token text
-);
-
-create table OauthParties
-(
-	id serial primary key,
-	name text
+	Token text,
+	method text not null
 );
 
 create table UserExtraData
 (
 	id serial primary key,
-	idOauthParties int references OauthParties(id),
+	idAccount int references Accounts(id),
 	token text,
 	tokenDataJson text,
 	createdat timestamp default now()
@@ -343,7 +338,8 @@ select * from AccountsCarsLocations;
 --insert into TestCoordinates(FromLongitude, FromLatitude) values (50.05463180727613, 17.80014622135593);
 --select * from TestCoordinates;
 create or replace view AccountRoles as
-select Accounts.id, Accounts.Name, Accounts.Surname, Accounts.email, Accounts.password, Accounts.emailConfirmed, Accounts.token , Roles.name as RoleName
+select Accounts.id, Accounts.Name, Accounts.Surname, Accounts.email, Accounts.password, Accounts.emailConfirmed, 
+Accounts.token , Roles.name as RoleName, Accounts.method 
 from Accounts
 join Roles on Roles.id = Accounts.idRole;
 

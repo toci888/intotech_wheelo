@@ -13,5 +13,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public int? Emailconfirmed { get; set; }
         public string? Token { get; set; }
         public string? Rolename { get; set; }
+        public string? Method { get; set; }
     }
 }

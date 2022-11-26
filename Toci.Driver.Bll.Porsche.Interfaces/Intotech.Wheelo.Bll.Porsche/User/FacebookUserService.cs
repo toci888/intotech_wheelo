@@ -18,7 +18,11 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         {
             string json = Request(token, "me?fields=id,name,email,picture&access_token=" + token);
 
-            return JsonSerializer.Deserialize<FacebookUserDto>(json);
+            FacebookUserDto dto = JsonSerializer.Deserialize<FacebookUserDto>(json);
+
+            dto.Json = json;
+
+            return dto;
         }
     }
 }

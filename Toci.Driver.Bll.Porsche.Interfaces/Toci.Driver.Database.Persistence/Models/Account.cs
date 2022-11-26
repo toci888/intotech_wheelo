@@ -22,6 +22,7 @@ namespace Toci.Driver.Database.Persistence.Models
             InvitationIdinvitedNavigations = new HashSet<Invitation>();
             Tripparticipants = new HashSet<Tripparticipant>();
             Trips = new HashSet<Trip>();
+            Userextradata = new HashSet<Userextradatum>();
             Worktrips = new HashSet<Worktrip>();
         }
 
@@ -39,6 +40,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public DateTime? Createdat { get; set; }
         public int? Idrole { get; set; }
         public string? Token { get; set; }
+        public string Method { get; set; } = null!;
 
         public virtual Geographicregion? IdgeographicregionNavigation { get; set; }
         public virtual Role? IdroleNavigation { get; set; }
@@ -57,6 +59,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual ICollection<Invitation> InvitationIdinvitedNavigations { get; set; }
         public virtual ICollection<Tripparticipant> Tripparticipants { get; set; }
         public virtual ICollection<Trip> Trips { get; set; }
+        public virtual ICollection<Userextradatum> Userextradata { get; set; }
         public virtual ICollection<Worktrip> Worktrips { get; set; }
     }
 }

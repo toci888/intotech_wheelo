@@ -31,7 +31,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Friendsuggestion> Friendsuggestions { get; set; } = null!;
         public virtual DbSet<Geographicregion> Geographicregions { get; set; } = null!;
         public virtual DbSet<Invitation> Invitations { get; set; } = null!;
-        public virtual DbSet<Oauthparty> Oauthparties { get; set; } = null!;
         public virtual DbSet<Occupation> Occupations { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Statisticstrip> Statisticstrips { get; set; } = null!;
@@ -83,6 +82,8 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasDefaultValueSql("1");
 
                 entity.Property(e => e.Login).HasColumnName("login");
+
+                entity.Property(e => e.Method).HasColumnName("method");
 
                 entity.Property(e => e.Name).HasColumnName("name");
 
@@ -149,6 +150,8 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Emailconfirmed).HasColumnName("emailconfirmed");
 
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Method).HasColumnName("method");
 
                 entity.Property(e => e.Name).HasColumnName("name");
 
@@ -484,15 +487,6 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasConstraintName("invitations_idinvited_fkey");
             });
 
-            modelBuilder.Entity<Oauthparty>(entity =>
-            {
-                entity.ToTable("oauthparties");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Name).HasColumnName("name");
-            });
-
             modelBuilder.Entity<Occupation>(entity =>
             {
                 entity.ToTable("occupations");
@@ -615,16 +609,16 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasColumnName("createdat")
                     .HasDefaultValueSql("now()");
 
-                entity.Property(e => e.Idoauthparties).HasColumnName("idoauthparties");
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
                 entity.Property(e => e.Token).HasColumnName("token");
 
                 entity.Property(e => e.Tokendatajson).HasColumnName("tokendatajson");
 
-                entity.HasOne(d => d.IdoauthpartiesNavigation)
+                entity.HasOne(d => d.IdaccountNavigation)
                     .WithMany(p => p.Userextradata)
-                    .HasForeignKey(d => d.Idoauthparties)
-                    .HasConstraintName("userextradata_idoauthparties_fkey");
+                    .HasForeignKey(d => d.Idaccount)
+                    .HasConstraintName("userextradata_idaccount_fkey");
             });
 
             modelBuilder.Entity<Vaccountscollocation>(entity =>

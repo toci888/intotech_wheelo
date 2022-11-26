@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Intotech.Common.Microservices;
 using Toci.Driver.Dal.Invitation.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Wheelo.Bll.Porsche.Interfaces;
 
 namespace Toci.Driver.Api.Controllers;
 
@@ -12,15 +13,23 @@ namespace Toci.Driver.Api.Controllers;
 [ApiController]
 public class AccountController : ApiControllerBase<IAccountLogic, Accountrole>
 {
-    public AccountController(IAccountLogic logic) : base(logic)
+    protected IGafManager GafManager;
+
+    public AccountController(IAccountLogic logic, IGafManager gafManager) : base(logic)
     {
+        GafManager = gafManager;
     }
 
     [AllowAnonymous]
     [HttpPost("register")]
     public Accountrole RegisterUser([FromBody] AccountRegisterDto user)
     {
-        return Logic.CreateAccount(user);
+        if (user.Method == "wheelo")
+        {
+            return Logic.CreateAccount(user);
+        }
+
+        return GafManager.RegisterByMethod(user.Method, user.Token);
     }
 
     [AllowAnonymous]
