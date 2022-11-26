@@ -221,6 +221,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.ReflectiveTools", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Runner", "..\..\Intotech.Common\Intotech.Runner\Intotech.Runner.csproj", "{842D52B0-EFF2-4E15-AD2D-3E516C851115}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Common", "Intotech.Wheelo.Common\Intotech.Wheelo.Common.csproj", "{E279A191-D6C9-4F8C-BA0E-6850DE301629}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.I18n", "Intotech.Wheelo.I18n", "{15070A0F-D28D-473A-8C8D-2D6BD2E8C382}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.I18n.Database.Persistence", "..\Intotech.Wheelo.I18n.Database.Persistence\Intotech.Wheelo.I18n.Database.Persistence.csproj", "{BA2807DF-80BF-43EE-8ED0-19038DCB4092}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.I18n.Seed", "..\Intotech.Wheelo.I18n.Seed\Intotech.Wheelo.I18n.Seed.csproj", "{2F055650-8063-4710-A12D-C835EF0AE634}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -493,6 +501,30 @@ Global
 		{842D52B0-EFF2-4E15-AD2D-3E516C851115}.Release|Any CPU.Build.0 = Release|Any CPU
 		{842D52B0-EFF2-4E15-AD2D-3E516C851115}.Release|x64.ActiveCfg = Release|Any CPU
 		{842D52B0-EFF2-4E15-AD2D-3E516C851115}.Release|x64.Build.0 = Release|Any CPU
+		{E279A191-D6C9-4F8C-BA0E-6850DE301629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E279A191-D6C9-4F8C-BA0E-6850DE301629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E279A191-D6C9-4F8C-BA0E-6850DE301629}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E279A191-D6C9-4F8C-BA0E-6850DE301629}.Debug|x64.Build.0 = Debug|Any CPU
+		{E279A191-D6C9-4F8C-BA0E-6850DE301629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E279A191-D6C9-4F8C-BA0E-6850DE301629}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E279A191-D6C9-4F8C-BA0E-6850DE301629}.Release|x64.ActiveCfg = Release|Any CPU
+		{E279A191-D6C9-4F8C-BA0E-6850DE301629}.Release|x64.Build.0 = Release|Any CPU
+		{BA2807DF-80BF-43EE-8ED0-19038DCB4092}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA2807DF-80BF-43EE-8ED0-19038DCB4092}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA2807DF-80BF-43EE-8ED0-19038DCB4092}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BA2807DF-80BF-43EE-8ED0-19038DCB4092}.Debug|x64.Build.0 = Debug|Any CPU
+		{BA2807DF-80BF-43EE-8ED0-19038DCB4092}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA2807DF-80BF-43EE-8ED0-19038DCB4092}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA2807DF-80BF-43EE-8ED0-19038DCB4092}.Release|x64.ActiveCfg = Release|Any CPU
+		{BA2807DF-80BF-43EE-8ED0-19038DCB4092}.Release|x64.Build.0 = Release|Any CPU
+		{2F055650-8063-4710-A12D-C835EF0AE634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F055650-8063-4710-A12D-C835EF0AE634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F055650-8063-4710-A12D-C835EF0AE634}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2F055650-8063-4710-A12D-C835EF0AE634}.Debug|x64.Build.0 = Debug|Any CPU
+		{2F055650-8063-4710-A12D-C835EF0AE634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F055650-8063-4710-A12D-C835EF0AE634}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F055650-8063-4710-A12D-C835EF0AE634}.Release|x64.ActiveCfg = Release|Any CPU
+		{2F055650-8063-4710-A12D-C835EF0AE634}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -523,6 +555,8 @@ Global
 		{46CCFFFA-0C9C-41C5-ABAB-01092C1AB39E} = {36E8836E-455B-44CA-ADD6-5E0C90D5D38B}
 		{4547042D-DE1F-43EF-A3BC-F4DC8B43CD91} = {61CCF297-620A-40F2-9052-7A5396FA48E4}
 		{842D52B0-EFF2-4E15-AD2D-3E516C851115} = {61CCF297-620A-40F2-9052-7A5396FA48E4}
+		{BA2807DF-80BF-43EE-8ED0-19038DCB4092} = {15070A0F-D28D-473A-8C8D-2D6BD2E8C382}
+		{2F055650-8063-4710-A12D-C835EF0AE634} = {15070A0F-D28D-473A-8C8D-2D6BD2E8C382}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {958786F8-D2E4-4AAC-949D-3CD908D8AE36}

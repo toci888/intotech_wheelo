@@ -1,0 +1,7 @@
+﻿Install-Package Npgsql.EntityFrameworkCore.PostgreSQL -version 5
+Install-Package Npgsql.EntityFrameworkCore.PostgreSQL.Design
+Install-Package Microsoft.EntityFrameworkCore.Design -version 5
+
+dotnet tool install --global dotnet-ef
+
+dotnet ef dbcontext scaffold "Host=localhost;Database=Intotech.Wheelo.I18n;Username=postgres;Password=beatka" Npgsql.EntityFrameworkCore.PostgreSQL -o Models --project Intotech.Wheelo.I18n.Database.Persistence -f

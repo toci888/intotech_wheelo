@@ -4,6 +4,7 @@ using Intotech.Wheelo.Bll.Models;
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
+using Intotech.Wheelo.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 return new ReturnedResponse<Simpleaccount>(null, "Nie odnaleziono konta.", false);
             }
 
-            return new ReturnedResponse<Simpleaccount>(simpleaccount, "Success.", true);
+            return new ReturnedResponse<Simpleaccount>(simpleaccount, I18nTranslation.Translation(I18nTags.Success), true);
         }
 
         public virtual ReturnedResponse<Simpleaccount> Register(Simpleaccount sAccount)
@@ -49,7 +50,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             simpleaccount.Verificationcode = 0;
 
-            return new ReturnedResponse<Simpleaccount>(simpleaccount, "", true);
+            return new ReturnedResponse<Simpleaccount>(simpleaccount, I18nTranslation.Translation(I18nTags.Success), true);
         }
     }
 }
