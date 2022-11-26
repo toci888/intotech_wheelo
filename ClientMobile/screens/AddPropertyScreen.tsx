@@ -5,7 +5,7 @@ import { AddPropertySection } from "../components/AddPropertySection";
 export const AddPropertyScreen = () => {
   const { user } = useUser();
 
-  if (!user) return <SignUpOrSignInScreen />;
+  if (user) return <SignUpOrSignInScreen />;
 
   return <AddPropertySection />;
 };
