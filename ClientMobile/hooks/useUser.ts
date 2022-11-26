@@ -6,7 +6,7 @@ import * as Notifications from "expo-notifications";
 import { AuthContext } from "../context";
 import { User } from "../types/user";
 import { Property } from "../types/property";
-import { queryKeys } from "../constants";
+import { queryKeys } from "../constants/constants";
 import { alterAllowsNotifications, alterPushToken } from "../services/user";
 import { socket } from "../constants/socket";
 

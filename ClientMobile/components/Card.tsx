@@ -17,9 +17,9 @@ import axios from "axios";
 import { Property } from "../types/property";
 import { ImageCarousel } from "./ImageCarousel";
 import { CardInformation } from "./CardInformation";
-import { LISTMARGIN, queryKeys } from "../constants";
+import { LISTMARGIN, queryKeys } from "../constants/constants";
 import { theme } from "../theme";
-import { endpoints } from "../constants";
+import { endpoints } from "../constants/constants";
 import { useLoading } from "../hooks/useLoading";
 import { useDeletePropertyMutation } from "../hooks/mutations/useDeletePropertyMutation";
 

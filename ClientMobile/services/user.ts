@@ -1,9 +1,10 @@
 import axios from "axios";
 
-import { endpoints } from "../constants";
+import { endpoints } from "../constants/constants";
 import { User } from "../types/user";
 import { handleError } from "../utils/handleError";
 import * as Crypto from 'expo-crypto';
+import { useUser } from "../hooks/useUser";
 
 type DataRes = { data: User };
 
@@ -36,6 +37,8 @@ export const loginUser = async (email: string, password: string) => {
       email,
       password,
     });
+    const { user, logout } = useUser();
+    logout();
     return data;
   } catch (error) {
     handleError(error);

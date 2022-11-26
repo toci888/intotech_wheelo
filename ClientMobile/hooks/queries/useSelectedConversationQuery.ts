@@ -2,7 +2,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { MessageType } from "@flyerhq/react-native-chat-ui";
 
-import { endpoints, queryKeys } from "../../constants";
+import { endpoints, queryKeys } from "../../constants/constants";
 import { Message } from "../../types/message";
 import { useUser } from "../useUser";
 import { getStateAbbreviation } from "../../utils/getStateAbbreviation";

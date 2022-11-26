@@ -15,7 +15,7 @@ import { theme } from "./theme";
 import { AuthContext, LoadingContext } from "./context";
 import { User } from "./types/user";
 import { socket } from "./constants/socket";
-import { queryKeys } from "./constants";
+import { queryKeys } from "./constants/constants";
 import { refreshTokens } from "./services/tokens";
 
 const queryClient = new QueryClient();

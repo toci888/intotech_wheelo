@@ -2,7 +2,7 @@ import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
 import { StackActions, useNavigation } from "@react-navigation/native";
 
-import { endpoints, queryKeys } from "../../constants";
+import { endpoints, queryKeys } from "../../constants/constants";
 import { CreateProperty, Property } from "../../types/property";
 import { useUser } from "../useUser";
 

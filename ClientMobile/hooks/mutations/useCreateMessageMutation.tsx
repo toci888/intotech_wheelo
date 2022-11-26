@@ -1,7 +1,7 @@
 import { useQueryClient, useMutation } from "react-query";
 import axios from "axios";
 
-import { endpoints, queryKeys } from "../../constants";
+import { endpoints, queryKeys } from "../../constants/constants";
 import { socket } from "../../constants/socket";
 import {
   SelectedConversation,

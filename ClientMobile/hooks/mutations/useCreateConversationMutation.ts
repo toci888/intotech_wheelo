@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
 
-import { endpoints, queryKeys } from "../../constants";
+import { endpoints, queryKeys } from "../../constants/constants";
 import { socket } from "../../constants/socket";
 import { Conversation, CreateConversation } from "../../types/conversation";
 import { useUser } from "../useUser";

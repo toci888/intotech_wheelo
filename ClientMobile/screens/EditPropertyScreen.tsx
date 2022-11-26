@@ -23,7 +23,7 @@ import {
   endpoints,
   PHOTOS_STR,
   queryKeys,
-} from "../constants";
+} from "../constants/constants";
 import { EditPropertyObj, Property } from "../types/property";
 import { bedValues } from "../constants/bedValues";
 import { bathValues } from "../constants/bathValues";

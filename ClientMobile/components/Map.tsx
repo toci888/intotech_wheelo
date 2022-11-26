@@ -12,7 +12,7 @@ import { MapMarker } from "./MapMarker";
 import { theme } from "../theme";
 import { Card } from "./Card";
 import { getPropertiesInArea } from "../data/properties";
-import { endpoints, queryKeys } from "../constants";
+import { endpoints, queryKeys } from "../constants/constants";
 import { useSearchPropertiesQuery } from "../hooks/queries/useSearchPropertiesQuery";
 
 // used to persist the region if search area from the map

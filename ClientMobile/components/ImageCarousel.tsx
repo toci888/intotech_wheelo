@@ -11,7 +11,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState, useRef } from "react";
 import { Text } from "@ui-kitten/components";
 
-import { WIDTH } from "../constants";
+import { WIDTH } from "../constants/constants";
 import { theme } from "../theme";
 
 export const ImageCarousel = ({

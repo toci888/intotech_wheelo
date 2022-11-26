@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 
-import { endpoints, queryKeys } from "../../constants";
+import { endpoints, queryKeys } from "../../constants/constants";
 import { Property } from "../../types/property";
 
 const fetchProperty = async (propertyID: number): Promise<Property> => {

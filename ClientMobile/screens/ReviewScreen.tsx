@@ -9,7 +9,7 @@ import axios from "axios";
 
 import { Screen } from "../components/Screen";
 import { ModalHeader } from "../components/ModalHeader";
-import { endpoints, queryKeys } from "../constants";
+import { endpoints, queryKeys } from "../constants/constants";
 import { useUser } from "../hooks/useUser";
 import { SignUpOrSignInScreen } from "./SignUpOrSignInScreen";
 import { theme } from "../theme";

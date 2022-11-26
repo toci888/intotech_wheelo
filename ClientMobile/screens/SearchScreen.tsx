@@ -5,7 +5,7 @@ import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { Screen } from "../components/Screen";
-import { endpoints, HEADERHEIGHT, queryKeys } from "../constants";
+import { endpoints, HEADERHEIGHT, queryKeys } from "../constants/constants";
 import { Card } from "../components/Card";
 import { AnimatedListHeader } from "../components/AnimatedListHeader";
 import { getPropertiesInArea } from "../data/properties";

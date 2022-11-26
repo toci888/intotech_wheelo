@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
-import { endpoints, queryKeys } from "../../constants";
+import { endpoints, queryKeys } from "../../constants/constants";
 
 import { EditPropertyObj } from "../../types/property";
 import { useLoading } from "../useLoading";

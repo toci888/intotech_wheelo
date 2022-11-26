@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 
-import { endpoints, queryKeys } from "../../constants";
+import { endpoints, queryKeys } from "../../constants/constants";
 import { TransformedConversation } from "../../types/conversation";
 import { Message } from "../../types/message";
 import { getStateAbbreviation } from "../../utils/getStateAbbreviation";

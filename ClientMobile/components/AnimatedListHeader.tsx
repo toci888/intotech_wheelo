@@ -10,7 +10,7 @@ import {
 import React, { useState } from "react";
 import { Text, Button, Divider } from "@ui-kitten/components";
 
-import { HEADERHEIGHT, LISTMARGIN } from "../constants";
+import { HEADERHEIGHT, LISTMARGIN } from "../constants/constants";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { theme } from "../theme";
 import { Row } from "./Row";
@@ -82,6 +82,7 @@ export const AnimatedListHeader = ({
       onLayout={onLayout}
     >
       <View style={styles.defaultMarginHorizontal}>
+        <HeaderInput location={location} />
         <HeaderInput location={location} />
         <HeaderFilterButtons />
       </View>

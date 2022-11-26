@@ -15,7 +15,7 @@ import { AmentitiesSection } from "../components/propertyDetailsSections/Ameniti
 import { LeaseAndFeesSection } from "../components/propertyDetailsSections/LeaseAndFeesSection";
 import { LocationSection } from "../components/propertyDetailsSections/LocationSection";
 import { ReviewSection } from "../components/propertyDetailsSections/ReviewSection";
-import { endpoints, queryKeys } from "../constants";
+import { endpoints, queryKeys } from "../constants/constants";
 import { useSelectedPropertyQuery } from "../hooks/queries/useSelectedPropertyQuery";
 
 export const PropertyDetailsScreen = ({

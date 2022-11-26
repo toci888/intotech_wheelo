@@ -9,7 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 import { PickerItem } from "react-native-woodpicker/dist/types";
 
 import { Screen } from "../components/Screen";
-import { endpoints, queryKeys } from "../constants";
+import { endpoints, queryKeys } from "../constants/constants";
 import { Apartment, EditApartment } from "../types/apartment";
 import { bedValues } from "../constants/bedValues";
 import { bathValues } from "../constants/bathValues";

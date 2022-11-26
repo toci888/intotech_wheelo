@@ -4,7 +4,7 @@ import { Text } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
 
 import { Row } from "./Row";
-import { LISTMARGIN } from "../constants";
+import { LISTMARGIN } from "../constants/constants";
 import { theme } from "../theme";
 
 const HeaderLogisticsButton = ({

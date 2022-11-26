@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { endpoints } from "../constants";
+import { endpoints } from "../constants/constants";
 
 export const refreshTokens = async (refreshToken: string) => {
   try {

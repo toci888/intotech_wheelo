@@ -11,7 +11,7 @@ import { TempApartment } from "../../types/tempApartment";
 import { Property } from "../../types/property";
 import { bedValues } from "../../constants/bedValues";
 import { bathValues } from "../../constants/bathValues";
-import { AMENITIES_STR, DESCRIPTION_STR, PHOTOS_STR } from "../../constants";
+import { AMENITIES_STR, DESCRIPTION_STR, PHOTOS_STR } from "../../constants/constants";
 import { theme } from "../../theme";
 import { EditPropertyInitialValues } from "../../types/editPropertyInitialValues";
 import { PickerItem } from "react-native-woodpicker/dist/types";

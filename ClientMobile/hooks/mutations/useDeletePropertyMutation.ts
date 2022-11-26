@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
 
-import { endpoints, queryKeys } from "../../constants";
+import { endpoints, queryKeys } from "../../constants/constants";
 import { Property } from "../../types/property";
 import { useUser } from "../useUser";
 
