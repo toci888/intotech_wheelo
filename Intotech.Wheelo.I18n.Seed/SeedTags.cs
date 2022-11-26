@@ -15,7 +15,15 @@ namespace Intotech.Wheelo.I18n.Seed
         {
             ModelsCollection.Add(new Tag() { Tag1 = I18nTags.Success });
             ModelsCollection.Add(new Tag() { Tag1 = I18nTags.Polish });
-            ModelsCollection.Add(new Tag() { Tag1 = I18nTags.Germany });
+            ModelsCollection.Add(new Tag() { Tag1 = I18nTags.English });
+            ModelsCollection.Add(new Tag() { Tag1 = I18nTags.German });
+            ModelsCollection.Add(new Tag() { Tag1 = I18nTags.French });
+            ModelsCollection.Add(new Tag() { Tag1 = I18nTags.Italian });
+            ModelsCollection.Add(new Tag() { Tag1 = I18nTags.Spanish });
+            ModelsCollection.Add(new Tag() { Tag1 = I18nTags.Portugese });
+            ModelsCollection.Add(new Tag() { Tag1 = I18nTags.Ukrainian });
+            ModelsCollection.Add(new Tag() { Tag1 = I18nTags.Swedish });
+            ModelsCollection.Add(new Tag() { Tag1 = I18nTags.Dutch });  
 
 
             InsertCollection(ModelsCollection);
