@@ -47,7 +47,7 @@ export const loginUser = async (email: string, password: string) => {
 
 export const facebookLoginOrRegister = async (token: string) => {
   try {
-    const { data }: DataRes = await axios.post(endpoints.facebook, {
+    const { data }: DataRes = await axios.post(endpoints.login, {
       token, method: 'facebook',
     });
     return data;
@@ -58,7 +58,7 @@ export const facebookLoginOrRegister = async (token: string) => {
 
 export const googleLoginOrRegister = async (token: string) => {
   try {
-    const { data }: DataRes = await axios.post(endpoints.google, {
+    const { data }: DataRes = await axios.post(endpoints.login, {
       token, method: 'google',
     });
     return data;
@@ -69,7 +69,7 @@ export const googleLoginOrRegister = async (token: string) => {
 
 export const appleLoginOrRegister = async (token: string) => {
   try {
-    const { data }: DataRes = await axios.post(endpoints.apple, {
+    const { data }: DataRes = await axios.post(endpoints.login, {
       token, method: 'apple',
     });
     return data;
