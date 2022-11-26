@@ -9,7 +9,7 @@ export const OrDivider = ({ style }: { style?: ViewStyle }) => {
     <Row style={[styles.container, style as ViewStyle]}>
       <Divider style={styles.divider} />
       <Text style={styles.orText} appearance={"hint"}>
-        or
+        albo
       </Text>
       <Divider style={styles.divider} />
     </Row>
