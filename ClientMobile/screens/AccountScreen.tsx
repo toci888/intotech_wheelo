@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     marginVertical: 25,
     marginHorizontal: 70,
     fontWeight: "600",
-    fontSize: "44px",
+    fontSize: 44,
     color: theme["color-violet"],
   },
   middleContainer: {
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
   brandText: {
     textAlign: "center",
     color: theme["color-violet"],
-    fontSize: "24px",
+    fontSize: 24,
     fontWeight: "700",
   },
 });
