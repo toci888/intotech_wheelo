@@ -5,6 +5,7 @@ import { Text, Button } from "@ui-kitten/components";
 import { Screen } from "../components/Screen";
 import { SignUpAndSignInButtons } from "../components/SignUpAndSignInButtons";
 import { theme } from "../theme";
+import { ButtonList } from "../components/ButtonList";
 import { useUser } from "../hooks/useUser";
 
 export const AccountScreen = () => {
@@ -124,6 +125,42 @@ export const AccountScreen = () => {
             </>
           )}
         </View>
+        {user ? (
+          <>
+            <ButtonList data={rentingButtons} header={"Renting Made Easy"} />
+            <ButtonList data={accountButtons} header={"My Account"} />
+            <ButtonList
+              data={rentalManagementButtons}
+              header={"Rental Manager Tools"}
+            />
+            <ButtonList data={supportButtons} header={"Support"} />
+            <View
+              style={[
+                styles.specialMarginVertical,
+                styles.defaultMarginHorizontal,
+              ]}
+            >
+              <Button
+                appearance={"ghost"}
+                style={styles.button}
+                onPress={logout}
+              >
+                Sign Out
+              </Button>
+            </View>
+          </>
+        ) : (
+          <>
+            <ButtonList data={firstSignedOutButtons} borderTop />
+            <ButtonList data={supportButtons} header="Support" marginTop />
+            <Text
+              appearance={"hint"}
+              style={[styles.brandText, styles.specialMarginVertical]}
+            >
+              JeremyPersing.com Version 1.0.0
+            </Text>
+          </>
+        )}
       </ScrollView>
     </Screen>
   );
