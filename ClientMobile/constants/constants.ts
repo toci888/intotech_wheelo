@@ -1,5 +1,7 @@
 import { Dimensions, Platform, StatusBar } from "react-native";
 
+export const locationAPIKEY = 'pk.95fe8bb8ddbbc10ed656fe23d485c8f0&q';
+
 export const LISTMARGIN = 10;
 export const WIDTH = Dimensions.get("screen").width - LISTMARGIN * 2;
 export const PHOTOS_STR = "photos";
@@ -16,8 +18,8 @@ androidHeight += androidNotch;
 
 export const HEADERHEIGHT = Platform.OS === "ios" ? iosHeight : androidHeight;
 
-// const serverUrl = "https://apartmentsclone.tk/api";
-// const chatUrl = "https://apartmentsclone.tk";
+const apartamentClone = "https://apartmentsclone.tk/api"; //TODEL
+const apartamentCloneChatUrl = "https://apartmentsclone.tk"; //TODEL
 const serverUrl = "http://20.100.196.118:5105/api"; //HERE
 const chatUrl = "http://192.168.30.24:3000";
 const location = "/location";
@@ -29,7 +31,7 @@ const conversation = "/conversation";
 const messages = "/messages";
 const refresh = "/refresh";
 const refreshTokenEndpoint = serverUrl + refresh;
-const locationEndpoint = serverUrl + location;
+const locationEndpoint = apartamentClone + location;
 const userEndpoint = serverUrl + user;
 const propertyEndpoint = serverUrl + property;
 const apartmentEndpoint = serverUrl + apartment;
@@ -44,7 +46,7 @@ const allowsNotificationsEndpoint = (id: number) =>
   `${userEndpoint}/${id}/settings/notifications`;
 
 export const endpoints = {
-  chat: chatUrl,
+  chat: apartamentCloneChatUrl,
   autoComplete: locationEndpoint + "/autocomplete",
   search: locationEndpoint + "/search",
   register: userEndpoint + "/simple-register",
