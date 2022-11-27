@@ -7,27 +7,33 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Common
 {
-    public class I18nManager
+    public abstract class I18nManager
     {
-        private static string Language = "pl";
+        protected string Language; // = "pl";
 
-        protected Dictionary<string, I18nModel> TranslationsMap = new Dictionary<string, I18nModel>()
-        {
-            { GetKey(Language, I18nTags.English), new I18nModel() { Language = Language, Tag = I18nTags.English, Content = "Angielski" } },
-            { GetKey(Language, I18nTags.Polish), new I18nModel() { Language = Language, Tag = I18nTags.Polish, Content = "Polski" } },
-        };
+        protected Dictionary<string, I18nModel> TranslationsMap;
 
-        private static string GetKey(string lang, string tag)
+        protected I18nManager(string language) 
         {
-            return string.Format("{0}_{1}");
+            Language = language;
+
+//            TranslationsMap = new Dictionary<string, I18nModel>()
+//            {
+ //               { GetKey(Language, I18nTags.English), new I18nModel() { Language = Language, Tag = I18nTags.English, Content = "Angielski" } },
+ //               { GetKey(Language, I18nTags.Polish), new I18nModel() { Language = Language, Tag = I18nTags.Polish, Content = "Polski" } },
+  //          };
         }
 
-        public virtual I18nModel GetTranslation(string language, string tag)
+        protected string GetKey(string lang, string tag)
         {
-            string key = GetKey(language, tag);
-            string rescueKey = GetKey(Language, tag);
+            return string.Format("{0}_{1}", lang, tag);
+        }
 
-            return TranslationsMap.ContainsKey(key) ? TranslationsMap[key] : (TranslationsMap.ContainsKey(rescueKey) ? TranslationsMap[rescueKey] : null);
+        public virtual I18nModel GetTranslation(string tag)
+        {
+            string key = GetKey(Language, tag);
+
+            return TranslationsMap.ContainsKey(key) ? TranslationsMap[key] : null;
         }
     }
 }
