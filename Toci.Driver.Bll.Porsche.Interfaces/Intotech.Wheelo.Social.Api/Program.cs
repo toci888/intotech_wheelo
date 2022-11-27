@@ -16,7 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IAccountLogic, AccountLogic>();
+builder.Services.AddScoped<IAccountRoleLogic, AccountRoleLogic>();
 builder.Services.AddScoped<ICommentLogic, CommentLogic>();
 builder.Services.AddScoped<ICommenttypeLogic, CommenttypeLogic>();
 builder.Services.AddScoped<IGroupLogic, GroupLogic>();

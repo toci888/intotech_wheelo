@@ -13,12 +13,12 @@ namespace Toci.Driver.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AccountController : ApiControllerBase<IAccountLogic, Accountrole>
+public class AccountController : ApiControllerBase<IAccountRoleLogic, Accountrole>
 {
     protected IGafManager GafManager;
     protected IWheeloAccountService WheeloAccountService;
 
-    public AccountController(IAccountLogic logic, IGafManager gafManager, IWheeloAccountService was) : base(logic)
+    public AccountController(IAccountRoleLogic logic, IGafManager gafManager, IWheeloAccountService was) : base(logic)
     {
         GafManager = gafManager;
         WheeloAccountService = was;
@@ -31,15 +31,15 @@ public class AccountController : ApiControllerBase<IAccountLogic, Accountrole>
     }
 
     [HttpPost("simple-register")]
-    public ReturnedResponse<Simpleaccount> SimpleRegister(Simpleaccount sa)
+    public ReturnedResponse<Account> SimpleRegister(AccountRegisterDto sa)
     {
         return WheeloAccountService.Register(sa);
     }
 
     [HttpPost("simple-login")]
-    public ActionResult<ReturnedResponse<Simpleaccount>> SimpleLogin(LoginDto lDto)
+    public ActionResult<ReturnedResponse<Accountrole>> SimpleLogin(LoginDto lDto)
     {
-        ReturnedResponse<Simpleaccount> sa = WheeloAccountService.Login(lDto);
+        ReturnedResponse<Accountrole> sa = WheeloAccountService.Login(lDto);
 
         if (!sa.IsSuccess)
         {
@@ -54,12 +54,12 @@ public class AccountController : ApiControllerBase<IAccountLogic, Accountrole>
     [HttpPost("register")]
     public Accountrole RegisterUser([FromBody] AccountRegisterDto user)
     {
-        if (user.Method == "wheelo")
+        //if (user.Method == "wheelo")
         {
             return Logic.CreateAccount(user);
         }
 
-        return GafManager.RegisterByMethod(user.Method, "");
+        //return GafManager.RegisterByMethod(user.Method, "");
     }
 
     [AllowAnonymous]

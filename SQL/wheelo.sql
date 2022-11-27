@@ -1,73 +1,6 @@
---migration 25.11
+drop table SimpleAccount;
 
-drop table AccountMetadata;
-drop table Occupations;
-drop table StatisticsTrips;
-drop view VTripsParticipants;
-drop table TripParticipants;
-drop table Trips;
-drop view AccountRoles;
-drop view VFriends;
-drop view VInvitations;
-drop view VAccountsCollocations;
-drop view VFriendSuggestions;
---select * from  WorkTrip;
---select * from  Accounts;
---select * from AccountsCollocations;
-drop view AccountsCarsLocations;
-drop table WorkTrip;
-drop view VCarOwner;
-drop table Cars;
-drop table Colours;
-drop table CarsModels;
-drop table CarsBrands;
-drop table AccountsCollocations;
-drop table AccountsWorkTime;
-drop table FriendSuggestions;
-drop table Friends;
-drop table Invitations cascade;
-drop table AccountsLocations cascade;
---table OauthParties
-drop table Accounts cascade;
-drop table Roles cascade;
---drop table Occupations;
-drop table GeographicRegion;
---select * from Accounts;
---select * from Cars;
-
-
---migration 22.11
-
-drop view VTripsParticipants;
-drop table TripParticipants;
-drop table Trips;
-drop view AccountRoles;
-drop view VFriends;
-drop view VInvitations;
-drop view VAccountsCollocations;
-drop view VFriendSuggestions;
---select * from  WorkTrip;
---select * from  Accounts;
---select * from AccountsCollocations;
-drop view AccountsCarsLocations;
-drop table WorkTrip;
-drop view VCarOwner;
-drop table Cars;
-drop table Colours;
-drop table CarsModels;
-drop table CarsBrands;
-drop table AccountsCollocations;
-drop table AccountsWorkTime;
-drop table FriendSuggestions;
-drop table Friends;
-drop table Invitations;
-drop table AccountsLocations;
-drop table Accounts;
-drop table Roles;
-drop table GeographicRegion;
-
-drop table OauthParties;
-
+----
 drop table AccountMetadata;
 drop table Occupations;
 drop table StatisticsTrips;
@@ -100,7 +33,7 @@ drop table Accounts cascade;
 drop table Roles cascade;
 --drop table Occupations;
 drop table GeographicRegion;
-drop table SimpleAccount;
+
 drop table EmailsRegister;
 --select * from Accounts;
 --select * from Cars;
@@ -113,15 +46,7 @@ create table EmailsRegister
 	isVerified bool default false
 );
 
-create table SimpleAccount
-(
-	Id serial primary key,
-	email text not null,
-	firstname text,
-	lastname text,
-	password text,
-	verificationCode int
-);
+
 
 create table GeographicRegion
 (
@@ -143,19 +68,14 @@ create table Roles
 create table Accounts
 (
 	Id serial primary key,
-	Name text not null,
-	Surname text not null,
-	Gender int not null,
-	Pesel text,
-	Phone text not null,
-	Email text not null,
-	Password text not null,
-	EmailConfirmed int default 0,
-	IdGeographicRegion int references GeographicRegion(Id),
-	CreatedAt timestamp default now(),
+	email text not null,
+	name text,
+	surname text,
+	password text,
+	verificationCode int,
 	IdRole int references roles(id) default 1,
-	Token text,
-	method text not null
+	emailconfirmed bool default false,
+	token text
 );
 
 create table UserExtraData
@@ -163,6 +83,7 @@ create table UserExtraData
 	id serial primary key,
 	idAccount int references Accounts(id),
 	token text,
+	method text,
 	tokenDataJson text,
 	createdat timestamp default now()
 );
@@ -338,7 +259,7 @@ create table WorkTrip
 );
 
 create or replace view AccountsCarsLocations as 
-select acc.id as accountId, acc.name, acc.surname, acc.phone, acc.email, acl.streetfrom, acl.streetto, acl.cityfrom, acl.cityto,
+select acc.id as accountId, acc.name, acc.surname, acc.email, acl.streetfrom, acl.streetto, acl.cityfrom, acl.cityto,
 c.RegistrationPlate, c.AvailableSeats, cb.Brand, cm.Model, col.name as colour, col.rgb
 from Accounts acc join WorkTrip acl on acc.id = acl.IdAccount
 join cars c on acc.id = c.IdAccounts
@@ -358,7 +279,7 @@ select * from AccountsCarsLocations;
 --select * from TestCoordinates;
 create or replace view AccountRoles as
 select Accounts.id, Accounts.Name, Accounts.Surname, Accounts.email, Accounts.password, Accounts.emailConfirmed, 
-Accounts.token , Roles.name as RoleName, Accounts.method 
+Accounts.token , Roles.name as RoleName 
 from Accounts
 join Roles on Roles.id = Accounts.idRole;
 
@@ -412,14 +333,28 @@ create table Occupations
 	name text
 );
 
+--create table Accounts
+--(
+--	Id serial primary key,
+--	Name text not null,
+--	Surname text not null,
+--	Token text,
+--	method text not null
+--);
+
 create table AccountMetadata
 (
 	id serial primary key,
 	IdAccount int references Accounts(id),
+	Gender int not null,
+	Pesel text,
+	Phone text,
+	IdGeographicRegion int references GeographicRegion(Id),
 	IdOccupation int references Occupations(id),
 	IsSmoker bool default false,
 	IsWithAnimals bool default false,
-	metaJson text
+	metaJson text,
+	CreatedAt timestamp default now()
 );
 
 --select * from VTripsParticipants;

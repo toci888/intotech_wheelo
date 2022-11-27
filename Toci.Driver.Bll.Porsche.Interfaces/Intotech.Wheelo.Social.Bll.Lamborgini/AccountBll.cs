@@ -11,9 +11,9 @@ namespace Intotech.Wheelo.Social.Bll.Lamborgini
 {
     public class AccountBll : IAccountBll
     {
-        protected IAccountLogic AccountLogic;
+        protected IAccountRoleLogic AccountLogic;
 
-        public AccountBll(IAccountLogic accountLogic)
+        public AccountBll(IAccountRoleLogic accountLogic)
         {
             AccountLogic = accountLogic;
         }

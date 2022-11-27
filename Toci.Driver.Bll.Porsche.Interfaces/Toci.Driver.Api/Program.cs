@@ -43,7 +43,6 @@ builder.Services.AddScoped<IFriendLogic, FriendLogic>();
 builder.Services.AddScoped<IFriendSuggestionLogic, FriendSuggestionLogic>();
 builder.Services.AddScoped<IGeographicRegionLogic, GeographicRegionLogic>();
 builder.Services.AddScoped<IInvitationLogic, InvitationLogic>();
-builder.Services.AddScoped<IAccountLogic, AccountLogic>();
 builder.Services.AddScoped<IUsersCollocationLogic, UsersCollocationLogic>();
 builder.Services.AddScoped<IUsersLocationLogic, UsersLocationLogic>();
 builder.Services.AddScoped<IUsersWorkTimeLogic, UsersWorkTimeLogic>();
@@ -51,7 +50,6 @@ builder.Services.AddScoped<IVfriendLogic, VfriendLogic>();
 builder.Services.AddScoped<IVfriendSuggestionLogic, VfriendSuggestionLogic>();
 builder.Services.AddScoped<IVinvitationLogic, VinvitationLogic>();
 builder.Services.AddScoped<IVusersCollocationLogic, VusersCollocationLogic>();
-builder.Services.AddScoped<IAccountLogic, AccountLogic>();
 builder.Services.AddScoped<IWorkTripLogic, WorkTripLogic>();
 builder.Services.AddScoped<ITripLogic, TripLogic>();
 builder.Services.AddScoped<ITripparticipantLogic, TripparticipantLogic>();
@@ -59,6 +57,8 @@ builder.Services.AddScoped<IVTripsParticipantsLogic, VTripsParticipantsLogic>();
 builder.Services.AddScoped<IAccountsCarsLocationLogic, AccountsCarsLocationLogic>();
 builder.Services.AddScoped<IUserExtraDataLogic, UserExtraDataLogic>();
 builder.Services.AddScoped<ISimpleAccountLogic, SimpleAccountLogic>();
+builder.Services.AddScoped<IAccountRoleLogic, AccountRoleLogic>();
+builder.Services.AddScoped<IAccountLogic, AccountLogic>();
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();
 

@@ -32,10 +32,8 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Friendsuggestion> Friendsuggestions { get; set; } = null!;
         public virtual DbSet<Geographicregion> Geographicregions { get; set; } = null!;
         public virtual DbSet<Invitation> Invitations { get; set; } = null!;
-        public virtual DbSet<Oauthparty> Oauthparties { get; set; } = null!;
         public virtual DbSet<Occupation> Occupations { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
-        public virtual DbSet<Simpleaccount> Simpleaccounts { get; set; } = null!;
         public virtual DbSet<Statisticstrip> Statisticstrips { get; set; } = null!;
         public virtual DbSet<Trip> Trips { get; set; } = null!;
         public virtual DbSet<Tripparticipant> Tripparticipants { get; set; } = null!;
@@ -65,43 +63,25 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Createdat)
-                    .HasColumnType("timestamp without time zone")
-                    .HasColumnName("createdat")
-                    .HasDefaultValueSql("now()");
-
                 entity.Property(e => e.Email).HasColumnName("email");
 
                 entity.Property(e => e.Emailconfirmed)
                     .HasColumnName("emailconfirmed")
-                    .HasDefaultValueSql("0");
-
-                entity.Property(e => e.Gender).HasColumnName("gender");
-
-                entity.Property(e => e.Idgeographicregion).HasColumnName("idgeographicregion");
+                    .HasDefaultValueSql("false");
 
                 entity.Property(e => e.Idrole)
                     .HasColumnName("idrole")
                     .HasDefaultValueSql("1");
 
-                entity.Property(e => e.Method).HasColumnName("method");
-
                 entity.Property(e => e.Name).HasColumnName("name");
 
                 entity.Property(e => e.Password).HasColumnName("password");
-
-                entity.Property(e => e.Pesel).HasColumnName("pesel");
-
-                entity.Property(e => e.Phone).HasColumnName("phone");
 
                 entity.Property(e => e.Surname).HasColumnName("surname");
 
                 entity.Property(e => e.Token).HasColumnName("token");
 
-                entity.HasOne(d => d.IdgeographicregionNavigation)
-                    .WithMany(p => p.Accounts)
-                    .HasForeignKey(d => d.Idgeographicregion)
-                    .HasConstraintName("accounts_idgeographicregion_fkey");
+                entity.Property(e => e.Verificationcode).HasColumnName("verificationcode");
 
                 entity.HasOne(d => d.IdroleNavigation)
                     .WithMany(p => p.Accounts)
@@ -115,7 +95,16 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
+                    .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Gender).HasColumnName("gender");
+
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Idgeographicregion).HasColumnName("idgeographicregion");
 
                 entity.Property(e => e.Idoccupation).HasColumnName("idoccupation");
 
@@ -129,10 +118,19 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Metajson).HasColumnName("metajson");
 
+                entity.Property(e => e.Pesel).HasColumnName("pesel");
+
+                entity.Property(e => e.Phone).HasColumnName("phone");
+
                 entity.HasOne(d => d.IdaccountNavigation)
                     .WithMany(p => p.Accountmetadata)
                     .HasForeignKey(d => d.Idaccount)
                     .HasConstraintName("accountmetadata_idaccount_fkey");
+
+                entity.HasOne(d => d.IdgeographicregionNavigation)
+                    .WithMany(p => p.Accountmetadata)
+                    .HasForeignKey(d => d.Idgeographicregion)
+                    .HasConstraintName("accountmetadata_idgeographicregion_fkey");
 
                 entity.HasOne(d => d.IdoccupationNavigation)
                     .WithMany(p => p.Accountmetadata)
@@ -151,8 +149,6 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Emailconfirmed).HasColumnName("emailconfirmed");
 
                 entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Method).HasColumnName("method");
 
                 entity.Property(e => e.Name).HasColumnName("name");
 
@@ -188,8 +184,6 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Model).HasColumnName("model");
 
                 entity.Property(e => e.Name).HasColumnName("name");
-
-                entity.Property(e => e.Phone).HasColumnName("phone");
 
                 entity.Property(e => e.Registrationplate).HasColumnName("registrationplate");
 
@@ -503,15 +497,6 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasConstraintName("invitations_idinvited_fkey");
             });
 
-            modelBuilder.Entity<Oauthparty>(entity =>
-            {
-                entity.ToTable("oauthparties");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Name).HasColumnName("name");
-            });
-
             modelBuilder.Entity<Occupation>(entity =>
             {
                 entity.ToTable("occupations");
@@ -528,23 +513,6 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name).HasColumnName("name");
-            });
-
-            modelBuilder.Entity<Simpleaccount>(entity =>
-            {
-                entity.ToTable("simpleaccount");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Email).HasColumnName("email");
-
-                entity.Property(e => e.Firstname).HasColumnName("firstname");
-
-                entity.Property(e => e.Lastname).HasColumnName("lastname");
-
-                entity.Property(e => e.Password).HasColumnName("password");
-
-                entity.Property(e => e.Verificationcode).HasColumnName("verificationcode");
             });
 
             modelBuilder.Entity<Statisticstrip>(entity =>
@@ -652,6 +620,8 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasDefaultValueSql("now()");
 
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Method).HasColumnName("method");
 
                 entity.Property(e => e.Token).HasColumnName("token");
 

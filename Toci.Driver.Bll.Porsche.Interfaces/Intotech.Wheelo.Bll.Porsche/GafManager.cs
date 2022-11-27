@@ -15,9 +15,9 @@ namespace Intotech.Wheelo.Bll.Porsche
     public class GafManager : IGafManager
     {
         protected IUserExtraDataLogic LUserExtraDataLogic;
-        protected IAccountLogic AccLogic;
+        protected IAccountRoleLogic AccLogic;
 
-        public GafManager(IUserExtraDataLogic lUserExtraDataLogic, IAccountLogic accLogic)
+        public GafManager(IUserExtraDataLogic lUserExtraDataLogic, IAccountRoleLogic accLogic)
         {
             LUserExtraDataLogic = lUserExtraDataLogic;
             AccLogic = accLogic;
@@ -67,7 +67,7 @@ namespace Intotech.Wheelo.Bll.Porsche
             }
 
             Accountrole accountrole = AccLogic.CreateAccount(new AccountRegisterDto() { 
-                Email = dto.email, Firstname = name, Lastname = surname, Password = string.Empty, Method = "facebook" });
+                Email = dto.email, Firstname = name, Lastname = surname, Password = string.Empty}); //, Method = "facebook" 
 
             LUserExtraDataLogic.Insert(new Userextradatum() { Idaccount = accountrole.Id, Token = token });
 

@@ -11,10 +11,8 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.User
 {
     public interface IWheeloAccountService
     {
-        ReturnedResponse<Simpleaccount> Register(Simpleaccount sAccount);
+        ReturnedResponse<Account> Register(AccountRegisterDto sAccount);
 
-        ReturnedResponse<Simpleaccount> Login(LoginDto loginDto);
-
-        //ReturnedResponse<Simpleaccount> Login(LoginDto loginDto);
+        ReturnedResponse<Accountrole> Login(LoginDto loginDto);
     }
 }

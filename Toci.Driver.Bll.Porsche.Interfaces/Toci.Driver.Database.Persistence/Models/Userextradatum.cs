@@ -8,6 +8,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public int Id { get; set; }
         public int? Idaccount { get; set; }
         public string? Token { get; set; }
+        public string? Method { get; set; }
         public string? Tokendatajson { get; set; }
         public DateTime? Createdat { get; set; }
 

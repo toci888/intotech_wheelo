@@ -16,41 +16,47 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 {
     public class WheeloAccountService : IWheeloAccountService
     {
-        protected ISimpleAccountLogic SaLogic;
+        protected IAccountLogic AccLogic;
+        protected IAccountRoleLogic AccRoleLogic;
 
-        public WheeloAccountService(ISimpleAccountLogic saLogic)
+
+        public WheeloAccountService(IAccountLogic accLogic, IAccountRoleLogic accRoleLogic)
         {
-            SaLogic = saLogic;
+            AccLogic = accLogic;
+            AccRoleLogic = accRoleLogic;
         }
 
-        public ReturnedResponse<Simpleaccount> Login(LoginDto loginDto)
+        public ReturnedResponse<Accountrole> Login(LoginDto loginDto)
         {
-            Simpleaccount simpleaccount = SaLogic.Select(m => m.Email == loginDto.Email && m.Password == loginDto.Password).FirstOrDefault();
+            Accountrole simpleaccount = AccRoleLogic.Select(m => m.Email == loginDto.Email && m.Password == loginDto.Password).FirstOrDefault();
 
             if (simpleaccount == null)
             {
-                return new ReturnedResponse<Simpleaccount>(null, "Nie odnaleziono konta.", false);
+                return new ReturnedResponse<Accountrole>(null, "Nie odnaleziono konta.", false);
             }
 
-            return new ReturnedResponse<Simpleaccount>(simpleaccount, I18nTranslation.Translation(I18nTags.Success), true);
+            return new ReturnedResponse<Accountrole>(simpleaccount, I18nTranslation.Translation(I18nTags.Success), true);
         }
 
-        public virtual ReturnedResponse<Simpleaccount> Register(Simpleaccount sAccount)
+        public virtual ReturnedResponse<Account> Register(AccountRegisterDto sAccount)
         {
-            Simpleaccount simpleaccount = SaLogic.Select(m => m.Email == sAccount.Email).FirstOrDefault();
+            Account simpleaccount = AccLogic.Select(m => m.Email == sAccount.Email).FirstOrDefault();
 
             if (simpleaccount != null)
             {
-                return new ReturnedResponse<Simpleaccount>(null, "Konto istnieje.", false);
+                return new ReturnedResponse<Account>(null, "Konto istnieje.", false);
             }
 
-            sAccount.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
+            Account account = new Account() { Name = sAccount.Firstname, 
+                Surname = sAccount.Lastname, Password = sAccount.Password, Email = sAccount.Email };
 
-            simpleaccount = SaLogic.Insert(sAccount);
+            account.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
+
+            simpleaccount = AccLogic.Insert(account);
 
             simpleaccount.Verificationcode = 0;
 
-            return new ReturnedResponse<Simpleaccount>(simpleaccount, I18nTranslation.Translation(I18nTags.Success), true);
+            return new ReturnedResponse<Account>(account, I18nTranslation.Translation(I18nTags.Success), true);
         }
     }
 }

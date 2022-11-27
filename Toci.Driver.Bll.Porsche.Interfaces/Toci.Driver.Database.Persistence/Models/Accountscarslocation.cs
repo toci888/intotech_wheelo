@@ -8,7 +8,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public int? Accountid { get; set; }
         public string? Name { get; set; }
         public string? Surname { get; set; }
-        public string? Phone { get; set; }
         public string? Email { get; set; }
         public string? Streetfrom { get; set; }
         public string? Streetto { get; set; }
