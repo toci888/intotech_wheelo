@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Common;
 using System.Xml.Linq;
+using Intotech.Wheelo.Bll.Models.Account;
 
 namespace Intotech.Wheelo.Bll.Persistence
 {

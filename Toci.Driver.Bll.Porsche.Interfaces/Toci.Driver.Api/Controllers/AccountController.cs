@@ -1,5 +1,4 @@
-﻿using Intotech.Wheelo.Bll.Models;
-using Intotech.Wheelo.Bll.Persistence.Interfaces;
+﻿using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Intotech.Common.Microservices;
@@ -8,6 +7,7 @@ using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Porsche.Interfaces;
 using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
+using Intotech.Wheelo.Bll.Models.Account;
 
 namespace Toci.Driver.Api.Controllers;
 
@@ -24,16 +24,17 @@ public class AccountController : ApiControllerBase<IAccountRoleLogic, Accountrol
         WheeloAccountService = was;
     }
 
-    [HttpPost("new-user-register")]
-    public bool NewEmail(Emailsregister emailsregister)
-    {
-        return true;
-    }
-
+    
     [HttpPost("simple-register")]
     public ReturnedResponse<Account> SimpleRegister(AccountRegisterDto sa)
     {
         return WheeloAccountService.Register(sa);
+    }
+
+    [HttpPost("confirm-email")]
+    public ReturnedResponse<Account> ConfirmEmail(EmailConfirmDto EcDto)
+    {
+        return WheeloAccountService.ConfirmEmail(EcDto);
     }
 
     [HttpPost("simple-login")]

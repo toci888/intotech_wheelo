@@ -1,5 +1,5 @@
 ﻿using Intotech.Common.Bll.Interfaces;
-using Intotech.Wheelo.Bll.Models;
+using Intotech.Wheelo.Bll.Models.Account;
 using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Persistence.Interfaces;

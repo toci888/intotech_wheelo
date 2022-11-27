@@ -1,6 +1,6 @@
 ﻿using Intotech.Common;
 using Intotech.Common.Bll.ComplexResponses;
-using Intotech.Wheelo.Bll.Models;
+using Intotech.Wheelo.Bll.Models.Account;
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
@@ -55,6 +55,22 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             simpleaccount = AccLogic.Insert(account);
 
             simpleaccount.Verificationcode = 0;
+
+            return new ReturnedResponse<Account>(account, I18nTranslation.Translation(I18nTags.Success), true);
+        }
+
+        public ReturnedResponse<Account> ConfirmEmail(EmailConfirmDto EcDto)
+        {
+            Account account = AccLogic.Select(m => m.Email == EcDto.Email && m.Verificationcode == EcDto.Code).FirstOrDefault();
+
+            if (account == null)
+            {
+                return new ReturnedResponse<Account>(null, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false);
+            }
+
+            account.Emailconfirmed = true;
+
+            AccLogic.Update(account);
 
             return new ReturnedResponse<Account>(account, I18nTranslation.Translation(I18nTags.Success), true);
         }

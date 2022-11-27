@@ -14,5 +14,6 @@
         public const string Ukrainian = "_ukrainian";
         public const string Swedish = "_swedish";
         public const string Dutch = "_dutch";
+        public const string FailVerifyingAccount = "_failVerifyingAccount";
     }
 }

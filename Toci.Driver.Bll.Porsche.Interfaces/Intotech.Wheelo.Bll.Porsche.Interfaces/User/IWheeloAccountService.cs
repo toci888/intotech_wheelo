@@ -1,5 +1,5 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
-using Intotech.Wheelo.Bll.Models;
+using Intotech.Wheelo.Bll.Models.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +14,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.User
         ReturnedResponse<Account> Register(AccountRegisterDto sAccount);
 
         ReturnedResponse<Accountrole> Login(LoginDto loginDto);
+
+        ReturnedResponse<Account> ConfirmEmail(EmailConfirmDto EcDto);
     }
 }
