@@ -1,4 +1,6 @@
-
+drop table translations;
+drop table languages;
+drop table tags;
 
 create table tags
 (
