@@ -13,5 +13,11 @@ namespace Intotech.Wheelo.Integration.Api.Controllers
         {
             return new GoogleService().GetLocationByPlaceId(placeId);
         }
+
+        [HttpGet("address-autocomplete")]
+        public virtual GeographicLocation[] GetAutocompleteHints(string query)
+        {
+            return new GoogleService().GetLocationsByQueryText(query);
+        }
     }
 }

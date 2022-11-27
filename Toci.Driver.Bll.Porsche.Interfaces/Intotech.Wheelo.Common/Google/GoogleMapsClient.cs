@@ -16,6 +16,7 @@ namespace Intotech.Wheelo.Common.Google
         private const string Url = "https://maps.googleapis.com/";
         private const string Uri = "maps/api/place/details/json?place_id={0}&key={1}";
 
+
         protected HttpClient HttpClient = new HttpClient();
 
         public virtual GooglePlaceGeoModel CallGoogleApiPlaceId(string request)
@@ -27,6 +28,17 @@ namespace Intotech.Wheelo.Common.Google
             string json = HttpClient.GetAsync(uri).Result.Content.ReadAsStringAsync().Result;
 
             return JsonSerializer.Deserialize<GooglePlaceGeoModel>(json);
+        }
+
+        public virtual GooglePredictionsGeoModel CallGoogleAutocomplete(string query)
+        {
+            string uri = string.Format("maps/api/place/autocomplete/json?input={0}&language=pl&types=geocode&key={1}", query, ApiKey);
+
+            HttpClient.BaseAddress = new Uri(Url);
+
+            string json = HttpClient.GetAsync(uri).Result.Content.ReadAsStringAsync().Result;
+
+            return JsonSerializer.Deserialize<GooglePredictionsGeoModel>(json);
         }
     }
 }

@@ -10,5 +10,7 @@ namespace Intotech.Wheelo.Common.Interfaces.Google
     public interface IGoogleService
     {
         GeographicLocation GetLocationByPlaceId(string placeId);
+
+        GeographicLocation[] GetLocationsByQueryText(string query);
     }
 }
