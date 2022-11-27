@@ -230,7 +230,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.I18n.Databa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.I18n.Seed", "..\Intotech.Wheelo.I18n.Seed\Intotech.Wheelo.I18n.Seed.csproj", "{2F055650-8063-4710-A12D-C835EF0AE634}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Common.Interfaces", "..\Intotech.Wheelo.Common.Interfaces\Intotech.Wheelo.Common.Interfaces.csproj", "{6C918C5E-3C20-4EB2-9F14-B82A83DA4BDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Common.Interfaces", "..\Intotech.Wheelo.Common.Interfaces\Intotech.Wheelo.Common.Interfaces.csproj", "{6C918C5E-3C20-4EB2-9F14-B82A83DA4BDE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.Integration", "Intotech.Wheelo.Integration", "{14C2EDD9-09A5-48DD-99FA-AC51331C789F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Integration.Api", "..\Intotech.Wheelo.Integration.Api\Intotech.Wheelo.Integration.Api.csproj", "{5D26FDBE-5AB3-42DC-8B99-908748E82453}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -536,6 +540,14 @@ Global
 		{6C918C5E-3C20-4EB2-9F14-B82A83DA4BDE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6C918C5E-3C20-4EB2-9F14-B82A83DA4BDE}.Release|x64.ActiveCfg = Release|Any CPU
 		{6C918C5E-3C20-4EB2-9F14-B82A83DA4BDE}.Release|x64.Build.0 = Release|Any CPU
+		{5D26FDBE-5AB3-42DC-8B99-908748E82453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D26FDBE-5AB3-42DC-8B99-908748E82453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D26FDBE-5AB3-42DC-8B99-908748E82453}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5D26FDBE-5AB3-42DC-8B99-908748E82453}.Debug|x64.Build.0 = Debug|Any CPU
+		{5D26FDBE-5AB3-42DC-8B99-908748E82453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D26FDBE-5AB3-42DC-8B99-908748E82453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D26FDBE-5AB3-42DC-8B99-908748E82453}.Release|x64.ActiveCfg = Release|Any CPU
+		{5D26FDBE-5AB3-42DC-8B99-908748E82453}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -568,6 +580,7 @@ Global
 		{842D52B0-EFF2-4E15-AD2D-3E516C851115} = {61CCF297-620A-40F2-9052-7A5396FA48E4}
 		{BA2807DF-80BF-43EE-8ED0-19038DCB4092} = {15070A0F-D28D-473A-8C8D-2D6BD2E8C382}
 		{2F055650-8063-4710-A12D-C835EF0AE634} = {15070A0F-D28D-473A-8C8D-2D6BD2E8C382}
+		{5D26FDBE-5AB3-42DC-8B99-908748E82453} = {14C2EDD9-09A5-48DD-99FA-AC51331C789F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {958786F8-D2E4-4AAC-949D-3CD908D8AE36}

@@ -41,7 +41,7 @@ namespace Intotech.Wheelo.Common.Google
                 (googlePlaceGeoModel.result.geometry.location.lng + 0.002).ToString()
             };
 
-            geographicLocation.display_name = geographicLocation.display_place = geographicLocation.display_address = 
+            geographicLocation.display_name = geographicLocation.display_address = 
                 geographicLocation.address.ToString();
             geographicLocation.place_id = googlePlaceGeoModel.result.place_id;
 
