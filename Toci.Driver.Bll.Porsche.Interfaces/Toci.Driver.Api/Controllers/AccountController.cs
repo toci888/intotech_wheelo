@@ -45,7 +45,7 @@ public class AccountController : ApiControllerBase<IAccountRoleLogic, Accountrol
     }
 
     [HttpPost("login")]
-    public ActionResult<ReturnedResponse<Accountrole>> SimpleLogin(LoginDto lDto)
+    public ActionResult<Accountrole> SimpleLogin(LoginDto lDto)
     {
         ReturnedResponse<Accountrole> sa = WheeloAccountService.Login(lDto);
 
@@ -54,7 +54,7 @@ public class AccountController : ApiControllerBase<IAccountRoleLogic, Accountrol
             return NotFound(sa);
         }
 
-        return sa;
+        return sa.MethodResult;
     }
 
 

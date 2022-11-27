@@ -7,6 +7,7 @@ using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
 using Intotech.Wheelo.Common;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,7 +41,9 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 return new ReturnedResponse<Accountrole>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false);
             }
 
-            return new ReturnedResponse<Accountrole>(simpleaccount, I18nTranslation.Translation(I18nTags.Success), true);
+            AccountRoleDto accountRoleDto = DtoModelMapper.Map<AccountRoleDto, Accountrole>(simpleaccount);
+
+            return new ReturnedResponse<Accountrole>(accountRoleDto, I18nTranslation.Translation(I18nTags.Success), true);
         }
 
         public virtual ReturnedResponse<AccountRegisterDto> Register(AccountRegisterDto sAccount)
