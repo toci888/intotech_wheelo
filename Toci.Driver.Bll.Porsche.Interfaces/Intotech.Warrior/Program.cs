@@ -6,6 +6,8 @@ using Intotech.Wheelo.Bll.Models.Social;
 using Intotech.Wheelo.Bll.Porsche;
 using Intotech.Wheelo.Bll.Porsche.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.User;
+using Intotech.Wheelo.Common.Google;
+using Intotech.Wheelo.Common.Interfaces.Models;
 using Intotech.Wheelo.Social.Tests.Persistence.Seed;
 using Intotech.Wheelo.Tests.Persistence.Seed;
 using System.Reflection;
@@ -13,6 +15,16 @@ using Toci.Driver.Database.Persistence.Models;
 
 
 Console.WriteLine("Warrior is seeding your dbs....");
+
+//GoogleMapsClient googleMapsClient = new GoogleMapsClient(); //ChIJ0eZpEy9FBEcRieu3xGIT0wc
+
+GoogleService googleService = new GoogleService();
+
+var doopa = googleService.GetLocationByPlaceId("ChIJ0eZpEy9FBEcRieu3xGIT0wc");
+
+//GooglePlaceGeoModel model = googleMapsClient.CallGoogleApiPlaceId("ChIJ0eZpEy9FBEcRieu3xGIT0wc");
+
+int i = 0;
 
 //IGafManager gafManager = new GafManager();
 
@@ -29,7 +41,7 @@ Console.WriteLine("Warrior is seeding your dbs....");
 //sa.Insert();
 //new SeedFriendSuggestion().Insert();
 
-new WheeloMainSeedManager().SeedAllDb();
+//new WheeloMainSeedManager().SeedAllDb();
 
 //new SocialSeedManager().SeedAllDb();
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Common.Interfaces.Models
 {
-    public interface IAddress
+    public class Address
     {
         public string name { get; set; }
         public string house_number { get; set; }
@@ -21,5 +21,11 @@ namespace Intotech.Wheelo.Common.Interfaces.Models
         public string postcode { get; set; }
         public string country { get; set; }
         public string country_code { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}, {1} {2}, {3}", city, road, house_number, postcode);
+
+        }
     }
 }
