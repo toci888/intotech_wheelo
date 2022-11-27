@@ -32,7 +32,12 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (simpleaccount == null)
             {
-                return new ReturnedResponse<Accountrole>(null, "Nie odnaleziono konta.", false);
+                return new ReturnedResponse<Accountrole>(null, I18nTranslation.Translation(I18nTags.AccountNotFound), false);
+            }
+
+            if (!simpleaccount.Emailconfirmed.Value)
+            {
+                return new ReturnedResponse<Accountrole>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false);
             }
 
             return new ReturnedResponse<Accountrole>(simpleaccount, I18nTranslation.Translation(I18nTags.Success), true);

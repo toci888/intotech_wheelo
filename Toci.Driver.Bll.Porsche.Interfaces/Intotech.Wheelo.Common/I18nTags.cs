@@ -15,5 +15,7 @@
         public const string Swedish = "_swedish";
         public const string Dutch = "_dutch";
         public const string FailVerifyingAccount = "_failVerifyingAccount";
+        public const string EmailIsNotConfirmed = "_emailIsNotConfirmed";
+        public const string AccountNotFound = "_accountNotFound";
     }
 }
