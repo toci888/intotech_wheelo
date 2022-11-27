@@ -48,7 +48,7 @@ namespace Intotech.Wheelo.Bll.Porsche
 
         protected virtual Accountrole GoogleAccountExtraData(GoogleUserDto dto, string token)
         {
-            Accountrole accountrole = AccLogic.CreateAccount(new AccountRegisterDto() { Email = dto.email, Firstname = dto.name, Lastname = dto.given_name  });
+            Accountrole accountrole = new Accountrole(); //= AccLogic.CreateAccount(new AccountRegisterDto() { Email = dto.email, Firstname = dto.name, Lastname = dto.given_name  });
 
             LUserExtraDataLogic.Insert(new Userextradatum() { Idaccount = accountrole.Id, Token = token });
 
@@ -67,8 +67,8 @@ namespace Intotech.Wheelo.Bll.Porsche
                 surname= nameSurname[1];
             }
 
-            Accountrole accountrole = AccLogic.CreateAccount(new AccountRegisterDto() { 
-                Email = dto.email, Firstname = name, Lastname = surname, Password = string.Empty}); //, Method = "facebook" 
+            Accountrole accountrole = new Accountrole(); //  AccLogic.CreateAccount(new AccountRegisterDto() { 
+                //Email = dto.email, Firstname = name, Lastname = surname, Password = string.Empty}); //, Method = "facebook" 
 
             LUserExtraDataLogic.Insert(new Userextradatum() { Idaccount = accountrole.Id, Token = token });
 

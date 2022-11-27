@@ -25,10 +25,17 @@ public class AccountController : ApiControllerBase<IAccountRoleLogic, Accountrol
     }
 
     
-    [HttpPost("simple-register")]
-    public ReturnedResponse<Account> SimpleRegister(AccountRegisterDto sa)
+    [HttpPost("register")]
+    public ActionResult<AccountRegisterDto> SimpleRegister(AccountRegisterDto sa)
     {
-        return WheeloAccountService.Register(sa);
+        ReturnedResponse<AccountRegisterDto>  reg = WheeloAccountService.Register(sa);
+
+        if (!reg.IsSuccess)
+        {
+            return BadRequest(reg);
+        }
+
+        return sa;
     }
 
     [HttpPost("confirm-email")]
@@ -37,7 +44,7 @@ public class AccountController : ApiControllerBase<IAccountRoleLogic, Accountrol
         return WheeloAccountService.ConfirmEmail(EcDto);
     }
 
-    [HttpPost("simple-login")]
+    [HttpPost("login")]
     public ActionResult<ReturnedResponse<Accountrole>> SimpleLogin(LoginDto lDto)
     {
         ReturnedResponse<Accountrole> sa = WheeloAccountService.Login(lDto);
@@ -51,7 +58,7 @@ public class AccountController : ApiControllerBase<IAccountRoleLogic, Accountrol
     }
 
 
-    [AllowAnonymous]
+   /* [AllowAnonymous]
     [HttpPost("register")]
     public Accountrole RegisterUser([FromBody] AccountRegisterDto user)
     {
@@ -62,14 +69,14 @@ public class AccountController : ApiControllerBase<IAccountRoleLogic, Accountrol
 
         //return GafManager.RegisterByMethod(user.Method, "");
     }
-
-    [AllowAnonymous]
+   */
+   /* [AllowAnonymous]
     [HttpPost("login")]
     public ActionResult<Account> Login([FromBody] LoginDto user)
     {
         Accountrole loggedUser = Logic.GenerateJwt(user);
         return Ok(loggedUser);
-    }
+    }*/
 
     [AllowAnonymous]
     [HttpPost("reset-password")]

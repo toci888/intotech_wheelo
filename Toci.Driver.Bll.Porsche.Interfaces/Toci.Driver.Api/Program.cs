@@ -15,6 +15,7 @@ using Toci.Driver.Bll.Porsche.Interfaces.Association;
 using Intotech.Wheelo.Bll.Porsche.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
 using Intotech.Wheelo.Bll.Porsche.User;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -75,6 +76,11 @@ builder.Services.AddScoped<IGafManager, GafManager>();
 builder.Services.AddScoped<IWheeloAccountService, WheeloAccountService>();
 
 builder.Services.AddSingleton(authenticationSettings);
+
+builder.Services.AddControllers().AddJsonOptions(options => {
+    options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+});
 
 var app = builder.Build();
 

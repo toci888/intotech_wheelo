@@ -43,17 +43,17 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             return new ReturnedResponse<Accountrole>(simpleaccount, I18nTranslation.Translation(I18nTags.Success), true);
         }
 
-        public virtual ReturnedResponse<Account> Register(AccountRegisterDto sAccount)
+        public virtual ReturnedResponse<AccountRegisterDto> Register(AccountRegisterDto sAccount)
         {
             Account simpleaccount = AccLogic.Select(m => m.Email == sAccount.Email).FirstOrDefault();
 
             if (simpleaccount != null)
             {
-                return new ReturnedResponse<Account>(null, "Konto istnieje.", false);
+                return new ReturnedResponse<AccountRegisterDto>(null, "Konto istnieje.", false);
             }
 
-            Account account = new Account() { Name = sAccount.Firstname, 
-                Surname = sAccount.Lastname, Password = sAccount.Password, Email = sAccount.Email };
+            Account account = new Account() { Name = sAccount.FirstName, 
+                Surname = sAccount.LastName, Password = sAccount.Password, Email = sAccount.Email };
 
             account.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
 
@@ -61,7 +61,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             simpleaccount.Verificationcode = 0;
 
-            return new ReturnedResponse<Account>(account, I18nTranslation.Translation(I18nTags.Success), true);
+            return new ReturnedResponse<AccountRegisterDto>(sAccount, I18nTranslation.Translation(I18nTags.Success), true);
         }
 
         public ReturnedResponse<Account> ConfirmEmail(EmailConfirmDto EcDto)
