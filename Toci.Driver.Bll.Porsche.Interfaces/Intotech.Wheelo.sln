@@ -228,7 +228,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.I18n", "Int
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.I18n.Database.Persistence", "..\Intotech.Wheelo.I18n.Database.Persistence\Intotech.Wheelo.I18n.Database.Persistence.csproj", "{BA2807DF-80BF-43EE-8ED0-19038DCB4092}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.I18n.Seed", "..\Intotech.Wheelo.I18n.Seed\Intotech.Wheelo.I18n.Seed.csproj", "{2F055650-8063-4710-A12D-C835EF0AE634}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.I18n.Seed", "..\Intotech.Wheelo.I18n.Seed\Intotech.Wheelo.I18n.Seed.csproj", "{2F055650-8063-4710-A12D-C835EF0AE634}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Common.Interfaces", "..\Intotech.Wheelo.Common.Interfaces\Intotech.Wheelo.Common.Interfaces.csproj", "{6C918C5E-3C20-4EB2-9F14-B82A83DA4BDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -526,6 +528,14 @@ Global
 		{2F055650-8063-4710-A12D-C835EF0AE634}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2F055650-8063-4710-A12D-C835EF0AE634}.Release|x64.ActiveCfg = Release|Any CPU
 		{2F055650-8063-4710-A12D-C835EF0AE634}.Release|x64.Build.0 = Release|Any CPU
+		{6C918C5E-3C20-4EB2-9F14-B82A83DA4BDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C918C5E-3C20-4EB2-9F14-B82A83DA4BDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C918C5E-3C20-4EB2-9F14-B82A83DA4BDE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6C918C5E-3C20-4EB2-9F14-B82A83DA4BDE}.Debug|x64.Build.0 = Debug|Any CPU
+		{6C918C5E-3C20-4EB2-9F14-B82A83DA4BDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C918C5E-3C20-4EB2-9F14-B82A83DA4BDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C918C5E-3C20-4EB2-9F14-B82A83DA4BDE}.Release|x64.ActiveCfg = Release|Any CPU
+		{6C918C5E-3C20-4EB2-9F14-B82A83DA4BDE}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
