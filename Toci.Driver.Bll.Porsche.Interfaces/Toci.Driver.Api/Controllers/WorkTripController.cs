@@ -1,4 +1,5 @@
-﻿using Intotech.Common.Microservices;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Microservices;
 using Intotech.Wheelo.Bll.Models;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating;
@@ -17,7 +18,7 @@ namespace Toci.Driver.Api.Controllers
 
         [HttpPost]
         [Route("add-work-trip")]
-        public List<Vaccountscollocation> AddWorkTrip(WorktripDto wt)
+        public ReturnedResponse<List<Vaccountscollocation>> AddWorkTrip(WorktripDto wt)
         {
             wt.Fromhour = new TimeOnly(wt.IFromHour, wt.IFromMinute);
             wt.Tohour = new TimeOnly(wt.IToHour, wt.IToMinute);
@@ -27,7 +28,7 @@ namespace Toci.Driver.Api.Controllers
 
         [HttpGet]
         [Route("associated-users")]
-        public List<Vaccountscollocation> GetAssociatedUsers(int accountId)
+        public ReturnedResponse<List<Vaccountscollocation>> GetAssociatedUsers(int accountId)
         {
             return Logic.GetUserAssociations(accountId);
         }

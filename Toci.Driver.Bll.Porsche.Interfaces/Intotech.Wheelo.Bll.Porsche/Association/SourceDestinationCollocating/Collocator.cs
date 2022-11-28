@@ -1,4 +1,5 @@
 ﻿using Intotech.Common.Bll;
+using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating;
 using System;
@@ -27,7 +28,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             AccountCollocationLogic = accountCollocationLogic;
         }
 
-        public virtual List<Vaccountscollocation> Collocate(int accountId)
+        public virtual ReturnedResponse<List<Vaccountscollocation>> Collocate(int accountId)
         {
             Worktrip baseWorktrip = FirstLogic.Select(m => m.Idaccount == accountId).First();
 
@@ -62,19 +63,19 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
                 });
             }
 
-            return AccountCollocationLogic.Select(m => m.Accountid == accountId).ToList();
+            return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == accountId).ToList(), "", true);
         }
 
-        public virtual List<Vaccountscollocation> AddWorkTrip(Worktrip worktrip)
+        public virtual ReturnedResponse<List<Vaccountscollocation>> AddWorkTrip(Worktrip worktrip)
         {
             Worktrip wt = FirstLogic.Insert(worktrip);
 
             return Collocate(wt.Idaccount.Value);
         }
 
-        public virtual List<Vaccountscollocation> GetUserAssociations(int accountId)
+        public virtual ReturnedResponse<List<Vaccountscollocation>> GetUserAssociations(int accountId)
         {
-            return AccountCollocationLogic.Select(m => m.Accountid == accountId || m.Suggestedaccountid == accountId).ToList();
+            return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == accountId || m.Suggestedaccountid == accountId).ToList(), "", true);
         }
     }
 }

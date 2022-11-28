@@ -21,7 +21,7 @@ namespace Intotech.Wheelo.Social.Bll.Lamborgini
 
         public virtual Accountrole GetUserAccounts(int accountId)
         {
-            return AccountLogic.Select(m => m.Id.Value == accountId).FirstOrDefault();
+            return AccountLogic.Select(m => m.Id.Value == accountId).FirstOrDefault(); //HttpClient -> api wheelo (nie social czasami)
         }
 
         public virtual List<Accountrole> GetUsersAccounts(List<int> accountIds)

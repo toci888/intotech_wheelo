@@ -1,4 +1,5 @@
-﻿using Intotech.Common.Microservices;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Microservices;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.PersistenceAggregation;
@@ -16,7 +17,7 @@ namespace Toci.Driver.Api.Controllers
         }
 
         [HttpPost("make-match")]
-        public List<Vaccountscollocation> MakeMatch(int accountId)
+        public ReturnedResponse<List<Vaccountscollocation>> MakeMatch(int accountId)
         {
             return Logic.Collocate(accountId);
         }
