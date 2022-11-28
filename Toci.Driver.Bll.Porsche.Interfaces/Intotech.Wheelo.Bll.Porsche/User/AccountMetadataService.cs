@@ -27,6 +27,50 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
         public virtual ReturnedResponse<AccountMetadataDto> Create(AccountMetadataDto accountMetaDto)
         {
+            Accountmetadatum modelCheck = AccountMetaLogic.Select(m => m.Idaccount == accountMetaDto.AccountId).FirstOrDefault();
+
+            if (modelCheck != null)
+            {
+                return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslation.Translation(I18nTags.DataAlreadyExistInDatabase), false);
+            }
+
+            Accountmetadatum model = GetAccountmetadatum(accountMetaDto);
+
+            model = AccountMetaLogic.Insert(model);
+
+            if (model.Id < 1)
+            {
+                return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslation.Translation(I18nTags.FailedToAddInformation), false);
+            }
+
+            return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslation.Translation(I18nTags.Success), true);
+        }
+
+        public virtual ReturnedResponse<AccountMetadataDto> Update(AccountMetadataDto accountMetaDto)
+        {
+            Accountmetadatum modelCheck = AccountMetaLogic.Select(m => m.Idaccount == accountMetaDto.AccountId).FirstOrDefault();
+
+            if (modelCheck != null)
+            {
+                Accountmetadatum model = GetAccountmetadatum(accountMetaDto);
+                
+                model.Id = modelCheck.Id;
+                model.Createdat = modelCheck.Createdat;
+
+                model = AccountMetaLogic.Update(model);
+
+                return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslation.Translation(I18nTags.Success), true);
+            }
+
+            Accountmetadatum modelIns = GetAccountmetadatum(accountMetaDto);
+
+            modelIns = AccountMetaLogic.Insert(modelIns);
+
+            return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslation.Translation(I18nTags.Success), true);
+        }
+
+        protected virtual Accountmetadatum GetAccountmetadatum(AccountMetadataDto accountMetaDto)
+        {
             Accountmetadatum model = MapDtoToModel(accountMetaDto);
 
             Geographicregion geographicregion = GeographicRegionLogic.Select(m => m.Name == accountMetaDto.City).FirstOrDefault();
@@ -43,14 +87,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 model.Idoccupation = occupation.Id;
             }
 
-            model = AccountMetaLogic.Insert(model);
-
-            if (model.Id < 1)
-            {
-                return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslation.Translation(I18nTags.FailedToAddInformation), false);
-            }
-
-            return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslation.Translation(I18nTags.Success), true);
+            return model;
         }
 
         protected virtual Accountmetadatum MapDtoToModel(AccountMetadataDto dto)

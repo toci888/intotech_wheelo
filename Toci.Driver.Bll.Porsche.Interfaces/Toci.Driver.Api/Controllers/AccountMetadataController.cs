@@ -19,5 +19,11 @@ namespace Toci.Driver.Api.Controllers
         {
             return Logic.Create(accountMetaDto);
         }
+
+        [HttpPut("account-metadata")]
+        public ReturnedResponse<AccountMetadataDto> Update(AccountMetadataDto accountMetaDto)
+        {
+            return Logic.Update(accountMetaDto);
+        }
     }
 }
