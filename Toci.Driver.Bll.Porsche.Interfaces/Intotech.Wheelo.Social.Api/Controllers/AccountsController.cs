@@ -1,4 +1,5 @@
-﻿using Intotech.Common.Microservices;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Microservices;
 using Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Toci.Driver.Database.Persistence.Models;
@@ -14,8 +15,8 @@ namespace Intotech.Wheelo.Social.Api.Controllers
         }
 
         [HttpGet]
-        [Route("get-user-account")]
-        public Accountrole GetUserAccount(int accountId)
+        [Route("user-account")]
+        public ReturnedResponse<Accountrole> GetUserAccount(int accountId)
         {
             return Logic.GetUserAccounts(accountId);
         }

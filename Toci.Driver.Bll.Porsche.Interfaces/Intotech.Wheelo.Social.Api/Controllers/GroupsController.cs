@@ -1,4 +1,5 @@
-﻿using Intotech.Common.Microservices;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Microservices;
 using Intotech.Wheelo.Bll.Models.Social;
 using Intotech.Wheelo.Social.Bll.Pontiac.Interfaces;
 using Intotech.Wheelo.Social.Database.Persistence.Models;
@@ -15,15 +16,15 @@ namespace Intotech.Wheelo.Social.Api.Controllers
         }
 
         [HttpGet]
-        [Route("get-group-with-members")]
-        public GroupMemebersDto GetGroupWithMembers(int groupId)
+        [Route("group-with-members")]
+        public ReturnedResponse<GroupMemebersDto> GetGroupWithMembers(int groupId)
         {
             return Logic.GetGroupWithMembers(groupId);
         }
 
         [HttpPost]
         [Route("add-member-to-group")]
-        public GroupMemberAddDto AddMemberToGroup([FromBody]Groupmember memberAdd)
+        public ReturnedResponse<GroupMemberAddDto> AddMemberToGroup([FromBody]Groupmember memberAdd)
         {
             return Logic.AddMemberToGroup(memberAdd);
         }

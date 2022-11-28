@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,8 @@ namespace Intotech.Wheelo.Bll.Bentley.Interfaces
 {
     public interface ICarsBrandsModelManager
     {
-        List<Carsbrand> GetCarsBrandsForWildcard(string beginning);
+        ReturnedResponse<List<Carsbrand>> GetCarsBrandsForWildcard(string beginning);
 
-        List<Carsmodel> GetModelsForBrandForWildcard(int carBrand, string beginning);
+        ReturnedResponse<List<Carsmodel>> GetModelsForBrandForWildcard(int carBrand, string beginning);
     }
 }

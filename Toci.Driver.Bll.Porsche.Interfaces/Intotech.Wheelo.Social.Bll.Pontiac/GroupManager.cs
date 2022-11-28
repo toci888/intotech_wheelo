@@ -1,4 +1,5 @@
 ﻿using Intotech.Common;
+using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Models.Social;
 using Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces;
 using Intotech.Wheelo.Social.Bll.Persistence.Interfaces;
@@ -26,7 +27,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
             GroupMemberLogic = groupMemberLogic;
         }
 
-        public virtual GroupMemberAddDto AddMemberToGroup(Groupmember model)
+        public virtual ReturnedResponse<GroupMemberAddDto> AddMemberToGroup(Groupmember model)
         {
             Groupmember memberAdded = GroupMemberLogic.Insert(model);
 
@@ -42,7 +43,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
             return groupMemberAddDto;
         }
 
-        public virtual GroupMemebersDto GetGroupWithMembers(int groupId)
+        public virtual ReturnedResponse<GroupMemebersDto> GetGroupWithMembers(int groupId)
         {
             GroupMemebersDto result = new GroupMemebersDto();
 

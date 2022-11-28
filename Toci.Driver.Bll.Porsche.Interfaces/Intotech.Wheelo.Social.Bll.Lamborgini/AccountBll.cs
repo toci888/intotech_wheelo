@@ -1,4 +1,5 @@
-﻿using Intotech.Wheelo.Bll.Persistence.Interfaces;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,12 +19,12 @@ namespace Intotech.Wheelo.Social.Bll.Lamborgini
             AccountLogic = accountLogic;
         }
 
-        public virtual Accountrole GetUserAccounts(int accountId)
+        public virtual ReturnedResponse<Accountrole> GetUserAccounts(int accountId)
         {
-            return AccountLogic.Select(m => m.Id.Value == accountId).FirstOrDefault();
+            return new ReturnedResponse<Accountrole>(AccountLogic.Select(m => m.Id.Value == accountId).FirstOrDefault(),"",true);
         }
 
-        public virtual List<Accountrole> GetUsersAccounts(List<int> accountIds)
+        public virtual ReturnedResponse<List<Accountrole>> GetUsersAccounts(List<int> accountIds)
         {
             return AccountLogic.Select(m => accountIds.Contains(m.Id.Value)).ToList();
         }

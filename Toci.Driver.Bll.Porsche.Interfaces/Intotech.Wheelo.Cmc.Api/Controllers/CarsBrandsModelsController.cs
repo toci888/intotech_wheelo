@@ -1,4 +1,5 @@
-﻿using Intotech.Common.Microservices;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Microservices;
 using Intotech.Wheelo.Bll.Bentley.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Toci.Driver.Database.Persistence.Models;
@@ -15,7 +16,7 @@ namespace Intotech.Wheelo.Cmc.Api.Controllers
 
 		[HttpGet]
 		[Route("get-cars-brands-for-wildcard")]
-		public List<Carsbrand> GetCarsBrandsForWildcard(string beginning)
+		public ReturnedResponse<List<Carsbrand>> GetCarsBrandsForWildcard(string beginning)
 		{
 			return Logic.GetCarsBrandsForWildcard(beginning);
 		}
@@ -23,7 +24,7 @@ namespace Intotech.Wheelo.Cmc.Api.Controllers
 
 		[HttpGet]
 		[Route("get-cars-models-for-wildcard")]
-		public List<Carsmodel> GetCarsModelsForWildcard(int brandId, string beginning)
+		public ReturnedResponse<List<Carsmodel>> GetCarsModelsForWildcard(int brandId, string beginning)
 		{
 			return Logic.GetModelsForBrandForWildcard(brandId, beginning);
 		}
