@@ -40,7 +40,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
 
             groupMemberAddDto.GroupName = group.Name;
 
-            return groupMemberAddDto;
+            return new ReturnedResponse<GroupMemberAddDto>(groupMemberAddDto, "", true);
         }
 
         public virtual ReturnedResponse<GroupMemebersDto> GetGroupWithMembers(int groupId)
@@ -57,7 +57,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
 
             result.GroupMembers = accountroles;
 
-            return result;
+            return new ReturnedResponse < GroupMemebersDto >(result, "", true);
         }
     }
 }
