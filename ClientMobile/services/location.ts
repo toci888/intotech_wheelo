@@ -1,16 +1,30 @@
 import axios from "axios";
 
 import { endpoints, locationAPIKEY } from "../constants/constants";
-import { Location } from "../types/locationIQ";
+import { GoogleMaps, Location } from "../types/locationIQ";
 
 export const getSuggestedLocations = async (text: string, limit?: number) => {
   try {
     let finalLimit = 8;
     if (limit) finalLimit = limit;
 
-    // const url = `${endpoints.autoComplete}?location=${text}&limit=${finalLimit}`;
-    const url = `https://api.locationiq.com/v1/autocomplete.php?key=${locationAPIKEY}=${text}&limit=${limit}`;
-    const { data } = await axios.get<Location[]>(url);
+    const urlPlaceId = `http://20.100.196.118:5108/api/GoogleMap/address-autocomplete?query=${text}`
+    const {data} = await axios.get<GoogleMaps[]>(urlPlaceId);
+    
+    if (data) return data;
+
+    return [];
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+export const getLocationByPlaceId = async (placeId: string) => {
+  try {
+    const url = `http://20.100.196.118:5108/api/GoogleMap/recognize-place-id?placeId=${placeId}`
+    const {data} = await axios.get<Location>(url);
+
     if (data) return data;
 
     return [];
