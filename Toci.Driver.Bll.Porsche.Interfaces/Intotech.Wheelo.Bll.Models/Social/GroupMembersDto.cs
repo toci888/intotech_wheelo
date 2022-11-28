@@ -7,7 +7,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Models.Social
 {
-    public class GroupMemebersDto 
+    public class GroupMembersDto 
     {
         public int GroupId { get; set; }
 

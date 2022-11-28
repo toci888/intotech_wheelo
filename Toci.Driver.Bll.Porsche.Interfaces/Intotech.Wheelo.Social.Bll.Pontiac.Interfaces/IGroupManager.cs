@@ -11,7 +11,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac.Interfaces
 {
     public interface IGroupManager
     {
-        ReturnedResponse<GroupMemebersDto> GetGroupWithMembers(int groupId);
+        ReturnedResponse<GroupMembersDto> GetGroupWithMembers(int groupId);
 
         ReturnedResponse<GroupMemberAddDto> AddMemberToGroup(Groupmember model);
     }

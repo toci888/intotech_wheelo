@@ -26,7 +26,7 @@ namespace Intotech.Wheelo.Social.Bll.Lamborgini
 
         public virtual ReturnedResponse<List<Accountrole>> GetUsersAccounts(List<int> accountIds)
         {
-            return AccountLogic.Select(m => accountIds.Contains(m.Id.Value)).ToList();
+            return new ReturnedResponse<List<Accountrole>>(AccountLogic.Select(m => accountIds.Contains(m.Id.Value)).ToList(), "", true);
         }
     }
 }

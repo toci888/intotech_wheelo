@@ -56,7 +56,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
 
         protected virtual OrganizemeetingDto GetMeetingDto(int accountId, OrganizemeetingDto result)
         {
-            Accountrole accR = AccountManager.GetUserAccounts(accountId);
+            Accountrole accR = AccountManager.GetUserAccounts(accountId).MethodResult;
 
             result.OrganizerEmail = accR.Email;
             result.OrganizerName = accR.Name;

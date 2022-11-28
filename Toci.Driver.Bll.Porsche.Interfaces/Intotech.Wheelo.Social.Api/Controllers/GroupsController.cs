@@ -17,7 +17,7 @@ namespace Intotech.Wheelo.Social.Api.Controllers
 
         [HttpGet]
         [Route("group-with-members")]
-        public ReturnedResponse<GroupMemebersDto> GetGroupWithMembers(int groupId)
+        public ReturnedResponse<GroupMembersDto> GetGroupWithMembers(int groupId)
         {
             return Logic.GetGroupWithMembers(groupId);
         }

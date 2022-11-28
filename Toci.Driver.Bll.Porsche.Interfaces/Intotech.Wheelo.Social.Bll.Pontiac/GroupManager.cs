@@ -33,8 +33,8 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
 
             GroupMemberAddDto groupMemberAddDto = DtoModelMapper.Map<GroupMemberAddDto, Groupmember>(memberAdded);
 
-            groupMemberAddDto.MemberWhoAdded = AccountLogic.GetUserAccounts(memberAdded.Idaccountwhoadded);
-            groupMemberAddDto.AddedMember = AccountLogic.GetUserAccounts(memberAdded.Idaccount);
+            groupMemberAddDto.MemberWhoAdded = AccountLogic.GetUserAccounts(memberAdded.Idaccountwhoadded).MethodResult;
+            groupMemberAddDto.AddedMember = AccountLogic.GetUserAccounts(memberAdded.Idaccount).MethodResult;
 
             Group group = GroupLogic.Select(m => m.Id == memberAdded.Idgroups).First();
 
@@ -43,21 +43,21 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
             return new ReturnedResponse<GroupMemberAddDto>(groupMemberAddDto, "", true);
         }
 
-        public virtual ReturnedResponse<GroupMemebersDto> GetGroupWithMembers(int groupId)
+        public virtual ReturnedResponse<GroupMembersDto> GetGroupWithMembers(int groupId)
         {
-            GroupMemebersDto result = new GroupMemebersDto();
+            GroupMembersDto result = new GroupMembersDto();
 
             Group group = GroupLogic.Select(m => m.Id == groupId).First();
             List<Groupmember> groupmembers = GroupMemberLogic.Select(m => m.Idgroups == groupId).ToList();
 
-            List<Accountrole> accountroles = AccountLogic.GetUsersAccounts(groupmembers.Select(m => m.Idaccount).ToList());
+            List<Accountrole> accountroles = AccountLogic.GetUsersAccounts(groupmembers.Select(m => m.Idaccount).ToList()).MethodResult;
 
             result.GroupName = group.Name;
             result.GroupId = group.Id;
 
             result.GroupMembers = accountroles;
 
-            return new ReturnedResponse < GroupMemebersDto >(result, "", true);
+            return new ReturnedResponse < GroupMembersDto >(result, "", true);
         }
     }
 }
