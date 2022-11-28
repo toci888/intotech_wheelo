@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,6 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa
     {
         List<Vfriend> GetVfriends(int accountId);
 
-        bool Unfriend(int accountId, int idFriendToRemove);
+        ReturnedResponse<bool> Unfriend(int accountId, int idFriendToRemove);
     }
 }

@@ -1,5 +1,7 @@
-﻿using Intotech.Wheelo.Bll.Persistence.Interfaces;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
+using Intotech.Wheelo.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,16 +22,21 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
             FriendLogic = friendLogic;
         }
 
-        public List<Vfriend> GetVfriends(int accountId)
+        public virtual List<Vfriend> GetVfriends(int accountId)
         {
             return VfriendLogic.Select(m => m.Accountid == accountId).ToList();
         }
 
-        public virtual bool Unfriend(int accountId, int idFriendToRemove)
+        public virtual ReturnedResponse<bool> Unfriend(int accountId, int idFriendToRemove)
         {
-            Friend fr = FriendLogic.Select(m => m.Idfriend == idFriendToRemove && m.Idaccount == accountId).First();
+            Friend fr = FriendLogic.Select(m => m.Idfriend == idFriendToRemove && m.Idaccount == accountId).FirstOrDefault();
 
-            return FriendLogic.Delete(fr) > 0;
+            if (fr == null)
+            {
+                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.FriendshipNotFound), false);
+            }
+
+            return new ReturnedResponse<bool>(FriendLogic.Delete(fr) > 0, I18nTranslation.Translation(I18nTags.Success), true);
         }
     }
 }

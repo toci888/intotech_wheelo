@@ -20,5 +20,6 @@
         public const string AccountExists = "_accountExists";
         public const string FailedToAddInformation = "_failedToAddInformation";
         public const string DataAlreadyExistInDatabase = "_dataAlreadyExistInDatabase";
+        public const string FriendshipNotFound = "_friendshipNotFound";
     }
 }
