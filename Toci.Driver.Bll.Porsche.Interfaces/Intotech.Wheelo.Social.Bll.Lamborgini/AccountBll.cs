@@ -19,14 +19,14 @@ namespace Intotech.Wheelo.Social.Bll.Lamborgini
             AccountLogic = accountLogic;
         }
 
-        public virtual ReturnedResponse<Accountrole> GetUserAccounts(int accountId)
+        public virtual Accountrole GetUserAccounts(int accountId)
         {
-            return new ReturnedResponse<Accountrole>(AccountLogic.Select(m => m.Id.Value == accountId).FirstOrDefault(),"",true);
+            return AccountLogic.Select(m => m.Id.Value == accountId).FirstOrDefault();
         }
 
-        public virtual ReturnedResponse<List<Accountrole>> GetUsersAccounts(List<int> accountIds)
+        public virtual List<Accountrole> GetUsersAccounts(List<int> accountIds)
         {
-            return new ReturnedResponse<List<Accountrole>>(AccountLogic.Select(m => accountIds.Contains(m.Id.Value)).ToList(), "", true);
+            return AccountLogic.Select(m => accountIds.Contains(m.Id.Value)).ToList();
         }
     }
 }

@@ -10,8 +10,8 @@ namespace Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces
 {
     public interface IAccountBll
     {
-        ReturnedResponse<List<Accountrole>> GetUsersAccounts(List<int> accountIds);
+        List<Accountrole> GetUsersAccounts(List<int> accountIds);
 
-        ReturnedResponse<Accountrole> GetUserAccounts(int accountId);
+        Accountrole GetUserAccounts(int accountId);
     }
 }
