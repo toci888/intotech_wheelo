@@ -60,6 +60,8 @@ builder.Services.AddScoped<IUserExtraDataLogic, UserExtraDataLogic>();
 builder.Services.AddScoped<ISimpleAccountLogic, SimpleAccountLogic>();
 builder.Services.AddScoped<IAccountRoleLogic, AccountRoleLogic>();
 builder.Services.AddScoped<IAccountLogic, AccountLogic>();
+builder.Services.AddScoped<IOccupationLogic, OccupationLogic>();
+builder.Services.AddScoped<IAccountMetadataLogic, AccountMetadataLogic>();
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();
 
@@ -74,6 +76,7 @@ builder.Services.AddScoped<IFriendsService, FriendsService>();
 builder.Services.AddScoped<IInvitationService, InvitationService>();
 builder.Services.AddScoped<IGafManager, GafManager>();
 builder.Services.AddScoped<IWheeloAccountService, WheeloAccountService>();
+builder.Services.AddScoped<IAccountMetadataService, AccountMetadataService>();
 
 builder.Services.AddSingleton(authenticationSettings);
 

@@ -78,7 +78,7 @@ create table Accounts
 	token text
 );
 
-create table UserExtraData
+create table UserExtraData -- for fb, google, apple
 (
 	id serial primary key,
 	idAccount int references Accounts(id),

@@ -17,5 +17,7 @@
         public const string FailVerifyingAccount = "_failVerifyingAccount";
         public const string EmailIsNotConfirmed = "_emailIsNotConfirmed";
         public const string AccountNotFound = "_accountNotFound";
+        public const string AccountExists = "_accountExists";
+        public const string FailedToAddInformation = "_failedToAddInformation";
     }
 }

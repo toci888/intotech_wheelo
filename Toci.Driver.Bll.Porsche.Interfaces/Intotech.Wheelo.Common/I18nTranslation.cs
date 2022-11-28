@@ -7,17 +7,20 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Common
 {
-    public class I18nTranslation
+    public static class I18nTranslation
     {
         private static string Language = "pl";
         //private static I18nManager i18NManager = new I18nManager(Language);
 
-        protected static Dictionary<string, I18nManager> LanguageManagers = new Dictionary<string, I18nManager>()
+        private static Dictionary<string, I18nManager> LanguageManagers = new Dictionary<string, I18nManager>()
         {
             { "en", new EnI18nManager() },
             { "pl", new PlI18nManager() },
         };
 
+        static I18nTranslation()
+        {
+        }
 
 
         public static void SetLanguage(string language)
@@ -28,7 +31,7 @@ namespace Intotech.Wheelo.Common
 
         public static string Translation(string tag)
         {
-            I18nModel model = LanguageManagers[Language].GetTranslation(tag);
+            I18nModel model = LanguageManagers.ContainsKey(Language) ? LanguageManagers[Language].GetTranslation(tag) : null;
 
             return model != null ? model.Content : tag;
         }

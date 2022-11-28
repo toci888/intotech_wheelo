@@ -52,7 +52,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (simpleaccount != null)
             {
-                return new ReturnedResponse<AccountRegisterDto>(null, "Konto istnieje.", false);
+                return new ReturnedResponse<AccountRegisterDto>(null, I18nTranslation.Translation(I18nTags.AccountExists), false);
             }
 
             Account account = new Account() { Name = sAccount.FirstName, 
