@@ -1,5 +1,7 @@
-﻿using Intotech.Wheelo.Bll.Persistence.Interfaces;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
+using Intotech.Wheelo.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +20,9 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
             VfriendSuggestionLogic = vfriendSuggestionLogic;
         }
 
-        public virtual List<Vfriendsuggestion> GetSuggestions(int accountId)
+        public virtual ReturnedResponse<List<Vfriendsuggestion>> GetSuggestions(int accountId)
         {
-            return VfriendSuggestionLogic.Select(m => m.Accountid == accountId).ToList();
+            return new ReturnedResponse<List<Vfriendsuggestion>>(VfriendSuggestionLogic.Select(m => m.Accountid == accountId).ToList(), I18nTranslation.Translation(I18nTags.Success), true);
         }
     }
 }
