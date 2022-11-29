@@ -17,13 +17,13 @@ namespace Toci.Driver.Api.Controllers
         [HttpPost("account-metadata")]
         public ReturnedResponse<AccountMetadataDto> Create(AccountMetadataDto accountMetaDto)
         {
-            return Logic.Create(accountMetaDto);
+            return Service.Create(accountMetaDto);
         }
 
         [HttpPut("account-metadata")]
         public ReturnedResponse<AccountMetadataDto> Update(AccountMetadataDto accountMetaDto)
         {
-            return Logic.Update(accountMetaDto);
+            return Service.Update(accountMetaDto);
         }
     }
 }

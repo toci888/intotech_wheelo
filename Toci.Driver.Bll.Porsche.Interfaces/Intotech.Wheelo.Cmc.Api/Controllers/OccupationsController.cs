@@ -17,7 +17,7 @@ namespace Intotech.Wheelo.Cmc.Api.Controllers
         [Route("get-occupation-for-wildcard")]
         public List<Occupation> GetOccupationsForContain(string contain)
         {
-            return Logic.GetOccupationsForContain(contain);
+            return Service.GetOccupationsForContain(contain);
         }
     }
 }

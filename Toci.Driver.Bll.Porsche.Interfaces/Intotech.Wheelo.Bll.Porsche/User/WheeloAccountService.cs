@@ -5,6 +5,7 @@ using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
 using Intotech.Wheelo.Common;
+using Intotech.Wheelo.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -73,14 +74,14 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (account == null)
             {
-                return new ReturnedResponse<Account>(null, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false);
+                return new ReturnedResponse<Account>(null, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
             }
 
             account.Emailconfirmed = true;
 
             AccLogic.Update(account);
 
-            return new ReturnedResponse<Account>(account, I18nTranslation.Translation(I18nTags.Success), true);
+            return new ReturnedResponse<Account>(account, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }

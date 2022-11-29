@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa
 {
     public interface IFriendsSuggestionsService
     {
-        List<Vfriendsuggestion> GetSuggestions(int accountId);
+        ReturnedResponse<List<Vfriendsuggestion>> GetSuggestions(int accountId);
     }
 }

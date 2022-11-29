@@ -2,6 +2,8 @@
 using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating;
+using Intotech.Wheelo.Common;
+using Intotech.Wheelo.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +32,12 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
         public virtual ReturnedResponse<List<Vaccountscollocation>> Collocate(int accountId)
         {
-            Worktrip baseWorktrip = FirstLogic.Select(m => m.Idaccount == accountId).First();
+            Worktrip baseWorktrip = FirstLogic.Select(m => m.Idaccount == accountId).FirstOrDefault();
+
+            if (baseWorktrip == null)
+            {
+                return new ReturnedResponse<List<Vaccountscollocation>>(null, I18nTranslation.Translation(I18nTags.NoWorkTripData), false, ErrorCodes.WorkTripFormNotFilled);//Nie uzupełniłeś formularza ..... ?
+            }
 
             double distance = baseWorktrip.Acceptabledistance.Value / DistanceDivisor;
 

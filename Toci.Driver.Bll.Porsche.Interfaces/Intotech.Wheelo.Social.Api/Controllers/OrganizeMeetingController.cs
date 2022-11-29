@@ -18,7 +18,7 @@ namespace Intotech.Wheelo.Social.Api.Controllers
         [Route("get-meeting-for-user")]
         public ReturnedResponse<OrganizemeetingDto> GetMeetingForUser(int accountId)
         {
-            return Logic.GetMeetingForUser(accountId);
+            return Service.GetMeetingForUser(accountId);
         }
     }
 }

@@ -19,14 +19,14 @@ namespace Intotech.Wheelo.Social.Api.Controllers
         [Route("group-with-members")]
         public ReturnedResponse<GroupMembersDto> GetGroupWithMembers(int groupId)
         {
-            return Logic.GetGroupWithMembers(groupId);
+            return Service.GetGroupWithMembers(groupId);
         }
 
         [HttpPost]
         [Route("add-member-to-group")]
         public ReturnedResponse<GroupMemberAddDto> AddMemberToGroup([FromBody]Groupmember memberAdd)
         {
-            return Logic.AddMemberToGroup(memberAdd);
+            return Service.AddMemberToGroup(memberAdd);
         }
     }
 }

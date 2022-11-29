@@ -19,7 +19,7 @@ namespace Toci.Driver.Api.Controllers
         [Route("invite-associated")]
         public Vinvitation InviteAssociated(int invitingAccountId, int invitedAccountId)
         {
-            return Logic.InviteToFriends(invitingAccountId, invitedAccountId);
+            return Service.InviteToFriends(invitingAccountId, invitedAccountId);
         }
     }
 }

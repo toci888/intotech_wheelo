@@ -1,4 +1,5 @@
-﻿using Intotech.Common.Microservices;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Microservices;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
 using Microsoft.AspNetCore.Mvc;
 using Toci.Driver.Database.Persistence.Models;
@@ -15,9 +16,9 @@ namespace Toci.Driver.Api.Controllers
 
         [HttpGet]
         [Route("get-friends-suggestions")]
-        public List<Vfriendsuggestion> GetSuggestions(int accountId)
+        public ReturnedResponse<List<Vfriendsuggestion>> GetSuggestions(int accountId)
         {
-            return Logic.GetSuggestions(accountId);
+            return Service.GetSuggestions(accountId);
         }
     }
 }
