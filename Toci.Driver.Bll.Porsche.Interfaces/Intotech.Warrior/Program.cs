@@ -18,13 +18,13 @@ Console.WriteLine("Warrior is seeding your dbs....");
 
 //GoogleMapsClient googleMapsClient = new GoogleMapsClient(); //ChIJ0eZpEy9FBEcRieu3xGIT0wc
 
-GoogleService googleService = new GoogleService();
+//GoogleService googleService = new GoogleService();
 
-var doopa = googleService.GetLocationByPlaceId("ChIJ0eZpEy9FBEcRieu3xGIT0wc");
+//var doopa = googleService.GetLocationByPlaceId("ChIJ0eZpEy9FBEcRieu3xGIT0wc");
 
 //GooglePlaceGeoModel model = googleMapsClient.CallGoogleApiPlaceId("ChIJ0eZpEy9FBEcRieu3xGIT0wc");
 
-int i = 0;
+//int i = 0;
 
 //IGafManager gafManager = new GafManager();
 
@@ -41,7 +41,7 @@ int i = 0;
 //sa.Insert();
 //new SeedFriendSuggestion().Insert();
 
-//new WheeloMainSeedManager().SeedAllDb();
+new WheeloMainSeedManager().SeedAllDb();
 
 //new SocialSeedManager().SeedAllDb();
 

@@ -39,7 +39,9 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Tripparticipant> Tripparticipants { get; set; } = null!;
         public virtual DbSet<Userextradatum> Userextradata { get; set; } = null!;
         public virtual DbSet<Vaccountscollocation> Vaccountscollocations { get; set; } = null!;
+        public virtual DbSet<Vacollocationsgeolocation> Vacollocationsgeolocations { get; set; } = null!;
         public virtual DbSet<Vcarowner> Vcarowners { get; set; } = null!;
+        public virtual DbSet<Vcollocationsgeolocation> Vcollocationsgeolocations { get; set; } = null!;
         public virtual DbSet<Vfriend> Vfriends { get; set; } = null!;
         public virtual DbSet<Vfriendsuggestion> Vfriendsuggestions { get; set; } = null!;
         public virtual DbSet<Vinvitation> Vinvitations { get; set; } = null!;
@@ -656,6 +658,33 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Surname).HasColumnName("surname");
             });
 
+            modelBuilder.Entity<Vacollocationsgeolocation>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vacollocationsgeolocations");
+
+                entity.Property(e => e.Accountidcollocated).HasColumnName("accountidcollocated");
+
+                entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
+
+                entity.Property(e => e.Latitudeto).HasColumnName("latitudeto");
+
+                entity.Property(e => e.Longitudefrom).HasColumnName("longitudefrom");
+
+                entity.Property(e => e.Longitudeto).HasColumnName("longitudeto");
+
+                entity.Property(e => e.Name).HasColumnName("name");
+
+                entity.Property(e => e.Surname).HasColumnName("surname");
+
+                entity.Property(e => e.Tohour).HasColumnName("tohour");
+            });
+
             modelBuilder.Entity<Vcarowner>(entity =>
             {
                 entity.HasNoKey();
@@ -677,6 +706,31 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Rgb).HasColumnName("rgb");
 
                 entity.Property(e => e.Surname).HasColumnName("surname");
+            });
+
+            modelBuilder.Entity<Vcollocationsgeolocation>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vcollocationsgeolocations");
+
+                entity.Property(e => e.Accountid).HasColumnName("accountid");
+
+                entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+
+                entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
+
+                entity.Property(e => e.Latitudeto).HasColumnName("latitudeto");
+
+                entity.Property(e => e.Longitudefrom).HasColumnName("longitudefrom");
+
+                entity.Property(e => e.Longitudeto).HasColumnName("longitudeto");
+
+                entity.Property(e => e.Name).HasColumnName("name");
+
+                entity.Property(e => e.Surname).HasColumnName("surname");
+
+                entity.Property(e => e.Tohour).HasColumnName("tohour");
             });
 
             modelBuilder.Entity<Vfriend>(entity =>

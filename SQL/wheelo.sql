@@ -1,4 +1,5 @@
-drop table SimpleAccount;
+drop view VCollocationsGeoLocations;
+drop view VACollocationsGeoLocations;
 
 ----
 drop table AccountMetadata;
@@ -16,6 +17,8 @@ drop view VFriendSuggestions;
 --select * from  Accounts;
 --select * from AccountsCollocations;
 drop view AccountsCarsLocations;
+drop view VCollocationsGeoLocations;
+drop view VACollocationsGeoLocations;
 drop table WorkTrip;
 drop view VCarOwner;
 drop table Cars;
@@ -241,8 +244,8 @@ create table WorkTrip
 (
 	id serial primary key,
     IdAccount int references Accounts (id),
-    LatitudeFrom double precision,
-	LongitudeFrom double precision,
+    LatitudeFrom double precision, --+
+	LongitudeFrom double precision,-- +
 	LatitudeTo double precision,
 	LongitudeTo double precision,
 	IdGeographicLocationFrom int references GeographicRegion(id),
@@ -257,6 +260,24 @@ create table WorkTrip
 	
 	CreatedAt timestamp default now()
 );
+
+
+
+create or replace view VCollocationsGeoLocations as
+select distinct a.id as accountId, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
+wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour
+from AccountsCollocations acc join WorkTrip wt on acc.IdAccount = wt.IdAccount
+join Accounts a on a.id = wt.IdAccount;
+
+create or replace view VACollocationsGeoLocations as 
+select acc.idaccount, a.id as accountIdCollocated, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
+wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour
+from AccountsCollocations acc join WorkTrip wt on acc.idcollocated = wt.IdAccount
+join Accounts a on a.id = wt.IdAccount;
+
+--select * from VACollocationsGeoLocations where idaccount = 1;
+--select * from VCollocationsGeoLocations;
+--select * from AccountsCollocations;
 
 create or replace view AccountsCarsLocations as 
 select acc.id as accountId, acc.name, acc.surname, acc.email, acl.streetfrom, acl.streetto, acl.cityfrom, acl.cityto,
@@ -316,6 +337,8 @@ tr.LeftSeats, tp.IsOccasion
 from Trips tr join TripParticipants tp on tr.id = tp.IdTrip
 join Accounts U1 on U1.Id = tr.IdInitiatorAccount 
 join Accounts U2 on U2.Id = tp.IdAccount ;
+
+
 
 create table StatisticsTrips
 (
