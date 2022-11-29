@@ -24,7 +24,9 @@ export const getLocationByPlaceId = async (placeId: string) => {
   try {
     const url = `http://20.100.196.118:5108/api/GoogleMap/recognize-place-id?placeId=${placeId}`
     const {data} = await axios.get<Location>(url);
-
+    console.log("dataapi", data)
+    data.lon = data.lon.replace(",", ".");
+    data.lat = data.lat.replace(",", ".");
     if (data) return data;
 
     return [];
