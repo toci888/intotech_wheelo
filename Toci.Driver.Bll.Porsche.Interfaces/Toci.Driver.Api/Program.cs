@@ -16,6 +16,8 @@ using Intotech.Wheelo.Bll.Porsche.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
 using Intotech.Wheelo.Bll.Porsche.User;
 using System.Text.Json;
+using Intotech.Wheelo.Bll.Porsche.Interfaces.Association;
+using Intotech.Wheelo.Bll.Porsche.Association;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,6 +64,8 @@ builder.Services.AddScoped<IAccountRoleLogic, AccountRoleLogic>();
 builder.Services.AddScoped<IAccountLogic, AccountLogic>();
 builder.Services.AddScoped<IOccupationLogic, OccupationLogic>();
 builder.Services.AddScoped<IAccountMetadataLogic, AccountMetadataLogic>();
+builder.Services.AddScoped<IVacollocationsgeolocationLogic, VacollocationsgeolocationLogic>();
+builder.Services.AddScoped<IVcollocationsgeolocationLogic, VcollocationsgeolocationLogic>();
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();
 
@@ -77,6 +81,7 @@ builder.Services.AddScoped<IInvitationService, InvitationService>();
 builder.Services.AddScoped<IGafManager, GafManager>();
 builder.Services.AddScoped<IWheeloAccountService, WheeloAccountService>();
 builder.Services.AddScoped<IAccountMetadataService, AccountMetadataService>();
+builder.Services.AddScoped<IAssociationMapDataService, AssociationMapDataService>();
 
 builder.Services.AddSingleton(authenticationSettings);
 
