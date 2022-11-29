@@ -3,6 +3,8 @@ using Intotech.Wheelo.Bll.Models.TripCollocation;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Association;
 using Intotech.Wheelo.Common;
+using Intotech.Wheelo.Common.Interfaces;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,14 +33,14 @@ namespace Intotech.Wheelo.Bll.Porsche.Association
 
             if (collocationSource == null)
             {
-                return new ReturnedResponse<TripCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.NoData), false);
+                return new ReturnedResponse<TripCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
             }
 
             resultDto.SourceAccount = collocationSource;
 
             resultDto.AccountsCollocated = VacollocationsgeolocationLogic.Select(m => m.Idaccount == accountId).ToList();
 
-            return new ReturnedResponse<TripCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success), true);
+            return new ReturnedResponse<TripCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }

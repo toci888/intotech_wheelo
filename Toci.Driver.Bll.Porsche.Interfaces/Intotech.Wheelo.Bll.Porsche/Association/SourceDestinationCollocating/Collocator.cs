@@ -70,7 +70,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
                 });
             }
 
-            return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == accountId).ToList(), "", true);
+            return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == accountId).ToList(), "", true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<List<Vaccountscollocation>> AddWorkTrip(Worktrip worktrip)
@@ -82,7 +82,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
         public virtual ReturnedResponse<List<Vaccountscollocation>> GetUserAssociations(int accountId)
         {
-            return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == accountId || m.Suggestedaccountid == accountId).ToList(), "", true);
+            return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == accountId || m.Suggestedaccountid == accountId).ToList(), "", true, ErrorCodes.Success);
         }
     }
 }

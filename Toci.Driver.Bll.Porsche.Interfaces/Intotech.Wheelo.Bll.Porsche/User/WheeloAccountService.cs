@@ -34,17 +34,17 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (simpleaccount == null)
             {
-                return new ReturnedResponse<Accountrole>(null, I18nTranslation.Translation(I18nTags.AccountNotFound), false);
+                return new ReturnedResponse<Accountrole>(null, I18nTranslation.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
             }
 
             if (!simpleaccount.Emailconfirmed.Value)
             {
-                return new ReturnedResponse<Accountrole>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false);
+                return new ReturnedResponse<Accountrole>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmed);
             }
 
             AccountRoleDto accountRoleDto = DtoModelMapper.Map<AccountRoleDto, Accountrole>(simpleaccount);
 
-            return new ReturnedResponse<Accountrole>(accountRoleDto, I18nTranslation.Translation(I18nTags.Success), true);
+            return new ReturnedResponse<Accountrole>(accountRoleDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<AccountRegisterDto> Register(AccountRegisterDto sAccount)
@@ -53,7 +53,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (simpleaccount != null)
             {
-                return new ReturnedResponse<AccountRegisterDto>(null, I18nTranslation.Translation(I18nTags.AccountExists), false);
+                return new ReturnedResponse<AccountRegisterDto>(null, I18nTranslation.Translation(I18nTags.AccountExists), false, ErrorCodes.AccountExists);
             }
 
             Account account = new Account() { Name = sAccount.FirstName, 
@@ -65,7 +65,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             simpleaccount.Verificationcode = 0;
 
-            return new ReturnedResponse<AccountRegisterDto>(sAccount, I18nTranslation.Translation(I18nTags.Success), true);
+            return new ReturnedResponse<AccountRegisterDto>(sAccount, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public ReturnedResponse<Account> ConfirmEmail(EmailConfirmDto EcDto)

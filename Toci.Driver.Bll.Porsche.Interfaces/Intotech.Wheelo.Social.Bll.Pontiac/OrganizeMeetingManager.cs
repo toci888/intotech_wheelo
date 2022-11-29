@@ -2,6 +2,7 @@
 using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Models.Social;
 using Intotech.Wheelo.Common;
+using Intotech.Wheelo.Common.Interfaces;
 using Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces;
 using Intotech.Wheelo.Social.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Social.Bll.Pontiac.Interfaces;
@@ -35,7 +36,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
 
             OrganizemeetingDto result = DtoModelMapper.Map<OrganizemeetingDto, Organizemeeting>(orgM);
 
-            return new ReturnedResponse<OrganizemeetingDto>(GetMeetingDto(accountId, result), I18nTranslation.Translation(I18nTags.Success), true);
+            return new ReturnedResponse<OrganizemeetingDto>(GetMeetingDto(accountId, result), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual OrganizemeetingDto OrganizeMeeting(CreateMeetingDto meeting)

@@ -2,6 +2,7 @@
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
 using Intotech.Wheelo.Common;
+using Intotech.Wheelo.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 
         public virtual ReturnedResponse<List<Vfriend>> GetVfriends(int accountId)
         {
-            return new ReturnedResponse<List<Vfriend>>(VfriendLogic.Select(m => m.Accountid == accountId).ToList(), "", true);
+            return new ReturnedResponse<List<Vfriend>>(VfriendLogic.Select(m => m.Accountid == accountId).ToList(), "", true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<bool> Unfriend(int accountId, int idFriendToRemove)
@@ -33,10 +34,10 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 
             if (fr == null)
             {
-                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.FriendshipNotFound), false);
+                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.FriendshipNotFound), false, ErrorCodes.FriendshipNotFound);
             }
 
-            return new ReturnedResponse<bool>(FriendLogic.Delete(fr) > 0, I18nTranslation.Translation(I18nTags.Success), true);
+            return new ReturnedResponse<bool>(FriendLogic.Delete(fr) > 0, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }
