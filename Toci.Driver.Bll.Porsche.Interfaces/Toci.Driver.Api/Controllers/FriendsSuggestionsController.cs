@@ -18,7 +18,7 @@ namespace Toci.Driver.Api.Controllers
         [Route("get-friends-suggestions")]
         public ReturnedResponse<List<Vfriendsuggestion>> GetSuggestions(int accountId)
         {
-            return Logic.GetSuggestions(accountId);
+            return Service.GetSuggestions(accountId);
         }
     }
 }

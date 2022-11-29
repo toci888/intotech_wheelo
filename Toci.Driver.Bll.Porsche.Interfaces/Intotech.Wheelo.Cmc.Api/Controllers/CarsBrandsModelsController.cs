@@ -18,7 +18,7 @@ namespace Intotech.Wheelo.Cmc.Api.Controllers
 		[Route("get-cars-brands-for-wildcard")]
 		public ReturnedResponse<List<Carsbrand>> GetCarsBrandsForWildcard(string beginning)
 		{
-			return Logic.GetCarsBrandsForWildcard(beginning);
+			return Service.GetCarsBrandsForWildcard(beginning);
 		}
 		//224
 
@@ -26,7 +26,7 @@ namespace Intotech.Wheelo.Cmc.Api.Controllers
 		[Route("get-cars-models-for-wildcard")]
 		public ReturnedResponse<List<Carsmodel>> GetCarsModelsForWildcard(int brandId, string beginning)
 		{
-			return Logic.GetModelsForBrandForWildcard(brandId, beginning);
+			return Service.GetModelsForBrandForWildcard(brandId, beginning);
 		}
 	}
 }

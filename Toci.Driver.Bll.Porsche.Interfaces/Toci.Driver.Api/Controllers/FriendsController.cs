@@ -18,14 +18,14 @@ namespace Toci.Driver.Api.Controllers
         [Route("your-friends")]
         public ReturnedResponse<List<Vfriend>> GetVfriends(int accountId)
         {
-            return Logic.GetVfriends(accountId);
+            return Service.GetVfriends(accountId);
         }
 
         [HttpDelete]
         [Route("unfriend")]
         public ReturnedResponse<bool> Unfriend(int accountId, int idFriendToRemove)
         {
-            return Logic.Unfriend(accountId, idFriendToRemove);
+            return Service.Unfriend(accountId, idFriendToRemove);
         }
     }
 }

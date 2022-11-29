@@ -23,14 +23,14 @@ namespace Toci.Driver.Api.Controllers
             wt.Fromhour = new TimeOnly(wt.IFromHour, wt.IFromMinute);
             wt.Tohour = new TimeOnly(wt.IToHour, wt.IToMinute);
 
-            return Logic.AddWorkTrip(wt);
+            return Service.AddWorkTrip(wt);
         }
 
         [HttpGet]
         [Route("associated-users")]
         public ReturnedResponse<List<Vaccountscollocation>> GetAssociatedUsers(int accountId)
         {
-            return Logic.GetUserAssociations(accountId);
+            return Service.GetUserAssociations(accountId);
         }
 
     }

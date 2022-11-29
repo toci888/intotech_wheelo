@@ -17,7 +17,7 @@ namespace Intotech.Wheelo.Cmc.Api.Controllers
         [Route("get-colours-for-wildcard")]
         public List<Colour> GetColoursForWildcard(string beginning)
         {
-            return Logic.GetColoursForWildcard(beginning);
+            return Service.GetColoursForWildcard(beginning);
         }
     }
 }
