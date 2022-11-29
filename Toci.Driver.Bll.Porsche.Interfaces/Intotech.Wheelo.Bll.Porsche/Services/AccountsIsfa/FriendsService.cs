@@ -22,9 +22,9 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
             FriendLogic = friendLogic;
         }
 
-        public virtual List<Vfriend> GetVfriends(int accountId)
+        public virtual ReturnedResponse<List<Vfriend>> GetVfriends(int accountId)
         {
-            return VfriendLogic.Select(m => m.Accountid == accountId).ToList();
+            return new ReturnedResponse<List<Vfriend>>(VfriendLogic.Select(m => m.Accountid == accountId).ToList(), "", true);
         }
 
         public virtual ReturnedResponse<bool> Unfriend(int accountId, int idFriendToRemove)

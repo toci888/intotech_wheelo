@@ -16,7 +16,7 @@ namespace Toci.Driver.Api.Controllers
 
         [HttpGet]
         [Route("your-friends")]
-        public List<Vfriend> GetVfriends(int accountId)
+        public ReturnedResponse<List<Vfriend>> GetVfriends(int accountId)
         {
             return Logic.GetVfriends(accountId);
         }
