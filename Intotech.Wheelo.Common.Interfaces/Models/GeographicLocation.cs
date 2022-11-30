@@ -13,9 +13,12 @@ namespace Intotech.Wheelo.Common.Interfaces.Models
             address = new Address();
         }
 
+        protected string LatValue;
+        protected string LonValue;
+
         public string place_id { get; set; }
-        public string lat { get; set; }
-        public string lon { get; set; }
+        public string lat { get { return LatValue.Replace(",", "."); } set { LatValue = value; } }
+        public string lon { get { return LonValue.Replace(",", "."); } set { LonValue = value; } }
         public string[] boundingbox { get; set; }
         public string display_name { get; set; }
         public string display_address { get; set; }

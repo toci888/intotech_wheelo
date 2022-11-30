@@ -23,6 +23,8 @@ namespace Intotech.Wheelo.Common.Google
                 {
                     place_id = prediction.place_id,
                     display_name = prediction.description,
+                    lat = string.Empty, 
+                    lon = string.Empty,
                 };
 
                 geographicLocation.address.name = prediction.description;

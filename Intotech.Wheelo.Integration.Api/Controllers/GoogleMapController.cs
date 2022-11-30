@@ -11,8 +11,10 @@ namespace Intotech.Wheelo.Integration.Api.Controllers
         [HttpGet("recognize-place-id")]
         public virtual GeographicLocation GetLocationByPlaceId(string placeId)
         {
-            var x = new GoogleService().GetLocationByPlaceId(placeId);
+            GeographicLocation x = new GoogleService().GetLocationByPlaceId(placeId);
             x.address.name = x.display_name;
+            //x.lon = x.lon.Replace(",", ".");
+            //x.lat = x.lat.Replace(",", ".");
             return x;
         }
 
