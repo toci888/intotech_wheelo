@@ -1,4 +1,5 @@
-﻿using Intotech.Common.Microservices;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Microservices;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace Toci.Driver.Api.Controllers
 
         [HttpPost]
         [Route("invite-associated")]
-        public Vinvitation InviteAssociated(int invitingAccountId, int invitedAccountId)
+        public ReturnedResponse<Vinvitation> InviteAssociated(int invitingAccountId, int invitedAccountId)
         {
             return Service.InviteToFriends(invitingAccountId, invitedAccountId);
         }
