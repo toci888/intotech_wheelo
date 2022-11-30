@@ -24,42 +24,42 @@ namespace Toci.Driver.Api.Controllers
 
         [HttpPost]
         [Route("add-trip-participant")]
-        public int AddTripParticipant(TripParticipantDto tripParticipantDto)
+        public int AddTripParticipant(TripParticipantDto tripParticipantDto) //
         {
             return Service.AddTripParticipant(tripParticipantDto.TripId, tripParticipantDto.AccountId);
         }
 
         [HttpPost]
         [Route("set-trip-not-current")]
-        public bool SetTripNotCurrent(TripParticipantDto tripInitiatorDto)
+        public bool SetTripNotCurrent(TripParticipantDto tripInitiatorDto) //
         {
             return Service.SetTripNotCurrent(tripInitiatorDto.TripId, tripInitiatorDto.AccountId);
         }
 
         [HttpGet]
         [Route("get-all-trips")]
-        public List<Trip> GetAllTrips(int accountId)
+        public ReturnedResponse<List<Trip>> GetAllTrips(int accountId)
         {
             return Service.GetAllTrips(accountId);
         }
 
         [HttpGet]
         [Route("get-trip")]
-        public Trip GetTrip(int tripId)
+        public Trip GetTrip(int tripId) //
         {
             return Service.GetTrip(tripId);
         }
 
         [HttpGet]
         [Route("get-initiator-trips")]
-        public List<Trip> GetInitiatorTrips(int inititatorAccountId)
+        public ReturnedResponse<List<Trip>> GetInitiatorTrips(int inititatorAccountId)
         {
             return Service.GetInitiatorTrips(inititatorAccountId);
         }
 
         [HttpGet]
         [Route("get-trip-participants")]
-        public List<Vtripsparticipant> GetTripParticipants(int accountId)
+        public ReturnedResponse<List<Vtripsparticipant>> GetTripParticipants(int accountId)
         {
             return Service.GetTripParticipants(accountId);
         }

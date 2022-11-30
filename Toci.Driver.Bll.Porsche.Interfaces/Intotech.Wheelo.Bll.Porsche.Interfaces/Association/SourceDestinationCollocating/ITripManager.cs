@@ -15,12 +15,12 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCo
 
         bool SetTripNotCurrent(int tripId, int inititatorAccountId);
 
-        List<Trip> GetAllTrips(int accountId);
+        ReturnedResponse<List<Trip>> GetAllTrips(int accountId);
 
         Trip GetTrip(int tripId);
 
-        List<Trip> GetInitiatorTrips(int inititatorAccountId);
+        ReturnedResponse<List<Trip>> GetInitiatorTrips(int inititatorAccountId);
 
-        List<Vtripsparticipant> GetTripParticipants(int accountId);
+        ReturnedResponse<List<Vtripsparticipant>> GetTripParticipants(int accountId);
     }
 }
