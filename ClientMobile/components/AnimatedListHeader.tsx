@@ -1,22 +1,15 @@
 import {
   Animated,
-  FlatList,
   LayoutChangeEvent,
-  Platform,
-  TouchableOpacity,
   View,
   StyleSheet,
 } from "react-native";
 import React, { useState } from "react";
-import { Text, Button, Divider } from "@ui-kitten/components";
 
 import { HEADERHEIGHT, LISTMARGIN } from "../constants/constants";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { theme } from "../theme";
-import { Row } from "./Row";
 import { HeaderInput } from "./HeaderInput";
-import { HeaderFilterButtons } from "./HeaderFilterButtons";
-import { HeaderLogistics } from "./HeaderLogistics";
+import { TopBar } from "./TopBar";
+import { theme } from "../theme";
 
 export const AnimatedListHeader = ({
   scrollAnimation,
@@ -82,15 +75,9 @@ export const AnimatedListHeader = ({
       onLayout={onLayout}
     >
       <View style={styles.defaultMarginHorizontal}>
+        <TopBar location={""} />
         <HeaderInput location={location} />
-        <HeaderFilterButtons />
       </View>
-      <Divider style={styles.divider} />
-      <HeaderLogistics
-        setMapShown={setMapShown}
-        mapShown={mapShown}
-        availableProperties={availableProperties}
-      />
     </Animated.View>
   );
 };
@@ -103,10 +90,9 @@ const styles = StyleSheet.create({
     left: 0,
     zIndex: 1000,
     height: HEADERHEIGHT,
-    backgroundColor: "#fff",
+    backgroundColor: theme["color-blue"],
   },
   defaultMarginHorizontal: {
     marginHorizontal: LISTMARGIN,
   },
-  divider: { backgroundColor: theme["color-gray"] },
 });

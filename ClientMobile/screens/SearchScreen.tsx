@@ -51,16 +51,6 @@ export const SearchScreen = ({
 
   return (
     <Screen>
-      <AnimatedListHeader
-        scrollAnimation={scrollAnimation}
-        setMapShown={setMapShown}
-        mapShown={mapShown}
-        location={location ? location : "Find a Location"}
-        availableProperties={
-          searchProperties.data ? searchProperties.data.length : undefined
-        }
-      />
-
       {mapShown ? (
         <Map
           properties={searchProperties?.data ? searchProperties.data : []}
@@ -123,16 +113,19 @@ export const SearchScreen = ({
                 </View>
               ) : (
                 <View style={styles.lottieContainer}>
-                  <LottieView
-                    autoPlay
-                    loop
-                    style={styles.lottie}
-                    source={require("../assets/lotties/SearchScreen.json")}
-                  />
                   <Text category={"h6"}>Begin Your Search</Text>
                   <Text appearance={"hint"} style={styles.subHeader}>
                     Find apartments anytime and anywhere.
                   </Text>
+                  <AnimatedListHeader
+                    scrollAnimation={scrollAnimation}
+                    setMapShown={setMapShown}
+                    mapShown={mapShown}
+                    location={location ? location : "Find a Location"}
+                    availableProperties={
+                      searchProperties.data ? searchProperties.data.length : undefined
+                    }
+                  />
                 </View>
               )}
             </>
@@ -146,7 +139,7 @@ export const SearchScreen = ({
 const styles = StyleSheet.create({
   card: { marginVertical: 5 },
   lottieContainer: {
-    backgroundColor: "#fff",
+    backgroundColor: "violet",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
