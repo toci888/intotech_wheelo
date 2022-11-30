@@ -39,6 +39,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Tripparticipant> Tripparticipants { get; set; } = null!;
         public virtual DbSet<Userextradatum> Userextradata { get; set; } = null!;
         public virtual DbSet<Vaccountscollocation> Vaccountscollocations { get; set; } = null!;
+        public virtual DbSet<Vaccountscollocationsworktrip> Vaccountscollocationsworktrips { get; set; } = null!;
         public virtual DbSet<Vacollocationsgeolocation> Vacollocationsgeolocations { get; set; } = null!;
         public virtual DbSet<Vcarowner> Vcarowners { get; set; } = null!;
         public virtual DbSet<Vcollocationsgeolocation> Vcollocationsgeolocations { get; set; } = null!;
@@ -646,6 +647,37 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Distancefrom).HasColumnName("distancefrom");
 
                 entity.Property(e => e.Distanceto).HasColumnName("distanceto");
+
+                entity.Property(e => e.Name).HasColumnName("name");
+
+                entity.Property(e => e.Suggestedaccountid).HasColumnName("suggestedaccountid");
+
+                entity.Property(e => e.Suggestedname).HasColumnName("suggestedname");
+
+                entity.Property(e => e.Suggestedsurname).HasColumnName("suggestedsurname");
+
+                entity.Property(e => e.Surname).HasColumnName("surname");
+            });
+
+            modelBuilder.Entity<Vaccountscollocationsworktrip>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vaccountscollocationsworktrip");
+
+                entity.Property(e => e.Accountid).HasColumnName("accountid");
+
+                entity.Property(e => e.Distancefrom).HasColumnName("distancefrom");
+
+                entity.Property(e => e.Distanceto).HasColumnName("distanceto");
+
+                entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
+
+                entity.Property(e => e.Latitudeto).HasColumnName("latitudeto");
+
+                entity.Property(e => e.Longitudefrom).HasColumnName("longitudefrom");
+
+                entity.Property(e => e.Longitudeto).HasColumnName("longitudeto");
 
                 entity.Property(e => e.Name).HasColumnName("name");
 

@@ -1,5 +1,6 @@
 drop view VCollocationsGeoLocations;
 drop view VACollocationsGeoLocations;
+drop view VAccountsCollocationsWorkTrip;
 
 ----
 drop table AccountMetadata;
@@ -19,6 +20,7 @@ drop view VFriendSuggestions;
 drop view AccountsCarsLocations;
 drop view VCollocationsGeoLocations;
 drop view VACollocationsGeoLocations;
+drop view VAccountsCollocationsWorkTrip;
 drop table WorkTrip;
 drop view VCarOwner;
 drop table Cars;
@@ -260,6 +262,15 @@ create table WorkTrip
 	
 	CreatedAt timestamp default now()
 );
+
+create or replace view VAccountsCollocationsWorkTrip as
+select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
+U2.Id as SuggestedAccountId, ac.DistanceFrom, ac.DistanceTo, wt.LatitudeFrom, wt.LongitudeFrom, wt.LatitudeTo,
+wt.LongitudeTo 
+from AccountsCollocations ac
+join Accounts U1 on U1.Id = ac.IdAccount 
+join Accounts U2 on U2.Id = ac.IdCollocated
+join WorkTrip wt on U2.id = wt.idaccount ;
 
 
 
