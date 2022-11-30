@@ -66,6 +66,7 @@ builder.Services.AddScoped<IOccupationLogic, OccupationLogic>();
 builder.Services.AddScoped<IAccountMetadataLogic, AccountMetadataLogic>();
 builder.Services.AddScoped<IVacollocationsgeolocationLogic, VacollocationsgeolocationLogic>();
 builder.Services.AddScoped<IVcollocationsgeolocationLogic, VcollocationsgeolocationLogic>();
+builder.Services.AddScoped<IVaccountscollocationsworktripLogic, VaccountscollocationsworktripLogic>();
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();
 

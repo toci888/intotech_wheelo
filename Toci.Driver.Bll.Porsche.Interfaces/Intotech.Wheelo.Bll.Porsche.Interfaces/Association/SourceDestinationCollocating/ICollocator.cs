@@ -1,4 +1,5 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Models;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCo
         where TWorktripLogic : IWorkTripLogic
         where TAccountsCollocationsLogic : IUsersCollocationLogic
     {
-        ReturnedResponse<List<Vaccountscollocation>> Collocate(int accountId);
+        ReturnedResponse<List<Vaccountscollocation>> CollocateAndMatch(int accountId);
 
         ReturnedResponse<List<Vaccountscollocation>> AddWorkTrip(Worktrip worktrip);
 
         ReturnedResponse<List<Vaccountscollocation>> GetUserAssociations(int accountId);
+
+        ReturnedResponse<List<Vaccountscollocationsworktrip>> SetWorkTripGetCollocations(Worktrip workTrip);
     }
 }

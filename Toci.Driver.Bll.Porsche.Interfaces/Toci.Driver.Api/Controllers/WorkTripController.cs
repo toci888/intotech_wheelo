@@ -26,6 +26,16 @@ namespace Toci.Driver.Api.Controllers
             return Service.AddWorkTrip(wt);
         }
 
+        [HttpPost]
+        [Route("add-work-trip-get-marker-collocations")]
+        public ReturnedResponse<List<Vaccountscollocationsworktrip>> AddWorkTripGetMarkerCollocations(WorktripDto wt)
+        {
+            wt.Fromhour = new TimeOnly(wt.IFromHour, wt.IFromMinute);
+            wt.Tohour = new TimeOnly(wt.IToHour, wt.IToMinute);
+
+            return Service.SetWorkTripGetCollocations(wt);
+        }
+
         [HttpGet]
         [Route("associated-users")]
         public ReturnedResponse<List<Vaccountscollocation>> GetAssociatedUsers(int accountId)

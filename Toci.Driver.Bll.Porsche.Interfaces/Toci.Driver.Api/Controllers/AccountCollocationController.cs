@@ -19,7 +19,7 @@ namespace Toci.Driver.Api.Controllers
         [HttpPost("make-match")]
         public ReturnedResponse<List<Vaccountscollocation>> MakeMatch(int accountId)
         {
-            return Service.Collocate(accountId);
+            return Service.CollocateAndMatch(accountId);
         }
     }
 }

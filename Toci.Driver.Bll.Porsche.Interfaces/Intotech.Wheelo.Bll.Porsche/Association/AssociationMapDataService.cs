@@ -1,4 +1,5 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Models;
 using Intotech.Wheelo.Bll.Models.TripCollocation;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Association;
@@ -18,8 +19,10 @@ namespace Intotech.Wheelo.Bll.Porsche.Association
     {
         protected IVacollocationsgeolocationLogic VacollocationsgeolocationLogic;
         protected IVcollocationsgeolocationLogic VcollocationsgeolocationLogic;
+        
 
-        public AssociationMapDataService(IVacollocationsgeolocationLogic vacollocationsgeolocationLogic, IVcollocationsgeolocationLogic vcollocationsgeolocationLogic)
+        public AssociationMapDataService(IVacollocationsgeolocationLogic vacollocationsgeolocationLogic, 
+            IVcollocationsgeolocationLogic vcollocationsgeolocationLogic)
         {
             VacollocationsgeolocationLogic = vacollocationsgeolocationLogic;
             VcollocationsgeolocationLogic = vcollocationsgeolocationLogic;
@@ -42,5 +45,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association
 
             return new ReturnedResponse<TripCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
+
+        
     }
 }

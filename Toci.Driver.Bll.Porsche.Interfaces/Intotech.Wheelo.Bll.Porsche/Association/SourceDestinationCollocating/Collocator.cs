@@ -1,5 +1,7 @@
 ﻿using Intotech.Common.Bll;
 using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Models;
+using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating;
 using Intotech.Wheelo.Common;
@@ -22,21 +24,25 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
         protected IAssociationCalculations AssociationCalculation;
         protected IVusersCollocationLogic AccountCollocationLogic;
+        protected IVaccountscollocationsworktripLogic VaccountscollocationsworktripLogic;
 
         public Collocator(IWorkTripLogic firstLogic, IUsersCollocationLogic secondLogic,
-            IAssociationCalculations associationCalculations, IVusersCollocationLogic accountCollocationLogic) : base(firstLogic, secondLogic)
+            IAssociationCalculations associationCalculations, 
+            IVusersCollocationLogic accountCollocationLogic,
+            IVaccountscollocationsworktripLogic vaccountscollocationsworktripLogic) : base(firstLogic, secondLogic)
         {
             AssociationCalculation = associationCalculations;
             AccountCollocationLogic = accountCollocationLogic;
+            VaccountscollocationsworktripLogic = vaccountscollocationsworktripLogic;
         }
 
-        public virtual ReturnedResponse<List<Vaccountscollocation>> Collocate(int accountId)
+        public virtual void Collocate(int accountId)
         {
             Worktrip baseWorktrip = FirstLogic.Select(m => m.Idaccount == accountId).FirstOrDefault();
 
             if (baseWorktrip == null)
             {
-                return new ReturnedResponse<List<Vaccountscollocation>>(null, I18nTranslation.Translation(I18nTags.NoWorkTripData), false, ErrorCodes.WorkTripFormNotFilled);//Nie uzupełniłeś formularza ..... ?
+                return; // new ReturnedResponse<List<Vaccountscollocation>>(null, I18nTranslation.Translation(I18nTags.NoWorkTripData), false, ErrorCodes.WorkTripFormNotFilled);//Nie uzupełniłeś formularza ..... ?
             }
 
             double distance = baseWorktrip.Acceptabledistance.Value / DistanceDivisor;
@@ -70,19 +76,37 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
                 });
             }
 
-            return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == accountId).ToList(), "", true, ErrorCodes.Success);
+            //return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == accountId).ToList(), "", true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<List<Vaccountscollocation>> AddWorkTrip(Worktrip worktrip)
         {
             Worktrip wt = FirstLogic.Insert(worktrip);
 
-            return Collocate(wt.Idaccount.Value);
+            Collocate(wt.Idaccount.Value);
+
+            return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == wt.Idaccount).ToList(), "", true, ErrorCodes.Success);
+        }
+
+        public virtual ReturnedResponse<List<Vaccountscollocationsworktrip>> SetWorkTripGetCollocations(Worktrip workTrip)
+        {
+            Worktrip wt = FirstLogic.Insert(workTrip);
+
+            Collocate(wt.Idaccount.Value);
+
+            return new ReturnedResponse<List<Vaccountscollocationsworktrip>>(VaccountscollocationsworktripLogic.Select(m => m.Accountid == wt.Idaccount).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<List<Vaccountscollocation>> GetUserAssociations(int accountId)
         {
             return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == accountId || m.Suggestedaccountid == accountId).ToList(), "", true, ErrorCodes.Success);
+        }
+
+        public virtual ReturnedResponse<List<Vaccountscollocation>> CollocateAndMatch(int accountId)
+        {
+            Collocate(accountId);
+
+            return GetUserAssociations(accountId);
         }
     }
 }
