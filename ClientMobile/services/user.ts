@@ -37,8 +37,6 @@ export const loginUser = async (email: string, password: string) => {
       email,
       password,
     });
-    const { user, logout } = useUser();
-    logout();
     return data;
   } catch (error) {
     handleError(error);

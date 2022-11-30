@@ -1,3 +1,4 @@
+import React from "react";
 import {
   View,
   Platform,
@@ -12,7 +13,7 @@ import { getFormattedLocationText } from "../utils/getFormattedLocationText";
 import { Row } from "./Row";
 import { theme } from "../theme";
 import { Location, SearchLocation } from "../types/locationIQ";
-import { getSuggestedLocations, searchLocations } from "../services/location";
+import { getLocationByPlaceId, getSuggestedLocations, searchLocations } from "../services/location";
 
 export const SearchAddress = ({
   type,
@@ -118,7 +119,9 @@ export const SearchAddress = ({
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => {
-                handleSuggestionPress(item);
+                getLocationByPlaceId(item.place_id).then(m => {
+                  handleSuggestionPress(m as Location)
+                });
               }}
             >
               <SuggestedText locationItem={item} />
