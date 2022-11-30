@@ -13,6 +13,9 @@ using Toci.Driver.Database.Persistence.Models;
 using Intotech.Common;
 using System.Xml.Linq;
 using Intotech.Wheelo.Bll.Models.Account;
+using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Common;
+using Intotech.Wheelo.Common.Interfaces;
 
 namespace Intotech.Wheelo.Bll.Persistence
 {
@@ -38,11 +41,60 @@ namespace Intotech.Wheelo.Bll.Persistence
             int gender = user.FirstName[user.FirstName.Length - 1] == 'a' ? 2 : 1;
 
             Account acc = new Account() { Email = user.Email, Name = user.FirstName, 
-                Password = user.Password, Surname = user.LastName };
+                Password = user.Password, Surname = user.LastName, Refreshtokenvalid = DateTime.Now.AddDays(7), 
+                Token = StringUtils.GetRandomString(32) };
 
             Account newUser = accountLogic.Insert(acc);
 
             return GenerateJwt(new LoginDto() { Email = newUser.Email, Password = newUser.Password });
+        }
+
+        public ReturnedResponse<string> CreateNewAccessToken(string accessToken, string refreshToken)
+        {
+            ClaimsPrincipal clPr = GetPrincipalFromExpiredToken(accessToken);
+
+            string email = clPr.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier).First().Value;
+
+            Account account = accountLogic.Select(m => m.Email == email).First();
+
+            if (account == null)
+            {
+                //TODO LOG invalid token usage attempt
+                return new ReturnedResponse<string>(string.Empty, I18nTranslation.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
+            }
+
+            if (account.Token != refreshToken)
+            {
+                //TODO LOG invalid refresh token usage attempt
+                return new ReturnedResponse<string>(string.Empty, I18nTranslation.Translation(I18nTags.ErrorPleaseLogInToApp), false, ErrorCodes.ErrorPleaseLogInToApp);
+            }
+
+            if (account.Refreshtokenvalid < DateTime.Now)
+            {
+                return new ReturnedResponse<string>(string.Empty, I18nTranslation.Translation(I18nTags.RefreshTokenExpiredPleaseLogIn), false, ErrorCodes.RefreshTokenExpiredPleaseLogIn);
+            }
+
+            return new ReturnedResponse<string>(GenerateJwt(new LoginDto() { Email = account.Email, Password = account.Password }).Token, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        }
+
+        protected ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
+        {
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateAudience = false, //you might want to validate the audience and issuer depending on your use case
+                ValidateIssuer = false,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey)),
+                ValidateLifetime = false //here we are saying that we don't care about the token's expiration date
+            };
+            var tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken securityToken;
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
+            var jwtSecurityToken = securityToken as JwtSecurityToken;
+            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                throw new SecurityTokenException("Invalid token");
+
+            return principal;
         }
 
         public Accountrole GenerateJwt(LoginDto user)
@@ -58,9 +110,9 @@ namespace Intotech.Wheelo.Bll.Persistence
 
             List<Claim> claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier, u.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, u.Email),
                 new Claim(ClaimTypes.Name, $"{u.Name} {u.Surname}"),
-                new Claim(ClaimTypes.Role, $"{u.Name}"),
+                new Claim(ClaimTypes.Role, $"{u.Rolename}"),
             };
 
             SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey));
@@ -72,6 +124,7 @@ namespace Intotech.Wheelo.Bll.Persistence
 
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             u.Token = tokenHandler.WriteToken(token);
+
             return u;
         }
 

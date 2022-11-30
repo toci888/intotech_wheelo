@@ -23,5 +23,7 @@
         public const string FriendshipNotFound = "_friendshipNotFound";
         public const string NoData = "_noData";
         public const string NoWorkTripData = "_noWorkTripData";
+        public const string ErrorPleaseLogInToApp = "_errorPleaseLogInToApp";
+        public const string RefreshTokenExpiredPleaseLogIn = "_refreshTokenExpiredPleaseLogIn";
     }
 }

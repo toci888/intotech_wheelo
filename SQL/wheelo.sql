@@ -80,7 +80,8 @@ create table Accounts
 	verificationCode int,
 	IdRole int references roles(id) default 1,
 	emailconfirmed bool default false,
-	token text
+	token text,
+	refreshTokenValid timestamp
 );
 
 create table UserExtraData -- for fb, google, apple
@@ -311,7 +312,7 @@ select * from AccountsCarsLocations;
 --select * from TestCoordinates;
 create or replace view AccountRoles as
 select Accounts.id, Accounts.Name, Accounts.Surname, Accounts.email, Accounts.password, Accounts.emailConfirmed, 
-Accounts.token , Roles.name as RoleName 
+Accounts.token , Roles.name as RoleName, Accounts.refreshTokenValid
 from Accounts
 join Roles on Roles.id = Accounts.idRole;
 

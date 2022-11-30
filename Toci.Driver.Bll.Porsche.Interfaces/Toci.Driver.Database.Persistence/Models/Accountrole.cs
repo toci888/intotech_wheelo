@@ -13,5 +13,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public bool? Emailconfirmed { get; set; }
         public string? Token { get; set; }
         public string? Rolename { get; set; }
+        public DateTime? Refreshtokenvalid { get; set; }
     }
 }

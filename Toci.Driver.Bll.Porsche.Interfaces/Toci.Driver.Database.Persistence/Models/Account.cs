@@ -35,6 +35,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public int? Idrole { get; set; }
         public bool? Emailconfirmed { get; set; }
         public string? Token { get; set; }
+        public DateTime? Refreshtokenvalid { get; set; }
 
         public virtual Role? IdroleNavigation { get; set; }
         public virtual ICollection<Accountmetadatum> Accountmetadata { get; set; }

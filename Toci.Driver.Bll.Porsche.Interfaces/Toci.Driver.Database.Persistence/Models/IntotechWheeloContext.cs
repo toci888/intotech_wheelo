@@ -80,6 +80,10 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Password).HasColumnName("password");
 
+                entity.Property(e => e.Refreshtokenvalid)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("refreshtokenvalid");
+
                 entity.Property(e => e.Surname).HasColumnName("surname");
 
                 entity.Property(e => e.Token).HasColumnName("token");
@@ -156,6 +160,10 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Name).HasColumnName("name");
 
                 entity.Property(e => e.Password).HasColumnName("password");
+
+                entity.Property(e => e.Refreshtokenvalid)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("refreshtokenvalid");
 
                 entity.Property(e => e.Rolename).HasColumnName("rolename");
 

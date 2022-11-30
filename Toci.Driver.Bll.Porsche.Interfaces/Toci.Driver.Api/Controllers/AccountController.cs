@@ -57,6 +57,12 @@ public class AccountController : ApiControllerBase<IAccountRoleLogic, Accountrol
         return sa.MethodResult;
     }
 
+    [HttpGet("refresh-token")]
+    public ReturnedResponse<string> CreateNewAccessToken(string accessToken, string refreshToken)
+    {
+        return Logic.CreateNewAccessToken(accessToken, refreshToken);
+    }
+
 
    /* [AllowAnonymous]
     [HttpPost("register")]
@@ -70,13 +76,13 @@ public class AccountController : ApiControllerBase<IAccountRoleLogic, Accountrol
         //return GafManager.RegisterByMethod(user.Method, "");
     }
    */
-   /* [AllowAnonymous]
-    [HttpPost("login")]
-    public ActionResult<Account> Login([FromBody] LoginDto user)
-    {
-        Accountrole loggedUser = Logic.GenerateJwt(user);
-        return Ok(loggedUser);
-    }*/
+    /* [AllowAnonymous]
+     [HttpPost("login")]
+     public ActionResult<Account> Login([FromBody] LoginDto user)
+     {
+         Accountrole loggedUser = Logic.GenerateJwt(user);
+         return Ok(loggedUser);
+     }*/
 
     [AllowAnonymous]
     [HttpPost("reset-password")]

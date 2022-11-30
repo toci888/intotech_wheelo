@@ -42,7 +42,23 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 return new ReturnedResponse<Accountrole>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmed);
             }
 
-            AccountRoleDto accountRoleDto = DtoModelMapper.Map<AccountRoleDto, Accountrole>(simpleaccount);
+            string refreshToken = simpleaccount.Token;
+
+            if (simpleaccount.Refreshtokenvalid == null || simpleaccount.Refreshtokenvalid < DateTime.Now)
+            {
+                Account accToRefreshToken = AccLogic.Select(m => m.Id == simpleaccount.Id).First();
+
+                accToRefreshToken.Refreshtokenvalid = DateTime.Now.AddDays(7); // TODO CONST
+                refreshToken = accToRefreshToken.Token = StringUtils.GetRandomString(32);
+
+                AccLogic.Update(accToRefreshToken);
+            }
+
+            Accountrole resultAccRole = AccRoleLogic.GenerateJwt(new LoginDto() { Email = simpleaccount.Email, Password = simpleaccount.Password });
+
+            AccountRoleDto accountRoleDto = DtoModelMapper.Map<AccountRoleDto, Accountrole>(resultAccRole);
+
+            accountRoleDto.RefreshToken = refreshToken;
 
             return new ReturnedResponse<Accountrole>(accountRoleDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
