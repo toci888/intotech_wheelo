@@ -19,6 +19,16 @@ namespace Intotech.Wheelo.Common.Interfaces.Models
 
         public override string ToString()
         {
+            if (string.IsNullOrEmpty(road) && string.IsNullOrEmpty(house_number))
+            {
+                return string.Format("{0}, {1}", city, postcode);
+            }
+
+            if (string.IsNullOrEmpty(house_number))
+            {
+                return string.Format("{0}, {1}, {3}", city, road, postcode);
+            }
+
             return string.Format("{0}, {1} {2}, {3}", city, road, house_number, postcode);
 
         }
