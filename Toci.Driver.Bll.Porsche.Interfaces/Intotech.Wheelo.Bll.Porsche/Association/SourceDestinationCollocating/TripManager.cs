@@ -1,5 +1,8 @@
-﻿using Intotech.Wheelo.Bll.Persistence.Interfaces;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating;
+using Intotech.Wheelo.Common.Interfaces;
+using Intotech.Wheelo.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +33,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             return TripparticipantLogic.Insert(new Tripparticipant() { Idtrip = tripId, Idaccount = accountId }).Id;
         }
 
-        public virtual Trip CreateTrip(Trip trip, List<int> accountIds)
+        public virtual ReturnedResponse<Trip> CreateTrip(Trip trip, List<int> accountIds)
         {
             trip.Iscurrent = true;
 
@@ -46,7 +49,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
                 TripparticipantLogic.Insert(new Tripparticipant() { Idaccount = accountId, Idtrip = newTrip.Id, Isoccasion = false });
             }
 
-            return newTrip;
+            return new ReturnedResponse<Trip>(newTrip, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual List<Trip> GetAllTrips(int accountId)

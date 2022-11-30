@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCo
 {
     public interface ITripManager
     {
-        Trip CreateTrip(Trip trip, List<int> accountIds);
+        ReturnedResponse<Trip> CreateTrip(Trip trip, List<int> accountIds);
         int AddTripParticipant(int tripId, int accountId);
 
         bool SetTripNotCurrent(int tripId, int inititatorAccountId);

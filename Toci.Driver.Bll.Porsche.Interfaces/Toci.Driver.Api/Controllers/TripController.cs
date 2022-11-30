@@ -1,6 +1,7 @@
 ﻿using Intotech.Common.Microservices;
 using Intotech.Wheelo.Bll.Models;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating;
+using Intotech.Common.Bll.ComplexResponses;
 using Microsoft.AspNetCore.Mvc;
 using Toci.Driver.Database.Persistence.Models;
 
@@ -16,7 +17,7 @@ namespace Toci.Driver.Api.Controllers
 
         [HttpPost]
         [Route("create-trip")]
-        public Trip CreateTrip(TripDto trip)
+        public ReturnedResponse<Trip> CreateTrip(TripDto trip)
         {
             return Service.CreateTrip(trip, trip.AccountIds);
         }
