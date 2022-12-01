@@ -2,13 +2,13 @@ import { Dimensions, Platform, StatusBar } from "react-native";
 
 export const locationAPIKEY = 'pk.95fe8bb8ddbbc10ed656fe23d485c8f0&q';
 
-export const LISTMARGIN = 6;
+export const LISTMARGIN = 10;
 export const WIDTH = Dimensions.get("screen").width - LISTMARGIN * 2;
 export const PHOTOS_STR = "photos";
 export const AMENITIES_STR = "amenities";
 export const DESCRIPTION_STR = "description";
 
-const baseHeight = 300;
+const baseHeight = 160;
 const iosNotch = 40;
 const iosHeight = baseHeight + iosNotch;
 let androidHeight = baseHeight;
@@ -18,8 +18,6 @@ androidHeight += androidNotch;
 
 export const HEADERHEIGHT = Platform.OS === "ios" ? iosHeight : androidHeight;
 
-const apartamentClone = "https://apartmentsclone.tk/api"; //TODEL
-const apartamentCloneChatUrl = "https://apartmentsclone.tk"; //TODEL
 const serverUrl = "http://20.100.196.118:5105/api"; //HERE
 const chatUrl = "http://192.168.30.24:3000";
 const location = "/location";
@@ -31,7 +29,7 @@ const conversation = "/conversation";
 const messages = "/messages";
 const refresh = "/refresh";
 const refreshTokenEndpoint = serverUrl + refresh;
-const locationEndpoint = apartamentClone + location;
+const locationEndpoint = serverUrl + location;
 const userEndpoint = serverUrl + user;
 const propertyEndpoint = serverUrl + property;
 const apartmentEndpoint = serverUrl + apartment;
@@ -46,11 +44,11 @@ const allowsNotificationsEndpoint = (id: number) =>
   `${userEndpoint}/${id}/settings/notifications`;
 
 export const endpoints = {
-  chat: apartamentCloneChatUrl,
+  chat: chatUrl,
   autoComplete: locationEndpoint + "/autocomplete",
   search: locationEndpoint + "/search",
-  register: userEndpoint + "/simple-register",
-  login: userEndpoint + "/simple-login",
+  register: userEndpoint + "/register",
+  login: userEndpoint + "/login",
   forgotPassword: userEndpoint + "/forgotpassword",
   resetPassword: userEndpoint + "/resetpassword",
   createProperty: propertyEndpoint,
