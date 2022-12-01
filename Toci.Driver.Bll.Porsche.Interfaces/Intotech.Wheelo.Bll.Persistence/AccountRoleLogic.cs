@@ -16,6 +16,7 @@ using Intotech.Wheelo.Bll.Models.Account;
 using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Common;
 using Intotech.Wheelo.Common.Interfaces;
+using Intotech.Wheelo.Common.Logging;
 
 namespace Intotech.Wheelo.Bll.Persistence
 {
@@ -59,13 +60,15 @@ namespace Intotech.Wheelo.Bll.Persistence
 
             if (account == null)
             {
-                //TODO LOG invalid token usage attempt
+                ErrorHandler.LogDebug("Access token: " + accessToken + " and refresh token " + refreshToken + " CreateNewAccessToken call failed with account not found for the email " + email);
+
                 return new ReturnedResponse<TokensModel>(null, I18nTranslation.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
             }
 
             if (account.Token != refreshToken)
             {
-                //TODO LOG invalid refresh token usage attempt
+                ErrorHandler.LogDebug("Access token: " + accessToken + " and refresh token " + refreshToken + " CreateNewAccessToken call failed with invalid refresh token for the email " + email);
+
                 return new ReturnedResponse<TokensModel>(null, I18nTranslation.Translation(I18nTags.ErrorPleaseLogInToApp), false, ErrorCodes.ErrorPleaseLogInToApp);
             }
 
