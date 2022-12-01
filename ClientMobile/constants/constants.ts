@@ -2,13 +2,13 @@ import { Dimensions, Platform, StatusBar } from "react-native";
 
 export const locationAPIKEY = 'pk.95fe8bb8ddbbc10ed656fe23d485c8f0&q';
 
-export const LISTMARGIN = 6;
+export const LISTMARGIN = 10;
 export const WIDTH = Dimensions.get("screen").width - LISTMARGIN * 2;
 export const PHOTOS_STR = "photos";
 export const AMENITIES_STR = "amenities";
 export const DESCRIPTION_STR = "description";
 
-const baseHeight = 300;
+const baseHeight = 160;
 const iosNotch = 40;
 const iosHeight = baseHeight + iosNotch;
 let androidHeight = baseHeight;
