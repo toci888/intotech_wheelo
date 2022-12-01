@@ -8,7 +8,7 @@ namespace Intotech.Wheelo.Common.I18nManagers
 {
     public class EnI18nManager : I18nManager
     {
-        public EnI18nManager() : base("en")
+        public EnI18nManager() : base(I18nTags.LanguageCodeEn)
         {
             TranslationsMap = new Dictionary<string, I18nModel>()
             {
