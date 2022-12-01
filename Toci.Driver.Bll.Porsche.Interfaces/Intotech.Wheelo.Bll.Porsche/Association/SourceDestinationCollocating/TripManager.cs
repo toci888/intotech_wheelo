@@ -28,9 +28,9 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             VAccountsCarsLocationLogic = vAccountsCarsLocationLogic;
         }
 
-        public int AddTripParticipant(int tripId, int accountId)
+        public ReturnedResponse<int> AddTripParticipant(int tripId, int accountId)
         {
-            return TripparticipantLogic.Insert(new Tripparticipant() { Idtrip = tripId, Idaccount = accountId }).Id;
+            return new ReturnedResponse<int>(TripparticipantLogic.Insert(new Tripparticipant() { Idtrip = tripId, Idaccount = accountId }).Id, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<Trip> CreateTrip(Trip trip, List<int> accountIds)
@@ -64,9 +64,9 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             return new ReturnedResponse<List<Trip>>(TripLogic.Select(m => m.Idinitiatoraccount == inititatorAccountId).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success); 
         }
 
-        public virtual Trip GetTrip(int tripId) //
+        public virtual ReturnedResponse<Trip> GetTrip(int tripId) //zmienione 1.12.22
         {
-            return TripLogic.Select(m => m.Id == tripId).First();
+            return new ReturnedResponse<Trip>(TripLogic.Select(m => m.Id == tripId).First(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<List<Vtripsparticipant>> GetTripParticipants(int accountId)
@@ -76,13 +76,13 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             return new ReturnedResponse<List<Vtripsparticipant>>(VTripparticipantLogic.Select(m => m.Tripid == tripId).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual bool SetTripNotCurrent(int tripId, int inititatorAccountId) //
+        public virtual ReturnedResponse<bool> SetTripNotCurrent(int tripId, int inititatorAccountId) //zmienione 1.12.22
         {
             Trip trip = TripLogic.Select(m => m.Id == tripId && m.Idinitiatoraccount == inititatorAccountId).First();
 
             trip.Iscurrent = false;
 
-            return TripLogic.Update(trip).Id > 0;
+            return new ReturnedResponse<bool>(TripLogic.Update(trip).Id > 0, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success); ; ; ;
         }
     }
 }

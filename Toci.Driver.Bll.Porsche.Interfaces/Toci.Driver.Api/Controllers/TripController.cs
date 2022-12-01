@@ -24,14 +24,14 @@ namespace Toci.Driver.Api.Controllers
 
         [HttpPost]
         [Route("add-trip-participant")]
-        public int AddTripParticipant(TripParticipantDto tripParticipantDto) //
+        public ReturnedResponse<int> AddTripParticipant(TripParticipantDto tripParticipantDto) //dodałam RR 1.12.22
         {
             return Service.AddTripParticipant(tripParticipantDto.TripId, tripParticipantDto.AccountId);
         }
 
         [HttpPost]
         [Route("set-trip-not-current")]
-        public bool SetTripNotCurrent(TripParticipantDto tripInitiatorDto) //
+        public ReturnedResponse<bool> SetTripNotCurrent(TripParticipantDto tripInitiatorDto) //dodałam RR 1.12.22
         {
             return Service.SetTripNotCurrent(tripInitiatorDto.TripId, tripInitiatorDto.AccountId);
         }
@@ -45,7 +45,7 @@ namespace Toci.Driver.Api.Controllers
 
         [HttpGet]
         [Route("get-trip")]
-        public Trip GetTrip(int tripId) //
+        public ReturnedResponse<Trip> GetTrip(int tripId) //dodałam RR 1.12.22
         {
             return Service.GetTrip(tripId);
         }
