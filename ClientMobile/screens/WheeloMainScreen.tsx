@@ -14,6 +14,7 @@ import { SearchScreenParams } from "../types";
 import { Property } from "../types/property";
 import { Text } from "@ui-kitten/components";
 import { useSearchPropertiesQuery } from "../hooks/queries/useSearchPropertiesQuery";
+import { i18n } from "../i18n/i18n";
 
 export const WheeloMainScreen = ({
   route,
@@ -55,7 +56,7 @@ export const WheeloMainScreen = ({
         scrollAnimation={scrollAnimation}
         setMapShown={setMapShown}
         mapShown={mapShown}
-        location={location ? location : "Find a Location"}
+        location={location ? location : i18n.t('Search')}
         availableProperties={
           searchProperties.data ? searchProperties.data.length : undefined
         }

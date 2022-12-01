@@ -1,18 +1,11 @@
 {
-    "common": {
-        "AppName": "Wheelo"
-    },
-    "user": {
-        "firstname": "Imię",
-        "lastname": "Nazwisko",
-        "email": "Email",
-        "password": "Hasło"
-    },
-    "buttons": {
-        "SignUp": "Zarejestruj się",
-        "SignIn": "Zaloguj się"
-    },
-    "forms": {
-        "UnableToAuthorize": "Nie udało się zalogować"
-    }
+    "AppName": "Wheelo",
+    "firstname": "Imię",
+    "lastname": "Nazwisko",
+    "email": "Email",
+    "password": "Hasło",
+    "SignUp": "Zarejestruj się",
+    "SignIn": "Zaloguj się",
+    "UnableToAuthorize": "Nie udało się zalogować",
+    "Search": "Szukaj tuttaj"
 }
