@@ -26,7 +26,8 @@ namespace Intotech.Wheelo.Common.Interfaces.Models
 
             if (string.IsNullOrEmpty(house_number))
             {
-                return string.Format("{0}, {1}, {3}", city, road, postcode);
+                return string.Format("{2} {0}, {1}", city, road, postcode);
+                //return string.Format("{0}, {1} {2}, {3}", city, road, house_number, postcode);
             }
 
             return string.Format("{0}, {1} {2}, {3}", city, road, house_number, postcode);

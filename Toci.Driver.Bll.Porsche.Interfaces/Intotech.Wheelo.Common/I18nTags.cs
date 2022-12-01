@@ -19,7 +19,7 @@
         public const string AccountNotFound = "_accountNotFound";
         public const string AccountExists = "_accountExists";
         public const string FailedToAddInformation = "_failedToAddInformation";
-        public const string DataAlreadyExistInDatabase = "_dataAlreadyExistInDatabase";
+        public const string DataAlreadyExistInDatabase = "_dataAlreadyExistInDatabase"; //
         public const string FriendshipNotFound = "_friendshipNotFound";
         public const string NoData = "_noData";
         public const string NoWorkTripData = "_noWorkTripData";
