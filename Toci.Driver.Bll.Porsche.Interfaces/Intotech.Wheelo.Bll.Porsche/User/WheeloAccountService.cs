@@ -6,6 +6,7 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
 using Intotech.Wheelo.Common;
 using Intotech.Wheelo.Common.Interfaces;
+using Intotech.Wheelo.Common.Interfaces.Emails;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Wheelo.Common.Emails;
 
 namespace Intotech.Wheelo.Bll.Porsche.User
 {
@@ -20,12 +22,13 @@ namespace Intotech.Wheelo.Bll.Porsche.User
     {
         protected IAccountLogic AccLogic;
         protected IAccountRoleLogic AccRoleLogic;
+        protected IEmailManager EmailManager = new EmailManager("pl");
 
-
-        public WheeloAccountService(IAccountLogic accLogic, IAccountRoleLogic accRoleLogic)
+        public WheeloAccountService(IAccountLogic accLogic, IAccountRoleLogic accRoleLogic/*, IEmailManager emailManager*/)
         {
             AccLogic = accLogic;
             AccRoleLogic = accRoleLogic;
+            //EmailManager = emailManager;
         }
 
         public ReturnedResponse<AccountRoleDto> Login(LoginDto loginDto)
@@ -78,6 +81,8 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             account.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
 
             simpleaccount = AccLogic.Insert(account);
+
+            EmailManager.SendEmailVerificationCode(account.Email, account.Name, simpleaccount.Verificationcode.Value.ToString());
 
             simpleaccount.Verificationcode = 0;
 

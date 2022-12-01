@@ -2,6 +2,9 @@
 {
     public static class I18nTags
     {
+        public const string LanguageCodePl = "pl";
+        public const string LanguageCodeEn = "en";
+
         public const string Success = "_success";
         public const string Error = "_error";
         public const string Polish = "_polish";
@@ -25,5 +28,6 @@
         public const string NoWorkTripData = "_noWorkTripData";
         public const string ErrorPleaseLogInToApp = "_errorPleaseLogInToApp";
         public const string RefreshTokenExpiredPleaseLogIn = "_refreshTokenExpiredPleaseLogIn";
+        public const string PleaseConfirmYourWheeloAccountRegistration = "_pleaseConfirmYourWheeloAccountRegistration";
     }
 }
