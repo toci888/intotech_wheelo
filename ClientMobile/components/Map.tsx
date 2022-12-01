@@ -123,9 +123,9 @@ export const Map = ({
         {properties &&
           properties.map((i, index) => (
             <MapMarker
-              key={i.ID}
-              lat={i.lat}
-              lng={i.lng}
+              key={i.ID} // id: 1
+              lat={i.lat} //52.387056469655896
+              lng={i.lng} // 16.881805743212674
               color={
                 activeIndex === index
                   ? theme["color-info-400"]

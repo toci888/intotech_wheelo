@@ -40,6 +40,7 @@ import { useNotifications } from "../hooks/useNotifications";
 import { AccountSettingsScreen } from "../screens/AccountSettingsScreen";
 import { ConversationsScreen } from "../screens/ConversationsScreen";
 import { MessagesScreen } from "../screens/MessagesScreen";
+import { WheeloMainScreen } from "../screens/WheeloMainScreen";
 
 export default function Navigation({
   colorScheme,
@@ -167,14 +168,14 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
-      initialRouteName="Search"
+      initialRouteName="WheeloMain"
       screenOptions={{
         tabBarActiveTintColor: theme["color-primary-500"],
       }}
     >
       <BottomTab.Screen
-        name="Search"
-        component={SearchScreen}
+        name="HERET"
+        component={WheeloMainScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (

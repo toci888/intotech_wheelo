@@ -18,12 +18,13 @@ export const CurrentLocationButton = ({ style }: { style?: ViewStyle }) => {
     }
 
     let location = await Location.getCurrentPositionAsync({});
+    console.log("XXXX", location);
     handleNavigate(location);
   };
 
   const handleNavigate = (location: Location.LocationObject) => {
-    let lat = location.coords.latitude;
-    let lon = location.coords.longitude;
+    let lat =  location.coords.latitude; //52.38705 16.88180 52.38512
+    let lon = location.coords.longitude; // 16.879011
     let boundingBox = [
       (lat - 0.048).toString(),
       (lat + 0.048).toString(),
