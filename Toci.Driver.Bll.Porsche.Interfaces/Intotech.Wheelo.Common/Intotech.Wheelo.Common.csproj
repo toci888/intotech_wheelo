@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll\Intotech.Common.Bll.csproj" />
     <ProjectReference Include="..\..\Intotech.Wheelo.Common.Interfaces\Intotech.Wheelo.Common.Interfaces.csproj" />
   </ItemGroup>
 

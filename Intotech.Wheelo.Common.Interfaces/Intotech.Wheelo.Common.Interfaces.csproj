@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Bll.Interfaces\Intotech.Common.Bll.Interfaces.csproj" />
+  </ItemGroup>
+
 </Project>
