@@ -48,8 +48,8 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             {
                 Account accToRefreshToken = AccLogic.Select(m => m.Id == simpleaccount.Id).First();
 
-                accToRefreshToken.Refreshtokenvalid = DateTime.Now.AddDays(7); // TODO CONST
-                refreshToken = accToRefreshToken.Token = StringUtils.GetRandomString(32);
+                accToRefreshToken.Refreshtokenvalid = DateTime.Now.AddDays(AccountLogicConstants.RefreshTokenValidDays); 
+                refreshToken = accToRefreshToken.Token = StringUtils.GetRandomString(AccountLogicConstants.RefreshTokenMaxLength);
 
                 AccLogic.Update(accToRefreshToken);
             }
@@ -84,20 +84,28 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             return new ReturnedResponse<AccountRegisterDto>(sAccount, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public ReturnedResponse<Account> ConfirmEmail(EmailConfirmDto EcDto)
+        public ReturnedResponse<Accountrole> ConfirmEmail(EmailConfirmDto EcDto)
         {
             Account account = AccLogic.Select(m => m.Email == EcDto.Email && m.Verificationcode == EcDto.Code).FirstOrDefault();
 
             if (account == null)
             {
-                return new ReturnedResponse<Account>(null, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
+                return new ReturnedResponse<Accountrole>(null, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
             }
 
             account.Emailconfirmed = true;
+            string refreshToken = account.Token = StringUtils.GetRandomString(AccountLogicConstants.RefreshTokenMaxLength);
+            account.Refreshtokenvalid = DateTime.Now.AddDays(AccountLogicConstants.RefreshTokenValidDays);
 
             AccLogic.Update(account);
 
-            return new ReturnedResponse<Account>(account, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            Accountrole resultAccRole = AccRoleLogic.GenerateJwt(new LoginDto() { Email = account.Email, Password = account.Password });
+
+            AccountRoleDto accountRoleDto = DtoModelMapper.Map<AccountRoleDto, Accountrole>(resultAccRole);
+
+            accountRoleDto.RefreshToken = refreshToken;
+
+            return new ReturnedResponse<Accountrole>(accountRoleDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace Intotech.Wheelo.Bll.Persistence
             return GenerateJwt(new LoginDto() { Email = newUser.Email, Password = newUser.Password });
         }
 
-        public ReturnedResponse<string> CreateNewAccessToken(string accessToken, string refreshToken)
+        public ReturnedResponse<TokensModel> CreateNewAccessToken(string accessToken, string refreshToken)
         {
             ClaimsPrincipal clPr = GetPrincipalFromExpiredToken(accessToken);
 
@@ -60,21 +60,29 @@ namespace Intotech.Wheelo.Bll.Persistence
             if (account == null)
             {
                 //TODO LOG invalid token usage attempt
-                return new ReturnedResponse<string>(string.Empty, I18nTranslation.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
+                return new ReturnedResponse<TokensModel>(null, I18nTranslation.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
             }
 
             if (account.Token != refreshToken)
             {
                 //TODO LOG invalid refresh token usage attempt
-                return new ReturnedResponse<string>(string.Empty, I18nTranslation.Translation(I18nTags.ErrorPleaseLogInToApp), false, ErrorCodes.ErrorPleaseLogInToApp);
+                return new ReturnedResponse<TokensModel>(null, I18nTranslation.Translation(I18nTags.ErrorPleaseLogInToApp), false, ErrorCodes.ErrorPleaseLogInToApp);
             }
 
             if (account.Refreshtokenvalid < DateTime.Now)
             {
-                return new ReturnedResponse<string>(string.Empty, I18nTranslation.Translation(I18nTags.RefreshTokenExpiredPleaseLogIn), false, ErrorCodes.RefreshTokenExpiredPleaseLogIn);
+                return new ReturnedResponse<TokensModel>(null, I18nTranslation.Translation(I18nTags.RefreshTokenExpiredPleaseLogIn), false, ErrorCodes.RefreshTokenExpiredPleaseLogIn);
             }
 
-            return new ReturnedResponse<string>(GenerateJwt(new LoginDto() { Email = account.Email, Password = account.Password }).Token, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            TokensModel tokensModel = new TokensModel();
+
+            tokensModel.AccessToken = GenerateJwt(new LoginDto() { Email = account.Email, Password = account.Password }).Token;
+
+            tokensModel.RefreshToken = account.Token = StringUtils.GetRandomString(AccountLogicConstants.RefreshTokenMaxLength);
+
+            accountLogic.Update(account);
+
+            return new ReturnedResponse<TokensModel>(tokensModel, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         protected ClaimsPrincipal GetPrincipalFromExpiredToken(string token)

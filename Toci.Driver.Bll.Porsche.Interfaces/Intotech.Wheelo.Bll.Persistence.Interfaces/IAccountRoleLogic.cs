@@ -12,5 +12,5 @@ public interface IAccountRoleLogic : ILogicBase<Accountrole>
     public IEnumerable<Account> GetAll();
     public int ResetPassword(int userId, string password);
 
-    public ReturnedResponse<string> CreateNewAccessToken(string accessToken, string refreshToken);
+    public ReturnedResponse<TokensModel> CreateNewAccessToken(string accessToken, string refreshToken);
 }

@@ -39,7 +39,7 @@ public class AccountController : ApiControllerBase<IAccountRoleLogic, Accountrol
     }
 
     [HttpPost("confirm-email")]
-    public ReturnedResponse<Account> ConfirmEmail(EmailConfirmDto EcDto)
+    public ReturnedResponse<Accountrole> ConfirmEmail(EmailConfirmDto EcDto)
     {
         return WheeloAccountService.ConfirmEmail(EcDto);
     }
@@ -58,7 +58,7 @@ public class AccountController : ApiControllerBase<IAccountRoleLogic, Accountrol
     }
 
     [HttpGet("refresh-token")]
-    public ReturnedResponse<string> CreateNewAccessToken(string accessToken, string refreshToken)
+    public ReturnedResponse<TokensModel> CreateNewAccessToken(string accessToken, string refreshToken)
     {
         return Logic.CreateNewAccessToken(accessToken, refreshToken);
     }
