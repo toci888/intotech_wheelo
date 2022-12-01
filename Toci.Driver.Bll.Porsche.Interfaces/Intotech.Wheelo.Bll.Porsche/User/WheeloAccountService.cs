@@ -28,18 +28,18 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             AccRoleLogic = accRoleLogic;
         }
 
-        public ReturnedResponse<Accountrole> Login(LoginDto loginDto)
+        public ReturnedResponse<AccountRoleDto> Login(LoginDto loginDto)
         {
             Accountrole simpleaccount = AccRoleLogic.Select(m => m.Email == loginDto.Email && m.Password == loginDto.Password).FirstOrDefault();
 
             if (simpleaccount == null)
             {
-                return new ReturnedResponse<Accountrole>(null, I18nTranslation.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
             }
 
             if (!simpleaccount.Emailconfirmed.Value)
             {
-                return new ReturnedResponse<Accountrole>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmed);
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmed);
             }
 
             string refreshToken = simpleaccount.Token;
@@ -60,7 +60,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             accountRoleDto.RefreshToken = refreshToken;
 
-            return new ReturnedResponse<Accountrole>(accountRoleDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<AccountRoleDto>(accountRoleDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<AccountRegisterDto> Register(AccountRegisterDto sAccount)
@@ -84,13 +84,13 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             return new ReturnedResponse<AccountRegisterDto>(sAccount, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public ReturnedResponse<Accountrole> ConfirmEmail(EmailConfirmDto EcDto)
+        public ReturnedResponse<AccountRoleDto> ConfirmEmail(EmailConfirmDto EcDto)
         {
             Account account = AccLogic.Select(m => m.Email == EcDto.Email && m.Verificationcode == EcDto.Code).FirstOrDefault();
 
             if (account == null)
             {
-                return new ReturnedResponse<Accountrole>(null, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
             }
 
             account.Emailconfirmed = true;
@@ -105,7 +105,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             accountRoleDto.RefreshToken = refreshToken;
 
-            return new ReturnedResponse<Accountrole>(accountRoleDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<AccountRoleDto>(accountRoleDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }

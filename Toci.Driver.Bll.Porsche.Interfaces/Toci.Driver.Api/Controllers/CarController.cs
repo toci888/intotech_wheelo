@@ -7,7 +7,7 @@ namespace Toci.Driver.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CarController : ApiControllerBase<ICarLogic, Car> // todo fix this when coding, ApiSimple..
+public class CarController : ApiSimpleControllerBase<ICarLogic> // todo fix this when coding, ICarService..
 {
     public CarController(ICarLogic logic) : base(logic)
     {

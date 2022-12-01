@@ -13,7 +13,7 @@ namespace Toci.Driver.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AccountController : ApiControllerBase<IAccountRoleLogic, Accountrole>
+public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
 {
     protected IGafManager GafManager;
     protected IWheeloAccountService WheeloAccountService;
@@ -39,15 +39,15 @@ public class AccountController : ApiControllerBase<IAccountRoleLogic, Accountrol
     }
 
     [HttpPost("confirm-email")]
-    public ReturnedResponse<Accountrole> ConfirmEmail(EmailConfirmDto EcDto)
+    public ReturnedResponse<AccountRoleDto> ConfirmEmail(EmailConfirmDto EcDto)
     {
         return WheeloAccountService.ConfirmEmail(EcDto);
     }
 
     [HttpPost("login")]
-    public ActionResult<Accountrole> SimpleLogin(LoginDto lDto)
+    public ActionResult<AccountRoleDto> Login(LoginDto lDto)
     {
-        ReturnedResponse<Accountrole> sa = WheeloAccountService.Login(lDto);
+        ReturnedResponse<AccountRoleDto> sa = WheeloAccountService.Login(lDto);
 
         if (!sa.IsSuccess)
         {
@@ -60,7 +60,7 @@ public class AccountController : ApiControllerBase<IAccountRoleLogic, Accountrol
     [HttpGet("refresh-token")]
     public ReturnedResponse<TokensModel> CreateNewAccessToken(string accessToken, string refreshToken)
     {
-        return Logic.CreateNewAccessToken(accessToken, refreshToken);
+        return Service.CreateNewAccessToken(accessToken, refreshToken);
     }
 
 
@@ -88,6 +88,6 @@ public class AccountController : ApiControllerBase<IAccountRoleLogic, Accountrol
     [HttpPost("reset-password")]
     public int ResetPassword(int userId, [FromBody] string password)
     {
-        return Logic.ResetPassword(userId, password);
+        return Service.ResetPassword(userId, password);
     }
 }

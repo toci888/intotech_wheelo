@@ -21,6 +21,10 @@
     "Debug": {
       "commandName": "Project",
       "applicationUrl": "http://192.168.43.58:5105"
+    },
+    "Warsztaty": {
+      "commandName": "Project",
+      "applicationUrl": "http://192.168.0.153:5105"
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json",
