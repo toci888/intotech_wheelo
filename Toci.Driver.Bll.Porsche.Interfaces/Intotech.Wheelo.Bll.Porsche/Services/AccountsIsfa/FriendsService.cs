@@ -1,4 +1,5 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Models.Isfa;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
 using Intotech.Wheelo.Common;
@@ -38,6 +39,15 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
             }
 
             return new ReturnedResponse<bool>(FriendLogic.Delete(fr) > 0, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        }
+
+        public virtual ReturnedResponse<Vfriend> AddFriend(NewFriendAddDto friend)
+        {
+            FriendLogic.Insert(new Friend() { Idaccount = friend.Idaccount, Idfriend = friend.Idfriend, Method = friend.Method });
+
+            return new ReturnedResponse<Vfriend>(VfriendLogic.Select(m => m.Accountid == friend.Idaccount && m.Friendaccountid == friend.Idfriend).First(),
+                I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+
         }
     }
 }

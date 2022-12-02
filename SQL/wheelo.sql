@@ -161,18 +161,19 @@ create table Friends
 	Id serial primary key,
 	IdAccount int references Accounts(Id) not null,
 	IdFriend int references Accounts(Id) not null,
+	method int,
 	CreatedAt timestamp default now()
 );
 
 
 create or replace view VFriends as
 select U1.Name, U1.Surname, U2.Name as FriendName, U2.Surname as FriendSurname, U1.Id as AccountId, 
-U2.Id as FriendAccountId
+U2.Id as FriendAccountId, Friends.method 
 from Friends 
 join Accounts U1 on U1.Id = Friends.IdAccount 
 join Accounts U2 on U2.Id = Friends.IdFriend ;
 
-select * from VFriends;
+--select * from VFriends;
 
 --select * from AccountsCollocations;
 

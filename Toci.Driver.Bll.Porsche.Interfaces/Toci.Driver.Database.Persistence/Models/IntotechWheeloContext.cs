@@ -409,6 +409,8 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Idfriend).HasColumnName("idfriend");
 
+                entity.Property(e => e.Method).HasColumnName("method");
+
                 entity.HasOne(d => d.IdaccountNavigation)
                     .WithMany(p => p.FriendIdaccountNavigations)
                     .HasForeignKey(d => d.Idaccount)
@@ -786,6 +788,8 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Friendname).HasColumnName("friendname");
 
                 entity.Property(e => e.Friendsurname).HasColumnName("friendsurname");
+
+                entity.Property(e => e.Method).HasColumnName("method");
 
                 entity.Property(e => e.Name).HasColumnName("name");
 
