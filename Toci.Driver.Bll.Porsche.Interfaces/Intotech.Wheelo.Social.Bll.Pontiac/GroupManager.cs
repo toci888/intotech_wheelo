@@ -1,6 +1,7 @@
 ﻿using Intotech.Common;
 using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Models.Social;
+using Intotech.Wheelo.Common;
 using Intotech.Wheelo.Common.Interfaces;
 using Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces;
 using Intotech.Wheelo.Social.Bll.Persistence.Interfaces;
@@ -41,7 +42,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
 
             groupMemberAddDto.GroupName = group.Name;
 
-            return new ReturnedResponse<GroupMemberAddDto>(groupMemberAddDto, "", true, ErrorCodes.Success);
+            return new ReturnedResponse<GroupMemberAddDto>(groupMemberAddDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<GroupMembersDto> GetGroupWithMembers(int groupId)
@@ -58,7 +59,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
 
             result.GroupMembers = accountroles;
 
-            return new ReturnedResponse<GroupMembersDto>(result, "", true, ErrorCodes.Success);
+            return new ReturnedResponse<GroupMembersDto>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }

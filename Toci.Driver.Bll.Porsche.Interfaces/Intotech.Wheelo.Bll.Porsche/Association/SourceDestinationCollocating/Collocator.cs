@@ -85,7 +85,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
             Collocate(wt.Idaccount.Value);
 
-            return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == wt.Idaccount).ToList(), "", true, ErrorCodes.Success);
+            return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == wt.Idaccount).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<List<Vaccountscollocationsworktrip>> SetWorkTripGetCollocations(Worktrip workTrip)
@@ -99,7 +99,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
         public virtual ReturnedResponse<List<Vaccountscollocation>> GetUserAssociations(int accountId)
         {
-            return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == accountId || m.Suggestedaccountid == accountId).ToList(), "", true, ErrorCodes.Success);
+            return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == accountId || m.Suggestedaccountid == accountId).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<List<Vaccountscollocation>> CollocateAndMatch(int accountId)
