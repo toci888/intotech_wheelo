@@ -1,13 +1,13 @@
-import { Location, SearchLocation } from "../types/locationIQ";
+import { Location } from "../types/locationIQ";
 import { getStateAbbreviation } from "./getStateAbbreviation";
 
 export const getFormattedLocationText = (
-  item: Location | SearchLocation,
+  item: Location,
   type: "autocomplete" | "search"
 ) => {
   let location = "";
   if (type === "search") {
-    item = item as SearchLocation;
+    item = item as Location;
     let address = item.address;
     location = item.display_name;
     if (item.address?.country_code && item.address.country_code == "us") {
@@ -21,7 +21,7 @@ export const getFormattedLocationText = (
     }
   } else {
     location = item.address?.name ? item.address.name : "";
-    if (item.type === "city" && item.address.state)
+    if (item.address.state)
       location = `${location}, ${getStateAbbreviation(item.address.state)}`;
   }
   return location;

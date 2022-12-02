@@ -5,6 +5,7 @@ export type Location = {
   boundingbox: string[];
   display_name: string;
   address: Address;
+  location: string;
 };
 
 export type GoogleMaps = {

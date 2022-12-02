@@ -12,7 +12,7 @@ import { useState } from "react";
 import { getFormattedLocationText } from "../utils/getFormattedLocationText";
 import { Row } from "./Row";
 import { theme } from "../theme";
-import { Location, SearchLocation } from "../types/locationIQ";
+import { Location } from "../types/locationIQ";
 import { getLocationByPlaceId, getSuggestedLocations, searchLocations } from "../services/location";
 
 export const SearchAddress = ({
@@ -24,10 +24,10 @@ export const SearchAddress = ({
   defaultLocation = "",
 }: {
   type: "autocomplete" | "search";
-  suggestions: Location[] | SearchLocation[];
+  suggestions: Location[];
   handleGoBack: () => void;
-  setSuggestions: (item: Location[] | SearchLocation[]) => void;
-  handleSuggestionPress: (item: Location | SearchLocation) => void;
+  setSuggestions: (item: Location[]) => void;
+  handleSuggestionPress: (item: Location) => void;
   defaultLocation?: string;
 }) => {
   const [value, setValue] = useState(defaultLocation);
@@ -62,7 +62,7 @@ export const SearchAddress = ({
   const SuggestedText = ({
     locationItem,
   }: {
-    locationItem: Location | SearchLocation;
+    locationItem: Location;
   }) => {
     const location = getFormattedLocationText(locationItem, type);
     return (

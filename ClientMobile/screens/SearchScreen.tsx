@@ -21,7 +21,7 @@ export const SearchScreen = ({
   route: { params: SearchScreenParams };
 }) => {
   const navigation = useNavigation();
-  const [mapShown, setMapShown] = useState<boolean>(false);
+  const [mapShown, setMapShown] = useState<boolean>(true);
   const [scrollAnimation] = useState(new Animated.Value(0));
   const mapRef = useRef<MapView | null>(null);
   const [location, setLocation] = useState<string | undefined>(undefined);

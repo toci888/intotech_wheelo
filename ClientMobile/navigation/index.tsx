@@ -168,14 +168,14 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
-      initialRouteName="WheeloMain"
+      initialRouteName="Search"
       screenOptions={{
         tabBarActiveTintColor: theme["color-primary-500"],
       }}
     >
       <BottomTab.Screen
-        name="HERET"
-        component={WheeloMainScreen}
+        name="Search"
+        component={SearchScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (

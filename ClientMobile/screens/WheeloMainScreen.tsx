@@ -27,6 +27,7 @@ export const WheeloMainScreen = ({
   const mapRef = useRef<MapView | null>(null);
   const [location, setLocation] = useState<string | undefined>(undefined);
   let boundingBox: number[] = [];
+  console.log("ROUTE", route)
   if (route.params?.boundingBox)
     boundingBox = [
       Number(route.params.boundingBox[0]),

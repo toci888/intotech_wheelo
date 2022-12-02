@@ -15,6 +15,7 @@ import { AMENITIES_STR, DESCRIPTION_STR, PHOTOS_STR } from "../../constants/cons
 import { theme } from "../../theme";
 import { EditPropertyInitialValues } from "../../types/editPropertyInitialValues";
 import { PickerItem } from "react-native-woodpicker/dist/types";
+import React from "react";
 
 export const UnitsInput = ({
   unitType,

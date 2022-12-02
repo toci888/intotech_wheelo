@@ -11,7 +11,7 @@ import { Screen } from "./Screen";
 import { ModalHeader } from "./ModalHeader";
 import { Row } from "./Row";
 import { UnitButton } from "./UnitButton";
-import { SearchLocation } from "../types/locationIQ";
+import { Location } from "../types/locationIQ";
 import { SearchAddress } from "./SearchAddress";
 import { getStateAbbreviation } from "../utils/getStateAbbreviation";
 import { Select } from "./Select";
@@ -25,7 +25,7 @@ import { useCreatePropertyMutation } from "../hooks/mutations/useCreatePropertyM
 export const AddPropertySection = () => {
   const { user } = useUser();
   const [searchingLocation, setSearchingLocation] = useState(false);
-  const [suggestions, setSuggestions] = useState<SearchLocation[]>([]);
+  const [suggestions, setSuggestions] = useState<Location[]>([]);
 
   const createProperty = useCreatePropertyMutation();
 
@@ -124,7 +124,7 @@ export const AddPropertySection = () => {
                   };
 
                   const handleSuggestionPress = (item: any) => {
-                    const location = item as SearchLocation;
+                    const location = item as Location;
 
                     let street = location.address?.road;
                     if (location.address?.house_number)
@@ -158,7 +158,7 @@ export const AddPropertySection = () => {
                         type="search"
                         suggestions={suggestions}
                         setSuggestions={(item) =>
-                          setSuggestions(item as SearchLocation[])
+                          setSuggestions(item as Location[])
                         }
                         handleGoBack={handleGoBack}
                         handleSuggestionPress={handleSuggestionPress}

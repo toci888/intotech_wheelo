@@ -1,3 +1,4 @@
+import React from "react";
 import { Platform, StyleSheet, View, ScrollView } from "react-native";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -41,9 +42,41 @@ export const FindLocationsScreen = () => {
   };
 
   const handleNavigate = (location: Location) => {
+    // console.log("LOCATION")
+    // console.log(location);
+
+    // location = {
+    //   "address": {
+    //     "city": "Miami",
+    //     "country": "Stany Zjednoczone",
+    //     "country_code": "us",
+    //     // "county": "Hrabstwo Miami-Dade",
+    //     "name": "Miami",
+    //     "postcode": "33132",
+    //     "state": "Floryda",
+    //   },
+    //   "boundingbox": [
+    //     "25.7090517",
+    //     "25.8557827",
+    //     "-80.31976",
+    //     "-80.139157",
+    //   ],
+    //   // "class": "place",
+    //   // "display_address": "Hrabstwo Miami-Dade, Floryda, 33132, Stany Zjednoczone",
+    //   "display_name": "Miami, Miami, Hrabstwo Miami-Dade, Floryda, 33132, Stany Zjednoczone",
+    //   // "display_place": "Miami",
+    //   "lat": "25.7741728",
+    //   // "licence": "https://locationiq.com/attribution",
+    //   "lon": "-80.19362",
+    //   // "osm_id": "1216769",
+    //   // "osm_type": "relation",
+    //   "place_id": "322907905098",
+    //   // "type": "city",
+    // }
+
     setRecentSearch(location);
     navigation.navigate("Root", {
-      screen: "Search",
+      screen: "WheeloMain",
       params: {
         location: getFormattedLocationText(location, "autocomplete"),
         lat: location.lat,

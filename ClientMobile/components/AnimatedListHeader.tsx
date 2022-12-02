@@ -82,31 +82,38 @@ export const AnimatedListHeader = ({
       onLayout={onLayout}
     >
       <View style={styles.defaultMarginHorizontal}>
-        <HeaderInput location={location} />
-        <HeaderFilterButtons />
+        <Text>Gdzie mieszkasz?</Text>
+        <HeaderInput type="start" location={location} />
+        <Text>Gdzie pracujesz?</Text>
+        <HeaderInput type="finish" location={location} />
+        {/* <HeaderFilterButtons /> */}
       </View>
       <Divider style={styles.divider} />
-      <HeaderLogistics
+      {/* <HeaderLogistics
         setMapShown={setMapShown}
         mapShown={mapShown}
         availableProperties={availableProperties}
-      />
+      /> */}
     </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
+    // marginTop: 30,
+    // position: "absolute",
     top: 0,
     right: 0,
     left: 0,
-    zIndex: 1000,
-    height: HEADERHEIGHT,
+    // zIndex: 1000,
+    // height: HEADERHEIGHT,
     backgroundColor: "#fff",
   },
   defaultMarginHorizontal: {
     marginHorizontal: LISTMARGIN,
   },
-  divider: { backgroundColor: theme["color-gray"] },
+  divider: { 
+    height: 20,
+    backgroundColor: 'white'
+  },
 });
