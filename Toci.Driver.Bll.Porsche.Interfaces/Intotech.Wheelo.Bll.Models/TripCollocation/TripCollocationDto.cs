@@ -9,7 +9,7 @@ namespace Intotech.Wheelo.Bll.Models.TripCollocation
 {
     public class TripCollocationDto
     {
-        public List<Vacollocationsgeolocation> AccountsCollocated { get; set; }
+        public List<Vacollocationsgeolocation> AccountsCollocated { get; set; } //Vaccountscollocationsworktrip
 
         public Vcollocationsgeolocation SourceAccount { get; set; }
     }

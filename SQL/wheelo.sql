@@ -186,14 +186,6 @@ create table AccountsCollocations
 	DistanceTo numeric,
 	CreatedAt timestamp default now()
 );
---select * from VAccountsCollocations;
-create or replace view VAccountsCollocations as
-select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
-U2.Id as SuggestedAccountId, ac.DistanceFrom, ac.DistanceTo
-from AccountsCollocations ac
-join Accounts U1 on U1.Id = ac.IdAccount 
-join Accounts U2 on U2.Id = ac.IdCollocated ;
-
 
 --select * from VAccountsCollocations;
 --select * from worktrip;
@@ -261,32 +253,43 @@ create table WorkTrip
     FromHour time, -- 0 60 -> 1 
     ToHour time,
     AcceptableDistance double precision,
-	
 	CreatedAt timestamp default now()
 );
 
+--select * from VAccountsCollocations;
+create or replace view VAccountsCollocations as
+select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
+U2.Id as SuggestedAccountId, ac.DistanceFrom, ac.DistanceTo
+from AccountsCollocations ac
+join Accounts U1 on U1.Id = ac.IdAccount 
+join Accounts U2 on U2.Id = ac.IdCollocated ;
+
+--select * from VAccountsCollocationsWorkTrip;
 create or replace view VAccountsCollocationsWorkTrip as
 select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
 U2.Id as SuggestedAccountId, ac.DistanceFrom, ac.DistanceTo, wt.LatitudeFrom, wt.LongitudeFrom, wt.LatitudeTo,
-wt.LongitudeTo 
+wt.LongitudeTo, wt.FromHour, wt.ToHour 
 from AccountsCollocations ac
 join Accounts U1 on U1.Id = ac.IdAccount 
 join Accounts U2 on U2.Id = ac.IdCollocated
 join WorkTrip wt on U2.id = wt.idaccount ;
 
-
-
-create or replace view VCollocationsGeoLocations as
+--select * from VCollocationsGeoLocations;
+create or replace view VCollocationsGeoLocations as --select hosts of collocations
 select distinct a.id as accountId, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
 wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour
-from AccountsCollocations acc join WorkTrip wt on acc.IdAccount = wt.IdAccount
+from AccountsCollocations acc 
+join WorkTrip wt on acc.IdAccount = wt.IdAccount
 join Accounts a on a.id = wt.IdAccount;
 
-create or replace view VACollocationsGeoLocations as 
+create or replace view VACollocationsGeoLocations as --select people, who belong to the group collocated
 select acc.idaccount, a.id as accountIdCollocated, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
 wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour
-from AccountsCollocations acc join WorkTrip wt on acc.idcollocated = wt.IdAccount
+from AccountsCollocations acc 
+join WorkTrip wt on acc.idcollocated = wt.IdAccount
 join Accounts a on a.id = wt.IdAccount;
+
+--select * from VACollocationsGeoLocations;
 
 --select * from VACollocationsGeoLocations where idaccount = 1;
 --select * from VCollocationsGeoLocations;
