@@ -30,7 +30,6 @@ export type RootStackParamList = {
   MyProperties: undefined;
   ManageUnits: { propertyID: number };
   Review: { propertyID: number; propertyName: string };
-  WheeloMain: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -38,7 +37,6 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 
 export type RootTabParamList = {
   Search: undefined | SearchScreenParams;
-  WheeloMain: undefined | SearchScreenParams;
   Saved: undefined;
   AccountRoot: NavigatorScreenParams<AccountTabParamList> | undefined;
 };
