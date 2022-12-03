@@ -15,12 +15,10 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCo
         where TWorktripLogic : IWorkTripLogic
         where TAccountsCollocationsLogic : IUsersCollocationLogic
     {
-        ReturnedResponse<List<Vaccountscollocation>> CollocateAndMatch(int accountId);
+        ReturnedResponse<TripCollocationDto> CollocateAndMatch(int accountId);
 
         ReturnedResponse<TripCollocationDto> AddWorkTrip(Worktrip worktrip);
 
-        ReturnedResponse<List<Vaccountscollocation>> GetUserAssociations(int accountId);
-
-        ReturnedResponse<List<Vaccountscollocationsworktrip>> SetWorkTripGetCollocations(Worktrip workTrip);
+        ReturnedResponse<TripCollocationDto> GetUserAssociations(int accountId);
     }
 }

@@ -93,25 +93,16 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             return AssociationMapDataSubService.GetTripCollocation(wt.Idaccount.Value);
         }
 
-        public virtual ReturnedResponse<List<Vaccountscollocationsworktrip>> SetWorkTripGetCollocations(Worktrip workTrip)
+        public virtual ReturnedResponse<TripCollocationDto> GetUserAssociations(int accountId)
         {
-            Worktrip wt = FirstLogic.Insert(workTrip);
-
-            Collocate(wt.Idaccount.Value);
-
-            return new ReturnedResponse<List<Vaccountscollocationsworktrip>>(VaccountscollocationsworktripLogic.Select(m => m.Accountid == wt.Idaccount).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return AssociationMapDataSubService.GetTripCollocation(accountId);
         }
 
-        public virtual ReturnedResponse<List<Vaccountscollocation>> GetUserAssociations(int accountId)
-        {
-            return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == accountId || m.Suggestedaccountid == accountId).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
-        }
-
-        public virtual ReturnedResponse<List<Vaccountscollocation>> CollocateAndMatch(int accountId)
+        public virtual ReturnedResponse<TripCollocationDto> CollocateAndMatch(int accountId)
         {
             Collocate(accountId);
 
-            return GetUserAssociations(accountId);
+            return AssociationMapDataSubService.GetTripCollocation(accountId);
         }
     }
 }

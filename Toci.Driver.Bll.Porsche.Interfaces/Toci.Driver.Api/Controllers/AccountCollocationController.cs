@@ -1,5 +1,6 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Common.Microservices;
+using Intotech.Wheelo.Bll.Models.TripCollocation;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.PersistenceAggregation;
@@ -17,7 +18,7 @@ namespace Toci.Driver.Api.Controllers
         }
 
         [HttpPost("make-match")]
-        public ReturnedResponse<List<Vaccountscollocation>> MakeMatch(int accountId)
+        public ReturnedResponse<TripCollocationDto> MakeMatch(int accountId)
         {
             return Service.CollocateAndMatch(accountId);
         }
