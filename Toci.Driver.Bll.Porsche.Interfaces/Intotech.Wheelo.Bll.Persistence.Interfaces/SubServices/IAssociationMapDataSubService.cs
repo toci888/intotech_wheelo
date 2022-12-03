@@ -8,12 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
 
-namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Association
+namespace Intotech.Wheelo.Bll.Persistence.Interfaces.SubServices
 {
-    public interface IAssociationMapDataService
+    public interface IAssociationMapDataSubService
     {
         ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId);
 
-        
+
     }
 }

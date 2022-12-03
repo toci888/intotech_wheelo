@@ -16,10 +16,10 @@ using Intotech.Wheelo.Bll.Porsche.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
 using Intotech.Wheelo.Bll.Porsche.User;
 using System.Text.Json;
-using Intotech.Wheelo.Bll.Porsche.Interfaces.Association;
-using Intotech.Wheelo.Bll.Porsche.Association;
 using Intotech.Wheelo.Common.Interfaces.Emails;
 using Intotech.Wheelo.Common.Emails;
+using Intotech.Wheelo.Bll.Persistence.Interfaces.SubServices;
+using Intotech.Wheelo.Bll.Persistence.SubServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -84,7 +84,7 @@ builder.Services.AddScoped<IInvitationService, InvitationService>();
 builder.Services.AddScoped<IGafManager, GafManager>();
 builder.Services.AddScoped<IWheeloAccountService, WheeloAccountService>();
 builder.Services.AddScoped<IAccountMetadataService, AccountMetadataService>();
-builder.Services.AddScoped<IAssociationMapDataService, AssociationMapDataService>();
+builder.Services.AddScoped<IAssociationMapDataSubService, AssociationMapDataSubService>();
 builder.Services.AddScoped<IEmailManager, EmailManager>();
 
 builder.Services.AddSingleton(authenticationSettings);

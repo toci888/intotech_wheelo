@@ -1,8 +1,10 @@
 ﻿using Intotech.Common.Bll;
 using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Models;
+using Intotech.Wheelo.Bll.Models.TripCollocation;
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Intotech.Wheelo.Bll.Persistence.Interfaces.SubServices;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating;
 using Intotech.Wheelo.Common;
 using Intotech.Wheelo.Common.Interfaces;
@@ -25,15 +27,18 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
         protected IAssociationCalculations AssociationCalculation;
         protected IVusersCollocationLogic AccountCollocationLogic;
         protected IVaccountscollocationsworktripLogic VaccountscollocationsworktripLogic;
+        protected IAssociationMapDataSubService AssociationMapDataSubService;
 
         public Collocator(IWorkTripLogic firstLogic, IUsersCollocationLogic secondLogic,
             IAssociationCalculations associationCalculations, 
             IVusersCollocationLogic accountCollocationLogic,
-            IVaccountscollocationsworktripLogic vaccountscollocationsworktripLogic) : base(firstLogic, secondLogic)
+            IVaccountscollocationsworktripLogic vaccountscollocationsworktripLogic,
+            IAssociationMapDataSubService associationMapDataSubService) : base(firstLogic, secondLogic)
         {
             AssociationCalculation = associationCalculations;
             AccountCollocationLogic = accountCollocationLogic;
             VaccountscollocationsworktripLogic = vaccountscollocationsworktripLogic;
+            AssociationMapDataSubService = associationMapDataSubService;
         }
 
         public virtual void Collocate(int accountId)
@@ -79,13 +84,13 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             //return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == accountId).ToList(), "", true, ErrorCodes.Success);
         }
 
-        public virtual ReturnedResponse<List<Vaccountscollocation>> AddWorkTrip(Worktrip worktrip)
+        public virtual ReturnedResponse<TripCollocationDto> AddWorkTrip(Worktrip worktrip)
         {
             Worktrip wt = FirstLogic.Insert(worktrip);
 
             Collocate(wt.Idaccount.Value);
 
-            return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == wt.Idaccount).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return AssociationMapDataSubService.GetTripCollocation(wt.Idaccount.Value);
         }
 
         public virtual ReturnedResponse<List<Vaccountscollocationsworktrip>> SetWorkTripGetCollocations(Worktrip workTrip)

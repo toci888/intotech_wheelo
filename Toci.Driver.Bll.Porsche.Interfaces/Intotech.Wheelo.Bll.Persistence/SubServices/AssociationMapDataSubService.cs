@@ -2,7 +2,7 @@
 using Intotech.Wheelo.Bll.Models;
 using Intotech.Wheelo.Bll.Models.TripCollocation;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
-using Intotech.Wheelo.Bll.Porsche.Interfaces.Association;
+using Intotech.Wheelo.Bll.Persistence.Interfaces.SubServices;
 using Intotech.Wheelo.Common;
 using Intotech.Wheelo.Common.Interfaces;
 using Npgsql;
@@ -13,15 +13,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
 
-namespace Intotech.Wheelo.Bll.Porsche.Association
+namespace Intotech.Wheelo.Bll.Persistence.SubServices
 {
-    public class AssociationMapDataService : IAssociationMapDataService
+    public class AssociationMapDataSubService : IAssociationMapDataSubService
     {
         protected IVacollocationsgeolocationLogic VacollocationsgeolocationLogic;
         protected IVcollocationsgeolocationLogic VcollocationsgeolocationLogic;
-        
 
-        public AssociationMapDataService(IVacollocationsgeolocationLogic vacollocationsgeolocationLogic, 
+
+        public AssociationMapDataSubService(IVacollocationsgeolocationLogic vacollocationsgeolocationLogic,
             IVcollocationsgeolocationLogic vcollocationsgeolocationLogic)
         {
             VacollocationsgeolocationLogic = vacollocationsgeolocationLogic;
@@ -46,6 +46,6 @@ namespace Intotech.Wheelo.Bll.Porsche.Association
             return new ReturnedResponse<TripCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        
+
     }
 }

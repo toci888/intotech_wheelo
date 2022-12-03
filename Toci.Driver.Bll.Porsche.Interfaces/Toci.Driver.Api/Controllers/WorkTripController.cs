@@ -1,6 +1,7 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Common.Microservices;
 using Intotech.Wheelo.Bll.Models;
+using Intotech.Wheelo.Bll.Models.TripCollocation;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace Toci.Driver.Api.Controllers
 
         [HttpPost]
         [Route("add-work-trip")]
-        public ReturnedResponse<List<Vaccountscollocation>> AddWorkTrip(WorktripDto wt)
+        public ReturnedResponse<TripCollocationDto> AddWorkTrip(WorktripDto wt)
         {
             wt.Fromhour = new TimeOnly(wt.IFromHour, wt.IFromMinute);
             wt.Tohour = new TimeOnly(wt.IToHour, wt.IToMinute);
