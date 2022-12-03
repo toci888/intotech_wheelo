@@ -70,18 +70,28 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             // 52.222476545789547
             foreach (Worktrip worktrip in collocations)
             {
-                decimal distanceFrom = (decimal)AssociationCalculation.DistanceInKmBetweenEarthCoordinates(baseWorktrip.Latitudefrom.Value,
-                    baseWorktrip.Longitudefrom.Value, worktrip.Latitudefrom.Value, worktrip.Longitudefrom.Value) * DistanceNormalize;
+                if (!IsCollocationDuplicate(baseWorktrip.Idaccount.Value, worktrip.Idaccount.Value))
+                {
+                    decimal distanceFrom = (decimal)AssociationCalculation.DistanceInKmBetweenEarthCoordinates(baseWorktrip.Latitudefrom.Value,
+                        baseWorktrip.Longitudefrom.Value, worktrip.Latitudefrom.Value, worktrip.Longitudefrom.Value) * DistanceNormalize;
 
-                decimal distanceTo = (decimal)AssociationCalculation.DistanceInKmBetweenEarthCoordinates(baseWorktrip.Latitudeto.Value,
-                    baseWorktrip.Longitudeto.Value, worktrip.Latitudeto.Value, worktrip.Longitudeto.Value) * DistanceNormalize;
+                    decimal distanceTo = (decimal)AssociationCalculation.DistanceInKmBetweenEarthCoordinates(baseWorktrip.Latitudeto.Value,
+                        baseWorktrip.Longitudeto.Value, worktrip.Latitudeto.Value, worktrip.Longitudeto.Value) * DistanceNormalize;
 
-                SecondLogic.Insert(new Accountscollocation() { Idaccount = baseWorktrip.Idaccount.Value,
-                    Idcollocated = worktrip.Idaccount.Value, Distancefrom = distanceFrom, Distanceto = distanceTo
-                });
+                    SecondLogic.Insert(new Accountscollocation()
+                    {
+                        Idaccount = baseWorktrip.Idaccount.Value,
+                        Idcollocated = worktrip.Idaccount.Value,
+                        Distancefrom = distanceFrom,
+                        Distanceto = distanceTo
+                    });
+                }
             }
+        }
 
-            //return new ReturnedResponse<List<Vaccountscollocation>>(AccountCollocationLogic.Select(m => m.Accountid == accountId).ToList(), "", true, ErrorCodes.Success);
+        protected virtual bool IsCollocationDuplicate(int accountId, int collocatedAccountId)
+        {
+            return SecondLogic.Select(m => m.Idaccount == accountId && m.Idcollocated == collocatedAccountId).FirstOrDefault() != null;
         }
 
         public virtual ReturnedResponse<TripCollocationDto> AddWorkTrip(Worktrip worktrip)
