@@ -75,18 +75,16 @@ export const SearchScreen = ({
           mapRef={mapRef}
           location={location ? location : i18n.t('Search')}
           setLocation={setLocation}
-          initialRegion={{
-            // route.params
-            //   ? {
-                  latitude: Number("52.38512"),          
-                  longitude: Number("16.879011"),
-                  // latitude: Number(route.params.lat), 
-                  // longitude: Number(route.params.lon),
+          initialRegion={
+            route.params
+              ? {
+                  latitude: Number(route.params.lat),
+                  longitude: Number(route.params.lon),
                   latitudeDelta: 0.4,
                   longitudeDelta: 0.4,
-              //   }
-              // : undefined
-          }}
+                }
+              : undefined
+          }
         />
       ) : (
         <>
