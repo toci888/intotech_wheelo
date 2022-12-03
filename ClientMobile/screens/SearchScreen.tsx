@@ -14,6 +14,7 @@ import { SearchScreenParams } from "../types";
 import { Property } from "../types/property";
 import { Text } from "@ui-kitten/components";
 import { useSearchPropertiesQuery } from "../hooks/queries/useSearchPropertiesQuery";
+import { i18n } from "../i18n/i18n";
 
 export const SearchScreen = ({
   route,
@@ -25,6 +26,7 @@ export const SearchScreen = ({
   const [scrollAnimation] = useState(new Animated.Value(0));
   const mapRef = useRef<MapView | null>(null);
   const [location, setLocation] = useState<string | undefined>(undefined);
+  // console.log("routehere", route)
   let boundingBox: number[] = [];
   if (route.params?.boundingBox)
     boundingBox = [
@@ -32,6 +34,10 @@ export const SearchScreen = ({
       Number(route.params.boundingBox[1]),
       Number(route.params.boundingBox[2]),
       Number(route.params.boundingBox[3]),
+      // Number(52.3831203918457),
+      // Number(52.387120391845706),
+      // Number(16.877011154174806),
+      // Number(16.881011154174804),
     ];
   const searchProperties = useSearchPropertiesQuery(boundingBox);
 
@@ -44,6 +50,8 @@ export const SearchScreen = ({
         center: {
           latitude: Number(route.params.lat),
           longitude: Number(route.params.lon),
+          // latitude: Number("52,38512"),          
+          // longitude: Number("16,879011"),
         },
       });
     }
@@ -55,7 +63,7 @@ export const SearchScreen = ({
         scrollAnimation={scrollAnimation}
         setMapShown={setMapShown}
         mapShown={mapShown}
-        location={location ? location : "Find a Location"}
+        location={location ? location : i18n.t('Search')}
         availableProperties={
           searchProperties.data ? searchProperties.data.length : undefined
         }
@@ -65,18 +73,20 @@ export const SearchScreen = ({
         <Map
           properties={searchProperties?.data ? searchProperties.data : []}
           mapRef={mapRef}
-          location={location ? location : "Find a Location"}
+          location={location ? location : i18n.t('Search')}
           setLocation={setLocation}
-          initialRegion={
-            route.params
-              ? {
-                  latitude: Number(route.params.lat),
-                  longitude: Number(route.params.lon),
+          initialRegion={{
+            // route.params
+            //   ? {
+                  latitude: Number("52.38512"),          
+                  longitude: Number("16.879011"),
+                  // latitude: Number(route.params.lat), 
+                  // longitude: Number(route.params.lon),
                   latitudeDelta: 0.4,
                   longitudeDelta: 0.4,
-                }
-              : undefined
-          }
+              //   }
+              // : undefined
+          }}
         />
       ) : (
         <>

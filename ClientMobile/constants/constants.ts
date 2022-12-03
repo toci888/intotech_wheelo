@@ -18,9 +18,13 @@ androidHeight += androidNotch;
 
 export const HEADERHEIGHT = Platform.OS === "ios" ? iosHeight : androidHeight;
 
-const serverUrl = "http://20.100.196.118:5105/api"; //HERE
+const server = "http://20.68.18.151";
+
+const serverUrl = server + ":5105/api";
+const integrationApiUrl = server + ":5108/api";
 const chatUrl = "http://192.168.30.24:3000";
 const location = "/location";
+const google = "/GoogleMap";
 const user = "/Account";
 const property = "/property";
 const apartment = "/apartment";
@@ -30,22 +34,22 @@ const messages = "/messages";
 const refresh = "/refresh";
 const refreshTokenEndpoint = serverUrl + refresh;
 const locationEndpoint = serverUrl + location;
+const googleEndpoint = integrationApiUrl + google;
 const userEndpoint = serverUrl + user;
 const propertyEndpoint = serverUrl + property;
 const apartmentEndpoint = serverUrl + apartment;
 const reviewEndpoint = serverUrl + review;
 const conversationEndpoint = serverUrl + conversation;
 const messagesEndpoint = serverUrl + messages;
-const contactedEndpoint = (id: number) =>
-  `${userEndpoint}/${id}/properties/contacted`;
+const contactedEndpoint = (id: number) => `${userEndpoint}/${id}/properties/contacted`;
 const savedEndpoint = (id: number) => `${userEndpoint}/${id}/properties/saved`;
 const pushTokenEndpoint = (id: number) => `${userEndpoint}/${id}/pushtoken`;
-const allowsNotificationsEndpoint = (id: number) =>
-  `${userEndpoint}/${id}/settings/notifications`;
+const allowsNotificationsEndpoint = (id: number) => `${userEndpoint}/${id}/settings/notifications`;
 
 export const endpoints = {
   chat: chatUrl,
-  autoComplete: locationEndpoint + "/autocomplete",
+  autoComplete: googleEndpoint + "/address-autocomplete",
+  recognizePlaceId: googleEndpoint + "/recognize-place-id",
   search: locationEndpoint + "/search",
   register: userEndpoint + "/register",
   login: userEndpoint + "/login",

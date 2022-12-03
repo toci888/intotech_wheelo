@@ -17,8 +17,7 @@ export const FindLocationsScreen = () => {
   const [suggestions, setSuggestions] = useState<Location[]>([]);
   const navigation = useNavigation();
   const queryClient = useQueryClient();
-  const recentSearches: Location[] | undefined =
-    queryClient.getQueryData("recentSearches");
+  const recentSearches: Location[] | undefined = queryClient.getQueryData("recentSearches");
 
   const setRecentSearch = (location: Location) => {
     queryClient.setQueryData("recentSearches", () => {
@@ -73,10 +72,10 @@ export const FindLocationsScreen = () => {
     //   "place_id": "322907905098",
     //   // "type": "city",
     // }
-
+    console.log("location", location)
     setRecentSearch(location);
     navigation.navigate("Root", {
-      screen: "WheeloMain",
+      screen: "Search",
       params: {
         location: getFormattedLocationText(location, "autocomplete"),
         lat: location.lat,

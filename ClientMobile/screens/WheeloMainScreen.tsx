@@ -145,6 +145,7 @@ export const WheeloMainScreen = ({
   );
 };
 
+
 const styles = StyleSheet.create({
   card: { marginVertical: 5 },
   lottieContainer: {

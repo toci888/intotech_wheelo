@@ -82,9 +82,17 @@ export const AnimatedListHeader = ({
       onLayout={onLayout}
     >
       <View style={styles.defaultMarginHorizontal}>
-        <Text>Gdzie mieszkasz?</Text>
+        <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+          <Text style={{marginRight: 'auto'}}>Gdzie mieszkasz?</Text>
+          <Text style={{marginLeft: 'auto'}}>O której wyjeżdżasz?</Text>
+        </View>
+        
         <HeaderInput type="start" location={location} />
-        <Text>Gdzie pracujesz?</Text>
+        
+        <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+          <Text style={{marginRight: 'auto'}}>Gdzie pracujesz?</Text>
+          <Text style={{marginLeft: 'auto'}}>O której wracasz?</Text>
+        </View>
         <HeaderInput type="finish" location={location} />
         {/* <HeaderFilterButtons /> */}
       </View>
