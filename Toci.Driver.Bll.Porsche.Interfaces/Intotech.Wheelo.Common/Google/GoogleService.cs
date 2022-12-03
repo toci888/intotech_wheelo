@@ -18,6 +18,11 @@ namespace Intotech.Wheelo.Common.Google
         {
             GooglePlaceGeoModel googleModel = GoogleClient.CallGoogleApiPlaceId(placeId);
 
+            if (googleModel.status == "INVALID_REQUEST")
+            {
+                return null; // 
+            }
+
             return Converter.Convert(googleModel);
         }
 
