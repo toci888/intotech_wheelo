@@ -20,7 +20,7 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   FindLocations: undefined;
   SignIn: undefined;
-  SignUp: undefined;
+  SignUp: { userId: string };
   ForgotPassword: undefined;
   ResetPassword: { token: string };
   PropertyDetails: { propertyID: number };
@@ -30,6 +30,8 @@ export type RootStackParamList = {
   MyProperties: undefined;
   ManageUnits: { propertyID: number };
   Review: { propertyID: number; propertyName: string };
+  WheeloMain: undefined;
+  EmailVerification: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

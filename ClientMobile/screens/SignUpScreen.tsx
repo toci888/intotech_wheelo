@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Input, Button, Text } from "@ui-kitten/components";
 import * as yup from "yup";
@@ -13,8 +13,28 @@ import { AppleButton } from "../components/AppleButton";
 import { OrDivider } from "../components/OrDivider";
 import { PasswordInput } from "../components/PasswordInput";
 import { useAuth } from "../hooks/useAuth";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../types";
+
+interface IUser {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+type SignUpProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>
 
 export const SignUpScreen = () => {
+  const [user, setUser] = useState<IUser>({
+    id: "zxcD@#gry123",
+    firstName: "asd",
+    lastName: "qwe",
+    email: "asdf@wp.pl",
+    password: "zxcD@#gry123",
+  });
+  const navigation = useNavigation();
   const { appleAuth, facebookAuth, googleAuth, nativeRegister } = useAuth();
 
   return (
@@ -27,10 +47,10 @@ export const SignUpScreen = () => {
           </Text>
           <Formik
             initialValues={{
-              firstName: "asd",
-              lastName: "qwe",
-              email: "asdf@wp.pl",
-              password: "zxcD@#gry123",
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user.email,
+              password: user.password,
             }}
             validationSchema={yup.object().shape({
               firstName: yup.string().required("Your first name is required."),
@@ -131,7 +151,10 @@ export const SignUpScreen = () => {
 
                   <Button
                     style={styles.signUpButton}
-                    onPress={() => handleSubmit()}
+                    // onPress={() => handleSubmit()}
+                    onPress={() =>
+                      navigation.navigate(`EmailVerification`)
+                    }
                   >
                     Sign Up
                   </Button>

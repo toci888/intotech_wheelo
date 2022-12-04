@@ -35,6 +35,8 @@ const linking: LinkingOptions<RootStackParamList> = {
       ResetPassword: { path: "resetpassword/:token" },
       SignIn: "signin",
       SignUp: "signup",
+      EmailVerification: "emailVerification",
+      WheeloMain: "WheeloMain",
     },
   },
 };
