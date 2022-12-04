@@ -9,6 +9,7 @@ import { Screen } from "../components/Screen";
 import { ModalHeader } from "../components/ModalHeader";
 import { PasswordInput } from "../components/PasswordInput";
 import { useAuth } from "../hooks/useAuth";
+import React from "react";
 
 export const SignInScreen = () => {
   const navigation = useNavigation();
