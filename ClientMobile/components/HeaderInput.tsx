@@ -1,63 +1,65 @@
 import { TouchableOpacity, Platform, StyleSheet, TextInput, View } from "react-native";
 import { Text } from "@ui-kitten/components";
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 import { theme } from "../theme";
 import { Row } from "./Row";
 import React, { useState } from "react";
-import RNDateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import DateTimePicker from "react-native-modal-datetime-picker";
-// import TimePicker from '@mui/lab/TimePicker';
 
-export const HeaderInput = ({ type, location }: { type: "start" | "finish", location: string }) => {
+export const HeaderInput = ({ type, location, setLocation }: 
+  { type: "start" | "end", location: string, setLocation: (location: string) => void; }) => {
   const navigation = useNavigation();
 
   const [showDate, setShowDate] = useState(false);
-  // Date().getMonth()
-  const [startTime, setStartTime] = useState("07:30"); // let today = new Date().toLocaleTimeString();
+  const [startTime, setStartTime] = useState(type==="start" ? "07:30" : "16:00"); // let today = new Date().toLocaleTimeString();
+  
+  const actualTime = (): Date => {
+    const date = new Date();
+    console.log(date)
+    return date
+  }
   
   return (
-  <View style={{flexDirection: 'row'}}>
-    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate("FindLocations")}>
-      <Row style={{alignItems: 'center'}}>
-        <Text style={styles.input}>{location}</Text>
-        {/* <MaterialCommunityIcons name="magnify" color={theme["color-primary-500"]} size={28} style={styles.text}/> */}
-        <MaterialIcons name="gps-fixed" size={24} color={theme["color-primary-500"]} style={styles.icon}/>
-      </Row>
-    </TouchableOpacity>
+    <View style={{flexDirection: 'row'}}>
+      <TouchableOpacity style={styles.container} onPress={() => { navigation.navigate("FindLocations", {type, location, setLocation}) }}>
+        <Row style={{alignItems: 'center'}}>
+          <Text style={styles.input}>{location}</Text>
+          <MaterialIcons name="gps-fixed" size={24} color={theme["color-primary-500"]} style={styles.icon}/>
+        </Row>
+      </TouchableOpacity>
 
-    <TouchableOpacity style={styles.dateContainer} onPress={() => setShowDate(true)}>
-      <Row style={{alignItems: 'center'}}>
-        <Text style={styles.input}>{startTime}</Text>
-      </Row>
-      {showDate && 
-    <DateTimePicker
-        locale="pl_PL"
-        isDarkModeEnabled={false}
-        textColor="black" //razem, bialy nie dziala
-        // date={new Date("2022-12-02T14:53:00.000Z")}
-        display="spinner" 
-        isVisible={showDate}
-        mode="time"
-        onConfirm={(selectedDate: Date) => {
-          if (selectedDate) {
-            setShowDate(false);
-            setStartTime(selectedDate.toTimeString().substring(0, 5))
-          }
-        }}
-        onCancel={() => { setShowDate(false); }}
+      <TouchableOpacity style={styles.dateContainer} onPress={() => setShowDate(true)}>
+        <Row style={{alignItems: 'center'}}>
+          <Text style={styles.inputTime}>{startTime}</Text>
+        </Row>
         
-       />
-      }
-    </TouchableOpacity>
-  </View>
+        <DateTimePicker
+          locale="pl_PL"
+          isDarkModeEnabled={false}
+          textColor="black" //razem, bialy sam nie dziala
+          date={actualTime()}
+
+          display="spinner" 
+          isVisible={showDate}
+          mode="time"
+          onConfirm={(selectedDate: Date) => {
+            if (selectedDate) {
+              setShowDate(false);
+              setStartTime(selectedDate.toTimeString().substring(0, 5))
+            }
+          }}
+          onCancel={() => { setShowDate(false); }}
+          onChange={(time) => {setStartTime(time.toLocaleString().substring(10, 16));}}
+        />
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    // marginLeft: 'auto',
     marginBottom: Platform.OS === "ios" ? 10 : 30,
     borderWidth: 1,
     borderColor: theme["color-gray"],
@@ -77,7 +79,10 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    // backgroundColor: '#fff',
+  },
+  inputTime: {
+    textAlign: 'center',
+    flex: 1,
   },
   icon: {
     marginLeft: 10,

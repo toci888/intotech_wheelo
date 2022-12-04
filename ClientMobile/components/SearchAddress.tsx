@@ -40,7 +40,7 @@ export const SearchAddress = ({
 
   const getSuggestions = async (value: string) => {
     let locations;
-    if (type === "search") locations = await searchLocations(value);
+    if (type === "search") locations = await searchLocations(value); //TODO!
     else locations = await getSuggestedLocations(value);
 
     if (locations.length > 0) setSuggestions(locations);

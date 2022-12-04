@@ -55,8 +55,13 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
   >;
 
 export type SearchScreenParams = {
-  location: string;
-  boundingBox: string[];
-  lat: string;
-  lon: string;
+  startLocation?: string;
+  startBoundingBox?: string[];
+  startLat?: string;
+  startLon?: string;
+
+  endLocation?: string;
+  endBoundingBox?: string[];
+  endLat?: string;
+  endLon?: string;
 };

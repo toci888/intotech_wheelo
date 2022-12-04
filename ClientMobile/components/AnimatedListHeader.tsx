@@ -1,120 +1,51 @@
-import {
-  Animated,
-  FlatList,
-  LayoutChangeEvent,
-  Platform,
-  TouchableOpacity,
-  View,
-  StyleSheet,
-} from "react-native";
+import { Animated, View, StyleSheet, } from "react-native";
 import React, { useState } from "react";
 import { Text, Button, Divider } from "@ui-kitten/components";
 
-import { HEADERHEIGHT, LISTMARGIN } from "../constants/constants";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { theme } from "../theme";
-import { Row } from "./Row";
+import { LISTMARGIN } from "../constants/constants";
 import { HeaderInput } from "./HeaderInput";
 import { HeaderFilterButtons } from "./HeaderFilterButtons";
-import { HeaderLogistics } from "./HeaderLogistics";
 
 export const AnimatedListHeader = ({
-  scrollAnimation,
-  mapShown,
-  setMapShown,
-  location,
-  availableProperties,
+  startLocation,
+  endLocation,
+  setStartLocation,
+  setEndLocation
 }: {
-  scrollAnimation: Animated.Value;
-  mapShown: boolean;
-  setMapShown: (bool: boolean) => void;
-  location: string;
-  availableProperties?: number;
+  startLocation: string;
+  endLocation: string;
+  setStartLocation: (startLocation: string) => void;
+  setEndLocation: (endLocation: string) => void;
 }) => {
-  const [offsetAnimation] = useState(new Animated.Value(0));
-  const [clampedScroll, setClampedScroll] = useState(
-    Animated.diffClamp(
-      Animated.add(
-        scrollAnimation.interpolate({
-          inputRange: [0, 1],
-          outputRange: [0, 1],
-          extrapolateLeft: "clamp",
-        }),
-        offsetAnimation
-      ),
-      0,
-      1
-    )
-  );
-
-  const navbarTranslate = clampedScroll.interpolate({
-    inputRange: availableProperties && !mapShown ? [0, HEADERHEIGHT] : [0, 0],
-    outputRange: availableProperties && !mapShown ? [0, -HEADERHEIGHT] : [0, 0],
-    extrapolate: "clamp",
-  });
-
-  const onLayout = (event: LayoutChangeEvent) => {
-    let { height } = event.nativeEvent.layout;
-    setClampedScroll(
-      Animated.diffClamp(
-        Animated.add(
-          scrollAnimation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, 1],
-            extrapolateLeft: "clamp",
-          }),
-          offsetAnimation
-        ),
-        0,
-        height
-      )
-    );
-  };
 
   return (
-    <Animated.View
-      style={[
-        styles.container,
-        {
-          transform: [{ translateY: navbarTranslate }],
-        },
-      ]}
-      onLayout={onLayout}
-    >
+    <Animated.View style={styles.container}>
       <View style={styles.defaultMarginHorizontal}>
         <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
           <Text style={{marginRight: 'auto'}}>Gdzie mieszkasz?</Text>
           <Text style={{marginLeft: 'auto'}}>O której wyjeżdżasz?</Text>
         </View>
         
-        <HeaderInput type="start" location={location} />
+        <HeaderInput type="start" location={startLocation} setLocation={setStartLocation} />
         
         <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
           <Text style={{marginRight: 'auto'}}>Gdzie pracujesz?</Text>
           <Text style={{marginLeft: 'auto'}}>O której wracasz?</Text>
         </View>
-        <HeaderInput type="finish" location={location} />
+        <HeaderInput type="end" location={endLocation} setLocation={setEndLocation} />
+        <Button onPress={() => {console.log("start", startLocation); console.log("end", endLocation);}}>ok</Button>
         {/* <HeaderFilterButtons /> */}
       </View>
       <Divider style={styles.divider} />
-      {/* <HeaderLogistics
-        setMapShown={setMapShown}
-        mapShown={mapShown}
-        availableProperties={availableProperties}
-      /> */}
     </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    // marginTop: 30,
-    // position: "absolute",
     top: 0,
     right: 0,
     left: 0,
-    // zIndex: 1000,
-    // height: HEADERHEIGHT,
     backgroundColor: "#fff",
   },
   defaultMarginHorizontal: {

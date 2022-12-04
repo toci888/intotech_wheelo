@@ -13,14 +13,17 @@ import { getFormattedLocationText } from "../utils/getFormattedLocationText";
 import { RecentSearchList } from "../components/RecentSearchList";
 import { SearchAddress } from "../components/SearchAddress";
 
-export const FindLocationsScreen = () => {
+export const FindLocationsScreen = ({route}:{
+  route: { params: { type: "start" | "end", location: string, setLocation: (location: string) => void;} };
+}) => {
   const [suggestions, setSuggestions] = useState<Location[]>([]);
   const navigation = useNavigation();
   const queryClient = useQueryClient();
-  const recentSearches: Location[] | undefined = queryClient.getQueryData("recentSearches");
+
+  const recentSearches: Location[] | undefined = queryClient.getQueryData(route.params.type === "start" ? "recentStartSearches" : "recentEndSearches");
 
   const setRecentSearch = (location: Location) => {
-    queryClient.setQueryData("recentSearches", () => {
+    queryClient.setQueryData(route.params.type === "start" ? "recentStartSearches" : "recentEndSearches", () => {
       if (recentSearches) {
         let included = false;
         for (let i of recentSearches) {
@@ -41,48 +44,24 @@ export const FindLocationsScreen = () => {
   };
 
   const handleNavigate = (location: Location) => {
-    // console.log("LOCATION")
-    // console.log(location);
-
-    // location = {
-    //   "address": {
-    //     "city": "Miami",
-    //     "country": "Stany Zjednoczone",
-    //     "country_code": "us",
-    //     // "county": "Hrabstwo Miami-Dade",
-    //     "name": "Miami",
-    //     "postcode": "33132",
-    //     "state": "Floryda",
-    //   },
-    //   "boundingbox": [
-    //     "25.7090517",
-    //     "25.8557827",
-    //     "-80.31976",
-    //     "-80.139157",
-    //   ],
-    //   // "class": "place",
-    //   // "display_address": "Hrabstwo Miami-Dade, Floryda, 33132, Stany Zjednoczone",
-    //   "display_name": "Miami, Miami, Hrabstwo Miami-Dade, Floryda, 33132, Stany Zjednoczone",
-    //   // "display_place": "Miami",
-    //   "lat": "25.7741728",
-    //   // "licence": "https://locationiq.com/attribution",
-    //   "lon": "-80.19362",
-    //   // "osm_id": "1216769",
-    //   // "osm_type": "relation",
-    //   "place_id": "322907905098",
-    //   // "type": "city",
-    // }
     console.log("location", location)
     setRecentSearch(location);
-    navigation.navigate("Root", {
-      screen: "Search",
-      params: {
-        location: getFormattedLocationText(location, "autocomplete"),
-        lat: location.lat,
-        lon: location.lon,
-        boundingBox: location.boundingbox,
-      },
-    });
+    route.params.setLocation(location.display_name);
+    navigation.goBack();
+    // navigation.navigate("Root", {
+    //   screen: "Search",
+    //   params: {
+    //     startLocation: getFormattedLocationText(location, "autocomplete"),
+    //     startLat: location.lat,
+    //     startLon: location.lon,
+    //     startBoundingBox: location.boundingbox,
+
+    //     endLocation: getFormattedLocationText(location, "autocomplete"),
+    //     endLat: location.lat,
+    //     endLon: location.lon,
+    //     endBoundingBox: location.boundingbox,
+    //   },
+    // });
   };
 
   return (
@@ -94,7 +73,7 @@ export const FindLocationsScreen = () => {
           handleGoBack={navigation.goBack}
           suggestions={suggestions}
           setSuggestions={(item) => setSuggestions(item as Location[])}
-          handleSuggestionPress={(item) => handleNavigate(item as Location)}
+          handleSuggestionPress={(item) => {handleNavigate(item as Location)}}
         />
         {suggestions.length === 0 ? (
           <ScrollView bounces={false}>
@@ -102,7 +81,9 @@ export const FindLocationsScreen = () => {
             <RecentSearchList
               style={styles.recentSearchContainer}
               recentSearches={recentSearches}
-            />
+              type={route.params.type} 
+              location={route.params.location} 
+              setLocation={route.params.setLocation}              />
           </ScrollView>
         ) : null}
       </View>

@@ -21,28 +21,30 @@ let mapRegion: Region | undefined = undefined;
 export const Map = ({
   properties,
   mapRef,
-  location,
-  setLocation,
+  startLocation,
+  setStartLocation,
+  endLocation,
+  setEndLocation,
   initialRegion,
 }: {
   properties: Property[];
   mapRef: React.MutableRefObject<MapView | null>;
-  location: string;
-  setLocation: (location: string) => void;
+  startLocation: string;
+  setStartLocation: (startLocation: string) => void;
+  endLocation: string;
+  setEndLocation: (endLocation: string) => void;
   initialRegion?: Region | undefined;
 }) => {
   const [activeIndex, setActiveIndex] = useState(-1);
   const [showSearchAreaButton, setShowSearchAreaButton] = useState(false);
   const [boundingBox, setBoundingBox] = useState<number[]>([]); // used for searching properties in region
-  const [region, setRegion] = useState<Region | undefined>(
-    mapRegion ? mapRegion : undefined
-  );
+  const [region, setRegion] = useState<Region | undefined>(mapRegion ? mapRegion : undefined);
   const navigation = useNavigation();
 
   const searchProperties = useSearchPropertiesQuery(boundingBox);
 
   useEffect(() => {
-    if (location === "Map Area") return;
+    if (startLocation === "Map Area") return;
 
     if (initialRegion) {
       setShowSearchAreaButton(false);
@@ -91,7 +93,7 @@ export const Map = ({
 
   const handleSearchAreaButtonPress = () => {
     searchProperties.refetch();
-    setLocation("Map Area");
+    setStartLocation("Map Area");
     mapRegion = region;
     setShowSearchAreaButton(false);
   };

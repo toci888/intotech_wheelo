@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { View, StyleSheet, ViewStyle } from "react-native";
 import { Button } from "@ui-kitten/components";
@@ -10,9 +11,12 @@ import { getFormattedLocationText } from "../utils/getFormattedLocationText";
 export const RecentSearchList = ({
   recentSearches,
   style,
+  type, location, setLocation
 }: {
   recentSearches?: Location[];
   style?: ViewStyle;
+  type: "start" | "end", 
+  location: string, setLocation: (location: string) => void
 }) => {
   const [showMore, setShowMore] = useState(false);
   const navigation = useNavigation();
@@ -31,15 +35,24 @@ export const RecentSearchList = ({
   );
 
   const handleRecentSearchButtonPress = (location: Location) => {
-    navigation.navigate("Root", {
-      screen: "Search",
-      params: {
-        location: getFormattedLocationText(location),
-        lat: location.lat,
-        lon: location.lon,
-        boundingBox: location.boundingbox,
-      },
-    });
+    setLocation(location.display_name)
+    navigation.goBack();
+    // navigation.navigate("Root", type === "start"? {
+    //   screen: "Search",
+    //   params: {
+    //     startLocation: getFormattedLocationText(location, "autocomplete"),
+    //     startLat: location.lat,
+    //     startLon: location.lon,
+    //     startBoundingBox: location.boundingbox,
+    //   }} : {
+    //     screen: "Search",
+    //     params: {
+    //       endLocation: getFormattedLocationText(location, "autocomplete"),
+    //       endLat: location.lat,
+    //       endLon: location.lon,
+    //       endBoundingBox: location.boundingbox,
+    //     }
+    // })
   };
 
   const getList = () => {

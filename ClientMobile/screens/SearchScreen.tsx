@@ -15,43 +15,51 @@ import { Property } from "../types/property";
 import { Text } from "@ui-kitten/components";
 import { useSearchPropertiesQuery } from "../hooks/queries/useSearchPropertiesQuery";
 import { i18n } from "../i18n/i18n";
+import React from "react";
 
 export const SearchScreen = ({
   route,
 }: {
   route: { params: SearchScreenParams };
 }) => {
-  const navigation = useNavigation();
-  const [mapShown, setMapShown] = useState<boolean>(true);
-  const [scrollAnimation] = useState(new Animated.Value(0));
   const mapRef = useRef<MapView | null>(null);
-  const [location, setLocation] = useState<string | undefined>(undefined);
-  // console.log("routehere", route)
+  const [startLocation, setStartLocation] = useState<string | undefined>(undefined);
+  const [endLocation, setEndLocation] = useState<string | undefined>(undefined);
+
+  const initialPolishRegion = {
+    latitude: 51,
+    longitude: 19,
+    latitudeDelta: 10,
+    longitudeDelta: 10,
+  }
+
   let boundingBox: number[] = [];
-  if (route.params?.boundingBox)
+  if (route.params?.startBoundingBox && route.params?.endBoundingBox)
     boundingBox = [
-      Number(route.params.boundingBox[0]),
-      Number(route.params.boundingBox[1]),
-      Number(route.params.boundingBox[2]),
-      Number(route.params.boundingBox[3]),
-      // Number(52.3831203918457),
-      // Number(52.387120391845706),
-      // Number(16.877011154174806),
-      // Number(16.881011154174804),
+      Number(route.params.startBoundingBox[0]),
+      Number(route.params.startBoundingBox[1]),
+      Number(route.params.startBoundingBox[2]),
+      Number(route.params.startBoundingBox[3]),
     ];
   const searchProperties = useSearchPropertiesQuery(boundingBox);
 
   useEffect(() => {
     if (route.params) {
-      setLocation(route.params.location);
+      console.log("route.params.location", route.params.startLocation)
+      if (route.params.startLocation) {
+        setStartLocation(route.params.startLocation);
+      }
+
+      if (route.params.startLocation) {
+        setEndLocation(route.params.endLocation)
+      }
+      
       searchProperties.refetch();
 
       mapRef?.current?.animateCamera({
         center: {
-          latitude: Number(route.params.lat),
-          longitude: Number(route.params.lon),
-          // latitude: Number("52,38512"),          
-          // longitude: Number("16,879011"),
+          latitude: Number(route.params.startLat),
+          longitude: Number(route.params.startLon),
         },
       });
     }
@@ -60,107 +68,25 @@ export const SearchScreen = ({
   return (
     <Screen>
       <AnimatedListHeader
-        scrollAnimation={scrollAnimation}
-        setMapShown={setMapShown}
-        mapShown={mapShown}
-        location={location ? location : i18n.t('Search')}
-        availableProperties={
-          searchProperties.data ? searchProperties.data.length : undefined
-        }
+        startLocation={startLocation ? startLocation : i18n.t('Search')}
+        endLocation={endLocation ? endLocation : i18n.t('Search')}
+        setStartLocation={setStartLocation}
+        setEndLocation={setEndLocation}
       />
-
-      {mapShown ? (
-        <Map
-          properties={searchProperties?.data ? searchProperties.data : []}
-          mapRef={mapRef}
-          location={location ? location : i18n.t('Search')}
-          setLocation={setLocation}
-          initialRegion={
-            route.params
-              ? {
-                  latitude: Number(route.params.lat),
-                  longitude: Number(route.params.lon),
-                  latitudeDelta: 0.4,
-                  longitudeDelta: 0.4,
-                }
-              : undefined
-          }
+      <Map
+        properties={searchProperties?.data ? searchProperties.data : []}
+        mapRef={mapRef}
+        startLocation={startLocation ? startLocation : i18n.t('Search')}
+        endLocation={endLocation ? endLocation : i18n.t('Search')}
+        setStartLocation={setStartLocation}
+        setEndLocation={setEndLocation}
+        initialRegion={route.params ? {
+          latitude: Number(route.params.startLat),
+          longitude: Number(route.params.endLon),
+          latitudeDelta: 0.4,
+          longitudeDelta: 0.4,
+        } : initialPolishRegion} 
         />
-      ) : (
-        <>
-          {searchProperties.data && searchProperties.data?.length > 0 ? (
-            <Animated.FlatList
-              onScroll={Animated.event(
-                [
-                  {
-                    nativeEvent: {
-                      contentOffset: {
-                        y: scrollAnimation,
-                      },
-                    },
-                  },
-                ],
-                { useNativeDriver: true }
-              )}
-              contentContainerStyle={{ paddingTop: HEADERHEIGHT - 20 }}
-              bounces={false}
-              scrollEventThrottle={16}
-              data={searchProperties?.data}
-              keyExtractor={(item) => item.ID.toString()}
-              showsVerticalScrollIndicator={false}
-              renderItem={({ item }) => (
-                <Card
-                  style={styles.card}
-                  property={item}
-                  onPress={() =>
-                    navigation.navigate("PropertyDetails", {
-                      propertyID: item.ID,
-                    })
-                  }
-                />
-              )}
-            />
-          ) : (
-            <>
-              {route.params ? (
-                <View style={styles.lottieContainer}>
-                  <Text category={"h6"}>No Properties Found</Text>
-                  <Text appearance={"hint"}>
-                    Please search in a different location.
-                  </Text>
-                </View>
-              ) : (
-                <View style={styles.lottieContainer}>
-                  <LottieView
-                    autoPlay
-                    loop
-                    style={styles.lottie}
-                    source={require("../assets/lotties/SearchScreen.json")}
-                  />
-                  <Text category={"h6"}>Begin Your Search</Text>
-                  <Text appearance={"hint"} style={styles.subHeader}>
-                    Find apartments anytime and anywhere.
-                  </Text>
-                </View>
-              )}
-            </>
-          )}
-        </>
-      )}
     </Screen>
   );
 };
-
-const styles = StyleSheet.create({
-  card: { marginVertical: 5 },
-  lottieContainer: {
-    backgroundColor: "#fff",
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  lottie: { height: 200, width: 200 },
-  subHeader: {
-    marginTop: 10,
-  },
-});
