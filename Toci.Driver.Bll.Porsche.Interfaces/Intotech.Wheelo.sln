@@ -244,6 +244,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Bll.Pe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Bll.Persistence", "..\Intotech.Wheelo.Chat.Bll.Persistence\Intotech.Wheelo.Chat.Bll.Persistence.csproj", "{EC487C6F-4B49-4533-A81F-F3C880D7B49A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Jaguar.Interfaces", "..\Intotech.Wheelo.Chat.Jaguar.Interfaces\Intotech.Wheelo.Chat.Jaguar.Interfaces.csproj", "{F36D8A64-EFA2-466B-AFE5-0085C62EB213}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Dodge", "..\Intotech.Wheelo.Chat.Dodge\Intotech.Wheelo.Chat.Dodge.csproj", "{F0157EE5-EF73-48E9-9E21-43E450A125F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Dodge.Interfaces", "Intotech.Wheelo.Chat.Dodge.Interfaces\Intotech.Wheelo.Chat.Dodge.Interfaces.csproj", "{46E90AB2-D578-4EA4-A17B-451217417A9B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -588,6 +594,30 @@ Global
 		{EC487C6F-4B49-4533-A81F-F3C880D7B49A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EC487C6F-4B49-4533-A81F-F3C880D7B49A}.Release|x64.ActiveCfg = Release|Any CPU
 		{EC487C6F-4B49-4533-A81F-F3C880D7B49A}.Release|x64.Build.0 = Release|Any CPU
+		{F36D8A64-EFA2-466B-AFE5-0085C62EB213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F36D8A64-EFA2-466B-AFE5-0085C62EB213}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F36D8A64-EFA2-466B-AFE5-0085C62EB213}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F36D8A64-EFA2-466B-AFE5-0085C62EB213}.Debug|x64.Build.0 = Debug|Any CPU
+		{F36D8A64-EFA2-466B-AFE5-0085C62EB213}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F36D8A64-EFA2-466B-AFE5-0085C62EB213}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F36D8A64-EFA2-466B-AFE5-0085C62EB213}.Release|x64.ActiveCfg = Release|Any CPU
+		{F36D8A64-EFA2-466B-AFE5-0085C62EB213}.Release|x64.Build.0 = Release|Any CPU
+		{F0157EE5-EF73-48E9-9E21-43E450A125F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0157EE5-EF73-48E9-9E21-43E450A125F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0157EE5-EF73-48E9-9E21-43E450A125F2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F0157EE5-EF73-48E9-9E21-43E450A125F2}.Debug|x64.Build.0 = Debug|Any CPU
+		{F0157EE5-EF73-48E9-9E21-43E450A125F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0157EE5-EF73-48E9-9E21-43E450A125F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0157EE5-EF73-48E9-9E21-43E450A125F2}.Release|x64.ActiveCfg = Release|Any CPU
+		{F0157EE5-EF73-48E9-9E21-43E450A125F2}.Release|x64.Build.0 = Release|Any CPU
+		{46E90AB2-D578-4EA4-A17B-451217417A9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46E90AB2-D578-4EA4-A17B-451217417A9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46E90AB2-D578-4EA4-A17B-451217417A9B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{46E90AB2-D578-4EA4-A17B-451217417A9B}.Debug|x64.Build.0 = Debug|Any CPU
+		{46E90AB2-D578-4EA4-A17B-451217417A9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46E90AB2-D578-4EA4-A17B-451217417A9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46E90AB2-D578-4EA4-A17B-451217417A9B}.Release|x64.ActiveCfg = Release|Any CPU
+		{46E90AB2-D578-4EA4-A17B-451217417A9B}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -625,6 +655,9 @@ Global
 		{4090890E-AA4C-4FFB-8DB1-8509C9D90041} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
 		{8A9FFFF4-1867-468A-9E8E-ADD380155B86} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
 		{EC487C6F-4B49-4533-A81F-F3C880D7B49A} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
+		{F36D8A64-EFA2-466B-AFE5-0085C62EB213} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
+		{F0157EE5-EF73-48E9-9E21-43E450A125F2} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
+		{46E90AB2-D578-4EA4-A17B-451217417A9B} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {958786F8-D2E4-4AAC-949D-3CD908D8AE36}
