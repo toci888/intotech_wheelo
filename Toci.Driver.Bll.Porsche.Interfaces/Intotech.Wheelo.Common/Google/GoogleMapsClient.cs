@@ -14,7 +14,7 @@ namespace Intotech.Wheelo.Common.Google
         private const string ApiKey = "AIzaSyDxVQqaiKE1L6N9Etv9SUgKsEHfPr9Et40";
         //ChIJ0eZpEy9FBEcRieu3xGIT0wc
         private const string Url = "https://maps.googleapis.com/";
-        private const string Uri = "maps/api/place/details/json?place_id={0}&key={1}";
+        private const string Uri = "maps/api/place/details/json?language=pl&place_id={0}&key={1}";
 
 
         protected HttpClient HttpClient = new HttpClient();

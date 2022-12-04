@@ -85,7 +85,7 @@ builder.Services.AddScoped<IGafManager, GafManager>();
 builder.Services.AddScoped<IWheeloAccountService, WheeloAccountService>();
 builder.Services.AddScoped<IAccountMetadataService, AccountMetadataService>();
 builder.Services.AddScoped<IAssociationMapDataSubService, AssociationMapDataSubService>();
-builder.Services.AddScoped<IEmailManager, EmailManager>();
+//builder.Services.AddScoped<IEmailManager, EmailManager>();
 
 builder.Services.AddSingleton(authenticationSettings);
 

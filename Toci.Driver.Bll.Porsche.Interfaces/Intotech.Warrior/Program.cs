@@ -48,7 +48,7 @@ Console.WriteLine("Warrior is seeding your dbs....");
 
 new WheeloMainSeedManager().SeedAllDb();
 
-//new SocialSeedManager().SeedAllDb();
+new SocialSeedManager().SeedAllDb();
 
 //new ProfessionsTxtParser().Insert();
 
