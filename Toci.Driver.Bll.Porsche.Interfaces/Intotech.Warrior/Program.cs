@@ -16,6 +16,11 @@ using Toci.Driver.Database.Persistence.Models;
 
 Console.WriteLine("Warrior is seeding your dbs....");
 
+
+//Service serv = new Service();
+//serv.Listen();
+
+
 //GoogleMapsClient googleMapsClient = new GoogleMapsClient(); //ChIJ0eZpEy9FBEcRieu3xGIT0wc
 
 //GoogleService googleService = new GoogleService();

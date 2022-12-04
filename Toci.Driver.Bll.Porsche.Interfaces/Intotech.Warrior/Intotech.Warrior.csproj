@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll.Interfaces\Intotech.Common.Bll.Interfaces.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll\Intotech.Common.Bll.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Database.Interfaces\Intotech.Common.Database.Interfaces.csproj" />
@@ -18,6 +22,7 @@
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.ExcelLibrary.Extensions\Intotech.ExcelLibrary.Extensions.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.ReflectiveTools\Intotech.ReflectiveTools.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
+    <ProjectReference Include="..\..\Intotech.Wheelo.Chat.Jaguar\Intotech.Wheelo.Chat.Jaguar.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Bentley.Interfaces\Intotech.Wheelo.Bll.Bentley.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Bentley\Intotech.Wheelo.Bll.Bentley.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Models\Intotech.Wheelo.Bll.Models.csproj" />
