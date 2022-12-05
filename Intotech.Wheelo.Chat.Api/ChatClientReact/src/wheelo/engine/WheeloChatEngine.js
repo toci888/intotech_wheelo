@@ -14,7 +14,7 @@ export default class WheeloChatEngine {
 
     serverUrl = "https://localhost:7082/wheeloChat";
     ReceiveMessageCallback = "ReceiveMessage";
-    joinRoomCallback = "JoinRoomFuck";
+    joinRoomCallback = "JoinWheeloRoom";
     sendMessageCallback = "SendMessage";
 
     joinRoomClient = async (room) => {
@@ -26,10 +26,11 @@ export default class WheeloChatEngine {
             .configureLogging(LogLevel.Information)
             .build();
 
-        this.connection.on(this.ReceiveMessageCallback, (user, message) => {
+        this.connection.on(this.ReceiveMessageCallback, (msgDto) => {
             
-            this.receiveMessageCall(user, message);
-            this.messages = [...this.messages, { user, message }];
+            console.log("msgDto", msgDto);
+            this.receiveMessageCall(msgDto.user.userName, msgDto.message);
+            //this.messages = [...this.messages, { user, message }];
         });
 
         this.connection.onclose(e => {
@@ -37,13 +38,10 @@ export default class WheeloChatEngine {
         });
 
         try{
-            console.log('1 str conn start', this.room); 
+
         await this.connection.start();
-        console.log('2 conn start', this.room);
 
         await this.connection.invoke(this.joinRoomCallback, this.room);
-
-        console.log('3 join room', this.room);
 
 }catch (e) {
     console.log(e);
@@ -55,7 +53,12 @@ export default class WheeloChatEngine {
     sendMessage = async (message, user) => {
         try {
           //console.log(message, user, connection, room);
-          await this.connection.invoke(this.sendMessageCallback, message, user, this.room);
+          await this.connection.invoke(this.sendMessageCallback, 
+            {  user: 
+                { UserId: 1, UserName: user },
+                Message: message,
+                RoomId: 'WheeloHeroes'
+            }); //message, user, this.room
 
         } catch (e) {
           console.log(e);

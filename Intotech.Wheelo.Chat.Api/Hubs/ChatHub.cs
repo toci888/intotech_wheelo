@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Intotech.Wheelo.Chat.Api.Logic;
+using Intotech.Wheelo.Chat.Models;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Intotech.Wheelo.Chat.Api.Hubs
 {
@@ -6,14 +8,23 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
     {
         private const string ClientReceiveMessageCallback = "ReceiveMessage";
 
-        public async Task SendMessage(string message, string user, string room)
+        protected ChatLogic ChatLogic;
+
+        public ChatHub(ChatLogic chatLogic)
         {
-            await Clients.Group(room).SendAsync(ClientReceiveMessageCallback, user, message);
+            ChatLogic = chatLogic;
         }
 
-        public async Task JoinRoomFuck(string room)
+        public async Task SendMessage(ChatMessageDto chatMessage)
         {
-            await Groups.AddToGroupAsync(Context.ConnectionId, room);
+            await Clients.Group(chatMessage.RoomId).SendAsync(ClientReceiveMessageCallback, chatMessage);
+
+            ChatLogic.SendMessage(chatMessage);
+        }
+
+        public async Task JoinWheeloRoom(string roomId)
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, roomId);
         }
     }
 }

@@ -1,4 +1,9 @@
 using Intotech.Wheelo.Chat.Api.Hubs;
+using Intotech.Wheelo.Chat.Api.Logic;
+using Intotech.Wheelo.Chat.Bll.Persistence;
+using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
+using Intotech.Wheelo.Chat.Jaguar;
+using Intotech.Wheelo.Chat.Jaguar.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +26,9 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddScoped<IMessagesService, MessagesService>();
+builder.Services.AddScoped<ChatLogic, ChatLogic>();
+builder.Services.AddScoped<IMessageLogic, MessageLogic>();
 
 var app = builder.Build();
 

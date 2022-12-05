@@ -252,6 +252,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Dodge.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Api", "..\Intotech.Wheelo.Chat.Api\Intotech.Wheelo.Chat.Api.csproj", "{236FACBF-F7BC-42D4-97BB-B9564C1AF832}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Models", "..\Intotech.Wheelo.Chat.Models\Intotech.Wheelo.Chat.Models.csproj", "{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -628,6 +630,14 @@ Global
 		{236FACBF-F7BC-42D4-97BB-B9564C1AF832}.Release|Any CPU.Build.0 = Release|Any CPU
 		{236FACBF-F7BC-42D4-97BB-B9564C1AF832}.Release|x64.ActiveCfg = Release|Any CPU
 		{236FACBF-F7BC-42D4-97BB-B9564C1AF832}.Release|x64.Build.0 = Release|Any CPU
+		{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}.Debug|x64.Build.0 = Debug|Any CPU
+		{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}.Release|x64.ActiveCfg = Release|Any CPU
+		{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -669,6 +679,7 @@ Global
 		{F0157EE5-EF73-48E9-9E21-43E450A125F2} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
 		{46E90AB2-D578-4EA4-A17B-451217417A9B} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
 		{236FACBF-F7BC-42D4-97BB-B9564C1AF832} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
+		{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {958786F8-D2E4-4AAC-949D-3CD908D8AE36}

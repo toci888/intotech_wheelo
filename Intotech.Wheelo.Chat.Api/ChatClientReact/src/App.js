@@ -30,7 +30,7 @@ const App = () => {
   <hr className='line' />
   <input type="text" id="messId"></input>
   <div id="chatBox"></div>
-  <input type="submit" onClick={() => wheeloClient.chat('doopa', "Julia", document.getElementById("messId").value, renderMsg)}></input>
+  <input type="submit" onClick={() => wheeloClient.chat('WheeloHeroes', "Julia", document.getElementById("messId").value, renderMsg)}></input>
   {
     //<Chat sendMessage={WheeloClient.sendMessage} />
     }

@@ -29,8 +29,6 @@ export default class WheeloClient {
 
         if (wheeloEngExists !== undefined)
         {
-            console.log("zjebane !", wheeloEngExists);
-
             wheeloEngExists.sendMessage(message, user);
 
             return wheeloEngExists;
