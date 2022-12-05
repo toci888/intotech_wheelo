@@ -103,7 +103,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginHorizontal: LISTMARGIN,
-    marginVertical: 5,
   },
   row: {
     alignItems: "center",

@@ -8,7 +8,7 @@ export const PHOTOS_STR = "photos";
 export const AMENITIES_STR = "amenities";
 export const DESCRIPTION_STR = "description";
 
-const baseHeight = 300;
+const baseHeight = 310;
 const iosNotch = 40;
 const iosHeight = baseHeight + iosNotch;
 let androidHeight = baseHeight;

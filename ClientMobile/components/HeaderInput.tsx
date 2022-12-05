@@ -16,8 +16,9 @@ export const HeaderInput = ({ location }: { location: string }) => {
       style={styles.container}
       onPress={() => navigation.navigate("FindLocations")}
     >
-      <Text category="h3" style={styles.clrWhite}>Cześć <Text category="h3" style={styles.clrGreen}>Dawid.</Text></Text>
-      <HomeAndWorkInput />
+      <HomeAndWorkInput type={"end"} location={""} setLocation={function (location: string): void {
+        throw new Error("Function not implemented.");
+      } } />
     </TouchableOpacity>
   );
 };
