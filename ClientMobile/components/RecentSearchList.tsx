@@ -16,7 +16,7 @@ export const RecentSearchList = ({
   recentSearches?: Location[];
   style?: ViewStyle;
   type: "start" | "end", 
-  location: string, setLocation: (location: string) => void
+  location: string | Location, setLocation: (location: string | Location) => void
 }) => {
   const [showMore, setShowMore] = useState(false);
   const navigation = useNavigation();

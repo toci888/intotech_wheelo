@@ -5,6 +5,8 @@ import { Text, Button, Divider } from "@ui-kitten/components";
 import { LISTMARGIN } from "../constants/constants";
 import { HeaderInput } from "./HeaderInput";
 import { HeaderFilterButtons } from "./HeaderFilterButtons";
+import { Location } from "../types/locationIQ";
+import { useNavigation } from "@react-navigation/native";
 
 export const AnimatedListHeader = ({
   startLocation,
@@ -12,11 +14,27 @@ export const AnimatedListHeader = ({
   setStartLocation,
   setEndLocation
 }: {
-  startLocation: string;
-  endLocation: string;
-  setStartLocation: (startLocation: string) => void;
-  setEndLocation: (endLocation: string) => void;
+  startLocation: string | Location;
+  endLocation: string | Location;
+  setStartLocation: (startLocation: string | Location) => void;
+  setEndLocation: (endLocation: string | Location) => void;
 }) => {
+
+  const navigation = useNavigation();
+
+  const submit = () => {
+    // console.log("start", startLocation); console.log("end", endLocation);
+
+    if(typeof(startLocation) !== 'string' && typeof(endLocation) !== 'string') {
+      navigation.navigate("Root", {
+        screen: "Search",
+        params: {
+          startLocation,
+          endLocation
+        }
+      });
+    }
+  }
 
   return (
     <Animated.View style={styles.container}>
@@ -33,7 +51,8 @@ export const AnimatedListHeader = ({
           <Text style={{marginLeft: 'auto'}}>O której wracasz?</Text>
         </View>
         <HeaderInput type="end" location={endLocation} setLocation={setEndLocation} />
-        <Button onPress={() => {console.log("start", startLocation); console.log("end", endLocation);}}>ok</Button>
+        {typeof(startLocation) !== 'string' && typeof(endLocation) !== 'string' &&
+        <Button onPress={() => {submit()}}>ok</Button>}
         {/* <HeaderFilterButtons /> */}
       </View>
       <Divider style={styles.divider} />

@@ -9,6 +9,7 @@ import {
   NavigatorScreenParams,
 } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Location } from "./types/locationIQ";
 
 declare global {
   namespace ReactNavigation {
@@ -55,13 +56,6 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
   >;
 
 export type SearchScreenParams = {
-  startLocation?: string;
-  startBoundingBox?: string[];
-  startLat?: string;
-  startLon?: string;
-
-  endLocation?: string;
-  endBoundingBox?: string[];
-  endLat?: string;
-  endLon?: string;
+  startLocation: Location;
+  endLocation: Location;
 };

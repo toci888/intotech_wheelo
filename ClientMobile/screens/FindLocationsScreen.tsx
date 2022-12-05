@@ -14,7 +14,7 @@ import { RecentSearchList } from "../components/RecentSearchList";
 import { SearchAddress } from "../components/SearchAddress";
 
 export const FindLocationsScreen = ({route}:{
-  route: { params: { type: "start" | "end", location: string, setLocation: (location: string) => void;} };
+  route: { params: { type: "start" | "end", location: string | Location, setLocation: (location: string | Location) => Location;} };
 }) => {
   const [suggestions, setSuggestions] = useState<Location[]>([]);
   const navigation = useNavigation();
@@ -43,25 +43,11 @@ export const FindLocationsScreen = ({route}:{
     });
   };
 
-  const handleNavigate = (location: Location) => {
-    console.log("location", location)
-    setRecentSearch(location);
-    route.params.setLocation(location.display_name);
+  const handleNavigate = (loc: Location) => {
+    setRecentSearch(loc);
+    route.params.location = loc;
+    route.params.setLocation(loc as Location);
     navigation.goBack();
-    // navigation.navigate("Root", {
-    //   screen: "Search",
-    //   params: {
-    //     startLocation: getFormattedLocationText(location, "autocomplete"),
-    //     startLat: location.lat,
-    //     startLon: location.lon,
-    //     startBoundingBox: location.boundingbox,
-
-    //     endLocation: getFormattedLocationText(location, "autocomplete"),
-    //     endLat: location.lat,
-    //     endLon: location.lon,
-    //     endBoundingBox: location.boundingbox,
-    //   },
-    // });
   };
 
   return (

@@ -16,6 +16,7 @@ import { Text } from "@ui-kitten/components";
 import { useSearchPropertiesQuery } from "../hooks/queries/useSearchPropertiesQuery";
 import { i18n } from "../i18n/i18n";
 import React from "react";
+import { Location } from "../types/locationIQ";
 
 export const SearchScreen = ({
   route,
@@ -23,8 +24,8 @@ export const SearchScreen = ({
   route: { params: SearchScreenParams };
 }) => {
   const mapRef = useRef<MapView | null>(null);
-  const [startLocation, setStartLocation] = useState<string | undefined>(undefined);
-  const [endLocation, setEndLocation] = useState<string | undefined>(undefined);
+  const [startLocation, setStartLocation] = useState<string | Location>(i18n.t('Search'));
+  const [endLocation, setEndLocation] = useState<string | Location>(i18n.t('Search'));
 
   const initialPolishRegion = {
     latitude: 51,
@@ -34,12 +35,12 @@ export const SearchScreen = ({
   }
 
   let boundingBox: number[] = [];
-  if (route.params?.startBoundingBox && route.params?.endBoundingBox)
+  if (route.params?.startLocation && route.params?.endLocation)
     boundingBox = [
-      Number(route.params.startBoundingBox[0]),
-      Number(route.params.startBoundingBox[1]),
-      Number(route.params.startBoundingBox[2]),
-      Number(route.params.startBoundingBox[3]),
+      Number(route.params.startLocation.boundingbox[0]), //HERETODO
+      Number(route.params.startLocation.boundingbox[1]),
+      Number(route.params.startLocation.boundingbox[2]),
+      Number(route.params.startLocation.boundingbox[3]),
     ];
   const searchProperties = useSearchPropertiesQuery(boundingBox);
 
@@ -58,8 +59,8 @@ export const SearchScreen = ({
 
       mapRef?.current?.animateCamera({
         center: {
-          latitude: Number(route.params.startLat),
-          longitude: Number(route.params.startLon),
+          latitude: Number(route.params.startLocation.lat), //HERETODO
+          longitude: Number(route.params.startLocation.lon),
         },
       });
     }
@@ -81,12 +82,12 @@ export const SearchScreen = ({
         setStartLocation={setStartLocation}
         setEndLocation={setEndLocation}
         initialRegion={route.params ? {
-          latitude: Number(route.params.startLat),
-          longitude: Number(route.params.endLon),
+          latitude: Number(route.params.startLocation.lat), //TODOHERE
+          longitude: Number(route.params.startLocation.lon),
           latitudeDelta: 0.4,
           longitudeDelta: 0.4,
         } : initialPolishRegion} 
-        />
+      />
     </Screen>
   );
 };

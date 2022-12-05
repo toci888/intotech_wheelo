@@ -7,9 +7,10 @@ import { theme } from "../theme";
 import { Row } from "./Row";
 import React, { useState } from "react";
 import DateTimePicker from "react-native-modal-datetime-picker";
+import { Location } from "../types/locationIQ";
 
 export const HeaderInput = ({ type, location, setLocation }: 
-  { type: "start" | "end", location: string, setLocation: (location: string) => void; }) => {
+  { type: "start" | "end", location: string | Location, setLocation: (location: string | Location) => void; }) => {
   const navigation = useNavigation();
 
   const [showDate, setShowDate] = useState(false);
@@ -17,7 +18,7 @@ export const HeaderInput = ({ type, location, setLocation }:
   
   const actualTime = (): Date => {
     const date = new Date();
-    console.log(date)
+    // console.log(date)
     return date
   }
   
@@ -25,7 +26,7 @@ export const HeaderInput = ({ type, location, setLocation }:
     <View style={{flexDirection: 'row'}}>
       <TouchableOpacity style={styles.container} onPress={() => { navigation.navigate("FindLocations", {type, location, setLocation}) }}>
         <Row style={{alignItems: 'center'}}>
-          <Text style={styles.input}>{location}</Text>
+          <Text style={styles.input}>{typeof(location) === 'string' ? location : location.display_name}</Text>
           <MaterialIcons name="gps-fixed" size={24} color={theme["color-primary-500"]} style={styles.icon}/>
         </Row>
       </TouchableOpacity>

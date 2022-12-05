@@ -1,3 +1,4 @@
+import React from "react";
 import MapView, { Region } from "react-native-maps";
 import { View, StyleSheet, Platform, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
@@ -14,6 +15,7 @@ import { Card } from "./Card";
 import { getPropertiesInArea } from "../data/properties";
 import { endpoints, queryKeys } from "../constants/constants";
 import { useSearchPropertiesQuery } from "../hooks/queries/useSearchPropertiesQuery";
+import { Location } from "../types/locationIQ";
 
 // used to persist the region if search area from the map
 let mapRegion: Region | undefined = undefined;
@@ -29,10 +31,10 @@ export const Map = ({
 }: {
   properties: Property[];
   mapRef: React.MutableRefObject<MapView | null>;
-  startLocation: string;
-  setStartLocation: (startLocation: string) => void;
-  endLocation: string;
-  setEndLocation: (endLocation: string) => void;
+  startLocation: string | Location;
+  setStartLocation: (startLocation: string | Location) => void;
+  endLocation: string | Location;
+  setEndLocation: (endLocation: string | Location) => void;
   initialRegion?: Region | undefined;
 }) => {
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -44,7 +46,7 @@ export const Map = ({
   const searchProperties = useSearchPropertiesQuery(boundingBox);
 
   useEffect(() => {
-    if (startLocation === "Map Area") return;
+    if (startLocation === "Map Area") return; //TODOHERE
 
     if (initialRegion) {
       setShowSearchAreaButton(false);
