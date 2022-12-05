@@ -238,17 +238,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Integration
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Jaguar", "..\Intotech.Wheelo.Chat.Jaguar\Intotech.Wheelo.Chat.Jaguar.csproj", "{129567D9-ADCE-40D9-B67F-7DCBE9A56349}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Database.Persistence", "..\Intotech.Wheelo.Chat.Database.Persistence\Intotech.Wheelo.Chat.Database.Persistence.csproj", "{4090890E-AA4C-4FFB-8DB1-8509C9D90041}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Database.Persistence", "..\Intotech.Wheelo.Chat.Database.Persistence\Intotech.Wheelo.Chat.Database.Persistence.csproj", "{4090890E-AA4C-4FFB-8DB1-8509C9D90041}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Bll.Persistence.Interfaces", "..\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces.csproj", "{8A9FFFF4-1867-468A-9E8E-ADD380155B86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Bll.Persistence.Interfaces", "..\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces.csproj", "{8A9FFFF4-1867-468A-9E8E-ADD380155B86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Bll.Persistence", "..\Intotech.Wheelo.Chat.Bll.Persistence\Intotech.Wheelo.Chat.Bll.Persistence.csproj", "{EC487C6F-4B49-4533-A81F-F3C880D7B49A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Bll.Persistence", "..\Intotech.Wheelo.Chat.Bll.Persistence\Intotech.Wheelo.Chat.Bll.Persistence.csproj", "{EC487C6F-4B49-4533-A81F-F3C880D7B49A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Jaguar.Interfaces", "..\Intotech.Wheelo.Chat.Jaguar.Interfaces\Intotech.Wheelo.Chat.Jaguar.Interfaces.csproj", "{F36D8A64-EFA2-466B-AFE5-0085C62EB213}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Jaguar.Interfaces", "..\Intotech.Wheelo.Chat.Jaguar.Interfaces\Intotech.Wheelo.Chat.Jaguar.Interfaces.csproj", "{F36D8A64-EFA2-466B-AFE5-0085C62EB213}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Dodge", "..\Intotech.Wheelo.Chat.Dodge\Intotech.Wheelo.Chat.Dodge.csproj", "{F0157EE5-EF73-48E9-9E21-43E450A125F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Dodge", "..\Intotech.Wheelo.Chat.Dodge\Intotech.Wheelo.Chat.Dodge.csproj", "{F0157EE5-EF73-48E9-9E21-43E450A125F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Dodge.Interfaces", "Intotech.Wheelo.Chat.Dodge.Interfaces\Intotech.Wheelo.Chat.Dodge.Interfaces.csproj", "{46E90AB2-D578-4EA4-A17B-451217417A9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Dodge.Interfaces", "Intotech.Wheelo.Chat.Dodge.Interfaces\Intotech.Wheelo.Chat.Dodge.Interfaces.csproj", "{46E90AB2-D578-4EA4-A17B-451217417A9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Api", "..\Intotech.Wheelo.Chat.Api\Intotech.Wheelo.Chat.Api.csproj", "{236FACBF-F7BC-42D4-97BB-B9564C1AF832}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -618,6 +620,14 @@ Global
 		{46E90AB2-D578-4EA4-A17B-451217417A9B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{46E90AB2-D578-4EA4-A17B-451217417A9B}.Release|x64.ActiveCfg = Release|Any CPU
 		{46E90AB2-D578-4EA4-A17B-451217417A9B}.Release|x64.Build.0 = Release|Any CPU
+		{236FACBF-F7BC-42D4-97BB-B9564C1AF832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{236FACBF-F7BC-42D4-97BB-B9564C1AF832}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{236FACBF-F7BC-42D4-97BB-B9564C1AF832}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{236FACBF-F7BC-42D4-97BB-B9564C1AF832}.Debug|x64.Build.0 = Debug|Any CPU
+		{236FACBF-F7BC-42D4-97BB-B9564C1AF832}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{236FACBF-F7BC-42D4-97BB-B9564C1AF832}.Release|Any CPU.Build.0 = Release|Any CPU
+		{236FACBF-F7BC-42D4-97BB-B9564C1AF832}.Release|x64.ActiveCfg = Release|Any CPU
+		{236FACBF-F7BC-42D4-97BB-B9564C1AF832}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -658,6 +668,7 @@ Global
 		{F36D8A64-EFA2-466B-AFE5-0085C62EB213} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
 		{F0157EE5-EF73-48E9-9E21-43E450A125F2} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
 		{46E90AB2-D578-4EA4-A17B-451217417A9B} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
+		{236FACBF-F7BC-42D4-97BB-B9564C1AF832} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {958786F8-D2E4-4AAC-949D-3CD908D8AE36}
