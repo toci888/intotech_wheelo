@@ -31,6 +31,7 @@ export default class WheeloClient {
         if (wheeloEngExists !== undefined)
         {
             await wheeloEngExists.userConnect(accountId, userName);
+            return;
         }
 
         var wheeloChatEngine = new WheeloChatEngine(() => {});
@@ -57,6 +58,7 @@ export default class WheeloClient {
         if (wheeloEngExists !== undefined)
         {
             wheeloEngExists.requestConversation(json);
+            return;
         }
 
         var wheeloChatEngine = new WheeloChatEngine(() => {});
