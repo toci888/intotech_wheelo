@@ -22,6 +22,7 @@ import { theme } from "../theme";
 import { endpoints } from "../constants/constants";
 import { useLoading } from "../hooks/useLoading";
 import { useDeletePropertyMutation } from "../hooks/mutations/useDeletePropertyMutation";
+import React from "react";
 
 export const Card = ({
   property,
@@ -57,7 +58,7 @@ export const Card = ({
     >
       <ImageCarousel
         onImagePress={onPress}
-        images={property.images}
+        images={property.methodResult.accountsCollocated[1].images}
         chevronsShown
       />
       <CardInformation property={property} myProperty={myProperty} />

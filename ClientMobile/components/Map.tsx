@@ -1,4 +1,3 @@
-import React from "react";
 import MapView, { Region } from "react-native-maps";
 import { View, StyleSheet, Platform, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
@@ -13,40 +12,39 @@ import { MapMarker } from "./MapMarker";
 import { theme } from "../theme";
 import { Card } from "./Card";
 import { getPropertiesInArea } from "../data/properties";
-import { endpoints, queryKeys } from "../constants/constants";
 import { useSearchPropertiesQuery } from "../hooks/queries/useSearchPropertiesQuery";
+import React from "react";
 import { Location } from "../types/locationIQ";
 
 // used to persist the region if search area from the map
 let mapRegion: Region | undefined = undefined;
 
 export const Map = ({
-  properties,
+  property,
   mapRef,
   startLocation,
-  setStartLocation,
   endLocation,
-  setEndLocation,
   initialRegion,
 }: {
-  properties: Property[];
+  property: Property;
   mapRef: React.MutableRefObject<MapView | null>;
-  startLocation: string | Location;
-  setStartLocation: (startLocation: string | Location) => void;
-  endLocation: string | Location;
-  setEndLocation: (endLocation: string | Location) => void;
-  initialRegion?: Region | undefined;
+  startLocation: Location;
+  endLocation: Location;
+  initialRegion: Region | undefined;
 }) => {
+
   const [activeIndex, setActiveIndex] = useState(-1);
   const [showSearchAreaButton, setShowSearchAreaButton] = useState(false);
   const [boundingBox, setBoundingBox] = useState<number[]>([]); // used for searching properties in region
-  const [region, setRegion] = useState<Region | undefined>(mapRegion ? mapRegion : undefined);
+  const [region, setRegion] = useState<Region | undefined>(
+    mapRegion ? mapRegion : undefined
+  );
   const navigation = useNavigation();
 
   const searchProperties = useSearchPropertiesQuery(boundingBox);
 
   useEffect(() => {
-    if (startLocation === "Map Area") return; //TODOHERE
+    // if (startLocation === "Map Area") return;
 
     if (initialRegion) {
       setShowSearchAreaButton(false);
@@ -64,22 +62,23 @@ export const Map = ({
   };
 
   const handleMarkerPress = (index: number) => {
+    console.log("DANE: ", property.methodResult.accountsCollocated[index])
     setTimeout(() => {
       mapRef.current?.animateCamera({
         center: {
-          latitude: properties[index].lat,
-          longitude: properties[index].lng,
+          latitude: property.methodResult.accountsCollocated[index].latitudefrom,
+          longitude: property.methodResult.accountsCollocated[index].longitudefrom,
         },
       });
     }, 100);
     setTimeout(() => {
       const newRegion: Region = {
-        latitude: properties[index].lat,
+        latitude: property.methodResult.accountsCollocated[index].latitudefrom,
         latitudeDelta:
           region?.latitudeDelta && region.latitudeDelta < 4
             ? region.latitudeDelta
             : 4,
-        longitude: properties[index].lng,
+        longitude: property.methodResult.accountsCollocated[index].longitudefrom,
         longitudeDelta:
           region?.longitudeDelta && region.longitudeDelta < 4
             ? region.longitudeDelta
@@ -95,7 +94,6 @@ export const Map = ({
 
   const handleSearchAreaButtonPress = () => {
     searchProperties.refetch();
-    setStartLocation("Map Area");
     mapRegion = region;
     setShowSearchAreaButton(false);
   };
@@ -124,12 +122,15 @@ export const Map = ({
           }
         }}
       >
-        {properties &&
-          properties.map((i, index) => (
+        {property.methodResult &&
+          property.methodResult.accountsCollocated.map((i, index) => (
             <MapMarker
-              key={i.ID} // id: 1
-              lat={i.lat} //52.387056469655896
-              lng={i.lng} // 16.881805743212674
+            // key={i.accountid} // id: 1
+            // lat={i.longitudefrom} //52.387056469655896    lat: 25.80913,
+            // lng={i.longitudefrom} // 16.881805743212674 -80.186363
+            key={index} // id: 1
+            lat={i.latitudefrom}//52.387056469655896+index} //52.387056469655896    lat: 25.80913,
+            lng={i.longitudefrom}//16.881805743212674+index} // 16.881805743212674 -80.186363
               color={
                 activeIndex === index
                   ? theme["color-info-400"]
@@ -150,15 +151,15 @@ export const Map = ({
               />
             </TouchableOpacity>
           )}
-          <Card
-            property={properties[activeIndex]}
+          {/* <Card
+            property={property[activeIndex]}
             style={styles.card}
             onPress={() =>
               navigation.navigate("PropertyDetails", {
                 propertyID: properties[activeIndex].ID,
               })
             }
-          />
+          /> */}
         </>
       )}
       {showSearchAreaButton && activeIndex === -1 && (

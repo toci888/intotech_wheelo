@@ -46,7 +46,7 @@ export const SearchScreen = ({
 
   useEffect(() => {
     if (route.params) {
-      console.log("route.params.location", route.params.startLocation)
+      // console.log("route.params.location", route.params.startLocation)
       if (route.params.startLocation) {
         setStartLocation(route.params.startLocation);
       }
@@ -66,6 +66,16 @@ export const SearchScreen = ({
     }
   }, [route]);
 
+  const initialRegion = {
+    place_id: 'string',
+    lat: 'string',
+    lon: 'string',
+    boundingbox: ['',''],
+    display_name: 'string',
+    address: 'Address',
+    location: 'string',
+  } as Location;
+
   return (
     <Screen>
       <AnimatedListHeader
@@ -75,12 +85,12 @@ export const SearchScreen = ({
         setEndLocation={setEndLocation}
       />
       <Map
-        properties={searchProperties?.data ? searchProperties.data : []}
+        property={searchProperties?.data ? searchProperties.data : {} as Property}
         mapRef={mapRef}
-        startLocation={startLocation ? startLocation : i18n.t('Search')}
-        endLocation={endLocation ? endLocation : i18n.t('Search')}
-        setStartLocation={setStartLocation}
-        setEndLocation={setEndLocation}
+        // startLocation={startLocation}
+        startLocation={typeof(startLocation) === 'string'? initialRegion : startLocation}
+        // endLocation={endLocation}
+        endLocation={typeof(endLocation) === 'string'? initialRegion : endLocation}
         initialRegion={route.params ? {
           latitude: Number(route.params.startLocation.lat), //TODOHERE
           longitude: Number(route.params.startLocation.lon),

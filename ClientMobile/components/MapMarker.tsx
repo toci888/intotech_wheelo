@@ -1,3 +1,4 @@
+import React from "react";
 import { Marker } from "react-native-maps";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -12,6 +13,7 @@ export const MapMarker = ({
   onPress?: () => void;
   color: string;
 }) => {
+  // console.log(lat, lng)
   return (
     <Marker coordinate={{ latitude: lat, longitude: lng }} onPress={onPress}>
       <MaterialCommunityIcons name="map-marker" size={32} color={color} />

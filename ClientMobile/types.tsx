@@ -57,5 +57,20 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
 
 export type SearchScreenParams = {
   startLocation: Location;
+  startLocationTime: string;
   endLocation: Location;
+  endLocationTime: string;
 };
+
+// export type SearchScreenParams = {
+//   idaccount: number,
+//   accountidcollocated: number,
+//   name: string,
+//   surname: string,
+//   latitudefrom: number,
+//   longitudefrom: number,
+//   latitudeto: number,
+//   longitudeto: number,
+//   fromhour: string,
+//   tohour: string
+// };

@@ -4,42 +4,37 @@ import { Pet } from "./pet";
 import { Score } from "./score";
 import { TempApartment } from "./tempApartment";
 
+// export class response<T> {
+//   methodResult!: {
+//     T: T
+//   };
+//   errorMessage!: string;
+//   isSuccess!: boolean;
+//   errorCode!: number;
+// }
+
 export type Property = {
-  ID: number;
-  images: string[];
-  rentLow: number;
-  rentHigh: number;
-  bedroomLow: number;
-  bedroomHigh: number;
-  name?: string;
-  street: string;
-  city: string;
-  state: string;
-  zip: number;
-  lat: number;
-  lng: number;
-  countryCode: string;
-  callingCode: string;
-  phoneNumber: string;
-  website?: string;
-  unitType: "single" | "multiple";
-  description?: string;
-  stars: number;
-  onMarket?: boolean;
-  reviews?: Review[];
-  apartments: Apartment[];
-  scores?: Score[];
-  includedUtilities?: string[];
-  amenities?: string[];
-  petsAllowed: string;
-  laundryType: string;
-  parkingFee?: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  userID: number;
-  liked?: boolean;
-};
+  methodResult: {
+    accountsCollocated: PropertyAccount[],
+    sourceAccount: PropertyAccount
+  },
+  errorMessage: string,
+  isSuccess: boolean,
+  errorCode: number
+}
+
+export type PropertyAccount = {
+  accountid: number,
+  images: string[],
+  name: string,
+  surname: string,
+  latitudefrom: number,
+  longitudefrom: number,
+  latitudeto: number,
+  longitudeto: number,
+  fromhour: string,
+  tohour: string
+}
 
 export type CreateProperty = {
   unitType: string;

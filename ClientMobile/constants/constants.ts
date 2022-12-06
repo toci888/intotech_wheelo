@@ -25,6 +25,7 @@ const integrationApiUrl = server + ":5108/api";
 const chatUrl = "http://192.168.30.24:3000";
 const location = "/location";
 const google = "/GoogleMap";
+const workTrip = serverUrl + "/WorkTrip";
 const user = "/Account";
 const property = "/property";
 const apartment = "/apartment";
@@ -51,6 +52,7 @@ export const endpoints = {
   autoComplete: googleEndpoint + "/address-autocomplete",
   recognizePlaceId: googleEndpoint + "/recognize-place-id",
   search: locationEndpoint + "/search",
+  addWorkTrip: workTrip + "/add-work-trip",
   register: userEndpoint + "/register",
   login: userEndpoint + "/login",
   forgotPassword: userEndpoint + "/forgotpassword",

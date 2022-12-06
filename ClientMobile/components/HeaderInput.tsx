@@ -1,4 +1,4 @@
-import { TouchableOpacity, Platform, StyleSheet, TextInput, View } from "react-native";
+import { TouchableOpacity, Platform, StyleSheet, View } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
