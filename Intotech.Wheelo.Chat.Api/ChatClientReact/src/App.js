@@ -1,7 +1,3 @@
-import { useState } from 'react';
-import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
-import Lobby from './components/Lobby';
-import Chat from './components/Chat';
 import WheeloClient from './wheelo/engine/WheeloClient';
 
 
@@ -26,14 +22,15 @@ const App = () => {
 //onClick={() => wheeloClient.joinRoomClient('doopa')}
 
   return <div className='app'>
-  <h2>MyChat</h2>
+  <h2>Wheelo Chat</h2>
   <hr className='line' />
-  <input type="text" id="messId"></input>
+  message: <input type="text" id="messId"></input>
+  user Id: <input type="text" id="userId"></input>
+  user Name: <input type="text" id="userName"></input>
   <div id="chatBox"></div>
   <input type="submit" onClick={() => wheeloClient.chat('WheeloHeroes', "Julia", document.getElementById("messId").value, renderMsg)}></input>
-  {
-    //<Chat sendMessage={WheeloClient.sendMessage} />
-    }
+  <input type="submit" text="Connect" onClick={() => wheeloClient.connect(document.getElementById("userId").value, document.getElementById("userName").value)}></input>
+  
 </div>
   
 }

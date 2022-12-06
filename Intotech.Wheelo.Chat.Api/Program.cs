@@ -29,6 +29,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IMessagesService, MessagesService>();
 builder.Services.AddScoped<ChatLogic, ChatLogic>();
 builder.Services.AddScoped<IMessageLogic, MessageLogic>();
+builder.Services.AddScoped<IRoomLogic, RoomLogic>();
 
 var app = builder.Build();
 
@@ -52,6 +53,7 @@ app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapHub<ChatHub>("/wheeloChat");
+    endpoints.MapHub<BroadcastHub>("/wheeloBroadcast");
 });
 
 app.Run();

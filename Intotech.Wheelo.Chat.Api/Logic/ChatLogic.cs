@@ -18,7 +18,7 @@ namespace Intotech.Wheelo.Chat.Api.Logic
             return MessagesService.AddMessage(new Message() 
             { 
                 Idauthor = chatMessage.User.UserId,
-                Idroom = 8,// chatMessage.RoomId,
+                Idroom = chatMessage.RoomId,
                 Message1 = chatMessage.Message
             }).Id > 0;
         }

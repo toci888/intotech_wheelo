@@ -11,15 +11,20 @@ export default class WheeloChatEngine {
     messages = [];
     room;
     receiveMessageCall;
+    connectionId;
 
     serverUrl = "https://localhost:7082/wheeloChat";
-    ReceiveMessageCallback = "ReceiveMessage";
-    joinRoomCallback = "JoinWheeloRoom";
+    ReceiveMessageCallback = "ReceiveMessage"; // react callback
+    joinRoomDelegate = "JoinWheeloRoom"; //method in c#
     sendMessageCallback = "SendMessage";
+    connectUserDelegate = "ConnectUser"; //method in c#
+    addUserCallback = "AddUser"; // react callback
+    inviteToConversationCallback = "InviteToConversation"; // react callback
+    requestConversationDelegate = "RequestConversation"; //method in c#
 
-    joinRoomClient = async (room) => {
+    initialize = async () => {
 
-        this.room = room;
+        //this.room = room;
 
         this.connection = new HubConnectionBuilder()
             .withUrl(this.serverUrl)
@@ -28,9 +33,19 @@ export default class WheeloChatEngine {
 
         this.connection.on(this.ReceiveMessageCallback, (msgDto) => {
             
-            console.log("msgDto", msgDto);
             this.receiveMessageCall(msgDto.user.userName, msgDto.message);
             //this.messages = [...this.messages, { user, message }];
+        });
+
+        this.connection.on(this.addUserCallback, (userId) => {
+
+            console.log("Connected with userId: ", userId);
+            this.connectionId = userId;
+        });
+
+        this.connection.on(this.inviteToConversationCallback, (invitingAccountId, invitingUserName) => {
+
+            console.log("invite", invitingAccountId, invitingUserName);
         });
 
         this.connection.onclose(e => {
@@ -41,25 +56,47 @@ export default class WheeloChatEngine {
 
         await this.connection.start();
 
-        await this.connection.invoke(this.joinRoomCallback, this.room);
+        //await this.connection.invoke(this.joinRoomDelegate, this.room);
 
-}catch (e) {
-    console.log(e);
-  }
-        console.log('end of join room');
-        //setConnection(connection);
+        //await this.connection.invoke(this.connectUserCallback, 1, "Warrior");
+        //this.broadcast();
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    /*broadcast = () => {
+        this.connection.broadcastMessage = function (name, message) {
+            console.log("broadcast", name, message);
+        }
+    }*/
+
+    userConnect = async (accountId, userName) => {
+
+        await this.connection.invoke(this.connectUserDelegate, accountId, userName);
+    }
+
+    requestConversation = async (convDto) => {
+
+        await this.connection.invoke(this.requestConversationDelegate, convDto);
     }
 
     sendMessage = async (message, user) => {
         try {
-          //console.log(message, user, connection, room);
+          console.log({  user: 
+            { UserId: 1, UserName: user },
+            Message: message,
+            RoomName: this.room
+        });
           await this.connection.invoke(this.sendMessageCallback, 
             {  user: 
                 { UserId: 1, UserName: user },
                 Message: message,
-                RoomId: 'WheeloHeroes'
-            }); //message, user, this.room
+                RoomName: this.room
+            }); 
 
+            //this.broadcast(user, message);
         } catch (e) {
           console.log(e);
         }
