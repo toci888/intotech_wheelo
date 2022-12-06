@@ -7,7 +7,7 @@ public partial class Room
 {
     public int Id { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string Roomid { get; set; } = null!;
 
     public int Type { get; set; }
 

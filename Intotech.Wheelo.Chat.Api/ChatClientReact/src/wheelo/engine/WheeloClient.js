@@ -9,8 +9,10 @@ export default class WheeloClient {
         this.engineMap.push({"room": room, "engine": wheeloChatEngine});
     }
 
-    getEngine = (room) => {
+    getEngine = async (room) => {
+
         var result;
+
         this.engineMap.forEach((element) => {
             
             if (element.room == room)
@@ -19,27 +21,30 @@ export default class WheeloClient {
             }
         });
 
+        if (result === undefined)
+        {
+            result = new WheeloChatEngine(() => {});
+
+            await result.initialize();
+            
+            this.addEngineToMap(result, room);
+        }
+
         return result;
+    }
+
+    useWheeloChatEngine = () => {
+
+
     }
 
     connect = async(accountId, userName) => {
 
         var roomId = "accountId: " + accountId + ", accountName: " + userName + " random ending";
 
-        var wheeloEngExists = this.getEngine(roomId);
+        var wheeloEngExists = await this.getEngine(roomId);
 
-        if (wheeloEngExists !== undefined)
-        {
-            await wheeloEngExists.userConnect(accountId, userName);
-            return;
-        }
-
-        var wheeloChatEngine = new WheeloChatEngine(() => {});
-        await wheeloChatEngine.initialize();
-
-        this.addEngineToMap(wheeloChatEngine, roomId);
-
-        await wheeloChatEngine.userConnect(accountId, userName);
+        await wheeloEngExists.userConnect(accountId, userName);
     }
 
     requestConversation = async (invitingAccountId, invitingAccountName, invitedAccountId, invitedAccountName) => {
@@ -53,20 +58,9 @@ export default class WheeloClient {
 
         var roomId = "accountId: " + invitedAccountId + ", accountName: " + invitedAccountName + " random ending";
 
-        var wheeloEngExists = this.getEngine(roomId);
+        var wheeloEngExists = await this.getEngine(roomId);
 
-        if (wheeloEngExists !== undefined)
-        {
-            wheeloEngExists.requestConversation(json);
-            return;
-        }
-
-        var wheeloChatEngine = new WheeloChatEngine(() => {});
-        await wheeloChatEngine.initialize();
-
-        this.addEngineToMap(wheeloChatEngine, roomId);
-
-        wheeloChatEngine.requestConversation(json);
+        await wheeloEngExists.requestConversation(json);
     }
 
     chat = async (room, user, message, recMagCall) => {

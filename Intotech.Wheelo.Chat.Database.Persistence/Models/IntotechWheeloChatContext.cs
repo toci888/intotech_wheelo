@@ -15,6 +15,8 @@ public partial class IntotechWheeloChatContext : DbContext
     {
     }
 
+    public virtual DbSet<Accountsidentifier> Accountsidentifiers { get; set; }
+
     public virtual DbSet<Message> Messages { get; set; }
 
     public virtual DbSet<Room> Rooms { get; set; }
@@ -27,6 +29,19 @@ public partial class IntotechWheeloChatContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Accountsidentifier>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("accountsidentifiers_pkey");
+
+            entity.ToTable("accountsidentifiers");
+
+            entity.HasIndex(e => e.Roomid, "accountsidentifiers_roomid_key").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Accountid).HasColumnName("accountid");
+            entity.Property(e => e.Roomid).HasColumnName("roomid");
+        });
+
         modelBuilder.Entity<Message>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("messages_pkey");
@@ -53,12 +68,14 @@ public partial class IntotechWheeloChatContext : DbContext
 
             entity.ToTable("rooms");
 
+            entity.HasIndex(e => e.Roomid, "rooms_roomid_key").IsUnique();
+
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Createdat)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
-            entity.Property(e => e.Name).HasColumnName("name");
+            entity.Property(e => e.Roomid).HasColumnName("roomid");
             entity.Property(e => e.Type)
                 .HasDefaultValueSql("1")
                 .HasColumnName("type");

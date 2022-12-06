@@ -62,7 +62,7 @@ export default class WheeloChatEngine {
     }
 
     userConnect = async (accountId, userName) => {
-
+        
         await this.connection.invoke(this.connectUserDelegate, accountId, userName);
     }
 
