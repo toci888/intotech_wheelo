@@ -27,6 +27,8 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
             await JoinRoom(userId);
 
+            //TODO save id to db
+
             await Clients.Group(userId).SendAsync(ClientAddUserCallback, userId);
         }
 

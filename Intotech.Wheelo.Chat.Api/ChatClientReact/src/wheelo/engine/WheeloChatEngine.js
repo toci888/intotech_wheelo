@@ -54,23 +54,12 @@ export default class WheeloChatEngine {
 
         try{
 
-        await this.connection.start();
-
-        //await this.connection.invoke(this.joinRoomDelegate, this.room);
-
-        //await this.connection.invoke(this.connectUserCallback, 1, "Warrior");
-        //this.broadcast();
+            await this.connection.start();
         }
         catch (e) {
             console.log(e);
         }
     }
-
-    /*broadcast = () => {
-        this.connection.broadcastMessage = function (name, message) {
-            console.log("broadcast", name, message);
-        }
-    }*/
 
     userConnect = async (accountId, userName) => {
 
@@ -78,17 +67,13 @@ export default class WheeloChatEngine {
     }
 
     requestConversation = async (convDto) => {
-
+        
         await this.connection.invoke(this.requestConversationDelegate, convDto);
     }
 
     sendMessage = async (message, user) => {
         try {
-          console.log({  user: 
-            { UserId: 1, UserName: user },
-            Message: message,
-            RoomName: this.room
-        });
+          
           await this.connection.invoke(this.sendMessageCallback, 
             {  user: 
                 { UserId: 1, UserName: user },
@@ -96,7 +81,6 @@ export default class WheeloChatEngine {
                 RoomName: this.room
             }); 
 
-            //this.broadcast(user, message);
         } catch (e) {
           console.log(e);
         }

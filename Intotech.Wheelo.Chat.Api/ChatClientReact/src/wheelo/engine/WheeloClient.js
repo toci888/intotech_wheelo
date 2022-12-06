@@ -43,13 +43,20 @@ export default class WheeloClient {
 
     requestConversation = async (invitingAccountId, invitingAccountName, invitedAccountId, invitedAccountName) => {
 
+        var json = {
+            InvitedAccountId: parseInt(invitedAccountId),
+            InvitedUserName: invitedAccountName,
+            InvitingAccountId: parseInt(invitingAccountId),
+            InvitingUserName: invitingAccountName
+        }
+
         var roomId = "accountId: " + invitedAccountId + ", accountName: " + invitedAccountName + " random ending";
 
         var wheeloEngExists = this.getEngine(roomId);
 
         if (wheeloEngExists !== undefined)
         {
-            wheeloEngExists.requestConversation({invitingAccountId, invitingAccountName, invitedAccountId, invitedAccountName});
+            wheeloEngExists.requestConversation(json);
         }
 
         var wheeloChatEngine = new WheeloChatEngine(() => {});
@@ -57,7 +64,7 @@ export default class WheeloClient {
 
         this.addEngineToMap(wheeloChatEngine, roomId);
 
-        wheeloChatEngine.requestConversation({invitingAccountId, invitingAccountName, invitedAccountId, invitedAccountName});
+        wheeloChatEngine.requestConversation(json);
     }
 
     chat = async (room, user, message, recMagCall) => {
@@ -76,8 +83,6 @@ export default class WheeloClient {
         await wheeloChatEngine.initialize();
 
         this.addEngineToMap(wheeloChatEngine, room);
-
-//        await wheeloChatEngine.joinRoomClient(room);
 
         await wheeloChatEngine.sendMessage(message, user);
 
