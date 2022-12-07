@@ -1,84 +1,42 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 import { endpoints, queryKeys } from "../../constants/constants";
+import { SearchScreenParams } from "../../types";
 import { Location } from "../../types/locationIQ";
 
 import { Collocation } from "../../types/property";
 import { useUser } from "../useUser";
 
-const fetchProperties = async (startLocation: Location, endLocation: Location): Promise<Collocation> => {
-  if (!startLocation || !endLocation) return {} as Collocation;
+const fetchProperties = async (startAndEndLocation: SearchScreenParams): Promise<Collocation> => {
+  if (!startAndEndLocation.startLocation || !startAndEndLocation.endLocation
+    ) return {} as Collocation;
 
   const response = await axios.post(`${endpoints.addWorkTrip}`, {
     "idaccount": 49,
     "searchid": "",
-    "latitudefrom": startLocation.lat,
-    "longitudefrom": startLocation.lon,
-    "latitudeto": endLocation.lat,
-    "longitudeto": endLocation.lon,
-    "iFromHour": 8,
-    "iToHour": 16,
-    "iFromMinute": 0,
-    "iToMinute": 0,
+    "latitudefrom": startAndEndLocation.startLocation.lat,
+    "longitudefrom": startAndEndLocation.startLocation.lon,
+    "latitudeto": startAndEndLocation.endLocation.lat,
+    "longitudeto": startAndEndLocation.endLocation.lon,
+    "iFromHour": Number(startAndEndLocation.startLocationTime.substring(0,2)),
+    "iToHour": Number(startAndEndLocation.endLocationTime.substring(0,2)),
+    "iFromMinute": Number(startAndEndLocation.startLocationTime.substring(3,5)),
+    "iToMinute": Number(startAndEndLocation.endLocationTime.substring(3,5)),
     "acceptabledistance": 800
-  });
-
-  console.log({
-    "idaccount": 49,
-    "searchid": "",
-    "latitudefrom": startLocation.lat,
-    "longitudefrom": startLocation.lon,
-    "latitudeto": endLocation.lat,
-    "longitudeto": endLocation.lon,
-    "iFromHour": 8,
-    "iToHour": 16,
-    "iFromMinute": 0,
-    "iToMinute": 0,
-    "acceptabledistance": 800
-  })
-
-  // console.log(endpoints.addWorkTrip, {
-  //   "idaccount": 50,
-  //   "latitudefrom": startLocation.lat,
-  //   "longitudefrom": startLocation.lon,
-  //   "latitudeto": endLocation.lat,
-  //   "longitudeto": endLocation.lon,
-  //   "iFromHour": 8,
-  //   "iToHour": 16,
-  //   "iFromMinute": 0,
-  //   "iToMinute": 0,
-  // })
-
-  // const response = await axios.post(`${endpoints.addWorkTrip}`, {
-  //   "idaccount": 50,
-  //   "latitudefrom": 52.24802984098752,
-  //   "longitudefrom": 21.08828642005573,
-  //   "latitudeto": 52.20878607141056,
-  //   "longitudeto": 21.0188489021064,
-  //   "streetfrom": "string",
-  //   "streetto": "string",
-  //   "cityfrom": "string",
-  //   "cityto": "string",
-  //   "iFromHour": 8,
-  //   "iToHour": 16,
-  //   "iFromMinute": 0,
-  //   "iToMinute": 0,
-  //   "acceptabledistance": 800
-  // });
-  
+  });  
 
   const data: Collocation = response.data;
   // console.log("przystanek 1", endpoints.addWorkTrip)
-  console.log("przystanek dane", data)
+  // console.log("przystanek dane", data)
   console.log("liczba elementow", data.methodResult.accountsCollocated.length)
   return data;
 };
 
-export const useSearchPropertiesQuery = (startLocation: Location, endLocation: Location) => {
+export const useSearchPropertiesQuery = (startAndEndLocation: SearchScreenParams) => {
   const { user } = useUser();
   const queryInfo = useQuery(
     queryKeys.searchProperties,
-    () => fetchProperties(startLocation, endLocation),
+    () => fetchProperties(startAndEndLocation),
     {
       enabled: false,
     }

@@ -9,12 +9,17 @@ import React, { useState } from "react";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import { Location } from "../types/locationIQ";
 
-export const HeaderInput = ({ type, location, setLocation }: 
-  { type: "start" | "end", location: string | Location, setLocation: (location: string | Location) => void; }) => {
+export const HeaderInput = ({ type, location, setLocation, time, setTime }: 
+  { 
+    type: "start" | "end", 
+    location: string | Location, 
+    setLocation: (location: string | Location) => void; 
+    time: string,
+    setTime: (time: string) => void
+  }) => {
   const navigation = useNavigation();
 
   const [showDate, setShowDate] = useState(false);
-  const [startTime, setStartTime] = useState(type==="start" ? "07:30" : "16:00"); // let today = new Date().toLocaleTimeString();
   
   const actualTime = (): Date => {
     const date = new Date();
@@ -33,7 +38,7 @@ export const HeaderInput = ({ type, location, setLocation }:
 
       <TouchableOpacity style={styles.dateContainer} onPress={() => setShowDate(true)}>
         <Row style={{alignItems: 'center'}}>
-          <Text style={styles.inputTime}>{startTime}</Text>
+          <Text style={styles.inputTime}>{time}</Text>
         </Row>
         
         <DateTimePicker
@@ -48,11 +53,12 @@ export const HeaderInput = ({ type, location, setLocation }:
           onConfirm={(selectedDate: Date) => {
             if (selectedDate) {
               setShowDate(false);
-              setStartTime(selectedDate.toTimeString().substring(0, 5))
+              setTime(selectedDate.toTimeString().substring(0, 5))
+              // setStartTime(selectedDate.toTimeString().substring(0, 5))
             }
           }}
           onCancel={() => { setShowDate(false); }}
-          onChange={(time) => {setStartTime(time.toLocaleString().substring(10, 16));}}
+          onChange={(selectedTime) => {setTime(selectedTime.toLocaleString().substring(10, 16))}}
         />
       </TouchableOpacity>
     </View>

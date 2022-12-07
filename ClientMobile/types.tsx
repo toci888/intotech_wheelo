@@ -61,16 +61,3 @@ export type SearchScreenParams = {
   endLocation: Location;
   endLocationTime: string;
 };
-
-// export type SearchScreenParams = {
-//   idaccount: number,
-//   accountidcollocated: number,
-//   name: string,
-//   surname: string,
-//   latitudefrom: number,
-//   longitudefrom: number,
-//   latitudeto: number,
-//   longitudeto: number,
-//   fromhour: string,
-//   tohour: string
-// };

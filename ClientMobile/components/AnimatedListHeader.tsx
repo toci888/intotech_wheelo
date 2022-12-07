@@ -23,17 +23,21 @@ export const AnimatedListHeader = ({
   setEndLocation: (endLocation: string | Location) => void;
 }) => {
 
+  const [startTime, setStartTime] = useState<string>("07:30");
+  const [endTime, setEndTime] = useState<string>("16:00");
+
   const navigation = useNavigation();
   
   const submit = async () => {
-
     if(typeof(startLocation) !== 'string' && typeof(endLocation) !== 'string') {
 
       navigation.navigate("Root", {
         screen: "Search",
         params: {
           startLocation,
-          endLocation
+          endLocation,
+          startLocationTime: startTime,
+          endLocationTime: endTime
         }
       } as any);
     }
@@ -47,13 +51,13 @@ export const AnimatedListHeader = ({
           <Text style={{marginLeft: 'auto'}}>O której wyjeżdżasz?</Text>
         </View>
         
-        <HeaderInput type="start" location={startLocation} setLocation={setStartLocation} />
+        <HeaderInput type="start" location={startLocation} setLocation={setStartLocation} time={startTime} setTime={setStartTime}/>
         
         <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
           <Text style={{marginRight: 'auto'}}>Gdzie pracujesz?</Text>
           <Text style={{marginLeft: 'auto'}}>O której wracasz?</Text>
         </View>
-        <HeaderInput type="end" location={endLocation} setLocation={setEndLocation} />
+        <HeaderInput type="end" location={endLocation} setLocation={setEndLocation} time={endTime} setTime={setEndTime}/>
         
         {typeof(startLocation) !== 'string' && typeof(endLocation) !== 'string' &&
         <Button onPress={() => {submit()}}>Szukaj</Button>}

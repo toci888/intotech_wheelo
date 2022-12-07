@@ -24,29 +24,22 @@ export const SearchScreen = ({
   const mapRef = useRef<MapView | null>(null);
   const [startLocation, setStartLocation] = useState<string | Location>(i18n.t('Search'));
   const [endLocation, setEndLocation] = useState<string | Location>(i18n.t('Search'));
-
-  if(route.params?.startLocationTime) {
-    console.log("CZAS:", route.params.startLocationTime)
-  }
-    
-  const searchProperties = useSearchPropertiesQuery(startLocation as Location, endLocation  as Location);
+  
+  const searchProperties = useSearchPropertiesQuery(route.params);
 
   useEffect(() => {
     if (route.params) {
       if (route.params.startLocation) {
         setStartLocation(route.params.startLocation);
-      }
-
-      if (route.params.startLocation) {
-        setEndLocation(route.params.endLocation)
+        setEndLocation(route.params.endLocation);
       }
       
       searchProperties.refetch();
 
       mapRef?.current?.animateCamera({
         center: {
-          latitude: Number(route.params.startLocation.lat), //HERETODO
-          longitude: Number(route.params.startLocation.lon),
+          latitude: Number(route.params.startLocation?.lat), //HERETODO
+          longitude: Number(route.params.startLocation?.lon),
         },
       });
     }
