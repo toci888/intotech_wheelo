@@ -12,6 +12,8 @@ namespace Toci.Driver.Database.Persistence.Models
             Statisticstrips = new HashSet<Statisticstrip>();
             WorktripIdgeographiclocationfromNavigations = new HashSet<Worktrip>();
             WorktripIdgeographiclocationtoNavigations = new HashSet<Worktrip>();
+            WorktripgenIdgeographiclocationfromNavigations = new HashSet<Worktripgen>();
+            WorktripgenIdgeographiclocationtoNavigations = new HashSet<Worktripgen>();
         }
 
         public int Id { get; set; }
@@ -26,5 +28,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual ICollection<Statisticstrip> Statisticstrips { get; set; }
         public virtual ICollection<Worktrip> WorktripIdgeographiclocationfromNavigations { get; set; }
         public virtual ICollection<Worktrip> WorktripIdgeographiclocationtoNavigations { get; set; }
+        public virtual ICollection<Worktripgen> WorktripgenIdgeographiclocationfromNavigations { get; set; }
+        public virtual ICollection<Worktripgen> WorktripgenIdgeographiclocationtoNavigations { get; set; }
     }
 }

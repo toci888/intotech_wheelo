@@ -7,10 +7,10 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Models.TripCollocation
 {
-    public class TripCollocationDto // DEPRECATED
+    public class TripGenCollocationDto
     {
-        public List<Vacollocationsgeolocation> AccountsCollocated { get; set; } //Vaccountscollocationsworktrip
+        public Vworktripgengeolocation SourceAccount { get; set; }
 
-        public Vcollocationsgeolocation SourceAccount { get; set; }
+        public List<Vaworktripgengeolocation> AccountsCollocated { get; set; } //Vaccountscollocationsworktrip
     }
 }

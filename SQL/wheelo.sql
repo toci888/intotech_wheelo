@@ -1,7 +1,8 @@
-drop view VCollocationsGeoLocations;
-drop view VACollocationsGeoLocations;
-drop view VAccountsCollocationsWorkTrip;
+drop view VAWorkTripGenGeoLocations;
+drop view VWorkTripGenGeoLocations;
 
+drop table WorkTripGen;
+drop table NotUser;
 ----
 drop table AccountMetadata;
 drop table Occupations;
@@ -72,7 +73,7 @@ create table Roles
 
 create table Accounts
 (
-	Id serial primary key,
+	Id int primary key not null,
 	email text not null,
 	name text,
 	surname text,
@@ -396,6 +397,50 @@ create table AccountMetadata
 	metaJson text,
 	CreatedAt timestamp default now()
 );
+
+create table NotUser
+(
+	id int unique not null,
+	searchId text not null
+);
+
+create table WorkTripGen
+(
+	id serial primary key,
+    IdAccount int not null, --references Accounts (id), NotUser
+	searchId text not null,
+	isUser bool not null default false,
+    LatitudeFrom double precision not null, --+
+	LongitudeFrom double precision not null,-- +
+	LatitudeTo double precision not null,
+	LongitudeTo double precision not null,
+	IdGeographicLocationFrom int references GeographicRegion(id),
+	IdGeographicLocationTo int references GeographicRegion(id),
+	StreetFrom text,
+	StreetTo text,
+	CityFrom text,
+	CityTo text,
+	PostCodeFrom text,
+	PostCodeTo text,
+    FromHour time, -- 0 60 -> 1 
+    ToHour time,
+    AcceptableDistance double precision,
+	CreatedAt timestamp default now()
+);
+
+create or replace view VWorkTripGenGeoLocations as --select people, who belong to the group collocated
+select acc.idaccount, a.id as accountIdCollocated, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
+wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchId
+from AccountsCollocations acc 
+join WorkTripGen wt on acc.idcollocated = wt.IdAccount
+join Accounts a on a.id = wt.IdAccount;
+
+create or replace view VAWorkTripGenGeoLocations as --select hosts of collocations
+select distinct a.id as accountId, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
+wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchid
+from AccountsCollocations acc 
+join WorkTripGen wt on acc.IdAccount = wt.IdAccount
+join Accounts a on a.id = wt.IdAccount;
 
 --select * from VTripsParticipants;
 --select * from Friends;

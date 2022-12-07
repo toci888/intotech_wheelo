@@ -32,6 +32,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Friendsuggestion> Friendsuggestions { get; set; } = null!;
         public virtual DbSet<Geographicregion> Geographicregions { get; set; } = null!;
         public virtual DbSet<Invitation> Invitations { get; set; } = null!;
+        public virtual DbSet<Notuser> Notusers { get; set; } = null!;
         public virtual DbSet<Occupation> Occupations { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Statisticstrip> Statisticstrips { get; set; } = null!;
@@ -41,13 +42,16 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Vaccountscollocation> Vaccountscollocations { get; set; } = null!;
         public virtual DbSet<Vaccountscollocationsworktrip> Vaccountscollocationsworktrips { get; set; } = null!;
         public virtual DbSet<Vacollocationsgeolocation> Vacollocationsgeolocations { get; set; } = null!;
+        public virtual DbSet<Vaworktripgengeolocation> Vaworktripgengeolocations { get; set; } = null!;
         public virtual DbSet<Vcarowner> Vcarowners { get; set; } = null!;
         public virtual DbSet<Vcollocationsgeolocation> Vcollocationsgeolocations { get; set; } = null!;
         public virtual DbSet<Vfriend> Vfriends { get; set; } = null!;
         public virtual DbSet<Vfriendsuggestion> Vfriendsuggestions { get; set; } = null!;
         public virtual DbSet<Vinvitation> Vinvitations { get; set; } = null!;
         public virtual DbSet<Vtripsparticipant> Vtripsparticipants { get; set; } = null!;
+        public virtual DbSet<Vworktripgengeolocation> Vworktripgengeolocations { get; set; } = null!;
         public virtual DbSet<Worktrip> Worktrips { get; set; } = null!;
+        public virtual DbSet<Worktripgen> Worktripgens { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -64,7 +68,9 @@ namespace Toci.Driver.Database.Persistence.Models
             {
                 entity.ToTable("accounts");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
 
                 entity.Property(e => e.Email).HasColumnName("email");
 
@@ -510,6 +516,20 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasConstraintName("invitations_idinvited_fkey");
             });
 
+            modelBuilder.Entity<Notuser>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("notuser");
+
+                entity.HasIndex(e => e.Id, "notuser_id_key")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Searchid).HasColumnName("searchid");
+            });
+
             modelBuilder.Entity<Occupation>(entity =>
             {
                 entity.ToTable("occupations");
@@ -733,6 +753,33 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Tohour).HasColumnName("tohour");
             });
 
+            modelBuilder.Entity<Vaworktripgengeolocation>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vaworktripgengeolocations");
+
+                entity.Property(e => e.Accountid).HasColumnName("accountid");
+
+                entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+
+                entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
+
+                entity.Property(e => e.Latitudeto).HasColumnName("latitudeto");
+
+                entity.Property(e => e.Longitudefrom).HasColumnName("longitudefrom");
+
+                entity.Property(e => e.Longitudeto).HasColumnName("longitudeto");
+
+                entity.Property(e => e.Name).HasColumnName("name");
+
+                entity.Property(e => e.Searchid).HasColumnName("searchid");
+
+                entity.Property(e => e.Surname).HasColumnName("surname");
+
+                entity.Property(e => e.Tohour).HasColumnName("tohour");
+            });
+
             modelBuilder.Entity<Vcarowner>(entity =>
             {
                 entity.HasNoKey();
@@ -887,6 +934,35 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Tripid).HasColumnName("tripid");
             });
 
+            modelBuilder.Entity<Vworktripgengeolocation>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vworktripgengeolocations");
+
+                entity.Property(e => e.Accountidcollocated).HasColumnName("accountidcollocated");
+
+                entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
+
+                entity.Property(e => e.Latitudeto).HasColumnName("latitudeto");
+
+                entity.Property(e => e.Longitudefrom).HasColumnName("longitudefrom");
+
+                entity.Property(e => e.Longitudeto).HasColumnName("longitudeto");
+
+                entity.Property(e => e.Name).HasColumnName("name");
+
+                entity.Property(e => e.Searchid).HasColumnName("searchid");
+
+                entity.Property(e => e.Surname).HasColumnName("surname");
+
+                entity.Property(e => e.Tohour).HasColumnName("tohour");
+            });
+
             modelBuilder.Entity<Worktrip>(entity =>
             {
                 entity.ToTable("worktrip");
@@ -942,6 +1018,64 @@ namespace Toci.Driver.Database.Persistence.Models
                     .WithMany(p => p.WorktripIdgeographiclocationtoNavigations)
                     .HasForeignKey(d => d.Idgeographiclocationto)
                     .HasConstraintName("worktrip_idgeographiclocationto_fkey");
+            });
+
+            modelBuilder.Entity<Worktripgen>(entity =>
+            {
+                entity.ToTable("worktripgen");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Acceptabledistance).HasColumnName("acceptabledistance");
+
+                entity.Property(e => e.Cityfrom).HasColumnName("cityfrom");
+
+                entity.Property(e => e.Cityto).HasColumnName("cityto");
+
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
+                    .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Idgeographiclocationfrom).HasColumnName("idgeographiclocationfrom");
+
+                entity.Property(e => e.Idgeographiclocationto).HasColumnName("idgeographiclocationto");
+
+                entity.Property(e => e.Isuser).HasColumnName("isuser");
+
+                entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
+
+                entity.Property(e => e.Latitudeto).HasColumnName("latitudeto");
+
+                entity.Property(e => e.Longitudefrom).HasColumnName("longitudefrom");
+
+                entity.Property(e => e.Longitudeto).HasColumnName("longitudeto");
+
+                entity.Property(e => e.Postcodefrom).HasColumnName("postcodefrom");
+
+                entity.Property(e => e.Postcodeto).HasColumnName("postcodeto");
+
+                entity.Property(e => e.Searchid).HasColumnName("searchid");
+
+                entity.Property(e => e.Streetfrom).HasColumnName("streetfrom");
+
+                entity.Property(e => e.Streetto).HasColumnName("streetto");
+
+                entity.Property(e => e.Tohour).HasColumnName("tohour");
+
+                entity.HasOne(d => d.IdgeographiclocationfromNavigation)
+                    .WithMany(p => p.WorktripgenIdgeographiclocationfromNavigations)
+                    .HasForeignKey(d => d.Idgeographiclocationfrom)
+                    .HasConstraintName("worktripgen_idgeographiclocationfrom_fkey");
+
+                entity.HasOne(d => d.IdgeographiclocationtoNavigation)
+                    .WithMany(p => p.WorktripgenIdgeographiclocationtoNavigations)
+                    .HasForeignKey(d => d.Idgeographiclocationto)
+                    .HasConstraintName("worktripgen_idgeographiclocationto_fkey");
             });
 
             OnModelCreatingPartial(modelBuilder);
