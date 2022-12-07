@@ -12,7 +12,7 @@ namespace Toci.Driver.Database.Persistence.Models
 
         public int Id { get; set; }
         public int? Idaccount { get; set; }
-        public string Searchid { get; set; } = null!;
+        public string? Searchid { get; set; }
         public double? Latitudefrom { get; set; }
         public double? Longitudefrom { get; set; }
         public double? Latitudeto { get; set; }

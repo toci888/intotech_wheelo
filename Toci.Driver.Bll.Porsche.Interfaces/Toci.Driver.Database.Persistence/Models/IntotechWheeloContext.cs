@@ -776,6 +776,8 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Name).HasColumnName("name");
 
+                entity.Property(e => e.Searchid).HasColumnName("searchid");
+
                 entity.Property(e => e.Surname).HasColumnName("surname");
 
                 entity.Property(e => e.Tohour).HasColumnName("tohour");

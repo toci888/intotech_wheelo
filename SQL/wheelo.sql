@@ -240,7 +240,7 @@ create table WorkTrip
 (
 	id serial primary key,
     IdAccount int references Accounts (id),
-	searchId text not null,
+	searchId text, -- not null,
     LatitudeFrom double precision, --+
 	LongitudeFrom double precision,-- +
 	LatitudeTo double precision,
@@ -278,7 +278,7 @@ join WorkTrip wt on U2.id = wt.idaccount ;
 --select * from VCollocationsGeoLocations;
 create or replace view VCollocationsGeoLocations as --select hosts of collocations
 select distinct a.id as accountId, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
-wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour
+wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchid
 from AccountsCollocations acc 
 join WorkTrip wt on acc.IdAccount = wt.IdAccount
 join Accounts a on a.id = wt.IdAccount;

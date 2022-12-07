@@ -41,6 +41,7 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
 
             resultDto.SourceAccount = collocationSource;
             //&& m.Searchid == searchId
+            //get collocated accounts
             resultDto.AccountsCollocated = VacollocationsgeolocationLogic.Select(m => m.Idaccount == accountId).ToList();
 
             return new ReturnedResponse<TripCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);

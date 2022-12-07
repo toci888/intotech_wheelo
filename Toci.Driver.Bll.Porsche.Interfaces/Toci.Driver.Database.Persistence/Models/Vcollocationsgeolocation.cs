@@ -14,5 +14,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public double? Longitudeto { get; set; }
         public TimeOnly? Fromhour { get; set; }
         public TimeOnly? Tohour { get; set; }
+        public string? Searchid { get; set; }
     }
 }
