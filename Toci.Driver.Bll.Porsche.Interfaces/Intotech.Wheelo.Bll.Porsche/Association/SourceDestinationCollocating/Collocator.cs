@@ -53,9 +53,13 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
             double distance = baseWorktrip.Acceptabledistance.Value / DistanceDivisor;
 
-            List<Worktrip> collocations = FirstLogic.Select(worktrip => worktrip.Idaccount.Value != accountId &&
+//            baseWorktrip.Fromhour.Value.IsBetween(worktrip.Fromhour.Value.AddMinutes(-MinutesInterval), worktrip.Fromhour.Value.AddMinutes(MinutesInterval)) &&
+//                baseWorktrip.Tohour.Value.IsBetween(worktrip.Tohour.Value.AddMinutes(-MinutesInterval), worktrip.Tohour.Value.AddMinutes(MinutesInterval)) &&
+
+            List <Worktrip> collocations = FirstLogic.Select(worktrip => worktrip.Idaccount.Value != accountId &&
                 baseWorktrip.Fromhour.Value.IsBetween(worktrip.Fromhour.Value.AddMinutes(-MinutesInterval), worktrip.Fromhour.Value.AddMinutes(MinutesInterval)) &&
                 baseWorktrip.Tohour.Value.IsBetween(worktrip.Tohour.Value.AddMinutes(-MinutesInterval), worktrip.Tohour.Value.AddMinutes(MinutesInterval)) &&
+
                 (baseWorktrip.Latitudefrom.Value - distance) <= worktrip.Latitudefrom.Value &&
                 (baseWorktrip.Latitudefrom.Value + distance) >= worktrip.Latitudefrom.Value &&
                 (baseWorktrip.Longitudefrom.Value + distance) >= worktrip.Longitudefrom.Value &&
@@ -131,7 +135,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
         {
             return HashGenerator.Md5(string.Format("AccountId: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", 
                 workTrip.Idaccount, workTrip.Longitudefrom, workTrip.Latitudefrom, workTrip.Longitudeto, workTrip.Latitudeto, 
-                workTrip.Fromhour, workTrip.Tohour, workTrip.Acceptabledistance));
+                workTrip.Fromhour.Value.Hour, workTrip.Tohour.Value.Hour, workTrip.Acceptabledistance));
         }
     }
 }
