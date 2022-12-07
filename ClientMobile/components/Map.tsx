@@ -3,54 +3,50 @@ import { View, StyleSheet, Platform, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useQuery } from "react-query";
-import { Button } from "@ui-kitten/components";
-import axios from "axios";
 
-import { Property } from "../types/property";
+import { Collocation } from "../types/property";
 import { MapMarker } from "./MapMarker";
 import { theme } from "../theme";
 import { Card } from "./Card";
-import { getPropertiesInArea } from "../data/properties";
-import { useSearchPropertiesQuery } from "../hooks/queries/useSearchPropertiesQuery";
 import React from "react";
 import { Location } from "../types/locationIQ";
-
-// used to persist the region if search area from the map
-let mapRegion: Region | undefined = undefined;
+import MapViewDirections from "react-native-maps-directions";
+import { googleAPIKEY } from "../constants/constants";
 
 export const Map = ({
   property,
   mapRef,
   startLocation,
   endLocation,
-  initialRegion,
 }: {
-  property: Property;
+  property: Collocation;
   mapRef: React.MutableRefObject<MapView | null>;
   startLocation: Location;
   endLocation: Location;
-  initialRegion: Region | undefined;
 }) => {
 
   const [activeIndex, setActiveIndex] = useState(-1);
-  const [showSearchAreaButton, setShowSearchAreaButton] = useState(false);
-  const [boundingBox, setBoundingBox] = useState<number[]>([]); // used for searching properties in region
-  const [region, setRegion] = useState<Region | undefined>(
-    mapRegion ? mapRegion : undefined
-  );
+  const [region, setRegion] = useState<Region>({
+    latitude: 51,
+    longitude: 19,
+    latitudeDelta: 10,
+    longitudeDelta: 10,
+  });
+
   const navigation = useNavigation();
 
-  const searchProperties = useSearchPropertiesQuery(boundingBox);
-
   useEffect(() => {
-    // if (startLocation === "Map Area") return;
+    if (startLocation.display_name === "Map Area") return;
 
-    if (initialRegion) {
-      setShowSearchAreaButton(false);
-      setRegion(initialRegion);
-    }
-  }, [initialRegion]);
+    if (!isNaN(Number(startLocation.lat))) {
+      setRegion({
+        latitude: Number(startLocation.lat),
+        longitude: Number(startLocation.lon),
+        latitudeDelta: 2,
+        longitudeDelta: 2,
+      } as Region);
+    } 
+  }, [startLocation]);
 
   const unFocusProperty = () => {
     setActiveIndex(-1);
@@ -92,12 +88,6 @@ export const Map = ({
     navigation.setOptions({ tabBarStyle: { display: "none" } });
   };
 
-  const handleSearchAreaButtonPress = () => {
-    searchProperties.refetch();
-    mapRegion = region;
-    setShowSearchAreaButton(false);
-  };
-
   return (
     <View style={styles.container}>
       <MapView
@@ -107,38 +97,46 @@ export const Map = ({
         ref={mapRef}
         onPress={handleMapPress}
         region={region}
-        onRegionChangeComplete={(region, isGesture) => {
-          if (isGesture?.isGesture) {
-            if (!showSearchAreaButton) setShowSearchAreaButton(true);
-
-            const newBoundingBox = [
-              region.latitude - region.latitudeDelta / 2,
-              region.latitude + region.latitudeDelta / 2,
-              region.longitude - region.longitudeDelta / 2,
-              region.longitude + region.longitudeDelta / 2,
-            ];
-            setRegion(region);
-            setBoundingBox(newBoundingBox);
-          }
-        }}
       >
-        {property.methodResult &&
-          property.methodResult.accountsCollocated.map((i, index) => (
-            <MapMarker
-            // key={i.accountid} // id: 1
-            // lat={i.longitudefrom} //52.387056469655896    lat: 25.80913,
-            // lng={i.longitudefrom} // 16.881805743212674 -80.186363
-            key={index} // id: 1
-            lat={i.latitudefrom}//52.387056469655896+index} //52.387056469655896    lat: 25.80913,
-            lng={i.longitudefrom}//16.881805743212674+index} // 16.881805743212674 -80.186363
-              color={
-                activeIndex === index
-                  ? theme["color-info-400"]
-                  : theme["color-primary-500"]
-              }
-              onPress={() => handleMarkerPress(index)}
-            />
-          ))}
+
+      {!isNaN(Number(startLocation.lat)) && !isNaN(Number(startLocation.lon)) 
+      && !isNaN(Number(endLocation.lat)) && !isNaN(Number(endLocation.lon)) 
+      && (
+        <>
+          <MapMarker
+            lat={Number(startLocation.lat)}
+            lng={Number(startLocation.lon)}
+            color={'red'}
+            onPress={() => console.log("Początek", startLocation.lat, startLocation.lon)}
+          />
+          <MapMarker
+            lat={Number(endLocation.lat)}
+            lng={Number(endLocation.lon)}
+            color={'red'}
+            onPress={() => console.log("Koniec", endLocation.lat, endLocation.lon)}
+          />
+
+          <MapViewDirections
+            origin={{latitude: Number(startLocation.lat), longitude: Number(startLocation.lon)}}
+            destination={{latitude: Number(endLocation.lat), longitude: Number(endLocation.lon)}}
+            language='pl'
+            strokeWidth={3}
+            strokeColor="hotpink"
+            apikey={googleAPIKEY}
+          />
+        </>)
+      }
+
+      {property.methodResult && property.methodResult.accountsCollocated.map((i, index) => (
+        <MapMarker
+          key={index} 
+          lat={i.latitudefrom}
+          lng={i.longitudefrom}
+          color={activeIndex === index ? theme["color-info-400"] : theme["color-primary-500"]}
+          onPress={() => handleMarkerPress(index)}
+        />
+      ))}
+
       </MapView>
       {activeIndex > -1 && (
         <>
@@ -151,25 +149,16 @@ export const Map = ({
               />
             </TouchableOpacity>
           )}
-          {/* <Card
-            property={property[activeIndex]}
+          <Card
+            property={property.methodResult.accountsCollocated[activeIndex]}  //property[activeIndex]}
             style={styles.card}
             onPress={() =>
               navigation.navigate("PropertyDetails", {
-                propertyID: properties[activeIndex].ID,
+                propertyID: property.methodResult.accountsCollocated[activeIndex].accountid,
               })
             }
-          /> */}
+          />
         </>
-      )}
-      {showSearchAreaButton && activeIndex === -1 && (
-        <Button
-          style={styles.searchAreaButton}
-          appearance={"ghost"}
-          onPress={handleSearchAreaButtonPress}
-        >
-          Search Area
-        </Button>
       )}
     </View>
   );
@@ -195,15 +184,5 @@ const styles = StyleSheet.create({
     top: 170,
     left: 15,
     borderRadius: 30,
-  },
-  searchAreaButton: {
-    position: "absolute",
-    bottom: 30,
-    zIndex: 100,
-    borderRadius: 30,
-    alignSelf: "center",
-    backgroundColor: "white",
-    borderColor: theme["color-gray"],
-    borderWidth: 1,
-  },
+  }
 });

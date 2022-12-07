@@ -4,9 +4,9 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { Row } from "../Row";
 import { BulletedList } from "../BulletedList";
-import { Property } from "../../types/property";
+import { Collocation } from "../../types/property";
 
-export const AmentitiesSection = ({ property }: { property: Property }) => {
+export const AmentitiesSection = ({ property }: { property: Collocation }) => {
   const apartmentsAmenities = [];
   const amenityExists = new Map<string, boolean>();
   for (let apartment of property.apartments) {

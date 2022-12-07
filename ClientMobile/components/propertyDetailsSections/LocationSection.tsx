@@ -3,14 +3,14 @@ import { Text } from "@ui-kitten/components";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import MapView from "react-native-maps";
 
-import { Property } from "../../types/property";
+import { Collocation } from "../../types/property";
 import { getStateAbbreviation } from "../../utils/getStateAbbreviation";
 import { Row } from "../Row";
 import { MapMarker } from "../MapMarker";
 import { theme } from "../../theme";
 import { ScoreCard } from "../ScoreCard";
 
-export const LocationSection = ({ property }: { property: Property }) => {
+export const LocationSection = ({ property }: { property: Collocation }) => {
   return (
     <>
       <Text category={"h5"} style={styles.defaultVerticalMargin}>

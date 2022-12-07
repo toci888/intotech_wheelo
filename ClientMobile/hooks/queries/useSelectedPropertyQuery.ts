@@ -2,13 +2,13 @@ import axios from "axios";
 import { useQuery } from "react-query";
 
 import { endpoints, queryKeys } from "../../constants/constants";
-import { Property } from "../../types/property";
+import { Collocation, CollocateAccount } from "../../types/property";
 import { useUser } from "../useUser";
 
-const fetchProperty = async (propertyID: number): Promise<Property> => {
+const fetchProperty = async (propertyID: number): Promise<CollocateAccount> => {
   const response = await axios.get(`${endpoints.getPropertyByID}${propertyID}`);
 
-  const data: Property = response.data;
+  const data: CollocateAccount = response.data;
   return data;
 };
 
@@ -18,8 +18,8 @@ export const useSelectedPropertyQuery = (propertyID: number) => {
     fetchProperty(propertyID)
   );
 
-  const data = queryInfo?.data;
-  if (data) if (user?.savedProperties?.includes(data.ID)) data.liked = true;
+  const data = {accountid: 1} as CollocateAccount//queryInfo?.data; // TODO!
+  if (data) if (user?.savedProperties?.includes(data.accountid)) data.areFriends = true;
 
   return {
     ...queryInfo,

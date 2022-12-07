@@ -1,6 +1,7 @@
 import { Dimensions, Platform, StatusBar } from "react-native";
 
 export const locationAPIKEY = 'pk.95fe8bb8ddbbc10ed656fe23d485c8f0&q';
+export const googleAPIKEY = 'AIzaSyDxVQqaiKE1L6N9Etv9SUgKsEHfPr9Et40';
 
 export const LISTMARGIN = 10;
 export const WIDTH = Dimensions.get("screen").width - LISTMARGIN * 2;

@@ -5,7 +5,7 @@ import * as Notifications from "expo-notifications";
 
 import { AuthContext } from "../context";
 import { User } from "../types/user";
-import { Property } from "../types/property";
+import { Collocation } from "../types/property";
 import { queryKeys } from "../constants/constants";
 import { alterAllowsNotifications, alterPushToken } from "../services/user";
 import { socket } from "../constants/socket";
@@ -23,7 +23,7 @@ export const useUser = () => {
   const login = (user: User) => {
     setAndStoreUser(user);
     // Nothing else is working so this is my last resort
-    const searchedProperties: Property[] | undefined = queryClient.getQueryData(
+    const searchedProperties: Collocation[] | undefined = queryClient.getQueryData(
       queryKeys.searchProperties
     );
 

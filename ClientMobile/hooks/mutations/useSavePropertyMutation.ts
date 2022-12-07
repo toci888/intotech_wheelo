@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { useUser } from "../useUser";
 import { endpoints, queryKeys } from "../../constants/constants";
-import { Property } from "../../types/property";
+import { Collocation } from "../../types/property";
 
 const saveOrUnsaveProperty = (
   propertyID: number,
@@ -37,11 +37,11 @@ export const useSavePropertyMutation = () => {
         await queryClient.cancelQueries(queryKeys.searchProperties);
         await queryClient.cancelQueries(queryKeys.selectedProperty);
 
-        const prevSavedProperties: Property[] | undefined =
+        const prevSavedProperties: Collocation[] | undefined =
           queryClient.getQueryData(queryKeys.savedProperties);
-        const prevSearchedProperties: Property[] | undefined =
+        const prevSearchedProperties: Collocation[] | undefined =
           queryClient.getQueryData(queryKeys.searchProperties);
-        const prevSelectedProperty: Property | undefined =
+        const prevSelectedProperty: Collocation | undefined =
           queryClient.getQueryData(queryKeys.selectedProperty);
 
         if (prevSelectedProperty?.ID === propertyID) {

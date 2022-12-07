@@ -1,6 +1,6 @@
-import { Property } from "../types/property";
+import { Collocation } from "../types/property";
 
-export const properties: Property[] = [
+export const properties: Collocation[] = [
   {
     ID: 1,
     unitType: "multiple",
@@ -759,13 +759,13 @@ export const properties: Property[] = [
  db that are within a certain lat and lng range
  */
 
-export const getPropertiesInArea = (boundingBox: number[]): Property[] => {
+export const getPropertiesInArea = (boundingBox: number[]): Collocation[] => {
   const minLat = boundingBox[0];
   const maxLat = boundingBox[1];
   const minLng = boundingBox[2];
   const maxLng = boundingBox[3];
 
-  const propertiesInArea: Property[] = [];
+  const propertiesInArea: Collocation[] = [];
 
   for (let i in properties) {
     if (

@@ -14,7 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 
-import { Property } from "../types/property";
+import { Collocation, CollocateAccount } from "../types/property";
 import { ImageCarousel } from "./ImageCarousel";
 import { CardInformation } from "./CardInformation";
 import { LISTMARGIN, queryKeys } from "../constants/constants";
@@ -30,7 +30,7 @@ export const Card = ({
   myProperty,
   style,
 }: {
-  property: Property;
+  property: CollocateAccount;
   onPress?: () => void;
   myProperty?: boolean;
   style?: ViewStyle;
@@ -42,12 +42,12 @@ export const Card = ({
   const deleteProperty = useDeletePropertyMutation();
 
   const handleEditProperty = () => {
-    navigation.navigate("EditProperty", { propertyID: property.ID });
+    navigation.navigate("EditProperty", { propertyID: property.accountid });
     closeModal();
   };
 
   const handleDeleteProperty = () => {
-    deleteProperty.mutate({ propertyID: property.ID });
+    deleteProperty.mutate({ propertyID: property.accountid });
     closeModal();
   };
 
@@ -58,9 +58,10 @@ export const Card = ({
     >
       <ImageCarousel
         onImagePress={onPress}
-        images={property.methodResult.accountsCollocated[1].images}
+        images={property.image}
         chevronsShown
       />
+
       <CardInformation property={property} myProperty={myProperty} />
 
       {myProperty ? (

@@ -13,19 +13,19 @@ import { TempApartment } from "./tempApartment";
 //   errorCode!: number;
 // }
 
-export type Property = {
+export type Collocation = {
   methodResult: {
-    accountsCollocated: PropertyAccount[],
-    sourceAccount: PropertyAccount
+    accountsCollocated: CollocateAccount[],
+    sourceAccount: CollocateAccount
   },
   errorMessage: string,
   isSuccess: boolean,
   errorCode: number
 }
 
-export type PropertyAccount = {
+export type CollocateAccount = {
   accountid: number,
-  images: string[],
+  image: string[],
   name: string,
   surname: string,
   latitudefrom: number,
@@ -34,6 +34,8 @@ export type PropertyAccount = {
   longitudeto: number,
   fromhour: string,
   tohour: string
+  areFriends: boolean;
+  phoneNumber: string;
 }
 
 export type CreateProperty = {
@@ -60,7 +62,7 @@ export type EditPropertyObj = {
   unitType?: "single" | "multiple";
   apartments: TempApartment[];
   description: string;
-  images: string[];
+  images: string;
   includedUtilities: string[];
   petsAllowed: string;
   laundryType: string;

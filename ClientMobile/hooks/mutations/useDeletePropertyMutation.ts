@@ -2,7 +2,7 @@ import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
 
 import { endpoints, queryKeys } from "../../constants/constants";
-import { Property } from "../../types/property";
+import { Collocation } from "../../types/property";
 import { useUser } from "../useUser";
 
 const deleteProperty = (propertyID: number, token?: string) =>
@@ -23,7 +23,7 @@ export const useDeletePropertyMutation = () => {
       onMutate: async ({ propertyID }) => {
         await queryClient.cancelQueries(queryKeys.myProperties);
 
-        const prevProperties: Property[] | undefined = queryClient.getQueryData(
+        const prevProperties: Collocation[] | undefined = queryClient.getQueryData(
           queryKeys.myProperties
         );
 

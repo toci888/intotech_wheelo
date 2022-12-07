@@ -3,9 +3,9 @@ import { Text } from "@ui-kitten/components";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import { Row } from "../Row";
-import { Property } from "../../types/property";
+import { Collocation } from "../../types/property";
 
-export const AboutSection = ({ property }: { property: Property }) => {
+export const AboutSection = ({ property }: { property: Collocation }) => {
   if (property.description)
     return (
       <>

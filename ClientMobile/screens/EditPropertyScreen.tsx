@@ -24,7 +24,7 @@ import {
   PHOTOS_STR,
   queryKeys,
 } from "../constants/constants";
-import { EditPropertyObj, Property } from "../types/property";
+import { EditPropertyObj, Collocation } from "../types/property";
 import { bedValues } from "../constants/bedValues";
 import { bathValues } from "../constants/bathValues";
 import { theme } from "../theme";

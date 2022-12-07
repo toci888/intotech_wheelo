@@ -1,4 +1,5 @@
 import { StyleSheet, FlatList, View, Dimensions } from "react-native";
+import React from "react";
 import { ImageCarousel } from "../components/ImageCarousel";
 import { Divider, Text } from "@ui-kitten/components";
 import { useQuery } from "react-query";
@@ -23,20 +24,21 @@ export const PropertyDetailsScreen = ({
 }: {
   route: { params: { propertyID: number } };
 }) => {
+  console.log("PROP");
   const property = useSelectedPropertyQuery(route.params.propertyID);
-
-  if (!property.data) return <Text>Unable to get property ...</Text>;
+  console.log("PROP", property);
+  if (!property.data) return <Text>Unable to get property details ...</Text>;
 
   return (
     <Screen>
       <FlatList
         data={[property.data]}
-        keyExtractor={(item) => item.ID.toString()}
+        keyExtractor={(item) => item.accountid.toString()}
         renderItem={({ item }) => (
           <>
-            {item.images ? (
+            {item.image ? (
               <ImageCarousel
-                images={item.images}
+                images={item.image}
                 indexShown
                 imageStyle={styles.image}
               />

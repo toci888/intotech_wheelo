@@ -1,10 +1,11 @@
+import React from "react";
 import { View, StyleSheet, Pressable } from "react-native";
 import { Text, Button, Divider } from "@ui-kitten/components";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 import { theme } from "../theme";
-import { Property } from "../types/property";
+import { CollocateAccount } from "../types/property";
 import { Row } from "./Row";
 import { callPhoneNumber } from "../utils/callPhoneNumber";
 import { getStateAbbreviation } from "../utils/getStateAbbreviation";
@@ -15,7 +16,7 @@ export const CardInformation = ({
   property,
   myProperty,
 }: {
-  property: Property;
+  property: CollocateAccount;
   myProperty?: boolean;
 }) => {
   const navigation = useNavigation();
@@ -39,42 +40,43 @@ export const CardInformation = ({
   const handleHeartPress = () => {
     if (!user) return alert("Please sign up or sign in to save properties");
     let op: "add" | "remove" = "add";
-    if (property?.liked) op = "remove";
+    if (property?.areFriends) op = "remove";
 
-    alterUsersSavedProperties(property.ID, op);
-    saveProperty.mutate({ propertyID: property.ID, op });
+    alterUsersSavedProperties(property.accountid, op);
+    saveProperty.mutate({ propertyID: property.accountid, op });
   };
 
   const manageUnitsNavigation = () =>
-    navigation.navigate("ManageUnits", { propertyID: property.ID });
+    navigation.navigate("ManageUnits", { propertyID: property.accountid });
 
   const emailNavigation = () =>
-    navigation.navigate("MessageProperty", { propertyID: property.ID });
+    navigation.navigate("MessageProperty", { propertyID: property.accountid });
 
   const editPropertyNavigation = () =>
-    navigation.navigate("EditProperty", { propertyID: property.ID });
+    navigation.navigate("EditProperty", { propertyID: property.accountid });
 
   const getLowAndHighText = (type: "rent" | "bedroom") => {
-    if (type === "rent") {
-      if (property.rentLow === property.rentHigh)
-        return `$${property.rentLow.toLocaleString()}`;
-      return `$${property.rentLow.toLocaleString()} - ${property.rentHigh.toLocaleString()}`;
-    }
+    // if (type === "rent") {
+    //   if (property.rentLow === property.rentHigh)
+    //     return `$${property.rentLow.toLocaleString()}`;
+    //   return `$${property.rentLow.toLocaleString()} - ${property.rentHigh.toLocaleString()}`;
+    // }
 
-    let bedLow = property.bedroomLow === 0 ? "Studio" : property.bedroomLow;
-    if (property.bedroomLow === property.bedroomHigh) return bedLow;
+    // let bedLow = property.bedroomLow === 0 ? "Studio" : property.bedroomLow;
+    // if (property.bedroomLow === property.bedroomHigh) return bedLow;
 
-    return `${bedLow} - ${property.bedroomHigh} Beds`;
+    // return `${bedLow} - ${property.bedroomHigh} Beds`;
+    return `linia69 Beds`;
   };
 
   const DefaultInfo = () => (
     <>
-      {property?.rentLow && property?.rentHigh && (
+      {property?.name && (
         <Row style={styles.rowJustification}>
           <Text category={"s1"}>{getLowAndHighText("rent")}</Text>
           <Pressable onPress={handleHeartPress} style={styles.heartContainer}>
             <MaterialCommunityIcons
-              name={property?.liked ? "heart" : "heart-outline"}
+              name={property?.areFriends ? "star" : "star-outline"}
               color={theme["color-primary-500"]}
               size={24}
             />
@@ -87,12 +89,9 @@ export const CardInformation = ({
           {property.name}
         </Text>
       ) : null}
-      <Text category={"c1"}>{property.street}</Text>
-      <Text category={"c1"}>
-        {property.city}, {property.state} {property.zip}
-      </Text>
+      <Text category={"c1"}>{property.name} 92</Text>
 
-      {property?.includedUtilities && property.includedUtilities.length > 0 ? (
+      {/* {property?.includedUtilities && property.includedUtilities.length > 0 ? (
         <Text category={"c1"} style={styles.defaultMarginTop}>
           {property.includedUtilities.map((tag, index) => {
             return property.includedUtilities &&
@@ -101,7 +100,7 @@ export const CardInformation = ({
               : `${tag}, `;
           })}
         </Text>
-      ) : null}
+      ) : null} */}
 
       <Row style={[styles.defaultMarginTop, styles.rowJustification]}>
         <Button
@@ -120,7 +119,7 @@ export const CardInformation = ({
         <Button
           style={styles.button}
           size="small"
-          onPress={() => callPhoneNumber(property.phoneNumber)}
+          onPress={() => {property.phoneNumber ? callPhoneNumber(property.phoneNumber) : console.log("nie ma numeru tele")}}
         >
           Call
         </Button>
@@ -131,19 +130,16 @@ export const CardInformation = ({
   const MyPropertyInfo = () => (
     <>
       <Text category={"s1"}>
-        {property?.name
-          ? property.name
-          : `${property.street}, ${property.city}, ${getStateAbbreviation(
-              property.state
-            )} ${property.zip}`}
+        {property?.name}
       </Text>
       <Row style={[styles.rowAlign, styles.defaultMarginTop]}>
-        {property?.apartments && property.apartments.length > 0 ? (
+        {/* {property?.apartments && property.apartments.length > 0 ? (
           <Text category={"c1"}>
             {property.apartments.length}{" "}
             {property.apartments.length > 1 ? "Units" : "Unit"}
           </Text>
-        ) : null}
+        ) : null} */}
+        UNITS
         <Button
           appearance={"ghost"}
           status="info"
@@ -164,7 +160,7 @@ export const CardInformation = ({
         ]}
       >
         <Text category={"s2"}>
-          Listing: {property?.onMarket ? "On Market" : "Off Market"}
+          Listing: {/* {property?.onMarket ? "On Market" : "Off Market"} */}
         </Text>
         <Button
           size={"small"}
@@ -172,7 +168,7 @@ export const CardInformation = ({
           status={"info"}
           onPress={editPropertyNavigation}
         >
-          {property?.onMarket ? "Deactivate" : "Reactivate"}
+          "Deactivate"{/* {property?.onMarket ? "Deactivate" : "Reactivate"} */}
         </Button>
       </Row>
     </>

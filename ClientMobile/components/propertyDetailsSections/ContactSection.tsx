@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { theme } from "../../theme";
 import { Row } from "../Row";
-import { Property } from "../../types/property";
+import { Collocation } from "../../types/property";
 import { callPhoneNumber } from "../../utils/callPhoneNumber";
 import { openURL } from "../../utils/openURL";
 
@@ -26,7 +26,7 @@ const formatPhoneNumber = (str: string, callingCode: string) => {
   return "Give Us A Call";
 };
 
-export const ContactSection = ({ property }: { property: Property }) => {
+export const ContactSection = ({ property }: { property: Collocation }) => {
   const navigation = useNavigation();
 
   return (

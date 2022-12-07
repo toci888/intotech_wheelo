@@ -3,14 +3,15 @@ import { Share, View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
-import { Property } from "../../types/property";
+import { Collocation } from "../../types/property";
 import { theme } from "../../theme";
 import { Row } from "../Row";
 import { getStateAbbreviation } from "../../utils/getStateAbbreviation";
 import { useUser } from "../../hooks/useUser";
 import { useSavePropertyMutation } from "../../hooks/mutations/useSavePropertyMutation";
+import React from "react";
 
-export const PropertyHeaderSection = ({ property }: { property: Property }) => {
+export const PropertyHeaderSection = ({ property }: { property: Collocation }) => {
   const { user, setSavedProperties } = useUser();
   const saveProperty = useSavePropertyMutation();
 

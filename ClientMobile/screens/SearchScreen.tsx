@@ -6,13 +6,11 @@ import { useNavigation } from "@react-navigation/native";
 
 import { Screen } from "../components/Screen";
 import { endpoints, HEADERHEIGHT, queryKeys } from "../constants/constants";
-import { Card } from "../components/Card";
 import { AnimatedListHeader } from "../components/AnimatedListHeader";
 import { getPropertiesInArea } from "../data/properties";
 import { Map } from "../components/Map";
 import { SearchScreenParams } from "../types";
-import { Property } from "../types/property";
-import { Text } from "@ui-kitten/components";
+import { Collocation } from "../types/property";
 import { useSearchPropertiesQuery } from "../hooks/queries/useSearchPropertiesQuery";
 import { i18n } from "../i18n/i18n";
 import React from "react";
@@ -27,26 +25,14 @@ export const SearchScreen = ({
   const [startLocation, setStartLocation] = useState<string | Location>(i18n.t('Search'));
   const [endLocation, setEndLocation] = useState<string | Location>(i18n.t('Search'));
 
-  const initialPolishRegion = {
-    latitude: 51,
-    longitude: 19,
-    latitudeDelta: 10,
-    longitudeDelta: 10,
+  if(route.params?.startLocationTime) {
+    console.log("CZAS:", route.params.startLocationTime)
   }
-
-  let boundingBox: number[] = [];
-  if (route.params?.startLocation && route.params?.endLocation)
-    boundingBox = [
-      Number(route.params.startLocation.boundingbox[0]), //HERETODO
-      Number(route.params.startLocation.boundingbox[1]),
-      Number(route.params.startLocation.boundingbox[2]),
-      Number(route.params.startLocation.boundingbox[3]),
-    ];
-  const searchProperties = useSearchPropertiesQuery(boundingBox);
+    
+  const searchProperties = useSearchPropertiesQuery(startLocation as Location, endLocation  as Location);
 
   useEffect(() => {
     if (route.params) {
-      // console.log("route.params.location", route.params.startLocation)
       if (route.params.startLocation) {
         setStartLocation(route.params.startLocation);
       }
@@ -66,16 +52,6 @@ export const SearchScreen = ({
     }
   }, [route]);
 
-  const initialRegion = {
-    place_id: 'string',
-    lat: 'string',
-    lon: 'string',
-    boundingbox: ['',''],
-    display_name: 'string',
-    address: 'Address',
-    location: 'string',
-  } as Location;
-
   return (
     <Screen>
       <AnimatedListHeader
@@ -85,18 +61,10 @@ export const SearchScreen = ({
         setEndLocation={setEndLocation}
       />
       <Map
-        property={searchProperties?.data ? searchProperties.data : {} as Property}
+        property={searchProperties?.data ? searchProperties.data : {} as Collocation}
         mapRef={mapRef}
-        // startLocation={startLocation}
-        startLocation={typeof(startLocation) === 'string'? initialRegion : startLocation}
-        // endLocation={endLocation}
-        endLocation={typeof(endLocation) === 'string'? initialRegion : endLocation}
-        initialRegion={route.params ? {
-          latitude: Number(route.params.startLocation.lat), //TODOHERE
-          longitude: Number(route.params.startLocation.lon),
-          latitudeDelta: 0.4,
-          longitudeDelta: 0.4,
-        } : initialPolishRegion} 
+        startLocation={startLocation as Location}
+        endLocation={endLocation as Location}
       />
     </Screen>
   );

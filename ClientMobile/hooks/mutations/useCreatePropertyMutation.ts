@@ -3,11 +3,11 @@ import { useMutation, useQueryClient } from "react-query";
 import { StackActions, useNavigation } from "@react-navigation/native";
 
 import { endpoints, queryKeys } from "../../constants/constants";
-import { CreateProperty, Property } from "../../types/property";
+import { CreateProperty, Collocation } from "../../types/property";
 import { useUser } from "../useUser";
 
 const createProperty = (obj: CreateProperty, token?: string) =>
-  axios.post<Property>(endpoints.createProperty, obj, {
+  axios.post<Collocation>(endpoints.createProperty, obj, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -24,7 +24,7 @@ export const useCreatePropertyMutation = () => {
       onError() {
         alert("Unable to create property");
       },
-      onSuccess(data: { data: Property }) {
+      onSuccess(data: { data: Collocation }) {
         queryClient.invalidateQueries(queryKeys.myProperties);
         dispatch(
           StackActions.replace("EditProperty", { propertyID: data.data.ID })

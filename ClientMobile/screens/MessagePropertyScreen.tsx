@@ -1,3 +1,4 @@
+import React from "react";
 import { Platform, StyleSheet, View, Image } from "react-native";
 import { Input, Button, Text } from "@ui-kitten/components";
 import * as yup from "yup";
@@ -32,7 +33,7 @@ export const MessagePropertyScreen = ({
   const createConversation = useCreateConversationMutation();
 
   if (!user) return <SignUpOrSignInScreen />;
-  if (!property) return <Text>Unable to get property ...</Text>;
+  if (!property) return <Text>Unable to get property message...</Text>;
   if (conversations.isLoading) return <Loading />;
 
   const navigateToMessageScreen = (
@@ -66,14 +67,14 @@ export const MessagePropertyScreen = ({
 
   const sendMessage = (text: string) => {
     createConversation.mutate({
-      ownerID: property.userID,
-      propertyID: property.ID,
+      ownerID: property.methodResult.sourceAccount.accountid, //property.userID,
+      propertyID: property.methodResult.accountsCollocated[propertyID].accountid,
       tenantID: user.ID,
-      propertyName: property.name
-        ? property.name
-        : `${property.street}, ${property.city}, ${getStateAbbreviation(
-            property.state
-          )}`,
+      propertyName: property.methodResult.accountsCollocated[propertyID].name
+        ? property.methodResult.accountsCollocated[propertyID].name : 'brak 74 linia',
+        // : `${property.street}, ${property.city}, ${getStateAbbreviation(
+        //     property.state
+        //   )}`,
       senderName:
         user.firstName && user.lastName
           ? `${user.firstName} ${user.lastName}`
@@ -87,21 +88,25 @@ export const MessagePropertyScreen = ({
       <Screen style={styles.container}>
         {Platform.OS === "ios" ? <ModalHeader /> : null}
         <Row style={styles.row}>
-          {property?.images && property.images.length > 0 ? (
-            <Image style={styles.image} source={{ uri: property.images[0] }} />
+          {property.methodResult.accountsCollocated[propertyID]?.image && property.methodResult.accountsCollocated[propertyID].image.length > 0 ? (
+            <Image style={styles.image} source={{uri: 'base64Icon'}}/>
+            // <Image style={styles.image} source={{ property.methodResult.accountsCollocated[propertyID].image }} />
           ) : null}
           <View style={styles.address}>
-            {property?.name ? (
+            {/* {property?.name ? (
               <Text category={"s1"}>{property.name}</Text>
-            ) : null}
+            ) : null} */}
+            nejm
             <Text category={"c1"}>
-              {property.street}, {property.city},{" "}
-              {getStateAbbreviation(property.state)} {property.zip}
+              {/* {property.street}, {property.city},{" "}
+              {getStateAbbreviation(property.state)} {property.zip} */}
+              where
             </Text>
             <Text category={"c1"}>
-              ${property.rentLow.toLocaleString()} -{" "}
+              {/* ${property.rentLow.toLocaleString()} -{" "}
               {property.rentHigh.toLocaleString()} | {property.bedroomLow} -{" "}
-              {property.bedroomHigh} Beds
+              {property.bedroomHigh} Beds */}
+              wiecej danych
             </Text>
           </View>
         </Row>

@@ -2,12 +2,12 @@ import axios from "axios";
 import { useQuery } from "react-query";
 
 import { endpoints, queryKeys } from "../../constants/constants";
-import { Property } from "../../types/property";
+import { Collocation } from "../../types/property";
 
-const fetchProperty = async (propertyID: number): Promise<Property> => {
+const fetchProperty = async (propertyID: number): Promise<Collocation> => {
   const response = await axios.get(`${endpoints.getPropertyByID}${propertyID}`);
 
-  const data: Property = response.data;
+  const data: Collocation = response.data;
   return data;
 };
 

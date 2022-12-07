@@ -24,27 +24,10 @@ export const AnimatedListHeader = ({
 }) => {
 
   const navigation = useNavigation();
-  const { user } = useUser();
   
   const submit = async () => {
-    // console.log("start", startLocation); console.log("end", endLocation);
 
     if(typeof(startLocation) !== 'string' && typeof(endLocation) !== 'string') {
-      // console.log(endpoints.addWorkTrip)
-      // const data: SearchScreenParams[] = await axios.post(endpoints.addWorkTrip, {
-      //   idaccount: 50,
-      //   latitudefrom: startLocation.lat, //52.24802984098752,
-      //   longitudefrom: startLocation.lon, //21.08828642005573,
-      //   latitudeto: endLocation.lat, //52.20878607141056,
-      //   longitudeto: endLocation.lon, //21.0188489021064,
-      //   iFromHour: 8, // 00-23
-      //   iToHour: 16,
-      //   iFromMinute: 0, // 00-59
-      //   iToMinute: 0,
-      //   // acceptabledistance: 800 not yet
-      // });
-
-      // console.log("ZWROTKA: ", data)
 
       navigation.navigate("Root", {
         screen: "Search",
@@ -52,7 +35,7 @@ export const AnimatedListHeader = ({
           startLocation,
           endLocation
         }
-      });
+      } as any);
     }
   }
 

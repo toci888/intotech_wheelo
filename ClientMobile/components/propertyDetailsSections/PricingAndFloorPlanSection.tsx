@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Text, Divider } from "@ui-kitten/components";
 import { StyleSheet, Image, View, TouchableOpacity } from "react-native";
 
-import { Property } from "../../types/property";
+import { Collocation } from "../../types/property";
 import { theme } from "../../theme";
 import { Row } from "../Row";
 import { TabBar } from "../TabBar";
@@ -23,7 +23,7 @@ const removeUnnecessaryButtons = (
 export const PricingAndFloorPlanSection = ({
   property,
 }: {
-  property: Property;
+  property: Collocation;
 }) => {
   const [currentApartments, setCurrentApartments] = useState(
     property.apartments

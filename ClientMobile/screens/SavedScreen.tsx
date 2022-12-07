@@ -9,7 +9,7 @@ import { Row } from "../components/Row";
 import { theme } from "../theme";
 import { properties } from "../data/properties";
 import { Card } from "../components/Card";
-import { Property } from "../types/property";
+import { Collocation } from "../types/property";
 import { SignUpAndSignInButtons } from "../components/SignUpAndSignInButtons";
 import { useUser } from "../hooks/useUser";
 import { Loading } from "../components/Loading";
@@ -62,7 +62,7 @@ export const SavedScreen = () => {
     );
   };
 
-  const getPropertiesFlatList = (properties: Property[]) => {
+  const getPropertiesFlatList = (properties: Collocation[]) => {
     return (
       <FlatList
         showsVerticalScrollIndicator={false}

@@ -13,7 +13,6 @@ export const MapMarker = ({
   onPress?: () => void;
   color: string;
 }) => {
-  // console.log(lat, lng)
   return (
     <Marker coordinate={{ latitude: lat, longitude: lng }} onPress={onPress}>
       <MaterialCommunityIcons name="map-marker" size={32} color={color} />

@@ -2,13 +2,13 @@ import axios from "axios";
 import { useQuery } from "react-query";
 
 import { endpoints, queryKeys } from "../../constants/constants";
-import { Property } from "../../types/property";
+import { Collocation } from "../../types/property";
 import { useUser } from "../useUser";
 
 const fetchProperties = async (
   userID?: number,
   token?: string
-): Promise<Property[]> => {
+): Promise<Collocation[]> => {
   if (!userID) return [];
 
   const response = await axios.get(
@@ -20,7 +20,7 @@ const fetchProperties = async (
     }
   );
 
-  const data: Property[] = response.data;
+  const data: Collocation[] = response.data;
   for (let i of data) i.liked = true;
 
   return data;

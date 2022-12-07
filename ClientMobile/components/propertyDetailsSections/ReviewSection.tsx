@@ -2,12 +2,12 @@ import { FlatList, StyleSheet } from "react-native";
 import { Text, Button } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
 
-import { Property } from "../../types/property";
+import { Collocation } from "../../types/property";
 import { OverallReviewScoreCard } from "../OverallReviewScoreCard";
 import { ReviewCard } from "../ReviewCard";
 import { getStateAbbreviation } from "../../utils/getStateAbbreviation";
 
-export const ReviewSection = ({ property }: { property: Property }) => {
+export const ReviewSection = ({ property }: { property: Collocation }) => {
   const { navigate } = useNavigation();
 
   return (

@@ -2,13 +2,13 @@ import { StyleSheet, FlatList } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import { Property } from "../../types/property";
+import { Collocation } from "../../types/property";
 import { Row } from "../Row";
 import { PetCard } from "../PetCard";
 import { GeneralTextCard } from "../GeneralTextCard";
 import { CatsAndDogs, CatsOnly, DogsOnly } from "../../constants/petValues";
 
-export const LeaseAndFeesSection = ({ property }: { property: Property }) => {
+export const LeaseAndFeesSection = ({ property }: { property: Collocation }) => {
   const leaseLengths = [];
   const leaseLengthExists = new Map<string, boolean>();
 
