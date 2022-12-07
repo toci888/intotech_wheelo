@@ -12,11 +12,11 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Porsche.PersistenceAggregation
 {
-    public class AccountCollocationMatch : TwoAggrLogicBase<IUsersLocationLogic, IUsersCollocationLogic>, IAccountCollocationMatch<IUsersLocationLogic, IUsersCollocationLogic>
+    public class AccountCollocationMatch : TwoAggrLogicBase<IUsersLocationLogic, IAccountscollocationLogic>, IAccountCollocationMatch<IUsersLocationLogic, IAccountscollocationLogic>
     {
         protected IAssociationCalculations AssociationCalculations;
 
-        public AccountCollocationMatch(IUsersLocationLogic firstLogic, IUsersCollocationLogic secondLogic, IAssociationCalculations associationCalculation) : base(firstLogic, secondLogic)
+        public AccountCollocationMatch(IUsersLocationLogic firstLogic, IAccountscollocationLogic secondLogic, IAssociationCalculations associationCalculation) : base(firstLogic, secondLogic)
         {
             AssociationCalculations = associationCalculation;
         }

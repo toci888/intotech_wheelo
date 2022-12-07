@@ -13,11 +13,11 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
     {
         private static int timeInterval = 15;
 
-        protected IUsersCollocationLogic UsersCollocationLogic;
+        protected IAccountscollocationLogic UsersCollocationLogic;
         protected ITripLogic TripsLogic;
         protected ITripparticipantLogic TripparticipantLogic;
 
-        public InstantOccasion(IUsersCollocationLogic usersCollocationLogic, ITripLogic tripsLogic, 
+        public InstantOccasion(IAccountscollocationLogic usersCollocationLogic, ITripLogic tripsLogic, 
             ITripparticipantLogic tripparticipantLogic)
         {
             UsersCollocationLogic = usersCollocationLogic;

@@ -3,6 +3,6 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Persistence.Interfaces;
 
-public interface IUsersCollocationLogic : ILogicBase<Accountscollocation>
+public interface IAccountscollocationLogic : ILogicBase<Accountscollocation>
 {
 }

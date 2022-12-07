@@ -19,7 +19,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 {
-    public class Collocator : TwoAggrLogicBase<IWorkTripLogic, IUsersCollocationLogic>, ICollocator<IWorkTripLogic, IUsersCollocationLogic>
+    public class Collocator : TwoAggrLogicBase<IWorkTripLogic, IAccountscollocationLogic>, ICollocator<IWorkTripLogic, IAccountscollocationLogic>
     {
         private const double DistanceDivisor = 100000; // todo make sure about this
         private const int MinutesInterval = 15;
@@ -30,7 +30,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
         protected IVaccountscollocationsworktripLogic VaccountscollocationsworktripLogic;
         protected IAssociationMapDataSubService AssociationMapDataSubService;
 
-        public Collocator(IWorkTripLogic firstLogic, IUsersCollocationLogic secondLogic,
+        public Collocator(IWorkTripLogic firstLogic, IAccountscollocationLogic secondLogic,
             IAssociationCalculations associationCalculations, 
             IVusersCollocationLogic accountCollocationLogic,
             IVaccountscollocationsworktripLogic vaccountscollocationsworktripLogic,

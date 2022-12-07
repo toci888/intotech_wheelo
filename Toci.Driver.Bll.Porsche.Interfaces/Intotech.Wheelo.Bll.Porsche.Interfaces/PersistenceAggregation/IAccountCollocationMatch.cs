@@ -9,7 +9,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.PersistenceAggregation
 {
     public interface IAccountCollocationMatch<TUserLocationLogic, TUsersCollocationLogic> 
         where TUserLocationLogic : IUsersLocationLogic
-        where TUsersCollocationLogic : IUsersCollocationLogic
+        where TUsersCollocationLogic : IAccountscollocationLogic
     {
         
         bool TryCollocate(int idUserFirst, int idUserSecond);

@@ -13,7 +13,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCo
 {
     public interface ICollocator<TWorktripLogic, TAccountsCollocationsLogic>
         where TWorktripLogic : IWorkTripLogic
-        where TAccountsCollocationsLogic : IUsersCollocationLogic
+        where TAccountsCollocationsLogic : IAccountscollocationLogic
     {
         ReturnedResponse<TripCollocationDto> CollocateAndMatch(int accountId, string searchId);
 

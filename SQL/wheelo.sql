@@ -73,7 +73,7 @@ create table Roles
 
 create table Accounts
 (
-	Id int primary key not null,
+	Id serial primary key not null,
 	email text not null,
 	name text,
 	surname text,
@@ -84,6 +84,8 @@ create table Accounts
 	token text,
 	refreshTokenValid timestamp
 );
+
+select setval('accounts_id_seq', 1000000000);
 
 create table UserExtraData -- for fb, google, apple
 (
@@ -400,7 +402,7 @@ create table AccountMetadata
 
 create table NotUser
 (
-	id int unique not null,
+	id serial primary key not null,
 	searchId text not null
 );
 

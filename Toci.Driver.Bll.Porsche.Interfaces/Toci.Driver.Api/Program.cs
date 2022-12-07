@@ -20,6 +20,8 @@ using Intotech.Wheelo.Common.Interfaces.Emails;
 using Intotech.Wheelo.Common.Emails;
 using Intotech.Wheelo.Bll.Persistence.Interfaces.SubServices;
 using Intotech.Wheelo.Bll.Persistence.SubServices;
+using Intotech.Wheelo.Bll.Porsche.Interfaces.WorkTripAssociating;
+using Intotech.Wheelo.Bll.Porsche.WorkTripAssociating;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,7 +50,7 @@ builder.Services.AddScoped<IFriendLogic, FriendLogic>();
 builder.Services.AddScoped<IFriendSuggestionLogic, FriendSuggestionLogic>();
 builder.Services.AddScoped<IGeographicRegionLogic, GeographicRegionLogic>();
 builder.Services.AddScoped<IInvitationLogic, InvitationLogic>();
-builder.Services.AddScoped<IUsersCollocationLogic, UsersCollocationLogic>();
+builder.Services.AddScoped<IAccountscollocationLogic, UsersCollocationLogic>();
 builder.Services.AddScoped<IUsersLocationLogic, UsersLocationLogic>();
 builder.Services.AddScoped<IUsersWorkTimeLogic, UsersWorkTimeLogic>();
 builder.Services.AddScoped<IVfriendLogic, VfriendLogic>();
@@ -69,13 +71,16 @@ builder.Services.AddScoped<IAccountMetadataLogic, AccountMetadataLogic>();
 builder.Services.AddScoped<IVacollocationsgeolocationLogic, VacollocationsgeolocationLogic>();
 builder.Services.AddScoped<IVcollocationsgeolocationLogic, VcollocationsgeolocationLogic>();
 builder.Services.AddScoped<IVaccountscollocationsworktripLogic, VaccountscollocationsworktripLogic>();
+builder.Services.AddScoped<IWorktripgenLogic, WorktripgenLogic>();
+builder.Services.AddScoped<IVaworktripgengeolocationLogic, VaworktripgengeolocationLogic>();
+builder.Services.AddScoped<IVacollocationsgeolocationLogic, VacollocationsgeolocationLogic>();
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();
 
 // -------
 builder.Services.AddScoped<IAssociationCalculations, AssociationCalculations>();
-builder.Services.AddScoped<IAccountCollocationMatch<IUsersLocationLogic, IUsersCollocationLogic>, AccountCollocationMatch>();
-builder.Services.AddScoped<ICollocator<IWorkTripLogic, IUsersCollocationLogic>, Collocator>();
+builder.Services.AddScoped<IAccountCollocationMatch<IUsersLocationLogic, IAccountscollocationLogic>, AccountCollocationMatch>();
+builder.Services.AddScoped<ICollocator<IWorkTripLogic, IAccountscollocationLogic>, Collocator>();
 builder.Services.AddScoped<ITripManager, TripManager>();
 builder.Services.AddScoped<IInstantOccasion, InstantOccasion>();
 builder.Services.AddScoped<IFriendsSuggestionsService, FriendsSuggestionsService>();
@@ -85,6 +90,7 @@ builder.Services.AddScoped<IGafManager, GafManager>();
 builder.Services.AddScoped<IWheeloAccountService, WheeloAccountService>();
 builder.Services.AddScoped<IAccountMetadataService, AccountMetadataService>();
 builder.Services.AddScoped<IAssociationMapDataSubService, AssociationMapDataSubService>();
+builder.Services.AddScoped<IWorkTripGenAssociationService, WorkTripGenAssociationService>();
 //builder.Services.AddScoped<IEmailManager, EmailManager>();
 
 builder.Services.AddSingleton(authenticationSettings);

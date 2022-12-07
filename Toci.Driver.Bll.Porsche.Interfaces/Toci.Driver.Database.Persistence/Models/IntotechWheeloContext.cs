@@ -68,9 +68,7 @@ namespace Toci.Driver.Database.Persistence.Models
             {
                 entity.ToTable("accounts");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Email).HasColumnName("email");
 
@@ -518,12 +516,7 @@ namespace Toci.Driver.Database.Persistence.Models
 
             modelBuilder.Entity<Notuser>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("notuser");
-
-                entity.HasIndex(e => e.Id, "notuser_id_key")
-                    .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
 

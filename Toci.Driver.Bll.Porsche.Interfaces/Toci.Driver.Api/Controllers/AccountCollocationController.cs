@@ -11,9 +11,9 @@ namespace Toci.Driver.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AccountCollocationController : ApiSimpleControllerBase<ICollocator<IWorkTripLogic, IUsersCollocationLogic>>
+    public class AccountCollocationController : ApiSimpleControllerBase<ICollocator<IWorkTripLogic, IAccountscollocationLogic>>
     {
-        public AccountCollocationController(ICollocator<IWorkTripLogic, IUsersCollocationLogic> logic) : base(logic)
+        public AccountCollocationController(ICollocator<IWorkTripLogic, IAccountscollocationLogic> logic) : base(logic)
         {
         }
 
