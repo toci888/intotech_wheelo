@@ -18,9 +18,9 @@ namespace Toci.Driver.Api.Controllers
         }
 
         [HttpPost("make-match")]
-        public ReturnedResponse<TripCollocationDto> MakeMatch(int accountId)
+        public ReturnedResponse<TripCollocationDto> MakeMatch(int accountId, string searchId)
         {
-            return Service.CollocateAndMatch(accountId);
+            return Service.CollocateAndMatch(accountId, searchId);
         }
     }
 }

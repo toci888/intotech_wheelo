@@ -681,6 +681,8 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Distanceto).HasColumnName("distanceto");
 
+                entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+
                 entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
 
                 entity.Property(e => e.Latitudeto).HasColumnName("latitudeto");
@@ -698,6 +700,8 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Suggestedsurname).HasColumnName("suggestedsurname");
 
                 entity.Property(e => e.Surname).HasColumnName("surname");
+
+                entity.Property(e => e.Tohour).HasColumnName("tohour");
             });
 
             modelBuilder.Entity<Vacollocationsgeolocation>(entity =>
@@ -721,6 +725,8 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Longitudeto).HasColumnName("longitudeto");
 
                 entity.Property(e => e.Name).HasColumnName("name");
+
+                entity.Property(e => e.Searchid).HasColumnName("searchid");
 
                 entity.Property(e => e.Surname).HasColumnName("surname");
 
@@ -911,6 +917,8 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Longitudefrom).HasColumnName("longitudefrom");
 
                 entity.Property(e => e.Longitudeto).HasColumnName("longitudeto");
+
+                entity.Property(e => e.Searchid).HasColumnName("searchid");
 
                 entity.Property(e => e.Streetfrom).HasColumnName("streetfrom");
 

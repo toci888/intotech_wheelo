@@ -24,7 +24,7 @@ namespace Intotech.Wheelo.Tests.Crap
                 , new AssociationMapDataSubService(new VacollocationsgeolocationLogic(), new VcollocationsgeolocationLogic()));
 
             for(int i = 1; i < 23; i++)
-                collocator.Collocate(i);
+                collocator.Collocate(i, "");
 
         }
     }

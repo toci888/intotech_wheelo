@@ -15,9 +15,9 @@ namespace Toci.Driver.Api.Controllers
         }
 
         [HttpGet("association-map-data")]
-        public ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId)
+        public ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId, string searchId)
         {
-            return Service.GetTripCollocation(accountId);
+            return Service.GetTripCollocation(accountId, searchId);
         }
     }
 }

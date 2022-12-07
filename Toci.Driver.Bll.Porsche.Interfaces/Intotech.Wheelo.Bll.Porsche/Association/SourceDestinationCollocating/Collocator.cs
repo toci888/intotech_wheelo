@@ -1,4 +1,5 @@
-﻿using Intotech.Common.Bll;
+﻿using Intotech.Common;
+using Intotech.Common.Bll;
 using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Models;
 using Intotech.Wheelo.Bll.Models.TripCollocation;
@@ -41,9 +42,9 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             AssociationMapDataSubService = associationMapDataSubService;
         }
 
-        public virtual void Collocate(int accountId)
+        public virtual void Collocate(int accountId, string searchId)
         {
-            Worktrip baseWorktrip = FirstLogic.Select(m => m.Idaccount == accountId).FirstOrDefault();
+            Worktrip baseWorktrip = FirstLogic.Select(m => m.Idaccount == accountId && m.Searchid == searchId).FirstOrDefault();
 
             if (baseWorktrip == null)
             {
@@ -96,23 +97,41 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
         public virtual ReturnedResponse<TripCollocationDto> AddWorkTrip(Worktrip worktrip)
         {
+            string searchId = GetWorktripSearchId(worktrip);
+
+            Worktrip wtExists = FirstLogic.Select(m => m.Idaccount == worktrip.Idaccount && m.Searchid == searchId).FirstOrDefault();
+
+            if (wtExists != null)
+            {
+                return AssociationMapDataSubService.GetTripCollocation(wtExists.Idaccount.Value, searchId);
+            }
+
+            worktrip.Searchid = searchId;
+
             Worktrip wt = FirstLogic.Insert(worktrip);
 
-            Collocate(wt.Idaccount.Value);
-
-            return AssociationMapDataSubService.GetTripCollocation(wt.Idaccount.Value);
+            Collocate(wt.Idaccount.Value, searchId);
+            
+            return AssociationMapDataSubService.GetTripCollocation(wt.Idaccount.Value, searchId);
         }
 
-        public virtual ReturnedResponse<TripCollocationDto> GetUserAssociations(int accountId)
+        public virtual ReturnedResponse<TripCollocationDto> GetUserAssociations(int accountId, string searchId)
         {
-            return AssociationMapDataSubService.GetTripCollocation(accountId);
+            return AssociationMapDataSubService.GetTripCollocation(accountId, searchId);
         }
 
-        public virtual ReturnedResponse<TripCollocationDto> CollocateAndMatch(int accountId)
+        public virtual ReturnedResponse<TripCollocationDto> CollocateAndMatch(int accountId, string searchId)
         {
-            Collocate(accountId);
+            Collocate(accountId, searchId);
 
-            return AssociationMapDataSubService.GetTripCollocation(accountId);
+            return AssociationMapDataSubService.GetTripCollocation(accountId, searchId);
+        }
+
+        protected virtual string GetWorktripSearchId(Worktrip workTrip)
+        {
+            return HashGenerator.Md5(string.Format("AccountId: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", 
+                workTrip.Idaccount, workTrip.Longitudefrom, workTrip.Latitudefrom, workTrip.Longitudeto, workTrip.Latitudeto, 
+                workTrip.Fromhour, workTrip.Tohour, workTrip.Acceptabledistance));
         }
     }
 }

@@ -240,6 +240,7 @@ create table WorkTrip
 (
 	id serial primary key,
     IdAccount int references Accounts (id),
+	searchId text not null,
     LatitudeFrom double precision, --+
 	LongitudeFrom double precision,-- +
 	LatitudeTo double precision,
@@ -284,7 +285,7 @@ join Accounts a on a.id = wt.IdAccount;
 
 create or replace view VACollocationsGeoLocations as --select people, who belong to the group collocated
 select acc.idaccount, a.id as accountIdCollocated, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
-wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour
+wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchId
 from AccountsCollocations acc 
 join WorkTrip wt on acc.idcollocated = wt.IdAccount
 join Accounts a on a.id = wt.IdAccount;

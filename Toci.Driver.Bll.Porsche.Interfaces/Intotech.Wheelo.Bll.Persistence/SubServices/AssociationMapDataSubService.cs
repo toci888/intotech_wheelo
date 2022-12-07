@@ -28,7 +28,7 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
             VcollocationsgeolocationLogic = vcollocationsgeolocationLogic;
         }
 
-        public virtual ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId)
+        public virtual ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId, string searchId)
         {
             TripCollocationDto resultDto = new TripCollocationDto();
 
@@ -41,7 +41,7 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
 
             resultDto.SourceAccount = collocationSource;
 
-            resultDto.AccountsCollocated = VacollocationsgeolocationLogic.Select(m => m.Idaccount == accountId).ToList();
+            resultDto.AccountsCollocated = VacollocationsgeolocationLogic.Select(m => m.Idaccount == accountId && m.Searchid == searchId).ToList();
 
             return new ReturnedResponse<TripCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }

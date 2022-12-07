@@ -29,9 +29,9 @@ namespace Toci.Driver.Api.Controllers
 
         [HttpGet]
         [Route("associated-users")]
-        public ReturnedResponse<TripCollocationDto> GetAssociatedUsers(int accountId)
+        public ReturnedResponse<TripCollocationDto> GetAssociatedUsers(int accountId, string searchId)
         {
-            return Service.GetUserAssociations(accountId);
+            return Service.GetUserAssociations(accountId, searchId);
         }
 
     }

@@ -12,7 +12,7 @@ namespace Intotech.Wheelo.Bll.Persistence.Interfaces.SubServices
 {
     public interface IAssociationMapDataSubService
     {
-        ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId);
+        ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId, string searchId);
 
 
     }
