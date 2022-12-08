@@ -24,9 +24,7 @@ export const SearchScreen = ({
         setStartLocation={setStartLocation}
         setEndLocation={setEndLocation}
       />
-      <Map
-        location={route.params}
-      />
+      <Map location={route.params} />
     </Screen>
   );
 };
