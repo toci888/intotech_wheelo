@@ -13,6 +13,7 @@ using Toci.Driver.Database.Persistence.Models;
 using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Common.Interfaces;
 using Intotech.Wheelo.Common;
+using Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces;
 
 namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 {
@@ -27,18 +28,24 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
         protected IVacollocationsgeolocationLogic VacollocationsgeolocationLogic;
         protected IAccountscollocationLogic AccountscollocationLogic; // an int map
         protected IAssociationCalculations AssociationCalculation;
+        protected IVacollocationsgeolocationToAccountCollocationDto ToAccountCollocationDto;
+        protected IFriendLogic FriendLogic;
 
         public WorkTripGenAssociationService(IWorktripgenLogic worktripgenLogic, 
             IVaworktripgengeolocationLogic vaworktripgengeolocationLogic,
             IVacollocationsgeolocationLogic vaccountscollocationsworktripLogic,
             IAccountscollocationLogic accountscollocationLogic,
-            IAssociationCalculations associationCalculations)
+            IAssociationCalculations associationCalculations,
+            IVacollocationsgeolocationToAccountCollocationDto toAccountCollocationDto,
+            IFriendLogic friendLogic)
         {
             WorktripLogic = worktripgenLogic;
             VaworktripgengeolocationLogic = vaworktripgengeolocationLogic;
             VacollocationsgeolocationLogic = vaccountscollocationsworktripLogic;
             AccountscollocationLogic = accountscollocationLogic;
             AssociationCalculation = associationCalculations;
+            ToAccountCollocationDto = toAccountCollocationDto;
+            FriendLogic = friendLogic;
         }
 
         public virtual ReturnedResponse<TripGenCollocationDto> SetWorkTripGetCollocations(WorkTripGenDto workTripGen)
@@ -70,6 +77,9 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
         {
             TripGenCollocationDto resultDto = new TripGenCollocationDto();
 
+            resultDto.SearchId = searchId;
+
+            //this is implemented distinct in backend
             Vaworktripgengeolocation collocationSource = VaworktripgengeolocationLogic.Select(m => m.Accountid == accountId).FirstOrDefault();
 
             if (collocationSource == null)
@@ -82,6 +92,25 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             resultDto.AccountsCollocated = VacollocationsgeolocationLogic.Select(m => m.Idaccount == accountId).ToList();
 
             return new ReturnedResponse<TripGenCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        }
+
+        public virtual ReturnedResponse<AccountCollocationDto> GetAccountDataForMarker(int sourceAccountId, int associatedAccountId)
+        {
+            Vacollocationsgeolocation data = VacollocationsgeolocationLogic.Select(m => m.Idaccount == sourceAccountId && m.Accountidcollocated == associatedAccountId).FirstOrDefault();
+
+            if (data == null)
+            {
+                return new ReturnedResponse<AccountCollocationDto>(null, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
+            }
+
+            AccountCollocationDto resultDto = ToAccountCollocationDto.Map(data);
+
+            Friend fr = FriendLogic.Select(m => (m.Idaccount == sourceAccountId && m.Idfriend == associatedAccountId) ||
+                (m.Idaccount == associatedAccountId && m.Idfriend == sourceAccountId)).FirstOrDefault();
+
+            resultDto.AreFriends = fr != null;
+
+            return new ReturnedResponse<AccountCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         protected virtual void Collocate(Worktripgen workTripGenRecord)

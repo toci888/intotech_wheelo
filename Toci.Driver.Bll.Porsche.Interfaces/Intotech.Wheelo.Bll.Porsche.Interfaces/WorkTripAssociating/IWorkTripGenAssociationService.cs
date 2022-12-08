@@ -14,5 +14,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.WorkTripAssociating
         ReturnedResponse<TripGenCollocationDto> SetWorkTripGetCollocations(WorkTripGenDto workTripGen);
 
         ReturnedResponse<TripGenCollocationDto> GetTripCollocation(int accountId, string searchId);
+
+        ReturnedResponse<AccountCollocationDto> GetAccountDataForMarker(int sourceAccountId, int associatedAccountId);
     }
 }

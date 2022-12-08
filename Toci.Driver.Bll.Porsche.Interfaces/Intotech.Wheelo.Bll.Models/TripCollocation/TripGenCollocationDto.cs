@@ -12,5 +12,7 @@ namespace Intotech.Wheelo.Bll.Models.TripCollocation
         public Vaworktripgengeolocation SourceAccount { get; set; }
 
         public List<Vacollocationsgeolocation> AccountsCollocated { get; set; } //Vaccountscollocationsworktrip
+
+        public string SearchId { get; set; }
     }
 }

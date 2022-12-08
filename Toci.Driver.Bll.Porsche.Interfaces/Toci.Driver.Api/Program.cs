@@ -22,6 +22,8 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces.SubServices;
 using Intotech.Wheelo.Bll.Persistence.SubServices;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.WorkTripAssociating;
 using Intotech.Wheelo.Bll.Porsche.WorkTripAssociating;
+using Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces;
+using Intotech.Wheelo.Bll.Models.ModelMappers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -74,6 +76,7 @@ builder.Services.AddScoped<IVaccountscollocationsworktripLogic, Vaccountscolloca
 builder.Services.AddScoped<IWorktripgenLogic, WorktripgenLogic>();
 builder.Services.AddScoped<IVaworktripgengeolocationLogic, VaworktripgengeolocationLogic>();
 builder.Services.AddScoped<IVacollocationsgeolocationLogic, VacollocationsgeolocationLogic>();
+builder.Services.AddScoped<IVacollocationsgeolocationToAccountCollocationDto, VacollocationsgeolocationToAccountCollocationDto>();
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();
 

@@ -24,6 +24,12 @@ namespace Toci.Driver.Api.Controllers
         {
             return Service.SetWorkTripGetCollocations(workTripGen);
         }
+
+        [HttpGet("collocated-account")]
+        public ReturnedResponse<AccountCollocationDto> GetAccountDataForMarker(int sourceAccountId, int associatedAccountId)
+        {
+            return Service.GetAccountDataForMarker(sourceAccountId, associatedAccountId);
+        }
         /*
         [HttpPost]
         [Route("add-work-trip")]
