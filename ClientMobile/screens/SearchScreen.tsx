@@ -24,8 +24,6 @@ export const SearchScreen = ({
   const mapRef = useRef<MapView | null>(null);
   const [startLocation, setStartLocation] = useState<string | Location>(i18n.t('Search'));
   const [endLocation, setEndLocation] = useState<string | Location>(i18n.t('Search'));
-  
-  const searchProperties = useSearchPropertiesQuery(route.params);
 
   useEffect(() => {
     if (route.params) {
@@ -33,8 +31,6 @@ export const SearchScreen = ({
         setStartLocation(route.params.startLocation);
         setEndLocation(route.params.endLocation);
       }
-      
-      searchProperties.refetch();
 
       mapRef?.current?.animateCamera({
         center: {
@@ -54,7 +50,6 @@ export const SearchScreen = ({
         setEndLocation={setEndLocation}
       />
       <Map
-        property={searchProperties?.data ? searchProperties.data : {} as Collocation}
         mapRef={mapRef}
         location={route.params}
       />

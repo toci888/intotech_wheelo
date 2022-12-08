@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { Collocation } from "../types/property";
+import { CollocateAccount, Collocation } from "../types/property";
 import { MapMarker } from "./MapMarker";
 import { theme } from "../theme";
 import { Card } from "./Card";
@@ -12,13 +12,12 @@ import React from "react";
 import MapViewDirections from "react-native-maps-directions";
 import { googleAPIKEY } from "../constants/constants";
 import { SearchScreenParams } from "../types";
+import { useSearchPropertiesQuery } from "../hooks/queries/useSearchPropertiesQuery";
 
 export const Map = ({
-  property,
   mapRef,
   location,
 }: {
-  property: Collocation;
   mapRef: React.MutableRefObject<MapView | null>;
   location: SearchScreenParams;
 }) => {
@@ -47,12 +46,19 @@ export const Map = ({
   const [region, setRegion] = useState<Region>(initPolishRegion);
 
   
+  const searchProperties = useSearchPropertiesQuery(location);
+  let property: any;
+  if(searchProperties.data?.isSuccess) {
+    property = searchProperties.data as Collocation;
+  }
 
   const navigation = useNavigation();
 
   useEffect(() => {
     if (location.startLocation.display_name === "Map Area") return;
 
+    searchProperties.refetch();
+    
     if (!isNaN(Number(location.startLocation.lat))) {
       setRegion({
         latitude: Number(location.startLocation.lat),
@@ -142,7 +148,7 @@ export const Map = ({
         </>)
       }
 
-      {property.methodResult && property.methodResult.accountsCollocated.map((i, index) => (
+      {property && property.methodResult.accountsCollocated.map((i: CollocateAccount, index: number) => (
         <MapMarker
           key={index} 
           lat={i.latitudefrom}

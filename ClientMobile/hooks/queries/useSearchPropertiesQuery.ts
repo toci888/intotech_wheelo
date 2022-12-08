@@ -28,7 +28,7 @@ const fetchProperties = async (startAndEndLocation: SearchScreenParams): Promise
   const data: Collocation = response.data;
   // console.log("przystanek 1", endpoints.addWorkTrip)
   // console.log("przystanek dane", data)
-  console.log("liczba elementow", data.methodResult.accountsCollocated.length)
+  console.log("liczba markerów:", data.methodResult.accountsCollocated.length)
   return data;
 };
 
