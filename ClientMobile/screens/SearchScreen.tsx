@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from "react";
-import MapView, { LatLng } from "react-native-maps";
+import { useState } from "react";
 
 import { Screen } from "../components/Screen";
 import { AnimatedListHeader } from "../components/AnimatedListHeader";
@@ -14,14 +13,14 @@ export const SearchScreen = ({
 }: {
   route: { params: SearchScreenParams };
 }) => {
-  const [startLocation, setStartLocation] = useState<string | Location>(i18n.t('Search'));
-  const [endLocation, setEndLocation] = useState<string | Location>(i18n.t('Search'));
+  const [startLocation, setStartLocation] = useState<Location>({display_name: i18n.t('Search')} as Location);
+  const [endLocation, setEndLocation] = useState<Location>({display_name: i18n.t('Search')} as Location);
 
   return (
     <Screen>
       <AnimatedListHeader
-        startLocation={startLocation ? startLocation : i18n.t('Search')}
-        endLocation={endLocation ? endLocation : i18n.t('Search')}
+        startLocation={startLocation}
+        endLocation={endLocation}
         setStartLocation={setStartLocation}
         setEndLocation={setEndLocation}
       />

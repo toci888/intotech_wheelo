@@ -12,8 +12,8 @@ import { Location } from "../types/locationIQ";
 export const HeaderInput = ({ type, location, setLocation, time, setTime }: 
   { 
     type: "start" | "end", 
-    location: string | Location, 
-    setLocation: (location: string | Location) => void; 
+    location: Location, 
+    setLocation: (location: Location) => void; 
     time: string,
     setTime: (time: string) => void
   }) => {
@@ -29,7 +29,7 @@ export const HeaderInput = ({ type, location, setLocation, time, setTime }:
   
   return (
     <View style={{flexDirection: 'row'}}>
-      <TouchableOpacity style={styles.container} onPress={() => { navigation.navigate("FindLocations", {type, location, setLocation}) }}>
+      <TouchableOpacity style={styles.container} onPress={() => { navigation.navigate("FindLocations", {type, location, setLocation} as any) }}>
         <Row style={{alignItems: 'center'}}>
           <Text style={styles.input}>{typeof(location) === 'string' ? location : location.display_name}</Text>
           <MaterialIcons name="gps-fixed" size={24} color={theme["color-primary-500"]} style={styles.icon}/>
@@ -54,7 +54,6 @@ export const HeaderInput = ({ type, location, setLocation, time, setTime }:
             if (selectedDate) {
               setShowDate(false);
               setTime(selectedDate.toTimeString().substring(0, 5))
-              // setStartTime(selectedDate.toTimeString().substring(0, 5))
             }
           }}
           onCancel={() => { setShowDate(false); }}

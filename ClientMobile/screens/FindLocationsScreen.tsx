@@ -9,12 +9,11 @@ import { ModalHeader } from "../components/ModalHeader";
 import { theme } from "../theme";
 import { Location } from "../types/locationIQ";
 import { CurrentLocationButton } from "../components/CurrentLocationButton";
-import { getFormattedLocationText } from "../utils/getFormattedLocationText";
 import { RecentSearchList } from "../components/RecentSearchList";
 import { SearchAddress } from "../components/SearchAddress";
 
 export const FindLocationsScreen = ({route}:{
-  route: { params: { type: "start" | "end", location: string | Location, setLocation: (location: string | Location) => Location;} };
+  route: { params: { type: "start" | "end", location: Location, setLocation: (location: Location) => Location;} };
 }) => {
   const [suggestions, setSuggestions] = useState<Location[]>([]);
   const navigation = useNavigation();
@@ -45,8 +44,7 @@ export const FindLocationsScreen = ({route}:{
 
   const handleNavigate = (loc: Location) => {
     setRecentSearch(loc);
-    route.params.location = loc;
-    route.params.setLocation(loc as Location);
+    route.params.setLocation(loc);
     navigation.goBack();
   };
 
@@ -69,7 +67,8 @@ export const FindLocationsScreen = ({route}:{
               recentSearches={recentSearches}
               type={route.params.type} 
               location={route.params.location} 
-              setLocation={route.params.setLocation}              />
+              setLocation={route.params.setLocation}
+            />
           </ScrollView>
         ) : null}
       </View>

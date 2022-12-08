@@ -2,14 +2,11 @@ import { Animated, View, StyleSheet, } from "react-native";
 import React, { useState } from "react";
 import { Text, Button, Divider } from "@ui-kitten/components";
 
-import { endpoints, LISTMARGIN } from "../constants/constants";
+import { LISTMARGIN } from "../constants/constants";
 import { HeaderInput } from "./HeaderInput";
-import { HeaderFilterButtons } from "./HeaderFilterButtons";
 import { Location } from "../types/locationIQ";
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
-import { SearchScreenParams } from "../types";
-import { useUser } from "../hooks/useUser";
+import { i18n } from "../i18n/i18n";
 
 export const AnimatedListHeader = ({
   startLocation,
@@ -17,10 +14,10 @@ export const AnimatedListHeader = ({
   setStartLocation,
   setEndLocation
 }: {
-  startLocation: string | Location;
-  endLocation: string | Location;
-  setStartLocation: (startLocation: string | Location) => void;
-  setEndLocation: (endLocation: string | Location) => void;
+  startLocation: Location;
+  endLocation: Location;
+  setStartLocation: (startLocation: Location) => void;
+  setEndLocation: (endLocation: Location) => void;
 }) => {
 
   const [startTime, setStartTime] = useState<string>("07:30");
@@ -29,7 +26,9 @@ export const AnimatedListHeader = ({
   const navigation = useNavigation();
   
   const submit = async () => {
-    if(typeof(startLocation) !== 'string' && typeof(endLocation) !== 'string') {
+    console.log(startLocation.display_name)
+    console.log(i18n.t('Search'))
+    if(startLocation.display_name !== i18n.t('Search') && endLocation.display_name !== i18n.t('Search')) {
 
       navigation.navigate("Root", {
         screen: "Search",
@@ -59,9 +58,8 @@ export const AnimatedListHeader = ({
         </View>
         <HeaderInput type="end" location={endLocation} setLocation={setEndLocation} time={endTime} setTime={setEndTime}/>
         
-        {typeof(startLocation) !== 'string' && typeof(endLocation) !== 'string' &&
+        {startLocation.display_name !== i18n.t('Search') && endLocation.display_name !== i18n.t('Search') &&
         <Button onPress={() => {submit()}}>Szukaj</Button>}
-        {/* <HeaderFilterButtons /> */}
       </View>
       <Divider style={styles.divider} />
     </Animated.View>

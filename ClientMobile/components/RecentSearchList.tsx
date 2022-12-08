@@ -9,14 +9,13 @@ import { RecentSearchButton } from "./RecentSearchButton";
 import { getFormattedLocationText } from "../utils/getFormattedLocationText";
 
 export const RecentSearchList = ({
-  recentSearches,
-  style,
-  type, location, setLocation
-}: {
+  recentSearches, style, type, location, setLocation 
+  }: {
   recentSearches?: Location[];
   style?: ViewStyle;
   type: "start" | "end", 
-  location: string | Location, setLocation: (location: string | Location) => void
+  location: Location, 
+  setLocation: (location: Location) => void
 }) => {
   const [showMore, setShowMore] = useState(false);
   const navigation = useNavigation();
@@ -24,35 +23,14 @@ export const RecentSearchList = ({
   const handleButtonPress = () => setShowMore(!showMore);
 
   const ShowButton = ({ text }: { text: string }) => (
-    <Button
-      appearance={"ghost"}
-      status={"info"}
-      style={styles.showButton}
-      onPress={handleButtonPress}
-    >
+    <Button appearance={"ghost"} status={"info"} style={styles.showButton} onPress={handleButtonPress}>
       {text}
     </Button>
   );
 
-  const handleRecentSearchButtonPress = (location: Location) => {
-    setLocation(location.display_name)
+  const handleRecentSearchButtonPress = (loc: Location) => {
+    setLocation(loc)
     navigation.goBack();
-    // navigation.navigate("Root", type === "start"? {
-    //   screen: "Search",
-    //   params: {
-    //     startLocation: getFormattedLocationText(location, "autocomplete"),
-    //     startLat: location.lat,
-    //     startLon: location.lon,
-    //     startBoundingBox: location.boundingbox,
-    //   }} : {
-    //     screen: "Search",
-    //     params: {
-    //       endLocation: getFormattedLocationText(location, "autocomplete"),
-    //       endLat: location.lat,
-    //       endLon: location.lon,
-    //       endBoundingBox: location.boundingbox,
-    //     }
-    // })
   };
 
   const getList = () => {
