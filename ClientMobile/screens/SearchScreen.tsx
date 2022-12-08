@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 
 import { Screen } from "../components/Screen";
@@ -5,7 +6,6 @@ import { AnimatedListHeader } from "../components/AnimatedListHeader";
 import { Map } from "../components/Map";
 import { SearchScreenParams } from "../types";
 import { i18n } from "../i18n/i18n";
-import React from "react";
 import { Location } from "../types/locationIQ";
 
 export const SearchScreen = ({

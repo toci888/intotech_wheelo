@@ -1,3 +1,5 @@
+import React from "react";
+import MapViewDirections from "react-native-maps-directions";
 import MapView, { LatLng, Polyline, Region } from "react-native-maps";
 import { View, StyleSheet, Platform, TouchableOpacity } from "react-native";
 import { useState, useEffect, useRef } from "react";
@@ -8,8 +10,6 @@ import { CollocateAccount, Collocation } from "../types/property";
 import { MapMarker } from "./MapMarker";
 import { theme } from "../theme";
 import { Card } from "./Card";
-import React from "react";
-import MapViewDirections from "react-native-maps-directions";
 import { googleAPIKEY } from "../constants/constants";
 import { SearchScreenParams } from "../types";
 import { useSearchPropertiesQuery } from "../hooks/queries/useSearchPropertiesQuery";
