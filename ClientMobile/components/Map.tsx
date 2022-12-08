@@ -1,6 +1,6 @@
-import MapView, { Region } from "react-native-maps";
+import MapView, { LatLng, Polyline, Region } from "react-native-maps";
 import { View, StyleSheet, Platform, TouchableOpacity } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -15,10 +15,8 @@ import { SearchScreenParams } from "../types";
 import { useSearchPropertiesQuery } from "../hooks/queries/useSearchPropertiesQuery";
 
 export const Map = ({
-  mapRef,
   location,
 }: {
-  mapRef: React.MutableRefObject<MapView | null>;
   location: SearchScreenParams;
 }) => {
 
@@ -35,17 +33,31 @@ export const Map = ({
         provider={"google"}
         style={styles.map}
         userInterfaceStyle={"light"}
-        ref={mapRef}
         onPress={() => console.log("ASD")}
         region={initPolishRegion}
       />
     )
   }
 
+  const coords: LatLng[] = 
+  [
+    {latitude: Number(location.startLocation.lat),
+    longitude: Number(location.startLocation.lon)},
+    {latitude: Number(location.endLocation.lat),
+    longitude: Number(location.endLocation.lon)}
+  ];
+
+  
+  const mapRef = useRef<MapView | null>(null);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [region, setRegion] = useState<Region>(initPolishRegion);
 
-  
+  // const [coords, setCoords] = useState([
+  //   { latitude: 37.766155, longitude: -122.51058 },
+  //   { latitude: 37.7948605, longitude: -122.4596065 },
+  //   { latitude: 37.799476, longitude: -122.397995 },
+  // ]);
+
   const searchProperties = useSearchPropertiesQuery(location);
   let property: any;
   if(searchProperties.data?.isSuccess) {
@@ -58,13 +70,18 @@ export const Map = ({
     if (location.startLocation.display_name === "Map Area") return;
 
     searchProperties.refetch();
-    
+
+    mapRef?.current?.fitToCoordinates(coords);
+
     if (!isNaN(Number(location.startLocation.lat))) {
+      console.log("LAT", (Number(location.startLocation.lat) + Number(location.endLocation.lat)) /2)
+      console.log("LON", (Number(location.startLocation.lon) + Number(location.endLocation.lon)) /2)
+
       setRegion({
-        latitude: Number(location.startLocation.lat),
-        longitude: Number(location.startLocation.lon),
-        latitudeDelta: 2,
-        longitudeDelta: 2,
+        latitude: (Number(location.startLocation.lat) + Number(location.endLocation.lat)) / 2,
+        longitude: (Number(location.startLocation.lon) + Number(location.endLocation.lon)) / 2,
+        latitudeDelta: (Number(location.startLocation.lat) + Number(location.endLocation.lat)) / 60,
+        longitudeDelta: (Number(location.startLocation.lon) + Number(location.endLocation.lon)) / 15,
       } as Region);
     } 
   }, [location]);
@@ -119,6 +136,11 @@ export const Map = ({
         onPress={handleMapPress}
         region={region}
       >
+      {/* <Polyline
+          coordinates={coords}
+          strokeColor={'rgb(0, 0, 0)'}
+          strokeWidth={6}
+        /> */}
 
       {!isNaN(Number(location.startLocation.lat)) && !isNaN(Number(location.startLocation.lon)) 
       && !isNaN(Number(location.endLocation.lat)) && !isNaN(Number(location.endLocation.lon)) 
