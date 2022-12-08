@@ -316,7 +316,7 @@ select * from AccountsCarsLocations;
 --select * from TestCoordinates;
 create or replace view AccountRoles as
 select Accounts.id, Accounts.Name, Accounts.Surname, Accounts.email, Accounts.password, Accounts.emailConfirmed, 
-Accounts.token , Roles.name as RoleName, Accounts.refreshTokenValid
+Accounts.refreshtoken , Roles.name as RoleName, Accounts.refreshTokenValid
 from Accounts
 join Roles on Roles.id = Accounts.idRole;
 
