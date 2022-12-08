@@ -80,17 +80,21 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasColumnName("idrole")
                     .HasDefaultValueSql("1");
 
+                entity.Property(e => e.Image).HasColumnName("image");
+
                 entity.Property(e => e.Name).HasColumnName("name");
 
                 entity.Property(e => e.Password).HasColumnName("password");
+
+                entity.Property(e => e.Phonenumber).HasColumnName("phonenumber");
+
+                entity.Property(e => e.Refreshtoken).HasColumnName("refreshtoken");
 
                 entity.Property(e => e.Refreshtokenvalid)
                     .HasColumnType("timestamp without time zone")
                     .HasColumnName("refreshtokenvalid");
 
                 entity.Property(e => e.Surname).HasColumnName("surname");
-
-                entity.Property(e => e.Token).HasColumnName("token");
 
                 entity.Property(e => e.Verificationcode).HasColumnName("verificationcode");
 
@@ -165,6 +169,8 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Password).HasColumnName("password");
 
+                entity.Property(e => e.Refreshtoken).HasColumnName("refreshtoken");
+
                 entity.Property(e => e.Refreshtokenvalid)
                     .HasColumnType("timestamp without time zone")
                     .HasColumnName("refreshtokenvalid");
@@ -172,8 +178,6 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Rolename).HasColumnName("rolename");
 
                 entity.Property(e => e.Surname).HasColumnName("surname");
-
-                entity.Property(e => e.Token).HasColumnName("token");
             });
 
             modelBuilder.Entity<Accountscarslocation>(entity =>

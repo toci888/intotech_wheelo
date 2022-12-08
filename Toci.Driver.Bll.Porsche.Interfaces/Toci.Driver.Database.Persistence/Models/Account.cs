@@ -34,7 +34,9 @@ namespace Toci.Driver.Database.Persistence.Models
         public int? Verificationcode { get; set; }
         public int? Idrole { get; set; }
         public bool? Emailconfirmed { get; set; }
-        public string? Token { get; set; }
+        public string? Image { get; set; }
+        public string? Phonenumber { get; set; }
+        public string? Refreshtoken { get; set; }
         public DateTime? Refreshtokenvalid { get; set; }
 
         public virtual Role? IdroleNavigation { get; set; }

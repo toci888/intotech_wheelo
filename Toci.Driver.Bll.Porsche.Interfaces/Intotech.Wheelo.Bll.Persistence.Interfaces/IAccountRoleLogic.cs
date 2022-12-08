@@ -8,7 +8,7 @@ namespace Intotech.Wheelo.Bll.Persistence.Interfaces;
 public interface IAccountRoleLogic : ILogicBase<Accountrole>
 {
     public Accountrole CreateAccount(AccountRegisterDto user);
-    public Accountrole GenerateJwt(LoginDto user);
+    public AccountRoleDto GenerateJwt(LoginDto user);
     public IEnumerable<Account> GetAll();
     public int ResetPassword(int userId, string password);
 

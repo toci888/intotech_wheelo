@@ -81,7 +81,9 @@ create table Accounts
 	verificationCode int,
 	IdRole int references roles(id) default 1,
 	emailconfirmed bool default false,
-	token text,
+	image text,
+	phoneNumber text,
+	refreshToken text,
 	refreshTokenValid timestamp
 );
 

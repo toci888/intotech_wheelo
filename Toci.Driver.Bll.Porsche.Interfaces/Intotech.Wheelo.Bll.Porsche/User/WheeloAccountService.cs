@@ -45,14 +45,14 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmed);
             }
 
-            string refreshToken = simpleaccount.Token;
+            string refreshToken = simpleaccount.Refreshtoken;
 
             if (simpleaccount.Refreshtokenvalid == null || simpleaccount.Refreshtokenvalid < DateTime.Now)
             {
                 Account accToRefreshToken = AccLogic.Select(m => m.Id == simpleaccount.Id).First();
 
                 accToRefreshToken.Refreshtokenvalid = DateTime.Now.AddDays(AccountLogicConstants.RefreshTokenValidDays); 
-                refreshToken = accToRefreshToken.Token = StringUtils.GetRandomString(AccountLogicConstants.RefreshTokenMaxLength);
+                refreshToken = accToRefreshToken.Refreshtoken = StringUtils.GetRandomString(AccountLogicConstants.RefreshTokenMaxLength);
 
                 AccLogic.Update(accToRefreshToken);
             }
@@ -99,7 +99,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             }
 
             account.Emailconfirmed = true;
-            string refreshToken = account.Token = StringUtils.GetRandomString(AccountLogicConstants.RefreshTokenMaxLength);
+            string refreshToken = account.Refreshtoken = StringUtils.GetRandomString(AccountLogicConstants.RefreshTokenMaxLength);
             account.Refreshtokenvalid = DateTime.Now.AddDays(AccountLogicConstants.RefreshTokenValidDays);
 
             AccLogic.Update(account);

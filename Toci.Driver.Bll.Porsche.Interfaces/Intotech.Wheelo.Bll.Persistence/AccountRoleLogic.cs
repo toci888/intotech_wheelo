@@ -43,7 +43,7 @@ namespace Intotech.Wheelo.Bll.Persistence
 
             Account acc = new Account() { Email = user.Email, Name = user.FirstName, 
                 Password = user.Password, Surname = user.LastName, Refreshtokenvalid = DateTime.Now.AddDays(7), 
-                Token = StringUtils.GetRandomString(32) };
+                Refreshtoken = StringUtils.GetRandomString(32) };
 
             Account newUser = accountLogic.Insert(acc);
 
@@ -65,7 +65,7 @@ namespace Intotech.Wheelo.Bll.Persistence
                 return new ReturnedResponse<TokensModel>(null, I18nTranslation.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
             }
 
-            if (account.Token != refreshToken)
+            if (account.Refreshtoken != refreshToken)
             {
                 ErrorHandler.LogDebug("Access token: " + accessToken + " and refresh token " + refreshToken + " CreateNewAccessToken call failed with invalid refresh token for the email " + email);
 
@@ -79,9 +79,9 @@ namespace Intotech.Wheelo.Bll.Persistence
 
             TokensModel tokensModel = new TokensModel();
 
-            tokensModel.AccessToken = GenerateJwt(new LoginDto() { Email = account.Email, Password = account.Password }).Token;
+            tokensModel.AccessToken = GenerateJwt(new LoginDto() { Email = account.Email, Password = account.Password }).AccessToken;
 
-            tokensModel.RefreshToken = account.Token = StringUtils.GetRandomString(AccountLogicConstants.RefreshTokenMaxLength);
+            tokensModel.RefreshToken = account.Refreshtoken = StringUtils.GetRandomString(AccountLogicConstants.RefreshTokenMaxLength);
 
             accountLogic.Update(account);
 
@@ -108,9 +108,10 @@ namespace Intotech.Wheelo.Bll.Persistence
             return principal;
         }
 
-        public Accountrole GenerateJwt(LoginDto user)
+        public AccountRoleDto GenerateJwt(LoginDto user)
         {
-            Accountrole u = Select(x => x.Email == user.Email && x.Password == user.Password).FirstOrDefault();
+            Accountrole userRole = Select(x => x.Email == user.Email && x.Password == user.Password).FirstOrDefault();
+            AccountRoleDto u = DtoModelMapper.Map< AccountRoleDto , Accountrole>(userRole);
 
             if (u is null)
             {
@@ -134,7 +135,8 @@ namespace Intotech.Wheelo.Bll.Persistence
                 _authenticationSettings.JwtIssuer, claims, expires: expires, signingCredentials: cred);
 
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            u.Token = tokenHandler.WriteToken(token);
+
+            u.AccessToken = tokenHandler.WriteToken(token);
 
             return u;
         }
