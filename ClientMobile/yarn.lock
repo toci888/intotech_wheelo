@@ -2972,9 +2972,9 @@ big-integer@1.6.x, big-integer@^1.6.16:
   integrity sha512-GPEid2Y9QU1Exl1rpO9B2IPJGHPSupF5GnVIP0blYvNOMer2bTvSWs1jGOUg04hTmu67nmLsQ9TBo1puaotBHg==
 
 bignumber.js@*:
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-9.1.0.tgz#8d340146107fe3a6cb8d40699643c302e8773b62"
-  integrity sha512-4LwHK4nfDOraBCtst+wOWIHbu1vhvAPJK8g8nROd4iuc3PSEjWif/qwbkh8jwCJz6yDBvtU4KPynETgrfh7y3A==
+  version "9.1.1"
+  resolved "https://registry.npmjs.org/bignumber.js/-/bignumber.js-9.1.1.tgz"
+  integrity sha512-pHm4LsMJ6lzgNGVfZHjMoO8sdoRhOzOH4MLmY65Jg70bpxCKu5iOHNJyfF6OyvYw7t8Fpf35RuzUyqnQsj8Vig==
 
 bl@^4.1.0:
   version "4.1.0"
@@ -4431,7 +4431,7 @@ expo-linking@~3.1.0:
 
 expo-localization@~13.0.0:
   version "13.0.0"
-  resolved "https://registry.yarnpkg.com/expo-localization/-/expo-localization-13.0.0.tgz#f78969151e8db18abc2ebb8fc423b836e21ab918"
+  resolved "https://registry.npmjs.org/expo-localization/-/expo-localization-13.0.0.tgz"
   integrity sha512-SlgHQYaX1D/4d78EQB836Yfx6iuC04pHdMNKoY7pxqEE+hC/X4Mnu0FfhbelfwXTPHFNNFFU1kV6XVF2Mu3dlg==
   dependencies:
     rtl-detect "^1.0.2"
@@ -5274,7 +5274,7 @@ hyphenate-style-name@^1.0.2, hyphenate-style-name@^1.0.4:
 
 i18n-js@^4.2.0:
   version "4.2.0"
-  resolved "https://registry.yarnpkg.com/i18n-js/-/i18n-js-4.2.0.tgz#c2d8417e8a93054d15e6f5199aa1f5297a325f10"
+  resolved "https://registry.npmjs.org/i18n-js/-/i18n-js-4.2.0.tgz"
   integrity sha512-3LIJO23hXITmUtvduSeBgRdclD9XwTtAv/Vqp1dtZZYF9SvxvjYDXUpzTM2Ptb64BdgPQXhPFECnIVHcMiwWaw==
   dependencies:
     bignumber.js "*"
@@ -6625,6 +6625,11 @@ lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.npmjs.org/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
   integrity "sha1-gteb/zCmfEAF/9XiUVMArZyk168= sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow=="
+
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==
 
 lodash.merge@^4.6.1, lodash.merge@^4.6.2:
   version "4.6.2"
@@ -8146,6 +8151,14 @@ react-native-keyboard-aware-scroll-view@^0.9.5:
     prop-types "^15.6.2"
     react-native-iphone-x-helper "^1.0.3"
 
+react-native-maps-directions@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/react-native-maps-directions/-/react-native-maps-directions-1.9.0.tgz#63ae8e8b36499042a658e43cd4836ac89aab8b7d"
+  integrity sha512-68SrMOUg4WQ5PmpS9sNOTZaYtdyVYJnnjQOOhABrgiKnb5BXCZRU2gDoS11gYf23hjUBjq8JXzgfn37WcINLwA==
+  dependencies:
+    lodash.isequal "^4.5.0"
+    prop-types "^15.6.0"
+
 react-native-maps@0.30.2:
   version "0.30.2"
   resolved "https://registry.npmjs.org/react-native-maps/-/react-native-maps-0.30.2.tgz"
@@ -8596,7 +8609,7 @@ rsvp@^4.8.4:
 
 rtl-detect@^1.0.2:
   version "1.0.4"
-  resolved "https://registry.yarnpkg.com/rtl-detect/-/rtl-detect-1.0.4.tgz#40ae0ea7302a150b96bc75af7d749607392ecac6"
+  resolved "https://registry.npmjs.org/rtl-detect/-/rtl-detect-1.0.4.tgz"
   integrity sha512-EBR4I2VDSSYr7PkBmFy04uhycIpDKp+21p/jARYXlCSjQksTBQcJ0HFUPOO79EPPH5JS6VAhiIQbycf0O3JAxQ==
 
 run-parallel@^1.1.9:
