@@ -56,8 +56,7 @@ export const SearchScreen = ({
       <Map
         property={searchProperties?.data ? searchProperties.data : {} as Collocation}
         mapRef={mapRef}
-        startLocation={startLocation as Location}
-        endLocation={endLocation as Location}
+        location={route.params}
       />
     </Screen>
   );

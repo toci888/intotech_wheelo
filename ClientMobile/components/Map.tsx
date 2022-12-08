@@ -9,44 +9,59 @@ import { MapMarker } from "./MapMarker";
 import { theme } from "../theme";
 import { Card } from "./Card";
 import React from "react";
-import { Location } from "../types/locationIQ";
 import MapViewDirections from "react-native-maps-directions";
 import { googleAPIKEY } from "../constants/constants";
+import { SearchScreenParams } from "../types";
 
 export const Map = ({
   property,
   mapRef,
-  startLocation,
-  endLocation,
+  location,
 }: {
   property: Collocation;
   mapRef: React.MutableRefObject<MapView | null>;
-  startLocation: Location;
-  endLocation: Location;
+  location: SearchScreenParams;
 }) => {
 
-  const [activeIndex, setActiveIndex] = useState(-1);
-  const [region, setRegion] = useState<Region>({
+  const initPolishRegion = {
     latitude: 51,
     longitude: 19,
     latitudeDelta: 10,
     longitudeDelta: 10,
-  });
+  }
+
+  if(location == undefined) {
+    return (
+      <MapView
+        provider={"google"}
+        style={styles.map}
+        userInterfaceStyle={"light"}
+        ref={mapRef}
+        onPress={() => console.log("ASD")}
+        region={initPolishRegion}
+      />
+    )
+  }
+
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const [region, setRegion] = useState<Region>(initPolishRegion);
+
+  
 
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (startLocation.display_name === "Map Area") return;
+    if (location.startLocation.display_name === "Map Area") return;
 
-    if (!isNaN(Number(startLocation.lat))) {
+    if (!isNaN(Number(location.startLocation.lat))) {
       setRegion({
-        latitude: Number(startLocation.lat),
-        longitude: Number(startLocation.lon),
+        latitude: Number(location.startLocation.lat),
+        longitude: Number(location.startLocation.lon),
         latitudeDelta: 2,
         longitudeDelta: 2,
       } as Region);
     } 
-  }, [startLocation]);
+  }, [location]);
 
   const unFocusProperty = () => {
     setActiveIndex(-1);
@@ -99,26 +114,26 @@ export const Map = ({
         region={region}
       >
 
-      {!isNaN(Number(startLocation.lat)) && !isNaN(Number(startLocation.lon)) 
-      && !isNaN(Number(endLocation.lat)) && !isNaN(Number(endLocation.lon)) 
+      {!isNaN(Number(location.startLocation.lat)) && !isNaN(Number(location.startLocation.lon)) 
+      && !isNaN(Number(location.endLocation.lat)) && !isNaN(Number(location.endLocation.lon)) 
       && (
         <>
           <MapMarker
-            lat={Number(startLocation.lat)}
-            lng={Number(startLocation.lon)}
+            lat={Number(location.startLocation.lat)}
+            lng={Number(location.startLocation.lon)}
             color={'red'}
-            onPress={() => console.log("Początek", startLocation.lat, startLocation.lon)}
+            onPress={() => console.log("Początek", location.startLocation.lat, location.startLocation.lon)}
           />
           <MapMarker
-            lat={Number(endLocation.lat)}
-            lng={Number(endLocation.lon)}
+            lat={Number(location.endLocation.lat)}
+            lng={Number(location.endLocation.lon)}
             color={'red'}
-            onPress={() => console.log("Koniec", endLocation.lat, endLocation.lon)}
+            onPress={() => console.log("Koniec", location.endLocation.lat, location.endLocation.lon)}
           />
 
           <MapViewDirections
-            origin={{latitude: Number(startLocation.lat), longitude: Number(startLocation.lon)}}
-            destination={{latitude: Number(endLocation.lat), longitude: Number(endLocation.lon)}}
+            origin={{latitude: Number(location.startLocation.lat), longitude: Number(location.startLocation.lon)}}
+            destination={{latitude: Number(location.endLocation.lat), longitude: Number(location.endLocation.lon)}}
             language='pl'
             strokeWidth={3}
             strokeColor="hotpink"
