@@ -25,7 +25,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 
         protected IWorktripgenLogic WorktripLogic;
         protected IVaworktripgengeolocationLogic VaworktripgengeolocationLogic; // distinct
-        protected IVacollocationsgeolocationLogic VacollocationsgeolocationLogic;
+        protected IVacollocationsgeolocationLogic VacollocationsgeolocationLogic; //accounts collocated, full data
         protected IAccountscollocationLogic AccountscollocationLogic; // an int map
         protected IAssociationCalculations AssociationCalculation;
         protected IVacollocationsgeolocationToAccountCollocationDto ToAccountCollocationDto;
