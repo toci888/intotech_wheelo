@@ -5,9 +5,9 @@ import * as Notifications from "expo-notifications";
 
 import { AuthContext } from "../context";
 import { User } from "../types/user";
-import { Collocation } from "../types/property";
+import { CollocateAccount } from "../types/property";
 import { queryKeys } from "../constants/constants";
-import { alterAllowsNotifications, alterPushToken } from "../services/user";
+import { alterDarkMode, alterAllowsNotifications, alterPushToken } from "../services/user";
 import { socket } from "../constants/socket";
 
 export const useUser = () => {
@@ -23,8 +23,8 @@ export const useUser = () => {
   const login = (user: User) => {
     setAndStoreUser(user);
     // Nothing else is working so this is my last resort
-    const searchedProperties: Collocation[] | undefined = queryClient.getQueryData(
-      queryKeys.searchProperties
+    const searchCollocations: CollocateAccount[] | undefined = queryClient.getQueryData(
+      queryKeys.searchCollocations
     );
 
     socket.auth = {
@@ -35,12 +35,12 @@ export const useUser = () => {
           : `${user.email}`,
     };
     socket.connect();
-    if (searchedProperties) {
-      for (let i of searchedProperties) {
-        i.liked = false;
-        if (user.savedProperties?.includes(i.ID)) i.liked = true;
+    if (searchCollocations) {
+      for (let i of searchCollocations) {
+        i.areFriends = false;
+        if (user.savedProperties?.includes(i.accountid)) i.areFriends = true;
       }
-      queryClient.setQueryData(queryKeys.searchProperties, searchedProperties);
+      queryClient.setQueryData(queryKeys.searchCollocations, searchCollocations);
     }
   };
 
@@ -102,6 +102,22 @@ export const useUser = () => {
     }
   };
 
+  const setDarkMode = async (allowed: boolean) => {
+    if (user) {
+      const updatedUser = { ...user };
+      const prevUser = { ...user };
+      updatedUser.alterDarkMode = allowed;
+      setAndStoreUser(updatedUser);
+
+      try {
+        await alterDarkMode(user.ID, allowed, user.accessToken);
+      } catch (error) {
+        console.error(error);
+        setAndStoreUser(prevUser);
+      }
+    }
+  };
+
   return {
     user,
     login,
@@ -109,5 +125,6 @@ export const useUser = () => {
     setSavedProperties,
     addPushToken,
     setAllowsNotifications,
+    setDarkMode
   };
 };

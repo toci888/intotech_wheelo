@@ -47,6 +47,7 @@ const contactedEndpoint = (id: number) => `${userEndpoint}/${id}/properties/cont
 const savedEndpoint = (id: number) => `${userEndpoint}/${id}/properties/saved`;
 const pushTokenEndpoint = (id: number) => `${userEndpoint}/${id}/pushtoken`;
 const allowsNotificationsEndpoint = (id: number) => `${userEndpoint}/${id}/settings/notifications`;
+const alterDarkModeEndpoint = (id: number) => `${userEndpoint}/${id}/settings/dark-mode`;
 
 export const endpoints = {
   chat: chatUrl,
@@ -72,6 +73,7 @@ export const endpoints = {
   alterSavedPropertiesByUserID: savedEndpoint,
   alterPushToken: pushTokenEndpoint,
   allowsNotifications: allowsNotificationsEndpoint,
+  alterDarkMode: alterDarkModeEndpoint,
   createConversation: conversationEndpoint,
   getConversationByID: conversationEndpoint + "/",
   getConversationsByUserID: conversationEndpoint + "/user/",
@@ -81,7 +83,7 @@ export const endpoints = {
 
 export const queryKeys = {
   contactedProperties: "contactedProperties",
-  searchProperties: "searchProperties",
+  searchCollocations: "searchCollocations",
   selectedProperty: "selectedProperty",
   savedProperties: "savedProperties",
   myProperties: "myProperties",
@@ -90,3 +92,8 @@ export const queryKeys = {
   conversations: "conversations",
   selectedConversation: "selectedConversation",
 };
+
+export const os = {
+  android: "android",
+  ios: "ios"
+}

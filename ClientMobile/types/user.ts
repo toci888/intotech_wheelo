@@ -5,6 +5,7 @@ export type User = {
   email: string;
   savedProperties?: number[];
   allowsNotifications: boolean;
+  alterDarkMode: boolean;
   pushToken?: string;
   sessionID?: string;
   accessToken: string;

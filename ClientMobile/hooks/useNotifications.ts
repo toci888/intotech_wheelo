@@ -4,6 +4,7 @@ import { Alert, Linking, Platform } from "react-native";
 import { openSettings } from "expo-linking";
 
 import { useUser } from "./useUser";
+import { os } from "../constants/constants";
 
 export const useNotifications = () => {
   const { addPushToken, setAllowsNotifications, user } = useUser();
@@ -46,7 +47,7 @@ export const useNotifications = () => {
       alert("Must use physical device for Push Notifications");
     }
 
-    if (Platform.OS === "android") {
+    if (Platform.OS === os.android) {
       Notifications.setNotificationChannelAsync("default", {
         name: "default",
         importance: Notifications.AndroidImportance.MAX,

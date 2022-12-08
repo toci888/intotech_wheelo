@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { useUser } from "../useUser";
 import { endpoints, queryKeys } from "../../constants/constants";
-import { Collocation } from "../../types/property";
+import { CollocateAccount } from "../../types/property";
 
 const saveOrUnsaveProperty = (
   propertyID: number,
@@ -34,20 +34,20 @@ export const useSavePropertyMutation = () => {
     {
       onMutate: async ({ propertyID, op }) => {
         await queryClient.cancelQueries(queryKeys.savedProperties);
-        await queryClient.cancelQueries(queryKeys.searchProperties);
+        await queryClient.cancelQueries(queryKeys.searchCollocations);
         await queryClient.cancelQueries(queryKeys.selectedProperty);
 
-        const prevSavedProperties: Collocation[] | undefined =
+        const prevSavedProperties: CollocateAccount[] | undefined =
           queryClient.getQueryData(queryKeys.savedProperties);
-        const prevSearchedProperties: Collocation[] | undefined =
-          queryClient.getQueryData(queryKeys.searchProperties);
-        const prevSelectedProperty: Collocation | undefined =
+        const prevSearchedProperties: CollocateAccount[] | undefined =
+          queryClient.getQueryData(queryKeys.searchCollocations);
+        const prevSelectedProperty: CollocateAccount | undefined =
           queryClient.getQueryData(queryKeys.selectedProperty);
 
-        if (prevSelectedProperty?.ID === propertyID) {
+        if (prevSelectedProperty?.accountid === propertyID) {
           const newSelectedProperty = { ...prevSelectedProperty };
 
-          newSelectedProperty.liked = !newSelectedProperty.liked;
+          newSelectedProperty.areFriends = !newSelectedProperty.areFriends;
           queryClient.setQueryData(
             queryKeys.selectedProperty,
             newSelectedProperty
@@ -57,7 +57,7 @@ export const useSavePropertyMutation = () => {
         if (op === "remove") {
           if (prevSavedProperties) {
             const newSavedProperties = prevSavedProperties.filter(
-              (i) => i.ID !== propertyID
+              (i) => i.accountid !== propertyID
             );
             queryClient.setQueryData(
               queryKeys.savedProperties,
@@ -67,18 +67,18 @@ export const useSavePropertyMutation = () => {
 
           if (prevSearchedProperties)
             for (let i of prevSearchedProperties) {
-              if (i.ID === propertyID) i.liked = false;
+              if (i.accountid === propertyID) i.areFriends = false;
             }
         } else if (op === "add") {
           if (prevSearchedProperties) {
             for (let i of prevSearchedProperties) {
-              if (i.ID === propertyID) i.liked = true;
+              if (i.accountid === propertyID) i.areFriends = true;
             }
           }
         }
 
         queryClient.setQueryData(
-          queryKeys.searchProperties,
+          queryKeys.searchCollocations,
           prevSearchedProperties
         );
 
@@ -94,7 +94,7 @@ export const useSavePropertyMutation = () => {
           context?.prevSavedProperties
         );
         queryClient.setQueryData(
-          queryKeys.searchProperties,
+          queryKeys.searchCollocations,
           context?.prevSearchedProperties
         );
         queryClient.setQueryData(
@@ -104,7 +104,7 @@ export const useSavePropertyMutation = () => {
       },
       onSettled: () => {
         queryClient.invalidateQueries(queryKeys.savedProperties);
-        queryClient.invalidateQueries(queryKeys.searchProperties);
+        queryClient.invalidateQueries(queryKeys.searchCollocations);
       },
     }
   );

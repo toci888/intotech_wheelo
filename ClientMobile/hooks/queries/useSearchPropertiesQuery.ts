@@ -2,7 +2,6 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { endpoints, queryKeys } from "../../constants/constants";
 import { SearchScreenParams } from "../../types";
-import { Location } from "../../types/locationIQ";
 
 import { Collocation } from "../../types/property";
 import { useUser } from "../useUser";
@@ -35,7 +34,7 @@ const fetchProperties = async (startAndEndLocation: SearchScreenParams): Promise
 export const useSearchPropertiesQuery = (startAndEndLocation: SearchScreenParams) => {
   const { user } = useUser();
   const queryInfo = useQuery(
-    queryKeys.searchProperties,
+    queryKeys.searchCollocations,
     () => fetchProperties(startAndEndLocation),
     {
       enabled: false,
@@ -43,11 +42,11 @@ export const useSearchPropertiesQuery = (startAndEndLocation: SearchScreenParams
   );
 
   const data = queryInfo?.data;
-  // if (data)
-  //   for (let property of data) {
-  //     property.liked = false;
-  //     if (user?.savedProperties?.includes(property.ID)) property.liked = true;
-  //   }
+  if (data)
+    for (let accountCollocated of data.methodResult.accountsCollocated) {
+      accountCollocated.areFriends = false;
+      if (user?.savedProperties?.includes(accountCollocated.accountid)) accountCollocated.areFriends = true;
+    }
 
   return {
     ...queryInfo,

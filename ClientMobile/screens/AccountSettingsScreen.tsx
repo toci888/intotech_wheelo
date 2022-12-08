@@ -1,3 +1,4 @@
+import React from "react";
 import { StyleSheet } from "react-native";
 import { Text, Toggle } from "@ui-kitten/components";
 
@@ -5,10 +6,12 @@ import { Screen } from "../components/Screen";
 import { useUser } from "../hooks/useUser";
 import { Row } from "../components/Row";
 import { useNotifications } from "../hooks/useNotifications";
+import { useDarkMode } from "../hooks/useDarkMode";
 
 export const AccountSettingsScreen = () => {
-  const { user, setAllowsNotifications } = useUser();
+  const { user, setAllowsNotifications, setDarkMode } = useUser();
   const { registerForPushNotificationsAsync } = useNotifications();
+  const { registerForDarkModeAsync } = useDarkMode();
 
   const notificationsChanged = async (checked: boolean) => {
     try {
@@ -21,6 +24,17 @@ export const AccountSettingsScreen = () => {
     }
   };
 
+  const darkModeChanged = async (checked: boolean) => {
+    try {
+      if (!checked) return setDarkMode(checked);
+
+      setDarkMode(checked);
+      await registerForDarkModeAsync(true);
+    } catch (error) {
+      setDarkMode(!checked);
+    }
+  };
+
   return (
     <Screen style={styles.container}>
       <Row style={styles.row}>
@@ -28,6 +42,13 @@ export const AccountSettingsScreen = () => {
         <Toggle
           checked={user?.allowsNotifications}
           onChange={notificationsChanged}
+        />
+      </Row>
+      <Row style={styles.row}>
+        <Text>Dark mode</Text>
+        <Toggle
+          checked={user?.alterDarkMode}
+          onChange={darkModeChanged}
         />
       </Row>
     </Screen>
