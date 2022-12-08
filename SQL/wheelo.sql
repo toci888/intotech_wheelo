@@ -1,7 +1,9 @@
+drop view vacollocationsgeolocations;
+drop view VAccountsCollocations;
 drop view VAWorkTripGenGeoLocations;
 drop view VWorkTripGenGeoLocations;
 
-drop table WorkTripGen;
+drop table WorkTripGen cascade;
 drop table NotUser;
 ----
 drop table AccountMetadata;
@@ -13,14 +15,12 @@ drop table Trips;
 drop view AccountRoles;
 drop view VFriends;
 drop view VInvitations;
-drop view VAccountsCollocations;
 drop view VFriendSuggestions;
 --select * from  WorkTrip;
 --select * from  Accounts;
 --select * from AccountsCollocations;
 drop view AccountsCarsLocations;
 drop view VCollocationsGeoLocations;
-drop view VACollocationsGeoLocations;
 drop view VAccountsCollocationsWorkTrip;
 drop table WorkTrip;
 drop view VCarOwner;
@@ -316,7 +316,7 @@ select * from AccountsCarsLocations;
 --select * from TestCoordinates;
 create or replace view AccountRoles as
 select Accounts.id, Accounts.Name, Accounts.Surname, Accounts.email, Accounts.password, Accounts.emailConfirmed, 
-Accounts.token , Roles.name as RoleName, Accounts.refreshTokenValid
+Accounts.refreshtoken , Roles.name as RoleName, Accounts.refreshTokenValid
 from Accounts
 join Roles on Roles.id = Accounts.idRole;
 
