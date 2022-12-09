@@ -77,6 +77,7 @@ builder.Services.AddScoped<IWorktripgenLogic, WorktripgenLogic>();
 builder.Services.AddScoped<IVaworktripgengeolocationLogic, VaworktripgengeolocationLogic>();
 builder.Services.AddScoped<IVacollocationsgeolocationLogic, VacollocationsgeolocationLogic>();
 builder.Services.AddScoped<IVacollocationsgeolocationToAccountCollocationDto, VacollocationsgeolocationToAccountCollocationDto>();
+builder.Services.AddScoped<IAccountmodeLogic, AccountmodeLogic>();
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();
 

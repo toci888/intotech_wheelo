@@ -1,3 +1,5 @@
+drop table AccountModes;
+
 drop view VAWorkTripGenGeoLocations;
 drop view VWorkTripGenGeoLocations;
 
@@ -446,6 +448,12 @@ wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchId
 from AccountsCollocations acc 
 join WorkTripGen wt on acc.idcollocated = wt.IdAccount
 join Accounts a on a.id = wt.IdAccount;
+
+create table AccountModes
+(
+	IdAccount int references Accounts(id) primary key,
+	mode int not null
+);
 
 --select * from VTripsParticipants;
 --select * from Friends;

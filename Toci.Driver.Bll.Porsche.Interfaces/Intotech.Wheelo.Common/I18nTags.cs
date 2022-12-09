@@ -29,5 +29,6 @@
         public const string ErrorPleaseLogInToApp = "_errorPleaseLogInToApp";
         public const string RefreshTokenExpiredPleaseLogIn = "_refreshTokenExpiredPleaseLogIn";
         public const string PleaseConfirmYourWheeloAccountRegistration = "_pleaseConfirmYourWheeloAccountRegistration";
+        public const string DefaultModeCreated = "_defaultModeCreated";
     }
 }

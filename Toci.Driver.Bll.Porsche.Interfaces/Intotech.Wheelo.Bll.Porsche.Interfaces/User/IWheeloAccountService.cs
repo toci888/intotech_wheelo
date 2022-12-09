@@ -16,5 +16,9 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.User
         ReturnedResponse<AccountRoleDto> Login(LoginDto loginDto);
 
         ReturnedResponse<AccountRoleDto> ConfirmEmail(EmailConfirmDto EcDto);
+
+        ReturnedResponse<Accountmode> GetMode(int accountId);
+
+        ReturnedResponse<Accountmode> SetMode(int accountId, int mode);
     }
 }

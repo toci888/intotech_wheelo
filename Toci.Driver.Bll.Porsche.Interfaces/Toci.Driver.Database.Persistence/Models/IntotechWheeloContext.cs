@@ -18,6 +18,7 @@ namespace Toci.Driver.Database.Persistence.Models
 
         public virtual DbSet<Account> Accounts { get; set; } = null!;
         public virtual DbSet<Accountmetadatum> Accountmetadata { get; set; } = null!;
+        public virtual DbSet<Accountmode> Accountmodes { get; set; } = null!;
         public virtual DbSet<Accountrole> Accountroles { get; set; } = null!;
         public virtual DbSet<Accountscarslocation> Accountscarslocations { get; set; } = null!;
         public virtual DbSet<Accountscollocation> Accountscollocations { get; set; } = null!;
@@ -151,6 +152,26 @@ namespace Toci.Driver.Database.Persistence.Models
                     .WithMany(p => p.Accountmetadata)
                     .HasForeignKey(d => d.Idoccupation)
                     .HasConstraintName("accountmetadata_idoccupation_fkey");
+            });
+
+            modelBuilder.Entity<Accountmode>(entity =>
+            {
+                entity.HasKey(e => e.Idaccount)
+                    .HasName("accountmodes_pkey");
+
+                entity.ToTable("accountmodes");
+
+                entity.Property(e => e.Idaccount)
+                    .ValueGeneratedNever()
+                    .HasColumnName("idaccount");
+
+                entity.Property(e => e.Mode).HasColumnName("mode");
+
+                entity.HasOne(d => d.IdaccountNavigation)
+                    .WithOne(p => p.Accountmode)
+                    .HasForeignKey<Accountmode>(d => d.Idaccount)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("accountmodes_idaccount_fkey");
             });
 
             modelBuilder.Entity<Accountrole>(entity =>

@@ -22,12 +22,19 @@ namespace Intotech.Wheelo.Bll.Porsche.User
     {
         protected IAccountLogic AccLogic;
         protected IAccountRoleLogic AccRoleLogic;
+        protected IAccountmodeLogic AccountmodeLogic;
         protected IEmailManager EmailManager = new EmailManager("pl");
 
-        public WheeloAccountService(IAccountLogic accLogic, IAccountRoleLogic accRoleLogic/*, IEmailManager emailManager*/)
+        public const int WhiteMode = 0;
+        public const int DarkMode = 1;
+        public const int BlueMode = 2;
+
+        public WheeloAccountService(IAccountLogic accLogic, IAccountRoleLogic accRoleLogic, IAccountmodeLogic accountmodeLogic
+            /*, IEmailManager emailManager*/)
         {
             AccLogic = accLogic;
             AccRoleLogic = accRoleLogic;
+            AccountmodeLogic = accountmodeLogic;
             //EmailManager = emailManager;
         }
 
@@ -111,6 +118,36 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             accountRoleDto.RefreshToken = refreshToken;
 
             return new ReturnedResponse<AccountRoleDto>(accountRoleDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        }
+
+
+        public virtual ReturnedResponse<Accountmode> GetMode(int accountId)
+        {
+            Accountmode mode = AccountmodeLogic.Select(m => m.Idaccount == accountId).FirstOrDefault();
+
+            if (mode == null)
+            {
+                return new ReturnedResponse<Accountmode>(AccountmodeLogic.Insert(new Accountmode() { Idaccount = accountId, Mode = WhiteMode }),
+                    I18nTranslation.Translation(I18nTags.DefaultModeCreated), true, ErrorCodes.Success);
+            }
+
+            return new ReturnedResponse<Accountmode>(mode, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        }
+
+        public virtual ReturnedResponse<Accountmode> SetMode(int accountId, int mode)
+        {
+            Accountmode accMode = AccountmodeLogic.Select(m => m.Idaccount == accountId).FirstOrDefault();
+
+            if (accMode == null)
+            {
+                return new ReturnedResponse<Accountmode>(AccountmodeLogic.Insert(new Accountmode() { Idaccount = accountId, Mode = mode }),
+                    I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            }
+
+            accMode.Mode = mode;
+
+            return new ReturnedResponse<Accountmode>(AccountmodeLogic.Update(accMode), 
+                I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }

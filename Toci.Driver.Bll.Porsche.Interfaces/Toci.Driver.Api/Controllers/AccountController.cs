@@ -90,4 +90,16 @@ public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
     {
         return Service.ResetPassword(userId, password);
     }
+
+    [HttpPatch("$id/settings/theme-mode")]
+    public ReturnedResponse<Accountmode> SetMode(int accountId, [FromBody] int themeMode)
+    {
+        return WheeloAccountService.SetMode(accountId, themeMode);
+    }
+
+    [HttpGet("$id/settings/theme-mode")]
+    public ReturnedResponse<Accountmode> GetMode(int accountId)
+    {
+        return WheeloAccountService.GetMode(accountId);
+    }
 }
