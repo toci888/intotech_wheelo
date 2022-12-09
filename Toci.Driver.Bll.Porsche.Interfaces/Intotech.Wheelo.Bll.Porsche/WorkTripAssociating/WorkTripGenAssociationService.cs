@@ -59,9 +59,11 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                 if (workTrips.Count() > 1)
                 {
                     // ERR !
+                    return new ReturnedResponse<TripGenCollocationDto>(null, "Błąd spójności danych", false, ErrorCodes.DataIntegrityViolated) ; // TODOFIX
                 }
 
                 // match workTripGenRecord with db -> update ?
+                workTripGenRecord = WorktripLogic.Update(workTripGenRecord);
             }
             else
             {
