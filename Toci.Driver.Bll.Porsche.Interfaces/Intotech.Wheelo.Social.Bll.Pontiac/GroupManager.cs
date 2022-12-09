@@ -52,7 +52,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
             Group group = GroupLogic.Select(m => m.Id == groupId).First();
             List<Groupmember> groupmembers = GroupMemberLogic.Select(m => m.Idgroups == groupId).ToList();
 
-            List<Accountrole> accountroles = AccountLogic.GetUsersAccounts(groupmembers.Select(m => m.Idaccount).ToList());
+            List<Account> accountroles = AccountLogic.GetUsersAccounts(groupmembers.Select(m => m.Idaccount).ToList());
 
             result.GroupName = group.Name;
             result.GroupId = group.Id;

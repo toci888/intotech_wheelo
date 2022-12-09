@@ -13,6 +13,6 @@ namespace Intotech.Wheelo.Bll.Models.Social
 
         public string GroupName { get; set; }
 
-        public List<Accountrole> GroupMembers { get; set; }
+        public List<Toci.Driver.Database.Persistence.Models.Account> GroupMembers { get; set; }
     }
 }
