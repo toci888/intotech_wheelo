@@ -6,3 +6,6 @@
 
 Git skip files with IP (include package-lock.json/environment.ts and launchSettings.json files in exactly folder - this can create problem with checkout bracnch):
 git update-index --assume-unchanged <file>
+
+npm i --force
+npm i --legacy-peer-deps

@@ -6,8 +6,14 @@ import * as Location from "expo-location";
 
 import { Row } from "./Row";
 import { theme } from "../theme";
+import React from "react";
 
-export const CurrentLocationButton = ({ style }: { style?: ViewStyle }) => {
+export const CurrentLocationButton = ({ style, location, setLocation 
+}: { 
+  style?: ViewStyle, 
+  location: Location, 
+  setLocation: (location: Location) => Location;
+}) => {
   const navigation = useNavigation();
 
   const getLocation = async () => {
@@ -25,22 +31,19 @@ export const CurrentLocationButton = ({ style }: { style?: ViewStyle }) => {
   const handleNavigate = (location: Location.LocationObject) => {
     let lat =  location.coords.latitude; //52.38705 16.88180 52.38512
     let lon = location.coords.longitude; // 16.879011
-    let boundingBox = [
-      (lat - 0.048).toString(),
-      (lat + 0.048).toString(),
-      (lon - 0.041).toString(),
-      (lon + 0.041).toString(),
-    ];
+    
+    
 
-    navigation.navigate("Root", {
-      screen: "Search",
-      params: {
-        location: "Your Current Location",
-        boundingBox,
-        lat: lat.toString(),
-        lon: lon.toString(),
-      },
-    });
+    // navigation.navigate("Root", {
+    //   screen: "Search",
+    //   params: {
+    //     location: "Your Current Location",
+    //     boundingBox,
+    //     lat: lat.toString(),
+    //     lon: lon.toString(),
+    //   },
+    // });
+    navigation.goBack();
   };
 
   return (

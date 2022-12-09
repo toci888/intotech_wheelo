@@ -2,10 +2,8 @@ export type Location = {
   place_id: string;
   lat: string;
   lon: string;
-  boundingbox: string[];
   display_name: string;
   address: Address;
-  location: string;
 };
 
 export type GoogleMaps = {

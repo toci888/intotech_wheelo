@@ -61,7 +61,7 @@ export const FindLocationsScreen = ({route}:{
         />
         {suggestions.length === 0 ? (
           <ScrollView bounces={false}>
-            <CurrentLocationButton style={styles.currentLocationButton} />
+            <CurrentLocationButton style={styles.currentLocationButton} location={route.params.location} setLocation={route.params.setLocation} />
             <RecentSearchList
               style={styles.recentSearchContainer}
               recentSearches={recentSearches}

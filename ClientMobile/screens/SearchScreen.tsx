@@ -19,10 +19,8 @@ export const SearchScreen = ({
   return (
     <Screen>
       <AnimatedListHeader
-        startLocation={startLocation}
-        endLocation={endLocation}
-        setStartLocation={setStartLocation}
-        setEndLocation={setEndLocation}
+        startLocation={startLocation} endLocation={endLocation}
+        setStartLocation={setStartLocation} setEndLocation={setEndLocation}
       />
       <Map location={route.params} />
     </Screen>

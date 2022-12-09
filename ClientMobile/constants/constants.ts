@@ -19,11 +19,12 @@ androidHeight += androidNotch;
 
 export const HEADERHEIGHT = Platform.OS === "ios" ? iosHeight : androidHeight;
 
-const server = "http://20.68.18.151";
+export const server = "http://20.68.18.151";
 
 const serverUrl = server + ":5105/api";
 const integrationApiUrl = server + ":5108/api";
 const chatUrl = "http://192.168.30.24:3000";
+
 const location = "/location";
 const google = "/GoogleMap";
 const workTrip = serverUrl + "/WorkTrip";
@@ -47,7 +48,7 @@ const contactedEndpoint = (id: number) => `${userEndpoint}/${id}/properties/cont
 const savedEndpoint = (id: number) => `${userEndpoint}/${id}/properties/saved`;
 const pushTokenEndpoint = (id: number) => `${userEndpoint}/${id}/pushtoken`;
 const allowsNotificationsEndpoint = (id: number) => `${userEndpoint}/${id}/settings/notifications`;
-const alterDarkModeEndpoint = (id: number) => `${userEndpoint}/${id}/settings/dark-mode`;
+const themeModeEndpoint = (idAccount: number, idThemeMode: number) => `${userEndpoint}/${idThemeMode}/settings/theme-mode?accountId=${idAccount}`;
 
 export const endpoints = {
   chat: chatUrl,
@@ -73,7 +74,7 @@ export const endpoints = {
   alterSavedPropertiesByUserID: savedEndpoint,
   alterPushToken: pushTokenEndpoint,
   allowsNotifications: allowsNotificationsEndpoint,
-  alterDarkMode: alterDarkModeEndpoint,
+  themeMode: themeModeEndpoint,
   createConversation: conversationEndpoint,
   getConversationByID: conversationEndpoint + "/",
   getConversationsByUserID: conversationEndpoint + "/user/",

@@ -7,8 +7,9 @@ import { AuthContext } from "../context";
 import { User } from "../types/user";
 import { CollocateAccount } from "../types/property";
 import { queryKeys } from "../constants/constants";
-import { alterDarkMode, alterAllowsNotifications, alterPushToken } from "../services/user";
+import { alterThemeMode, alterAllowsNotifications, alterPushToken } from "../services/user";
 import { socket } from "../constants/socket";
+import { ThemeMode } from "../types";
 
 export const useUser = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -56,7 +57,7 @@ export const useUser = () => {
         if (token)
           await alterPushToken(user?.ID, "remove", token, user.accessToken);
       } catch (error) {
-        //setAndStoreUser(prevUser);
+        setAndStoreUser(prevUser);
       }
     }
   };
@@ -102,15 +103,15 @@ export const useUser = () => {
     }
   };
 
-  const setDarkMode = async (allowed: boolean) => {
+  const setDarkMode = async (allowed: ThemeMode) => {
     if (user) {
       const updatedUser = { ...user };
       const prevUser = { ...user };
-      updatedUser.alterDarkMode = allowed;
+      updatedUser.themeMode = allowed;
       setAndStoreUser(updatedUser);
 
       try {
-        await alterDarkMode(user.ID, allowed, user.accessToken);
+        await alterThemeMode(user.ID, allowed, user.accessToken);
       } catch (error) {
         console.error(error);
         setAndStoreUser(prevUser);

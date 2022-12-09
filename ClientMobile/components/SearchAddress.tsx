@@ -43,7 +43,7 @@ export const SearchAddress = ({
     if (type === "search") locations = await searchLocations(value); //TODO!
     else locations = await getSuggestedLocations(value);
 
-    if (locations.length > 0) setSuggestions(locations);
+    if (locations.length > 0) setSuggestions(locations as Location[]);
   };
 
   const handleSubmitEditing = async () => {

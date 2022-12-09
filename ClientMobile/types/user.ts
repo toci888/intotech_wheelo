@@ -1,3 +1,5 @@
+import { ThemeMode } from "../types";
+
 export type User = {
   ID: number;
   firstName?: string;
@@ -5,7 +7,7 @@ export type User = {
   email: string;
   savedProperties?: number[];
   allowsNotifications: boolean;
-  alterDarkMode: boolean;
+  themeMode: ThemeMode;
   pushToken?: string;
   sessionID?: string;
   accessToken: string;

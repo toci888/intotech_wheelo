@@ -4,6 +4,7 @@ import { endpoints } from "../constants/constants";
 import { User } from "../types/user";
 import { handleError } from "../utils/handleError";
 import * as Crypto from 'expo-crypto';
+import { ThemeMode } from "../types";
 
 type DataRes = { data: User };
 
@@ -142,14 +143,14 @@ export const alterAllowsNotifications = (
     }
   );
 
-  export const alterDarkMode = (
+  export const alterThemeMode = (
     userID: number,
-    allowsDarkMode: boolean,
+    themeMode: ThemeMode,
     token: string
   ) =>
     axios.patch(
-      endpoints.alterDarkMode(userID),
-      { allowsDarkMode },
+      endpoints.themeMode(userID, themeMode),
+      { allowsDarkMode: themeMode },
       {
         headers: {
           Authorization: `Bearer ${token}`,

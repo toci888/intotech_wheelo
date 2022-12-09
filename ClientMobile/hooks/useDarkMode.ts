@@ -10,7 +10,7 @@ export const useDarkMode = () => {
   const { setDarkMode, user } = useUser();
 
   const registerForDarkModeAsync = async (alertUser?: boolean) => {
-    // if (!user) return;
+    if (!user) return;
     // const { status: existingStatus } =
     // await Notifications.getPermissionsAsync();
     // let finalStatus = existingStatus;
