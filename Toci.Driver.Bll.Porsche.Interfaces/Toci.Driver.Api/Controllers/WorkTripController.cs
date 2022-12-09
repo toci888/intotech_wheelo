@@ -20,7 +20,7 @@ namespace Toci.Driver.Api.Controllers
         }
 
         [HttpPost("add-work-trip")]
-        public ReturnedResponse<TripGenCollocationDto> AddWorkTrip(WorkTripGenDto workTripGen)
+        public ReturnedResponse<TripGenCollocationDto> AddWorkTrip([FromBody]WorkTripGenDto workTripGen)
         {
             return Service.SetWorkTripGetCollocations(workTripGen);
         }

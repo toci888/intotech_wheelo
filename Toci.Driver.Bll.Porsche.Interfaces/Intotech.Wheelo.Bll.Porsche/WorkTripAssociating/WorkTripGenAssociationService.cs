@@ -169,6 +169,9 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                 result.Isuser = true;
             }
 
+            string[] FromTime = workTripGen.StartLocationTime.Split(":");
+            string[] ToTime = workTripGen.EndLocationTime.Split(":");
+
             result.Streetfrom = workTripGen.StartLocation.address.road;
             result.Streetto = workTripGen.EndLocation.address.road;
             result.Cityfrom = workTripGen.StartLocation.address.city;
@@ -176,8 +179,8 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             result.Postcodefrom = workTripGen.StartLocation.address.postcode;
             result.Postcodeto = workTripGen.EndLocation.address.postcode;
             result.Acceptabledistance = workTripGen.AcceptableDistance;
-            result.Fromhour = new TimeOnly(workTripGen.StartLocationTime.Hour, workTripGen.StartLocationTime.Minute);
-            result.Tohour = new TimeOnly(workTripGen.EndLocationTime.Hour, workTripGen.EndLocationTime.Minute);
+            result.Fromhour = new TimeOnly(int.Parse(FromTime[0]), int.Parse(FromTime[1]));
+            result.Tohour = new TimeOnly(int.Parse(ToTime[0]), int.Parse(ToTime[1]));
             result.Idaccount = workTripGen.AccountId;
             result.Latitudefrom = double.Parse(workTripGen.StartLocation.lat.Replace(".", ","));
             result.Latitudeto = double.Parse(workTripGen.EndLocation.lat.Replace(".", ","));

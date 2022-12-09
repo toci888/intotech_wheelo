@@ -34,14 +34,8 @@ namespace Intotech.Wheelo.Common.Google
             geographicLocation.lat = googlePlaceGeoModel.result.geometry.location.lat.ToString();
             geographicLocation.lon = googlePlaceGeoModel.result.geometry.location.lng.ToString();
 
-            geographicLocation.boundingbox = new string[] { 
-                (googlePlaceGeoModel.result.geometry.location.lat - 0.002).ToString().Replace(",", "."), 
-                (googlePlaceGeoModel.result.geometry.location.lat + 0.002).ToString().Replace(",", "."),
-                (googlePlaceGeoModel.result.geometry.location.lng - 0.002).ToString().Replace(",", "."),
-                (googlePlaceGeoModel.result.geometry.location.lng + 0.002).ToString().Replace(",", ".")
-            };
-
-            geographicLocation.display_name = geographicLocation.display_address = 
+       
+            geographicLocation.display_name = 
                 geographicLocation.address.ToString();
             geographicLocation.place_id = googlePlaceGeoModel.result.place_id;
 
