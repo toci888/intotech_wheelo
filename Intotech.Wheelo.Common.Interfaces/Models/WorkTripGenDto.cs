@@ -14,5 +14,6 @@ namespace Intotech.Wheelo.Common.Interfaces.Models
         public string EndLocationTime { get; set; }
         public double AcceptableDistance { get; set; }
         public int Idaccount { get; set; }
+        public int IsDriver { get; set; }
     }
 }
