@@ -8,7 +8,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://20.68.18.151:5105"
+      "applicationUrl": "http://51.107.0.138:5105"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -25,6 +25,13 @@
     "Warsztaty": {
       "commandName": "Project",
       "applicationUrl": "http://192.168.0.153:5105"
+    },
+    "Profile 1": {
+      "commandName": "Executable"
+    },
+    "Profile 2": {
+      "commandName": "Project",
+      "applicationUrl": "http://10.0.0.4:5105"
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json",

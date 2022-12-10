@@ -1,4 +1,4 @@
-drop table AccountModes;
+﻿drop table AccountModes;
 
 drop view VAWorkTripGenGeoLocations;
 drop view VWorkTripGenGeoLocations;
@@ -454,6 +454,37 @@ create table AccountModes
 	IdAccount int references Accounts(id) primary key,
 	mode int not null
 );
+--TABELA 1:
+create table FailedLoginAttempts
+(
+	id serial primary key,
+	IdAccount int not null,
+	ts1 timestamp not null,
+);
+--TABEL 2:
+create table SimplePasswords
+(
+	id serial primary key,
+	IdAccount int not null,
+	
+);
+--INSERTY:
+insert into FailedLoginAttempts (IdAccount, ts1) values (AcountIndentifiers, timestamps)
+insert into SimplePasswords (IdAccount) values (AcountIndentifiers)
+--ew. blokada jeśli gdzieś damy boolean np czy simple password czy nie
+--bolakada1:
+select IdAccount
+from FailedLoginAttempts
+where count(TIMESTAMP DEFAULT)>=3 AND IdAccount IN SimplePasswords
+
+--blokada2:
+select IdAccount
+from FailedLoginAttempts
+where count(TIMESTAMP DEFAULT)>=5 AND IdAccount NOT IN SimplePassword;
+
+
+
+
 
 --select * from VTripsParticipants;
 --select * from Friends;

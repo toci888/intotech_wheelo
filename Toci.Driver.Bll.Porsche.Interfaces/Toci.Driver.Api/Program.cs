@@ -78,6 +78,7 @@ builder.Services.AddScoped<IVaworktripgengeolocationLogic, Vaworktripgengeolocat
 builder.Services.AddScoped<IVacollocationsgeolocationLogic, VacollocationsgeolocationLogic>();
 builder.Services.AddScoped<IVacollocationsgeolocationToAccountCollocationDto, VacollocationsgeolocationToAccountCollocationDto>();
 builder.Services.AddScoped<IAccountmodeLogic, AccountmodeLogic>();
+builder.Services.AddScoped<IFailedloginattemptLogic, FailedloginattemptLogic>();
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();
 
@@ -95,6 +96,7 @@ builder.Services.AddScoped<IWheeloAccountService, WheeloAccountService>();
 builder.Services.AddScoped<IAccountMetadataService, AccountMetadataService>();
 builder.Services.AddScoped<IAssociationMapDataSubService, AssociationMapDataSubService>();
 builder.Services.AddScoped<IWorkTripGenAssociationService, WorkTripGenAssociationService>();
+builder.Services.AddScoped<IPassStrLoginAttFailService, PassStrLoginAttFailService>();
 //builder.Services.AddScoped<IEmailManager, EmailManager>();
 
 builder.Services.AddSingleton(authenticationSettings);

@@ -30,5 +30,6 @@
         public const string RefreshTokenExpiredPleaseLogIn = "_refreshTokenExpiredPleaseLogIn";
         public const string PleaseConfirmYourWheeloAccountRegistration = "_pleaseConfirmYourWheeloAccountRegistration";
         public const string DefaultModeCreated = "_defaultModeCreated";
+        public const string UnderAttack = "_youSeemRobot";
     }
 }

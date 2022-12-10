@@ -250,9 +250,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Dodge"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Dodge.Interfaces", "Intotech.Wheelo.Chat.Dodge.Interfaces\Intotech.Wheelo.Chat.Dodge.Interfaces.csproj", "{46E90AB2-D578-4EA4-A17B-451217417A9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Api", "..\Intotech.Wheelo.Chat.Api\Intotech.Wheelo.Chat.Api.csproj", "{236FACBF-F7BC-42D4-97BB-B9564C1AF832}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Api", "..\Intotech.Wheelo.Chat.Api\Intotech.Wheelo.Chat.Api.csproj", "{236FACBF-F7BC-42D4-97BB-B9564C1AF832}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Models", "..\Intotech.Wheelo.Chat.Models\Intotech.Wheelo.Chat.Models.csproj", "{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Models", "..\Intotech.Wheelo.Chat.Models\Intotech.Wheelo.Chat.Models.csproj", "{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

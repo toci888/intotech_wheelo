@@ -20,6 +20,7 @@ namespace Intotech.Wheelo.Common.Interfaces
         public const int ErrorPleaseLogInToApp = 1024;
         public const int RefreshTokenExpiredPleaseLogIn = 2048;
         public const int DataIntegrityViolated = 4096;
+        public const int UnderAttack = 8192;
         // dodajesz swoje nowe errory
         // 4 8 16 32 64 128
         public const int Success = 1;

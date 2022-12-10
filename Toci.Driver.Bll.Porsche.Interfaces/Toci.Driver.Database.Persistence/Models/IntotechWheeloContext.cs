@@ -29,12 +29,14 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Carsmodel> Carsmodels { get; set; } = null!;
         public virtual DbSet<Colour> Colours { get; set; } = null!;
         public virtual DbSet<Emailsregister> Emailsregisters { get; set; } = null!;
+        public virtual DbSet<Failedloginattempt> Failedloginattempts { get; set; } = null!;
         public virtual DbSet<Friend> Friends { get; set; } = null!;
         public virtual DbSet<Friendsuggestion> Friendsuggestions { get; set; } = null!;
         public virtual DbSet<Geographicregion> Geographicregions { get; set; } = null!;
         public virtual DbSet<Invitation> Invitations { get; set; } = null!;
         public virtual DbSet<Notuser> Notusers { get; set; } = null!;
         public virtual DbSet<Occupation> Occupations { get; set; } = null!;
+        public virtual DbSet<Passwordsstrenght> Passwordsstrenghts { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Statisticstrip> Statisticstrips { get; set; } = null!;
         public virtual DbSet<Trip> Trips { get; set; } = null!;
@@ -423,6 +425,26 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Verificationcode).HasColumnName("verificationcode");
             });
 
+            modelBuilder.Entity<Failedloginattempt>(entity =>
+            {
+                entity.ToTable("failedloginattempts");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
+                    .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.HasOne(d => d.IdaccountNavigation)
+                    .WithMany(p => p.Failedloginattempts)
+                    .HasForeignKey(d => d.Idaccount)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("failedloginattempts_idaccount_fkey");
+            });
+
             modelBuilder.Entity<Friend>(entity =>
             {
                 entity.ToTable("friends");
@@ -555,6 +577,23 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name).HasColumnName("name");
+            });
+
+            modelBuilder.Entity<Passwordsstrenght>(entity =>
+            {
+                entity.ToTable("passwordsstrenght");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Level).HasColumnName("level");
+
+                entity.HasOne(d => d.IdaccountNavigation)
+                    .WithMany(p => p.Passwordsstrenghts)
+                    .HasForeignKey(d => d.Idaccount)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("passwordsstrenght_idaccount_fkey");
             });
 
             modelBuilder.Entity<Role>(entity =>

@@ -23,18 +23,21 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         protected IAccountLogic AccLogic;
         protected IAccountRoleLogic AccRoleLogic;
         protected IAccountmodeLogic AccountmodeLogic;
+        protected IFailedloginattemptLogic FailedloginattemptLogic;
         protected IEmailManager EmailManager = new EmailManager("pl");
 
         public const int WhiteMode = 0;
         public const int DarkMode = 1;
         public const int BlueMode = 2;
 
-        public WheeloAccountService(IAccountLogic accLogic, IAccountRoleLogic accRoleLogic, IAccountmodeLogic accountmodeLogic
+        public WheeloAccountService(IAccountLogic accLogic, IAccountRoleLogic accRoleLogic, IAccountmodeLogic accountmodeLogic, 
+            IFailedloginattemptLogic failedloginattemptLogic
             /*, IEmailManager emailManager*/)
         {
             AccLogic = accLogic;
             AccRoleLogic = accRoleLogic;
             AccountmodeLogic = accountmodeLogic;
+            FailedloginattemptLogic = failedloginattemptLogic;
             //EmailManager = emailManager;
         }
 
@@ -44,6 +47,20 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (simpleaccount == null)
             {
+                Accountrole emailAccount = AccRoleLogic.Select(m => m.Email == loginDto.Email).FirstOrDefault();
+
+                if (emailAccount != null)
+                {
+                    FailedloginattemptLogic.Insert(new Failedloginattempt() { Idaccount = emailAccount.Id.Value });
+
+                    bool isHack = FailedloginattemptLogic.Select(m => m.Idaccount == emailAccount.Id.Value && m.Createdat > DateTime.Now.AddSeconds(-15)).Count() > 5;
+
+                    if (isHack)
+                    {
+                        return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.UnderAttack), false, ErrorCodes.UnderAttack);
+                    }
+                }
+
                 return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
             }
 
