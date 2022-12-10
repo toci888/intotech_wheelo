@@ -1,3 +1,4 @@
+import React from "react";
 import { View, Platform, StyleSheet } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Text, Input, Button } from "@ui-kitten/components";
@@ -22,7 +23,7 @@ import { useCreateReviewMutation } from "../hooks/mutations/useCreateReviewMutat
 export const ReviewScreen = ({
   route,
 }: {
-  route: { params: { propertyID: number; propertyName: string } };
+  route: { params: { collocationID: number; collocationName: string } };
 }) => {
   const { user } = useUser();
   const navigation = useNavigation();
@@ -39,7 +40,7 @@ export const ReviewScreen = ({
         {Platform.OS === "ios" ? <ModalHeader /> : null}
         <View style={styles.container}>
           <Text category={"s1"} style={styles.header}>
-            Write a Review for {route.params.propertyName}
+            Write a Review for {route.params.collocationName}
           </Text>
           <Formik
             initialValues={{
@@ -61,7 +62,7 @@ export const ReviewScreen = ({
               };
 
               createReview.mutate({
-                propertyID: route.params.propertyID,
+                collocationID: route.params.collocationID,
                 review: createReviewObj,
               });
             }}

@@ -1,4 +1,4 @@
-import { Collocation } from "../types/property";
+import { Collocation } from "../types/collocation";
 
 export const properties: Collocation[] = [
   {

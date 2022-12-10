@@ -4,24 +4,22 @@ import { endpoints, queryKeys } from "../../constants/constants";
 import { useApiClient } from "../../services/useApiClient";
 import { SearchScreenParams } from "../../types";
 
-import { Collocation } from "../../types/property";
+import { Collocation } from "../../types/collocation";
 import { useUser } from "../useUser";
 
-const fetchProperties = async (startAndEndLocation: SearchScreenParams): Promise<Collocation> => {
-  if (!startAndEndLocation.startLocation || !startAndEndLocation.endLocation) return {} as Collocation;
+const fetchProperties = async (startAndEndLocation: SearchScreenParams, userId?: number): Promise<Collocation> => {
+  if (!startAndEndLocation.startLocation || !startAndEndLocation.endLocation) 
+    return {} as Collocation;
 
-  // const { Post } = useApiClient();
-  // const {user} = useUser();
-  // await Post(`${endpoints.addWorkTrip}`, json).then((x: any) => console.log("TUUUMOJE")) ;
   const response = await axios.post(`${endpoints.addWorkTrip}`, {
     startLocation: startAndEndLocation.startLocation,
     endLocation: startAndEndLocation.endLocation,
     startLocationTime: startAndEndLocation.startLocationTime,
     endLocationTime: startAndEndLocation.endLocationTime,
-    idaccount: 1000000045,
-    acceptabledistance: 800
+    idAccount: userId ? userId : 1000000045,
+    acceptableDistance: 800
   });  
-
+  
   const data = response.data as Collocation;
 
   console.log("przystanek dane", data)
@@ -35,7 +33,7 @@ export const useSearchPropertiesQuery = (startAndEndLocation: SearchScreenParams
   const { user } = useUser();
   const queryInfo = useQuery(
     queryKeys.searchCollocations,
-    () => fetchProperties(startAndEndLocation),
+    () => fetchProperties(startAndEndLocation, user?.ID),
     {
       enabled: false,
     }
@@ -46,7 +44,7 @@ export const useSearchPropertiesQuery = (startAndEndLocation: SearchScreenParams
   if (data && data.isSuccess !== false)
     for (let accountCollocated of data.methodResult.accountsCollocated) {
       accountCollocated.areFriends = false;
-      if (user?.savedProperties?.includes(accountCollocated.accountid)) accountCollocated.areFriends = true;
+      if (user?.savedProperties?.includes(accountCollocated.idAccount)) accountCollocated.areFriends = true;
     }
 
   return {

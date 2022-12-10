@@ -3,6 +3,7 @@ import { Review } from "./review";
 import { Pet } from "./pet";
 import { Score } from "./score";
 import { TempApartment } from "./tempApartment";
+import { Driver } from "../types";
 
 // export class response<T> {
 //   methodResult!: {
@@ -24,7 +25,7 @@ export type Collocation = {
 }
 
 export type CollocateAccount = {
-  accountid: number,
+  idAccount: number,
   image: string[],
   name: string,
   surname: string,
@@ -36,6 +37,7 @@ export type CollocateAccount = {
   tohour: string
   areFriends: boolean;
   phoneNumber: string;
+  isDriver: Driver;
 }
 
 export type CreateProperty = {

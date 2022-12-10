@@ -5,16 +5,17 @@ import { useNavigation } from "@react-navigation/native";
 
 import { theme } from "../../theme";
 import { Row } from "../Row";
-import { Collocation } from "../../types/property";
+import { CollocateAccount, Collocation } from "../../types/collocation";
 import { callPhoneNumber } from "../../utils/callPhoneNumber";
 import { openURL } from "../../utils/openURL";
+import React from "react";
 
-const formatPhoneNumber = (str: string, callingCode: string) => {
+const formatPhoneNumber = (str: string) => {
   let cleaned = ("" + str).replace(/\D/g, "");
   let match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
   if (match) {
     return [
-      `+${callingCode} `,
+      `+$48 `,
       "(",
       match[2],
       ") ",
@@ -26,7 +27,7 @@ const formatPhoneNumber = (str: string, callingCode: string) => {
   return "Give Us A Call";
 };
 
-export const ContactSection = ({ property }: { property: Collocation }) => {
+export const ContactSection = ({ collocation }: { collocation: CollocateAccount }) => {
   const navigation = useNavigation();
 
   return (
@@ -34,7 +35,7 @@ export const ContactSection = ({ property }: { property: Collocation }) => {
       <Text category={"h5"} style={styles.defaultMarginVertical}>
         Contact
       </Text>
-      <TouchableOpacity onPress={() => callPhoneNumber(property.phoneNumber)}>
+      <TouchableOpacity onPress={() => callPhoneNumber(collocation.phoneNumber)}>
         <Row style={styles.row}>
           <MaterialIcons
             name="smartphone"
@@ -43,16 +44,16 @@ export const ContactSection = ({ property }: { property: Collocation }) => {
           />
 
           <Text category={"c1"} status={"info"} style={styles.rowText}>
-            {formatPhoneNumber(property.phoneNumber, property.callingCode)}
+            {formatPhoneNumber(collocation.phoneNumber)}
           </Text>
         </Row>
       </TouchableOpacity>
-      {property?.website ? (
+      {collocation?.phoneNumber ? (
         <TouchableOpacity
           onPress={() =>
             // can also use Linking.openURL but that takes you out of the app
             {
-              if (property.website) openURL(property.website);
+              if (collocation.phoneNumber) openURL("WWW.GOOGLE.COM/kotki");
             }
           }
         >
@@ -74,7 +75,7 @@ export const ContactSection = ({ property }: { property: Collocation }) => {
           appearance={"ghost"}
           onPress={() => {
             navigation.navigate("MessageProperty", {
-              propertyID: property.ID,
+              propertyID: collocation.idAccount,
               tour: true,
             });
           }}
@@ -86,7 +87,7 @@ export const ContactSection = ({ property }: { property: Collocation }) => {
           appearance={"ghost"}
           onPress={() => {
             navigation.navigate("MessageProperty", {
-              propertyID: property.ID,
+              propertyID: collocation.idAccount,
             });
           }}
         >

@@ -6,6 +6,7 @@ import { Row } from "./Row";
 import { Review } from "../types/review";
 import { theme } from "../theme";
 import { TextMoreOrLess } from "./TextMoreOrLess";
+import React from "react";
 
 const getFormattedDate = (date: Date) => {
   const dateStr = date.toDateString(); // Thu Mar 31 2022

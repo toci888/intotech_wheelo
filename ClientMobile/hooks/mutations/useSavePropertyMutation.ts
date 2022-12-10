@@ -3,10 +3,10 @@ import axios from "axios";
 
 import { useUser } from "../useUser";
 import { endpoints, queryKeys } from "../../constants/constants";
-import { CollocateAccount } from "../../types/property";
+import { CollocateAccount } from "../../types/collocation";
 
-const saveOrUnsaveProperty = (
-  propertyID: number,
+const saveOrUnsaveCollocation = (
+  collocationID: number,
   op: "add" | "remove",
   userID?: number,
   token?: string
@@ -14,7 +14,7 @@ const saveOrUnsaveProperty = (
   axios.patch(
     `${endpoints.alterSavedPropertiesByUserID(userID as number)}`,
     {
-      propertyID,
+      collocationID,
       op,
     },
     {
@@ -24,13 +24,13 @@ const saveOrUnsaveProperty = (
     }
   );
 
-export const useSavePropertyMutation = () => {
+export const useSaveCollocationMutation = () => {
   const { user } = useUser();
   const queryClient = useQueryClient();
 
   return useMutation(
     ({ propertyID, op }: { propertyID: number; op: "add" | "remove" }) =>
-      saveOrUnsaveProperty(propertyID, op, user?.ID, user?.accessToken),
+      saveOrUnsaveCollocation(propertyID, op, user?.ID, user?.accessToken),
     {
       onMutate: async ({ propertyID, op }) => {
         await queryClient.cancelQueries(queryKeys.savedProperties);
@@ -44,7 +44,7 @@ export const useSavePropertyMutation = () => {
         const prevSelectedProperty: CollocateAccount | undefined =
           queryClient.getQueryData(queryKeys.selectedProperty);
 
-        if (prevSelectedProperty?.accountid === propertyID) {
+        if (prevSelectedProperty?.idAccount === propertyID) {
           const newSelectedProperty = { ...prevSelectedProperty };
 
           newSelectedProperty.areFriends = !newSelectedProperty.areFriends;
@@ -57,7 +57,7 @@ export const useSavePropertyMutation = () => {
         if (op === "remove") {
           if (prevSavedProperties) {
             const newSavedProperties = prevSavedProperties.filter(
-              (i) => i.accountid !== propertyID
+              (i) => i.idAccount !== propertyID
             );
             queryClient.setQueryData(
               queryKeys.savedProperties,
@@ -67,12 +67,12 @@ export const useSavePropertyMutation = () => {
 
           if (prevSearchedProperties)
             for (let i of prevSearchedProperties) {
-              if (i.accountid === propertyID) i.areFriends = false;
+              if (i.idAccount === propertyID) i.areFriends = false;
             }
         } else if (op === "add") {
           if (prevSearchedProperties) {
             for (let i of prevSearchedProperties) {
-              if (i.accountid === propertyID) i.areFriends = true;
+              if (i.idAccount === propertyID) i.areFriends = true;
             }
           }
         }

@@ -3,14 +3,15 @@ import { Text } from "@ui-kitten/components";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import MapView from "react-native-maps";
 
-import { Collocation } from "../../types/property";
+import { CollocateAccount } from "../../types/collocation";
 import { getStateAbbreviation } from "../../utils/getStateAbbreviation";
 import { Row } from "../Row";
 import { MapMarker } from "../MapMarker";
 import { theme } from "../../theme";
 import { ScoreCard } from "../ScoreCard";
+import React from "react";
 
-export const LocationSection = ({ property }: { property: Collocation }) => {
+export const LocationSection = ({ collocation }: { collocation: CollocateAccount }) => {
   return (
     <>
       <Text category={"h5"} style={styles.defaultVerticalMargin}>
@@ -25,37 +26,40 @@ export const LocationSection = ({ property }: { property: Collocation }) => {
       </Row>
 
       <Text category={"c1"} appearance={"hint"}>
-        {property.street}, {property.city},{" "}
-        {getStateAbbreviation(property.state)} {property.zip}
+        {collocation.name}, {collocation.surname},{" "}
+        {/* {getStateAbbreviation(collocation.state)} {collocation.zip} */}
       </Text>
       <View style={styles.mapContainer}>
         <MapView
           provider={"google"}
           style={styles.map}
           initialRegion={{
-            latitude: property.lat,
-            longitude: property.lng,
+            latitude: collocation.latitudefrom,
+            longitude: collocation.latitudeto,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
         >
           <MapMarker
             color={theme["color-info-400"]}
-            lat={property.lat}
-            lng={property.lng}
+            lat={collocation.latitudefrom}
+            lng={collocation.latitudeto}
           />
         </MapView>
       </View>
 
-      {property.scores ? (
+      {collocation.name ? (
         <FlatList
           horizontal
           style={styles.defaultVerticalMargin}
           showsHorizontalScrollIndicator={false}
-          data={property.scores}
-          keyExtractor={(item) => item.type}
+          data={[collocation.name, collocation.surname]}
+          keyExtractor={(item) => item}
           renderItem={({ item }) => (
-            <ScoreCard score={item} style={styles.scoreCard} />
+            <ScoreCard score={{type: "Walk", 
+              score: 1,
+              description: "description"
+            }} style={styles.scoreCard} />
           )}
         />
       ) : null}

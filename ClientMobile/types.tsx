@@ -27,7 +27,7 @@ export type RootStackParamList = {
   PropertyDetails: { propertyID: number };
   MessageProperty: { propertyID: number; tour?: boolean };
   AddProperty: undefined;
-  EditProperty: { propertyID: number };
+  EditProperty: { collocationId: number };
   MyProperties: undefined;
   ManageUnits: { propertyID: number };
   Review: { propertyID: number; propertyName: string };
@@ -66,4 +66,10 @@ export enum ThemeMode {
   'light' = 0,
   'dark' = 1,
   'blue' = 2
+}
+
+export enum Driver {
+  'driver' = 1,
+  'passenger' = 2,
+  'both' = 3
 }

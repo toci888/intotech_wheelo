@@ -3,7 +3,7 @@ import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
 import { endpoints, queryKeys } from "../../constants/constants";
 
-import { EditPropertyObj } from "../../types/property";
+import { EditPropertyObj } from "../../types/collocation";
 import { useLoading } from "../useLoading";
 import { useUser } from "../useUser";
 

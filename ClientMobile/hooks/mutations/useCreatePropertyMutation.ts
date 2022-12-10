@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { StackActions, useNavigation } from "@react-navigation/native";
 
 import { endpoints, queryKeys } from "../../constants/constants";
-import { CreateProperty, Collocation } from "../../types/property";
+import { CreateProperty, Collocation } from "../../types/collocation";
 import { useUser } from "../useUser";
 
 const createProperty = (obj: CreateProperty, token?: string) =>

@@ -8,7 +8,7 @@ import { Row } from "../Row";
 import { Select } from "../Select";
 import { PressableInput } from "../PressableInput";
 import { TempApartment } from "../../types/tempApartment";
-import { Collocation } from "../../types/property";
+import { Collocation } from "../../types/collocation";
 import { bedValues } from "../../constants/bedValues";
 import { bathValues } from "../../constants/bathValues";
 import { AMENITIES_STR, DESCRIPTION_STR, PHOTOS_STR } from "../../constants/constants";

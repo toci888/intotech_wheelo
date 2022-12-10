@@ -5,7 +5,7 @@ import { Divider, Text } from "@ui-kitten/components";
 import { useQuery } from "react-query";
 import axios from "axios";
 
-import { PropertyHeaderSection } from "../components/propertyDetailsSections/PropertyHeaderSection";
+import { CollocationHeaderSection } from "../components/propertyDetailsSections/PropertyHeaderSection";
 import { Screen } from "../components/Screen";
 import { properties } from "../data/properties";
 import { theme } from "../theme";
@@ -33,7 +33,7 @@ export const PropertyDetailsScreen = ({
     <Screen>
       <FlatList
         data={[property.data]}
-        keyExtractor={(item) => item.accountid.toString()}
+        keyExtractor={(item) => item.idAccount.toString()}
         renderItem={({ item }) => (
           <>
             {item.image ? (
@@ -44,21 +44,22 @@ export const PropertyDetailsScreen = ({
               />
             ) : null}
             <View style={styles.contentContainer}>
-              <PropertyHeaderSection property={item} />
+              <Text>asd</Text>
+              <CollocationHeaderSection collocation={item} />
               <Divider style={styles.divider} />
-              <PricingAndFloorPlanSection property={item} />
+              <PricingAndFloorPlanSection collocation={item} />
               <Divider style={styles.divider} />
-              <AboutSection property={item} />
+              <AboutSection collocation={item} />
               <Divider style={styles.divider} />
-              <ContactSection property={item} />
+              <ContactSection collocation={item} />
               <Divider style={styles.divider} />
-              <AmentitiesSection property={item} />
+              <AmentitiesSection collocation={item} />
               <Divider style={styles.divider} />
-              <LeaseAndFeesSection property={item} />
+              <LeaseAndFeesSection collocation={item} />
               <Divider style={styles.divider} />
-              <LocationSection property={item} />
+              <LocationSection collocation={item} />
               <Divider style={styles.divider} />
-              <ReviewSection property={item} />
+              <ReviewSection collocation={item} />
               <Divider style={styles.divider} />
             </View>
           </>

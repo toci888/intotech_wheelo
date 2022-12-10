@@ -27,7 +27,8 @@ export const AnimatedListHeader = ({
   
   const submit = async () => {
     console.log(startLocation.display_name)
-    console.log(i18n.t('Search'))
+    console.log(endLocation.display_name)
+
     if(startLocation.display_name !== i18n.t('Search') && endLocation.display_name !== i18n.t('Search')) {
 
       navigation.navigate("Root", {

@@ -71,7 +71,7 @@ export const MyPropertiesScreen = () => {
               property={item}
               myProperty
               onPress={() =>
-                navigation.navigate("EditProperty", { propertyID: item.ID })
+                navigation.navigate("EditProperty", { collocationId: item.ID })
               }
             />
           )}

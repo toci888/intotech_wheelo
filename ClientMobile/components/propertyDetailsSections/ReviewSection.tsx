@@ -1,13 +1,15 @@
+import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 import { Text, Button } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
 
-import { Collocation } from "../../types/property";
+import { CollocateAccount } from "../../types/collocation";
 import { OverallReviewScoreCard } from "../OverallReviewScoreCard";
 import { ReviewCard } from "../ReviewCard";
 import { getStateAbbreviation } from "../../utils/getStateAbbreviation";
+import { Review } from "../../types/review";
 
-export const ReviewSection = ({ property }: { property: Collocation }) => {
+export const ReviewSection = ({ collocation }: { collocation: CollocateAccount }) => {
   const { navigate } = useNavigation();
 
   return (
@@ -15,34 +17,34 @@ export const ReviewSection = ({ property }: { property: Collocation }) => {
       <Text category={"h5"} style={styles.defaultMarginVertical}>
         Reviews
       </Text>
-      {property.reviews ? (
+      {collocation.name ? (
         <>
           <OverallReviewScoreCard
-            numberOfReviews={property.reviews ? property.reviews.length : 0}
-            score={property.stars}
+            numberOfReviews={collocation.name ? collocation.surname.length : 0}
+            score={collocation.idAccount}
             style={styles.defaultMarginVertical}
           />
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
             style={styles.flatListMargin}
-            data={property.reviews}
-            keyExtractor={(item) => item.ID.toString()}
-            renderItem={({ item }) => <ReviewCard review={item} />}
+            data={[collocation.name, collocation.surname]}
+            keyExtractor={(item) => item}
+            renderItem={({ item }) => <ReviewCard review={{ item } as unknown as Review} />}
           />
         </>
       ) : (
-        <Text>No reviews yet. Be the first one to review this property.</Text>
+        <Text>No reviews yet. Be the first one to review this collocation.</Text>
       )}
 
       <Button
         onPress={() =>
           navigate("Review", {
-            propertyID: property.ID,
-            propertyName: property?.name
-              ? property.name
-              : `${property.street}, ${getStateAbbreviation(property.state)}, ${
-                  property.zip
+            collocationID: collocation.idAccount,
+            collocationName: collocation?.name
+              ? collocation.name
+              : `${collocation.surname}, ${getStateAbbreviation(collocation.surname)}, ${
+                  collocation.surname
                 }`,
           })
         }

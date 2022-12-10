@@ -9,7 +9,7 @@ import { Row } from "../components/Row";
 import { theme } from "../theme";
 import { properties } from "../data/properties";
 import { Card } from "../components/Card";
-import { Collocation } from "../types/property";
+import { Collocation } from "../types/collocation";
 import { SignUpAndSignInButtons } from "../components/SignUpAndSignInButtons";
 import { useUser } from "../hooks/useUser";
 import { Loading } from "../components/Loading";

@@ -3,28 +3,28 @@ import { Share, View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
-import { Collocation } from "../../types/property";
+import { CollocateAccount } from "../../types/collocation";
 import { theme } from "../../theme";
 import { Row } from "../Row";
 import { getStateAbbreviation } from "../../utils/getStateAbbreviation";
 import { useUser } from "../../hooks/useUser";
-import { useSavePropertyMutation } from "../../hooks/mutations/useSavePropertyMutation";
+import { useSaveCollocationMutation } from "../../hooks/mutations/useSavePropertyMutation";
 import React from "react";
 
-export const PropertyHeaderSection = ({ property }: { property: Collocation }) => {
+export const CollocationHeaderSection = ({ collocation }: { collocation: CollocateAccount }) => {
   const { user, setSavedProperties } = useUser();
-  const saveProperty = useSavePropertyMutation();
+  const saveCollocation = useSaveCollocationMutation();
 
   const alterUsersSavedProperties = (
-    propertyID: number,
+    collocationID: number,
     type: "add" | "remove"
   ) => {
     let newProperties: number[] = user?.savedProperties
       ? [...user.savedProperties]
       : [];
 
-    if (type === "add") newProperties.push(propertyID);
-    else newProperties = newProperties.filter((i) => i !== propertyID);
+    if (type === "add") newProperties.push(collocationID);
+    else newProperties = newProperties.filter((i) => i !== collocationID);
 
     setSavedProperties(newProperties);
   };
@@ -32,10 +32,10 @@ export const PropertyHeaderSection = ({ property }: { property: Collocation }) =
   const handleHeartPress = () => {
     if (!user) return alert("Please sign up or sign in to save properties");
     let op: "add" | "remove" = "add";
-    if (property?.liked) op = "remove";
+    if (collocation?.areFriends) op = "remove";
 
-    alterUsersSavedProperties(property.ID, op);
-    saveProperty.mutate({ propertyID: property.ID, op });
+    alterUsersSavedProperties(collocation.idAccount, op);
+    saveCollocation.mutate({ collocationID: collocation.idAccount, op } as any);
   };
 
   const shareItem = async () => {
@@ -50,17 +50,15 @@ export const PropertyHeaderSection = ({ property }: { property: Collocation }) =
 
   return (
     <>
-      {property.name ? (
+      {collocation.name ? (
         <Text category={"h5"} style={styles.defaultMarginTop}>
-          {property.name}
+          {collocation.name}
         </Text>
       ) : null}
       <Row style={[styles.containerRow, styles.defaultMarginTop]}>
         <View>
-          <Text category={"c1"}>{property.street}</Text>
-          <Text category={"c1"}>{`${property.city}, ${getStateAbbreviation(
-            property.state
-          )} ${property.zip}`}</Text>
+          <Text category={"c1"}>{collocation.name}</Text>
+          <Text category={"c1"}>{`${collocation.surname}`}</Text>
         </View>
         <Row style={styles.iconRow}>
           <MaterialIcons
@@ -74,7 +72,7 @@ export const PropertyHeaderSection = ({ property }: { property: Collocation }) =
           />
           <MaterialCommunityIcons
             onPress={handleHeartPress}
-            name={property?.liked ? "heart" : "heart-outline"}
+            name={collocation?.areFriends ? "heart" : "heart-outline"}
             size={30}
             color={theme["color-primary-500"]}
           />

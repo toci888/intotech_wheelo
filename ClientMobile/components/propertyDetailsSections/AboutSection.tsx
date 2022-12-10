@@ -1,27 +1,28 @@
+import React from "react";
 import { StyleSheet } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import { Row } from "../Row";
-import { Collocation } from "../../types/property";
+import { CollocateAccount } from "../../types/collocation";
 
-export const AboutSection = ({ property }: { property: Collocation }) => {
-  if (property.description)
+export const AboutSection = ({ collocation }: { collocation: CollocateAccount }) => {
+  if (collocation.name)
     return (
       <>
         <Text category={"h5"} style={styles.header}>
           About
         </Text>
-        {property?.name ? (
+        {collocation?.name ? (
           <Row>
             <MaterialIcons color={"#36454f"} size={24} name="apartment" />
 
             <Text category={"h6"} style={styles.apartmentText}>
-              {property?.name}
+              {collocation?.name}
             </Text>
           </Row>
         ) : null}
-        <Text category={"c1"}>{property.description}</Text>
+        <Text category={"c1"}>{collocation.surname}</Text>
       </>
     );
 

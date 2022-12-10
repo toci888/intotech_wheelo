@@ -5,12 +5,12 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 import { theme } from "../theme";
-import { CollocateAccount } from "../types/property";
+import { CollocateAccount } from "../types/collocation";
 import { Row } from "./Row";
 import { callPhoneNumber } from "../utils/callPhoneNumber";
 import { getStateAbbreviation } from "../utils/getStateAbbreviation";
 import { useUser } from "../hooks/useUser";
-import { useSavePropertyMutation } from "../hooks/mutations/useSavePropertyMutation";
+import { useSaveCollocationMutation } from "../hooks/mutations/useSavePropertyMutation";
 
 export const CardInformation = ({
   property,
@@ -21,7 +21,7 @@ export const CardInformation = ({
 }) => {
   const navigation = useNavigation();
   const { user, setSavedProperties } = useUser();
-  const saveProperty = useSavePropertyMutation();
+  const saveProperty = useSaveCollocationMutation();
 
   const alterUsersSavedProperties = (
     propertyID: number,
@@ -42,18 +42,18 @@ export const CardInformation = ({
     let op: "add" | "remove" = "add";
     if (property?.areFriends) op = "remove";
 
-    alterUsersSavedProperties(property.accountid, op);
-    saveProperty.mutate({ propertyID: property.accountid, op });
+    alterUsersSavedProperties(property.idAccount, op);
+    saveProperty.mutate({ propertyID: property.idAccount, op });
   };
 
   const manageUnitsNavigation = () =>
-    navigation.navigate("ManageUnits", { propertyID: property.accountid });
+    navigation.navigate("ManageUnits", { propertyID: property.idAccount });
 
   const emailNavigation = () =>
-    navigation.navigate("MessageProperty", { propertyID: property.accountid });
+    navigation.navigate("MessageProperty", { propertyID: property.idAccount });
 
   const editPropertyNavigation = () =>
-    navigation.navigate("EditProperty", { propertyID: property.accountid });
+    navigation.navigate("EditProperty", { collocationId: property.idAccount });
 
   const getLowAndHighText = (type: "rent" | "bedroom") => {
     // if (type === "rent") {

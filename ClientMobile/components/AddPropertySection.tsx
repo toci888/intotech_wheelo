@@ -1,3 +1,4 @@
+import React from "react";
 import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
 import { Text, Input, Divider, Button } from "@ui-kitten/components";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
@@ -16,7 +17,7 @@ import { SearchAddress } from "./SearchAddress";
 import { getStateAbbreviation } from "../utils/getStateAbbreviation";
 import { Select } from "./Select";
 import { theme } from "../theme";
-import { CreateProperty } from "../types/property";
+import { CreateProperty } from "../types/collocation";
 import { useUser } from "../hooks/useUser";
 import { bedValues } from "../constants/bedValues";
 import { bathValues } from "../constants/bathValues";

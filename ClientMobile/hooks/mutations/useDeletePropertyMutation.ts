@@ -2,7 +2,7 @@ import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
 
 import { endpoints, queryKeys } from "../../constants/constants";
-import { Collocation } from "../../types/property";
+import { Collocation } from "../../types/collocation";
 import { useUser } from "../useUser";
 
 const deleteProperty = (propertyID: number, token?: string) =>

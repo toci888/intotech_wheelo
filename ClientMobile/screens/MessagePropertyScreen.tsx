@@ -67,8 +67,8 @@ export const MessagePropertyScreen = ({
 
   const sendMessage = (text: string) => {
     createConversation.mutate({
-      ownerID: property.methodResult.sourceAccount.accountid, //property.userID,
-      propertyID: property.methodResult.accountsCollocated[propertyID].accountid,
+      ownerID: property.methodResult.sourceAccount.idAccount, //property.userID,
+      propertyID: property.methodResult.accountsCollocated[propertyID].idAccount,
       tenantID: user.ID,
       propertyName: property.methodResult.accountsCollocated[propertyID].name
         ? property.methodResult.accountsCollocated[propertyID].name : 'brak 74 linia',

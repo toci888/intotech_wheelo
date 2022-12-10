@@ -1,36 +1,24 @@
-import {
-  Pressable,
-  ViewStyle,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Modal,
-  Dimensions,
-} from "react-native";
+import React from "react";
+import { Pressable, ViewStyle, StyleSheet, TouchableOpacity, View, Modal, Dimensions } from "react-native";
 import { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
-import { useMutation, useQueryClient } from "react-query";
-import axios from "axios";
 
-import { Collocation, CollocateAccount } from "../types/property";
+import { CollocateAccount } from "../types/collocation";
 import { ImageCarousel } from "./ImageCarousel";
 import { CardInformation } from "./CardInformation";
 import { LISTMARGIN, queryKeys } from "../constants/constants";
 import { theme } from "../theme";
-import { endpoints } from "../constants/constants";
-import { useLoading } from "../hooks/useLoading";
 import { useDeletePropertyMutation } from "../hooks/mutations/useDeletePropertyMutation";
-import React from "react";
 
 export const Card = ({
-  property,
+  collocation,
   onPress,
   myProperty,
   style,
 }: {
-  property: CollocateAccount;
+  collocation: CollocateAccount;
   onPress?: () => void;
   myProperty?: boolean;
   style?: ViewStyle;
@@ -42,12 +30,12 @@ export const Card = ({
   const deleteProperty = useDeletePropertyMutation();
 
   const handleEditProperty = () => {
-    navigation.navigate("EditProperty", { propertyID: property.accountid });
+    navigation.navigate("EditProperty", { collocationId: collocation.idaccount });
     closeModal();
   };
 
   const handleDeleteProperty = () => {
-    deleteProperty.mutate({ propertyID: property.accountid });
+    deleteProperty.mutate({ propertyID: collocation.idaccount });
     closeModal();
   };
 
@@ -58,11 +46,11 @@ export const Card = ({
     >
       <ImageCarousel
         onImagePress={onPress}
-        images={property.image}
+        images={collocation.image}
         chevronsShown
       />
 
-      <CardInformation property={property} myProperty={myProperty} />
+      <CardInformation property={collocation} myProperty={myProperty} />
 
       {myProperty ? (
         <TouchableOpacity onPress={openModal} style={styles.ellipses}>

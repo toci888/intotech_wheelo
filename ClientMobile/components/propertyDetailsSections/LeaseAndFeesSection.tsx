@@ -1,28 +1,30 @@
+import React from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import { Collocation } from "../../types/property";
+import { CollocateAccount, Collocation } from "../../types/collocation";
 import { Row } from "../Row";
 import { PetCard } from "../PetCard";
 import { GeneralTextCard } from "../GeneralTextCard";
 import { CatsAndDogs, CatsOnly, DogsOnly } from "../../constants/petValues";
+import { Driver } from "../../types";
 
-export const LeaseAndFeesSection = ({ property }: { property: Collocation }) => {
+export const LeaseAndFeesSection = ({ collocation }: { collocation: CollocateAccount }) => {
   const leaseLengths = [];
   const leaseLengthExists = new Map<string, boolean>();
 
-  let minDeposit = property.apartments[0].deposit;
-  let maxDeposit = property.apartments[0].deposit;
-  for (let apartment of property.apartments) {
-    if (apartment.deposit > maxDeposit) maxDeposit = apartment.deposit;
-    if (apartment.deposit < minDeposit) minDeposit = apartment.deposit;
+  let minDeposit = collocation.latitudefrom;
+  let maxDeposit = collocation.latitudeto;
+  // for (let apartment of collocation.apartments) {
+    if (collocation.latitudefrom > maxDeposit) maxDeposit = collocation.latitudefrom;
+    if (collocation.latitudeto < minDeposit) minDeposit = collocation.latitudeto;
 
-    if (!leaseLengthExists.get(apartment.leaseLength)) {
-      leaseLengths.push(apartment.leaseLength);
-      leaseLengthExists.set(apartment.leaseLength, true);
+    if (!leaseLengthExists.get(collocation.phoneNumber)) {
+      leaseLengths.push(collocation.phoneNumber);
+      leaseLengthExists.set(collocation.phoneNumber, true);
     }
-  }
+  // }
 
   let downDepositBody = [];
   if (minDeposit === maxDeposit) downDepositBody.push(`$${minDeposit}`);
@@ -32,9 +34,9 @@ export const LeaseAndFeesSection = ({ property }: { property: Collocation }) => 
   }
 
   const getPetsAllowedText = () => {
-    if (property.petsAllowed === CatsAndDogs) return "Cats and Dogs Allowed";
-    if (property.petsAllowed === CatsOnly) return "Only Cats Allowed";
-    if (property.petsAllowed === DogsOnly) return "Only Dogs Allowed";
+    if (collocation.isDriver === Driver.driver) return "Cats and Dogs Allowed";
+    if (collocation.isDriver === Driver.passenger) return "Only Cats Allowed";
+    // if (collocation.petsAllowed === DogsOnly) return "Only Dogs Allowed";
     return "No Pets Allowed";
   };
 
@@ -43,7 +45,7 @@ export const LeaseAndFeesSection = ({ property }: { property: Collocation }) => 
       <Text category={"h5"} style={styles.defaultMarginVertical}>
         Lease Detail & Fees
       </Text>
-      {property.petsAllowed ? (
+      {collocation.isDriver === Driver.driver ? (
         <>
           <Row style={styles.row}>
             <MaterialIcons name="pets" color="black" size={24} />
@@ -54,7 +56,7 @@ export const LeaseAndFeesSection = ({ property }: { property: Collocation }) => 
           <GeneralTextCard heading="Pets" body={[getPetsAllowedText()]} />
         </>
       ) : null}
-      {property.parkingFee ? (
+      {collocation.isDriver === Driver.driver ? (
         <>
           <Row style={styles.row}>
             <MaterialIcons name="attach-money" color="black" size={24} />
@@ -64,7 +66,7 @@ export const LeaseAndFeesSection = ({ property }: { property: Collocation }) => 
           </Row>
           <GeneralTextCard
             heading="parking"
-            body={[`${property.parkingFee}`]}
+            body={[`${collocation.name}`]}
           />
         </>
       ) : null}

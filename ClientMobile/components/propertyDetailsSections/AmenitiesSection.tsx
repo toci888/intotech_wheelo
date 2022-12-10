@@ -1,28 +1,29 @@
+import React from "react";
 import { StyleSheet } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { Row } from "../Row";
 import { BulletedList } from "../BulletedList";
-import { Collocation } from "../../types/property";
+import { CollocateAccount } from "../../types/collocation";
 
-export const AmentitiesSection = ({ property }: { property: Collocation }) => {
+export const AmentitiesSection = ({ collocation }: { collocation: CollocateAccount }) => {
   const apartmentsAmenities = [];
   const amenityExists = new Map<string, boolean>();
-  for (let apartment of property.apartments) {
-    if (apartment?.amenities) {
-      for (let amenity of apartment.amenities) {
-        if (!amenityExists.get(amenity)) {
-          apartmentsAmenities.push(amenity);
-          amenityExists.set(amenity, true);
-        }
-      }
+  // for (let apartment of collocation.apartments) {
+    if (collocation.name) {
+      // for (let amenity of apartment.amenities) {
+        // if (!amenityExists.get(amenity)) {
+          apartmentsAmenities.push(collocation.name);
+          amenityExists.set(collocation.name, true);
+        // }
+      // }
     }
-  }
+  // }
 
   return (
     <>
-      {property.amenities && property.amenities.length > 0 ? (
+      {collocation.name && collocation.name.length > 0 ? (
         <>
           <Text category={"h5"} style={styles.defaultMarginVertical}>
             Amenities
@@ -37,7 +38,7 @@ export const AmentitiesSection = ({ property }: { property: Collocation }) => {
               Community Amenities
             </Text>
           </Row>
-          <BulletedList data={property.amenities} />
+          <BulletedList data={[collocation.name, collocation.surname]} />
         </>
       ) : null}
 

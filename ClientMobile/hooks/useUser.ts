@@ -5,7 +5,7 @@ import * as Notifications from "expo-notifications";
 
 import { AuthContext } from "../context";
 import { User } from "../types/user";
-import { CollocateAccount } from "../types/property";
+import { CollocateAccount } from "../types/collocation";
 import { queryKeys } from "../constants/constants";
 import { alterThemeMode, alterAllowsNotifications, alterPushToken } from "../services/user";
 import { socket } from "../constants/socket";
@@ -39,7 +39,7 @@ export const useUser = () => {
     if (searchCollocations) {
       for (let i of searchCollocations) {
         i.areFriends = false;
-        if (user.savedProperties?.includes(i.accountid)) i.areFriends = true;
+        if (user.savedProperties?.includes(i.idAccount)) i.areFriends = true;
       }
       queryClient.setQueryData(queryKeys.searchCollocations, searchCollocations);
     }

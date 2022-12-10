@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { CollocateAccount, Collocation } from "../types/property";
+import { CollocateAccount, Collocation } from "../types/collocation";
 import { MapMarker } from "./MapMarker";
 import { theme } from "../theme";
 import { Card } from "./Card";
@@ -59,10 +59,9 @@ export const Map = ({
   // ]);
 
   const searchProperties = useSearchPropertiesQuery(location);
-  let property: any;
-  if(searchProperties.data?.isSuccess) {
-    property = searchProperties.data as Collocation;
-  }
+  let collocation: Collocation = searchProperties.data?.isSuccess ? searchProperties.data as Collocation : {} as Collocation;
+  
+  // const searchProperties = searchProperties.data?.isSuccess ? searchProperties.data : {};
 
   const navigation = useNavigation();
 
@@ -74,9 +73,6 @@ export const Map = ({
     mapRef?.current?.fitToCoordinates(coords);
 
     if (!isNaN(Number(location.startLocation.lat))) {
-      console.log("LAT", (Number(location.startLocation.lat) + Number(location.endLocation.lat)) /2)
-      console.log("LON", (Number(location.startLocation.lon) + Number(location.endLocation.lon)) /2)
-
       setRegion({
         latitude: (Number(location.startLocation.lat) + Number(location.endLocation.lat)) / 2,
         longitude: (Number(location.startLocation.lon) + Number(location.endLocation.lon)) / 2,
@@ -96,23 +92,23 @@ export const Map = ({
   };
 
   const handleMarkerPress = (index: number) => {
-    console.log("DANE: ", property.methodResult.accountsCollocated[index])
+    console.log("DANE: ", collocation.methodResult.accountsCollocated[index])
     setTimeout(() => {
       mapRef.current?.animateCamera({
         center: {
-          latitude: property.methodResult.accountsCollocated[index].latitudefrom,
-          longitude: property.methodResult.accountsCollocated[index].longitudefrom,
+          latitude: collocation.methodResult.accountsCollocated[index].latitudefrom,
+          longitude: collocation.methodResult.accountsCollocated[index].longitudefrom,
         },
       });
     }, 100);
     setTimeout(() => {
       const newRegion: Region = {
-        latitude: property.methodResult.accountsCollocated[index].latitudefrom,
+        latitude: collocation.methodResult.accountsCollocated[index].latitudefrom,
         latitudeDelta:
           region?.latitudeDelta && region.latitudeDelta < 4
             ? region.latitudeDelta
             : 4,
-        longitude: property.methodResult.accountsCollocated[index].longitudefrom,
+        longitude: collocation.methodResult.accountsCollocated[index].longitudefrom,
         longitudeDelta:
           region?.longitudeDelta && region.longitudeDelta < 4
             ? region.longitudeDelta
@@ -170,7 +166,7 @@ export const Map = ({
         </>)
       }
 
-      {property && property.methodResult.accountsCollocated.map((i: CollocateAccount, index: number) => (
+      {collocation.methodResult && collocation.methodResult.accountsCollocated.map((i: CollocateAccount, index: number) => (
         <MapMarker
           key={index} 
           lat={i.latitudefrom}
@@ -193,12 +189,14 @@ export const Map = ({
             </TouchableOpacity>
           )}
           <Card
-            property={property.methodResult.accountsCollocated[activeIndex]}  //property[activeIndex]}
+            collocation={collocation.methodResult.accountsCollocated[activeIndex]}
             style={styles.card}
-            onPress={() =>
+            onPress={() =>{
+              console.log("ASDFGH", collocation.methodResult.accountsCollocated[activeIndex])
               navigation.navigate("PropertyDetails", {
-                propertyID: property.methodResult.accountsCollocated[activeIndex].accountid,
+                propertyID: collocation.methodResult.accountsCollocated[activeIndex].idAccount,
               })
+            }
             }
           />
         </>

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 
 import { endpoints, queryKeys } from "../../constants/constants";
-import { Collocation, CollocateAccount } from "../../types/property";
+import { Collocation, CollocateAccount } from "../../types/collocation";
 import { useUser } from "../useUser";
 
 const fetchProperty = async (propertyID: number): Promise<CollocateAccount> => {
@@ -18,8 +18,8 @@ export const useSelectedPropertyQuery = (propertyID: number) => {
     fetchProperty(propertyID)
   );
 
-  const data = {accountid: 1} as CollocateAccount//queryInfo?.data; // TODO!
-  if (data) if (user?.savedProperties?.includes(data.accountid)) data.areFriends = true;
+  const data = {idAccount: 1} as CollocateAccount//queryInfo?.data; // TODO!
+  if (data) if (user?.savedProperties?.includes(data.idAccount)) data.areFriends = true;
 
   return {
     ...queryInfo,

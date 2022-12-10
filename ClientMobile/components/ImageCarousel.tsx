@@ -1,12 +1,5 @@
-import {
-  FlatList,
-  Pressable,
-  Image,
-  StyleSheet,
-  ImageStyle,
-  View,
-  ViewStyle,
-} from "react-native";
+import React from "react";
+import {FlatList, Pressable, Image, StyleSheet, ImageStyle, View, ViewStyle,} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState, useRef } from "react";
 import { Text } from "@ui-kitten/components";
