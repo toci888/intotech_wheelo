@@ -23,7 +23,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
         private const int MinutesInterval = 15;
         private const int DistanceNormalize = 1000;
 
-        protected IWorktripgenLogic WorktripLogic;
+        protected IWorktripgenLogic WorktripGenLogic;
         protected IVaworktripgengeolocationLogic VaworktripgengeolocationLogic; // distinct
         protected IVacollocationsgeolocationLogic VacollocationsgeolocationLogic; //accounts collocated, full data
         protected IAccountscollocationLogic AccountscollocationLogic; // an int map
@@ -39,7 +39,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             IVacollocationsgeolocationToAccountCollocationDto toAccountCollocationDto,
             IFriendLogic friendLogic)
         {
-            WorktripLogic = worktripgenLogic;
+            WorktripGenLogic = worktripgenLogic;
             VaworktripgengeolocationLogic = vaworktripgengeolocationLogic;
             VacollocationsgeolocationLogic = vaccountscollocationsworktripLogic;
             AccountscollocationLogic = accountscollocationLogic;
@@ -52,7 +52,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
         {
             Worktripgen workTripGenRecord = MapWorkTrip(workTripGen);
 
-            List<Worktripgen> workTrips  = WorktripLogic.Select(m => m.Idaccount == workTripGen.AccountId && m.Searchid == workTripGenRecord.Searchid).ToList();
+            List<Worktripgen> workTrips  = WorktripGenLogic.Select(m => m.Idaccount == workTripGen.Idaccount && m.Searchid == workTripGenRecord.Searchid).ToList();
 
             if (workTrips.Count() > 0)
             {
@@ -63,11 +63,11 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                 }
 
                 // match workTripGenRecord with db -> update ?
-                workTripGenRecord = WorktripLogic.Update(workTripGenRecord);
+                workTripGenRecord = WorktripGenLogic.Update(workTripGenRecord);
             }
             else
             {
-                workTripGenRecord = WorktripLogic.Insert(workTripGenRecord);
+                workTripGenRecord = WorktripGenLogic.Insert(workTripGenRecord);
             }
 
             Collocate(workTripGenRecord);
@@ -119,7 +119,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
         {
             double distance = workTripGenRecord.Acceptabledistance.Value / DistanceDivisor;
 
-            List<Worktripgen> collocations = WorktripLogic.Select(worktrip => worktrip.Idaccount != workTripGenRecord.Idaccount &&
+            List<Worktripgen> collocations = WorktripGenLogic.Select(worktrip => worktrip.Idaccount != workTripGenRecord.Idaccount &&
                 workTripGenRecord.Fromhour.Value.IsBetween(worktrip.Fromhour.Value.AddMinutes(-MinutesInterval), worktrip.Fromhour.Value.AddMinutes(MinutesInterval)) &&
                 workTripGenRecord.Tohour.Value.IsBetween(worktrip.Tohour.Value.AddMinutes(-MinutesInterval), worktrip.Tohour.Value.AddMinutes(MinutesInterval)) &&
 
@@ -166,7 +166,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
         {
             Worktripgen result = new Worktripgen();
 
-            if (workTripGen.AccountId > WorktripgenLogic.AccountIdOffset)
+            if (workTripGen.Idaccount > WorktripgenLogic.AccountIdOffset)
             {
                 result.Isuser = true;
             }
@@ -183,7 +183,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             result.Acceptabledistance = workTripGen.AcceptableDistance;
             result.Fromhour = new TimeOnly(int.Parse(FromTime[0]), int.Parse(FromTime[1]));
             result.Tohour = new TimeOnly(int.Parse(ToTime[0]), int.Parse(ToTime[1]));
-            result.Idaccount = workTripGen.AccountId;
+            result.Idaccount = workTripGen.Idaccount;
             result.Latitudefrom = double.Parse(workTripGen.StartLocation.lat.Replace(".", ","));
             result.Latitudeto = double.Parse(workTripGen.EndLocation.lat.Replace(".", ","));
             result.Longitudefrom = double.Parse(workTripGen.StartLocation.lon.Replace(".", ","));
