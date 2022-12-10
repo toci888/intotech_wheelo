@@ -31,7 +31,7 @@ export type RootStackParamList = {
   ManageUnits: { propertyID: number };
   Review: { propertyID: number; propertyName: string };
   WheeloMain: undefined;
-  EmailVerification: undefined;
+  EmailVerification: any;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

@@ -77,7 +77,7 @@ export const useAuth = () => {
         values.firstName,
         values.lastName,
         values.email,
-        values.password
+        values.password,
       );
       handleSignInUser(user);
     } catch (error) {

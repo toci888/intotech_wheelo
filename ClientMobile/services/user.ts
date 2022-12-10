@@ -12,7 +12,7 @@ export const registerUser = async (
   firstName: string,
   lastName: string,
   email: string,
-  password: string
+  password: string,
 ) => {
   try {
     password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, password);

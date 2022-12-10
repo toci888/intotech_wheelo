@@ -18,7 +18,6 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
 
 interface IUser {
-  id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -28,11 +27,14 @@ type SignUpProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>
 
 export const SignUpScreen = () => {
   const [user, setUser] = useState<IUser>({
-    id: "zxcD@#gry123",
-    firstName: "asd",
-    lastName: "qwe",
-    email: "asdf@wp.pl",
-    password: "zxcD@#gry123",
+    // firstName: "asd",
+    // lastName: "qwe",
+    // email: "asdf@wp.pl",
+    // password: "zxcD@#gry123",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
   });
   const navigation = useNavigation();
   const { appleAuth, facebookAuth, googleAuth, nativeRegister } = useAuth();
@@ -40,7 +42,7 @@ export const SignUpScreen = () => {
   return (
     <KeyboardAwareScrollView bounces={false}>
       <Screen>
-        <ModalHeader text="JPApartments" xShown />
+        <ModalHeader text="Wheelo" xShown />
         <View style={styles.container}>
           <Text category={"h5"} style={styles.header}>
             Sign Up
@@ -152,9 +154,10 @@ export const SignUpScreen = () => {
                   <Button
                     style={styles.signUpButton}
                     // onPress={() => handleSubmit()}
-                    onPress={() =>
-                      navigation.navigate(`EmailVerification`)
-                    }
+                    onPress={() => {
+                      handleSubmit();
+                      navigation.navigate(`EmailVerification`, { values })
+                    }}
                   >
                     Sign Up
                   </Button>

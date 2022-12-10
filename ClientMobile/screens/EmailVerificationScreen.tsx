@@ -1,6 +1,13 @@
-
-import {Animated, Image, Platform, SafeAreaView, Text, View, StyleSheet} from 'react-native';
-import React, {useState} from 'react';
+import {
+  Animated,
+  Image,
+  Platform,
+  SafeAreaView,
+  Text,
+  View,
+  StyleSheet,
+} from "react-native";
+import React, { useEffect, useState } from "react";
 import { theme } from "../theme";
 
 import {
@@ -8,19 +15,23 @@ import {
   Cursor,
   useBlurOnFulfill,
   useClearByFocusCell,
-} from 'react-native-confirmation-code-field';
+} from "react-native-confirmation-code-field";
+import { useRoute } from "@react-navigation/native";
+import { useAuth } from "../hooks/useAuth";
+import axios from "axios";
+import { endpoints } from "../constants/constants";
 
-const {Value, Text: AnimatedText} = Animated;
+const { Value, Text: AnimatedText } = Animated;
 
 const CELL_COUNT = 4;
 const source = {
-  uri: 'https://user-images.githubusercontent.com/4661784/56352614-4631a680-61d8-11e9-880d-86ecb053413d.png',
+  uri: "https://user-images.githubusercontent.com/4661784/56352614-4631a680-61d8-11e9-880d-86ecb053413d.png",
 };
 
 const animationsColor = [...new Array(CELL_COUNT)].map(() => new Value(0));
 const animationsScale = [...new Array(CELL_COUNT)].map(() => new Value(1));
 //TODO: typing any
-const animateCell = ({hasValue, index, isFocused}: any) => {
+const animateCell = ({ hasValue, index, isFocused }: any) => {
   Animated.parallel([
     Animated.timing(animationsColor[index], {
       useNativeDriver: false,
@@ -36,14 +47,41 @@ const animateCell = ({hasValue, index, isFocused}: any) => {
 };
 
 export const EmailVerificationScreen = () => {
-  const [value, setValue] = useState('');
-  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
+  const route = useRoute();
+  const [value, setValue] = useState("");
+  const [registrationForm, setRegistartionForm] = useState({});
+  const { appleAuth, facebookAuth, googleAuth, nativeRegister } = useAuth();
+
+  const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
     setValue,
   });
 
-  const renderCell = ({index, symbol, isFocused}) => {
+  const handleVerify = () => {
+    const user = route.params.values;
+    setRegistartionForm({ ...user, code: value });
+    console.log(user.email);
+    console.log(parseInt(value));
+    console.log(`${endpoints.emailVerification}`);
+
+    axios
+      .post(`${endpoints.emailVerification}`, {
+        email: `${user.email}`,
+        code: parseInt(value),
+      })
+      .then(function (response) {
+        response.data.isSuccess ? alert("sukces") : alert("niepowodzenie");
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {}, [registrationForm]);
+
+  const renderCell = ({ index, symbol, isFocused }) => {
     const hasValue = Boolean(symbol);
     const animatedCellStyle = {
       backgroundColor: hasValue
@@ -72,14 +110,15 @@ export const EmailVerificationScreen = () => {
     // Run animation on next event loop tik
     // Because we need first return new style prop and then animate this value
     setTimeout(() => {
-      animateCell({hasValue, index, isFocused});
+      animateCell({ hasValue, index, isFocused });
     }, 0);
 
     return (
       <AnimatedText
         key={index}
         style={[styles.cell, animatedCellStyle]}
-        onLayout={getCellOnLayoutHandler(index)}>
+        onLayout={getCellOnLayoutHandler(index)}
+      >
         {symbol || (isFocused ? <Cursor /> : null)}
       </AnimatedText>
     );
@@ -90,7 +129,7 @@ export const EmailVerificationScreen = () => {
       <Text style={styles.title}>Email Verification</Text>
       <Image style={styles.icon} source={source} />
       <Text style={styles.subTitle}>
-        Please enter the verification code{'\n'}
+        Please enter the verification code{"\n"}
         we send to your email address
       </Text>
 
@@ -106,38 +145,40 @@ export const EmailVerificationScreen = () => {
         renderCell={renderCell}
       />
       <View style={styles.nextButton}>
-        <Text style={styles.nextButtonText}>Verify</Text>
+        <Text style={styles.nextButtonText} onPress={handleVerify}>
+          Verify
+        </Text>
       </View>
     </SafeAreaView>
   );
 };
 const CELL_SIZE = 70;
 const CELL_BORDER_RADIUS = 8;
-const DEFAULT_CELL_BG_COLOR = theme['color-white'];
-const NOT_EMPTY_CELL_BG_COLOR = theme['color-violet'];
-const ACTIVE_CELL_BG_COLOR = theme['color-white'];
+const DEFAULT_CELL_BG_COLOR = theme["color-white"];
+const NOT_EMPTY_CELL_BG_COLOR = theme["color-violet"];
+const ACTIVE_CELL_BG_COLOR = theme["color-white"];
 
 const styles = StyleSheet.create({
   codeFieldRoot: {
     height: CELL_SIZE,
     marginTop: 30,
     paddingHorizontal: 20,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   cell: {
     marginHorizontal: 8,
     height: CELL_SIZE,
     width: CELL_SIZE,
     lineHeight: CELL_SIZE - 5,
-    ...Platform.select({web: {lineHeight: 65}}),
+    ...Platform.select({ web: { lineHeight: 65 } }),
     fontSize: 30,
-    textAlign: 'center',
+    textAlign: "center",
     borderRadius: CELL_BORDER_RADIUS,
-    color: theme['color-violet'],
-    backgroundColor: theme['color-white'],
+    color: theme["color-violet"],
+    backgroundColor: theme["color-white"],
 
     // IOS
-    shadowColor: theme['color-black'],
+    shadowColor: theme["color-black"],
     shadowOffset: {
       width: 0,
       height: 1,
@@ -157,37 +198,37 @@ const styles = StyleSheet.create({
   },
   title: {
     paddingTop: 50,
-    color: theme['color-black'],
+    color: theme["color-black"],
     fontSize: 25,
-    fontWeight: '700',
-    textAlign: 'center',
+    fontWeight: "700",
+    textAlign: "center",
     paddingBottom: 40,
   },
   icon: {
     width: 217 / 2.4,
     height: 158 / 2.4,
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   subTitle: {
     paddingTop: 30,
-    color: theme['color-black'],
-    textAlign: 'center',
+    color: theme["color-black"],
+    textAlign: "center",
   },
   nextButton: {
     marginTop: 30,
     borderRadius: 8,
     height: 60,
-    backgroundColor: theme['color-violet'],
-    justifyContent: 'center',
+    backgroundColor: theme["color-violet"],
+    justifyContent: "center",
     minWidth: 200,
     marginBottom: 100,
     marginHorizontal: 20,
   },
   nextButtonText: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 20,
-    color: theme['color-white'],
-    fontWeight: '700',
+    color: theme["color-white"],
+    fontWeight: "700",
   },
 });

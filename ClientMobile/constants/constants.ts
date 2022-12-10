@@ -52,6 +52,7 @@ export const endpoints = {
   recognizePlaceId: googleEndpoint + "/recognize-place-id",
   search: locationEndpoint + "/search",
   register: userEndpoint + "/register",
+  emailVerification: userEndpoint + "/confirm-email",
   login: userEndpoint + "/login",
   forgotPassword: userEndpoint + "/forgotpassword",
   resetPassword: userEndpoint + "/resetpassword",
