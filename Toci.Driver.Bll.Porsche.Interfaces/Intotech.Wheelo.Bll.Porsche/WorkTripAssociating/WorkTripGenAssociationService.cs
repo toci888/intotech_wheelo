@@ -52,7 +52,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
         {
             Worktripgen workTripGenRecord = MapWorkTrip(workTripGen);
 
-            List<Worktripgen> workTrips  = WorktripLogic.Select(m => m.Idaccount == workTripGen.AccountId && m.Searchid == workTripGenRecord.Searchid).ToList();
+            List<Worktripgen> workTrips  = WorktripLogic.Select(m => m.Idaccount == workTripGen.Idaccount && m.Searchid == workTripGenRecord.Searchid).ToList();
 
             if (workTrips.Count() > 0)
             {
@@ -166,7 +166,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
         {
             Worktripgen result = new Worktripgen();
 
-            if (workTripGen.AccountId > WorktripgenLogic.AccountIdOffset)
+            if (workTripGen.Idaccount > WorktripgenLogic.AccountIdOffset)
             {
                 result.Isuser = true;
             }
@@ -183,7 +183,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             result.Acceptabledistance = workTripGen.AcceptableDistance;
             result.Fromhour = new TimeOnly(int.Parse(FromTime[0]), int.Parse(FromTime[1]));
             result.Tohour = new TimeOnly(int.Parse(ToTime[0]), int.Parse(ToTime[1]));
-            result.Idaccount = workTripGen.AccountId;
+            result.Idaccount = workTripGen.Idaccount;
             result.Latitudefrom = double.Parse(workTripGen.StartLocation.lat.Replace(".", ","));
             result.Latitudeto = double.Parse(workTripGen.EndLocation.lat.Replace(".", ","));
             result.Longitudefrom = double.Parse(workTripGen.StartLocation.lon.Replace(".", ","));
