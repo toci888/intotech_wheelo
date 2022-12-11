@@ -13,7 +13,7 @@ namespace Intotech.Wheelo.Bll.Models.Account
 
         public string FirstName { get { return Name; } }
         public string LastName { get { return Surname; } }
-        public string RefreshToken { get; set; }
+        //public string RefreshToken { get; set; }
         public string AccessToken { get; set; }
     }
 }
