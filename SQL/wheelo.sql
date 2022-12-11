@@ -1,4 +1,7 @@
-﻿drop table PasswordStrength;
+﻿drop table ResetPassword;
+
+
+drop table PasswordStrength;
 drop table FailedLoginAttempts;
 
 drop table AccountModes;
@@ -474,6 +477,15 @@ create table PasswordStrength
 	id serial primary key,
 	IdAccount int not null,
 	level int not null
+);
+
+create table ResetPassword
+(
+	id serial primary key,
+	createdat timestamp not null default now(),
+	email text not null,
+	verificationcode int not null
+	
 );
 --INSERTY:
 --insert into FailedLoginAttempts (IdAccount, ts1) values (AcountIndentifiers, timestamps)

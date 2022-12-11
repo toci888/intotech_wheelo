@@ -36,7 +36,9 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Invitation> Invitations { get; set; } = null!;
         public virtual DbSet<Notuser> Notusers { get; set; } = null!;
         public virtual DbSet<Occupation> Occupations { get; set; } = null!;
+        public virtual DbSet<Passwordsstrenght> Passwordsstrenghts { get; set; } = null!;
         public virtual DbSet<Passwordstrength> Passwordstrengths { get; set; } = null!;
+        public virtual DbSet<Resetpassword> Resetpasswords { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Statisticstrip> Statisticstrips { get; set; } = null!;
         public virtual DbSet<Trip> Trips { get; set; } = null!;
@@ -573,6 +575,17 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Name).HasColumnName("name");
             });
 
+            modelBuilder.Entity<Passwordsstrenght>(entity =>
+            {
+                entity.ToTable("passwordsstrenght");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Level).HasColumnName("level");
+            });
+
             modelBuilder.Entity<Passwordstrength>(entity =>
             {
                 entity.ToTable("passwordstrength");
@@ -582,6 +595,22 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
                 entity.Property(e => e.Level).HasColumnName("level");
+            });
+
+            modelBuilder.Entity<Resetpassword>(entity =>
+            {
+                entity.ToTable("resetpassword");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
+                    .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Email).HasColumnName("email");
+
+                entity.Property(e => e.Verificationcode).HasColumnName("verificationcode");
             });
 
             modelBuilder.Entity<Role>(entity =>
