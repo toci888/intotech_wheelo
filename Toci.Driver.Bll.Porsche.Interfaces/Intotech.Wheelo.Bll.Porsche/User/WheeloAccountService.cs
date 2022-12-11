@@ -15,29 +15,35 @@ using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Common.Emails;
+using Intotech.Wheelo.Bll.Models;
 
 namespace Intotech.Wheelo.Bll.Porsche.User
 {
     public class WheeloAccountService : IWheeloAccountService
     {
+        private readonly AuthenticationSettings _authenticationSettings;
         protected IAccountLogic AccLogic;
         protected IAccountRoleLogic AccRoleLogic;
         protected IAccountmodeLogic AccountmodeLogic;
         protected IFailedloginattemptLogic FailedloginattemptLogic;
+        protected IResetpasswordLogic ResetpasswordLogic;
         protected IEmailManager EmailManager = new EmailManager("pl");
 
         public const int WhiteMode = 0;
         public const int DarkMode = 1;
         public const int BlueMode = 2;
 
-        public WheeloAccountService(IAccountLogic accLogic, IAccountRoleLogic accRoleLogic, IAccountmodeLogic accountmodeLogic, 
-            IFailedloginattemptLogic failedloginattemptLogic
+        public WheeloAccountService(AuthenticationSettings authenticationSettings, IAccountLogic accLogic, IAccountRoleLogic accRoleLogic, 
+            IAccountmodeLogic accountmodeLogic, 
+            IFailedloginattemptLogic failedloginattemptLogic, IResetpasswordLogic resetpasswordLogic
             /*, IEmailManager emailManager*/)
         {
+            _authenticationSettings = authenticationSettings;
             AccLogic = accLogic;
             AccRoleLogic = accRoleLogic;
             AccountmodeLogic = accountmodeLogic;
             FailedloginattemptLogic = failedloginattemptLogic;
+            ResetpasswordLogic = resetpasswordLogic;
             //EmailManager = emailManager;
         }
 
@@ -111,7 +117,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             return new ReturnedResponse<AccountRegisterDto>(sAccount, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public ReturnedResponse<AccountRoleDto> ConfirmEmail(EmailConfirmDto EcDto)
+        public virtual ReturnedResponse<AccountRoleDto> ConfirmEmail(EmailConfirmDto EcDto)
         {
             Account account = AccLogic.Select(m => m.Email == EcDto.Email && m.Verificationcode == EcDto.Code).FirstOrDefault();
 
@@ -161,6 +167,40 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             return new ReturnedResponse<Accountmode>(AccountmodeLogic.Update(accMode), 
                 I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        }
+
+        public virtual ReturnedResponse<AccountRoleDto> AcceptResetPassword(ResetPasswordConfirmDto resetPasswordConfirmDto) // email, kod
+        {
+             Resetpassword resPwd = ResetpasswordLogic.Select(m => m.Email == resetPasswordConfirmDto.Email && m.Verificationcode == resetPasswordConfirmDto.Code).FirstOrDefault();
+
+            if (resPwd == null)
+            {
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
+            }
+
+            Account account = AccLogic.Select(m => m.Email == resetPasswordConfirmDto.Email).FirstOrDefault();
+
+            if (account == null)
+            {
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
+            }
+
+            account.Password = resetPasswordConfirmDto.Password;
+
+            AccLogic.Update(account);
+
+            return Login(new LoginDto() { Email = resetPasswordConfirmDto.Email, Password = resetPasswordConfirmDto.Password });
+        }
+
+        public virtual ReturnedResponse<int> RequestPasswordReset(string email)
+        {
+            //check if email exists in accounts
+            // if not return with significant error code
+            // if exists, generate a code and stor4e record with ResetpasswordLogic.Insert 
+
+            //send Email ??
+
+            return new ReturnedResponse<int>(0, "", true, 0); // TODO
         }
     }
 }

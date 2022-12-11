@@ -30,26 +30,6 @@ namespace Intotech.Wheelo.Bll.Persistence
             _authenticationSettings = authenticationSettings;
         }
 
-        //22CE8D06972A4DEF08FD462C470E60ED1849700D18D96FB472778DB639D1830C
-
-        public Accountrole CreateAccount(AccountRegisterDto user)
-        {
-            if (isLoginAlreadyInDb(user.Email))
-            {
-                return null;
-            }
-
-            int gender = user.FirstName[user.FirstName.Length - 1] == 'a' ? 2 : 1;
-
-            Account acc = new Account() { Email = user.Email, Name = user.FirstName, 
-                Password = user.Password, Surname = user.LastName, Refreshtokenvalid = DateTime.Now.AddDays(7), 
-                Refreshtoken = StringUtils.GetRandomString(32) };
-
-            Account newUser = accountLogic.Insert(acc);
-
-            return GenerateJwt(new LoginDto() { Email = newUser.Email, Password = newUser.Password });
-        }
-
         public ReturnedResponse<TokensModel> CreateNewAccessToken(string accessToken, string refreshToken)
         {
             ClaimsPrincipal clPr = GetPrincipalFromExpiredToken(accessToken);
@@ -148,16 +128,6 @@ namespace Intotech.Wheelo.Bll.Persistence
             user.Password = password;
 
             return accountLogic.Update(user).Id;
-        }
-
-        public IEnumerable<Account> GetAll()
-        {
-            return accountLogic.Select(m => m.Id > 0);
-        }
-
-        protected virtual bool isLoginAlreadyInDb(string email)
-        {
-            return accountLogic.Select(x => x.Email == email).Any();
         }
     }
 }

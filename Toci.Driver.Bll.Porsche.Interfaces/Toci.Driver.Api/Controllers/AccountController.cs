@@ -64,25 +64,7 @@ public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
     }
 
 
-   /* [AllowAnonymous]
-    [HttpPost("register")]
-    public Accountrole RegisterUser([FromBody] AccountRegisterDto user)
-    {
-        //if (user.Method == "wheelo")
-        {
-            return Logic.CreateAccount(user);
-        }
-
-        //return GafManager.RegisterByMethod(user.Method, "");
-    }
-   */
-    /* [AllowAnonymous]
-     [HttpPost("login")]
-     public ActionResult<Account> Login([FromBody] LoginDto user)
-     {
-         Accountrole loggedUser = Logic.GenerateJwt(user);
-         return Ok(loggedUser);
-     }*/
+  
 
     [AllowAnonymous]
     [HttpPost("reset-password")]

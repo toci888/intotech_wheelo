@@ -14,6 +14,7 @@ using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Common.Interfaces;
 using Intotech.Wheelo.Common;
 using Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces;
+using Intotech.Common;
 
 namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 {
@@ -30,6 +31,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
         protected IAssociationCalculations AssociationCalculation;
         protected IVacollocationsgeolocationToAccountCollocationDto ToAccountCollocationDto;
         protected IFriendLogic FriendLogic;
+        protected IWorkTripLogic WorkTripHistoryLogic;
 
         public WorkTripGenAssociationService(IWorktripgenLogic worktripgenLogic, 
             IVaworktripgengeolocationLogic vaworktripgengeolocationLogic,
@@ -37,7 +39,8 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             IAccountscollocationLogic accountscollocationLogic,
             IAssociationCalculations associationCalculations,
             IVacollocationsgeolocationToAccountCollocationDto toAccountCollocationDto,
-            IFriendLogic friendLogic)
+            IFriendLogic friendLogic,
+            IWorkTripLogic workTripHistoryLogic)
         {
             WorktripGenLogic = worktripgenLogic;
             VaworktripgengeolocationLogic = vaworktripgengeolocationLogic;
@@ -46,30 +49,22 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             AssociationCalculation = associationCalculations;
             ToAccountCollocationDto = toAccountCollocationDto;
             FriendLogic = friendLogic;
+            WorkTripHistoryLogic = workTripHistoryLogic;
         }
 
         public virtual ReturnedResponse<TripGenCollocationDto> SetWorkTripGetCollocations(WorkTripGenDto workTripGen)
         {
             Worktripgen workTripGenRecord = MapWorkTrip(workTripGen);
 
-            List<Worktripgen> workTrips  = WorktripGenLogic.Select(m => m.Idaccount == workTripGen.Idaccount && m.Searchid == workTripGenRecord.Searchid).ToList();
+            List<Worktripgen> workTrips  = WorktripGenLogic.Select(m => m.Idaccount == workTripGen.Idaccount).ToList();
 
             if (workTrips.Count() > 0)
             {
-                if (workTrips.Count() > 1)
-                {
-                    // ERR !
-                    return new ReturnedResponse<TripGenCollocationDto>(null, "Błąd spójności danych", false, ErrorCodes.DataIntegrityViolated) ; // TODOFIX
-                }
-
-                // match workTripGenRecord with db -> update ?
-                workTripGenRecord = WorktripGenLogic.Update(workTripGenRecord);
+                StoreHistoryDataWorkTrip(workTrips);
             }
-            else
-            {
-                workTripGenRecord = WorktripGenLogic.Insert(workTripGenRecord);
-            }
-
+            
+            workTripGenRecord = WorktripGenLogic.Insert(workTripGenRecord);
+            
             Collocate(workTripGenRecord);
 
             return GetTripCollocation(workTripGenRecord.Idaccount, workTripGenRecord.Searchid);
@@ -191,6 +186,20 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             result.Searchid = WorktripgenLogic.GetWorktripSearchId(result);
 
             return result;
+        }
+
+        protected virtual int StoreHistoryDataWorkTrip(List<Worktripgen> workTrips)
+        {
+            foreach (Worktripgen worktripgenRecord in workTrips)
+            {
+                Worktrip worktripHistoryRecord = DtoModelMapper.Map<Worktrip, Worktripgen>(worktripgenRecord);
+
+                WorkTripHistoryLogic.Insert(worktripHistoryRecord);
+
+                WorktripGenLogic.Delete(worktripgenRecord);
+            }
+
+            return workTrips.Count();
         }
     }
 }
