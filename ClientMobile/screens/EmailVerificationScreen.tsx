@@ -16,10 +16,11 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from "react-native-confirmation-code-field";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useAuth } from "../hooks/useAuth";
 import axios from "axios";
 import { endpoints } from "../constants/constants";
+import { useUser } from "../hooks/useUser";
 
 const { Value, Text: AnimatedText } = Animated;
 
@@ -51,7 +52,9 @@ export const EmailVerificationScreen = () => {
   const [value, setValue] = useState("");
   const [registrationForm, setRegistartionForm] = useState({});
   const { appleAuth, facebookAuth, googleAuth, nativeRegister } = useAuth();
-
+  const { login } = useUser();
+  const navigation = useNavigation();
+  
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
@@ -64,15 +67,26 @@ export const EmailVerificationScreen = () => {
     console.log(user.email);
     console.log(parseInt(value));
     console.log(`${endpoints.emailVerification}`);
-
+    console.log("ENDPOINT", endpoints.emailVerification, JSON.stringify({
+      email: `${user.email}`,
+      code: Number(value),
+    }))
     axios
       .post(`${endpoints.emailVerification}`, {
         email: `${user.email}`,
-        code: parseInt(value),
+        code: Number(value),
       })
       .then(function (response) {
-        response.data.isSuccess ? alert("sukces") : alert("niepowodzenie");
+        response.data.isSuccess ?  alert("sukces") : alert("niepowodzenie");
+        if(response.data.isSuccess) {
+          login(user);
+          navigation.goBack();
+        }
+        else if(response.data.isSuccess === false && response.data.errorCode === 16384) {
+          // wyswietl email veryfication screen
+        }
         console.log(response);
+
       })
       .catch(function (error) {
         console.log(error);

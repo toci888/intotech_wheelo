@@ -27,14 +27,14 @@ type SignUpProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>
 
 export const SignUpScreen = () => {
   const [user, setUser] = useState<IUser>({
-    // firstName: "asd",
-    // lastName: "qwe",
-    // email: "asdf@wp.pl",
-    // password: "zxcD@#gry123",
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
+    firstName: "asd",
+    lastName: "qwe",
+    email: "asdf@wp.pl",
+    password: "zxcD@#gry123",
+    // firstName: "",
+    // lastName: "",
+    // email: "",
+    // password: "",
   });
   const navigation = useNavigation();
   const { appleAuth, facebookAuth, googleAuth, nativeRegister } = useAuth();
@@ -67,7 +67,11 @@ export const SignUpScreen = () => {
                 ),
             })}
             onSubmit={async (values) => {
-              await nativeRegister(values);
+              const isSuccess = await nativeRegister(values);
+              console.log("isSuccess", isSuccess);     
+              if(isSuccess) {      
+                navigation.navigate(`EmailVerification`, { values })
+              }
             }}
           >
             {({
@@ -156,7 +160,6 @@ export const SignUpScreen = () => {
                     // onPress={() => handleSubmit()}
                     onPress={() => {
                       handleSubmit();
-                      navigation.navigate(`EmailVerification`, { values })
                     }}
                   >
                     Sign Up

@@ -4,13 +4,7 @@ import * as Google from "expo-auth-session/providers/google";
 import * as AppleAuthentication from "expo-apple-authentication";
 import { useEffect } from "react";
 
-import {
-  appleLoginOrRegister,
-  facebookLoginOrRegister,
-  googleLoginOrRegister,
-  loginUser,
-  registerUser,
-} from "../services/user";
+import { appleLoginOrRegister, facebookLoginOrRegister, googleLoginOrRegister, loginUser, registerUser } from "../services/user";
 import { User } from "../types/user";
 import { useUser } from "./useUser";
 import { useLoading } from "./useLoading";
@@ -54,11 +48,13 @@ export const useAuth = () => {
   const { login } = useUser();
   const { goBack } = useNavigation();
   const { setLoading } = useLoading();
+  const navigation = useNavigation();
 
   const handleSignInUser = (user?: User | null) => {
     if (user) {
-      login(user);
-      goBack();
+      navigation.navigate(`EmailVerification`, user)
+      // login(user);
+      // goBack();
     }
   };
 
@@ -79,7 +75,9 @@ export const useAuth = () => {
         values.email,
         values.password,
       );
+      console.log("USERRR", user)
       handleSignInUser(user);
+      return user ? true : false;
     } catch (error) {
       handleAuthError();
     } finally {

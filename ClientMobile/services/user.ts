@@ -5,6 +5,7 @@ import { User } from "../types/user";
 import { handleError } from "../utils/handleError";
 import * as Crypto from 'expo-crypto';
 import { useUser } from "../hooks/useUser";
+import { useNavigation } from "@react-navigation/native";
 
 type DataRes = { data: User };
 
@@ -16,13 +17,16 @@ export const registerUser = async (
 ) => {
   try {
     password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, password);
-    const { data }: DataRes = await axios.post(endpoints.register, {
+    const values = {
       method: 'wheelo',
       email,
       password,
       firstName,
       lastName,
-    });
+    }
+    const { data }: DataRes = await axios.post(endpoints.register, values);
+    console.log("AdSDdata", data); 
+    // navigation.navigate(`EmailVerification`, { values })
     return data;
   } catch (error) {
     handleError(error);
