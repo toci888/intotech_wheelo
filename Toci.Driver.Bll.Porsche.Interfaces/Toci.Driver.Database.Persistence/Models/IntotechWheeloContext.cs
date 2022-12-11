@@ -36,7 +36,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Invitation> Invitations { get; set; } = null!;
         public virtual DbSet<Notuser> Notusers { get; set; } = null!;
         public virtual DbSet<Occupation> Occupations { get; set; } = null!;
-        public virtual DbSet<Passwordsstrenght> Passwordsstrenghts { get; set; } = null!;
+        public virtual DbSet<Passwordstrength> Passwordstrengths { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Statisticstrip> Statisticstrips { get; set; } = null!;
         public virtual DbSet<Trip> Trips { get; set; } = null!;
@@ -437,12 +437,6 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasDefaultValueSql("now()");
 
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
-
-                entity.HasOne(d => d.IdaccountNavigation)
-                    .WithMany(p => p.Failedloginattempts)
-                    .HasForeignKey(d => d.Idaccount)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("failedloginattempts_idaccount_fkey");
             });
 
             modelBuilder.Entity<Friend>(entity =>
@@ -579,21 +573,15 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Name).HasColumnName("name");
             });
 
-            modelBuilder.Entity<Passwordsstrenght>(entity =>
+            modelBuilder.Entity<Passwordstrength>(entity =>
             {
-                entity.ToTable("passwordsstrenght");
+                entity.ToTable("passwordstrength");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
                 entity.Property(e => e.Level).HasColumnName("level");
-
-                entity.HasOne(d => d.IdaccountNavigation)
-                    .WithMany(p => p.Passwordsstrenghts)
-                    .HasForeignKey(d => d.Idaccount)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("passwordsstrenght_idaccount_fkey");
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -1045,6 +1033,8 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Idgeographiclocationto).HasColumnName("idgeographiclocationto");
 
+                entity.Property(e => e.Isuser).HasColumnName("isuser");
+
                 entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
 
                 entity.Property(e => e.Latitudeto).HasColumnName("latitudeto");
@@ -1053,6 +1043,10 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Longitudeto).HasColumnName("longitudeto");
 
+                entity.Property(e => e.Postcodefrom).HasColumnName("postcodefrom");
+
+                entity.Property(e => e.Postcodeto).HasColumnName("postcodeto");
+
                 entity.Property(e => e.Searchid).HasColumnName("searchid");
 
                 entity.Property(e => e.Streetfrom).HasColumnName("streetfrom");
@@ -1060,11 +1054,6 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Streetto).HasColumnName("streetto");
 
                 entity.Property(e => e.Tohour).HasColumnName("tohour");
-
-                entity.HasOne(d => d.IdaccountNavigation)
-                    .WithMany(p => p.Worktrips)
-                    .HasForeignKey(d => d.Idaccount)
-                    .HasConstraintName("worktrip_idaccount_fkey");
 
                 entity.HasOne(d => d.IdgeographiclocationfromNavigation)
                     .WithMany(p => p.WorktripIdgeographiclocationfromNavigations)

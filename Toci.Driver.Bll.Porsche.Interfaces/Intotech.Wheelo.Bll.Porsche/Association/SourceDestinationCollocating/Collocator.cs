@@ -53,10 +53,10 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
             double distance = baseWorktrip.Acceptabledistance.Value / DistanceDivisor;
 
-//            baseWorktrip.Fromhour.Value.IsBetween(worktrip.Fromhour.Value.AddMinutes(-MinutesInterval), worktrip.Fromhour.Value.AddMinutes(MinutesInterval)) &&
-//                baseWorktrip.Tohour.Value.IsBetween(worktrip.Tohour.Value.AddMinutes(-MinutesInterval), worktrip.Tohour.Value.AddMinutes(MinutesInterval)) &&
-
-            List <Worktrip> collocations = FirstLogic.Select(worktrip => worktrip.Idaccount.Value != accountId &&
+         
+            List<Worktrip> collocations = new List<Worktrip>();
+                
+             /*   FirstLogic.Select(worktrip => worktrip.Idaccount.Value != accountId &&
                 baseWorktrip.Fromhour.Value.IsBetween(worktrip.Fromhour.Value.AddMinutes(-MinutesInterval), worktrip.Fromhour.Value.AddMinutes(MinutesInterval)) &&
                 baseWorktrip.Tohour.Value.IsBetween(worktrip.Tohour.Value.AddMinutes(-MinutesInterval), worktrip.Tohour.Value.AddMinutes(MinutesInterval)) &&
 
@@ -70,10 +70,11 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
                 (baseWorktrip.Longitudeto.Value + distance) >= worktrip.Longitudeto.Value &&
                 (baseWorktrip.Longitudeto.Value - distance) <= worktrip.Longitudeto.Value
             ).ToList();
+             */
 
             //52.245876327341477
             // 52.222476545789547
-            foreach (Worktrip worktrip in collocations)
+            /*foreach (Worktrip worktrip in collocations)
             {
                 if (!IsCollocationDuplicate(baseWorktrip.Idaccount.Value, worktrip.Idaccount.Value))
                 {
@@ -91,7 +92,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
                         Distanceto = distanceTo
                     });
                 }
-            }
+            }*/
         }
 
         protected virtual bool IsCollocationDuplicate(int accountId, int collocatedAccountId)
@@ -107,16 +108,16 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
             if (wtExists != null)
             {
-                return AssociationMapDataSubService.GetTripCollocation(wtExists.Idaccount.Value, searchId);
+                return AssociationMapDataSubService.GetTripCollocation(wtExists.Idaccount, searchId);
             }
 
             worktrip.Searchid = searchId;
 
             Worktrip wt = FirstLogic.Insert(worktrip);
 
-            Collocate(wt.Idaccount.Value, searchId);
+            Collocate(wt.Idaccount, searchId);
             
-            return AssociationMapDataSubService.GetTripCollocation(wt.Idaccount.Value, searchId);
+            return AssociationMapDataSubService.GetTripCollocation(wt.Idaccount, searchId);
         }
 
         public virtual ReturnedResponse<TripCollocationDto> GetUserAssociations(int accountId, string searchId)

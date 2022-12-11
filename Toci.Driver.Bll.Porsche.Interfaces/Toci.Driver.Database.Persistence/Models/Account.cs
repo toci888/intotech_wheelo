@@ -13,7 +13,6 @@ namespace Toci.Driver.Database.Persistence.Models
             Accountslocations = new HashSet<Accountslocation>();
             Accountsworktimes = new HashSet<Accountsworktime>();
             Cars = new HashSet<Car>();
-            Failedloginattempts = new HashSet<Failedloginattempt>();
             FriendIdaccountNavigations = new HashSet<Friend>();
             FriendIdfriendNavigations = new HashSet<Friend>();
             FriendsuggestionIdaccountNavigations = new HashSet<Friendsuggestion>();
@@ -21,11 +20,9 @@ namespace Toci.Driver.Database.Persistence.Models
             FriendsuggestionIdsuggestedfriendNavigations = new HashSet<Friendsuggestion>();
             InvitationIdaccountNavigations = new HashSet<Invitation>();
             InvitationIdinvitedNavigations = new HashSet<Invitation>();
-            Passwordsstrenghts = new HashSet<Passwordsstrenght>();
             Tripparticipants = new HashSet<Tripparticipant>();
             Trips = new HashSet<Trip>();
             Userextradata = new HashSet<Userextradatum>();
-            Worktrips = new HashSet<Worktrip>();
         }
 
         public int Id { get; set; }
@@ -49,7 +46,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual ICollection<Accountslocation> Accountslocations { get; set; }
         public virtual ICollection<Accountsworktime> Accountsworktimes { get; set; }
         public virtual ICollection<Car> Cars { get; set; }
-        public virtual ICollection<Failedloginattempt> Failedloginattempts { get; set; }
         public virtual ICollection<Friend> FriendIdaccountNavigations { get; set; }
         public virtual ICollection<Friend> FriendIdfriendNavigations { get; set; }
         public virtual ICollection<Friendsuggestion> FriendsuggestionIdaccountNavigations { get; set; }
@@ -57,10 +53,8 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual ICollection<Friendsuggestion> FriendsuggestionIdsuggestedfriendNavigations { get; set; }
         public virtual ICollection<Invitation> InvitationIdaccountNavigations { get; set; }
         public virtual ICollection<Invitation> InvitationIdinvitedNavigations { get; set; }
-        public virtual ICollection<Passwordsstrenght> Passwordsstrenghts { get; set; }
         public virtual ICollection<Tripparticipant> Tripparticipants { get; set; }
         public virtual ICollection<Trip> Trips { get; set; }
         public virtual ICollection<Userextradatum> Userextradata { get; set; }
-        public virtual ICollection<Worktrip> Worktrips { get; set; }
     }
 }

@@ -1,7 +1,11 @@
-﻿drop table AccountModes;
+﻿drop table PasswordStrength;
+drop table FailedLoginAttempts;
+
+drop table AccountModes;
 
 drop view VAWorkTripGenGeoLocations;
 drop view VWorkTripGenGeoLocations;
+drop view VACollocationsGeoLocations;
 
 drop table WorkTripGen;
 drop table NotUser;
@@ -22,7 +26,7 @@ drop view VFriendSuggestions;
 --select * from AccountsCollocations;
 drop view AccountsCarsLocations;
 drop view VCollocationsGeoLocations;
-drop view VACollocationsGeoLocations;
+
 drop view VAccountsCollocationsWorkTrip;
 drop table WorkTrip;
 drop view VCarOwner;
@@ -246,18 +250,21 @@ join Colours co on co.id = cr.IdColours;
 create table WorkTrip
 (
 	id serial primary key,
-    IdAccount int references Accounts (id),
-	searchId text, -- not null,
-    LatitudeFrom double precision, --+
-	LongitudeFrom double precision,-- +
-	LatitudeTo double precision,
-	LongitudeTo double precision,
+    IdAccount int not null, --references Accounts (id), NotUser
+	searchId text not null,
+	isUser bool not null default false,
+    LatitudeFrom double precision not null, --+
+	LongitudeFrom double precision not null,-- +
+	LatitudeTo double precision not null,
+	LongitudeTo double precision not null,
 	IdGeographicLocationFrom int references GeographicRegion(id),
 	IdGeographicLocationTo int references GeographicRegion(id),
 	StreetFrom text,
 	StreetTo text,
 	CityFrom text,
 	CityTo text,
+	PostCodeFrom text,
+	PostCodeTo text,
     FromHour time, -- 0 60 -> 1 
     ToHour time,
     AcceptableDistance double precision,
@@ -459,28 +466,28 @@ create table FailedLoginAttempts
 (
 	id serial primary key,
 	IdAccount int not null,
-	ts1 timestamp not null,
+	createdat timestamp not null default now()
 );
 --TABEL 2:
-create table SimplePasswords
+create table PasswordStrength
 (
 	id serial primary key,
 	IdAccount int not null,
-	
+	level int not null
 );
 --INSERTY:
-insert into FailedLoginAttempts (IdAccount, ts1) values (AcountIndentifiers, timestamps)
-insert into SimplePasswords (IdAccount) values (AcountIndentifiers)
+--insert into FailedLoginAttempts (IdAccount, ts1) values (AcountIndentifiers, timestamps)
+--insert into SimplePasswords (IdAccount) values (AcountIndentifiers)
 --ew. blokada jeśli gdzieś damy boolean np czy simple password czy nie
 --bolakada1:
-select IdAccount
-from FailedLoginAttempts
-where count(TIMESTAMP DEFAULT)>=3 AND IdAccount IN SimplePasswords
+--select IdAccount
+--from FailedLoginAttempts
+--where count(TIMESTAMP DEFAULT)>=3 AND IdAccount IN SimplePasswords
 
 --blokada2:
-select IdAccount
-from FailedLoginAttempts
-where count(TIMESTAMP DEFAULT)>=5 AND IdAccount NOT IN SimplePassword;
+--select IdAccount
+--from FailedLoginAttempts
+--where count(TIMESTAMP DEFAULT)>=5 AND IdAccount NOT IN SimplePassword;
 
 
 
