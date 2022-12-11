@@ -26,7 +26,7 @@ public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
 
     
     [HttpPost("register")]
-    public ActionResult<AccountRegisterDto> SimpleRegister(AccountRegisterDto sa)
+    public ActionResult<ReturnedResponse<AccountRegisterDto>> Register(AccountRegisterDto sa)
     {
         ReturnedResponse<AccountRegisterDto>  reg = WheeloAccountService.Register(sa);
 
@@ -35,7 +35,7 @@ public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
             return BadRequest(reg);
         }
 
-        return sa;
+        return reg;
     }
 
     [HttpPost("confirm-email")]
@@ -45,7 +45,7 @@ public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
     }
 
     [HttpPost("login")]
-    public ActionResult<AccountRoleDto> Login(LoginDto lDto)
+    public ActionResult<ReturnedResponse<AccountRoleDto>> Login(LoginDto lDto)
     {
         ReturnedResponse<AccountRoleDto> sa = WheeloAccountService.Login(lDto);
 
@@ -54,7 +54,7 @@ public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
             return NotFound(sa);
         }
 
-        return sa.MethodResult;
+        return sa;
     }
 
     [HttpGet("refresh-token")]

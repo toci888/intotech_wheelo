@@ -79,6 +79,7 @@ builder.Services.AddScoped<IVacollocationsgeolocationLogic, Vacollocationsgeoloc
 builder.Services.AddScoped<IVacollocationsgeolocationToAccountCollocationDto, VacollocationsgeolocationToAccountCollocationDto>();
 builder.Services.AddScoped<IAccountmodeLogic, AccountmodeLogic>();
 builder.Services.AddScoped<IFailedloginattemptLogic, FailedloginattemptLogic>();
+builder.Services.AddScoped<IResetpasswordLogic, ResetpasswordLogic>();
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();
 
@@ -126,6 +127,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseDeveloperExceptionPage();
 
 app.Run();
 

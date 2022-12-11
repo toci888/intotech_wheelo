@@ -17,6 +17,12 @@ using Toci.Driver.Database.Persistence.Models;
 Console.WriteLine("Warrior is seeding your dbs....");
 
 
+//new SeedRole().Insert();
+
+new WheeloMainSeedManager().SeedAllDb();
+
+new SocialSeedManager().SeedAllDb();
+
 //Service serv = new Service();
 //serv.Listen();
 
@@ -46,9 +52,7 @@ Console.WriteLine("Warrior is seeding your dbs....");
 //sa.Insert();
 //new SeedFriendSuggestion().Insert();
 
-new WheeloMainSeedManager().SeedAllDb();
 
-new SocialSeedManager().SeedAllDb();
 
 //new ProfessionsTxtParser().Insert();
 
