@@ -81,13 +81,11 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 AccLogic.Update(accToRefreshToken);
             }
 
-            Accountrole resultAccRole = AccRoleLogic.GenerateJwt(new LoginDto() { Email = simpleaccount.Email, Password = simpleaccount.Password });
+            AccountRoleDto resultAccRole = AccRoleLogic.GenerateJwt(new LoginDto() { Email = simpleaccount.Email, Password = simpleaccount.Password });
 
-            AccountRoleDto accountRoleDto = DtoModelMapper.Map<AccountRoleDto, Accountrole>(resultAccRole);
+            resultAccRole.Refreshtoken = refreshToken;
 
-            accountRoleDto.Refreshtoken = refreshToken;
-
-            return new ReturnedResponse<AccountRoleDto>(accountRoleDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<AccountRoleDto>(resultAccRole, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<AccountRegisterDto> Register(AccountRegisterDto sAccount)
@@ -129,8 +127,6 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             AccLogic.Update(account);
 
             AccountRoleDto accountRoleDto = AccRoleLogic.GenerateJwt(new LoginDto() { Email = account.Email, Password = account.Password });
-
-            //AccountRoleDto accountRoleDto = DtoModelMapper.Map<AccountRoleDto, AccountRoleDto>(resultAccRole);
 
             accountRoleDto.Refreshtoken = refreshToken;
 
