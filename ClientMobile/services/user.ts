@@ -6,8 +6,7 @@ import { handleError } from "../utils/handleError";
 import * as Crypto from 'expo-crypto';
 import { useUser } from "../hooks/useUser";
 import { useNavigation } from "@react-navigation/native";
-
-type DataRes = { data: User };
+import { ReturnedResponse } from "../types";
 
 export const registerUser = async (
   firstName: string,
@@ -24,10 +23,12 @@ export const registerUser = async (
       firstName,
       lastName,
     }
-    const { data }: DataRes = await axios.post(endpoints.register, values);
-    console.log("AdSDdata", data); 
-    // navigation.navigate(`EmailVerification`, { values })
-    return data;
+    console.log(endpoints.register, JSON.stringify(values))
+    const user: ReturnedResponse<User> = await axios.post(endpoints.register, values);
+    console.log("CHUJKURWA")
+    console.log("AdSDuser", user); 
+    
+    return user;
   } catch (error) {
     handleError(error);
   }
@@ -36,12 +37,12 @@ export const registerUser = async (
 export const loginUser = async (email: string, password: string) => {
   try {
     password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, password);
-    const { data }: DataRes = await axios.post(endpoints.login, {
+    const user: ReturnedResponse<User> = await axios.post(endpoints.login, {
       method: 'wheelo',
       email,
       password,
     });
-    return data;
+    return user;
   } catch (error) {
     handleError(error);
   }
@@ -49,10 +50,10 @@ export const loginUser = async (email: string, password: string) => {
 
 export const facebookLoginOrRegister = async (token: string) => {
   try {
-    const { data }: DataRes = await axios.post(endpoints.login, {
+    const user: ReturnedResponse<User> = await axios.post(endpoints.login, {
       token, method: 'facebook',
     });
-    return data;
+    return user;
   } catch (error) {
     handleError(error);
   }
@@ -60,10 +61,10 @@ export const facebookLoginOrRegister = async (token: string) => {
 
 export const googleLoginOrRegister = async (token: string) => {
   try {
-    const { data }: DataRes = await axios.post(endpoints.login, {
+    const user: ReturnedResponse<User> = await axios.post(endpoints.login, {
       token, method: 'google',
     });
-    return data;
+    return user;
   } catch (error) {
     handleError(error);
   }
@@ -71,10 +72,10 @@ export const googleLoginOrRegister = async (token: string) => {
 
 export const appleLoginOrRegister = async (token: string) => {
   try {
-    const { data }: DataRes = await axios.post(endpoints.login, {
+    const user: ReturnedResponse<User> = await axios.post(endpoints.login, {
       token, method: 'apple',
     });
-    return data;
+    return user;
   } catch (error) {
     handleError(error);
   }

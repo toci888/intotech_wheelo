@@ -8,6 +8,7 @@ import { appleLoginOrRegister, facebookLoginOrRegister, googleLoginOrRegister, l
 import { User } from "../types/user";
 import { useUser } from "./useUser";
 import { useLoading } from "./useLoading";
+import { ReturnedResponse } from "../types";
 
 export const useAuth = () => {
   const [_, googleResponse, googleAuth] = Google.useAuthRequest({
@@ -69,15 +70,14 @@ export const useAuth = () => {
     try {
       setLoading(true);
 
-      const user = await registerUser(
+      const user: ReturnedResponse<User> | undefined = await registerUser(
         values.firstName,
         values.lastName,
         values.email,
         values.password,
       );
-      console.log("USERRR", user)
       handleSignInUser(user);
-      return user ? true : false;
+      return user;
     } catch (error) {
       handleAuthError();
     } finally {

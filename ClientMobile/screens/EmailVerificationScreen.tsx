@@ -80,10 +80,10 @@ export const EmailVerificationScreen = () => {
         response.data.isSuccess ?  alert("sukces") : alert("niepowodzenie");
         if(response.data.isSuccess) {
           login(user);
-          navigation.goBack();
-        }
-        else if(response.data.isSuccess === false && response.data.errorCode === 16384) {
-          // wyswietl email veryfication screen
+          navigation.navigate("Root", {screen: "AccountRoot"});
+        } else if(response.data.isSuccess === false && response.data.errorCode === 16384) {
+          // wyswietl email veryfication screen lub 512
+          navigation.navigate("EmailVerification", user)
         }
         console.log(response);
 

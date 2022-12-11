@@ -67,9 +67,9 @@ export const SignUpScreen = () => {
                 ),
             })}
             onSubmit={async (values) => {
-              const isSuccess = await nativeRegister(values);
-              console.log("isSuccess", isSuccess);     
-              if(isSuccess) {      
+              const user = await nativeRegister(values);
+              console.log("isUser??", user);
+              if(user) {      
                 navigation.navigate(`EmailVerification`, { values })
               }
             }}

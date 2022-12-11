@@ -62,3 +62,11 @@ export type SearchScreenParams = {
   lat: string;
   lon: string;
 };
+
+type Response = {
+  errorMessage: string;
+  isSuccess: boolean;
+  errorCode: number;
+}
+
+export type ReturnedResponse<TModel> = TModel & Response

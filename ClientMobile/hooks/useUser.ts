@@ -23,9 +23,7 @@ export const useUser = () => {
   const login = (user: User) => {
     setAndStoreUser(user);
     // Nothing else is working so this is my last resort
-    const searchedProperties: Property[] | undefined = queryClient.getQueryData(
-      queryKeys.searchProperties
-    );
+    const searchedProperties: Property[] | undefined = queryClient.getQueryData(queryKeys.searchProperties);
 
     socket.auth = {
       userID: user.ID,
