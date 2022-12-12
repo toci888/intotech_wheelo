@@ -14,6 +14,7 @@ import {
 import { User } from "../types/user";
 import { useUser } from "./useUser";
 import { useLoading } from "./useLoading";
+import { i18n } from "../i18n/i18n";
 
 export const useAuth = () => {
   const [_, googleResponse, googleAuth] = Google.useAuthRequest({
@@ -62,7 +63,7 @@ export const useAuth = () => {
     }
   };
 
-  const handleAuthError = () => alert("Unable to authorize");
+  const handleAuthError = () => alert(i18n.t('UnableToAuthorize'));
 
   const nativeRegister = async (values: {
     firstName: string;

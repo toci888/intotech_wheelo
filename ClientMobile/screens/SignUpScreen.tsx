@@ -13,6 +13,7 @@ import { AppleButton } from "../components/AppleButton";
 import { OrDivider } from "../components/OrDivider";
 import { PasswordInput } from "../components/PasswordInput";
 import { useAuth } from "../hooks/useAuth";
+import { i18n } from "../i18n/i18n";
 
 export const SignUpScreen = () => {
   const { appleAuth, facebookAuth, googleAuth, nativeRegister } = useAuth();
@@ -23,7 +24,7 @@ export const SignUpScreen = () => {
         <ModalHeader text="JPApartments" xShown />
         <View style={styles.container}>
           <Text category={"h5"} style={styles.header}>
-            Sign Up
+             {i18n.t('SignUp')}
           </Text>
           <Formik
             initialValues={{

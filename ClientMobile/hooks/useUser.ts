@@ -57,7 +57,7 @@ export const useUser = () => {
         if (token)
           await alterPushToken(user?.ID, "remove", token, user.accessToken);
       } catch (error) {
-        setAndStoreUser(prevUser);
+        // setAndStoreUser(prevUser);
       }
     }
   };
