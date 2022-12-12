@@ -304,6 +304,71 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
                 Acceptabledistance = distanceAcc
             });
 
+            ModelsEntities.Add(new Worktripgen()
+            {
+                Searchid = StringUtils.GetRandomString(32),
+                Idaccount = 23 + offset,
+                Latitudefrom = 52.40655122342916,
+                Longitudefrom = 16.92578850458502,
+                Latitudeto = 51.107230555909715,
+                Longitudeto = 17.038070201490435,
+                Fromhour = new TimeOnly(8, 00),
+                Tohour = new TimeOnly(16, 00),
+                Acceptabledistance = distanceAcc
+            });
+
+            ModelsEntities.Add(new Worktripgen()
+            {
+                Searchid = StringUtils.GetRandomString(32),
+                Idaccount = 24 + offset,
+                Latitudefrom = 52.41055122342916,
+                Longitudefrom = 16.92978850458502,
+                Latitudeto = 51.104230555909715,
+                Longitudeto = 17.034070201490435,
+                Fromhour = new TimeOnly(8, 00),
+                Tohour = new TimeOnly(16, 00),
+                Acceptabledistance = distanceAcc
+            });
+
+            ModelsEntities.Add(new Worktripgen()
+            {
+                Searchid = StringUtils.GetRandomString(32),
+                Idaccount = 25 + offset,
+                Latitudefrom = 52.40455122342916,
+                Longitudefrom = 16.92178850458502,
+                Latitudeto = 51.102230555909715,
+                Longitudeto = 17.031070201490435,
+                Fromhour = new TimeOnly(8, 00),
+                Tohour = new TimeOnly(16, 00),
+                Acceptabledistance = distanceAcc
+            });
+
+            ModelsEntities.Add(new Worktripgen()
+            {
+                Searchid = StringUtils.GetRandomString(32),
+                Idaccount = 26 + offset,
+                Latitudefrom = 52.40155122342916,
+                Longitudefrom = 16.92378850458502,
+                Latitudeto = 51.109230555909715,
+                Longitudeto = 17.036070201490435,
+                Fromhour = new TimeOnly(8, 00),
+                Tohour = new TimeOnly(16, 00),
+                Acceptabledistance = distanceAcc
+            });
+
+            ModelsEntities.Add(new Worktripgen()
+            {
+                Searchid = StringUtils.GetRandomString(32),
+                Idaccount = 27 + offset,
+                Latitudefrom = 52.40555122342916,
+                Longitudefrom = 16.92578850458502,
+                Latitudeto = 51.105230555909715,
+                Longitudeto = 17.035070201490435,
+                Fromhour = new TimeOnly(8, 00),
+                Tohour = new TimeOnly(16, 00),
+                Acceptabledistance = distanceAcc
+            });
+
             InsertCollection(ModelsEntities);
         }
     }

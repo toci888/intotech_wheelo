@@ -15,6 +15,7 @@ using Intotech.Wheelo.Common.Interfaces;
 using Intotech.Wheelo.Common;
 using Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces;
 using Intotech.Common;
+using System.Globalization;
 
 namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 {
@@ -179,10 +180,10 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             result.Fromhour = new TimeOnly(int.Parse(FromTime[0]), int.Parse(FromTime[1]));
             result.Tohour = new TimeOnly(int.Parse(ToTime[0]), int.Parse(ToTime[1]));
             result.Idaccount = workTripGen.Idaccount;
-            result.Latitudefrom = double.Parse(workTripGen.StartLocation.lat.Replace(".", ","));
-            result.Latitudeto = double.Parse(workTripGen.EndLocation.lat.Replace(".", ","));
-            result.Longitudefrom = double.Parse(workTripGen.StartLocation.lon.Replace(".", ","));
-            result.Longitudeto = double.Parse(workTripGen.EndLocation.lon.Replace(".", ","));
+            result.Latitudefrom = double.Parse(workTripGen.StartLocation.lat, CultureInfo.InvariantCulture); //.Replace(".", ","));
+            result.Latitudeto = double.Parse(workTripGen.EndLocation.lat, CultureInfo.InvariantCulture); //.Replace(".", ","));
+            result.Longitudefrom = double.Parse(workTripGen.StartLocation.lon, CultureInfo.InvariantCulture); //.Replace(".", ","));
+            result.Longitudeto = double.Parse(workTripGen.EndLocation.lon, CultureInfo.InvariantCulture); //.Replace(".", ","));
             result.Searchid = WorktripgenLogic.GetWorktripSearchId(result);
 
             return result;

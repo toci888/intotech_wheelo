@@ -20,8 +20,8 @@ namespace Intotech.Wheelo.Bll.Models.ModelMappers
                 Latitudeto = dbModel.Latitudeto.Value,
                 Longitudefrom = dbModel.Longitudefrom.Value,
                 Longitudeto = dbModel.Longitudeto.Value,
-                Fromhour = dbModel.Fromhour.Value.Hour.ToString() + " : " + dbModel.Fromhour.Value.Minute.ToString(),
-                Tohour = dbModel.Tohour.Value.Hour.ToString() + " : " + dbModel.Tohour.Value.Minute.ToString(),
+                Fromhour = dbModel.Fromhour.Value.Hour.ToString() + ":" + dbModel.Fromhour.Value.Minute.ToString(),
+                Tohour = dbModel.Tohour.Value.Hour.ToString() + ":" + dbModel.Tohour.Value.Minute.ToString(),
                 Name = dbModel.Name,
                 Surname = dbModel.Surname
             };
