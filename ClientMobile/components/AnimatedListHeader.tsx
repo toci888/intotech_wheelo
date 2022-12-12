@@ -20,7 +20,7 @@ export const AnimatedListHeader = ({
   setEndLocation: (endLocation: Location) => void;
 }) => {
 
-  const [startTime, setStartTime] = useState<string>("07:30");
+  const [startTime, setStartTime] = useState<string>("08:00");
   const [endTime, setEndTime] = useState<string>("16:00");
 
   const navigation = useNavigation();

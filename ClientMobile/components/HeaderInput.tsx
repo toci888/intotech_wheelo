@@ -21,12 +21,6 @@ export const HeaderInput = ({ type, location, setLocation, time, setTime }:
 
   const [showDate, setShowDate] = useState(false);
   
-  const actualTime = (): Date => {
-    const date = new Date();
-    // console.log(date)
-    return date
-  }
-  
   return (
     <View style={{flexDirection: 'row'}}>
       <TouchableOpacity style={styles.container} onPress={() => { navigation.navigate("FindLocations", {type, location, setLocation} as any) }}>
@@ -45,7 +39,7 @@ export const HeaderInput = ({ type, location, setLocation, time, setTime }:
           locale="pl_PL"
           isDarkModeEnabled={false}
           textColor="black" //razem, bialy sam nie dziala
-          date={actualTime()}
+          date={new Date(`July 1, 1999, ${time}`)}
 
           display="spinner" 
           isVisible={showDate}

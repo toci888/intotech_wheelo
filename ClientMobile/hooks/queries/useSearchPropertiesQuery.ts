@@ -19,10 +19,19 @@ const fetchProperties = async (startAndEndLocation: SearchScreenParams, userId?:
     idAccount: userId ? userId : 1000000045,
     acceptableDistance: 800
   });  
+
+  // console.log(JSON.stringify({
+  //   startLocation: startAndEndLocation.startLocation,
+  //   endLocation: startAndEndLocation.endLocation,
+  //   startLocationTime: startAndEndLocation.startLocationTime,
+  //   endLocationTime: startAndEndLocation.endLocationTime,
+  //   idAccount: userId ? userId : 1000000047,
+  //   acceptableDistance: 800
+  // }))
   
   const data = response.data as Collocation;
 
-  console.log("przystanek dane", data)
+  console.log("przystanek dane", JSON.stringify(data))
   data.isSuccess?
   console.log("liczba markerów:", data.methodResult.accountsCollocated.length)
   : console.log("Brak markerów")
