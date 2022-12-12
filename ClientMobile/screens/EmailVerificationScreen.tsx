@@ -84,6 +84,8 @@ export const EmailVerificationScreen = () => {
         } else if(response.data.isSuccess === false && response.data.errorCode === 16384) {
           // wyswietl email veryfication screen lub 512
           navigation.navigate("EmailVerification", user)
+        } else if(response.data.isSuccess === false && response.data.errorCode === 1234) {
+          // jezzeli istnieje konto przekieruj na account lub logowanie
         }
         console.log(response);
 
