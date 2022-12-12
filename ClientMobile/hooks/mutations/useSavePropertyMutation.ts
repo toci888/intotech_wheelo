@@ -29,10 +29,10 @@ export const useSaveCollocationMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    ({ propertyID, op }: { propertyID: number; op: "add" | "remove" }) =>
-      saveOrUnsaveCollocation(propertyID, op, user?.ID, user?.accessToken),
+    ({ collocationID, op }: { collocationID: number; op: "add" | "remove" }) =>
+      saveOrUnsaveCollocation(collocationID, op, user?.ID, user?.accessToken),
     {
-      onMutate: async ({ propertyID, op }) => {
+      onMutate: async ({ collocationID, op }) => {
         await queryClient.cancelQueries(queryKeys.savedProperties);
         await queryClient.cancelQueries(queryKeys.searchCollocations);
         await queryClient.cancelQueries(queryKeys.selectedProperty);
@@ -44,7 +44,7 @@ export const useSaveCollocationMutation = () => {
         const prevSelectedProperty: CollocateAccount | undefined =
           queryClient.getQueryData(queryKeys.selectedProperty);
 
-        if (prevSelectedProperty?.idAccount === propertyID) {
+        if (prevSelectedProperty?.idAccount === collocationID) {
           const newSelectedProperty = { ...prevSelectedProperty };
 
           newSelectedProperty.areFriends = !newSelectedProperty.areFriends;
@@ -57,7 +57,7 @@ export const useSaveCollocationMutation = () => {
         if (op === "remove") {
           if (prevSavedProperties) {
             const newSavedProperties = prevSavedProperties.filter(
-              (i) => i.idAccount !== propertyID
+              (i) => i.idAccount !== collocationID
             );
             queryClient.setQueryData(
               queryKeys.savedProperties,
@@ -67,12 +67,12 @@ export const useSaveCollocationMutation = () => {
 
           if (prevSearchedProperties)
             for (let i of prevSearchedProperties) {
-              if (i.idAccount === propertyID) i.areFriends = false;
+              if (i.idAccount === collocationID) i.areFriends = false;
             }
         } else if (op === "add") {
           if (prevSearchedProperties) {
             for (let i of prevSearchedProperties) {
-              if (i.idAccount === propertyID) i.areFriends = true;
+              if (i.idAccount === collocationID) i.areFriends = true;
             }
           }
         }

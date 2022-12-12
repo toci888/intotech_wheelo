@@ -31,10 +31,8 @@ const fetchProperties = async (startAndEndLocation: SearchScreenParams, userId?:
   
   const data = response.data as Collocation;
 
-  console.log("przystanek dane", JSON.stringify(data))
-  data.isSuccess?
-  console.log("liczba markerów:", data.methodResult.accountsCollocated.length)
-  : console.log("Brak markerów")
+  // console.log("przystanek dane", JSON.stringify(data))
+  data.isSuccess? console.log("liczba markerów:", data.methodResult.accountsCollocated.length) : console.log("Brak markerów")
   return data;
 };
 

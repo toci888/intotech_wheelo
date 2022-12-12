@@ -13,26 +13,26 @@ import { useUser } from "../hooks/useUser";
 import { useSaveCollocationMutation } from "../hooks/mutations/useSavePropertyMutation";
 
 export const CardInformation = ({
-  property,
-  myProperty,
+  collocation,
+  myCollocation,
 }: {
-  property: CollocateAccount;
-  myProperty?: boolean;
+  collocation: CollocateAccount;
+  myCollocation?: boolean;
 }) => {
   const navigation = useNavigation();
   const { user, setSavedProperties } = useUser();
-  const saveProperty = useSaveCollocationMutation();
+  const saveCollocation = useSaveCollocationMutation();
 
   const alterUsersSavedProperties = (
-    propertyID: number,
+    collocationID: number,
     type: "add" | "remove"
   ) => {
     let newProperties: number[] = user?.savedProperties
       ? [...user.savedProperties]
       : [];
 
-    if (type === "add") newProperties.push(propertyID);
-    else newProperties = newProperties.filter((i) => i !== propertyID);
+    if (type === "add") newProperties.push(collocationID);
+    else newProperties = newProperties.filter((i) => i !== collocationID);
 
     setSavedProperties(newProperties);
   };
@@ -40,20 +40,20 @@ export const CardInformation = ({
   const handleHeartPress = () => {
     if (!user) return alert("Please sign up or sign in to save properties");
     let op: "add" | "remove" = "add";
-    if (property?.areFriends) op = "remove";
+    if (collocation?.areFriends) op = "remove";
 
-    alterUsersSavedProperties(property.idAccount, op);
-    saveProperty.mutate({ propertyID: property.idAccount, op });
+    alterUsersSavedProperties(collocation.idAccount, op);
+    saveCollocation.mutate({ collocationID: collocation.idAccount, op });
   };
 
   const manageUnitsNavigation = () =>
-    navigation.navigate("ManageUnits", { propertyID: property.idAccount });
+    navigation.navigate("ManageUnits", { propertyID: collocation.idAccount });
 
   const emailNavigation = () =>
-    navigation.navigate("MessageProperty", { propertyID: property.idAccount });
+    navigation.navigate("MessageProperty", { propertyID: collocation.idAccount });
 
   const editPropertyNavigation = () =>
-    navigation.navigate("EditProperty", { collocationId: property.idAccount });
+    navigation.navigate("EditProperty", { collocationId: collocation.idAccount });
 
   const getLowAndHighText = (type: "rent" | "bedroom") => {
     // if (type === "rent") {
@@ -71,12 +71,12 @@ export const CardInformation = ({
 
   const DefaultInfo = () => (
     <>
-      {property?.name && (
+      {collocation?.name && (
         <Row style={styles.rowJustification}>
           <Text category={"s1"}>{getLowAndHighText("rent")}</Text>
           <Pressable onPress={handleHeartPress} style={styles.heartContainer}>
             <MaterialCommunityIcons
-              name={property?.areFriends ? "star" : "star-outline"}
+              name={collocation?.areFriends ? "star" : "star-outline"}
               color={theme["color-primary-500"]}
               size={24}
             />
@@ -84,12 +84,12 @@ export const CardInformation = ({
         </Row>
       )}
       <Text category={"c1"}>{getLowAndHighText("bedroom")}</Text>
-      {property?.name ? (
+      {collocation?.name ? (
         <Text category={"c1"} style={styles.defaultMarginTop}>
-          {property.name}
+          {collocation.name}
         </Text>
       ) : null}
-      <Text category={"c1"}>{property.name} 92</Text>
+      <Text category={"c1"}>{collocation.name} 92</Text>
 
       {/* {property?.includedUtilities && property.includedUtilities.length > 0 ? (
         <Text category={"c1"} style={styles.defaultMarginTop}>
@@ -119,7 +119,7 @@ export const CardInformation = ({
         <Button
           style={styles.button}
           size="small"
-          onPress={() => {property.phoneNumber ? callPhoneNumber(property.phoneNumber) : console.log("nie ma numeru tele")}}
+          onPress={() => {collocation.phoneNumber ? callPhoneNumber(collocation.phoneNumber) : console.log("nie ma numeru tele")}}
         >
           Call
         </Button>
@@ -130,7 +130,7 @@ export const CardInformation = ({
   const MyPropertyInfo = () => (
     <>
       <Text category={"s1"}>
-        {property?.name}
+        {collocation?.name}
       </Text>
       <Row style={[styles.rowAlign, styles.defaultMarginTop]}>
         {/* {property?.apartments && property.apartments.length > 0 ? (
@@ -176,7 +176,7 @@ export const CardInformation = ({
 
   return (
     <View style={styles.informationContainer}>
-      {myProperty ? <MyPropertyInfo /> : <DefaultInfo />}
+      {myCollocation ? <MyPropertyInfo /> : <DefaultInfo />}
     </View>
   );
 };

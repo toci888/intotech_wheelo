@@ -42,7 +42,6 @@ export const PropertyDetailsScreen = ({
               />
             ) : null}
             <View style={styles.contentContainer}>
-              <Text>asd</Text>
               <CollocationHeaderSection collocation={item} />
               <Divider style={styles.divider} />
               <PricingAndFloorPlanSection collocation={item} />

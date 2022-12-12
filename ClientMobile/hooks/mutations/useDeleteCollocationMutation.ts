@@ -2,33 +2,33 @@ import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
 
 import { endpoints, queryKeys } from "../../constants/constants";
-import { Collocation } from "../../types/collocation";
+import { CollocateAccount } from "../../types/collocation";
 import { useUser } from "../useUser";
 
-const deleteProperty = (propertyID: number, token?: string) =>
+const deleteCollocation = (propertyID: number, token?: string) =>
   axios.delete(`${endpoints.deleteProperty}${propertyID}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 
-export const useDeletePropertyMutation = () => {
+export const useDeleteCollocationMutation = () => {
   const queryClient = useQueryClient();
   const { user } = useUser();
 
   return useMutation(
-    ({ propertyID }: { propertyID: number }) =>
-      deleteProperty(propertyID, user?.accessToken),
+    ({ collocationID }: { collocationID: number }) =>
+      deleteCollocation(collocationID, user?.accessToken),
     {
-      onMutate: async ({ propertyID }) => {
+      onMutate: async ({ collocationID }) => {
         await queryClient.cancelQueries(queryKeys.myProperties);
 
-        const prevProperties: Collocation[] | undefined = queryClient.getQueryData(
+        const prevProperties: CollocateAccount[] | undefined = queryClient.getQueryData(
           queryKeys.myProperties
         );
 
         if (prevProperties) {
-          const filtered = prevProperties.filter((i) => i.ID !== propertyID);
+          const filtered = prevProperties.filter((i) => i.idAccount !== collocationID);
 
           queryClient.setQueryData(queryKeys.myProperties, filtered);
         }

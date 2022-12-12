@@ -10,32 +10,32 @@ import { ImageCarousel } from "./ImageCarousel";
 import { CardInformation } from "./CardInformation";
 import { LISTMARGIN, queryKeys } from "../constants/constants";
 import { theme } from "../theme";
-import { useDeletePropertyMutation } from "../hooks/mutations/useDeletePropertyMutation";
+import { useDeleteCollocationMutation } from "../hooks/mutations/useDeleteCollocationMutation";
 
 export const Card = ({
   collocation,
   onPress,
-  myProperty,
+  myCollocation,
   style,
 }: {
   collocation: CollocateAccount;
   onPress?: () => void;
-  myProperty?: boolean;
+  myCollocation?: boolean;
   style?: ViewStyle;
 }) => {
   const navigation = useNavigation();
   const [showModal, setShowModal] = useState(false);
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
-  const deleteProperty = useDeletePropertyMutation();
+  const deleteCollocation = useDeleteCollocationMutation();
 
-  const handleEditProperty = () => {
-    navigation.navigate("EditProperty", { collocationId: collocation.idaccount });
+  const handleEditCollocation = () => {
+    navigation.navigate("EditProperty", { collocationId: collocation.idAccount });
     closeModal();
   };
 
-  const handleDeleteProperty = () => {
-    deleteProperty.mutate({ propertyID: collocation.idaccount });
+  const handleDeleteCollocation = () => {
+    deleteCollocation.mutate({ collocationID: collocation.idAccount });
     closeModal();
   };
 
@@ -50,9 +50,9 @@ export const Card = ({
         chevronsShown
       />
 
-      <CardInformation property={collocation} myProperty={myProperty} />
+      <CardInformation collocation={collocation} myCollocation={myCollocation} />
 
-      {myProperty ? (
+      {myCollocation ? (
         <TouchableOpacity onPress={openModal} style={styles.ellipses}>
           <MaterialCommunityIcons
             name="dots-horizontal"
@@ -67,17 +67,17 @@ export const Card = ({
           <Button
             status={"info"}
             appearance="ghost"
-            onPress={handleEditProperty}
+            onPress={handleEditCollocation}
           >
-            Edit Property
+            Edit Collocation
           </Button>
 
           <Button
             status={"danger"}
             appearance="ghost"
-            onPress={handleDeleteProperty}
+            onPress={handleDeleteCollocation}
           >
-            Delete Property
+            Delete Collocation
           </Button>
           <Button appearance="ghost" onPress={closeModal}>
             Cancel
