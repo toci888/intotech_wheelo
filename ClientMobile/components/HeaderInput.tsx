@@ -57,7 +57,7 @@ export const HeaderInput = ({ type, location, setLocation, time, setTime }:
             }
           }}
           onCancel={() => { setShowDate(false); }}
-          onChange={(selectedTime) => {setTime(selectedTime.toLocaleString().substring(10, 16))}}
+          onChange={(selectedTime) => {setTime(selectedTime.toLocaleString().substring(12, 17))}}
         />
       </TouchableOpacity>
     </View>
