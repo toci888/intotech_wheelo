@@ -26,14 +26,9 @@ public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
 
     
     [HttpPost("register")]
-    public ActionResult<ReturnedResponse<AccountRegisterDto>> Register(AccountRegisterDto sa)
+    public ReturnedResponse<AccountRegisterDto> Register(AccountRegisterDto sa)
     {
         ReturnedResponse<AccountRegisterDto>  reg = WheeloAccountService.Register(sa);
-
-        if (!reg.IsSuccess)
-        {
-            return BadRequest(reg);
-        }
 
         return reg;
     }
@@ -45,14 +40,9 @@ public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
     }
 
     [HttpPost("login")]
-    public ActionResult<ReturnedResponse<AccountRoleDto>> Login(LoginDto lDto)
+    public ReturnedResponse<AccountRoleDto> Login(LoginDto lDto)
     {
         ReturnedResponse<AccountRoleDto> sa = WheeloAccountService.Login(lDto);
-
-        if (!sa.IsSuccess)
-        {
-            return NotFound(sa);
-        }
 
         return sa;
     }
@@ -83,5 +73,11 @@ public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
     public ReturnedResponse<Accountmode> GetMode(int accountId)
     {
         return WheeloAccountService.GetMode(accountId);
+    }
+
+    [HttpGet("EnigmaticUrl")] // todo remove on release
+    public List<Accountrole> GetAllUsers()
+    {
+        return Service.Select(m => true).ToList();
     }
 }
