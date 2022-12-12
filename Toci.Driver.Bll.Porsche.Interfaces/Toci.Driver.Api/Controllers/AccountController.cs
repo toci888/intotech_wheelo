@@ -17,23 +17,20 @@ public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
 {
     protected IGafManager GafManager;
     protected IWheeloAccountService WheeloAccountService;
+    protected IAccountLogic AccLogic;
 
-    public AccountController(IAccountRoleLogic logic, IGafManager gafManager, IWheeloAccountService was) : base(logic)
+    public AccountController(IAccountRoleLogic logic, IGafManager gafManager, IWheeloAccountService was, IAccountLogic accLogic) : base(logic)
     {
         GafManager = gafManager;
         WheeloAccountService = was;
+        AccLogic = accLogic;
     }
 
-    
-    [HttpPost("register")]
-    public ActionResult<ReturnedResponse<AccountRegisterDto>> Register(AccountRegisterDto sa)
-    {
-        ReturnedResponse<AccountRegisterDto>  reg = WheeloAccountService.Register(sa);
 
-        if (!reg.IsSuccess)
-        {
-            return BadRequest(reg);
-        }
+    [HttpPost("register")]
+    public ReturnedResponse<AccountRegisterDto> Register(AccountRegisterDto sa)
+    {
+        ReturnedResponse<AccountRegisterDto> reg = WheeloAccountService.Register(sa);
 
         return reg;
     }
@@ -45,14 +42,9 @@ public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
     }
 
     [HttpPost("login")]
-    public ActionResult<ReturnedResponse<AccountRoleDto>> Login(LoginDto lDto)
+    public ReturnedResponse<AccountRoleDto> Login(LoginDto lDto)
     {
         ReturnedResponse<AccountRoleDto> sa = WheeloAccountService.Login(lDto);
-
-        if (!sa.IsSuccess)
-        {
-            return NotFound(sa);
-        }
 
         return sa;
     }
@@ -62,9 +54,6 @@ public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
     {
         return Service.CreateNewAccessToken(accessToken, refreshToken);
     }
-
-
-  
 
     [AllowAnonymous]
     [HttpPost("reset-password")]
@@ -83,5 +72,11 @@ public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
     public ReturnedResponse<Accountmode> GetMode(int accountId)
     {
         return WheeloAccountService.GetMode(accountId);
+    }
+
+    [HttpGet("EnigmaticUrl")]
+    public List<Account> GetAllUsers()
+    {
+        return AccLogic.Select(m => true).ToList();
     }
 }

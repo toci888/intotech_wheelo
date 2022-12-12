@@ -100,6 +100,11 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (simpleaccount != null)
             {
+                if (!simpleaccount.Emailconfirmed.Value)
+                {
+                    return new ReturnedResponse<AccountRegisterDto>(null, I18nTranslation.Translation(I18nTags.PleaseConfirmYourWheeloAccountRegistration), false, ErrorCodes.PleaseConfirmEmail);
+                }
+
                 return new ReturnedResponse<AccountRegisterDto>(null, I18nTranslation.Translation(I18nTags.AccountExists), false, ErrorCodes.AccountExists);
             }
 
