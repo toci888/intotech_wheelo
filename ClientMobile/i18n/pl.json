@@ -6,7 +6,9 @@
     "password": "Hasło",
     "SignUp": "Zarejestruj się",
     "SignIn": "Zaloguj się",
+    "SignOut": "Wyloguj się",
     "UnableToAuthorize": "Nie udało się zalogować",
     "Search": "Szukaj",
-    "Alert": "Komunikat"
+    "Alert": "Komunikat",
+    "Welcome": "Witaj"
 }

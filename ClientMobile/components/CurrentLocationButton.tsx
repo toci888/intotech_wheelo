@@ -23,14 +23,14 @@ export const CurrentLocationButton = ({ style, location, setLocation
       return;
     }
 
-    let location = await Location.getCurrentPositionAsync({});
-    console.log("CurrentLocationButton:", location);
-    handleNavigate(location);
+    let currentLocation = await Location.getCurrentPositionAsync({});
+    console.log("CurrentLocationButton:", currentLocation);
+    handleNavigate(currentLocation);
   };
 
-  const handleNavigate = (location: Location.LocationObject) => {
-    let lat =  location.coords.latitude; //52.38705 16.88180 52.38512
-    let lon = location.coords.longitude; // 16.879011
+  const handleNavigate = (currentLocation: Location.LocationObject) => {
+    let lat =  currentLocation.coords.latitude; //52.38705 16.88180 52.38512
+    let lon = currentLocation.coords.longitude; // 16.879011
     
     
 

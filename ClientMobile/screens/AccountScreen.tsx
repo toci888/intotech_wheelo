@@ -8,6 +8,7 @@ import { theme } from "../theme";
 import { ButtonList } from "../components/ButtonList";
 import { useUser } from "../hooks/useUser";
 import React from "react";
+import { i18n } from "../i18n/i18n";
 
 export const AccountScreen = () => {
   const { user, logout } = useUser();
@@ -116,13 +117,10 @@ export const AccountScreen = () => {
           ) : (
             <>
               <Text style={styles.header} category={"h5"}>
-                Witaj!
+                {i18n.t('Welcome')}!
               </Text>
 
               <SignUpAndSignInButtons />
-              <View style={styles.middleContainer}>
-                <Text style={styles.brandText}>WHEELO</Text>
-              </View>
             </>
           )}
         </View>
@@ -135,18 +133,9 @@ export const AccountScreen = () => {
               header={"Rental Manager Tools"}
             />
             <ButtonList data={supportButtons} header={"Support"} />
-            <View
-              style={[
-                styles.specialMarginVertical,
-                styles.defaultMarginHorizontal,
-              ]}
-            >
-              <Button
-                appearance={"ghost"}
-                style={styles.button}
-                onPress={logout}
-              >
-                Sign Out
+            <View style={[styles.specialMarginVertical, styles.defaultMarginHorizontal,]}>
+              <Button appearance={"ghost"} style={styles.button} onPress={logout}>
+                {i18n.t('SignOut')}
               </Button>
             </View>
           </>
@@ -154,11 +143,8 @@ export const AccountScreen = () => {
           <>
             <ButtonList data={firstSignedOutButtons} borderTop />
             <ButtonList data={supportButtons} header="Support" marginTop />
-            <Text
-              appearance={"hint"}
-              style={[styles.brandText, styles.specialMarginVertical]}
-            >
-              JeremyPersing.com Version 1.0.0
+            <Text appearance={"hint"} style={[styles.brandText, styles.specialMarginVertical]}>
+              {i18n.t('AppName').toUpperCase()}
             </Text>
           </>
         )}
