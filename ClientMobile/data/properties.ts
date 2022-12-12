@@ -124,7 +124,7 @@ export const properties: Collocation[] = [
       "Underground Parking",
     ],
     phoneNumber: "12334556757",
-    website: "www.jeremypersing.com",
+    website: "www.intotech.com.pl",
     scores: [
       { type: "Walk", description: "Very Walkable", score: 73 },
       { type: "Bike", description: "Very Bikeable", score: 72 },
