@@ -7,6 +7,7 @@ import { SignUpAndSignInButtons } from "../components/SignUpAndSignInButtons";
 import { theme } from "../theme";
 import { ButtonList } from "../components/ButtonList";
 import { useUser } from "../hooks/useUser";
+import React from "react";
 
 export const AccountScreen = () => {
   const { user, logout } = useUser();

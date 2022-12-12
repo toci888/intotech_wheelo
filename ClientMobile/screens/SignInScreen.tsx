@@ -1,4 +1,4 @@
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Text, Input, Button } from "@ui-kitten/components";
 import * as yup from "yup";
@@ -9,10 +9,14 @@ import { Screen } from "../components/Screen";
 import { ModalHeader } from "../components/ModalHeader";
 import { PasswordInput } from "../components/PasswordInput";
 import { useAuth } from "../hooks/useAuth";
+import React from "react";
+import { ReturnedResponse } from "../types";
+import { User } from "../types/user";
+import { i18n } from "../i18n/i18n";
 
 export const SignInScreen = () => {
   const navigation = useNavigation();
-  const { nativeLogin, facebookAuth, googleAuth, appleAuth } = useAuth();
+  const { nativeLogin } = useAuth();
 
   return (
     <KeyboardAwareScrollView bounces={false}>
@@ -24,7 +28,7 @@ export const SignInScreen = () => {
           </Text>
           <Formik
             initialValues={{
-              email: "asdf@wp.pl",
+              email: "asdf@wp.plzxcxxxc",
               password: "zxcD@#gry123",
             }}
             validationSchema={yup.object().shape({
@@ -34,7 +38,11 @@ export const SignInScreen = () => {
                 .required("Hasło jest wymagane..")
             })}
             onSubmit={async (values) => {
-              await nativeLogin(values);
+              const user: ReturnedResponse<User> | undefined = await nativeLogin(values);
+              if(user?.isSuccess === false && user?.errorCode) {
+                console.log("User", user);
+                navigation.navigate(`EmailVerification`, user.methodResult)
+              }
             }}
           >
             {({

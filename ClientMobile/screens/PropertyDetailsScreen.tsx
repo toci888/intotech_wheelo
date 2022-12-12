@@ -24,9 +24,7 @@ export const PropertyDetailsScreen = ({
 }: {
   route: { params: { propertyID: number } };
 }) => {
-  console.log("PROP");
   const property = useSelectedPropertyQuery(route.params.propertyID);
-  console.log("PROP", property);
   if (!property.data) return <Text>Unable to get property details ...</Text>;
 
   return (

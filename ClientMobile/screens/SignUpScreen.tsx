@@ -1,5 +1,5 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, Alert } from "react-native";
 import { Input, Button, Text } from "@ui-kitten/components";
 import * as yup from "yup";
 import { Formik } from "formik";
@@ -14,24 +14,47 @@ import { OrDivider } from "../components/OrDivider";
 import { PasswordInput } from "../components/PasswordInput";
 import { useAuth } from "../hooks/useAuth";
 import { i18n } from "../i18n/i18n";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { ReturnedResponse, RootStackParamList } from "../types";
+import { User } from "../types/user";
+
+interface IUser {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+type SignUpProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>
 
 export const SignUpScreen = () => {
+  const [user, setUser] = useState<IUser>({
+    firstName: "asd",
+    lastName: "qwe",
+    email: "asdf@wp.plzxcxxxc",
+    password: "zxcD@#gry123",
+    // firstName: "",
+    // lastName: "",
+    // email: "",
+    // password: "",
+  });
+  const navigation = useNavigation();
   const { appleAuth, facebookAuth, googleAuth, nativeRegister } = useAuth();
 
   return (
     <KeyboardAwareScrollView bounces={false}>
       <Screen>
-        <ModalHeader text="JPApartments" xShown />
+        <ModalHeader text="Wheelo" xShown />
         <View style={styles.container}>
           <Text category={"h5"} style={styles.header}>
              {i18n.t('SignUp')}
           </Text>
           <Formik
             initialValues={{
-              firstName: "asd",
-              lastName: "qwe",
-              email: "asdf@wp.pl",
-              password: "zxcD@#gry123",
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user.email,
+              password: user.password,
             }}
             validationSchema={yup.object().shape({
               firstName: yup.string().required("Your first name is required."),
@@ -46,7 +69,19 @@ export const SignUpScreen = () => {
                 ),
             })}
             onSubmit={async (values) => {
-              await nativeRegister(values);
+              const user: ReturnedResponse<User> | undefined = await nativeRegister(values);
+              if(user) {
+                if(user.isSuccess === true) {
+                  navigation.navigate(`EmailVerification`, user.methodResult)
+                } 
+                else if(user.isSuccess === false && user.errorCode === 16384) {
+                  navigation.navigate("EmailVerification", user.methodResult);
+                }
+                else if(user.isSuccess === false && user.errorCode === 512) {
+                  navigation.goBack();
+                  Alert.alert(i18n.t('Alert'), user.errorMessage);
+                }
+              }
             }}
           >
             {({

@@ -21,7 +21,7 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   FindLocations: undefined;
   SignIn: undefined;
-  SignUp: undefined;
+  SignUp: { userId: string };
   ForgotPassword: undefined;
   ResetPassword: { token: string };
   PropertyDetails: { propertyID: number };
@@ -31,6 +31,8 @@ export type RootStackParamList = {
   MyProperties: undefined;
   ManageUnits: { propertyID: number };
   Review: { propertyID: number; propertyName: string };
+  WheeloMain: undefined;
+  EmailVerification: any;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -72,4 +74,29 @@ export enum Driver {
   'driver' = 1,
   'passenger' = 2,
   'both' = 3
+}
+
+type Response = {
+  errorMessage: string;
+  isSuccess: boolean;
+  errorCode: number;
+}
+
+export type ReturnedResponse<TModel> = 
+Response & {
+  methodResult: TModel
+}
+
+export type registerDto = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  method?: string;
+}
+
+export type loginDto = {
+  email: string;
+  password: string;
+  method?: string;
 }

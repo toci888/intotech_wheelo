@@ -4,40 +4,28 @@ import { endpoints } from "../constants/constants";
 import { User } from "../types/user";
 import { handleError } from "../utils/handleError";
 import * as Crypto from 'expo-crypto';
-import { ThemeMode } from "../types";
+import { loginDto, registerDto, ThemeMode } from "../types";
+import { ReturnedResponse } from "../types";
 
-type DataRes = { data: User };
-
-export const registerUser = async (
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string
-) => {
+export const registerUser = async (values: registerDto) => {
   try {
-    password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, password);
-    const { data }: DataRes = await axios.post(endpoints.register, {
-      method: 'wheelo',
-      email,
-      password,
-      firstName,
-      lastName,
-    });
-    return data;
+    values.password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, values.password);
+    values.method = 'wheelo';
+
+    const { data } = await axios.post(endpoints.register, values);
+    return data as ReturnedResponse<User>;
   } catch (error) {
     handleError(error);
   }
 };
 
-export const loginUser = async (email: string, password: string) => {
+export const loginUser = async (values: loginDto) => {
   try {
-    password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, password);
-    const { data }: DataRes = await axios.post(endpoints.login, {
-      method: 'wheelo',
-      email,
-      password,
-    });
-    return data;
+    values.password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, values.password);
+    values.method = 'wheelo';
+
+    const { data } = await axios.post(endpoints.login, values);
+    return data as ReturnedResponse<User>;
   } catch (error) {
     handleError(error);
   }
@@ -45,10 +33,10 @@ export const loginUser = async (email: string, password: string) => {
 
 export const facebookLoginOrRegister = async (token: string) => {
   try {
-    const { data }: DataRes = await axios.post(endpoints.login, {
+    const user: ReturnedResponse<User> = await axios.post(endpoints.login, {
       token, method: 'facebook',
     });
-    return data;
+    return user;
   } catch (error) {
     handleError(error);
   }
@@ -56,10 +44,10 @@ export const facebookLoginOrRegister = async (token: string) => {
 
 export const googleLoginOrRegister = async (token: string) => {
   try {
-    const { data }: DataRes = await axios.post(endpoints.login, {
+    const user: ReturnedResponse<User> = await axios.post(endpoints.login, {
       token, method: 'google',
     });
-    return data;
+    return user;
   } catch (error) {
     handleError(error);
   }
@@ -67,10 +55,10 @@ export const googleLoginOrRegister = async (token: string) => {
 
 export const appleLoginOrRegister = async (token: string) => {
   try {
-    const { data }: DataRes = await axios.post(endpoints.login, {
+    const user: ReturnedResponse<User> = await axios.post(endpoints.login, {
       token, method: 'apple',
     });
-    return data;
+    return user;
   } catch (error) {
     handleError(error);
   }

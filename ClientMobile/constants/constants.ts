@@ -1,5 +1,11 @@
 import { Dimensions, Platform, StatusBar } from "react-native";
 
+export const expoClientId = "102834178930-2ttlkgvfa9g29umbtuqtv90vjasf4mop.apps.googleusercontent.com";
+export const iosClientId = "102834178930-2ttlkgvfa9g29umbtuqtv90vjasf4mop.apps.googleusercontent.com";
+export const androidClientId = "102834178930-2ttlkgvfa9g29umbtuqtv90vjasf4mop.apps.googleusercontent.com";
+export const webClientId = "102834178930-2ttlkgvfa9g29umbtuqtv90vjasf4mop.apps.googleusercontent.com";
+export const facebookClientId = "1596113584178438";
+
 export const locationAPIKEY = 'pk.95fe8bb8ddbbc10ed656fe23d485c8f0&q';
 export const googleAPIKEY = 'AIzaSyDxVQqaiKE1L6N9Etv9SUgKsEHfPr9Et40';
 
@@ -57,6 +63,7 @@ export const endpoints = {
   search: locationEndpoint + "/search",
   addWorkTrip: workTrip + "/add-work-trip",
   register: userEndpoint + "/register",
+  emailVerification: userEndpoint + "/confirm-email",
   login: userEndpoint + "/login",
   forgotPassword: userEndpoint + "/forgotpassword",
   resetPassword: userEndpoint + "/resetpassword",

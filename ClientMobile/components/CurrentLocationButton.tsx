@@ -24,7 +24,7 @@ export const CurrentLocationButton = ({ style, location, setLocation
     }
 
     let location = await Location.getCurrentPositionAsync({});
-    console.log("XXXX", location);
+    console.log("CurrentLocationButton:", location);
     handleNavigate(location);
   };
 

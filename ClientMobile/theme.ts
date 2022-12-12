@@ -4,6 +4,8 @@ export const theme = {
   ...light,
 // nowe kolory
   "color-violet": "#6e53a6",
+  "color-white": "#ffffff",
+  "color-black": "#000000",
   
 // stare kolory
   "color-gray": "#d3d3d3",

@@ -4,41 +4,34 @@ import * as Google from "expo-auth-session/providers/google";
 import * as AppleAuthentication from "expo-apple-authentication";
 import { useEffect } from "react";
 
-import {
-  appleLoginOrRegister,
-  facebookLoginOrRegister,
-  googleLoginOrRegister,
-  loginUser,
-  registerUser,
-} from "../services/user";
+import { appleLoginOrRegister, facebookLoginOrRegister, googleLoginOrRegister, loginUser, registerUser } from "../services/user";
 import { User } from "../types/user";
 import { useUser } from "./useUser";
 import { useLoading } from "./useLoading";
+import { loginDto, registerDto, ReturnedResponse } from "../types";
 import { i18n } from "../i18n/i18n";
+import { commonAlert } from "../utils/handleError";
+import { androidClientId, expoClientId, facebookClientId, iosClientId, webClientId } from "../constants/constants";
 
 export const useAuth = () => {
   const [_, googleResponse, googleAuth] = Google.useAuthRequest({
-    expoClientId:
-      "102834178930-2ttlkgvfa9g29umbtuqtv90vjasf4mop.apps.googleusercontent.com",
-    iosClientId:
-      "102834178930-2ttlkgvfa9g29umbtuqtv90vjasf4mop.apps.googleusercontent.com",
-    androidClientId:
-      "102834178930-2ttlkgvfa9g29umbtuqtv90vjasf4mop.apps.googleusercontent.com",
-    webClientId: "102834178930-2ttlkgvfa9g29umbtuqtv90vjasf4mop.apps.googleusercontent.com",
+    expoClientId: expoClientId,
+    iosClientId: iosClientId,
+    androidClientId: androidClientId,
+    webClientId: webClientId,
     selectAccount: true,
   });
 
   const [___, ____, fbPromptAsync] = Facebook.useAuthRequest({
-    clientId: "1596113584178438",
+    clientId: facebookClientId,
   });
 
   useEffect(() => {
     async function loginUserWithGoogle(access_token: string) {
       try {
         setLoading(true);
-        console.log('access_token', access_token);
         const user = await googleLoginOrRegister(access_token);
-        handleSignInUser(user);
+        handleSignInUser(user?.methodResult);
       } catch (error) {
         handleAuthError();
       } finally {
@@ -55,32 +48,27 @@ export const useAuth = () => {
   const { login } = useUser();
   const { goBack } = useNavigation();
   const { setLoading } = useLoading();
+  const navigation = useNavigation();
 
-  const handleSignInUser = (user?: User | null) => {
+  const handleSignInUser = (user?: User) => {
     if (user) {
       login(user);
       goBack();
     }
   };
 
-  const handleAuthError = () => alert(i18n.t('UnableToAuthorize'));
+  const handleAuthError = (description?: string) => {
+    description? commonAlert(description) : commonAlert(i18n.t('UnableToAuthorize'));
+  }
 
-  const nativeRegister = async (values: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-  }) => {
+  const nativeRegister = async (values: registerDto) => {
     try {
       setLoading(true);
 
-      const user = await registerUser(
-        values.firstName,
-        values.lastName,
-        values.email,
-        values.password
-      );
-      handleSignInUser(user);
+      const user = await registerUser(values);
+
+      navigation.navigate(`EmailVerification`, user)
+      return user;
     } catch (error) {
       handleAuthError();
     } finally {
@@ -88,12 +76,12 @@ export const useAuth = () => {
     }
   };
 
-  const nativeLogin = async (values: { email: string; password: string }) => {
+  const nativeLogin = async (values: loginDto) => {
     try {
       setLoading(true);
-
-      const user = await loginUser(values.email, values.password);
-      handleSignInUser(user);
+      const user = await loginUser(values);
+      handleSignInUser(user?.methodResult);
+      return user;
     } catch (error) {
       handleAuthError();
     } finally {
@@ -107,9 +95,8 @@ export const useAuth = () => {
       if (response.type === "success") {
         setLoading(true);
         const { access_token } = response.params;
-        console.log('access_token', access_token)
         const user = await facebookLoginOrRegister(access_token);
-        handleSignInUser(user);
+        handleSignInUser(user?.methodResult);
       }
     } catch (error) {
       handleAuthError();
@@ -129,9 +116,8 @@ export const useAuth = () => {
 
       if (identityToken) {
         setLoading(true);
-        console.log('identityToken', identityToken)
         const user = await appleLoginOrRegister(identityToken);
-        handleSignInUser(user);
+        handleSignInUser(user?.methodResult);
       }
     } catch (error) {
       handleAuthError();

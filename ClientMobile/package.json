@@ -50,6 +50,7 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-native": "0.68.2",
+    "react-native-confirmation-code-field": "^7.3.1",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-maps": "0.30.2",
     "react-native-maps-directions": "^1.9.0",
