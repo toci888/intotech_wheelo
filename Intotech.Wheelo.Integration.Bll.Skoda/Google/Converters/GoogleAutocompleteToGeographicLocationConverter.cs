@@ -1,5 +1,6 @@
-﻿using Intotech.Wheelo.Common.Interfaces.Google;
-using Intotech.Wheelo.Common.Interfaces.Models;
+﻿using Intotech.Wheelo.Common.Interfaces.Models;
+using Intotech.Wheelo.Integration.Bll.Skoda.Interfaces.Google.Converters;
+using Intotech.Wheelo.Integration.Bll.Skoda.Interfaces.Google.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Common.Google
 {
-    public class GoogleAutocompleteToGeographicLocationConverter : IGooglePlaceToGeographicLocationConverter<GeographicLocation[], GooglePredictionsGeoModel>
+    public class GoogleAutocompleteToGeographicLocationConverter : IGooglePlaceToGeographicLocationConverter<GooglePredictionsGeoModel, GeographicLocation[]>
     {
     
        public virtual GeographicLocation[] Convert(GooglePredictionsGeoModel googlePlaceGeoModel)

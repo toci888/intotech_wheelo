@@ -6,7 +6,6 @@ using Intotech.Wheelo.Bll.Models.Social;
 using Intotech.Wheelo.Bll.Porsche;
 using Intotech.Wheelo.Bll.Porsche.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.User;
-using Intotech.Wheelo.Common.Google;
 using Intotech.Wheelo.Common.Interfaces.Models;
 using Intotech.Wheelo.Social.Tests.Persistence.Seed;
 using Intotech.Wheelo.Tests.Persistence.Seed;

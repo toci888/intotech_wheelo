@@ -369,6 +369,13 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
                 Acceptabledistance = distanceAcc
             });
 
+            /*
+             {"startLocation":{"place_id":"ChIJtwrh7NJEBEcR0b80A5gx6qQ","lat":"52.406376","lon":"16.925169","display_name":"Poznań, 62",
+            "address":{"name":"Poznań, 62","house_number":null,"road":null,"city":"Poznań","state":"Wielkopolskie","postcode":"62","country":"Polska",
+            "country_code":null}},"endLocation":{"place_id":"ChIJv4q11MLpD0cR9eAFwq5WCbc","lat":"51.107883","lon":"17.038538","display_name":"Wrocław, 51","address":{"name":"Wrocław, 51","house_number":null,"road":null,"city":"Wrocław","state":"Dolnośląskie","postcode":"51","country":"Polska","country_code":null}},
+            "startLocationTime":"14:39",
+            "endLocationTime":"16:00","idAccount":1000000047,"acceptableDistance":800}
+*/
             InsertCollection(ModelsEntities);
         }
     }
