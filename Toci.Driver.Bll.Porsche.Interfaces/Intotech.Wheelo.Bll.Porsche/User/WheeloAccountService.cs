@@ -316,6 +316,22 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             return new ReturnedResponse<TokensModel>(tokensModel, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
+        public ReturnedResponse<bool> SetAllowsNotifications(int accountId, bool allowsNotifications)
+        {
+            Account account = AccLogic.Select(m => m.Id == accountId).FirstOrDefault();
+
+            if (account == null)
+            {
+                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
+            }
+
+            account.Allowsnotifications= allowsNotifications;
+
+            AccLogic.Update(account);
+
+            return new ReturnedResponse<bool>(allowsNotifications, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        }
+
         public List<Account> GetAllUsers() // TODO REMOVE
         {
             return AccLogic.Select(m => true).ToList();

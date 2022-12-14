@@ -14,5 +14,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public string? Refreshtoken { get; set; }
         public string? Rolename { get; set; }
         public DateTime? Refreshtokenvalid { get; set; }
+        public bool? Allowsnotifications { get; set; }
     }
 }

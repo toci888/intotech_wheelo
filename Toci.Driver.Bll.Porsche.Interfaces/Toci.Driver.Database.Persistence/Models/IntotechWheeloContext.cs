@@ -36,7 +36,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Invitation> Invitations { get; set; } = null!;
         public virtual DbSet<Notuser> Notusers { get; set; } = null!;
         public virtual DbSet<Occupation> Occupations { get; set; } = null!;
-        public virtual DbSet<Passwordsstrenght> Passwordsstrenghts { get; set; } = null!;
         public virtual DbSet<Passwordstrength> Passwordstrengths { get; set; } = null!;
         public virtual DbSet<Resetpassword> Resetpasswords { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
@@ -74,6 +73,10 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.ToTable("accounts");
 
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Allowsnotifications)
+                    .HasColumnName("allowsnotifications")
+                    .HasDefaultValueSql("false");
 
                 entity.Property(e => e.Email).HasColumnName("email");
 
@@ -183,6 +186,8 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.HasNoKey();
 
                 entity.ToView("accountroles");
+
+                entity.Property(e => e.Allowsnotifications).HasColumnName("allowsnotifications");
 
                 entity.Property(e => e.Email).HasColumnName("email");
 
@@ -573,17 +578,6 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name).HasColumnName("name");
-            });
-
-            modelBuilder.Entity<Passwordsstrenght>(entity =>
-            {
-                entity.ToTable("passwordsstrenght");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
-
-                entity.Property(e => e.Level).HasColumnName("level");
             });
 
             modelBuilder.Entity<Passwordstrength>(entity =>

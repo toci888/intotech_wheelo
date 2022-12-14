@@ -21,7 +21,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.User
 
         ReturnedResponse<Accountmode> SetMode(int accountId, int mode);
 
-      //  protected AccountRoleDto GenerateJwt(LoginDto user);
+        ReturnedResponse<bool> SetAllowsNotifications(int accountId, bool allowsNotifications);
 
         ReturnedResponse<int> ResetPassword(string email, string password, string token);
 

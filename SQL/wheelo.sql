@@ -90,6 +90,7 @@ create table Accounts
 	verificationCode int,
 	IdRole int references roles(id) default 1,
 	emailconfirmed bool default false,
+	allowsNotifications bool default false,
 	image text,
 	phoneNumber text,
 	refreshToken text,
@@ -316,7 +317,7 @@ join Colours col on c.IdColours = col.id
 join CarsBrands cb on c.IdCarsBrands = cb.id
 join CarsModels cm on c.IdCarsModels = cm.id;
 
-select * from AccountsCarsLocations;
+--select * from AccountsCarsLocations;
 -- drop table TestCoordinates;
 --create table TestCoordinates
 --(
@@ -328,7 +329,7 @@ select * from AccountsCarsLocations;
 --select * from TestCoordinates;
 create or replace view AccountRoles as
 select Accounts.id, Accounts.Name, Accounts.Surname, Accounts.email, Accounts.password, Accounts.emailConfirmed, 
-Accounts.refreshtoken , Roles.name as RoleName, Accounts.refreshTokenValid
+Accounts.refreshtoken , Roles.name as RoleName, Accounts.refreshTokenValid, Accounts.allowsNotifications 
 from Accounts
 join Roles on Roles.id = Accounts.idRole;
 

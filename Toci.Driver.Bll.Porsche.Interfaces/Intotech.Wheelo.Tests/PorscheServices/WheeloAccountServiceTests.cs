@@ -42,9 +42,9 @@ namespace Intotech.Wheelo.Tests.PorscheServices
         {
             AccountRegisterDto testData = GetRegisterData();
 
-            ReturnedResponse<AccountRegisterDto> result = AccountService.Register(testData);
+            ReturnedResponse<AccountRoleDto> result = AccountService.Register(testData);
 
-            ReturnedResponse<AccountRegisterDto> secResult = AccountService.Register(testData);
+            ReturnedResponse<AccountRoleDto> secResult = AccountService.Register(testData);
 
            // result.ErrorCode ?
            // secResult.ErrorCode ? 

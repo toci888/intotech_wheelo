@@ -37,6 +37,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public string? Phonenumber { get; set; }
         public string? Refreshtoken { get; set; }
         public DateTime? Refreshtokenvalid { get; set; }
+        public bool? Allowsnotifications { get; set; }
 
         public virtual Role? IdroleNavigation { get; set; }
         public virtual Accountmode? Accountmode { get; set; }
