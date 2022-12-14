@@ -96,7 +96,6 @@ export const AnimatedListHeader = ({
         }
 
       </View>
-      <Divider style={styles.divider} />
     </Animated.View>
   );
 };
@@ -110,10 +109,6 @@ const styles = StyleSheet.create({
   },
   defaultMarginHorizontal: {
     marginHorizontal: LISTMARGIN,
-  },
-  divider: { 
-    height: 20,
-    backgroundColor: theme["color-white"],
   },
   row: {
     marginBottom: 5,
