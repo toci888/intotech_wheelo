@@ -5,6 +5,7 @@ import { openSettings } from "expo-linking";
 
 import { useUser } from "./useUser";
 import { os } from "../constants/constants";
+import { i18n } from "../i18n/i18n";
 
 export const useNotifications = () => {
   const { addPushToken, setAllowsNotifications, user } = useUser();
@@ -12,8 +13,7 @@ export const useNotifications = () => {
   const registerForPushNotificationsAsync = async (alertUser?: boolean) => {
     if (Device.isDevice) {
       if (!user) return;
-      const { status: existingStatus } =
-        await Notifications.getPermissionsAsync();
+      const { status: existingStatus } = await Notifications.getPermissionsAsync();
       let finalStatus = existingStatus;
       if (existingStatus !== "granted") {
         const { status } = await Notifications.requestPermissionsAsync();
@@ -22,15 +22,13 @@ export const useNotifications = () => {
 
       if (finalStatus !== "granted") {
         if (alertUser)
-          Alert.alert(
-            "Error",
-            "To enable Push Notifications please change your settings.",
+          Alert.alert(i18n.t('Alert'), i18n.t('ToenablePushNotificationspleasechangeyoursettings'),
             [
               {
-                text: "OK",
+                text: i18n.t('Ok'),
               },
               {
-                text: "Open Settings",
+                text: i18n.t('OpenSettings'),
                 onPress: openSettings,
               },
             ]
