@@ -1,11 +1,15 @@
 {
     "AppName": "Wheelo",
-    "firstname": "Imię",
-    "lastname": "Nazwisko",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
     "email": "Email",
-    "password": "Hasło",
-    "SignUp": "Zarejestruj się",
-    "SignIn": "Zaloguj się",
-    "UnableToAuthorize": "Nie udało się zalogować",
-    "Search": "Szukaj tuttaj"
+    "password": "Password",
+    "SignUp": "Sign Up",
+    "SignIn": "Sign In",
+    "SignOut": "Sign Out",
+    "UnableToAuthorize": "Unable to authorize",
+    "Search": "Search",
+    "Alert": "Alert",
+    "Welcome": "Welcome",
+    "FindAvailableConnections": "Find available connections"
 }

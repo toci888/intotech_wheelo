@@ -1,4 +1,4 @@
-import { Animated, View, StyleSheet, } from "react-native";
+import { Animated, View, StyleSheet, TouchableOpacity, } from "react-native";
 import React, { useState } from "react";
 import { Text, Button, Divider } from "@ui-kitten/components";
 
@@ -7,6 +7,10 @@ import { HeaderInput } from "./HeaderInput";
 import { Location } from "../types/locationIQ";
 import { useNavigation } from "@react-navigation/native";
 import { i18n } from "../i18n/i18n";
+import { TopBar } from "./TopBar";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Row } from "./Row";
+import { theme } from "../theme";
 
 export const AnimatedListHeader = ({
   startLocation,
@@ -44,23 +48,53 @@ export const AnimatedListHeader = ({
   }
 
   return (
-    <Animated.View style={styles.container}>
+    <Animated.View style={styles.container}>    
+      <View
+          style={[styles.defaultMarginHorizontal, {"marginTop": 10}]}
+        >
+        <Row style={styles.row}>
+          <TouchableOpacity onPress={() => console.log("press a bell")}>
+            <MaterialCommunityIcons
+              name={"bell-outline"}
+              size={28}
+              color={theme["color-white"]} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text category="h3" style={{"textTransform": "uppercase", "color": theme["color-white"]}} onPress={() => console.log("press a logo")}>Wheelo</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => console.log("press a cog")}>
+            <MaterialCommunityIcons
+              name={"cog"}
+              size={28}
+              color={theme["color-white"]} />
+          </TouchableOpacity>
+        </Row>
+        <Text category="h3" style={{"textTransform": "capitalize", "color": theme["color-white"]}}>Cześć,
+          {/* TODO - dorobić wyświetlanie zalogowanego użytkownika */}
+          <Text category="h3" style={{"textTransform": "capitalize", "color": theme["color-green"]}}> Dawid.</Text>
+        </Text>
+      </View>    
       <View style={styles.defaultMarginHorizontal}>
-        <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-          <Text style={{marginRight: 'auto'}}>Gdzie mieszkasz?</Text>
-          <Text style={{marginLeft: 'auto'}}>O której wyjeżdżasz?</Text>
+        <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+          <Text category="h6" style={{ marginRight: "auto", color: theme["color-white"] }}>Gdzie mieszkasz?</Text>
+          <Text category="h6" style={{ marginLeft: "auto", color: theme["color-white"] }}>O której wyjeżdżasz?</Text>
         </View>
-        
-        <HeaderInput type="start" location={startLocation} setLocation={setStartLocation} time={startTime} setTime={setStartTime}/>
-        
-        <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-          <Text style={{marginRight: 'auto'}}>Gdzie pracujesz?</Text>
-          <Text style={{marginLeft: 'auto'}}>O której wracasz?</Text>
+
+        <HeaderInput type="start" location={startLocation} setLocation={setStartLocation} time={startTime} setTime={setStartTime} />
+
+        <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+          <Text category="h6" style={{ marginRight: "auto", color: theme["color-white"] }}>Gdzie pracujesz?</Text>
+          <Text category="h6" style={{ marginLeft: "auto", color: theme["color-white"] }}>O której wracasz?</Text>
         </View>
-        <HeaderInput type="end" location={endLocation} setLocation={setEndLocation} time={endTime} setTime={setEndTime}/>
-        
-        {startLocation.display_name !== i18n.t('Search') && endLocation.display_name !== i18n.t('Search') &&
-        <Button onPress={() => {submit()}}>Szukaj</Button>}
+        <HeaderInput type="end" location={endLocation} setLocation={setEndLocation} time={endTime} setTime={setEndTime} />
+
+        {
+          startLocation.display_name !== i18n.t('Search') && endLocation.display_name !== i18n.t('Search') &&
+            <Button style={{ marginBottom: 10, borderRadius: 20, }} onPress={() => { submit(); }} >
+              {evaProps => <Text {...evaProps} style={{ fontSize: 18, fontWeight: "500", color: theme["color-white"], textTransform: "uppercase" }}>{i18n.t("FindAvailableConnections")}</Text>}
+            </Button>
+        }
+
       </View>
       <Divider style={styles.divider} />
     </Animated.View>
@@ -72,13 +106,18 @@ const styles = StyleSheet.create({
     top: 0,
     right: 0,
     left: 0,
-    backgroundColor: "#fff",
+    backgroundColor: theme["color-blue"],
   },
   defaultMarginHorizontal: {
     marginHorizontal: LISTMARGIN,
   },
   divider: { 
     height: 20,
-    backgroundColor: 'white'
+    backgroundColor: theme["color-white"],
   },
+  row: {
+    marginBottom: 5,
+    alignItems: "center",
+    justifyContent: "space-between",
+  },  
 });
