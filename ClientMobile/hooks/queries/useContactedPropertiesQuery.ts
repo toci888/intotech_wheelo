@@ -29,7 +29,7 @@ export const useContactedPropertiesQuery = () => {
   const { user } = useUser();
   const queryInfo = useQuery(
     queryKeys.contactedProperties,
-    () => fetchProperties(user?.ID, user?.accessToken),
+    () => fetchProperties(user?.id, user?.accessToken),
     {
       retry: false,
     }

@@ -40,7 +40,7 @@ export const useSearchPropertiesQuery = (startAndEndLocation: SearchScreenParams
   const { user } = useUser();
   const queryInfo = useQuery(
     queryKeys.searchCollocations,
-    () => fetchProperties(startAndEndLocation, user?.ID),
+    () => fetchProperties(startAndEndLocation, user?.id),
     {
       enabled: false,
     }

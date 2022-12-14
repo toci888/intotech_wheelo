@@ -30,7 +30,7 @@ export const useSaveCollocationMutation = () => {
 
   return useMutation(
     ({ collocationID, op }: { collocationID: number; op: "add" | "remove" }) =>
-      saveOrUnsaveCollocation(collocationID, op, user?.ID, user?.accessToken),
+      saveOrUnsaveCollocation(collocationID, op, user?.id, user?.accessToken),
     {
       onMutate: async ({ collocationID, op }) => {
         await queryClient.cancelQueries(queryKeys.savedProperties);

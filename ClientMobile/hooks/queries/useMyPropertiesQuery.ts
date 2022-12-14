@@ -28,6 +28,6 @@ export const useMyPropertiesQuery = () => {
   const { user } = useUser();
 
   return useQuery(queryKeys.myProperties, () =>
-    fetchProperties(user?.ID, user?.accessToken)
+    fetchProperties(user?.id, user?.accessToken)
   );
 };

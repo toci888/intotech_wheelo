@@ -59,7 +59,7 @@ export const AddPropertySection = () => {
         zip: Number(values.zip),
         lat: Number(values.lat),
         lng: Number(values.lng),
-        userID: user.ID,
+        userID: user.id,
         apartments: [],
       };
 

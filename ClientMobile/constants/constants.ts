@@ -54,7 +54,7 @@ const contactedEndpoint = (id: number) => `${userEndpoint}/${id}/properties/cont
 const savedEndpoint = (id: number) => `${userEndpoint}/${id}/properties/saved`;
 const pushTokenEndpoint = (id: number) => `${userEndpoint}/${id}/pushtoken`;
 const allowsNotificationsEndpoint = (id: number) => `${userEndpoint}/${id}/settings/notifications`;
-const themeModeEndpoint = (idAccount: number, idThemeMode: number) => `${userEndpoint}/${idThemeMode}/settings/theme-mode?idAccount=${idAccount}`;
+const themeModeEndpoint = (idAccount: number, darkModeEnabled: boolean) => `${userEndpoint}/${idAccount}/settings/theme-mode?darkmode=${darkModeEnabled}`;
 
 export const endpoints = {
   chat: chatUrl,

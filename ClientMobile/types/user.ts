@@ -1,13 +1,11 @@
-import { ThemeMode } from "../types";
-
 export type User = {
-  ID: number;
+  id: number;
   firstName?: string;
   lastName?: string;
   email: string;
   savedProperties?: number[];
   allowsNotifications: boolean;
-  themeMode: ThemeMode;
+  darkMode: boolean;
   pushToken?: string;
   sessionID?: string;
   accessToken: string;

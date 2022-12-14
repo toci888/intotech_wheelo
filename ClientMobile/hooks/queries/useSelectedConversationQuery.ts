@@ -65,7 +65,7 @@ export const useSelectedConversationQuery = (conversationID: number) => {
   const { user } = useUser();
 
   return useQuery(queryKeys.selectedConversation, () =>
-    fetchConversation(conversationID, user?.ID, user?.accessToken)
+    fetchConversation(conversationID, user?.id, user?.accessToken)
   );
 };
 

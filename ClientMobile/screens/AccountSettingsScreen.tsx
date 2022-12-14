@@ -47,7 +47,7 @@ export const AccountSettingsScreen = () => {
       <Row style={styles.row}>
         <Text>Dark mode</Text>
         <Toggle
-          checked={user?.themeMode}
+          checked={user?.darkMode}
           onChange={darkModeChanged}
         />
       </Row>

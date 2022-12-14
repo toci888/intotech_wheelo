@@ -29,7 +29,7 @@ export const useUser = () => {
     );
 
     socket.auth = {
-      userID: user.ID,
+      userID: user.id,
       username:
         user.firstName && user.lastName
           ? `${user.firstName} ${user.lastName}`
@@ -55,7 +55,7 @@ export const useUser = () => {
       try {
         const token = (await Notifications.getExpoPushTokenAsync()).data;
         if (token)
-          await alterPushToken(user?.ID, "remove", token, user.accessToken);
+          await alterPushToken(user?.id, "remove", token, user.accessToken);
       } catch (error) {
         // setAndStoreUser(prevUser);
       }
@@ -80,7 +80,7 @@ export const useUser = () => {
       setAndStoreUser(updatedUser);
 
       try {
-        await alterPushToken(user.ID, "add", token, user.accessToken);
+        await alterPushToken(user.id, "add", token, user.accessToken);
       } catch (error) {
         setAndStoreUser(prevUser);
       }
@@ -95,7 +95,7 @@ export const useUser = () => {
       setAndStoreUser(updatedUser);
 
       try {
-        await alterAllowsNotifications(user.ID, allowed, user.accessToken);
+        await alterAllowsNotifications(user.id, allowed, user.accessToken);
       } catch (error) {
         console.error(error);
         setAndStoreUser(prevUser);
@@ -103,15 +103,15 @@ export const useUser = () => {
     }
   };
 
-  const setDarkMode = async (allowed: ThemeMode) => {
+  const setDarkMode = async (darkMode: boolean) => {
     if (user) {
       const updatedUser = { ...user };
       const prevUser = { ...user };
-      updatedUser.themeMode = allowed;
+      updatedUser.darkMode = darkMode;
       setAndStoreUser(updatedUser);
 
       try {
-        await alterThemeMode(user.ID, allowed, user.accessToken);
+        await alterThemeMode(user.id, darkMode, user.accessToken);
       } catch (error) {
         console.error(error);
         setAndStoreUser(prevUser);

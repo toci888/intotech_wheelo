@@ -70,7 +70,7 @@ export const MessagePropertyScreen = ({
     createConversation.mutate({
       ownerID: collocation.methodResult.sourceAccount.idAccount, //property.userID,
       propertyID: collocation.methodResult.accountsCollocated[propertyID].idAccount,
-      tenantID: user.ID,
+      tenantID: user.id,
       propertyName: collocation.methodResult.accountsCollocated[propertyID].name
         ? collocation.methodResult.accountsCollocated[propertyID].name : 'brak 74 linia',
         // : `${property.street}, ${property.city}, ${getStateAbbreviation(

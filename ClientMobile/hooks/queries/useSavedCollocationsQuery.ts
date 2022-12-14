@@ -31,7 +31,7 @@ export const useSavedCollocationsQuery = () => {
 
   return useQuery(
     queryKeys.savedProperties,
-    () => fetchProperties(user?.ID, user?.accessToken),
+    () => fetchProperties(user?.id, user?.accessToken),
     {
       retry: false,
     }

@@ -54,7 +54,7 @@ export const useConversationsQuery = () => {
 
   return useQuery(
     queryKeys.conversations,
-    () => fetchConversations(user?.ID, user?.accessToken),
+    () => fetchConversations(user?.id, user?.accessToken),
     {
       retry: false,
     }

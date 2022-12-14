@@ -4,7 +4,7 @@ import { endpoints } from "../constants/constants";
 import { User } from "../types/user";
 import { handleError } from "../utils/handleError";
 import * as Crypto from 'expo-crypto';
-import { loginDto, registerDto, ThemeMode } from "../types";
+import { loginDto, registerDto, ThemeMode as boolean } from "../types";
 import { ReturnedResponse } from "../types";
 
 export const registerUser = async (values: registerDto) => {
@@ -133,15 +133,19 @@ export const alterAllowsNotifications = (
 
   export const alterThemeMode = (
     userID: number,
-    themeMode: ThemeMode,
+    darkMode: boolean,
     token: string
-  ) =>
-    axios.patch(
-      endpoints.themeMode(userID, themeMode),
-      { allowsDarkMode: themeMode },
+  ) =>{
+    console.log("TUTAJ")
+    console.log("DARKMODE", endpoints.themeMode(userID, darkMode), userID, darkMode,
+    { allowsDarkMode: darkMode }, {Authorization: `Bearer ${token}`})
+
+    axios.patch(endpoints.themeMode(userID, darkMode),
+      { allowsDarkMode: darkMode },
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
     );
+  }

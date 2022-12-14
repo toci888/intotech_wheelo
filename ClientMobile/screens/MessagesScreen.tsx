@@ -40,7 +40,7 @@ export const MessagesScreen = ({
         author: conversation.data.author,
         conversationID: conversation.data.ID,
         receiverID: conversation.data.receiverID,
-        senderID: user.ID,
+        senderID: user.id,
         text: message.text,
       });
   };

@@ -58,7 +58,7 @@ export const ReviewScreen = ({
                 body: values.body,
                 stars: values.stars,
                 title: values.title,
-                userID: user.ID,
+                userID: user.id,
               };
 
               createReview.mutate({

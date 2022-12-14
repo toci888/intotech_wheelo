@@ -42,7 +42,7 @@ export default function App() {
         setUser(userObj);
 
         socket.auth = {
-          userID: userObj.ID,
+          userID: userObj.id,
           username:
             userObj.firstName && userObj.lastName
               ? `${userObj.firstName} ${userObj.lastName}`
@@ -91,7 +91,7 @@ export default function App() {
       socket.on("connect_error", (err) => {
         if (err.message === "Invalid userID" && user) {
           socket.auth = {
-            userID: user?.ID,
+            userID: user?.id,
             username:
               user.firstName && user.lastName
                 ? `${user.firstName} ${user.lastName}`
