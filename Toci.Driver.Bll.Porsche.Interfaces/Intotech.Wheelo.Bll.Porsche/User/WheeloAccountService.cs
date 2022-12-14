@@ -16,6 +16,10 @@ using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Common.Emails;
 using Intotech.Wheelo.Bll.Models;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Intotech.Wheelo.Common.Logging;
 
 namespace Intotech.Wheelo.Bll.Porsche.User
 {
@@ -92,7 +96,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 AccLogic.Update(accToRefreshToken);
             }
 
-            AccountRoleDto resultAccRole = AccRoleLogic.GenerateJwt(new LoginDto() { Email = simpleaccount.Email, Password = simpleaccount.Password });
+            AccountRoleDto resultAccRole = GenerateJwt(new LoginDto() { Email = simpleaccount.Email, Password = simpleaccount.Password });
 
             resultAccRole.Refreshtoken = refreshToken;
 
@@ -147,7 +151,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             AccLogic.Update(account);
 
-            AccountRoleDto accountRoleDto = AccRoleLogic.GenerateJwt(new LoginDto() { Email = account.Email, Password = account.Password });
+            AccountRoleDto accountRoleDto = GenerateJwt(new LoginDto() { Email = account.Email, Password = account.Password });
 
             accountRoleDto.Refreshtoken = refreshToken;
 
@@ -216,6 +220,108 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             //send Email ??
 
             return new ReturnedResponse<int>(0, "", true, 0); // TODO
+        }
+
+        public ReturnedResponse<int> ResetPassword(int userId, string password, string token)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ReturnedResponse<TokensModel> CreateNewAccessToken(string accessToken, string refreshToken)
+        {
+            ClaimsPrincipal clPr = GetPrincipalFromExpiredToken(accessToken);
+
+            string email = clPr.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier).First().Value;
+
+            Account account = AccLogic.Select(m => m.Email == email).First();
+
+            if (account == null)
+            {
+                ErrorHandler.LogDebug("Access token: " + accessToken + " and refresh token " + refreshToken + " CreateNewAccessToken call failed with account not found for the email " + email);
+
+                return new ReturnedResponse<TokensModel>(null, I18nTranslation.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
+            }
+
+            if (account.Refreshtoken != refreshToken)
+            {
+                ErrorHandler.LogDebug("Access token: " + accessToken + " and refresh token " + refreshToken + " CreateNewAccessToken call failed with invalid refresh token for the email " + email);
+
+                return new ReturnedResponse<TokensModel>(null, I18nTranslation.Translation(I18nTags.ErrorPleaseLogInToApp), false, ErrorCodes.ErrorPleaseLogInToApp);
+            }
+
+            if (account.Refreshtokenvalid < DateTime.Now)
+            {
+                return new ReturnedResponse<TokensModel>(null, I18nTranslation.Translation(I18nTags.RefreshTokenExpiredPleaseLogIn), false, ErrorCodes.RefreshTokenExpiredPleaseLogIn);
+            }
+
+            TokensModel tokensModel = new TokensModel();
+
+            tokensModel.AccessToken = GenerateJwt(new LoginDto() { Email = account.Email, Password = account.Password }).AccessToken;
+
+            tokensModel.RefreshToken = account.Refreshtoken = StringUtils.GetRandomString(AccountLogicConstants.RefreshTokenMaxLength);
+
+            AccLogic.Update(account);
+
+            return new ReturnedResponse<TokensModel>(tokensModel, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        }
+
+        public List<Account> GetAllUsers() // TODO REMOVE
+        {
+            return AccLogic.Select(m => true).ToList();
+        }
+
+        protected AccountRoleDto GenerateJwt(LoginDto user)
+        {
+            Accountrole userRole = AccRoleLogic.Select(x => x.Email == user.Email && x.Password == user.Password).FirstOrDefault();
+
+            if (userRole is null)
+            {
+                //throw new Exception("Invalid username or password");
+                //throw new BadRequestException("Invalid username or password");
+                return null;
+            }
+
+            AccountRoleDto userArd = DtoModelMapper.Map<AccountRoleDto, Accountrole>(userRole);
+
+            List<Claim> claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.NameIdentifier, userArd.Email),
+                new Claim(ClaimTypes.Name, $"{userArd.Name} {userArd.Surname}"),
+                new Claim(ClaimTypes.Role, $"{userArd.Rolename}"),
+            };
+
+            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey));
+            SigningCredentials cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            DateTime expires = DateTime.Now.AddDays(_authenticationSettings.JwtExpireDays);
+
+            JwtSecurityToken token = new JwtSecurityToken(_authenticationSettings.JwtIssuer,
+                _authenticationSettings.JwtIssuer, claims, expires: expires, signingCredentials: cred);
+
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+
+            userArd.AccessToken = tokenHandler.WriteToken(token);
+
+            return userArd;
+        }
+
+        protected ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
+        {
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateAudience = false, //you might want to validate the audience and issuer depending on your use case
+                ValidateIssuer = false,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey)),
+                ValidateLifetime = false //here we are saying that we don't care about the token's expiration date
+            };
+            var tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken securityToken;
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
+            var jwtSecurityToken = securityToken as JwtSecurityToken;
+            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                throw new SecurityTokenException("Invalid token");
+
+            return principal;
         }
     }
 }
