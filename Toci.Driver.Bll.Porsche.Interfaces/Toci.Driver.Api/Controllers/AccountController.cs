@@ -53,9 +53,9 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
 
     [AllowAnonymous]
     [HttpPost("reset-password")]
-    public ReturnedResponse<int> ResetPassword(int userId, string token, [FromBody] string password)
+    public ReturnedResponse<int> ResetPassword(string email, string token, [FromBody] string password)
     {
-        return Service.ResetPassword(userId, password, token);
+        return Service.ResetPassword(email, password, token);
     }
 
     [HttpPatch("$id/settings/theme-mode")]

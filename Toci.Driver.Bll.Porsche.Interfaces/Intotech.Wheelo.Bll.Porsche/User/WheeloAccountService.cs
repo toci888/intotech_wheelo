@@ -235,9 +235,28 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             return new ReturnedResponse<int>(ErrorCodes.Success, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success); 
         }
 
-        public ReturnedResponse<int> ResetPassword(int userId, string password, string token)
+        public ReturnedResponse<int> ResetPassword(string email, string password, string token)
         {
-            throw new NotImplementedException();
+            Account acc = AccLogic.Select(m => m.Email == email).FirstOrDefault();
+            // if not return with significant error code
+
+            if (acc == null)
+            {
+                return new ReturnedResponse<int>(ErrorCodes.EmailDoesNotExistResetPassword, I18nTranslation.Translation(I18nTags.EmailDoesNotExist), false, ErrorCodes.EmailDoesNotExistResetPassword);
+            }
+
+            Resetpassword resetpassword = ResetpasswordLogic.Select(m => m.Email == email && m.Verificationcode.ToString() == token).FirstOrDefault();
+
+            if (resetpassword == null)
+            {
+                return new ReturnedResponse<int>(ErrorCodes.FailVerifyingAccount, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
+            }
+
+            acc.Password = password;
+
+            AccLogic.Update(acc);
+
+            return new ReturnedResponse<int>(ErrorCodes.Success, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public ReturnedResponse<TokensModel> CreateNewAccessToken(string accessToken, string refreshToken)

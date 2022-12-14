@@ -23,7 +23,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.User
 
       //  protected AccountRoleDto GenerateJwt(LoginDto user);
 
-        ReturnedResponse<int> ResetPassword(int userId, string password, string token);
+        ReturnedResponse<int> ResetPassword(string email, string password, string token);
 
         ReturnedResponse<TokensModel> CreateNewAccessToken(string accessToken, string refreshToken);
 
