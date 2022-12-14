@@ -9,3 +9,7 @@ git update-index --assume-unchanged <file>
 
 npm i --force
 npm i --legacy-peer-deps
+
+
+FIREBASE EXPO:
+expo push:android:upload --api-key <KEY>

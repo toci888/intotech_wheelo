@@ -102,7 +102,17 @@ export const alterPushToken = (
   op: "add" | "remove",
   pushToken: string,
   token: string
-) =>
+) => {
+  console.log("LECII", endpoints.alterPushToken(userID),
+  {
+    op,
+    token: pushToken,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
   axios.patch(
     endpoints.alterPushToken(userID),
     {
@@ -115,6 +125,7 @@ export const alterPushToken = (
       },
     }
   );
+}
 
 export const alterAllowsNotifications = (
   userID: number,
