@@ -20,6 +20,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Intotech.Wheelo.Common.Logging;
+using System.Security.Principal;
 
 namespace Intotech.Wheelo.Bll.Porsche.User
 {
@@ -81,6 +82,14 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (!simpleaccount.Emailconfirmed.Value)
             {
+                Account accToRefreshCode = AccLogic.Select(m => m.Id == simpleaccount.Id).First();
+
+                accToRefreshCode.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
+
+                accToRefreshCode = AccLogic.Update(accToRefreshCode);
+
+                EmailManager.SendEmailVerificationCode(accToRefreshCode.Email, accToRefreshCode.Name, accToRefreshCode.Verificationcode.Value.ToString());
+
                 return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmed);
             }
 
