@@ -70,6 +70,12 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
         return Service.GetMode(accountId);
     }
 
+    [HttpGet("request-password-reset")]
+    public ReturnedResponse<int> RequestPasswordReset(string email)
+    {
+        return Service.RequestPasswordReset(email);
+    }
+
     [HttpGet("EnigmaticUrl")]
     public List<Account> GetAllUsers()
     {

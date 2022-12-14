@@ -32,5 +32,6 @@
         public const string PleaseConfirmYourWheeloAccountRegistration = "_pleaseConfirmYourWheeloAccountRegistration";
         public const string DefaultModeCreated = "_defaultModeCreated";
         public const string UnderAttack = "_youSeemRobot";
+        public const string EmailDoesNotExist = "_emailDoesNotExist";
     }
 }

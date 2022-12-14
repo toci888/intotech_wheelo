@@ -27,6 +27,8 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.User
 
         ReturnedResponse<TokensModel> CreateNewAccessToken(string accessToken, string refreshToken);
 
+        ReturnedResponse<int> RequestPasswordReset(string email);
+
         List<Account> GetAllUsers(); // temporary, development purpose, TODO REMOVE
     }
 }
