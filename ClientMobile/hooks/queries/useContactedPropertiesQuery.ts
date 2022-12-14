@@ -39,7 +39,7 @@ export const useContactedPropertiesQuery = () => {
   if (data)
     for (let property of data) {
       property.liked = false;
-      if (user?.savedProperties?.includes(property.ID)) property.liked = true;
+      if (user?.savedCollocations?.includes(property.ID)) property.liked = true;
     }
 
   return {

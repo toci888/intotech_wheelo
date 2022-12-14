@@ -29,7 +29,7 @@ export const SavedScreen = () => {
   useFocusEffect(() => {
     if (
       (!savedCollocations.data || savedCollocations.data.length === 0) &&
-      user && user?.savedProperties && user.savedProperties.length > 0
+      user && user?.savedCollocations && user.savedCollocations.length > 0
     ) {
       // savedCollocations.refetch();
       // contactedProperties.refetch();

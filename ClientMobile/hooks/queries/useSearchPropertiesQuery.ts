@@ -51,7 +51,7 @@ export const useSearchPropertiesQuery = (startAndEndLocation: SearchScreenParams
   if (data && data.isSuccess !== false)
     for (let accountCollocated of data.methodResult.accountsCollocated) {
       accountCollocated.areFriends = false;
-      if (user?.savedProperties?.includes(accountCollocated.idAccount)) accountCollocated.areFriends = true;
+      if (user?.savedCollocations?.includes(accountCollocated.idAccount)) accountCollocated.areFriends = true;
     }
 
   return {

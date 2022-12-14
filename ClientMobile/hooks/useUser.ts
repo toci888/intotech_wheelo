@@ -39,7 +39,7 @@ export const useUser = () => {
     if (searchCollocations) {
       for (let i of searchCollocations) {
         i.areFriends = false;
-        if (user.savedProperties?.includes(i.idAccount)) i.areFriends = true;
+        if (user.savedCollocations?.includes(i.idAccount)) i.areFriends = true;
       }
       queryClient.setQueryData(queryKeys.searchCollocations, searchCollocations);
     }
@@ -65,7 +65,7 @@ export const useUser = () => {
   const setSavedProperties = (savedProperties: number[]) => {
     if (user) {
       const newUser = { ...user };
-      newUser.savedProperties = savedProperties;
+      newUser.savedCollocations = savedProperties;
       setAndStoreUser(newUser);
     }
   };

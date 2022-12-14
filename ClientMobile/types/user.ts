@@ -3,7 +3,7 @@ export type User = {
   firstName?: string;
   lastName?: string;
   email: string;
-  savedProperties?: number[];
+  savedCollocations?: number[];
   allowsNotifications: boolean;
   darkMode: boolean;
   pushToken?: string;

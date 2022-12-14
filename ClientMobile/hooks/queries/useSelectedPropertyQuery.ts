@@ -19,7 +19,7 @@ export const useSelectedPropertyQuery = (propertyID: number) => {
   );
 
   const data = {idAccount: 1} as CollocateAccount//queryInfo?.data; // TODO!
-  if (data) if (user?.savedProperties?.includes(data.idAccount)) data.areFriends = true;
+  if (data) if (user?.savedCollocations?.includes(data.idAccount)) data.areFriends = true;
 
   return {
     ...queryInfo,

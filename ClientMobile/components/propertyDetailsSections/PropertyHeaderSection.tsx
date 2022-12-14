@@ -19,8 +19,8 @@ export const CollocationHeaderSection = ({ collocation }: { collocation: Colloca
     collocationID: number,
     type: "add" | "remove"
   ) => {
-    let newProperties: number[] = user?.savedProperties
-      ? [...user.savedProperties]
+    let newProperties: number[] = user?.savedCollocations
+      ? [...user.savedCollocations]
       : [];
 
     if (type === "add") newProperties.push(collocationID);

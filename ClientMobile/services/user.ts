@@ -120,7 +120,15 @@ export const alterAllowsNotifications = (
   userID: number,
   allowsNotifications: boolean,
   token: string
-) =>
+) => {
+  console.log("TUTAJXDFASD")
+  console.log("NOTIFICATIONS", endpoints.allowsNotifications(userID),
+  { allowsNotifications },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
   axios.patch(
     endpoints.allowsNotifications(userID),
     { allowsNotifications },
@@ -130,6 +138,7 @@ export const alterAllowsNotifications = (
       },
     }
   );
+}
 
   export const alterThemeMode = (
     userID: number,
