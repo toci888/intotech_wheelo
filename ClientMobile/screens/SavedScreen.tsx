@@ -1,3 +1,4 @@
+import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import { Button, Text } from "@ui-kitten/components";
 import { useState } from "react";
@@ -9,31 +10,29 @@ import { Row } from "../components/Row";
 import { theme } from "../theme";
 import { properties } from "../data/properties";
 import { Card } from "../components/Card";
-import { Collocation } from "../types/collocation";
+import { CollocateAccount, Collocation } from "../types/collocation";
 import { SignUpAndSignInButtons } from "../components/SignUpAndSignInButtons";
 import { useUser } from "../hooks/useUser";
 import { Loading } from "../components/Loading";
-import { useSavedPropertiesQuery } from "../hooks/queries/useSavedPropertiesQuery";
+import { useSavedCollocationsQuery } from "../hooks/queries/useSavedCollocationsQuery";
 import { useContactedPropertiesQuery } from "../hooks/queries/useContactedPropertiesQuery";
 
 export const SavedScreen = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const { user } = useUser();
   const navigation = useNavigation();
-  const savedProperties = useSavedPropertiesQuery();
+  const savedCollocations = useSavedCollocationsQuery();
   const contactedProperties = useContactedPropertiesQuery();
   const applicationProperties = undefined;
 
   // Refetching saved properties doesn't occur after login
   useFocusEffect(() => {
     if (
-      (!savedProperties.data || savedProperties.data.length === 0) &&
-      user &&
-      user?.savedProperties &&
-      user.savedProperties.length > 0
+      (!savedCollocations.data || savedCollocations.data.length === 0) &&
+      user && user?.savedProperties && user.savedProperties.length > 0
     ) {
-      savedProperties.refetch();
-      contactedProperties.refetch();
+      // savedCollocations.refetch();
+      // contactedProperties.refetch();
     }
   });
 
@@ -46,7 +45,7 @@ export const SavedScreen = () => {
     setActiveIndex(index);
   };
 
-  if (savedProperties.isLoading || contactedProperties.isLoading)
+  if (savedCollocations.isLoading || contactedProperties.isLoading)
     return <Loading />;
 
   const getBodyText = (heading: string, subHeading: string) => {
@@ -62,30 +61,30 @@ export const SavedScreen = () => {
     );
   };
 
-  const getPropertiesFlatList = (properties: Collocation[]) => {
+  const getPropertiesFlatList = (collocation: CollocateAccount[]) => {
     return (
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={properties}
+        data={collocation}
         style={{ marginTop: 10 }}
         renderItem={({ item }) => (
           <Card
-            property={item}
+            collocation={item}
             style={styles.card}
             onPress={() =>
-              navigation.navigate("PropertyDetails", { propertyID: item.ID })
+              navigation.navigate("PropertyDetails", { propertyID: item.idAccount })
             }
           />
         )}
-        keyExtractor={(item) => item.ID.toString()}
+        keyExtractor={(item) => item.idAccount.toString()}
       />
     );
   };
 
   const getBody = () => {
     if (activeIndex === 0) {
-      if (savedProperties?.data && savedProperties.data.length > 0)
-        return getPropertiesFlatList(savedProperties.data);
+      if (savedCollocations?.data && savedCollocations.data.length > 0)
+        return getPropertiesFlatList(savedCollocations.data[0].methodResult.accountsCollocated);
       return (
         <>
           <LottieView
@@ -107,7 +106,7 @@ export const SavedScreen = () => {
     }
     if (activeIndex === 1) {
       if (contactedProperties?.data && contactedProperties.data.length > 0)
-        return getPropertiesFlatList(contactedProperties.data);
+        return getPropertiesFlatList(contactedProperties.data[0].methodResult.accountsCollocated);
       return (
         <>
           <LottieView
@@ -176,6 +175,7 @@ export const SavedScreen = () => {
         >
           Applications
         </Button>
+        <Text>asd</Text>
       </Row>
       <View style={styles.container}>{getBody()}</View>
     </Screen>

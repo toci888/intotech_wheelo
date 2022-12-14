@@ -21,12 +21,12 @@ const fetchProperties = async (
   );
 
   const data: Collocation[] = response.data;
-  for (let i of data) i.liked = true;
+  for (let i of data) i.methodResult.accountsCollocated[0].areFriends = true;
 
   return data;
 };
 
-export const useSavedPropertiesQuery = () => {
+export const useSavedCollocationsQuery = () => {
   const { user } = useUser();
 
   return useQuery(

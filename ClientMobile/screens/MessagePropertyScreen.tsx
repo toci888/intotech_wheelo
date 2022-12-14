@@ -22,18 +22,19 @@ import { Loading } from "../components/Loading";
 export const MessagePropertyScreen = ({
   route,
 }: {
-  route: { params: { propertyID: number; tour?: boolean } };
+  route: { params: { collocationID: number; tour?: boolean } };
 }) => {
   const navigation = useNavigation();
-  const { tour, propertyID } = route.params;
-  const propertyQuery = useSelectedPropertyQuery(propertyID);
-  const property = propertyQuery.data;
+  const { tour, collocationID } = route.params;
+  const collocationQuery = useSelectedPropertyQuery(collocationID);
+  const collocation = collocationQuery.data;
   const { user } = useUser();
   const conversations = useConversationsQuery();
   const createConversation = useCreateConversationMutation();
-
+  console.log("zxcvb", user)
+  console.log("zx2vb", collocation)
   if (!user) return <SignUpOrSignInScreen />;
-  if (!property) return <Text>Unable to get property message...</Text>;
+  if (!collocation) return <Text>Unable to get property message...</Text>;
   if (conversations.isLoading) return <Loading />;
 
   const navigateToMessageScreen = (
@@ -67,11 +68,11 @@ export const MessagePropertyScreen = ({
 
   const sendMessage = (text: string) => {
     createConversation.mutate({
-      ownerID: property.methodResult.sourceAccount.idAccount, //property.userID,
-      propertyID: property.methodResult.accountsCollocated[propertyID].idAccount,
+      ownerID: collocation.methodResult.sourceAccount.idAccount, //property.userID,
+      propertyID: collocation.methodResult.accountsCollocated[propertyID].idAccount,
       tenantID: user.ID,
-      propertyName: property.methodResult.accountsCollocated[propertyID].name
-        ? property.methodResult.accountsCollocated[propertyID].name : 'brak 74 linia',
+      propertyName: collocation.methodResult.accountsCollocated[propertyID].name
+        ? collocation.methodResult.accountsCollocated[propertyID].name : 'brak 74 linia',
         // : `${property.street}, ${property.city}, ${getStateAbbreviation(
         //     property.state
         //   )}`,
@@ -88,7 +89,7 @@ export const MessagePropertyScreen = ({
       <Screen style={styles.container}>
         {Platform.OS === "ios" ? <ModalHeader /> : null}
         <Row style={styles.row}>
-          {property.methodResult.accountsCollocated[propertyID]?.image && property.methodResult.accountsCollocated[propertyID].image.length > 0 ? (
+          {collocation.methodResult.accountsCollocated[propertyID]?.image && collocation.methodResult.accountsCollocated[propertyID].image.length > 0 ? (
             <Image style={styles.image} source={{uri: 'base64Icon'}}/>
             // <Image style={styles.image} source={{ property.methodResult.accountsCollocated[propertyID].image }} />
           ) : null}

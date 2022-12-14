@@ -60,6 +60,7 @@ export const EmailVerificationScreen = () => {
         email: `${user.email}`,
         code: Number(value),
       });
+      console.log("USERXD", data)
 
       if(data.methodResult) {
         login(data.methodResult);

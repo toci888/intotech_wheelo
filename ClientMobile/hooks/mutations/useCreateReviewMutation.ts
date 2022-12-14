@@ -32,7 +32,7 @@ export const useCreateReviewMutation = () => {
         setLoading(true);
       },
       onSuccess: () => {
-        queryClient.invalidateQueries(queryKeys.selectedProperty);
+        queryClient.invalidateQueries(queryKeys.selectedCollocation);
       },
       onError: () => {
         alert("Unable to create review");

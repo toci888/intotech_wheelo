@@ -14,7 +14,7 @@ const fetchProperty = async (propertyID: number): Promise<CollocateAccount> => {
 
 export const useSelectedPropertyQuery = (propertyID: number) => {
   const { user } = useUser();
-  const queryInfo = useQuery(queryKeys.selectedProperty, () =>
+  const queryInfo = useQuery(queryKeys.selectedCollocation, () =>
     fetchProperty(propertyID)
   );
 

@@ -35,21 +35,21 @@ export const useSaveCollocationMutation = () => {
       onMutate: async ({ collocationID, op }) => {
         await queryClient.cancelQueries(queryKeys.savedProperties);
         await queryClient.cancelQueries(queryKeys.searchCollocations);
-        await queryClient.cancelQueries(queryKeys.selectedProperty);
+        await queryClient.cancelQueries(queryKeys.selectedCollocation);
 
         const prevSavedProperties: CollocateAccount[] | undefined =
           queryClient.getQueryData(queryKeys.savedProperties);
         const prevSearchedProperties: CollocateAccount[] | undefined =
           queryClient.getQueryData(queryKeys.searchCollocations);
         const prevSelectedProperty: CollocateAccount | undefined =
-          queryClient.getQueryData(queryKeys.selectedProperty);
+          queryClient.getQueryData(queryKeys.selectedCollocation);
 
         if (prevSelectedProperty?.idAccount === collocationID) {
           const newSelectedProperty = { ...prevSelectedProperty };
 
           newSelectedProperty.areFriends = !newSelectedProperty.areFriends;
           queryClient.setQueryData(
-            queryKeys.selectedProperty,
+            queryKeys.selectedCollocation,
             newSelectedProperty
           );
         }
@@ -98,7 +98,7 @@ export const useSaveCollocationMutation = () => {
           context?.prevSearchedProperties
         );
         queryClient.setQueryData(
-          queryKeys.selectedProperty,
+          queryKeys.selectedCollocation,
           context?.prevSelectedProperty
         );
       },

@@ -92,7 +92,7 @@ export const endpoints = {
 export const queryKeys = {
   contactedProperties: "contactedProperties",
   searchCollocations: "searchCollocations",
-  selectedProperty: "selectedProperty",
+  selectedCollocation: "selectedCollocation",
   savedProperties: "savedProperties",
   myProperties: "myProperties",
   editProperty: "editProperty",
