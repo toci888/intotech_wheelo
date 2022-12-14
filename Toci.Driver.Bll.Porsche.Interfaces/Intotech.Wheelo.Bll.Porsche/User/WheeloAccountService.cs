@@ -77,11 +77,6 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (!simpleaccount.Emailconfirmed.Value && simpleaccount.Password == loginDto.Password)
             {
-                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmedPassMatch);
-            }
-
-            if (!simpleaccount.Emailconfirmed.Value)
-            {
                 Account accToRefreshCode = AccLogic.Select(m => m.Id == simpleaccount.Id).First();
 
                 accToRefreshCode.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
@@ -92,6 +87,12 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
                 return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmed);
             }
+
+            if (!simpleaccount.Emailconfirmed.Value)
+            {
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmedPassMatch);
+            }
+                
 
             string refreshToken = simpleaccount.Refreshtoken;
 
@@ -112,7 +113,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             return new ReturnedResponse<AccountRoleDto>(resultAccRole, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual ReturnedResponse<AccountRegisterDto> Register(AccountRegisterDto sAccount)
+        public virtual ReturnedResponse<AccountRoleDto> Register(AccountRegisterDto sAccount)
         {
             Account simpleaccount = AccLogic.Select(m => m.Email == sAccount.Email).FirstOrDefault();
 
@@ -120,15 +121,23 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             {
                 if (!simpleaccount.Emailconfirmed.Value && simpleaccount.Password == sAccount.Password)
                 {
-                    return new ReturnedResponse<AccountRegisterDto>(null, I18nTranslation.Translation(I18nTags.PleaseConfirmYourWheeloAccountRegistration), false, ErrorCodes.PleaseConfirmEmail);
+                    Account accToRefreshCode = AccLogic.Select(m => m.Id == simpleaccount.Id).First();
+
+                    accToRefreshCode.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
+
+                    accToRefreshCode = AccLogic.Update(accToRefreshCode);
+
+                    EmailManager.SendEmailVerificationCode(accToRefreshCode.Email, accToRefreshCode.Name, accToRefreshCode.Verificationcode.Value.ToString());
+
+                    return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.PleaseConfirmYourWheeloAccountRegistration), false, ErrorCodes.PleaseConfirmEmail);
                 }
 
                 if (simpleaccount.Emailconfirmed.Value && simpleaccount.Password == sAccount.Password)
                 {
-                    return new ReturnedResponse<AccountRegisterDto>(null, I18nTranslation.Translation(I18nTags.PleaseLogIn), false, ErrorCodes.PleaseLogIn);
+                    return new ReturnedResponse<AccountRoleDto>(Login(new LoginDto() { Email = sAccount.Email, Password = sAccount.Password }).MethodResult, I18nTranslation.Translation(I18nTags.Success), false, ErrorCodes.Success);
                 }
 
-                return new ReturnedResponse<AccountRegisterDto>(null, I18nTranslation.Translation(I18nTags.AccountExists), false, ErrorCodes.AccountExists);
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.AccountExists), false, ErrorCodes.AccountExists);
             }
 
             Account account = new Account() { Name = sAccount.FirstName, 
@@ -142,7 +151,8 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             simpleaccount.Verificationcode = 0;
 
-            return new ReturnedResponse<AccountRegisterDto>(sAccount, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<AccountRoleDto>(new AccountRoleDto() { Name = sAccount.FirstName, Email = sAccount.Email, Surname = sAccount.LastName }, 
+                I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<AccountRoleDto> ConfirmEmail(EmailConfirmDto EcDto)

@@ -24,9 +24,9 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
 
 
     [HttpPost("register")]
-    public ReturnedResponse<AccountRegisterDto> Register(AccountRegisterDto sa)
+    public ReturnedResponse<AccountRoleDto> Register(AccountRegisterDto sa)
     {
-        ReturnedResponse<AccountRegisterDto> reg = Service.Register(sa);
+        ReturnedResponse<AccountRoleDto> reg = Service.Register(sa);
 
         return reg;
     }
