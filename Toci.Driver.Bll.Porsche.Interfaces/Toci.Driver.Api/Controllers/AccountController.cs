@@ -13,24 +13,20 @@ namespace Toci.Driver.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
+public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
 {
     protected IGafManager GafManager;
-    protected IWheeloAccountService WheeloAccountService;
-    protected IAccountLogic AccLogic;
 
-    public AccountController(IAccountRoleLogic logic, IGafManager gafManager, IWheeloAccountService was, IAccountLogic accLogic) : base(logic)
+    public AccountController(IWheeloAccountService service, IGafManager gafManager) : base(service) //IAccountRoleLogic logic, IAccountLogic accLogic
     {
         GafManager = gafManager;
-        WheeloAccountService = was;
-        AccLogic = accLogic;
     }
 
 
     [HttpPost("register")]
     public ReturnedResponse<AccountRegisterDto> Register(AccountRegisterDto sa)
     {
-        ReturnedResponse<AccountRegisterDto> reg = WheeloAccountService.Register(sa);
+        ReturnedResponse<AccountRegisterDto> reg = Service.Register(sa);
 
         return reg;
     }
@@ -38,13 +34,13 @@ public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
     [HttpPost("confirm-email")]
     public ReturnedResponse<AccountRoleDto> ConfirmEmail(EmailConfirmDto EcDto)
     {
-        return WheeloAccountService.ConfirmEmail(EcDto);
+        return Service.ConfirmEmail(EcDto);
     }
 
     [HttpPost("login")]
     public ReturnedResponse<AccountRoleDto> Login(LoginDto lDto)
     {
-        ReturnedResponse<AccountRoleDto> sa = WheeloAccountService.Login(lDto);
+        ReturnedResponse<AccountRoleDto> sa = Service.Login(lDto);
 
         return sa;
     }
@@ -57,26 +53,26 @@ public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
 
     [AllowAnonymous]
     [HttpPost("reset-password")]
-    public int ResetPassword(int userId, [FromBody] string password)
+    public ReturnedResponse<int> ResetPassword(int userId, string token, [FromBody] string password)
     {
-        return Service.ResetPassword(userId, password);
+        return Service.ResetPassword(userId, password, token);
     }
 
     [HttpPatch("$id/settings/theme-mode")]
     public ReturnedResponse<Accountmode> SetMode(int accountId, [FromBody] int themeMode)
     {
-        return WheeloAccountService.SetMode(accountId, themeMode);
+        return Service.SetMode(accountId, themeMode);
     }
 
     [HttpGet("$id/settings/theme-mode")]
     public ReturnedResponse<Accountmode> GetMode(int accountId)
     {
-        return WheeloAccountService.GetMode(accountId);
+        return Service.GetMode(accountId);
     }
 
     [HttpGet("EnigmaticUrl")]
     public List<Account> GetAllUsers()
     {
-        return AccLogic.Select(m => true).ToList();
+        return Service.GetAllUsers();
     }
 }

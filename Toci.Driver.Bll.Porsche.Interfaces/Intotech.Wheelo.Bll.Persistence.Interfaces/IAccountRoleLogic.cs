@@ -7,8 +7,4 @@ namespace Intotech.Wheelo.Bll.Persistence.Interfaces;
 
 public interface IAccountRoleLogic : ILogicBase<Accountrole>
 {
-    public AccountRoleDto GenerateJwt(LoginDto user);
-    public int ResetPassword(int userId, string password);
-
-    public ReturnedResponse<TokensModel> CreateNewAccessToken(string accessToken, string refreshToken);
 }
