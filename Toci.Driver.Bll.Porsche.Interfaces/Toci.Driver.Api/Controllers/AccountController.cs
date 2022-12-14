@@ -58,8 +58,8 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
         return Service.ResetPassword(email, password, token);
     }
 
-    [HttpPatch("$id/settings/theme-mode")]
-    public ReturnedResponse<Accountmode> SetMode(int accountId, [FromBody] int themeMode)
+    [HttpPatch("$accountId/settings/theme-mode")]
+    public ReturnedResponse<bool> SetMode(int accountId, bool themeMode)
     {
         return Service.SetMode(accountId, themeMode);
     }
@@ -70,8 +70,8 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
         return Service.SetAllowsNotifications(idAccount, allowsNotifications);
     }
 
-    [HttpGet("$id/settings/theme-mode")]
-    public ReturnedResponse<Accountmode> GetMode(int accountId)
+    [HttpGet("$accountId/settings/theme-mode")]
+    public ReturnedResponse<bool> GetMode(int accountId)
     {
         return Service.GetMode(accountId);
     }
