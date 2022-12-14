@@ -70,6 +70,11 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
             }
 
+            if (!simpleaccount.Emailconfirmed.Value && simpleaccount.Password == loginDto.Password)
+            {
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmedPassMatch);
+            }
+
             if (!simpleaccount.Emailconfirmed.Value)
             {
                 return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmed);
@@ -100,9 +105,14 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (simpleaccount != null)
             {
-                if (!simpleaccount.Emailconfirmed.Value)
+                if (!simpleaccount.Emailconfirmed.Value && simpleaccount.Password == sAccount.Password)
                 {
                     return new ReturnedResponse<AccountRegisterDto>(null, I18nTranslation.Translation(I18nTags.PleaseConfirmYourWheeloAccountRegistration), false, ErrorCodes.PleaseConfirmEmail);
+                }
+
+                if (simpleaccount.Emailconfirmed.Value && simpleaccount.Password == sAccount.Password)
+                {
+                    return new ReturnedResponse<AccountRegisterDto>(null, I18nTranslation.Translation(I18nTags.PleaseLogIn), false, ErrorCodes.PleaseLogIn);
                 }
 
                 return new ReturnedResponse<AccountRegisterDto>(null, I18nTranslation.Translation(I18nTags.AccountExists), false, ErrorCodes.AccountExists);

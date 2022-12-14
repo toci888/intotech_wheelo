@@ -22,6 +22,8 @@ namespace Intotech.Wheelo.Common.Interfaces
         public const int DataIntegrityViolated = 4096;
         public const int UnderAttack = 8192;
         public const int PleaseConfirmEmail = 16384;
+        public const int PleaseLogIn = 32768;
+        public const int EmailIsNotConfirmedPassMatch = 65536;
         // dodajesz swoje nowe errory
         // 4 8 16 32 64 128
         public const int Success = 1;
