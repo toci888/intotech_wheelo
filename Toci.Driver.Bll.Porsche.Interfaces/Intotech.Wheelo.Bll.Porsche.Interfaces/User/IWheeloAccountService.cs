@@ -17,9 +17,9 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.User
 
         ReturnedResponse<AccountRoleDto> ConfirmEmail(EmailConfirmDto EcDto);
 
-        ReturnedResponse<Accountmode> GetMode(int accountId);
+        ReturnedResponse<bool> GetMode(int accountId);
 
-        ReturnedResponse<Accountmode> SetMode(int accountId, int mode);
+        ReturnedResponse<bool> SetMode(int accountId, bool mode);
 
       //  protected AccountRoleDto GenerateJwt(LoginDto user);
 

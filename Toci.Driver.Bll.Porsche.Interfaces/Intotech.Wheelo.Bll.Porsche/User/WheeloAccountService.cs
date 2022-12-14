@@ -34,9 +34,9 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         protected IResetpasswordLogic ResetpasswordLogic;
         protected IEmailManager EmailManager = new EmailManager("pl");
 
-        public const int WhiteMode = 0;
-        public const int DarkMode = 1;
-        public const int BlueMode = 2;
+        public const int WhiteMode = 1;
+        public const int DarkMode = 2;
+        //public const int BlueMode = 2;
 
         public WheeloAccountService(AuthenticationSettings authenticationSettings, IAccountLogic accLogic, IAccountRoleLogic accRoleLogic, 
             IAccountmodeLogic accountmodeLogic, 
@@ -168,33 +168,36 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         }
 
 
-        public virtual ReturnedResponse<Accountmode> GetMode(int accountId)
+        public virtual ReturnedResponse<bool> GetMode(int accountId)
         {
             Accountmode mode = AccountmodeLogic.Select(m => m.Idaccount == accountId).FirstOrDefault();
 
             if (mode == null)
             {
-                return new ReturnedResponse<Accountmode>(AccountmodeLogic.Insert(new Accountmode() { Idaccount = accountId, Mode = WhiteMode }),
-                    I18nTranslation.Translation(I18nTags.DefaultModeCreated), true, ErrorCodes.Success);
+                AccountmodeLogic.Insert(new Accountmode() { Idaccount = accountId, Mode = WhiteMode });
+
+                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.DefaultModeCreated), true, ErrorCodes.Success);
             }
 
-            return new ReturnedResponse<Accountmode>(mode, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<bool>(mode.Mode == WhiteMode ? false : true, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual ReturnedResponse<Accountmode> SetMode(int accountId, int mode)
+        public virtual ReturnedResponse<bool> SetMode(int accountId, bool mode)
         {
             Accountmode accMode = AccountmodeLogic.Select(m => m.Idaccount == accountId).FirstOrDefault();
 
             if (accMode == null)
             {
-                return new ReturnedResponse<Accountmode>(AccountmodeLogic.Insert(new Accountmode() { Idaccount = accountId, Mode = mode }),
-                    I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                AccountmodeLogic.Insert(new Accountmode() { Idaccount = accountId, Mode = mode ? WhiteMode : DarkMode });
+
+                return new ReturnedResponse<bool>(mode, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
             }
 
-            accMode.Mode = mode;
+            accMode.Mode = mode ? WhiteMode : DarkMode;
 
-            return new ReturnedResponse<Accountmode>(AccountmodeLogic.Update(accMode), 
-                I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            AccountmodeLogic.Update(accMode);
+
+            return new ReturnedResponse<bool>(mode, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<AccountRoleDto> AcceptResetPassword(ResetPasswordConfirmDto resetPasswordConfirmDto) // email, kod
