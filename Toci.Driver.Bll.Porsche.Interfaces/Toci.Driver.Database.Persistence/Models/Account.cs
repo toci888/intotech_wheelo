@@ -20,6 +20,7 @@ namespace Toci.Driver.Database.Persistence.Models
             FriendsuggestionIdsuggestedfriendNavigations = new HashSet<Friendsuggestion>();
             InvitationIdaccountNavigations = new HashSet<Invitation>();
             InvitationIdinvitedNavigations = new HashSet<Invitation>();
+            Pushtokens = new HashSet<Pushtoken>();
             Tripparticipants = new HashSet<Tripparticipant>();
             Trips = new HashSet<Trip>();
             Userextradata = new HashSet<Userextradatum>();
@@ -54,6 +55,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual ICollection<Friendsuggestion> FriendsuggestionIdsuggestedfriendNavigations { get; set; }
         public virtual ICollection<Invitation> InvitationIdaccountNavigations { get; set; }
         public virtual ICollection<Invitation> InvitationIdinvitedNavigations { get; set; }
+        public virtual ICollection<Pushtoken> Pushtokens { get; set; }
         public virtual ICollection<Tripparticipant> Tripparticipants { get; set; }
         public virtual ICollection<Trip> Trips { get; set; }
         public virtual ICollection<Userextradatum> Userextradata { get; set; }

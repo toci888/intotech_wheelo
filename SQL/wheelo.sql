@@ -1,4 +1,6 @@
-﻿drop table ResetPassword;
+﻿drop table PushTokens;
+
+drop table ResetPassword;
 
 
 drop table PasswordStrength;
@@ -469,14 +471,14 @@ create table AccountModes
 create table FailedLoginAttempts
 (
 	id serial primary key,
-	IdAccount int not null,
+	IdAccount int references Accounts(id) not null,
 	createdat timestamp not null default now()
 );
 --TABEL 2:
 create table PasswordStrength
 (
 	id serial primary key,
-	IdAccount int not null,
+	IdAccount int references Accounts(id) not null,
 	level int not null
 );
 
@@ -487,6 +489,14 @@ create table ResetPassword
 	email text not null,
 	verificationcode int not null
 	
+);
+
+create table PushTokens
+(
+	id serial primary key,
+	IdAccount int references Accounts(id) not null,
+	token text not null,
+	createdat timestamp not null default now()
 );
 --INSERTY:
 --insert into FailedLoginAttempts (IdAccount, ts1) values (AcountIndentifiers, timestamps)

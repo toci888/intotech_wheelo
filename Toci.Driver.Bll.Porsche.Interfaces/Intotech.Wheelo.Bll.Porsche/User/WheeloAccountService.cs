@@ -32,6 +32,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         protected IAccountmodeLogic AccountmodeLogic;
         protected IFailedloginattemptLogic FailedloginattemptLogic;
         protected IResetpasswordLogic ResetpasswordLogic;
+        protected IPushtokenLogic PushtokenLogic;
         protected IEmailManager EmailManager = new EmailManager("pl");
 
         public const int WhiteMode = 1;
@@ -40,7 +41,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
         public WheeloAccountService(AuthenticationSettings authenticationSettings, IAccountLogic accLogic, IAccountRoleLogic accRoleLogic, 
             IAccountmodeLogic accountmodeLogic, 
-            IFailedloginattemptLogic failedloginattemptLogic, IResetpasswordLogic resetpasswordLogic
+            IFailedloginattemptLogic failedloginattemptLogic, IResetpasswordLogic resetpasswordLogic, IPushtokenLogic pushtokenLogic
             /*, IEmailManager emailManager*/)
         {
             _authenticationSettings = authenticationSettings;
@@ -49,6 +50,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             AccountmodeLogic = accountmodeLogic;
             FailedloginattemptLogic = failedloginattemptLogic;
             ResetpasswordLogic = resetpasswordLogic;
+            PushtokenLogic = pushtokenLogic;
             //EmailManager = emailManager;
         }
 
@@ -392,6 +394,48 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 throw new SecurityTokenException("Invalid token");
 
             return principal;
+        }
+
+        public virtual ReturnedResponse<PushTokenDto> SetPushToken(int idAccount, PushTokenDto pushToken)
+        {
+            if (pushToken.Op == "add")
+            {
+                Pushtoken pushtoken = PushtokenLogic.Select(m => m.Idaccount == idAccount).FirstOrDefault();
+
+                if (pushtoken != null)
+                {
+                    pushtoken.Token = pushToken.Token;
+                    pushtoken.Createdat = DateTime.UtcNow;
+
+                    PushtokenLogic.Update(pushtoken);
+
+                    return new ReturnedResponse<PushTokenDto>(pushToken, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                }
+
+                pushtoken = DtoModelMapper.Map<Pushtoken, PushTokenDto>(pushToken);
+
+                pushtoken.Idaccount = idAccount;
+
+                pushtoken = PushtokenLogic.Insert(pushtoken);
+
+                return new ReturnedResponse<PushTokenDto>(pushToken, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            }
+
+            if (pushToken.Op == "remove")
+            {
+                Pushtoken pushtoken = PushtokenLogic.Select(m => m.Idaccount == idAccount && m.Token == pushToken.Token).FirstOrDefault();
+
+                if (pushtoken != null)
+                {
+                    PushtokenLogic.Delete(pushtoken);
+
+                    pushToken.Token = string.Empty;
+
+                    return new ReturnedResponse<PushTokenDto>(pushToken, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                }
+            }
+
+            return new ReturnedResponse<PushTokenDto>(pushToken, I18nTranslation.Translation(I18nTags.WrongOperations), false, ErrorCodes.WrongPushTokenOperations);
         }
     }
 }

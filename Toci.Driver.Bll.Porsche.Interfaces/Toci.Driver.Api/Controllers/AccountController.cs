@@ -82,6 +82,12 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
         return Service.RequestPasswordReset(email);
     }
 
+    [HttpPatch("{idAccount}/pushtoken")]
+    public ReturnedResponse<PushTokenDto> SetPushToken(int idAccount, [FromBody]PushTokenDto pushToken)
+    {
+        return Service.SetPushToken(idAccount, pushToken);
+    }
+
     [HttpGet("EnigmaticUrl")]
     public List<Account> GetAllUsers()
     {
