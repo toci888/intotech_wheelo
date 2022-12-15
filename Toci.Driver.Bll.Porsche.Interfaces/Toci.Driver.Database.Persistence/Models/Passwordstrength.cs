@@ -8,7 +8,5 @@ namespace Toci.Driver.Database.Persistence.Models
         public int Id { get; set; }
         public int Idaccount { get; set; }
         public int Level { get; set; }
-
-        public virtual Account IdaccountNavigation { get; set; } = null!;
     }
 }

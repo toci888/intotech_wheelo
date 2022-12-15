@@ -13,7 +13,6 @@ namespace Toci.Driver.Database.Persistence.Models
             Accountslocations = new HashSet<Accountslocation>();
             Accountsworktimes = new HashSet<Accountsworktime>();
             Cars = new HashSet<Car>();
-            Failedloginattempts = new HashSet<Failedloginattempt>();
             FriendIdaccountNavigations = new HashSet<Friend>();
             FriendIdfriendNavigations = new HashSet<Friend>();
             FriendsuggestionIdaccountNavigations = new HashSet<Friendsuggestion>();
@@ -37,11 +36,11 @@ namespace Toci.Driver.Database.Persistence.Models
         public int? Verificationcode { get; set; }
         public int? Idrole { get; set; }
         public bool? Emailconfirmed { get; set; }
-        public bool? Allowsnotifications { get; set; }
         public string? Image { get; set; }
         public string? Phonenumber { get; set; }
         public string? Refreshtoken { get; set; }
         public DateTime? Refreshtokenvalid { get; set; }
+        public bool? Allowsnotifications { get; set; }
 
         public virtual Role? IdroleNavigation { get; set; }
         public virtual Accountmode? Accountmode { get; set; }
@@ -51,7 +50,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual ICollection<Accountslocation> Accountslocations { get; set; }
         public virtual ICollection<Accountsworktime> Accountsworktimes { get; set; }
         public virtual ICollection<Car> Cars { get; set; }
-        public virtual ICollection<Failedloginattempt> Failedloginattempts { get; set; }
         public virtual ICollection<Friend> FriendIdaccountNavigations { get; set; }
         public virtual ICollection<Friend> FriendIdfriendNavigations { get; set; }
         public virtual ICollection<Friendsuggestion> FriendsuggestionIdaccountNavigations { get; set; }
