@@ -36,7 +36,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Invitation> Invitations { get; set; } = null!;
         public virtual DbSet<Notuser> Notusers { get; set; } = null!;
         public virtual DbSet<Occupation> Occupations { get; set; } = null!;
-        public virtual DbSet<Passwordsstrenght> Passwordsstrenghts { get; set; } = null!;
         public virtual DbSet<Passwordstrength> Passwordstrengths { get; set; } = null!;
         public virtual DbSet<Pushtoken> Pushtokens { get; set; } = null!;
         public virtual DbSet<Resetpassword> Resetpasswords { get; set; } = null!;
@@ -73,9 +72,6 @@ namespace Toci.Driver.Database.Persistence.Models
             modelBuilder.Entity<Account>(entity =>
             {
                 entity.ToTable("accounts");
-
-                entity.HasIndex(e => e.Email, "accounts_email_key")
-                    .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
@@ -451,12 +447,6 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
                 entity.Property(e => e.Kind).HasColumnName("kind");
-
-                entity.HasOne(d => d.IdaccountNavigation)
-                    .WithMany(p => p.Failedloginattempts)
-                    .HasForeignKey(d => d.Idaccount)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("failedloginattempts_idaccount_fkey");
             });
 
             modelBuilder.Entity<Friend>(entity =>
@@ -593,17 +583,6 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Name).HasColumnName("name");
             });
 
-            modelBuilder.Entity<Passwordsstrenght>(entity =>
-            {
-                entity.ToTable("passwordsstrenght");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
-
-                entity.Property(e => e.Level).HasColumnName("level");
-            });
-
             modelBuilder.Entity<Passwordstrength>(entity =>
             {
                 entity.ToTable("passwordstrength");
@@ -613,12 +592,6 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
                 entity.Property(e => e.Level).HasColumnName("level");
-
-                entity.HasOne(d => d.IdaccountNavigation)
-                    .WithMany(p => p.Passwordstrengths)
-                    .HasForeignKey(d => d.Idaccount)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("passwordstrength_idaccount_fkey");
             });
 
             modelBuilder.Entity<Pushtoken>(entity =>

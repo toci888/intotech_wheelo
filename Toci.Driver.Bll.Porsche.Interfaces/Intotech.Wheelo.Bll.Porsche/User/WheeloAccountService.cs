@@ -39,6 +39,9 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         public const int DarkMode = 2;
         //public const int BlueMode = 2;
 
+        public const int RegistrationBadVerificationCodeKind = 1;
+        public const int LoginBadVerificationCodeKind = 2;
+
         public WheeloAccountService(AuthenticationSettings authenticationSettings, IAccountLogic accLogic, IAccountRoleLogic accRoleLogic, 
             IAccountmodeLogic accountmodeLogic, 
             IFailedloginattemptLogic failedloginattemptLogic, IResetpasswordLogic resetpasswordLogic, IPushtokenLogic pushtokenLogic
@@ -64,9 +67,9 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
                 if (emailAccount != null)
                 {
-                    FailedloginattemptLogic.Insert(new Failedloginattempt() { Idaccount = emailAccount.Id.Value });
+                    FailedloginattemptLogic.Insert(new Failedloginattempt() { Idaccount = emailAccount.Id.Value, Kind = LoginBadVerificationCodeKind }); //, Kind 
 
-                    bool isHack = FailedloginattemptLogic.Select(m => m.Idaccount == emailAccount.Id.Value && m.Createdat > DateTime.Now.AddSeconds(-15)).Count() > 5;
+                    bool isHack = FailedloginattemptLogic.Select(m => m.Idaccount == emailAccount.Id.Value && m.Kind == LoginBadVerificationCodeKind && m.Createdat > DateTime.Now.AddMinutes(-5)).Count() > 5;
 
                     if (isHack)
                     {
@@ -141,7 +144,20 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
                 if (simpleaccount.Emailconfirmed.Value && simpleaccount.Password == sAccount.Password)
                 {
+                    //login from registration - all data ok
                     return new ReturnedResponse<AccountRoleDto>(Login(new LoginDto() { Email = sAccount.Email, Password = sAccount.Password }).MethodResult, I18nTranslation.Translation(I18nTags.Success), false, ErrorCodes.Success);
+                }
+
+                if (!simpleaccount.Emailconfirmed.Value)
+                {
+                    FailedloginattemptLogic.Insert(new Failedloginattempt() { Idaccount = simpleaccount.Id, Kind = RegistrationBadVerificationCodeKind }); 
+
+                    bool isHack = FailedloginattemptLogic.Select(m => m.Idaccount == simpleaccount.Id && m.Kind == RegistrationBadVerificationCodeKind && m.Createdat > DateTime.Now.AddMinutes(-5)).Count() > 5;
+
+                    if (isHack)
+                    {
+                        return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.UnderAttack), false, ErrorCodes.UnderAttack);
+                    }
                 }
 
                 return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.AccountExists), false, ErrorCodes.AccountExists);
