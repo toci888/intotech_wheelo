@@ -472,6 +472,7 @@ create table FailedLoginAttempts
 (
 	id serial primary key,
 	IdAccount int references Accounts(id) not null,
+	kind int not null,
 	createdat timestamp not null default now()
 );
 --TABEL 2:
