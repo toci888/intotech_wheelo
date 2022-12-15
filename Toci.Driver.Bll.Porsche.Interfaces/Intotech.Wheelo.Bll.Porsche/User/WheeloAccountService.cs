@@ -246,10 +246,23 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 return new ReturnedResponse<int>(ErrorCodes.EmailDoesNotExistResetPassword, I18nTranslation.Translation(I18nTags.EmailDoesNotExist), false, ErrorCodes.EmailDoesNotExistResetPassword);
             }
 
+            Resetpassword resetpassword = ResetpasswordLogic.Select(m => m.Email == email).FirstOrDefault();
+
+            if (resetpassword != null)
+            {
+                resetpassword.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
+
+                ResetpasswordLogic.Update(resetpassword);
+
+                EmailManager.SendPasswordResetVerificationCode(email, acc.Name, resetpassword.Verificationcode.ToString());
+
+                return new ReturnedResponse<int>(ErrorCodes.Success, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            }
+
             int verificationCode = IntUtils.GetRandomCode(1000, 9999);
 
             // if exists, generate a code and stor4e record with ResetpasswordLogic.Insert 
-            Resetpassword resetpassword = new Resetpassword() { Email = email, Verificationcode = verificationCode };
+            resetpassword = new Resetpassword() { Email = email, Verificationcode = verificationCode };
 
             ResetpasswordLogic.Insert(resetpassword);
 
