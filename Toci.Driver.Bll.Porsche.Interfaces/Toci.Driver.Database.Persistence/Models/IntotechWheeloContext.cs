@@ -37,6 +37,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Notuser> Notusers { get; set; } = null!;
         public virtual DbSet<Occupation> Occupations { get; set; } = null!;
         public virtual DbSet<Passwordstrength> Passwordstrengths { get; set; } = null!;
+        public virtual DbSet<Pushtoken> Pushtokens { get; set; } = null!;
         public virtual DbSet<Resetpassword> Resetpasswords { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Statisticstrip> Statisticstrips { get; set; } = null!;
@@ -589,6 +590,28 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
                 entity.Property(e => e.Level).HasColumnName("level");
+            });
+
+            modelBuilder.Entity<Pushtoken>(entity =>
+            {
+                entity.ToTable("pushtokens");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
+                    .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Token).HasColumnName("token");
+
+                entity.HasOne(d => d.IdaccountNavigation)
+                    .WithMany(p => p.Pushtokens)
+                    .HasForeignKey(d => d.Idaccount)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("pushtokens_idaccount_fkey");
             });
 
             modelBuilder.Entity<Resetpassword>(entity =>

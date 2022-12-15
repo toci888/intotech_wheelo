@@ -80,6 +80,7 @@ builder.Services.AddScoped<IVacollocationsgeolocationToAccountCollocationDto, Va
 builder.Services.AddScoped<IAccountmodeLogic, AccountmodeLogic>();
 builder.Services.AddScoped<IFailedloginattemptLogic, FailedloginattemptLogic>();
 builder.Services.AddScoped<IResetpasswordLogic, ResetpasswordLogic>();
+builder.Services.AddScoped<IPushtokenLogic, PushtokenLogic>();
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();
 
