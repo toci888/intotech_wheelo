@@ -1,4 +1,5 @@
-﻿drop table PushTokens;
+﻿drop table OccupationSmokerCrat;
+drop table PushTokens;
 
 drop table ResetPassword;
 
@@ -498,6 +499,14 @@ create table PushTokens
 	IdAccount int references Accounts(id) not null,
 	token text not null,
 	createdat timestamp not null default now()
+);
+create table OccupationSmokerCrat
+(
+	id serial primary key,
+	IdAccount int references Accounts(id),
+	IdOccupation int references Occupations(id),
+	IsSmoker bool default false,
+	CreatedAt timestamp default now()
 );
 --INSERTY:
 --insert into FailedLoginAttempts (IdAccount, ts1) values (AcountIndentifiers, timestamps)

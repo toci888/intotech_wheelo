@@ -36,6 +36,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Invitation> Invitations { get; set; } = null!;
         public virtual DbSet<Notuser> Notusers { get; set; } = null!;
         public virtual DbSet<Occupation> Occupations { get; set; } = null!;
+        public virtual DbSet<Occupationsmokercrat> Occupationsmokercrats { get; set; } = null!;
         public virtual DbSet<Passwordsstrenght> Passwordsstrenghts { get; set; } = null!;
         public virtual DbSet<Passwordstrength> Passwordstrengths { get; set; } = null!;
         public virtual DbSet<Pushtoken> Pushtokens { get; set; } = null!;
@@ -591,6 +592,36 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name).HasColumnName("name");
+            });
+
+            modelBuilder.Entity<Occupationsmokercrat>(entity =>
+            {
+                entity.ToTable("occupationsmokercrat");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
+                    .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Idoccupation).HasColumnName("idoccupation");
+
+                entity.Property(e => e.Issmoker)
+                    .HasColumnName("issmoker")
+                    .HasDefaultValueSql("false");
+
+                entity.HasOne(d => d.IdaccountNavigation)
+                    .WithMany(p => p.Occupationsmokercrats)
+                    .HasForeignKey(d => d.Idaccount)
+                    .HasConstraintName("occupationsmokercrat_idaccount_fkey");
+
+                entity.HasOne(d => d.IdoccupationNavigation)
+                    .WithMany(p => p.Occupationsmokercrats)
+                    .HasForeignKey(d => d.Idoccupation)
+                    .HasConstraintName("occupationsmokercrat_idoccupation_fkey");
             });
 
             modelBuilder.Entity<Passwordsstrenght>(entity =>
