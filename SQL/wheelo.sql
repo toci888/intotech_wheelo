@@ -82,6 +82,8 @@ create table Roles
 	name text
 );
 
+--alter table accounts add column verificationCodeValid timestamp;
+
 create table Accounts
 (
 	Id serial primary key not null,
@@ -90,6 +92,7 @@ create table Accounts
 	surname text,
 	password text,
 	verificationCode int,
+	verificationCodeValid timestamp,
 	IdRole int references roles(id) default 1,
 	emailconfirmed bool default false,
 	allowsNotifications bool default false,

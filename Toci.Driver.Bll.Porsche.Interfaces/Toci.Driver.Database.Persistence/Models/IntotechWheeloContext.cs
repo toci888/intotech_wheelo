@@ -107,6 +107,10 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Verificationcode).HasColumnName("verificationcode");
 
+                entity.Property(e => e.Verificationcodevalid)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("verificationcodevalid");
+
                 entity.HasOne(d => d.IdroleNavigation)
                     .WithMany(p => p.Accounts)
                     .HasForeignKey(d => d.Idrole)
