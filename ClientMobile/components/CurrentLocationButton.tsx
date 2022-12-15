@@ -7,6 +7,10 @@ import * as Location from "expo-location";
 import { Row } from "./Row";
 import { theme } from "../theme";
 import React from "react";
+import axios from "axios";
+import { endpoints } from "../constants/constants";
+import { commonAlert } from "../utils/handleError";
+import { i18n } from "../i18n/i18n";
 
 export const CurrentLocationButton = ({ style, location, setLocation 
 }: { 
@@ -19,30 +23,18 @@ export const CurrentLocationButton = ({ style, location, setLocation
   const getLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
-      alert("Permission to access location was denied");
+      commonAlert(i18n.t('Permissiontoaccesslocationwasdenied'))
       return;
     }
 
     let currentLocation = await Location.getCurrentPositionAsync({});
-    console.log("CurrentLocationButton:", currentLocation);
-    handleNavigate(currentLocation);
-  };
 
-  const handleNavigate = (currentLocation: Location.LocationObject) => {
     let lat =  currentLocation.coords.latitude; //52.38705 16.88180 52.38512
     let lon = currentLocation.coords.longitude; // 16.879011
     
-    
+    const {data} = await axios.get(`${endpoints.currentLocation(lat, lon)}`);
 
-    // navigation.navigate("Root", {
-    //   screen: "Search",
-    //   params: {
-    //     location: "Your Current Location",
-    //     boundingBox,
-    //     lat: lat.toString(),
-    //     lon: lon.toString(),
-    //   },
-    // });
+    setLocation(data);
     navigation.goBack();
   };
 

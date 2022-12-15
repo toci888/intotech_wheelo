@@ -55,6 +55,8 @@ const savedEndpoint = (id: number) => `${userEndpoint}/${id}/properties/saved`;
 const pushTokenEndpoint = (id: number) => `${userEndpoint}/${id}/pushtoken`;
 const allowsNotificationsEndpoint = (id: number) => `${userEndpoint}/${id}/settings/notifications`;
 const themeModeEndpoint = (idAccount: number, darkModeEnabled: boolean) => `${userEndpoint}/${idAccount}/settings/theme-mode?darkmode=${darkModeEnabled}`;
+const currentLocationEndpoint = (latitude: number, longitude: number) => `${googleEndpoint}/current-button-location?latitude=${latitude}&longitude=${longitude}`;
+
 
 export const endpoints = {
   chat: chatUrl,
@@ -87,6 +89,7 @@ export const endpoints = {
   getConversationsByUserID: conversationEndpoint + "/user/",
   createMessage: messagesEndpoint,
   refreshTokens: refreshTokenEndpoint,
+  currentLocation: currentLocationEndpoint
 };
 
 export const queryKeys = {

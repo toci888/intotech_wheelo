@@ -13,5 +13,6 @@
     "Welcome": "Witaj",
     "ToenablePushNotificationspleasechangeyoursettings": "W celu włączenia powiadomień, włącz je w ustawieniach",
     "OpenSettings": "Otwórz ustawienia",
-    "Ok": "Ok"
+    "Ok": "Ok",
+    "Permissiontoaccesslocationwasdenied": "Nie udzielono zgody na pobranie danych geograficznych."
 }
