@@ -117,6 +117,11 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
         public virtual ReturnedResponse<AccountRoleDto> Register(AccountRegisterDto sAccount)
         {
+            if (!StringUtils.IsEmailAddress(sAccount.Email))
+            {
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
+            }
+
             Account simpleaccount = AccLogic.Select(m => m.Email == sAccount.Email).FirstOrDefault();
 
             if (simpleaccount != null)
