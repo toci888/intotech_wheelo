@@ -114,11 +114,12 @@ export const useAuth = () => {
           AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
         ],
       });
-
+      console.log("APPLETOKEN", identityToken)
       if (identityToken) {
         setLoading(true);
         const user = await appleLoginOrRegister(identityToken);
-        handleSignInUser(user?.methodResult);
+        console.log("APPLEHEERE", user)
+        // handleSignInUser(user?.methodResult);
       }
     } catch (error) {
       handleAuthError();
