@@ -81,6 +81,7 @@ builder.Services.AddScoped<IAccountmodeLogic, AccountmodeLogic>();
 builder.Services.AddScoped<IFailedloginattemptLogic, FailedloginattemptLogic>();
 builder.Services.AddScoped<IResetpasswordLogic, ResetpasswordLogic>();
 builder.Services.AddScoped<IPushtokenLogic, PushtokenLogic>();
+builder.Services.AddScoped<IOccupationSmokerCratLogic, OccupationSmokerCratLogic>();
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();
 
@@ -99,6 +100,7 @@ builder.Services.AddScoped<IAccountMetadataService, AccountMetadataService>();
 builder.Services.AddScoped<IAssociationMapDataSubService, AssociationMapDataSubService>();
 builder.Services.AddScoped<IWorkTripGenAssociationService, WorkTripGenAssociationService>();
 builder.Services.AddScoped<IPassStrLoginAttFailService, PassStrLoginAttFailService>();
+builder.Services.AddScoped<IUserMetaService, UserMetaService>();
 //builder.Services.AddScoped<IEmailManager, EmailManager>();
 
 builder.Services.AddSingleton(authenticationSettings);

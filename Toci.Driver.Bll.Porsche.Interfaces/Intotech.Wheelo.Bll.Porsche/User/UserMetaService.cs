@@ -3,6 +3,8 @@ using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Models.Account;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
+using Intotech.Wheelo.Common.Interfaces;
+using Intotech.Wheelo.Common;
 using Npgsql.Internal.TypeMapping;
 using System;
 using System.Collections.Generic;
@@ -26,9 +28,20 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         {
             Occupationsmokercrat model = DtoModelMapper.Map<Occupationsmokercrat, SmokerOccupationDto>(smokerOccupationDto);
 
+            Occupationsmokercrat exists = OccSmoCrLogic.Select(m => m.Idaccount == smokerOccupationDto.Idaccount).FirstOrDefault();
+
+            if (exists != null)
+            {
+                model.Id = exists.Id;
+
+                OccSmoCrLogic.Update(model);
+
+                return new ReturnedResponse<SmokerOccupationDto>(smokerOccupationDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            }
+
             OccSmoCrLogic.Insert(model);
 
-            return null;
+            return new ReturnedResponse<SmokerOccupationDto>(smokerOccupationDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }
