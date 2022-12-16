@@ -50,11 +50,36 @@ namespace Intotech.Wheelo.Tests.PorscheServices
 
             Assert.AreEqual(result.ErrorCode, ErrorCodes.DataIntegrityViolated);
 
+            testData.Email = "warriorr@poczta.fm";
 
             ReturnedResponse<AccountRoleDto> secResult = SecAccountService.Register(testData);
 
-           // result.ErrorCode ?
-           // secResult.ErrorCode ? 
+            Assert.AreEqual(secResult.ErrorCode, ErrorCodes.Success);
+
+            secResult = SecAccountService.Register(testData);
+
+            Assert.AreEqual(secResult.ErrorCode, ErrorCodes.PleaseConfirmEmail);
+
+            testData.Password = StringUtils.GetRandomText(20);
+
+            secResult = SecAccountService.Register(testData);
+
+            Assert.AreEqual(secResult.ErrorCode, ErrorCodes.PleaseConfirmEmail);
+
+            for (int i = 0; i < 6; i++)
+            {
+                secResult = SecAccountService.Register(testData);
+            }
+
+            Assert.AreEqual(secResult.ErrorCode, ErrorCodes.UnderAttack);
+
+           
+            CleanUp();
+        }
+
+        protected virtual void CleanUp()
+        {
+
         }
 
         protected virtual AccountRegisterDto GetRegisterData()

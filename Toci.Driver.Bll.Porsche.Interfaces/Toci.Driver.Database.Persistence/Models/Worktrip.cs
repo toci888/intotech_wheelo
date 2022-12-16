@@ -30,6 +30,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public TimeOnly? Tohour { get; set; }
         public double? Acceptabledistance { get; set; }
         public DateTime? Createdat { get; set; }
+        public int Driverpassenger { get; set; }
 
         public virtual Geographicregion? IdgeographiclocationfromNavigation { get; set; }
         public virtual Geographicregion? IdgeographiclocationtoNavigation { get; set; }

@@ -278,6 +278,7 @@ create table WorkTrip
 	PostCodeTo text,
     FromHour time, -- 0 60 -> 1 
     ToHour time,
+	DriverPassenger int not null default 1,
     AcceptableDistance double precision,
 	CreatedAt timestamp default now()
 );
@@ -443,6 +444,7 @@ create table WorkTripGen
     FromHour time, -- 0 60 -> 1 
     ToHour time,
     AcceptableDistance double precision,
+	DriverPassenger int not null default 1, -- 1 passenger, 2 driver, 3 both
 	CreatedAt timestamp default now()
 );
 
@@ -455,14 +457,14 @@ join Accounts a on a.id = wt.IdAccount;
 
 create or replace view VAWorkTripGenGeoLocations as --select hosts of collocations
 select distinct a.id as accountId, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
-wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchid
+wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchid, wt.DriverPassenger as IsDriver
 from AccountsCollocations acc 
 join WorkTripGen wt on acc.IdAccount = wt.IdAccount
 join Accounts a on a.id = wt.IdAccount;
 
 create or replace view VACollocationsGeoLocations as --select people, who belong to the group collocated
 select acc.idaccount, a.id as accountIdCollocated, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
-wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchId
+wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchId, wt.DriverPassenger as IsDriver
 from AccountsCollocations acc 
 join WorkTripGen wt on acc.idcollocated = wt.IdAccount
 join Accounts a on a.id = wt.IdAccount;

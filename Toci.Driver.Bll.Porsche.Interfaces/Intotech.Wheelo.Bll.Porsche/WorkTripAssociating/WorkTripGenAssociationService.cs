@@ -185,6 +185,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             result.Longitudefrom = double.Parse(workTripGen.StartLocation.lon, CultureInfo.InvariantCulture); //.Replace(".", ","));
             result.Longitudeto = double.Parse(workTripGen.EndLocation.lon, CultureInfo.InvariantCulture); //.Replace(".", ","));
             result.Searchid = WorktripgenLogic.GetWorktripSearchId(result);
+            result.Driverpassenger = workTripGen.IsDriver;
 
             return result;
         }

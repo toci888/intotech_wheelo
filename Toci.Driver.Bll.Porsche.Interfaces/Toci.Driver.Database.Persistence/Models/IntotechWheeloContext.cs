@@ -833,6 +833,8 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
+                entity.Property(e => e.Isdriver).HasColumnName("isdriver");
+
                 entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
 
                 entity.Property(e => e.Latitudeto).HasColumnName("latitudeto");
@@ -859,6 +861,8 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Accountid).HasColumnName("accountid");
 
                 entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+
+                entity.Property(e => e.Isdriver).HasColumnName("isdriver");
 
                 entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
 
@@ -1077,6 +1081,10 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasColumnName("createdat")
                     .HasDefaultValueSql("now()");
 
+                entity.Property(e => e.Driverpassenger)
+                    .HasColumnName("driverpassenger")
+                    .HasDefaultValueSql("1");
+
                 entity.Property(e => e.Fromhour).HasColumnName("fromhour");
 
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
@@ -1134,6 +1142,10 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasColumnType("timestamp without time zone")
                     .HasColumnName("createdat")
                     .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Driverpassenger)
+                    .HasColumnName("driverpassenger")
+                    .HasDefaultValueSql("1");
 
                 entity.Property(e => e.Fromhour).HasColumnName("fromhour");
 
