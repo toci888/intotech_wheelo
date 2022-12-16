@@ -48,7 +48,6 @@ export const useAuth = () => {
   const { login } = useUser();
   const { goBack } = useNavigation();
   const { setLoading } = useLoading();
-  const navigation = useNavigation();
 
   const handleSignInUser = (user?: User) => {
     if (user) {
@@ -82,7 +81,7 @@ export const useAuth = () => {
       const user = await loginUser(values);
       
       handleSignInUser(user?.methodResult);
-      
+
       return user;
     } catch (error) {
       handleAuthError();

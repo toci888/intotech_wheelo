@@ -73,14 +73,11 @@ export const SignUpScreen = () => {
               const response: ReturnedResponse<User> | undefined = await nativeRegister(values);
               if(response) {
                 console.log("valuess", values)
-                if(response.isSuccess === true && response.errorCode === 1) {
-                  navigation.navigate("EmailVerification", values);
-                } 
-                else if(response.isSuccess === false && response.errorCode === 16384) {
+                if ((response.isSuccess === true && response.errorCode === 1)
+                || (response.isSuccess === false && response.errorCode === 16384)) {
                   navigation.navigate("EmailVerification", values);
                 }
-                else if(response.isSuccess === false && response.errorCode === 512) {
-                  navigation.goBack();
+                else if(response.isSuccess === false) {
                   commonAlert(response.errorMessage)
                 }
               }

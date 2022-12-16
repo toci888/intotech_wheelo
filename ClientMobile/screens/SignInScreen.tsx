@@ -41,7 +41,6 @@ export const SignInScreen = () => {
             onSubmit={async (values) => {
               const response: ReturnedResponse<User> | undefined = await nativeLogin(values);
               if (response && response.isSuccess === false) {
-                console.log("LOGINRESP", response)
                 if(response.errorCode === 256) {
                   navigation.navigate(`EmailVerification`, values);
                 } else {

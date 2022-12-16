@@ -55,25 +55,11 @@ export const CardInformation = ({
   const editPropertyNavigation = () =>
     navigation.navigate("EditProperty", { collocationId: collocation.idAccount });
 
-  const getLowAndHighText = (type: "rent" | "bedroom") => {
-    // if (type === "rent") {
-    //   if (property.rentLow === property.rentHigh)
-    //     return `$${property.rentLow.toLocaleString()}`;
-    //   return `$${property.rentLow.toLocaleString()} - ${property.rentHigh.toLocaleString()}`;
-    // }
-
-    // let bedLow = property.bedroomLow === 0 ? "Studio" : property.bedroomLow;
-    // if (property.bedroomLow === property.bedroomHigh) return bedLow;
-
-    // return `${bedLow} - ${property.bedroomHigh} Beds`;
-    return `linia69 Beds`;
-  };
-
   const DefaultInfo = () => (
     <>
-      {collocation?.name && (
+      {
         <Row style={styles.rowJustification}>
-          <Text category={"s1"}>{getLowAndHighText("rent")}</Text>
+          <Text category={"s1"}>{collocation.name + " " + collocation.surname}</Text>
           <Pressable onPress={handleHeartPress} style={styles.heartContainer}>
             <MaterialCommunityIcons
               name={collocation?.areFriends ? "star" : "star-outline"}
@@ -82,14 +68,12 @@ export const CardInformation = ({
             />
           </Pressable>
         </Row>
-      )}
-      <Text category={"c1"}>{getLowAndHighText("bedroom")}</Text>
+      }
       {collocation?.name ? (
         <Text category={"c1"} style={styles.defaultMarginTop}>
-          {collocation.name}
+          {collocation.phoneNumber}
         </Text>
       ) : null}
-      <Text category={"c1"}>{collocation.name} 92</Text>
 
       {/* {property?.includedUtilities && property.includedUtilities.length > 0 ? (
         <Text category={"c1"} style={styles.defaultMarginTop}>
