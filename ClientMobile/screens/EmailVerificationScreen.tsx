@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Animated, Image, Platform, SafeAreaView, Text, View, StyleSheet } from "react-native";
 import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell } from "react-native-confirmation-code-field";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 import { theme } from "../theme";
 import { useAuth } from "../hooks/useAuth";
@@ -37,10 +37,12 @@ const animateCell = ({ hasValue, index, isFocused }: any) => {
   ]).start();
 };
 
-export const EmailVerificationScreen = () => {
-  const route = useRoute();
+export const EmailVerificationScreen = ({route}:{
+  route: { params: User}
+}) => {
+  // const route = useRoute();
   const [value, setValue] = useState("");
-  const [registrationForm, setRegistartionForm] = useState({});
+  const [emailVeryficationForm, setEmailVeryficationForm] = useState({});
   const { login } = useUser();
   const navigation = useNavigation();
   
@@ -52,15 +54,13 @@ export const EmailVerificationScreen = () => {
 
   const handleVerify = async () => {
     const user = route.params as User;
-    
-    setRegistartionForm({ ...user, code: value });
+    setEmailVeryficationForm({ email: user.email, code: value });
     try
     {
       const { data } = await axios.post(`${endpoints.emailVerification}`, {
         email: `${user.email}`,
         code: Number(value),
       });
-      console.log("USERXD", data)
 
       if(data.methodResult) {
         login(data.methodResult);
@@ -75,9 +75,9 @@ export const EmailVerificationScreen = () => {
     };
   };
 
-  useEffect(() => {}, [registrationForm]);
+  // useEffect(() => {}, [emailVeryficationForm]);
 
-  const renderCell = ({ index, symbol, isFocused }) => {
+  const renderCell = ({ index, symbol, isFocused }: any) => {
     const hasValue = Boolean(symbol);
     const animatedCellStyle = {
       backgroundColor: hasValue

@@ -18,6 +18,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ReturnedResponse, RootStackParamList } from "../types";
 import { User } from "../types/user";
+import { commonAlert } from "../utils/handleError";
 
 interface IUser {
   firstName: string;
@@ -31,7 +32,7 @@ export const SignUpScreen = () => {
   const [user, setUser] = useState<IUser>({
     firstName: "asd",
     lastName: "qwe",
-    email: "asdf@wp.plzxcxxxc",
+    email: "new@wp.plxb",
     password: "zxcD@#gry123",
     // firstName: "",
     // lastName: "",
@@ -69,17 +70,18 @@ export const SignUpScreen = () => {
                 ),
             })}
             onSubmit={async (values) => {
-              const user: ReturnedResponse<User> | undefined = await nativeRegister(values);
-              if(user) {
-                if(user.isSuccess === true) {
-                  navigation.navigate(`EmailVerification`, user.methodResult)
+              const response: ReturnedResponse<User> | undefined = await nativeRegister(values);
+              if(response) {
+                console.log("valuess", values)
+                if(response.isSuccess === true && response.errorCode === 1) {
+                  // navigation.goBack();
                 } 
-                else if(user.isSuccess === false && user.errorCode === 16384) {
-                  navigation.navigate("EmailVerification", user.methodResult);
+                else if(response.isSuccess === false && response.errorCode === 16384) {
+                  navigation.navigate("EmailVerification", values);
                 }
-                else if(user.isSuccess === false && user.errorCode === 512) {
+                else if(response.isSuccess === false && response.errorCode === 512) {
                   navigation.goBack();
-                  Alert.alert(i18n.t('Alert'), user.errorMessage);
+                  commonAlert(response.errorMessage)
                 }
               }
             }}

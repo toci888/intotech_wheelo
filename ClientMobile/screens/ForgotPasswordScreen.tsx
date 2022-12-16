@@ -9,6 +9,7 @@ import { Screen } from "../components/Screen";
 import { ModalHeader } from "../components/ModalHeader";
 import { useLoading } from "../hooks/useLoading";
 import { forgotPassword } from "../services/user";
+import React from "react";
 
 export const ForgotPasswordScreen = () => {
   const [emailSent, setEmailSent] = useState(false);

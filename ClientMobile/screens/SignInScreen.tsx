@@ -13,6 +13,7 @@ import React from "react";
 import { ReturnedResponse } from "../types";
 import { User } from "../types/user";
 import { i18n } from "../i18n/i18n";
+import { commonAlert } from "../utils/handleError";
 
 export const SignInScreen = () => {
   const navigation = useNavigation();
@@ -21,14 +22,14 @@ export const SignInScreen = () => {
   return (
     <KeyboardAwareScrollView bounces={false}>
       <Screen>
-        <ModalHeader text="WHEELO" xShown />
+        <ModalHeader text={i18n.t('AppName')} xShown />
         <View style={styles.container}>
           <Text category={"h5"} style={styles.header}>
-            Zaloguj się
+            {i18n.t('SignIn')}
           </Text>
           <Formik
             initialValues={{
-              email: "asdf@wp.plzxcxxxc",
+              email: "new@wp.plxb",
               password: "zxcD@#gry123",
             }}
             validationSchema={yup.object().shape({
@@ -38,10 +39,14 @@ export const SignInScreen = () => {
                 .required("Hasło jest wymagane..")
             })}
             onSubmit={async (values) => {
-              const user: ReturnedResponse<User> | undefined = await nativeLogin(values);
-              if(user?.isSuccess === false && user?.errorCode) {
-                console.log("User", user);
-                navigation.navigate(`EmailVerification`, user.methodResult)
+              const response: ReturnedResponse<User> | undefined = await nativeLogin(values);
+              if (response && response.isSuccess === false) {
+                console.log("LOGINRESP", response)
+                if(response.errorCode === 256) {
+                  navigation.navigate(`EmailVerification`, values);
+                } else {
+                  commonAlert(response.errorMessage)
+                }
               }
             }}
           >

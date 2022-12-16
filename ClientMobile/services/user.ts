@@ -103,16 +103,6 @@ export const alterPushToken = (
   pushToken: string,
   token: string
 ) => {
-  console.log("LECII", endpoints.alterPushToken(userID),
-  {
-    op,
-    token: pushToken,
-  },
-  {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
   axios.patch(
     endpoints.alterPushToken(userID),
     {
