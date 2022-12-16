@@ -34,5 +34,6 @@
         public const string UnderAttack = "_youSeemRobot";
         public const string EmailDoesNotExist = "_emailDoesNotExist";
         public const string WrongOperations = "_wrongOperations";
+        public const string WrongData = "_wrongData";
     }
 }

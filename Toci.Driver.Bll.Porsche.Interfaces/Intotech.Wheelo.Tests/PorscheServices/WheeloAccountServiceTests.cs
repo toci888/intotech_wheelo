@@ -12,29 +12,33 @@ using System.Text;
 using System.Threading.Tasks;
 using Intotech.Wheelo.Bll.Porsche.User;
 using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Common.Interfaces;
 
 namespace Intotech.Wheelo.Tests.PorscheServices
 {
     [TestClass]
     public class WheeloAccountServiceTests
     {
-        IWheeloAccountService AccountService;   
+        IWheeloAccountService AccountService;
+        IWheeloAccountService SecAccountService;
 
         public WheeloAccountServiceTests() 
         {
             ServiceCollection services = new ServiceCollection();
 
-            services.AddScoped<AuthenticationSettings, AuthenticationSettings>();
-            services.AddScoped<IAccountLogic, AccountLogic>();
-            services.AddScoped<IAccountRoleLogic, AccountRoleLogic>();
-            services.AddScoped<IFailedloginattemptLogic, FailedloginattemptLogic>();
-            services.AddScoped<IResetpasswordLogic, ResetpasswordLogic>();
-            services.AddScoped<IWheeloAccountService, WheeloAccountService>();
-            services.AddScoped<IAccountmodeLogic, AccountmodeLogic>();
+            services.AddTransient<AuthenticationSettings, AuthenticationSettings>();
+            services.AddTransient<IAccountLogic, AccountLogic>();
+            services.AddTransient<IAccountRoleLogic, AccountRoleLogic>();
+            services.AddTransient<IFailedloginattemptLogic, FailedloginattemptLogic>();
+            services.AddTransient<IResetpasswordLogic, ResetpasswordLogic>();
+            services.AddTransient<IPushtokenLogic, PushtokenLogic>();
+            services.AddTransient<IWheeloAccountService, WheeloAccountService>();
+            services.AddTransient<IAccountmodeLogic, AccountmodeLogic>();
 
             ServiceProvider serviceProvider = services.BuildServiceProvider();
 
             AccountService = serviceProvider.GetService<IWheeloAccountService>();
+            SecAccountService = serviceProvider.GetService<IWheeloAccountService>();
         }
 
         [TestMethod]
@@ -44,7 +48,10 @@ namespace Intotech.Wheelo.Tests.PorscheServices
 
             ReturnedResponse<AccountRoleDto> result = AccountService.Register(testData);
 
-            ReturnedResponse<AccountRoleDto> secResult = AccountService.Register(testData);
+            Assert.AreEqual(result.ErrorCode, ErrorCodes.DataIntegrityViolated);
+
+
+            ReturnedResponse<AccountRoleDto> secResult = SecAccountService.Register(testData);
 
            // result.ErrorCode ?
            // secResult.ErrorCode ? 
