@@ -74,7 +74,7 @@ export const SignUpScreen = () => {
               if(response) {
                 console.log("valuess", values)
                 if(response.isSuccess === true && response.errorCode === 1) {
-                  // navigation.goBack();
+                  navigation.navigate("EmailVerification", values);
                 } 
                 else if(response.isSuccess === false && response.errorCode === 16384) {
                   navigation.navigate("EmailVerification", values);

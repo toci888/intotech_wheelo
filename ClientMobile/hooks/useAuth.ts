@@ -66,9 +66,6 @@ export const useAuth = () => {
       setLoading(true);
       const user = await registerUser(values);
 
-      if (!user?.methodResult) {
-        navigation.navigate(`EmailVerification`, values);
-      }
       handleSignInUser(user?.methodResult);
       
       return user;
@@ -85,6 +82,7 @@ export const useAuth = () => {
       const user = await loginUser(values);
       
       handleSignInUser(user?.methodResult);
+      
       return user;
     } catch (error) {
       handleAuthError();
