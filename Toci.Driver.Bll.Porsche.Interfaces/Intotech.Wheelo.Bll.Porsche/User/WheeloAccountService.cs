@@ -35,6 +35,8 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         protected IPushtokenLogic PushtokenLogic;
         protected IEmailManager EmailManager = new EmailManager("pl");
 
+        public const int MinutesVerificationCodeValid = 15;
+
         public const int WhiteMode = 1;
         public const int DarkMode = 2;
         //public const int BlueMode = 2;
@@ -43,6 +45,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         public const int LoginBadVerificationCodeKind = 2;
         public const int LoginBadPassword = 3;
         public const int LoginEmailNotVerifiedPasswdMatch = 4;
+        public const int LoginEmailNotVerifiedPasswdDontMatch = 5;
 
         public WheeloAccountService(AuthenticationSettings authenticationSettings, IAccountLogic accLogic, IAccountRoleLogic accRoleLogic,
             IAccountmodeLogic accountmodeLogic,
@@ -86,13 +89,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
                 if (isHackResult.ErrorCode == ErrorCodes.UnderAttack)
                 {
-                    Account accToRefreshCode = AccLogic.Select(m => m.Id == simpleaccount.Id).First();
-
-                    accToRefreshCode.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
-
-                    accToRefreshCode = AccLogic.Update(accToRefreshCode);
-
-                    EmailManager.SendEmailVerificationCode(accToRefreshCode.Email, accToRefreshCode.Name, accToRefreshCode.Verificationcode.Value.ToString());
+                    ResendEmailVerificationCode(simpleaccount.Id.Value);
 
                     return isHackResult;
                 }
@@ -138,14 +135,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             {
                 if (!simpleaccount.Emailconfirmed.Value && simpleaccount.Password == sAccount.Password)
                 {
-                    //TODO FIX
-                    Account accToRefreshCode = AccLogic.Select(m => m.Id == simpleaccount.Id).First();
-
-                    accToRefreshCode.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
-
-                    accToRefreshCode = AccLogic.Update(accToRefreshCode);
-
-                    EmailManager.SendEmailVerificationCode(accToRefreshCode.Email, accToRefreshCode.Name, accToRefreshCode.Verificationcode.Value.ToString());
+                    ResendEmailVerificationCode(simpleaccount.Id);
 
                     return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.PleaseConfirmYourWheeloAccountRegistration), false, ErrorCodes.PleaseConfirmEmail);
                 }
@@ -158,7 +148,17 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
                 if (!simpleaccount.Emailconfirmed.Value)
                 {
-                    // pass  do not match, email is not verified, TODO
+                    // pass  do not match, email is not verified
+                    ReturnedResponse<AccountRoleDto> isHackRes = IsHack<AccountRoleDto>(simpleaccount.Id, LoginEmailNotVerifiedPasswdDontMatch);
+
+                    if (!isHackRes.IsSuccess)
+                    {
+                        return isHackRes;
+                    }
+
+                    ResendEmailVerificationCode(simpleaccount.Id);
+
+                    return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.PleaseConfirmYourWheeloAccountRegistration), false, ErrorCodes.PleaseConfirmEmail);
                 }
 
                 return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.AccountExists), false, ErrorCodes.AccountExists);
@@ -168,6 +168,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 Surname = sAccount.LastName, Password = sAccount.Password, Email = sAccount.Email };
 
             account.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
+            account.Verificationcodevalid = DateTime.Now.AddMinutes(MinutesVerificationCodeValid);
 
             simpleaccount = AccLogic.Insert(account);
 
@@ -487,17 +488,32 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             //if (kind == RegistrationBadVerificationCodeKind || kind == LoginBadVerificationCodeKind || kind == LoginBadPassword)
            // {
-                isHack = FailedloginattemptLogic.Select(m => m.Idaccount == accountId && m.Kind == kind && m.Createdat > DateTime.Now.AddMinutes(-5)).Count() > 5;
+            isHack = FailedloginattemptLogic.Select(m => m.Idaccount == accountId && m.Kind == kind && m.Createdat > DateTime.Now.AddMinutes(-5)).Count() > 5;
 
-                if (isHack)
-                {
-                    return new ReturnedResponse<TResponse>(default(TResponse), I18nTranslation.Translation(I18nTags.UnderAttack), false, ErrorCodes.UnderAttack);
-                }
+            if (isHack)
+            {
+                return new ReturnedResponse<TResponse>(default(TResponse), I18nTranslation.Translation(I18nTags.UnderAttack), false, ErrorCodes.UnderAttack);
+            }
 
-                return new ReturnedResponse<TResponse>(default(TResponse), string.Empty, true, ErrorCodes.Success);
+            return new ReturnedResponse<TResponse>(default(TResponse), string.Empty, true, ErrorCodes.Success);
           //  }
+        }
 
-            
+        protected virtual bool ResendEmailVerificationCode(int accountId)
+        {
+            Account accToRefreshCode = AccLogic.Select(m => m.Id == accountId).First();
+
+            if (accToRefreshCode.Verificationcodevalid < DateTime.Now)
+            {
+                accToRefreshCode.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
+                accToRefreshCode.Verificationcodevalid = DateTime.Now.AddMinutes(MinutesVerificationCodeValid);
+
+                accToRefreshCode = AccLogic.Update(accToRefreshCode);
+
+                EmailManager.SendEmailVerificationCode(accToRefreshCode.Email, accToRefreshCode.Name, accToRefreshCode.Verificationcode.Value.ToString());
+            }
+
+            return true;
         }
     }
 }
