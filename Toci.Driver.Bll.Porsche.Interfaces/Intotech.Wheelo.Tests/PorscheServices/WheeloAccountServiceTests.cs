@@ -77,6 +77,12 @@ namespace Intotech.Wheelo.Tests.PorscheServices
             CleanUp();
         }
 
+        [TestMethod]
+        public void LoginTests()
+        {
+            
+        }
+
         protected virtual void CleanUp()
         {
 
