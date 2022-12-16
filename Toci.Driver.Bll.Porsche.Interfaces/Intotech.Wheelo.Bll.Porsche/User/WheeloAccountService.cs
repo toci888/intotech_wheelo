@@ -175,8 +175,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             simpleaccount.Verificationcode = 0;
 
-            return new ReturnedResponse<AccountRoleDto>(new AccountRoleDto() { Name = sAccount.FirstName, Email = sAccount.Email, Surname = sAccount.LastName },
-                I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<AccountRoleDto> ConfirmEmail(EmailConfirmDto EcDto)
@@ -447,7 +446,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 if (pushtoken != null)
                 {
                     pushtoken.Token = pushToken.Token;
-                    pushtoken.Createdat = DateTime.UtcNow;
+                    pushtoken.Createdat = DateTime.Now;
 
                     PushtokenLogic.Update(pushtoken);
 

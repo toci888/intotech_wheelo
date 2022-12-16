@@ -39,9 +39,9 @@ namespace Intotech.Wheelo.Integration.Api.Controllers
         }
 
         [HttpGet("current-button-location")]
-        public GeographicLocation GetCurrentButtonLocation(string latitue, string longitude)
+        public GeographicLocation GetCurrentButtonLocation(string latitude, string longitude)
         {
-            return Service.GetCurrentButtonLocation(latitue, longitude);
+            return Service.GetCurrentButtonLocation(latitude, longitude);
         }
     }
 }
