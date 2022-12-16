@@ -100,7 +100,8 @@ create table Accounts
 	image text,
 	phoneNumber text,
 	refreshToken text,
-	refreshTokenValid timestamp
+	refreshTokenValid timestamp,
+	createdat timestamp default now()
 );
 
 select setval('accounts_id_seq', 1000000000);

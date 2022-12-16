@@ -254,9 +254,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Api", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Models", "..\Intotech.Wheelo.Chat.Models\Intotech.Wheelo.Chat.Models.csproj", "{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Integration.Bll.Skoda.Interfaces", "..\Intotech.Wheelo.Integration.Bll.Skoda.Interfaces\Intotech.Wheelo.Integration.Bll.Skoda.Interfaces.csproj", "{9473EB68-FADB-4259-9199-74986F2A1E4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Integration.Bll.Skoda.Interfaces", "..\Intotech.Wheelo.Integration.Bll.Skoda.Interfaces\Intotech.Wheelo.Integration.Bll.Skoda.Interfaces.csproj", "{9473EB68-FADB-4259-9199-74986F2A1E4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Integration.Bll.Skoda", "..\Intotech.Wheelo.Integration.Bll.Skoda\Intotech.Wheelo.Integration.Bll.Skoda.csproj", "{1AEF4726-146E-4970-8155-BA3796EDB6F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Integration.Bll.Skoda", "..\Intotech.Wheelo.Integration.Bll.Skoda\Intotech.Wheelo.Integration.Bll.Skoda.csproj", "{1AEF4726-146E-4970-8155-BA3796EDB6F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WheeloSqlMigrations", "WheeloSqlMigrations", "{94626A6A-464F-4FC8-9ACE-F96A0F3EC8A3}"
+	ProjectSection(SolutionItems) = preProject
+		16-12-2022 wheelo.sql = 16-12-2022 wheelo.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -702,6 +707,7 @@ Global
 		{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
 		{9473EB68-FADB-4259-9199-74986F2A1E4E} = {14C2EDD9-09A5-48DD-99FA-AC51331C789F}
 		{1AEF4726-146E-4970-8155-BA3796EDB6F8} = {14C2EDD9-09A5-48DD-99FA-AC51331C789F}
+		{94626A6A-464F-4FC8-9ACE-F96A0F3EC8A3} = {A662B894-F584-4249-902F-47612C3E8E94}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {958786F8-D2E4-4AAC-949D-3CD908D8AE36}

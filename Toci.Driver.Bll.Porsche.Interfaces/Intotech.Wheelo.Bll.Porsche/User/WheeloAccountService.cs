@@ -41,9 +41,11 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
         public const int RegistrationBadVerificationCodeKind = 1;
         public const int LoginBadVerificationCodeKind = 2;
+        public const int LoginBadPassword = 3;
+        public const int LoginEmailNotVerifiedPasswdMatch = 4;
 
-        public WheeloAccountService(AuthenticationSettings authenticationSettings, IAccountLogic accLogic, IAccountRoleLogic accRoleLogic, 
-            IAccountmodeLogic accountmodeLogic, 
+        public WheeloAccountService(AuthenticationSettings authenticationSettings, IAccountLogic accLogic, IAccountRoleLogic accRoleLogic,
+            IAccountmodeLogic accountmodeLogic,
             IFailedloginattemptLogic failedloginattemptLogic, IResetpasswordLogic resetpasswordLogic, IPushtokenLogic pushtokenLogic
             /*, IEmailManager emailManager*/)
         {
@@ -67,13 +69,11 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
                 if (emailAccount != null)
                 {
-                    FailedloginattemptLogic.Insert(new Failedloginattempt() { Idaccount = emailAccount.Id.Value, Kind = LoginBadVerificationCodeKind }); //, Kind 
+                    ReturnedResponse<AccountRoleDto> isHackResult = IsHack<AccountRoleDto>(emailAccount.Id.Value, LoginBadPassword);
 
-                    bool isHack = FailedloginattemptLogic.Select(m => m.Idaccount == emailAccount.Id.Value && m.Kind == LoginBadVerificationCodeKind && m.Createdat > DateTime.Now.AddMinutes(-5)).Count() > 5;
-
-                    if (isHack)
+                    if (isHackResult.ErrorCode == ErrorCodes.UnderAttack)
                     {
-                        return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.UnderAttack), false, ErrorCodes.UnderAttack);
+                        return isHackResult;
                     }
                 }
 
@@ -82,13 +82,20 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (!simpleaccount.Emailconfirmed.Value && simpleaccount.Password == loginDto.Password)
             {
-                Account accToRefreshCode = AccLogic.Select(m => m.Id == simpleaccount.Id).First();
+                ReturnedResponse<AccountRoleDto> isHackResult = IsHack<AccountRoleDto>(simpleaccount.Id.Value, LoginEmailNotVerifiedPasswdMatch);
 
-                accToRefreshCode.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
+                if (isHackResult.ErrorCode == ErrorCodes.UnderAttack)
+                {
+                    Account accToRefreshCode = AccLogic.Select(m => m.Id == simpleaccount.Id).First();
 
-                accToRefreshCode = AccLogic.Update(accToRefreshCode);
+                    accToRefreshCode.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
 
-                EmailManager.SendEmailVerificationCode(accToRefreshCode.Email, accToRefreshCode.Name, accToRefreshCode.Verificationcode.Value.ToString());
+                    accToRefreshCode = AccLogic.Update(accToRefreshCode);
+
+                    EmailManager.SendEmailVerificationCode(accToRefreshCode.Email, accToRefreshCode.Name, accToRefreshCode.Verificationcode.Value.ToString());
+
+                    return isHackResult;
+                }
 
                 return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmed);
             }
@@ -97,7 +104,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             {
                 return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmedPassMatch);
             }
-                
+
 
             string refreshToken = simpleaccount.Refreshtoken;
 
@@ -105,7 +112,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             {
                 Account accToRefreshToken = AccLogic.Select(m => m.Id == simpleaccount.Id).First();
 
-                accToRefreshToken.Refreshtokenvalid = DateTime.Now.AddDays(AccountLogicConstants.RefreshTokenValidDays); 
+                accToRefreshToken.Refreshtokenvalid = DateTime.Now.AddDays(AccountLogicConstants.RefreshTokenValidDays);
                 refreshToken = accToRefreshToken.Refreshtoken = StringUtils.GetRandomString(AccountLogicConstants.RefreshTokenMaxLength);
 
                 AccLogic.Update(accToRefreshToken);
@@ -131,6 +138,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             {
                 if (!simpleaccount.Emailconfirmed.Value && simpleaccount.Password == sAccount.Password)
                 {
+                    //TODO FIX
                     Account accToRefreshCode = AccLogic.Select(m => m.Id == simpleaccount.Id).First();
 
                     accToRefreshCode.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
@@ -150,20 +158,13 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
                 if (!simpleaccount.Emailconfirmed.Value)
                 {
-                    FailedloginattemptLogic.Insert(new Failedloginattempt() { Idaccount = simpleaccount.Id, Kind = RegistrationBadVerificationCodeKind }); 
-
-                    bool isHack = FailedloginattemptLogic.Select(m => m.Idaccount == simpleaccount.Id && m.Kind == RegistrationBadVerificationCodeKind && m.Createdat > DateTime.Now.AddMinutes(-5)).Count() > 5;
-
-                    if (isHack)
-                    {
-                        return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.UnderAttack), false, ErrorCodes.UnderAttack);
-                    }
+                    // pass  do not match, email is not verified, TODO
                 }
 
                 return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.AccountExists), false, ErrorCodes.AccountExists);
             }
 
-            Account account = new Account() { Name = sAccount.FirstName, 
+            Account account = new Account() { Name = sAccount.FirstName,
                 Surname = sAccount.LastName, Password = sAccount.Password, Email = sAccount.Email };
 
             account.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
@@ -174,30 +175,37 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             simpleaccount.Verificationcode = 0;
 
-            return new ReturnedResponse<AccountRoleDto>(new AccountRoleDto() { Name = sAccount.FirstName, Email = sAccount.Email, Surname = sAccount.LastName }, 
+            return new ReturnedResponse<AccountRoleDto>(new AccountRoleDto() { Name = sAccount.FirstName, Email = sAccount.Email, Surname = sAccount.LastName },
                 I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<AccountRoleDto> ConfirmEmail(EmailConfirmDto EcDto)
         {
-            Account account = AccLogic.Select(m => m.Email == EcDto.Email && m.Verificationcode == EcDto.Code).FirstOrDefault();
+            Account account = AccLogic.Select(m => m.Email == EcDto.Email).FirstOrDefault();
 
             if (account == null)
             {
                 return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
             }
+            else
+            {
+                if (account.Verificationcode != EcDto.Code)
+                {
+                    ReturnedResponse<AccountRoleDto> isHAckResult = IsHack<AccountRoleDto>(account.Id, RegistrationBadVerificationCodeKind);
+                }
 
-            account.Emailconfirmed = true;
-            string refreshToken = account.Refreshtoken = StringUtils.GetRandomString(AccountLogicConstants.RefreshTokenMaxLength);
-            account.Refreshtokenvalid = DateTime.Now.AddDays(AccountLogicConstants.RefreshTokenValidDays);
+                account.Emailconfirmed = true;
+                string refreshToken = account.Refreshtoken = StringUtils.GetRandomString(AccountLogicConstants.RefreshTokenMaxLength);
+                account.Refreshtokenvalid = DateTime.Now.AddDays(AccountLogicConstants.RefreshTokenValidDays);
 
-            AccLogic.Update(account);
+                AccLogic.Update(account);
 
-            AccountRoleDto accountRoleDto = GenerateJwt(new LoginDto() { Email = account.Email, Password = account.Password });
+                AccountRoleDto accountRoleDto = GenerateJwt(new LoginDto() { Email = account.Email, Password = account.Password });
 
-            accountRoleDto.Refreshtoken = refreshToken;
+                accountRoleDto.Refreshtoken = refreshToken;
 
-            return new ReturnedResponse<AccountRoleDto>(accountRoleDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                return new ReturnedResponse<AccountRoleDto>(accountRoleDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            }
         }
 
 
@@ -235,7 +243,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
         public virtual ReturnedResponse<AccountRoleDto> AcceptResetPassword(ResetPasswordConfirmDto resetPasswordConfirmDto) // email, kod
         {
-             Resetpassword resPwd = ResetpasswordLogic.Select(m => m.Email == resetPasswordConfirmDto.Email && m.Verificationcode == resetPasswordConfirmDto.Code).FirstOrDefault();
+            Resetpassword resPwd = ResetpasswordLogic.Select(m => m.Email == resetPasswordConfirmDto.Email && m.Verificationcode == resetPasswordConfirmDto.Code).FirstOrDefault();
 
             if (resPwd == null)
             {
@@ -290,7 +298,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             //send Email 
             EmailManager.SendPasswordResetVerificationCode(email, acc.Name, verificationCode.ToString());
 
-            return new ReturnedResponse<int>(ErrorCodes.Success, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success); 
+            return new ReturnedResponse<int>(ErrorCodes.Success, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public ReturnedResponse<int> ResetPassword(string email, string password, string token)
@@ -364,7 +372,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
             }
 
-            account.Allowsnotifications= allowsNotifications;
+            account.Allowsnotifications = allowsNotifications;
 
             AccLogic.Update(account);
 
@@ -470,6 +478,27 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             }
 
             return new ReturnedResponse<PushTokenDto>(pushToken, I18nTranslation.Translation(I18nTags.WrongOperations), false, ErrorCodes.WrongPushTokenOperations);
+        }
+
+        protected virtual ReturnedResponse<TResponse> IsHack<TResponse>(int accountId, int kind)
+        {
+            FailedloginattemptLogic.Insert(new Failedloginattempt() { Idaccount = accountId, Kind = kind });
+
+            bool isHack = false;
+
+            //if (kind == RegistrationBadVerificationCodeKind || kind == LoginBadVerificationCodeKind || kind == LoginBadPassword)
+           // {
+                isHack = FailedloginattemptLogic.Select(m => m.Idaccount == accountId && m.Kind == kind && m.Createdat > DateTime.Now.AddMinutes(-5)).Count() > 5;
+
+                if (isHack)
+                {
+                    return new ReturnedResponse<TResponse>(default(TResponse), I18nTranslation.Translation(I18nTags.UnderAttack), false, ErrorCodes.UnderAttack);
+                }
+
+                return new ReturnedResponse<TResponse>(default(TResponse), string.Empty, true, ErrorCodes.Success);
+          //  }
+
+            
         }
     }
 }
