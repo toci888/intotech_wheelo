@@ -16,10 +16,10 @@ namespace Toci.Driver.Api.Controllers
         }
 
         [HttpGet]
-        [Route("your-friends")]
-        public ReturnedResponse<List<Vfriend>> GetVfriends(int accountId)
+        [Route("your-friends/{idAccount}")]
+        public ReturnedResponse<List<Vfriend>> GetVfriends(int idAccount)
         {
-            return Service.GetVfriends(accountId);
+            return Service.GetVfriends(idAccount);
         }
 
         [HttpPost("friend")]

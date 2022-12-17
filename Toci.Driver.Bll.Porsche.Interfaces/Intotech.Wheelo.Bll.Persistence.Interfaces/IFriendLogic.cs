@@ -5,6 +5,6 @@ namespace Intotech.Wheelo.Bll.Persistence.Interfaces;
 
 public interface IFriendLogic : ILogicBase<Friend>
 {
-    Vfriend AccecptInviteToFriends(int proposalAccountId, int accountId);
+    
 }
 
