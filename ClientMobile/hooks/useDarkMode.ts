@@ -8,7 +8,10 @@ import { os } from "../constants/constants";
 
 export const useDarkMode = () => {
   const { setDarkMode, user } = useUser();
-
+  const isDarkModeEnabled = () => {
+    return user?.darkMode;
+  }
+  
   const registerForDarkModeAsync = async (alertUser?: boolean) => {
     if (!user) return;
     // const { status: existingStatus } =
@@ -54,6 +57,7 @@ export const useDarkMode = () => {
   };
 
   return {
-    registerForDarkModeAsync
+    registerForDarkModeAsync,
+    isDarkModeEnabled
   };
 };

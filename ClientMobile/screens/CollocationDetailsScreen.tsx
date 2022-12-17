@@ -17,20 +17,21 @@ import { LeaseAndFeesSection } from "../components/propertyDetailsSections/Lease
 import { LocationSection } from "../components/propertyDetailsSections/LocationSection";
 import { ReviewSection } from "../components/propertyDetailsSections/ReviewSection";
 import { endpoints, queryKeys } from "../constants/constants";
-import { useSelectedPropertyQuery } from "../hooks/queries/useSelectedPropertyQuery";
+import { useSelectedCollocationQuery } from "../hooks/queries/useSelectedPropertyQuery";
 
-export const PropertyDetailsScreen = ({
+export const CollocationDetailsScreen = ({
   route,
 }: {
-  route: { params: { propertyID: number } };
+  route: { params: { collocationID: number } };
 }) => {
-  const property = useSelectedPropertyQuery(route.params.propertyID);
-  if (!property.data) return <Text>Unable to get property details ...</Text>;
+  const collocation = useSelectedCollocationQuery(route.params.collocationID);
+  console.log("TUTAJKOLO", collocation)
+  if (!collocation.data) return <Text>Unable to get property details ...</Text>;
 
   return (
     <Screen>
       <FlatList
-        data={[property.data]}
+        data={[collocation.data]}
         keyExtractor={(item) => item.idAccount.toString()}
         renderItem={({ item }) => (
           <>
@@ -42,6 +43,7 @@ export const PropertyDetailsScreen = ({
               />
             ) : null}
             <View style={styles.contentContainer}>
+              <Text>tu {item.name ? item.name : "nie ma itema"}</Text>
               <CollocationHeaderSection collocation={item} />
               <Divider style={styles.divider} />
               <PricingAndFloorPlanSection collocation={item} />

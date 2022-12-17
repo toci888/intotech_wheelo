@@ -13,7 +13,7 @@ import { Row } from "../components/Row";
 import { getStateAbbreviation } from "../utils/getStateAbbreviation";
 import { useUser } from "../hooks/useUser";
 import { PressableInput } from "../components/PressableInput";
-import { useSelectedPropertyQuery } from "../hooks/queries/useSelectedPropertyQuery";
+import { useSelectedCollocationQuery } from "../hooks/queries/useSelectedPropertyQuery";
 import { SignUpOrSignInScreen } from "./SignUpOrSignInScreen";
 import { useConversationsQuery } from "../hooks/queries/useConversationsQuery";
 import { useCreateConversationMutation } from "../hooks/mutations/useCreateConversationMutation";
@@ -26,7 +26,7 @@ export const MessagePropertyScreen = ({
 }) => {
   const navigation = useNavigation();
   const { tour, collocationID } = route.params;
-  const collocationQuery = useSelectedPropertyQuery(collocationID);
+  const collocationQuery = useSelectedCollocationQuery(collocationID);
   const collocation = collocationQuery.data;
   const { user } = useUser();
   const conversations = useConversationsQuery();
@@ -56,7 +56,7 @@ export const MessagePropertyScreen = ({
 
   if (conversations?.data && conversations.data.length > 0) {
     const index = conversations.data.findIndex(
-      (i) => i.propertyID === route.params.propertyID
+      (i) => i.propertyID === route.params.collocationID
     );
     if (index >= 0) {
       navigateToMessageScreen(
@@ -68,11 +68,11 @@ export const MessagePropertyScreen = ({
 
   const sendMessage = (text: string) => {
     createConversation.mutate({
-      ownerID: collocation.methodResult.sourceAccount.idAccount, //property.userID,
-      propertyID: collocation.methodResult.accountsCollocated[propertyID].idAccount,
+      ownerID: collocation.idAccount, //property.userID,
+      propertyID: collocation.idAccount,
       tenantID: user.id,
-      propertyName: collocation.methodResult.accountsCollocated[propertyID].name
-        ? collocation.methodResult.accountsCollocated[propertyID].name : 'brak 74 linia',
+      propertyName: collocation.name
+        ? collocation.name : 'brak 74 linia',
         // : `${property.street}, ${property.city}, ${getStateAbbreviation(
         //     property.state
         //   )}`,
@@ -87,17 +87,17 @@ export const MessagePropertyScreen = ({
   return (
     <KeyboardAwareScrollView bounces={false}>
       <Screen style={styles.container}>
-        {Platform.OS === "ios" ? <ModalHeader /> : null}
+        {/* {Platform.OS === "ios" ? <ModalHeader /> : null} */}
         <Row style={styles.row}>
-          {collocation.methodResult.accountsCollocated[propertyID]?.image && collocation.methodResult.accountsCollocated[propertyID].image.length > 0 ? (
+          {collocation.image && collocation.image.length > 0 ? (
             <Image style={styles.image} source={{uri: 'base64Icon'}}/>
             // <Image style={styles.image} source={{ property.methodResult.accountsCollocated[propertyID].image }} />
           ) : null}
           <View style={styles.address}>
-            {/* {property?.name ? (
-              <Text category={"s1"}>{property.name}</Text>
-            ) : null} */}
-            nejm
+            {collocation?.name ? (
+              <Text category={"s1"}>{collocation.name}</Text>
+            ) : null}
+            
             <Text category={"c1"}>
               {/* {property.street}, {property.city},{" "}
               {getStateAbbreviation(property.state)} {property.zip} */}

@@ -37,7 +37,7 @@ export const CardInformation = ({
     setSavedProperties(newProperties);
   };
 
-  const handleHeartPress = () => {
+  const handleStarPress = () => {
     if (!user) return alert("Please sign up or sign in to save properties");
     let op: "add" | "remove" = "add";
     if (collocation?.areFriends) op = "remove";
@@ -60,7 +60,7 @@ export const CardInformation = ({
       {
         <Row style={styles.rowJustification}>
           <Text category={"s1"}>{collocation.name + " " + collocation.surname}</Text>
-          <Pressable onPress={handleHeartPress} style={styles.heartContainer}>
+          <Pressable onPress={handleStarPress} style={styles.heartContainer}>
             <MaterialCommunityIcons
               name={collocation?.areFriends ? "star" : "star-outline"}
               color={theme["color-primary-500"]}
@@ -98,7 +98,7 @@ export const CardInformation = ({
           size="small"
           onPress={emailNavigation}
         >
-          Email
+          Chat
         </Button>
         <Button
           style={styles.button}

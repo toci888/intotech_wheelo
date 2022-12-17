@@ -60,7 +60,6 @@ export const Map = ({
 
   const searchProperties = useSearchPropertiesQuery(location);
   let collocation: Collocation = searchProperties.data?.isSuccess ? searchProperties.data as Collocation : {} as Collocation;
-  
   // const searchProperties = searchProperties.data?.isSuccess ? searchProperties.data : {};
 
   const navigation = useNavigation();
@@ -92,7 +91,7 @@ export const Map = ({
   };
 
   const handleMarkerPress = (index: number) => {
-    console.log("DANE: ", collocation.methodResult.accountsCollocated[index])
+    // console.log("DANE: ", collocation.methodResult.accountsCollocated[index])
     setTimeout(() => {
       mapRef.current?.animateCamera({
         center: {
@@ -192,7 +191,7 @@ export const Map = ({
             collocation={collocation.methodResult.accountsCollocated[activeIndex]}
             style={styles.card}
             onPress={() =>{
-              console.log("ASDFGH", collocation.methodResult.accountsCollocated[activeIndex])
+              // console.log("ASDFGH", collocation.methodResult.accountsCollocated[activeIndex])
               navigation.navigate("PropertyDetails", {
                 propertyID: collocation.methodResult.accountsCollocated[activeIndex].idAccount,
               })

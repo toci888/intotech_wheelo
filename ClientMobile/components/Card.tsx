@@ -28,7 +28,7 @@ export const Card = ({
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
   const deleteCollocation = useDeleteCollocationMutation();
-
+  
   const handleEditCollocation = () => {
     navigation.navigate("EditProperty", { collocationId: collocation.idAccount });
     closeModal();

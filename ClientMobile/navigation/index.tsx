@@ -30,7 +30,7 @@ import {
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { theme } from "../theme";
-import { PropertyDetailsScreen } from "../screens/CollocationDetailsScreen";
+import { CollocationDetailsScreen } from "../screens/CollocationDetailsScreen";
 import { AddPropertyScreen } from "../screens/AddPropertyScreen";
 import { EditPropertyScreen } from "../screens/EditPropertyScreen";
 import { MyPropertiesScreen } from "../screens/MyPropertiesScreen";
@@ -121,7 +121,7 @@ function RootNavigator() {
         />
         <Stack.Screen
           name="PropertyDetails"
-          component={PropertyDetailsScreen}
+          component={CollocationDetailsScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen

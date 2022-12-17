@@ -48,7 +48,7 @@ export const ContactSection = ({ collocation }: { collocation: CollocateAccount 
           </Text>
         </Row>
       </TouchableOpacity>
-      {collocation?.phoneNumber ? (
+      {collocation?.name ? (
         <TouchableOpacity
           onPress={() =>
             // can also use Linking.openURL but that takes you out of the app

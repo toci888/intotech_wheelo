@@ -45,13 +45,13 @@ const refreshTokenEndpoint = serverUrl + refresh;
 const locationEndpoint = serverUrl + location;
 const googleEndpoint = integrationApiUrl + google;
 const userEndpoint = serverUrl + user;
-const propertyEndpoint = serverUrl + property;
+const collocationEndpoint = serverUrl + property;
 const apartmentEndpoint = serverUrl + apartment;
 const reviewEndpoint = serverUrl + review;
 const conversationEndpoint = serverUrl + conversation;
 const messagesEndpoint = serverUrl + messages;
 const contactedEndpoint = (id: number) => `${userEndpoint}/${id}/properties/contacted`;
-const savedEndpoint = (id: number) => `${userEndpoint}/${id}/properties/saved`;
+const savedEndpoint = (id: number) => `${userEndpoint}/${id}/collocations/saved`;
 const pushTokenEndpoint = (id: number) => `${userEndpoint}/${id}/pushtoken`;
 const allowsNotificationsEndpoint = (id: number) => `${userEndpoint}/${id}/settings/notifications`;
 const themeModeEndpoint = (idAccount: number, darkModeEnabled: boolean) => `${userEndpoint}/${idAccount}/settings/theme-mode?darkmode=${darkModeEnabled}`;
@@ -69,13 +69,13 @@ export const endpoints = {
   login: userEndpoint + "/login",
   forgotPassword: userEndpoint + "/forgotpassword",
   resetPassword: userEndpoint + "/resetpassword",
-  createProperty: propertyEndpoint,
-  getPropertyByID: propertyEndpoint + "/",
+  createProperty: collocationEndpoint,
+  getCollocationByID: serverUrl+'/AssociationMapData/association-user' + "/",
   getContactedPropertiesByUserID: contactedEndpoint,
-  getPropertiesByUserID: propertyEndpoint + "/userid/",
-  getPropertiesByBoundingBox: propertyEndpoint + "/search",
-  deleteProperty: propertyEndpoint + "/",
-  updateProperty: propertyEndpoint + "/update/",
+  getPropertiesByUserID: collocationEndpoint + "/userid/",
+  getPropertiesByBoundingBox: collocationEndpoint + "/search",
+  deleteProperty: collocationEndpoint + "/",
+  updateProperty: collocationEndpoint + "/update/",
   getApartmentsByPropertyID: apartmentEndpoint + "/property/",
   updateApartments: apartmentEndpoint + "/property/",
   createReview: reviewEndpoint + "/property/",

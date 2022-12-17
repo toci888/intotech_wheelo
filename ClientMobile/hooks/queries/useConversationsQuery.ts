@@ -13,16 +13,40 @@ const fetchConversations = async (
 ): Promise<TransformedConversation[]> => {
   if (!userID) return [];
 
-  const response = await axios.get(
-    `${endpoints.getConversationsByUserID}${userID}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  // const response = await axios.get(
+  //   `${endpoints.getConversationsByUserID}${userID}`,
+  //   {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   }
+  // );
 
-  const conversations: ConversationsRes[] = response.data;
+  // const conversations: ConversationsRes[] = response.data;
+  const conversations: ConversationsRes[] = [{
+    ID: 1,
+    CreatedAt: '01-01-2022',
+    tenantID: 2,
+    ownerID: 3,
+    propertyID: 4,
+    propertyName: 'proname',
+    street: 'street',
+    city: 'city',
+    state: 'state',
+    ownerFirstName: 'ownerfirstname',
+    ownerLastName: 'ownerlast',
+    ownerEmail: 'ownerEMail',
+    tenantFirstName: 'tenantFirst',
+    tenantLastName: 'tenantlast',
+    tenantEmail: 'tenantemail',
+    messages: [{
+      ID: 1,
+      CreatedAt: '01-01-2022',
+      senderID: 2,
+      receiverID: 3,
+      text: 'textasd'
+    }]
+  }]
   const data: TransformedConversation[] = [];
   for (let i of conversations) {
     // recipientName represents the person other than curr user in the conversation

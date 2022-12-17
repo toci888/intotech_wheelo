@@ -5,20 +5,23 @@ import { endpoints, queryKeys } from "../../constants/constants";
 import { Collocation, CollocateAccount } from "../../types/collocation";
 import { useUser } from "../useUser";
 
-const fetchProperty = async (propertyID: number): Promise<CollocateAccount> => {
-  const response = await axios.get(`${endpoints.getPropertyByID}${propertyID}`);
+const fetchProperty = async (collocationID: number): Promise<CollocateAccount> => {
+  // const {data} = await axios.get(`http://20.68.18.151:5105/api/AssociationMapData/association-user/1000000045`);
+  collocationID = 1000000045; // TO CHANGE
+  // console.log("URRLLLRL", `${endpoints.getCollocationByID}${collocationID}`)
+  const { data } = await axios.get(`${endpoints.getCollocationByID}${collocationID}`);
+  const collocateAccount: CollocateAccount = data.methodResult;
 
-  const data: CollocateAccount = response.data;
-  return data;
+  return collocateAccount;
 };
 
-export const useSelectedPropertyQuery = (propertyID: number) => {
+export const useSelectedCollocationQuery = (collocationID: number) => {
   const { user } = useUser();
   const queryInfo = useQuery(queryKeys.selectedCollocation, () =>
-    fetchProperty(propertyID)
+    fetchProperty(collocationID)
   );
 
-  const data = {idAccount: 1} as CollocateAccount//queryInfo?.data; // TODO!
+  const data = queryInfo?.data as CollocateAccount;
   if (data) if (user?.savedCollocations?.includes(data.idAccount)) data.areFriends = true;
 
   return {

@@ -8,16 +8,15 @@ import { SearchScreenParams } from "../types";
 import { i18n } from "../i18n/i18n";
 import { Location } from "../types/locationIQ";
 
-export const SearchScreen = ({
-  route,
-}: {
+export const SearchScreen = ({route}: {
   route: { params: SearchScreenParams };
 }) => {
   const [startLocation, setStartLocation] = useState<Location>({display_name: i18n.t('Search')} as Location);
   const [endLocation, setEndLocation] = useState<Location>({display_name: i18n.t('Search')} as Location);
-
+  
   return (
     <Screen>
+      asd
       <AnimatedListHeader
         startLocation={startLocation} endLocation={endLocation}
         setStartLocation={setStartLocation} setEndLocation={setEndLocation}
@@ -26,3 +25,5 @@ export const SearchScreen = ({
     </Screen>
   );
 };
+
+
