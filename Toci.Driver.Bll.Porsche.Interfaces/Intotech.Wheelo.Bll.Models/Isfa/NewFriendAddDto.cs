@@ -8,7 +8,7 @@ namespace Intotech.Wheelo.Bll.Models.Isfa
 {
     public class NewFriendAddDto
     {
-        public NewFriendAddDto RefreshDto()
+        public NewFriendAddDto RefreshSwapDto()
         {
             int swap = 0;
 

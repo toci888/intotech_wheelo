@@ -31,6 +31,13 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 
         public virtual ReturnedResponse<bool> Unfriend(int accountId, int idFriendToRemove)
         {
+            if (accountId > idFriendToRemove)
+            {
+                int swap = accountId;
+                accountId = idFriendToRemove;
+                idFriendToRemove = swap;
+            }
+
             Friend fr = FriendLogic.Select(m => m.Idfriend == idFriendToRemove && m.Idaccount == accountId).FirstOrDefault();
 
             if (fr == null)
@@ -43,7 +50,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 
         public virtual ReturnedResponse<Vfriend> AddFriend(NewFriendAddDto friend)
         {
-            friend = friend.RefreshDto();
+            friend = friend.RefreshSwapDto();
 
             Friend testFr = FriendLogic.Select(m => m.Idaccount == friend.Idaccount && m.Idfriend == friend.Idfriend).FirstOrDefault();
 
