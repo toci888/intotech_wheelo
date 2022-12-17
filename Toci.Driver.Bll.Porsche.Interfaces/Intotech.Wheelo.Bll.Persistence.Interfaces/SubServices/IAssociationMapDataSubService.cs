@@ -14,6 +14,6 @@ namespace Intotech.Wheelo.Bll.Persistence.Interfaces.SubServices
     {
         ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId, string searchId);
 
-
+        ReturnedResponse<Vcollocationsgeolocation> GetCollocationUser(int accountId);
     }
 }

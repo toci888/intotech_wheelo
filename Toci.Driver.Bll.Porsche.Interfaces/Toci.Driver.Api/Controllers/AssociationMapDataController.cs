@@ -3,6 +3,7 @@ using Intotech.Common.Microservices;
 using Intotech.Wheelo.Bll.Models.TripCollocation;
 using Intotech.Wheelo.Bll.Persistence.Interfaces.SubServices;
 using Microsoft.AspNetCore.Mvc;
+using Toci.Driver.Database.Persistence.Models;
 
 namespace Toci.Driver.Api.Controllers
 {
@@ -15,9 +16,15 @@ namespace Toci.Driver.Api.Controllers
         }
 
         [HttpGet("association-map-data")]
-        public ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId, string searchId)
+        public ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId)
         {
-            return Service.GetTripCollocation(accountId, searchId);
+            return Service.GetTripCollocation(accountId, "");
+        }
+
+        [HttpGet("association-user/{idAccount}")]
+        public ReturnedResponse<Vcollocationsgeolocation> GetCollocationUser(int idAccount)
+        {
+            return Service.GetCollocationUser(idAccount);
         }
     }
 }

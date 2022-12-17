@@ -261,6 +261,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WheeloSqlMigrations", "WheeloSqlMigrations", "{94626A6A-464F-4FC8-9ACE-F96A0F3EC8A3}"
 	ProjectSection(SolutionItems) = preProject
 		16-12-2022 wheelo.sql = 16-12-2022 wheelo.sql
+		17-12-2022 wheelo.sql = 17-12-2022 wheelo.sql
 	EndProjectSection
 EndProject
 Global

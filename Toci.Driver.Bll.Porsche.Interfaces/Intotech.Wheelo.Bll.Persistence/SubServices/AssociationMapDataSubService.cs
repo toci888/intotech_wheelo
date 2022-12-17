@@ -28,6 +28,13 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
             VcollocationsgeolocationLogic = vcollocationsgeolocationLogic;
         }
 
+        public virtual ReturnedResponse<Vcollocationsgeolocation> GetCollocationUser(int accountId)
+        {
+            Vcollocationsgeolocation collocationSource = VcollocationsgeolocationLogic.Select(m => m.Accountid == accountId).FirstOrDefault();
+
+            return new ReturnedResponse<Vcollocationsgeolocation>(collocationSource, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        }
+
         public virtual ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId, string searchId)
         {
             TripCollocationDto resultDto = new TripCollocationDto();
