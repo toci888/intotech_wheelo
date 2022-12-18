@@ -31,7 +31,19 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 
         public virtual ReturnedResponse<List<Vfriendsuggestion>> MakeSuggestion(MakeFriendSuggestionDto friendSuggestionDto)
         {
-            FriendSuggestionLogic.Insert(new Friendsuggestion() { Idaccount = friendSuggestionDto.SuggestingAccountId, Idsuggested = friendSuggestionDto.SuggestedAccountId, Idsuggestedfriend = friendSuggestionDto.SuggestedAccountFriendId });
+            if(friendSuggestionDto.SuggestedAccountId > friendSuggestionDto.SuggestedAccountFriendId) 
+            {
+                int swap = friendSuggestionDto.SuggestedAccountId;
+                friendSuggestionDto.SuggestedAccountId = friendSuggestionDto.SuggestedAccountFriendId;
+                friendSuggestionDto.SuggestedAccountFriendId = swap;
+            }
+            Friendsuggestion friendsuggestion = FriendSuggestionLogic.Select(m => m.Idsuggested == friendSuggestionDto.SuggestedAccountId && m.Idsuggestedfriend == friendSuggestionDto.SuggestedAccountFriendId).FirstOrDefault();
+            
+            if(friendsuggestion == null)
+            {
+                FriendSuggestionLogic.Insert(new Friendsuggestion() { Idaccount = friendSuggestionDto.SuggestingAccountId, Idsuggested = friendSuggestionDto.SuggestedAccountId, Idsuggestedfriend = friendSuggestionDto.SuggestedAccountFriendId });
+            }
+
 
             return new ReturnedResponse<List<Vfriendsuggestion>>(VfriendSuggestionLogic.Select(m => m.Accountid == friendSuggestionDto.SuggestingAccountId).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
