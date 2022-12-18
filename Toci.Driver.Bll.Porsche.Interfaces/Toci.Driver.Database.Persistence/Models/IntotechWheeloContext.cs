@@ -784,6 +784,8 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Method).HasColumnName("method");
 
+                entity.Property(e => e.Origin).HasColumnName("origin");
+
                 entity.Property(e => e.Token).HasColumnName("token");
 
                 entity.Property(e => e.Tokendatajson).HasColumnName("tokendatajson");

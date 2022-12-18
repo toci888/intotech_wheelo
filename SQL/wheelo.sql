@@ -113,6 +113,7 @@ create table UserExtraData -- for fb, google, apple
 	token text,
 	method text,
 	tokenDataJson text,
+    origin int not null, --1 fb, 2 google, 3 apple
 	createdat timestamp default now()
 );
 

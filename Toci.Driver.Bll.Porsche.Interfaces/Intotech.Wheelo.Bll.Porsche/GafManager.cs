@@ -17,18 +17,17 @@ namespace Intotech.Wheelo.Bll.Porsche
     {
         protected IUserExtraDataLogic LUserExtraDataLogic;
         protected IAccountRoleLogic AccLogic;
+        protected GafServiceBase<FacebookUserDto> FbGafService;
 
-        public GafManager(IUserExtraDataLogic lUserExtraDataLogic, IAccountRoleLogic accLogic)
+        public GafManager(IUserExtraDataLogic lUserExtraDataLogic, IAccountRoleLogic accLogic, GafServiceBase<FacebookUserDto> fbGafService)
         {
             LUserExtraDataLogic = lUserExtraDataLogic;
             AccLogic = accLogic;
+            FbGafService = fbGafService;
         }
 
         public virtual Accountrole RegisterByMethod(string method, string token)
         {
-            Userextradatum userextradatum = new Userextradatum();
-            Account account = new Account();
-
             if (method == "google")
             {
                 GoogleUserDto dto = new GoogleUserService().GetUserByToken(token);
@@ -38,9 +37,9 @@ namespace Intotech.Wheelo.Bll.Porsche
 
             if (method == "facebook")
             {
-                FacebookUserDto dto = new FacebookUserService().GetUserByToken(token);
+                FacebookUserDto dto = FbGafService.GetUserByToken(token);
 
-                return FacebookAccountExtraData(dto, token);
+                return AccLogic.Select(m => m.Email == dto.email).FirstOrDefault();
             }
 
             return null;
@@ -55,24 +54,6 @@ namespace Intotech.Wheelo.Bll.Porsche
             return accountrole;
         }
 
-        protected virtual Accountrole FacebookAccountExtraData(FacebookUserDto dto, string token)
-        {
-            string[] nameSurname = dto.name.Split(" ");
-            string name = string.Empty;
-            string surname = string.Empty;
-
-            if (nameSurname.Length == 2)
-            {
-                name = nameSurname[0];
-                surname= nameSurname[1];
-            }
-
-            Accountrole accountrole = new Accountrole(); //  AccLogic.CreateAccount(new AccountRegisterDto() { 
-                //Email = dto.email, Firstname = name, Lastname = surname, Password = string.Empty}); //, Method = "facebook" 
-
-            LUserExtraDataLogic.Insert(new Userextradatum() { Idaccount = accountrole.Id, Token = token });
-
-            return accountrole;
-        }
+        
     }
 }
