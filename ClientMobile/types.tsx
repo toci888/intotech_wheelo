@@ -24,13 +24,13 @@ export type RootStackParamList = {
   SignUp: { userId: string };
   ForgotPassword: undefined;
   ResetPassword: { token: string };
-  PropertyDetails: { propertyID: number };
-  MessageProperty: { propertyID: number; tour?: boolean };
+  PropertyDetails: { collocationID: number };
+  MessageProperty: { collocationID: number; tour?: boolean };
   AddProperty: undefined;
   EditProperty: { collocationId: number };
   MyProperties: undefined;
-  ManageUnits: { propertyID: number };
-  Review: { propertyID: number; propertyName: string };
+  ManageUnits: { collocationID: number };
+  Review: { collocationID: number; propertyName: string };
   WheeloMain: undefined;
   EmailVerification: any;
 };

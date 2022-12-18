@@ -25,9 +25,8 @@ export const CollocationDetailsScreen = ({
   route: { params: { collocationID: number } };
 }) => {
   const collocation = useSelectedCollocationQuery(route.params.collocationID);
-  console.log("TUTAJKOLO", collocation)
-  if (!collocation.data) return <Text>Unable to get property details ...</Text>;
-
+  if (!collocation.data) return <Text>Unable to get collocation details ...</Text>;
+  console.log("COLLASD", collocation)
   return (
     <Screen>
       <FlatList
@@ -43,7 +42,6 @@ export const CollocationDetailsScreen = ({
               />
             ) : null}
             <View style={styles.contentContainer}>
-              <Text>tu {item.name ? item.name : "nie ma itema"}</Text>
               <CollocationHeaderSection collocation={item} />
               <Divider style={styles.divider} />
               <PricingAndFloorPlanSection collocation={item} />

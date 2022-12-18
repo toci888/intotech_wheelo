@@ -33,7 +33,7 @@ export const Map = ({
         provider={"google"}
         style={styles.map}
         userInterfaceStyle={"light"}
-        onPress={() => console.log("ASD")}
+        onPress={() => console.log("Mapa kliknięta")}
         region={initPolishRegion}
       />
     )
@@ -191,9 +191,8 @@ export const Map = ({
             collocation={collocation.methodResult.accountsCollocated[activeIndex]}
             style={styles.card}
             onPress={() =>{
-              // console.log("ASDFGH", collocation.methodResult.accountsCollocated[activeIndex])
               navigation.navigate("PropertyDetails", {
-                propertyID: collocation.methodResult.accountsCollocated[activeIndex].idAccount,
+                collocationID: collocation.methodResult.accountsCollocated[activeIndex].idaccount,
               })
             }
             }
