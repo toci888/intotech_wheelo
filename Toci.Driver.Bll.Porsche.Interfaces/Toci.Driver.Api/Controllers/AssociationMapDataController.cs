@@ -1,5 +1,6 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Common.Microservices;
+using Intotech.Wheelo.Bll.Models.ModelMappers.ModelToDtoMaps;
 using Intotech.Wheelo.Bll.Models.TripCollocation;
 using Intotech.Wheelo.Bll.Persistence.Interfaces.SubServices;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ namespace Toci.Driver.Api.Controllers
         }
 
         [HttpGet("association-user/{idAccount}")]
-        public ReturnedResponse<Vcollocationsgeolocation> GetCollocationUser(int idAccount)
+        public ReturnedResponse<VCollocationsGeoLocationModelDto> GetCollocationUser(int idAccount)
         {
             return Service.GetCollocationUser(idAccount);
         }

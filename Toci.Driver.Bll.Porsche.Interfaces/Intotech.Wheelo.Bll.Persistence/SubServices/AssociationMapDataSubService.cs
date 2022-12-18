@@ -1,5 +1,7 @@
-﻿using Intotech.Common.Bll.ComplexResponses;
+﻿using Intotech.Common;
+using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Models;
+using Intotech.Wheelo.Bll.Models.ModelMappers.ModelToDtoMaps;
 using Intotech.Wheelo.Bll.Models.TripCollocation;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Persistence.Interfaces.SubServices;
@@ -28,11 +30,13 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
             VcollocationsgeolocationLogic = vcollocationsgeolocationLogic;
         }
 
-        public virtual ReturnedResponse<Vcollocationsgeolocation> GetCollocationUser(int accountId)
+        public virtual ReturnedResponse<VCollocationsGeoLocationModelDto> GetCollocationUser(int accountId)
         {
             Vcollocationsgeolocation collocationSource = VcollocationsgeolocationLogic.Select(m => m.Idaccount == accountId).FirstOrDefault();
 
-            return new ReturnedResponse<Vcollocationsgeolocation>(collocationSource, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            VCollocationsGeoLocationModelDto result = DtoModelMapper.Map<VCollocationsGeoLocationModelDto , Vcollocationsgeolocation>(collocationSource);
+
+            return new ReturnedResponse<VCollocationsGeoLocationModelDto>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId, string searchId)
