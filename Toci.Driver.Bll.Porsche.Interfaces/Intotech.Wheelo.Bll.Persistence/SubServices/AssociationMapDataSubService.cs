@@ -30,7 +30,7 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
 
         public virtual ReturnedResponse<Vcollocationsgeolocation> GetCollocationUser(int accountId)
         {
-            Vcollocationsgeolocation collocationSource = VcollocationsgeolocationLogic.Select(m => m.Accountid == accountId).FirstOrDefault();
+            Vcollocationsgeolocation collocationSource = VcollocationsgeolocationLogic.Select(m => m.Idaccount == accountId).FirstOrDefault();
 
             return new ReturnedResponse<Vcollocationsgeolocation>(collocationSource, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
@@ -39,7 +39,7 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
         {
             TripCollocationDto resultDto = new TripCollocationDto();
 
-            Vcollocationsgeolocation collocationSource = VcollocationsgeolocationLogic.Select(m => m.Accountid == accountId).FirstOrDefault();
+            Vcollocationsgeolocation collocationSource = VcollocationsgeolocationLogic.Select(m => m.Idaccount == accountId).FirstOrDefault();
 
             if (collocationSource == null)
             {

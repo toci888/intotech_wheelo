@@ -54,7 +54,7 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
             //    to = "/topics/marketing"
             //};
 
-            string json = "{ to: \"" + deviceToken + "\", data: { message: \"Kurde\", name: \"Lol xd\" } }";
+            string json = "{ to: \"" + deviceToken + "\", body: \"message\", title: \"title\", data: { message: \"Kurde\", name: \"Lol xd\" } }";
 
             //var serializer = new JavaScriptSerializer();
 
@@ -103,26 +103,23 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
                 Webpush = webC
             };
 
+            string isitright = "dsIjMYW-T-CWdi7qi6Roo-:APA91bHgjyLJnYv30_3tg6r-noKERA-rcxK-UH2T4feVacd7VkX02e_kOS-FHV3i2Wp1rmqBcvZDNSzxmzSbQpkiXvB0Phx1cmt2B7TfSLQyHlEAKMSnvst9vLLudRLMuSknQ_5omn9U";
+
             string devToken = "ExponentPushToken[rtWCLaAF92lqq4mIgmzvRV]";
             //deviceToken
-            string json = "{ to: \"" + deviceToken + "\", data: { message: \"Kurde\", name: \"Lol xd\" } }";
+            string json = "{ to: \"" + isitright + "\", body: \"message\", title: \"title\", data: { message: \"Kurde\", name: \"Lol xd\" } }";
 
             string ServiceAccountFile = @"C:\Users\bzapa\source\pushtokens.txt";
 
             //ServiceAccountCredential serviceAccountCredential = new ServiceAccountCredential(new ServiceAccountCredential.Initializer("102834178930"));
             //serviceAccountCredential.User
 
-            FirebaseApp fireBase = FirebaseApp.Create(new AppOptions()
-            {
-                Credential = GoogleCredential.FromFile(ServiceAccountFile),
-                ProjectId = "wheelo-368119",
-                ServiceAccountId = "102834178930",
-                
-            });
+            
 
-            FirebaseAuth defaultAuth = FirebaseAuth.GetAuth(fireBase);
+            //FirebaseAuth defaultAuth = FirebaseAuth.GetAuth(fireBase);
 
-            UserRecord rec = defaultAuth.GetUserByEmailAsync("bzapart@gmail.com").Result;
+
+           // UserRecord rec = defaultAuth.GetUserByEmailAsync("bzapart@gmail.com").Result;
 
             //defaultAuth.sign
 
@@ -147,8 +144,17 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
 
 
             CreateHttpClientArgs createHttpClientArgs = new Google.Apis.Http.CreateHttpClientArgs();
-            fireBase.Options.Credential.CreateScoped();
+            //fireBase.Options.Credential.CreateScoped();
             createHttpClientArgs.ApplicationName = "wheelo-368119";
+
+            FirebaseApp fireBase = FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.FromFile(ServiceAccountFile),
+                ProjectId = "wheelo-368119",
+                ServiceAccountId = "102834178930",
+
+
+            });
 
             ConfigurableHttpClient configurableHttpClient = fireBase.Options.HttpClientFactory.CreateHttpClient(createHttpClientArgs);
 
@@ -161,9 +167,26 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
             configurableHttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "key=AAAAF_FlC3I:APA91bFTbLX6KEcC_m2LSJsjJncYLUvD2BzOkTVInPjHHXPtypzRBudrCOxgxBCHJuyo6cJSwzVNsMQ0BefDAWk4kiJtZB2-bitBgKUITF9mV0wUbMh1hRWUx4MtRA3DI0gCOUgMTjpI");
             configurableHttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Sender", "id=102834178930");
 
-            //HttpContent con = new HttpRequestMessage();
+            //fireBase.Options.HttpClientFactory = new HttpClientFactory();
 
-            var dp = configurableHttpClient.PostAsync("fcm/send", new StringContent(json)).Result;
+
+            //HttpContent con = new HttpRequestMessage();
+            
+            HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, "fcm/send");
+            httpRequestMessage.Content = new StringContent(json);
+
+            var dp = configurableHttpClient.SendAsync(httpRequestMessage).Result;
+
+            //var dp = configurableHttpClient.SendAsync("fcm/send", new StringContent(json)).Result;
+
+            Message mess = new Message() { Token = deviceToken, Notification = new Notification() { Body = "doopa", Title = "Lol Xd" } ,
+                   
+                FcmOptions= new FcmOptions() {  }
+            };
+
+            FirebaseMessaging firebaseMessaging =  FirebaseMessaging.GetMessaging(fireBase);
+
+            string res = FirebaseMessaging.GetMessaging(fireBase).SendAsync(mess).Result;
 
 
             // Send a message to the device corresponding to the provided
@@ -192,9 +215,9 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
 
                 ////fireBaseAuth.GetUserAsync().Result.
 
-                //Message mess = new Message() { Token = deviceToken, Notification = new Notification() { Body = "doopa", Title = "Lol Xd" } };
+               // Message mess = new Message() { Token = deviceToken, Notification = new Notification() { Body = "doopa", Title = "Lol Xd" } };
 
-                ////FirebaseMessaging.GetMessaging(fireBase).SendAsync(mess);
+              //  string res = FirebaseMessaging.GetMessaging(fireBase).SendAsync(mess).Result;
 
                 //string result = FirebaseMessaging.GetMessaging(fireBase).SendAsync(mess).Result;
 

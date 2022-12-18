@@ -5,7 +5,7 @@ namespace Toci.Driver.Database.Persistence.Models
 {
     public partial class Vcollocationsgeolocation
     {
-        public int? Accountid { get; set; }
+        public int? Idaccount { get; set; }
         public string? Name { get; set; }
         public string? Surname { get; set; }
         public double? Latitudefrom { get; set; }

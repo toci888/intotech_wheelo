@@ -943,9 +943,9 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.ToView("vcollocationsgeolocations");
 
-                entity.Property(e => e.Accountid).HasColumnName("accountid");
-
                 entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
                 entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
 

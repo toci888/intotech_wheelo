@@ -304,7 +304,7 @@ join WorkTrip wt on U2.id = wt.idaccount ;
 
 --select * from VCollocationsGeoLocations;
 create or replace view VCollocationsGeoLocations as --select hosts of collocations
-select distinct a.id as accountId, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
+select distinct a.id as idAccount, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
 wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchid
 from AccountsCollocations acc 
 join WorkTripGen wt on acc.IdAccount = wt.IdAccount
