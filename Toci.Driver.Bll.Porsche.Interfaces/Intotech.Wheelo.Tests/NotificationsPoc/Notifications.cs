@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,7 +23,7 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
         {
             string SERVER_API_KEY = "AAAAF_FlC3I:APA91bFTbLX6KEcC_m2LSJsjJncYLUvD2BzOkTVInPjHHXPtypzRBudrCOxgxBCHJuyo6cJSwzVNsMQ0BefDAWk4kiJtZB2 - bitBgKUITF9mV0wUbMh1hRWUx4MtRA3DI0gCOUgMTjpI";
             var SENDER_ID = "102834178930";
-
+            string yetAnotherKey = "BN7CbsQa5qnoxkZYbExHYE6TDULyJluPbc3nbF9GSxjrQrwgyN7XkvfYdcL8FehegrNgTX9qSATnPcqHhl9TOs4";
             string key = "59c9789b29b73f43e8aebf6021d0cb308eff6174";
 
             string ApiKey = "AIzaSyDxVQqaiKE1L6N9Etv9SUgKsEHfPr9Et40";
@@ -34,10 +35,10 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
 
             tRequest.Method = "post";
             tRequest.ContentType = "application/json";
-            tRequest.Headers.Add(string.Format("Authorization: key={0}", SERVER_API_KEY));
+            tRequest.Headers.Add(string.Format("Authorization: key={0}", yetAnotherKey));
             tRequest.Headers.Add(string.Format("Sender: id={0}", SENDER_ID));
 
-
+            
             //var data = new
             //{
             //    notification = new
@@ -98,6 +99,8 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
                 Webpush = webC
             };
 
+            string json = "{ to: \"" + deviceToken + "\", data: { message: \"Kurde\", name: \"Lol xd\" } }";
+
             string ServiceAccountFile = @"C:\Users\bzapa\source\pushtokens.txt";
 
             FirebaseApp fireBase = FirebaseApp.Create(new AppOptions()
@@ -108,21 +111,28 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
             });
 
             CreateHttpClientArgs createHttpClientArgs = new Google.Apis.Http.CreateHttpClientArgs();
-
+            fireBase.Options.Credential.CreateScoped();
             createHttpClientArgs.ApplicationName = "wheelo-368119";
 
             ConfigurableHttpClient configurableHttpClient = fireBase.Options.HttpClientFactory.CreateHttpClient(createHttpClientArgs);
 
             configurableHttpClient.BaseAddress = new Uri("https://fcm.googleapis.com/");
 
+            //configurableHttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "key=AAAAF_FlC3I:APA91bFTbLX6KEcC_m2LSJsjJncYLUvD2BzOkTVInPjHHXPtypzRBudrCOxgxBCHJuyo6cJSwzVNsMQ0BefDAWk4kiJtZB2 - bitBgKUITF9mV0wUbMh1hRWUx4MtRA3DI0gCOUgMTjpI");
+            //configurableHttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "key=AIzaSyDxVQqaiKE1L6N9Etv9SUgKsEHfPr9Et40");
+            //configurableHttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "key=BN7CbsQa5qnoxkZYbExHYE6TDULyJluPbc3nbF9GSxjrQrwgyN7XkvfYdcL8FehegrNgTX9qSATnPcqHhl9TOs4");
+//            configurableHttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "key=59c9789b29b73f43e8aebf6021d0cb308eff6174");
+            configurableHttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "key=AIzaSyAxvZgMDz212AaBsrbTGDvdv9Vc4KkzI94");
+            configurableHttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Sender", "id=102834178930");
+
             //HttpContent con = new HttpRequestMessage();
 
-            //configurableHttpClient.PostAsync("fcm/send", );
+            var dp = configurableHttpClient.PostAsync("fcm/send", new StringContent(json)).Result;
 
 
             // Send a message to the device corresponding to the provided
             // registration token.
-            string result = FirebaseMessaging.GetMessaging(fireBase).SendAsync(message, true).Result;
+            //string result = FirebaseMessaging.GetMessaging(fireBase).SendAsync(message, true).Result;
 
 
             // new HttpClient() { BaseAddress = new Uri("https://expo.dev/") } );

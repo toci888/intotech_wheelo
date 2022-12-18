@@ -16,8 +16,14 @@ namespace Toci.Driver.Api.Controllers
             
         }
 
+        [HttpGet("view-invitations")]
+        public ReturnedResponse<List<Vinvitation>> GetInvitations(int idAccount)
+        {
+            return Service.GetInvitedAccounts(idAccount);
+        }
+
         [HttpPost]
-        [Route("invite-associated")]
+        [Route("invite-to-friends")]
         public ReturnedResponse<Vinvitation> InviteAssociated(int invitingAccountId, int invitedAccountId)
         {
             return Service.InviteToFriends(invitingAccountId, invitedAccountId);

@@ -26,12 +26,24 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 
         public ReturnedResponse<List<Vinvitation>> GetInvitedAccounts(int accountId)
         {
-            return new ReturnedResponse<List<Vinvitation>>(VinvitationLogic.Select(invitation => invitation.Accountid == accountId).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<List<Vinvitation>>(VinvitationLogic.Select(invitation => invitation.Accountid == accountId || invitation.Suggestedaccountid == accountId).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<Vinvitation> InviteToFriends(int invitingAccountId, int invitedAccountId)
         {
-            InvitationLogic.Insert(new Invitation() { Idaccount = invitingAccountId, Idinvited = invitedAccountId });
+            if (invitingAccountId > invitedAccountId)
+            {
+                int swap = invitingAccountId;
+                invitingAccountId = invitedAccountId;
+                invitedAccountId = swap;
+            }
+
+            Invitation invitation = InvitationLogic.Select(m => m.Idinvited == invitedAccountId && m.Idaccount == invitingAccountId).FirstOrDefault();
+
+            if (invitation == null)
+            {
+                InvitationLogic.Insert(new Invitation() { Idaccount = invitingAccountId, Idinvited = invitedAccountId });
+            }
 
             return new ReturnedResponse<Vinvitation>(VinvitationLogic.Select(m => m.Accountid == invitingAccountId).FirstOrDefault(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
