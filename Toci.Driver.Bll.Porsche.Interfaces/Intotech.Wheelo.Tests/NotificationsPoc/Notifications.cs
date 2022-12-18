@@ -149,9 +149,10 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
 
             FirebaseApp fireBase = FirebaseApp.Create(new AppOptions()
             {
-                Credential = GoogleCredential.FromFile(ServiceAccountFile),
+                Credential = GoogleCredential.FromFile(ServiceAccountFile).
+                CreateScoped("https://www.googleapis.com/auth/firebase.messaging").CreateWithUser("firebase-adminsdk-6a8bi@wheelo-368119.iam.gserviceaccount.com"),
                 ProjectId = "wheelo-368119",
-                ServiceAccountId = "102834178930",
+                //ServiceAccountId = "102834178930",
 
 
             });
@@ -186,7 +187,9 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
 
             FirebaseMessaging firebaseMessaging =  FirebaseMessaging.GetMessaging(fireBase);
 
-            string res = FirebaseMessaging.GetMessaging(fireBase).SendAsync(mess).Result;
+            string resultOne = firebaseMessaging.SendAsync(new Message() { Token = isitright, Notification = new Notification() { Body = "doopa", Title = "jak to zadziala" } }).Result;
+
+            //Mes mess = FirebaseMessaging.GetMessaging(fireBase); //.SendAsync(mess).Result;
 
 
             // Send a message to the device corresponding to the provided
