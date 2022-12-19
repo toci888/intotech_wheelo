@@ -41,17 +41,10 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
 
             AccountCollocationDto result = VacollocationsgeolocationToAccountCollocation.Map(collocationSource);
 
-           
-
-           // Friend fr = FriendLogic.Select(m => (m.Idaccount == sourceAccountId && m.Idfriend == associatedAccountId) ||
-             //   (m.Idaccount == associatedAccountId && m.Idfriend == sourceAccountId)).FirstOrDefault();
-
-            //result.AreFriends = fr != null;
-
             return new ReturnedResponse<AccountCollocationDto>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId, string searchId)
+        public virtual ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId, string searchId) // DEPRECATED
         {
             TripCollocationDto resultDto = new TripCollocationDto();
 
