@@ -76,8 +76,8 @@ export const Map = ({
       setRegion({
         latitude: (Number(location.startLocation.lat) + Number(location.endLocation.lat)) / 2,
         longitude: (Number(location.startLocation.lon) + Number(location.endLocation.lon)) / 2,
-        latitudeDelta: (Number(location.startLocation.lat) + Number(location.endLocation.lat)) / 60,
-        longitudeDelta: (Number(location.startLocation.lon) + Number(location.endLocation.lon)) / 15,
+        latitudeDelta: Math.abs((Number(location.startLocation.lat)) - (Number(location.endLocation.lat))) + 2,
+        longitudeDelta: Math.abs((Number(location.startLocation.lon)) - (Number(location.endLocation.lon))) + 2,
       } as Region);
     } 
   }, [location]);
