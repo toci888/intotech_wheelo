@@ -24,6 +24,7 @@ using Intotech.Wheelo.Bll.Porsche.Interfaces.WorkTripAssociating;
 using Intotech.Wheelo.Bll.Porsche.WorkTripAssociating;
 using Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces;
 using Intotech.Wheelo.Bll.Models.ModelMappers;
+using Intotech.Wheelo.Bll.Models.Gaf;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -101,6 +102,8 @@ builder.Services.AddScoped<IAssociationMapDataSubService, AssociationMapDataSubS
 builder.Services.AddScoped<IWorkTripGenAssociationService, WorkTripGenAssociationService>();
 builder.Services.AddScoped<IPassStrLoginAttFailService, PassStrLoginAttFailService>();
 builder.Services.AddScoped<IUserMetaService, UserMetaService>();
+builder.Services.AddScoped<IGafManager, GafManager>();
+builder.Services.AddScoped<GafServiceBase<FacebookUserDto>, FacebookUserService>();
 //builder.Services.AddScoped<IEmailManager, EmailManager>();
 
 builder.Services.AddSingleton(authenticationSettings);

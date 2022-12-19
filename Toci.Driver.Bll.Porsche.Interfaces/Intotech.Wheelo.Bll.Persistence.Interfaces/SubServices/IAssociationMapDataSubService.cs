@@ -1,5 +1,6 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Models;
+using Intotech.Wheelo.Bll.Models.ModelMappers.ModelToDtoMaps;
 using Intotech.Wheelo.Bll.Models.TripCollocation;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,6 @@ namespace Intotech.Wheelo.Bll.Persistence.Interfaces.SubServices
     {
         ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId, string searchId);
 
-        ReturnedResponse<Vcollocationsgeolocation> GetCollocationUser(int accountId);
+        ReturnedResponse<VCollocationsGeoLocationModelDto> GetCollocationUser(int accountId);
     }
 }
