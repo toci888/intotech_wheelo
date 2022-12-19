@@ -88,7 +88,7 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
             pac.SetToken("HiEwn2qhRGh2GkVX7jhS3FG1GP88Ilx9kV1KD84Z"); // HERE !!!!!!!!!!!!!!!!!!!!!!
 
             PushTicketRequest ptr = new PushTicketRequest() {
-                PushTo = new List<string>() { "ExponentPushToken[rtWCLaAF92lqq4mIgmzvRV]" },
+                PushTo = new List<string>() { "ExponentPushToken[rtWCLaAF92lqq4mIgmzvRV]", "ExponentPushToken[XqgL8PLm-p-XsCtlZ_dapr]" },
                 PushBadgeCount = 7,
                 PushTitle = "Me & Julietta",
                 PushBody = "Witam Szefa :)",
