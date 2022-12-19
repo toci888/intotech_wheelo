@@ -37,7 +37,7 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
 
         public virtual ReturnedResponse<AccountCollocationDto> GetCollocationUser(int accountId)
         {
-            Vacollocationsgeolocation collocationSource = VacollocationsgeolocationLogic.Select(m => m.Idaccount == accountId || m.Accountidcollocated == accountId).FirstOrDefault();
+            Vacollocationsgeolocation collocationSource = VacollocationsgeolocationLogic.Select(m => m.Accountidcollocated == accountId).FirstOrDefault();
 
             if (collocationSource != null)
             {
