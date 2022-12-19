@@ -16,6 +16,7 @@ using Intotech.Wheelo.Common;
 using Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces;
 using Intotech.Common;
 using System.Globalization;
+using Intotech.Wheelo.Bll.Persistence.Extensions;
 
 namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 {
@@ -89,7 +90,16 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 
             List<Vacollocationsgeolocation> data = VacollocationsgeolocationLogic.Select(m => m.Idaccount == accountId).ToList();
 
-            resultDto.AccountsCollocated = ToAccountCollocationDto.Map(data);
+            resultDto.AccountsCollocated = new List<AccountCollocationDto>();
+
+            foreach (Vacollocationsgeolocation item in data)
+            {
+                AccountCollocationDto element = ToAccountCollocationDto.Map(item);
+
+                element.AreFriends = FriendLogic.AreFriends(accountId, element.idAccount);
+
+                resultDto.AccountsCollocated.Add(element);
+            }
 
             return new ReturnedResponse<TripGenCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
@@ -107,10 +117,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 
             AccountCollocationDto resultDto = ToAccountCollocationDto.Map(data);
 
-            Friend fr = FriendLogic.Select(m => (m.Idaccount == sourceAccountId && m.Idfriend == associatedAccountId) ||
-                (m.Idaccount == associatedAccountId && m.Idfriend == sourceAccountId)).FirstOrDefault();
-
-            resultDto.AreFriends = fr != null;
+            resultDto.AreFriends = FriendLogic.AreFriends(sourceAccountId, associatedAccountId);
 
             return new ReturnedResponse<AccountCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
