@@ -106,7 +106,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 
         public virtual ReturnedResponse<AccountCollocationDto> GetAccountDataForMarker(int sourceAccountId, int associatedAccountId)
         {
-            // TODO potential swap
+            WheeloUtils.PotentialSwapIds(ref sourceAccountId, ref associatedAccountId);
 
             Vacollocationsgeolocation data = VacollocationsgeolocationLogic.Select(m => m.Idaccount == sourceAccountId && m.Accountidcollocated == associatedAccountId).FirstOrDefault();
 
@@ -144,7 +144,12 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
     
             foreach (Worktripgen worktrip in collocations)
             {
-                if (!IsCollocationDuplicate(workTripGenRecord.Idaccount, worktrip.Idaccount))
+                int accountId = workTripGenRecord.Idaccount;
+                int collocatedAccountId = worktrip.Idaccount;
+
+                WheeloUtils.PotentialSwapIds(ref accountId, ref collocatedAccountId);
+
+                if (!IsCollocationDuplicate(accountId, collocatedAccountId))
                 {
                     decimal distanceFrom = (decimal)AssociationCalculation.DistanceInKmBetweenEarthCoordinates(workTripGenRecord.Latitudefrom,
                         workTripGenRecord.Longitudefrom, worktrip.Latitudefrom, worktrip.Longitudefrom) * DistanceNormalize;
@@ -154,8 +159,8 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 
                     AccountscollocationLogic.Insert(new Accountscollocation()
                     {
-                        Idaccount = workTripGenRecord.Idaccount,
-                        Idcollocated = worktrip.Idaccount,
+                        Idaccount = accountId,
+                        Idcollocated = collocatedAccountId,
                         Distancefrom = distanceFrom,
                         Distanceto = distanceTo
                     });

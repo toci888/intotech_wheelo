@@ -53,7 +53,7 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
             return new ReturnedResponse<AccountCollocationDto>(null, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
         }
 
-        public virtual ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId, string searchId)
+        public virtual ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId, string searchId) // DEPRECATED
         {
             TripCollocationDto resultDto = new TripCollocationDto();
 
