@@ -82,6 +82,14 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
         public void doopa()
         {
 
+            PushApiClient pac = new PushApiClient();
+            string devToken = "ExponentPushToken[rtWCLaAF92lqq4mIgmzvRV]";
+
+            pac.SetToken("HiEwn2qhRGh2GkVX7jhS3FG1GP88Ilx9kV1KD84Z"); // HERE !!!!!!!!!!!!!!!!!!!!!!
+
+
+            var d = pac.SendPushAsync(new PushTicketRequest() { PushTo = new List<string>() { "ExponentPushToken[rtWCLaAF92lqq4mIgmzvRV]" }, PushBadgeCount = 7, PushTitle = "Me & Julietta", PushBody = "Witam Szefa :)", PushSubTitle = "Bartek z tej strony :P" }).Result;
+
             string deviceToken = "eotQtMDpTkiwHRFDGEQRlL:APA91bGHj-SbymBwwgok_gqHoT-XDFMiF2MN978RFzpm3aaKRiHGJKrxWFu8SiNPOPwLLTS4rnm07qqHRHuACv0Om6wAUv5DipLej_VFb7lgZwthvHW4_0oWc5ykrwhLTggnMoC2itrj";
 
             WebpushConfig webC = new WebpushConfig();
@@ -105,7 +113,7 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
 
             string isitright = "dsIjMYW-T-CWdi7qi6Roo-:APA91bHgjyLJnYv30_3tg6r-noKERA-rcxK-UH2T4feVacd7VkX02e_kOS-FHV3i2Wp1rmqBcvZDNSzxmzSbQpkiXvB0Phx1cmt2B7TfSLQyHlEAKMSnvst9vLLudRLMuSknQ_5omn9U";
 
-            string devToken = "ExponentPushToken[rtWCLaAF92lqq4mIgmzvRV]";
+            
             //deviceToken
             string json = "{ to: \"" + isitright + "\", body: \"message\", title: \"title\", data: { message: \"Kurde\", name: \"Lol xd\" } }";
 
@@ -146,13 +154,13 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
             CreateHttpClientArgs createHttpClientArgs = new Google.Apis.Http.CreateHttpClientArgs();
             //fireBase.Options.Credential.CreateScoped();
             createHttpClientArgs.ApplicationName = "wheelo-368119";
-
+            
             FirebaseApp fireBase = FirebaseApp.Create(new AppOptions()
             {
                 Credential = GoogleCredential.FromFile(ServiceAccountFile).
-                CreateScoped("https://www.googleapis.com/auth/firebase.messaging").CreateWithUser("firebase-adminsdk-6a8bi@wheelo-368119.iam.gserviceaccount.com"),
+                CreateScoped("https://www.googleapis.com/auth/firebase.messaging"), //.CreateWithUser("firebase-adminsdk-6a8bi@wheelo-368119.iam.gserviceaccount.com"),
                 ProjectId = "wheelo-368119",
-                //ServiceAccountId = "102834178930",
+                ServiceAccountId = "59c9789b29b73f43e8aebf6021d0cb308eff6174\r\n13f83110ab17d2ea09dfd52e3e05521483e1dd2c",
 
 
             });
@@ -184,6 +192,8 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
                    
                 FcmOptions= new FcmOptions() {  }
             };
+
+            fireBase.Options.ServiceAccountId = deviceToken;
 
             FirebaseMessaging firebaseMessaging =  FirebaseMessaging.GetMessaging(fireBase);
 
@@ -226,13 +236,7 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
 
                 //string token = fireBaseAuth.CreateCustomTokenAsync("102834178930").Result;
 
-                //PushApiClient pac = new PushApiClient(fireBase.Options.HttpClientFactory.CreateHttpClient(new Google.Apis.Http.CreateHttpClientArgs()));
-
-                //pac.SetToken(token);
-
-                //var x = fireBase.Options.Credential;
-
-                //var d = pac.SendPushAsync(new PushTicketRequest() { PushTo = new List<string>() { "ExponentPushToken[rtWCLaAF92lqq4mIgmzvRV]" }, PushBadgeCount = 7, PushTitle = "Me & Julietta", PushBody = "Witam Szefa :)", PushSubTitle = "Bartek z tej strony :P" }).Result;
+                
             }
             catch (Exception ex)
             {
