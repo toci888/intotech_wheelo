@@ -87,8 +87,17 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
 
             pac.SetToken("HiEwn2qhRGh2GkVX7jhS3FG1GP88Ilx9kV1KD84Z"); // HERE !!!!!!!!!!!!!!!!!!!!!!
 
+            PushTicketRequest ptr = new PushTicketRequest() {
+                PushTo = new List<string>() { "ExponentPushToken[rtWCLaAF92lqq4mIgmzvRV]" },
+                PushBadgeCount = 7,
+                PushTitle = "Me & Julietta",
+                PushBody = "Witam Szefa :)",
+                PushSubTitle = "Bartek z tej strony :P",
+                //PushSound = 
+                PushData = new { test = "doopa" }
+            };
 
-            var d = pac.SendPushAsync(new PushTicketRequest() { PushTo = new List<string>() { "ExponentPushToken[rtWCLaAF92lqq4mIgmzvRV]" }, PushBadgeCount = 7, PushTitle = "Me & Julietta", PushBody = "Witam Szefa :)", PushSubTitle = "Bartek z tej strony :P" }).Result;
+            PushTicketResponse response = pac.SendPushAsync(ptr).Result;
 
             string deviceToken = "eotQtMDpTkiwHRFDGEQRlL:APA91bGHj-SbymBwwgok_gqHoT-XDFMiF2MN978RFzpm3aaKRiHGJKrxWFu8SiNPOPwLLTS4rnm07qqHRHuACv0Om6wAUv5DipLej_VFb7lgZwthvHW4_0oWc5ykrwhLTggnMoC2itrj";
 

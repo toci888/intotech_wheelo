@@ -85,15 +85,19 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                 return new ReturnedResponse<TripGenCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
             }
 
-            resultDto.SourceAccount = collocationSource;
+            resultDto.SourceAccount = ToAccountCollocationDto.Map(collocationSource);
 
-            resultDto.AccountsCollocated = VacollocationsgeolocationLogic.Select(m => m.Idaccount == accountId).ToList();
+            List<Vacollocationsgeolocation> data = VacollocationsgeolocationLogic.Select(m => m.Idaccount == accountId).ToList();
+
+            resultDto.AccountsCollocated = ToAccountCollocationDto.Map(data);
 
             return new ReturnedResponse<TripGenCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<AccountCollocationDto> GetAccountDataForMarker(int sourceAccountId, int associatedAccountId)
         {
+            // TODO potential swap
+
             Vacollocationsgeolocation data = VacollocationsgeolocationLogic.Select(m => m.Idaccount == sourceAccountId && m.Accountidcollocated == associatedAccountId).FirstOrDefault();
 
             if (data == null)

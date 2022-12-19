@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces
-{
+{ 
     public interface IVacollocationsgeolocationToAccountCollocationDto
     {
         AccountCollocationDto Map(Vacollocationsgeolocation dbModel);
 
         AccountCollocationDto Map(Vcollocationsgeolocation dbModel);
+
+        AccountCollocationDto Map(Vaworktripgengeolocation dbModel);
+
+        List<AccountCollocationDto> Map(List<Vacollocationsgeolocation> associationsList);
     }
 }
