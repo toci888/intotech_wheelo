@@ -866,6 +866,8 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
+                entity.Property(e => e.Image).HasColumnName("image");
+
                 entity.Property(e => e.Isdriver).HasColumnName("isdriver");
 
                 entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");

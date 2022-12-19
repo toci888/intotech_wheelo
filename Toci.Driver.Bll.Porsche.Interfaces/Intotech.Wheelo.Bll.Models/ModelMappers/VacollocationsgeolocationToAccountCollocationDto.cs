@@ -15,7 +15,7 @@ namespace Intotech.Wheelo.Bll.Models.ModelMappers
         {
             AccountCollocationDto result = new AccountCollocationDto()
             {
-                Accountid = dbModel.Accountidcollocated.Value,
+                idAccount = dbModel.Accountidcollocated.Value,
                 Latitudefrom = dbModel.Latitudefrom.Value,
                 Latitudeto = dbModel.Latitudeto.Value,
                 Longitudefrom = dbModel.Longitudefrom.Value,
@@ -23,7 +23,9 @@ namespace Intotech.Wheelo.Bll.Models.ModelMappers
                 Fromhour = dbModel.Fromhour.Value.Hour.ToString() + ":" + dbModel.Fromhour.Value.Minute.ToString(),
                 Tohour = dbModel.Tohour.Value.Hour.ToString() + ":" + dbModel.Tohour.Value.Minute.ToString(),
                 Name = dbModel.Name,
-                Surname = dbModel.Surname
+                Surname = dbModel.Surname,
+                Driver = (Driver)dbModel.Isdriver.Value,
+                Image = dbModel.Image
             };
 
             return result;
