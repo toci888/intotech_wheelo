@@ -192,7 +192,7 @@ export const Map = ({
             style={styles.card}
             onPress={() =>{
               navigation.navigate("PropertyDetails", {
-                collocationID: collocation.methodResult.accountsCollocated[activeIndex].idaccount,
+                collocationID: collocation.methodResult.accountsCollocated[activeIndex].idAccount,
               })
             }
             }

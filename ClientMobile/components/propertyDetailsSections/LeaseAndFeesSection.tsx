@@ -34,8 +34,8 @@ export const LeaseAndFeesSection = ({ collocation }: { collocation: CollocateAcc
   }
 
   const getPetsAllowedText = () => {
-    if (collocation.isDriver === Driver.driver) return "Cats and Dogs Allowed";
-    if (collocation.isDriver === Driver.passenger) return "Only Cats Allowed";
+    if (collocation.driver === Driver.driver) return "Cats and Dogs Allowed";
+    if (collocation.driver === Driver.passenger) return "Only Cats Allowed";
     // if (collocation.petsAllowed === DogsOnly) return "Only Dogs Allowed";
     return "No Pets Allowed";
   };
@@ -45,7 +45,7 @@ export const LeaseAndFeesSection = ({ collocation }: { collocation: CollocateAcc
       <Text category={"h5"} style={styles.defaultMarginVertical}>
         Lease Detail & Fees
       </Text>
-      {collocation.isDriver === Driver.driver ? (
+      {collocation.driver === Driver.driver ? (
         <>
           <Row style={styles.row}>
             <MaterialIcons name="pets" color="black" size={24} />
@@ -56,7 +56,7 @@ export const LeaseAndFeesSection = ({ collocation }: { collocation: CollocateAcc
           <GeneralTextCard heading="Pets" body={[getPetsAllowedText()]} />
         </>
       ) : null}
-      {collocation.isDriver === Driver.driver ? (
+      {collocation.driver === Driver.driver ? (
         <>
           <Row style={styles.row}>
             <MaterialIcons name="attach-money" color="black" size={24} />

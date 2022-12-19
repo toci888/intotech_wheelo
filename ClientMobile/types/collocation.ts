@@ -24,7 +24,7 @@ export type CollocateAccount = {
   tohour: string
   areFriends: boolean;
   phoneNumber: string;
-  isDriver: Driver;
+  driver: Driver;
 }
 
 export type CreateProperty = {
