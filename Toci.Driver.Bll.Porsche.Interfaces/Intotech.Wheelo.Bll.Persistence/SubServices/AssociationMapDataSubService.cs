@@ -45,11 +45,7 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
 
                 return new ReturnedResponse<AccountCollocationDto>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
             }
-            // Friend fr = FriendLogic.Select(m => (m.Idaccount == sourceAccountId && m.Idfriend == associatedAccountId) ||
-            //   (m.Idaccount == associatedAccountId && m.Idfriend == sourceAccountId)).FirstOrDefault();
-
-            //result.AreFriends = fr != null;
-
+        
             return new ReturnedResponse<AccountCollocationDto>(null, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
         }
 
@@ -65,8 +61,6 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
             }
 
             resultDto.SourceAccount = collocationSource;
-            //&& m.Searchid == searchId
-            //get collocated accounts
             resultDto.AccountsCollocated = VacollocationsgeolocationLogic.Select(m => m.Idaccount == accountId).ToList();
 
             return new ReturnedResponse<TripCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
