@@ -1,12 +1,14 @@
 ﻿using Intotech.Common;
 using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Models;
-using Intotech.Wheelo.Bll.Models.ModelMappers.ModelToDtoMaps;
+using Intotech.Wheelo.Bll.Models.ModelMappers;
 using Intotech.Wheelo.Bll.Models.TripCollocation;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Persistence.Interfaces.SubServices;
 using Intotech.Wheelo.Common;
 using Intotech.Wheelo.Common.Interfaces;
+using Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces;
+using Intotech.Wheelo.Common.Interfaces.Models;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -21,22 +23,32 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
     {
         protected IVacollocationsgeolocationLogic VacollocationsgeolocationLogic;
         protected IVcollocationsgeolocationLogic VcollocationsgeolocationLogic;
+        protected IVacollocationsgeolocationToAccountCollocationDto VacollocationsgeolocationToAccountCollocation;
 
 
         public AssociationMapDataSubService(IVacollocationsgeolocationLogic vacollocationsgeolocationLogic,
-            IVcollocationsgeolocationLogic vcollocationsgeolocationLogic)
+            IVcollocationsgeolocationLogic vcollocationsgeolocationLogic,
+            IVacollocationsgeolocationToAccountCollocationDto vacollocationsgeolocationToAccountCollocationDto)
         {
             VacollocationsgeolocationLogic = vacollocationsgeolocationLogic;
             VcollocationsgeolocationLogic = vcollocationsgeolocationLogic;
+            VacollocationsgeolocationToAccountCollocation = vacollocationsgeolocationToAccountCollocationDto;
         }
 
-        public virtual ReturnedResponse<VCollocationsGeoLocationModelDto> GetCollocationUser(int accountId)
+        public virtual ReturnedResponse<AccountCollocationDto> GetCollocationUser(int accountId)
         {
             Vcollocationsgeolocation collocationSource = VcollocationsgeolocationLogic.Select(m => m.Idaccount == accountId).FirstOrDefault();
 
-            VCollocationsGeoLocationModelDto result = DtoModelMapper.Map<VCollocationsGeoLocationModelDto , Vcollocationsgeolocation>(collocationSource);
+            AccountCollocationDto result = VacollocationsgeolocationToAccountCollocation.Map(collocationSource);
 
-            return new ReturnedResponse<VCollocationsGeoLocationModelDto>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+           
+
+           // Friend fr = FriendLogic.Select(m => (m.Idaccount == sourceAccountId && m.Idfriend == associatedAccountId) ||
+             //   (m.Idaccount == associatedAccountId && m.Idfriend == sourceAccountId)).FirstOrDefault();
+
+            //result.AreFriends = fr != null;
+
+            return new ReturnedResponse<AccountCollocationDto>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId, string searchId)

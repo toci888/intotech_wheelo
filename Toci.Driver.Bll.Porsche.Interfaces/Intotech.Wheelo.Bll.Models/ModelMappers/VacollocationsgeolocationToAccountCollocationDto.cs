@@ -30,5 +30,25 @@ namespace Intotech.Wheelo.Bll.Models.ModelMappers
 
             return result;
         }
+
+        public virtual AccountCollocationDto Map(Vcollocationsgeolocation dbModel)
+        {
+            AccountCollocationDto result = new AccountCollocationDto()
+            {
+                idAccount = dbModel.Idaccount.Value,
+                Latitudefrom = dbModel.Latitudefrom.Value,
+                Latitudeto = dbModel.Latitudeto.Value,
+                Longitudefrom = dbModel.Longitudefrom.Value,
+                Longitudeto = dbModel.Longitudeto.Value,
+                Fromhour = dbModel.Fromhour.Value.Hour.ToString() + ":" + dbModel.Fromhour.Value.Minute.ToString(),
+                Tohour = dbModel.Tohour.Value.Hour.ToString() + ":" + dbModel.Tohour.Value.Minute.ToString(),
+                Name = dbModel.Name,
+                Surname = dbModel.Surname,
+                Driver = (Driver)dbModel.Driverpassenger.Value,
+                Image = dbModel.Image
+            };
+
+            return result;
+        }
     }
 }

@@ -11,5 +11,7 @@ namespace Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces
     public interface IVacollocationsgeolocationToAccountCollocationDto
     {
         AccountCollocationDto Map(Vacollocationsgeolocation dbModel);
+
+        AccountCollocationDto Map(Vcollocationsgeolocation dbModel);
     }
 }

@@ -19,12 +19,12 @@ namespace Intotech.Wheelo.Tests.Crap
         {
             //double longitude = 50.05463180727613;
 
-            Collocator collocator = new Collocator(new WorkTripLogic(), new UsersCollocationLogic(), 
-                new AssociationCalculations(), new VusersCollocationLogic(), new VaccountscollocationsworktripLogic()
-                , new AssociationMapDataSubService(new VacollocationsgeolocationLogic(), new VcollocationsgeolocationLogic()));
+            //Collocator collocator = new Collocator(new WorkTripLogic(), new UsersCollocationLogic(), 
+            //    new AssociationCalculations(), new VusersCollocationLogic(), new VaccountscollocationsworktripLogic()
+            //    , new AssociationMapDataSubService(new VacollocationsgeolocationLogic(), new VcollocationsgeolocationLogic()));
 
-            for(int i = 1; i < 23; i++)
-                collocator.Collocate(i, "");
+            //for(int i = 1; i < 23; i++)
+            //    collocator.Collocate(i, "");
 
         }
     }

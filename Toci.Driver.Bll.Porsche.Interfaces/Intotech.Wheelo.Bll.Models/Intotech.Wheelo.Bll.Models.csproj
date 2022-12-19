@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ModelMappers\ModelToDtoMaps\" />
+  </ItemGroup>
+
 </Project>

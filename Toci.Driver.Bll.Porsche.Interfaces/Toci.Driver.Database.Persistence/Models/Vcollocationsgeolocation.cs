@@ -15,5 +15,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public TimeOnly? Fromhour { get; set; }
         public TimeOnly? Tohour { get; set; }
         public string? Searchid { get; set; }
+        public int? Driverpassenger { get; set; }
+        public string? Image { get; set; }
     }
 }

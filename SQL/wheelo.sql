@@ -7,6 +7,8 @@ drop table ResetPassword;
 drop table PasswordStrength;
 drop table FailedLoginAttempts;
 
+drop view VCollocationsGeoLocations;
+
 drop table AccountModes;
 
 drop view VAWorkTripGenGeoLocations;
@@ -303,12 +305,7 @@ join Accounts U2 on U2.Id = ac.IdCollocated
 join WorkTrip wt on U2.id = wt.idaccount ;
 
 --select * from VCollocationsGeoLocations;
-create or replace view VCollocationsGeoLocations as --select hosts of collocations
-select distinct a.id as idAccount, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
-wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchid
-from AccountsCollocations acc 
-join WorkTripGen wt on acc.IdAccount = wt.IdAccount
-join Accounts a on a.id = wt.IdAccount;
+
 
 
 --select * from VACollocationsGeoLocations;
@@ -468,6 +465,13 @@ select acc.idaccount, a.id as accountIdCollocated, a.name, a.surname, wt.Latitud
 wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchId, wt.DriverPassenger as IsDriver, a.image
 from AccountsCollocations acc 
 join WorkTripGen wt on acc.idcollocated = wt.IdAccount
+join Accounts a on a.id = wt.IdAccount;
+
+create or replace view VCollocationsGeoLocations as --select hosts of collocations
+select distinct a.id as idAccount, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
+wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchid, wt.DriverPassenger, a.image  
+from AccountsCollocations acc 
+join WorkTripGen wt on acc.IdAccount = wt.IdAccount
 join Accounts a on a.id = wt.IdAccount;
 
 create table AccountModes
