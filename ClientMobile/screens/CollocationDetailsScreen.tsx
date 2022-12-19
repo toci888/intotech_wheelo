@@ -26,7 +26,7 @@ export const CollocationDetailsScreen = ({
 }) => {
   const collocation = useSelectedCollocationQuery(route.params.collocationID);
   if (!collocation.data) return <Text>Unable to get collocation details ...</Text>;
-  console.log("COLLASD", collocation)
+  
   return (
     <Screen>
       <FlatList
