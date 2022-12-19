@@ -37,18 +37,20 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
 
         public virtual ReturnedResponse<AccountCollocationDto> GetCollocationUser(int accountId)
         {
-            Vcollocationsgeolocation collocationSource = VcollocationsgeolocationLogic.Select(m => m.Idaccount == accountId).FirstOrDefault();
+            Vacollocationsgeolocation collocationSource = VacollocationsgeolocationLogic.Select(m => m.Idaccount == accountId || m.Accountidcollocated == accountId).FirstOrDefault();
 
-            AccountCollocationDto result = VacollocationsgeolocationToAccountCollocation.Map(collocationSource);
+            if (collocationSource != null)
+            {
+                AccountCollocationDto result = VacollocationsgeolocationToAccountCollocation.Map(collocationSource);
 
-           
-
-           // Friend fr = FriendLogic.Select(m => (m.Idaccount == sourceAccountId && m.Idfriend == associatedAccountId) ||
-             //   (m.Idaccount == associatedAccountId && m.Idfriend == sourceAccountId)).FirstOrDefault();
+                return new ReturnedResponse<AccountCollocationDto>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            }
+            // Friend fr = FriendLogic.Select(m => (m.Idaccount == sourceAccountId && m.Idfriend == associatedAccountId) ||
+            //   (m.Idaccount == associatedAccountId && m.Idfriend == sourceAccountId)).FirstOrDefault();
 
             //result.AreFriends = fr != null;
 
-            return new ReturnedResponse<AccountCollocationDto>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<AccountCollocationDto>(null, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
         }
 
         public virtual ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId, string searchId)
