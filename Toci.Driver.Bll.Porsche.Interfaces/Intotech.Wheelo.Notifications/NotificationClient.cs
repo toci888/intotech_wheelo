@@ -1,6 +1,7 @@
 ﻿using ExpoCommunityNotificationServer.Client;
 using ExpoCommunityNotificationServer.Models;
 using Intotech.Wheelo.Notifications.Interfaces;
+using Intotech.Wheelo.Notifications.Interfaces.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,13 @@ namespace Intotech.Wheelo.Notifications
         public NotificationClient()
         {
             PushApiClient = new PushApiClient();
+
+            PushApiClient.SetToken(AccessToken);
         }
 
-
+        public virtual PushTicketResponse SendNotification(ModelBase notification)
+        {
+            return PushApiClient.SendPushAsync(notification.ToRequest()).Result;
+        }
     }
 }
