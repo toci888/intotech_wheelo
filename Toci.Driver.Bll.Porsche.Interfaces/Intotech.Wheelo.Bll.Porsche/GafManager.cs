@@ -18,21 +18,24 @@ namespace Intotech.Wheelo.Bll.Porsche
         protected IUserExtraDataLogic LUserExtraDataLogic;
         protected IAccountRoleLogic AccLogic;
         protected GafServiceBase<FacebookUserDto> FbGafService;
+        protected GafServiceBase<GoogleUserDto> GoogleGafService;
 
-        public GafManager(IUserExtraDataLogic lUserExtraDataLogic, IAccountRoleLogic accLogic, GafServiceBase<FacebookUserDto> fbGafService)
+        public GafManager(IUserExtraDataLogic lUserExtraDataLogic, IAccountRoleLogic accLogic, GafServiceBase<FacebookUserDto> fbGafService,
+            GafServiceBase<GoogleUserDto> googleGafService)
         {
             LUserExtraDataLogic = lUserExtraDataLogic;
             AccLogic = accLogic;
             FbGafService = fbGafService;
+            GoogleGafService = googleGafService;
         }
 
         public virtual Accountrole RegisterByMethod(string method, string token)
         {
             if (method == "google")
             {
-                GoogleUserDto dto = new GoogleUserService().GetUserByToken(token);
+                GoogleUserDto dto = GoogleGafService.GetUserByToken(token);
 
-                return GoogleAccountExtraData(dto, token);
+                return AccLogic.Select(m => m.Email == dto.email).FirstOrDefault();
             }
 
             if (method == "facebook")
@@ -43,17 +46,6 @@ namespace Intotech.Wheelo.Bll.Porsche
             }
 
             return null;
-        }
-
-        protected virtual Accountrole GoogleAccountExtraData(GoogleUserDto dto, string token)
-        {
-            Accountrole accountrole = new Accountrole(); //= AccLogic.CreateAccount(new AccountRegisterDto() { Email = dto.email, Firstname = dto.name, Lastname = dto.given_name  });
-
-            LUserExtraDataLogic.Insert(new Userextradatum() { Idaccount = accountrole.Id, Token = token });
-
-            return accountrole;
-        }
-
-        
+        }        
     }
 }

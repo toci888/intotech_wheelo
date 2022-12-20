@@ -104,6 +104,7 @@ builder.Services.AddScoped<IPassStrLoginAttFailService, PassStrLoginAttFailServi
 builder.Services.AddScoped<IUserMetaService, UserMetaService>();
 builder.Services.AddScoped<IGafManager, GafManager>();
 builder.Services.AddScoped<GafServiceBase<FacebookUserDto>, FacebookUserService>();
+builder.Services.AddScoped<GafServiceBase<GoogleUserDto>, GoogleUserService>();
 builder.Services.AddScoped<IVacollocationsgeolocationToAccountCollocationDto, VacollocationsgeolocationToAccountCollocationDto>();
 
 //builder.Services.AddScoped<IEmailManager, EmailManager>();

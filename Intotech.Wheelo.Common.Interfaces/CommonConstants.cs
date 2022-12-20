@@ -9,6 +9,7 @@ namespace Intotech.Wheelo.Common.Interfaces
     public static class CommonConstants
     {
         public const int FacebookOrigin = 1;
+        public const int GoogleOrigin = 2;
 
         public const int RoleUser = 1;
     }
