@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http.Json;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -84,8 +85,11 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc
 
             PushApiClient pac = new PushApiClient();
             string devToken = "ExponentPushToken[rtWCLaAF92lqq4mIgmzvRV]";
+            string kacper = "4CBXDdgBr7SOrOc0x7eK2a9b-pVHV9Xt-IYjyQ2n";
 
-            pac.SetToken("HiEwn2qhRGh2GkVX7jhS3FG1GP88Ilx9kV1KD84Z"); // HERE !!!!!!!!!!!!!!!!!!!!!!
+            string bartek = "HiEwn2qhRGh2GkVX7jhS3FG1GP88Ilx9kV1KD84Z";
+
+            pac.SetToken(kacper); // HERE !!!!!!!!!!!!!!!!!!!!!!
 
             PushTicketRequest ptr = new PushTicketRequest() {
                 PushTo = new List<string>() { "ExponentPushToken[rtWCLaAF92lqq4mIgmzvRV]", "ExponentPushToken[XqgL8PLm-p-XsCtlZ_dapr]" },
