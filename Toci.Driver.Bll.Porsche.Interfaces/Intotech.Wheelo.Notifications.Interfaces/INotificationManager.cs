@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Notifications.Interfaces
 {
-    public interface INotificationClient
+    public interface INotificationManager
     {
-        PushTicketResponse SendNotification(NotificationModelBase notification);
+        PushTicketResponse SendNotifications(NotificationsKinds notificationsKind, NotificationModelBase notificationModel);
     }
 }

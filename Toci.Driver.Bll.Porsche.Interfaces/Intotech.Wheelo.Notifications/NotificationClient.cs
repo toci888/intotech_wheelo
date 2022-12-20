@@ -23,7 +23,7 @@ namespace Intotech.Wheelo.Notifications
             PushApiClient.SetToken(AccessToken);
         }
 
-        public virtual PushTicketResponse SendNotification(ModelBase notification)
+        public virtual PushTicketResponse SendNotification(NotificationModelBase notification)
         {
             return PushApiClient.SendPushAsync(notification.ToRequest()).Result;
         }

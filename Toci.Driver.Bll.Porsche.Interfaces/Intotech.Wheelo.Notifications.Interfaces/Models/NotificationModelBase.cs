@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Notifications.Interfaces.Models
 {
-    public abstract class ModelBase
+    public abstract class NotificationModelBase
     {
         public abstract PushTicketRequest ToRequest();
     }
