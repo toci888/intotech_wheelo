@@ -58,6 +58,12 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
         return Service.ResetPassword(email, password, token);
     }
 
+    [HttpPost("forgot-password-check-code")]
+    public ReturnedResponse<int> ResetPasswordCheckCode(string email, string verificationCode)
+    {
+        return Service.ResetPasswordCheckCode(email, verificationCode);
+    }
+
     [HttpPatch("{accountId}/settings/theme-mode")]
     public ReturnedResponse<bool> SetMode(int accountId, bool themeMode)
     {
@@ -76,10 +82,10 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
         return Service.GetMode(accountId);
     }
 
-    [HttpGet("request-password-reset")]
-    public ReturnedResponse<int> RequestPasswordReset(string email)
+    [HttpPost("forgot-password")]
+    public ReturnedResponse<int> ForgotPassword([FromBody]string email)
     {
-        return Service.RequestPasswordReset(email);
+        return Service.ForgotPassword(email);
     }
 
     [HttpPatch("{idAccount}/pushtoken")]

@@ -21,6 +21,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Intotech.Wheelo.Common.Logging;
 using System.Security.Principal;
+using Newtonsoft.Json.Linq;
 
 namespace Intotech.Wheelo.Bll.Porsche.User
 {
@@ -264,7 +265,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             return Login(new LoginDto() { Email = resetPasswordConfirmDto.Email, Password = resetPasswordConfirmDto.Password });
         }
 
-        public virtual ReturnedResponse<int> RequestPasswordReset(string email)
+        public virtual ReturnedResponse<int> ForgotPassword(string email)
         {
             //check if email exists in accounts
             Account acc = AccLogic.Select(m => m.Email == email).FirstOrDefault();
@@ -297,6 +298,26 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             //send Email 
             EmailManager.SendPasswordResetVerificationCode(email, acc.Name, verificationCode.ToString());
+
+            return new ReturnedResponse<int>(ErrorCodes.Success, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        }
+
+        public ReturnedResponse<int> ResetPasswordCheckCode(string email, string verificationCode)
+        {
+            Account acc = AccLogic.Select(m => m.Email == email).FirstOrDefault();
+            // if not return with significant error code
+
+            if (acc == null)
+            {
+                return new ReturnedResponse<int>(ErrorCodes.EmailDoesNotExistResetPassword, I18nTranslation.Translation(I18nTags.EmailDoesNotExist), false, ErrorCodes.EmailDoesNotExistResetPassword);
+            }
+
+            Resetpassword resetpassword = ResetpasswordLogic.Select(m => m.Email == email && m.Verificationcode.ToString() == verificationCode).FirstOrDefault();
+
+            if (resetpassword == null)
+            {
+                return new ReturnedResponse<int>(ErrorCodes.FailVerifyingAccount, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
+            }
 
             return new ReturnedResponse<int>(ErrorCodes.Success, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
