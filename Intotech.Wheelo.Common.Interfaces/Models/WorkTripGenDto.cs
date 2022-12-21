@@ -10,9 +10,10 @@ namespace Intotech.Wheelo.Common.Interfaces.Models
     {
         public GeographicLocation StartLocation { get; set; }
         public GeographicLocation EndLocation { get; set; }
-        public TimeDto StartLocationTime { get; set; }
-        public TimeDto EndLocationTime { get; set; }
+        public string StartLocationTime { get; set; }
+        public string EndLocationTime { get; set; }
         public double AcceptableDistance { get; set; }
-        public int AccountId { get; set; }
+        public int Idaccount { get; set; }
+        public int IsDriver { get; set; }
     }
 }

@@ -23,7 +23,8 @@ namespace Intotech.Wheelo.Common.Emails
         {
             { I18nTags.LanguageCodePl, new Dictionary<string, Func<List<string>, string>>()
                 {
-                    { I18nEmailMessagesTags.EmailVerificationCode, (data) => string.Format("Witaj {0}, Niniejszym przesyłamy kod potwierdzenia Twojego adresu email: {1}.", data[0], data[1]) }
+                    { I18nEmailMessagesTags.EmailVerificationCode, (data) => string.Format("Witaj {0}, niniejszym przesyłamy kod potwierdzenia Twojego adresu email: {1}.", data[0], data[1]) },
+                    { I18nEmailMessagesTags.PasswordResetEmailVerificationCode, (data) => string.Format("Witaj {0}, niniejszym przesyłamy kod potwierdzenia zmiany hasła Twojego adresu email: {1}.", data[0], data[1]) }
                 }
             },
             { I18nTags.LanguageCodeEn, new Dictionary<string, Func<List<string>, string>>()
@@ -36,6 +37,13 @@ namespace Intotech.Wheelo.Common.Emails
         public virtual bool SendEmailVerificationCode(string emailTo, string userName, string verificationCode)
         {
             string message = MessagesLanguageMap[LanguageCode][I18nEmailMessagesTags.EmailVerificationCode](new List<string>() { userName, verificationCode });
+
+            return EmailMsgSender.SendEmail(new EmailContent() { Body = message, EmailTo = emailTo, From = EmailFrom, Subject = I18nTranslation.Translation(I18nTags.PleaseConfirmYourWheeloAccountRegistration) });
+        }
+
+        public virtual bool SendPasswordResetVerificationCode(string emailTo, string userName, string verificationCode)
+        {
+            string message = MessagesLanguageMap[LanguageCode][I18nEmailMessagesTags.PasswordResetEmailVerificationCode](new List<string>() { userName, verificationCode });
 
             return EmailMsgSender.SendEmail(new EmailContent() { Body = message, EmailTo = emailTo, From = EmailFrom, Subject = I18nTranslation.Translation(I18nTags.PleaseConfirmYourWheeloAccountRegistration) });
         }

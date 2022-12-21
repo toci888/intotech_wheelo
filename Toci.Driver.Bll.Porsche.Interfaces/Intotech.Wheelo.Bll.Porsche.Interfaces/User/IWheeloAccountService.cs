@@ -11,10 +11,28 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.User
 {
     public interface IWheeloAccountService
     {
-        ReturnedResponse<AccountRegisterDto> Register(AccountRegisterDto sAccount);
+        ReturnedResponse<AccountRoleDto> Register(AccountRegisterDto sAccount);
+
+        ReturnedResponse<AccountRoleDto> GafLogin(Accountrole accountrole);
 
         ReturnedResponse<AccountRoleDto> Login(LoginDto loginDto);
 
         ReturnedResponse<AccountRoleDto> ConfirmEmail(EmailConfirmDto EcDto);
+
+        ReturnedResponse<bool> GetMode(int accountId);
+
+        ReturnedResponse<bool> SetMode(int accountId, bool mode);
+
+        ReturnedResponse<bool> SetAllowsNotifications(int accountId, bool allowsNotifications);
+
+        ReturnedResponse<int> ResetPassword(string email, string password, string token);
+
+        ReturnedResponse<TokensModel> CreateNewAccessToken(string accessToken, string refreshToken);
+
+        ReturnedResponse<int> RequestPasswordReset(string email);
+
+        ReturnedResponse<PushTokenDto> SetPushToken(int idAccount, PushTokenDto pushToken);
+
+        List<Account> GetAllUsers(); // temporary, development purpose, TODO REMOVE
     }
 }

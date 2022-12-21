@@ -18,6 +18,7 @@ namespace Toci.Driver.Database.Persistence.Models
 
         public virtual DbSet<Account> Accounts { get; set; } = null!;
         public virtual DbSet<Accountmetadatum> Accountmetadata { get; set; } = null!;
+        public virtual DbSet<Accountmode> Accountmodes { get; set; } = null!;
         public virtual DbSet<Accountrole> Accountroles { get; set; } = null!;
         public virtual DbSet<Accountscarslocation> Accountscarslocations { get; set; } = null!;
         public virtual DbSet<Accountscollocation> Accountscollocations { get; set; } = null!;
@@ -28,12 +29,17 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Carsmodel> Carsmodels { get; set; } = null!;
         public virtual DbSet<Colour> Colours { get; set; } = null!;
         public virtual DbSet<Emailsregister> Emailsregisters { get; set; } = null!;
+        public virtual DbSet<Failedloginattempt> Failedloginattempts { get; set; } = null!;
         public virtual DbSet<Friend> Friends { get; set; } = null!;
         public virtual DbSet<Friendsuggestion> Friendsuggestions { get; set; } = null!;
         public virtual DbSet<Geographicregion> Geographicregions { get; set; } = null!;
         public virtual DbSet<Invitation> Invitations { get; set; } = null!;
         public virtual DbSet<Notuser> Notusers { get; set; } = null!;
         public virtual DbSet<Occupation> Occupations { get; set; } = null!;
+        public virtual DbSet<Occupationsmokercrat> Occupationsmokercrats { get; set; } = null!;
+        public virtual DbSet<Passwordstrength> Passwordstrengths { get; set; } = null!;
+        public virtual DbSet<Pushtoken> Pushtokens { get; set; } = null!;
+        public virtual DbSet<Resetpassword> Resetpasswords { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Statisticstrip> Statisticstrips { get; set; } = null!;
         public virtual DbSet<Trip> Trips { get; set; } = null!;
@@ -70,6 +76,10 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.Allowsnotifications)
+                    .HasColumnName("allowsnotifications")
+                    .HasDefaultValueSql("false");
+
                 entity.Property(e => e.Email).HasColumnName("email");
 
                 entity.Property(e => e.Emailconfirmed)
@@ -97,6 +107,10 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Surname).HasColumnName("surname");
 
                 entity.Property(e => e.Verificationcode).HasColumnName("verificationcode");
+
+                entity.Property(e => e.Verificationcodevalid)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("verificationcodevalid");
 
                 entity.HasOne(d => d.IdroleNavigation)
                     .WithMany(p => p.Accounts)
@@ -153,11 +167,33 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasConstraintName("accountmetadata_idoccupation_fkey");
             });
 
+            modelBuilder.Entity<Accountmode>(entity =>
+            {
+                entity.HasKey(e => e.Idaccount)
+                    .HasName("accountmodes_pkey");
+
+                entity.ToTable("accountmodes");
+
+                entity.Property(e => e.Idaccount)
+                    .ValueGeneratedNever()
+                    .HasColumnName("idaccount");
+
+                entity.Property(e => e.Mode).HasColumnName("mode");
+
+                entity.HasOne(d => d.IdaccountNavigation)
+                    .WithOne(p => p.Accountmode)
+                    .HasForeignKey<Accountmode>(d => d.Idaccount)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("accountmodes_idaccount_fkey");
+            });
+
             modelBuilder.Entity<Accountrole>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToView("accountroles");
+
+                entity.Property(e => e.Allowsnotifications).HasColumnName("allowsnotifications");
 
                 entity.Property(e => e.Email).HasColumnName("email");
 
@@ -402,6 +438,22 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Verificationcode).HasColumnName("verificationcode");
             });
 
+            modelBuilder.Entity<Failedloginattempt>(entity =>
+            {
+                entity.ToTable("failedloginattempts");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
+                    .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Kind).HasColumnName("kind");
+            });
+
             modelBuilder.Entity<Friend>(entity =>
             {
                 entity.ToTable("friends");
@@ -536,6 +588,85 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Name).HasColumnName("name");
             });
 
+            modelBuilder.Entity<Occupationsmokercrat>(entity =>
+            {
+                entity.ToTable("occupationsmokercrat");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
+                    .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Idoccupation).HasColumnName("idoccupation");
+
+                entity.Property(e => e.Issmoker)
+                    .HasColumnName("issmoker")
+                    .HasDefaultValueSql("false");
+
+                entity.HasOne(d => d.IdaccountNavigation)
+                    .WithMany(p => p.Occupationsmokercrats)
+                    .HasForeignKey(d => d.Idaccount)
+                    .HasConstraintName("occupationsmokercrat_idaccount_fkey");
+
+                entity.HasOne(d => d.IdoccupationNavigation)
+                    .WithMany(p => p.Occupationsmokercrats)
+                    .HasForeignKey(d => d.Idoccupation)
+                    .HasConstraintName("occupationsmokercrat_idoccupation_fkey");
+            });
+
+            modelBuilder.Entity<Passwordstrength>(entity =>
+            {
+                entity.ToTable("passwordstrength");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Level).HasColumnName("level");
+            });
+
+            modelBuilder.Entity<Pushtoken>(entity =>
+            {
+                entity.ToTable("pushtokens");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
+                    .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Token).HasColumnName("token");
+
+                entity.HasOne(d => d.IdaccountNavigation)
+                    .WithMany(p => p.Pushtokens)
+                    .HasForeignKey(d => d.Idaccount)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("pushtokens_idaccount_fkey");
+            });
+
+            modelBuilder.Entity<Resetpassword>(entity =>
+            {
+                entity.ToTable("resetpassword");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Createdat)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("createdat")
+                    .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Email).HasColumnName("email");
+
+                entity.Property(e => e.Verificationcode).HasColumnName("verificationcode");
+            });
+
             modelBuilder.Entity<Role>(entity =>
             {
                 entity.ToTable("roles");
@@ -653,6 +784,8 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Method).HasColumnName("method");
 
+                entity.Property(e => e.Origin).HasColumnName("origin");
+
                 entity.Property(e => e.Token).HasColumnName("token");
 
                 entity.Property(e => e.Tokendatajson).HasColumnName("tokendatajson");
@@ -733,6 +866,10 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
+                entity.Property(e => e.Image).HasColumnName("image");
+
+                entity.Property(e => e.Isdriver).HasColumnName("isdriver");
+
                 entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
 
                 entity.Property(e => e.Latitudeto).HasColumnName("latitudeto");
@@ -759,6 +896,10 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Accountid).HasColumnName("accountid");
 
                 entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+
+                entity.Property(e => e.Image).HasColumnName("image");
+
+                entity.Property(e => e.Isdriver).HasColumnName("isdriver");
 
                 entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
 
@@ -806,9 +947,13 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.ToView("vcollocationsgeolocations");
 
-                entity.Property(e => e.Accountid).HasColumnName("accountid");
+                entity.Property(e => e.Driverpassenger).HasColumnName("driverpassenger");
 
                 entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Image).HasColumnName("image");
 
                 entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
 
@@ -977,6 +1122,10 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasColumnName("createdat")
                     .HasDefaultValueSql("now()");
 
+                entity.Property(e => e.Driverpassenger)
+                    .HasColumnName("driverpassenger")
+                    .HasDefaultValueSql("1");
+
                 entity.Property(e => e.Fromhour).HasColumnName("fromhour");
 
                 entity.Property(e => e.Idaccount).HasColumnName("idaccount");
@@ -984,6 +1133,8 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Idgeographiclocationfrom).HasColumnName("idgeographiclocationfrom");
 
                 entity.Property(e => e.Idgeographiclocationto).HasColumnName("idgeographiclocationto");
+
+                entity.Property(e => e.Isuser).HasColumnName("isuser");
 
                 entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
 
@@ -993,6 +1144,10 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Longitudeto).HasColumnName("longitudeto");
 
+                entity.Property(e => e.Postcodefrom).HasColumnName("postcodefrom");
+
+                entity.Property(e => e.Postcodeto).HasColumnName("postcodeto");
+
                 entity.Property(e => e.Searchid).HasColumnName("searchid");
 
                 entity.Property(e => e.Streetfrom).HasColumnName("streetfrom");
@@ -1000,11 +1155,6 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Streetto).HasColumnName("streetto");
 
                 entity.Property(e => e.Tohour).HasColumnName("tohour");
-
-                entity.HasOne(d => d.IdaccountNavigation)
-                    .WithMany(p => p.Worktrips)
-                    .HasForeignKey(d => d.Idaccount)
-                    .HasConstraintName("worktrip_idaccount_fkey");
 
                 entity.HasOne(d => d.IdgeographiclocationfromNavigation)
                     .WithMany(p => p.WorktripIdgeographiclocationfromNavigations)
@@ -1033,6 +1183,10 @@ namespace Toci.Driver.Database.Persistence.Models
                     .HasColumnType("timestamp without time zone")
                     .HasColumnName("createdat")
                     .HasDefaultValueSql("now()");
+
+                entity.Property(e => e.Driverpassenger)
+                    .HasColumnName("driverpassenger")
+                    .HasDefaultValueSql("1");
 
                 entity.Property(e => e.Fromhour).HasColumnName("fromhour");
 

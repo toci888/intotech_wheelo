@@ -1,7 +1,21 @@
+﻿drop table OccupationSmokerCrat;
+drop table PushTokens;
+
+drop table ResetPassword;
+
+
+drop table PasswordStrength;
+drop table FailedLoginAttempts;
+
+drop view VCollocationsGeoLocations;
+
+drop table AccountModes;
+
 drop view vacollocationsgeolocations;
 drop view VAccountsCollocations;
 drop view VAWorkTripGenGeoLocations;
 drop view VWorkTripGenGeoLocations;
+drop view VACollocationsGeoLocations;
 
 drop table WorkTripGen cascade;
 drop table NotUser;
@@ -21,6 +35,7 @@ drop view VFriendSuggestions;
 --select * from AccountsCollocations;
 drop view AccountsCarsLocations;
 drop view VCollocationsGeoLocations;
+
 drop view VAccountsCollocationsWorkTrip;
 drop table WorkTrip;
 drop view VCarOwner;
@@ -71,20 +86,25 @@ create table Roles
 	name text
 );
 
+--alter table accounts add column verificationCodeValid timestamp;
+
 create table Accounts
 (
 	Id serial primary key not null,
-	email text not null,
+	email text not null unique,
 	name text,
 	surname text,
 	password text,
 	verificationCode int,
+	verificationCodeValid timestamp,
 	IdRole int references roles(id) default 1,
 	emailconfirmed bool default false,
+	allowsNotifications bool default false,
 	image text,
 	phoneNumber text,
 	refreshToken text,
-	refreshTokenValid timestamp
+	refreshTokenValid timestamp,
+	createdat timestamp default now()
 );
 
 select setval('accounts_id_seq', 1000000000);
@@ -96,6 +116,7 @@ create table UserExtraData -- for fb, google, apple
 	token text,
 	method text,
 	tokenDataJson text,
+    origin int not null, --1 fb, 2 google, 3 apple
 	createdat timestamp default now()
 );
 
@@ -244,20 +265,24 @@ join Colours co on co.id = cr.IdColours;
 create table WorkTrip
 (
 	id serial primary key,
-    IdAccount int references Accounts (id),
-	searchId text, -- not null,
-    LatitudeFrom double precision, --+
-	LongitudeFrom double precision,-- +
-	LatitudeTo double precision,
-	LongitudeTo double precision,
+    IdAccount int not null, --references Accounts (id), NotUser
+	searchId text not null,
+	isUser bool not null default false,
+    LatitudeFrom double precision not null, --+
+	LongitudeFrom double precision not null,-- +
+	LatitudeTo double precision not null,
+	LongitudeTo double precision not null,
 	IdGeographicLocationFrom int references GeographicRegion(id),
 	IdGeographicLocationTo int references GeographicRegion(id),
 	StreetFrom text,
 	StreetTo text,
 	CityFrom text,
 	CityTo text,
+	PostCodeFrom text,
+	PostCodeTo text,
     FromHour time, -- 0 60 -> 1 
     ToHour time,
+	DriverPassenger int not null default 1,
     AcceptableDistance double precision,
 	CreatedAt timestamp default now()
 );
@@ -281,12 +306,7 @@ join Accounts U2 on U2.Id = ac.IdCollocated
 join WorkTrip wt on U2.id = wt.idaccount ;
 
 --select * from VCollocationsGeoLocations;
-create or replace view VCollocationsGeoLocations as --select hosts of collocations
-select distinct a.id as accountId, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
-wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchid
-from AccountsCollocations acc 
-join WorkTrip wt on acc.IdAccount = wt.IdAccount
-join Accounts a on a.id = wt.IdAccount;
+
 
 
 --select * from VACollocationsGeoLocations;
@@ -304,7 +324,7 @@ join Colours col on c.IdColours = col.id
 join CarsBrands cb on c.IdCarsBrands = cb.id
 join CarsModels cm on c.IdCarsModels = cm.id;
 
-select * from AccountsCarsLocations;
+--select * from AccountsCarsLocations;
 -- drop table TestCoordinates;
 --create table TestCoordinates
 --(
@@ -316,7 +336,7 @@ select * from AccountsCarsLocations;
 --select * from TestCoordinates;
 create or replace view AccountRoles as
 select Accounts.id, Accounts.Name, Accounts.Surname, Accounts.email, Accounts.password, Accounts.emailConfirmed, 
-Accounts.refreshtoken , Roles.name as RoleName, Accounts.refreshTokenValid
+Accounts.refreshtoken , Roles.name as RoleName, Accounts.refreshTokenValid, Accounts.allowsNotifications 
 from Accounts
 join Roles on Roles.id = Accounts.idRole;
 
@@ -423,6 +443,7 @@ create table WorkTripGen
     FromHour time, -- 0 60 -> 1 
     ToHour time,
     AcceptableDistance double precision,
+	DriverPassenger int not null default 1, -- 1 passenger, 2 driver, 3 both
 	CreatedAt timestamp default now()
 );
 
@@ -435,17 +456,87 @@ join Accounts a on a.id = wt.IdAccount;
 
 create or replace view VAWorkTripGenGeoLocations as --select hosts of collocations
 select distinct a.id as accountId, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
-wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchid
+wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchid, wt.DriverPassenger as IsDriver, a.image
 from AccountsCollocations acc 
 join WorkTripGen wt on acc.IdAccount = wt.IdAccount
 join Accounts a on a.id = wt.IdAccount;
 
 create or replace view VACollocationsGeoLocations as --select people, who belong to the group collocated
 select acc.idaccount, a.id as accountIdCollocated, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
-wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchId
+wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchId, wt.DriverPassenger as IsDriver, a.image
 from AccountsCollocations acc 
 join WorkTripGen wt on acc.idcollocated = wt.IdAccount
 join Accounts a on a.id = wt.IdAccount;
+
+create or replace view VCollocationsGeoLocations as --select hosts of collocations
+select distinct a.id as idAccount, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
+wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchid, wt.DriverPassenger, a.image  
+from AccountsCollocations acc 
+join WorkTripGen wt on acc.IdAccount = wt.IdAccount
+join Accounts a on a.id = wt.IdAccount;
+
+create table AccountModes
+(
+	IdAccount int references Accounts(id) primary key,
+	mode int not null
+);
+--TABELA 1:
+create table FailedLoginAttempts
+(
+	id serial primary key,
+	IdAccount int references Accounts(id) not null,
+	kind int not null,
+	createdat timestamp not null default now()
+);
+--TABEL 2:
+create table PasswordStrength
+(
+	id serial primary key,
+	IdAccount int references Accounts(id) not null,
+	level int not null
+);
+
+create table ResetPassword
+(
+	id serial primary key,
+	createdat timestamp not null default now(),
+	email text not null,
+	verificationcode int not null
+	
+);
+
+create table PushTokens
+(
+	id serial primary key,
+	IdAccount int references Accounts(id) not null,
+	token text not null,
+	createdat timestamp not null default now()
+);
+create table OccupationSmokerCrat
+(
+	id serial primary key,
+	IdAccount int references Accounts(id),
+	IdOccupation int references Occupations(id),
+	IsSmoker bool default false,
+	CreatedAt timestamp default now()
+);
+--INSERTY:
+--insert into FailedLoginAttempts (IdAccount, ts1) values (AcountIndentifiers, timestamps)
+--insert into SimplePasswords (IdAccount) values (AcountIndentifiers)
+--ew. blokada jeśli gdzieś damy boolean np czy simple password czy nie
+--bolakada1:
+--select IdAccount
+--from FailedLoginAttempts
+--where count(TIMESTAMP DEFAULT)>=3 AND IdAccount IN SimplePasswords
+
+--blokada2:
+--select IdAccount
+--from FailedLoginAttempts
+--where count(TIMESTAMP DEFAULT)>=5 AND IdAccount NOT IN SimplePassword;
+
+
+
+
 
 --select * from VTripsParticipants;
 --select * from Friends;

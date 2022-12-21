@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intotech.Wheelo.Common.Interfaces.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,9 @@ namespace Intotech.Wheelo.Bll.Models.TripCollocation
 {
     public class TripGenCollocationDto
     {
-        public Vaworktripgengeolocation SourceAccount { get; set; }
+        public AccountCollocationDto SourceAccount { get; set; }
 
-        public List<Vacollocationsgeolocation> AccountsCollocated { get; set; } //Vaccountscollocationsworktrip
+        public List<AccountCollocationDto> AccountsCollocated { get; set; } //Vaccountscollocationsworktrip
 
         public string SearchId { get; set; }
     }

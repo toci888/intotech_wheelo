@@ -1,3 +1,5 @@
+-- 9.12.2022 13:12
+drop table Expenses;
 
 -- run once for migration
 drop table Comments;
@@ -9,7 +11,10 @@ drop table CommentTypes;
 drop table GroupMembers;
 drop table Groups;
 
-
+----------
+-- 9.12.2022 13:12
+drop table Expenses;
+---
 drop table UserComments;
 drop table MeetingSkippedAccounts;
 drop table OrganizeMeeting;
@@ -94,3 +99,14 @@ create table UserComments
 	IdCommentTypes int references CommentTypes(id) not null,
 	CreatedAt timestamp default now()
 );
+
+create table Expenses
+(
+	id serial primary key,
+	idAccount int not null,
+	kind int not null, -- 1 monthly, 2 weekly, 3 daily; 
+	amount double precision not null,
+	CreatedAt timestamp default now()
+);
+
+---?????

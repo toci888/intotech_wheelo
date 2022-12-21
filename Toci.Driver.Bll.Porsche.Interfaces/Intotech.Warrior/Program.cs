@@ -6,7 +6,6 @@ using Intotech.Wheelo.Bll.Models.Social;
 using Intotech.Wheelo.Bll.Porsche;
 using Intotech.Wheelo.Bll.Porsche.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.User;
-using Intotech.Wheelo.Common.Google;
 using Intotech.Wheelo.Common.Interfaces.Models;
 using Intotech.Wheelo.Social.Tests.Persistence.Seed;
 using Intotech.Wheelo.Tests.Persistence.Seed;
@@ -16,6 +15,12 @@ using Toci.Driver.Database.Persistence.Models;
 
 Console.WriteLine("Warrior is seeding your dbs....");
 
+
+//new SeedRole().Insert();
+
+new WheeloMainSeedManager().SeedAllDb();
+
+new SocialSeedManager().SeedAllDb();
 
 //Service serv = new Service();
 //serv.Listen();
@@ -46,9 +51,7 @@ Console.WriteLine("Warrior is seeding your dbs....");
 //sa.Insert();
 //new SeedFriendSuggestion().Insert();
 
-new WheeloMainSeedManager().SeedAllDb();
 
-new SocialSeedManager().SeedAllDb();
 
 //new ProfessionsTxtParser().Insert();
 

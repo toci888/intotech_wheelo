@@ -12,7 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Microservices\Intotech.Common.Microservices.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Common.Interfaces\Intotech.Wheelo.Common.Interfaces.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Integration.Bll.Skoda.Interfaces\Intotech.Wheelo.Integration.Bll.Skoda.Interfaces.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Integration.Bll.Skoda\Intotech.Wheelo.Integration.Bll.Skoda.csproj" />
     <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Common\Intotech.Wheelo.Common.csproj" />
   </ItemGroup>
 

@@ -24,6 +24,7 @@ using Intotech.Wheelo.Bll.Porsche.Interfaces.WorkTripAssociating;
 using Intotech.Wheelo.Bll.Porsche.WorkTripAssociating;
 using Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces;
 using Intotech.Wheelo.Bll.Models.ModelMappers;
+using Intotech.Wheelo.Bll.Models.Gaf;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -77,6 +78,11 @@ builder.Services.AddScoped<IWorktripgenLogic, WorktripgenLogic>();
 builder.Services.AddScoped<IVaworktripgengeolocationLogic, VaworktripgengeolocationLogic>();
 builder.Services.AddScoped<IVacollocationsgeolocationLogic, VacollocationsgeolocationLogic>();
 builder.Services.AddScoped<IVacollocationsgeolocationToAccountCollocationDto, VacollocationsgeolocationToAccountCollocationDto>();
+builder.Services.AddScoped<IAccountmodeLogic, AccountmodeLogic>();
+builder.Services.AddScoped<IFailedloginattemptLogic, FailedloginattemptLogic>();
+builder.Services.AddScoped<IResetpasswordLogic, ResetpasswordLogic>();
+builder.Services.AddScoped<IPushtokenLogic, PushtokenLogic>();
+builder.Services.AddScoped<IOccupationSmokerCratLogic, OccupationSmokerCratLogic>();
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();
 
@@ -94,6 +100,13 @@ builder.Services.AddScoped<IWheeloAccountService, WheeloAccountService>();
 builder.Services.AddScoped<IAccountMetadataService, AccountMetadataService>();
 builder.Services.AddScoped<IAssociationMapDataSubService, AssociationMapDataSubService>();
 builder.Services.AddScoped<IWorkTripGenAssociationService, WorkTripGenAssociationService>();
+builder.Services.AddScoped<IPassStrLoginAttFailService, PassStrLoginAttFailService>();
+builder.Services.AddScoped<IUserMetaService, UserMetaService>();
+builder.Services.AddScoped<IGafManager, GafManager>();
+builder.Services.AddScoped<GafServiceBase<FacebookUserDto>, FacebookUserService>();
+builder.Services.AddScoped<GafServiceBase<GoogleUserDto>, GoogleUserService>();
+builder.Services.AddScoped<IVacollocationsgeolocationToAccountCollocationDto, VacollocationsgeolocationToAccountCollocationDto>();
+
 //builder.Services.AddScoped<IEmailManager, EmailManager>();
 
 builder.Services.AddSingleton(authenticationSettings);
@@ -123,6 +136,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseDeveloperExceptionPage();
 
 app.Run();
 

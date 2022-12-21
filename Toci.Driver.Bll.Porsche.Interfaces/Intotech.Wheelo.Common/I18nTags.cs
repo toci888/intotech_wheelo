@@ -28,6 +28,12 @@
         public const string NoWorkTripData = "_noWorkTripData";
         public const string ErrorPleaseLogInToApp = "_errorPleaseLogInToApp";
         public const string RefreshTokenExpiredPleaseLogIn = "_refreshTokenExpiredPleaseLogIn";
+        public const string PleaseLogIn = "_pleaseLogIn";
         public const string PleaseConfirmYourWheeloAccountRegistration = "_pleaseConfirmYourWheeloAccountRegistration";
+        public const string DefaultModeCreated = "_defaultModeCreated";
+        public const string UnderAttack = "_youSeemRobot";
+        public const string EmailDoesNotExist = "_emailDoesNotExist";
+        public const string WrongOperations = "_wrongOperations";
+        public const string WrongData = "_wrongData";
     }
 }

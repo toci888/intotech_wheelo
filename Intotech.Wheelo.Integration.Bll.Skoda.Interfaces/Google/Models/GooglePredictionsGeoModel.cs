@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Intotech.Wheelo.Common.Interfaces.Models
+namespace Intotech.Wheelo.Integration.Bll.Skoda.Interfaces.Google.Models
 {
     public class GooglePredictionsGeoModel
     {

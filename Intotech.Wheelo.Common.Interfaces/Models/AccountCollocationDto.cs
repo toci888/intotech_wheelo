@@ -8,7 +8,7 @@ namespace Intotech.Wheelo.Common.Interfaces.Models
 {
     public class AccountCollocationDto
     {
-        public int Accountid { get; set; }
+        public int idAccount { get; set; }
         public string Image { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -20,5 +20,24 @@ namespace Intotech.Wheelo.Common.Interfaces.Models
         public string Tohour { get; set; }
         public bool AreFriends { get; set; }
         public string PhoneNumber { get; set; }
+        public Driver Driver { get; set; }
+
+        /*
+     export type CollocateAccount = {
+  idAccount: number,
+  image: string[],
+  name: string,
+  surname: string,
+  latitudefrom: number,
+  longitudefrom: number,
+  latitudeto: number,
+  longitudeto: number,
+  fromhour: string,
+  tohour: string
+  areFriends: boolean;
+  phoneNumber: string;
+  isDriver: Driver;
+}
+    */
     }
 }

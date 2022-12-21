@@ -8,53 +8,55 @@ using Intotech.Wheelo.Bll.Porsche.Interfaces;
 using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
 using Intotech.Wheelo.Bll.Models.Account;
+using Intotech.Wheelo.Common.Interfaces;
+using Intotech.Wheelo.Common;
 
 namespace Toci.Driver.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
+public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
 {
     protected IGafManager GafManager;
-    protected IWheeloAccountService WheeloAccountService;
 
-    public AccountController(IAccountRoleLogic logic, IGafManager gafManager, IWheeloAccountService was) : base(logic)
+    public AccountController(IWheeloAccountService service, IGafManager gafManager) : base(service) //IAccountRoleLogic logic, IAccountLogic accLogic
     {
         GafManager = gafManager;
-        WheeloAccountService = was;
     }
 
-    
+
     [HttpPost("register")]
-    public ActionResult<AccountRegisterDto> SimpleRegister(AccountRegisterDto sa)
+    public ReturnedResponse<AccountRoleDto> Register(AccountRegisterDto sa)
     {
-        ReturnedResponse<AccountRegisterDto>  reg = WheeloAccountService.Register(sa);
+        ReturnedResponse<AccountRoleDto> reg = Service.Register(sa);
 
-        if (!reg.IsSuccess)
-        {
-            return BadRequest(reg);
-        }
-
-        return sa;
+        return reg;
     }
 
     [HttpPost("confirm-email")]
     public ReturnedResponse<AccountRoleDto> ConfirmEmail(EmailConfirmDto EcDto)
     {
-        return WheeloAccountService.ConfirmEmail(EcDto);
+        return Service.ConfirmEmail(EcDto);
     }
 
     [HttpPost("login")]
-    public ActionResult<AccountRoleDto> Login(LoginDto lDto)
+    public ReturnedResponse<AccountRoleDto> Login(LoginDto lDto)
     {
-        ReturnedResponse<AccountRoleDto> sa = WheeloAccountService.Login(lDto);
-
-        if (!sa.IsSuccess)
+        if (lDto.Method == "facebook" || lDto.Method == "google")
         {
-            return NotFound(sa);
+            Accountrole result = GafManager.RegisterByMethod(lDto.Method, lDto.Token);
+
+            if (result == null)
+            {
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
+            }
+
+            return Service.GafLogin(result);
         }
 
-        return sa.MethodResult;
+        ReturnedResponse<AccountRoleDto> sa = Service.Login(lDto);
+
+        return sa;
     }
 
     [HttpGet("refresh-token")]
@@ -63,31 +65,46 @@ public class AccountController : ApiSimpleControllerBase<IAccountRoleLogic>
         return Service.CreateNewAccessToken(accessToken, refreshToken);
     }
 
-
-   /* [AllowAnonymous]
-    [HttpPost("register")]
-    public Accountrole RegisterUser([FromBody] AccountRegisterDto user)
-    {
-        //if (user.Method == "wheelo")
-        {
-            return Logic.CreateAccount(user);
-        }
-
-        //return GafManager.RegisterByMethod(user.Method, "");
-    }
-   */
-    /* [AllowAnonymous]
-     [HttpPost("login")]
-     public ActionResult<Account> Login([FromBody] LoginDto user)
-     {
-         Accountrole loggedUser = Logic.GenerateJwt(user);
-         return Ok(loggedUser);
-     }*/
-
     [AllowAnonymous]
     [HttpPost("reset-password")]
-    public int ResetPassword(int userId, [FromBody] string password)
+    public ReturnedResponse<int> ResetPassword(string email, string token, [FromBody] string password)
     {
-        return Service.ResetPassword(userId, password);
+        return Service.ResetPassword(email, password, token);
+    }
+
+    [HttpPatch("{accountId}/settings/theme-mode")]
+    public ReturnedResponse<bool> SetMode(int accountId, bool themeMode)
+    {
+        return Service.SetMode(accountId, themeMode);
+    }
+
+    [HttpPatch("{idAccount}/settings/notifications")]
+    public ReturnedResponse<bool> SetAllowsNotifications(int idAccount, [FromBody] NotificationsModel allowsNotifications)
+    {
+        return Service.SetAllowsNotifications(idAccount, allowsNotifications.AreNotificationsEnabled);
+    }
+
+    [HttpGet("{accountId}/settings/theme-mode")]
+    public ReturnedResponse<bool> GetMode(int accountId)
+    {
+        return Service.GetMode(accountId);
+    }
+
+    [HttpGet("request-password-reset")]
+    public ReturnedResponse<int> RequestPasswordReset(string email)
+    {
+        return Service.RequestPasswordReset(email);
+    }
+
+    [HttpPatch("{idAccount}/pushtoken")]
+    public ReturnedResponse<PushTokenDto> SetPushToken(int idAccount, [FromBody]PushTokenDto pushToken)
+    {
+        return Service.SetPushToken(idAccount, pushToken);
+    }
+
+    [HttpGet("EnigmaticUrl")]
+    public List<Account> GetAllUsers()
+    {
+        return Service.GetAllUsers();
     }
 }

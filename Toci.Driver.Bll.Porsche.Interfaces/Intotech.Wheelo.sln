@@ -250,9 +250,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Dodge"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Dodge.Interfaces", "Intotech.Wheelo.Chat.Dodge.Interfaces\Intotech.Wheelo.Chat.Dodge.Interfaces.csproj", "{46E90AB2-D578-4EA4-A17B-451217417A9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Api", "..\Intotech.Wheelo.Chat.Api\Intotech.Wheelo.Chat.Api.csproj", "{236FACBF-F7BC-42D4-97BB-B9564C1AF832}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Api", "..\Intotech.Wheelo.Chat.Api\Intotech.Wheelo.Chat.Api.csproj", "{236FACBF-F7BC-42D4-97BB-B9564C1AF832}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Models", "..\Intotech.Wheelo.Chat.Models\Intotech.Wheelo.Chat.Models.csproj", "{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Models", "..\Intotech.Wheelo.Chat.Models\Intotech.Wheelo.Chat.Models.csproj", "{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Integration.Bll.Skoda.Interfaces", "..\Intotech.Wheelo.Integration.Bll.Skoda.Interfaces\Intotech.Wheelo.Integration.Bll.Skoda.Interfaces.csproj", "{9473EB68-FADB-4259-9199-74986F2A1E4E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Integration.Bll.Skoda", "..\Intotech.Wheelo.Integration.Bll.Skoda\Intotech.Wheelo.Integration.Bll.Skoda.csproj", "{1AEF4726-146E-4970-8155-BA3796EDB6F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WheeloSqlMigrations", "WheeloSqlMigrations", "{94626A6A-464F-4FC8-9ACE-F96A0F3EC8A3}"
+	ProjectSection(SolutionItems) = preProject
+		16-12-2022 wheelo.sql = 16-12-2022 wheelo.sql
+		17-12-2022 wheelo.sql = 17-12-2022 wheelo.sql
+		18-12-2022 wheelo.sql = 18-12-2022 wheelo.sql
+		19-12-2022 wheelo.sql = 19-12-2022 wheelo.sql
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Notifications.Interfaces", "Intotech.Wheelo.Notifications.Interfaces\Intotech.Wheelo.Notifications.Interfaces.csproj", "{5558666A-67FD-4684-997A-89FB6035B34A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Notifications", "Intotech.Wheelo.Notifications\Intotech.Wheelo.Notifications.csproj", "{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -638,6 +654,38 @@ Global
 		{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}.Release|Any CPU.Build.0 = Release|Any CPU
 		{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}.Release|x64.ActiveCfg = Release|Any CPU
 		{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}.Release|x64.Build.0 = Release|Any CPU
+		{9473EB68-FADB-4259-9199-74986F2A1E4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9473EB68-FADB-4259-9199-74986F2A1E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9473EB68-FADB-4259-9199-74986F2A1E4E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9473EB68-FADB-4259-9199-74986F2A1E4E}.Debug|x64.Build.0 = Debug|Any CPU
+		{9473EB68-FADB-4259-9199-74986F2A1E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9473EB68-FADB-4259-9199-74986F2A1E4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9473EB68-FADB-4259-9199-74986F2A1E4E}.Release|x64.ActiveCfg = Release|Any CPU
+		{9473EB68-FADB-4259-9199-74986F2A1E4E}.Release|x64.Build.0 = Release|Any CPU
+		{1AEF4726-146E-4970-8155-BA3796EDB6F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AEF4726-146E-4970-8155-BA3796EDB6F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AEF4726-146E-4970-8155-BA3796EDB6F8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1AEF4726-146E-4970-8155-BA3796EDB6F8}.Debug|x64.Build.0 = Debug|Any CPU
+		{1AEF4726-146E-4970-8155-BA3796EDB6F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AEF4726-146E-4970-8155-BA3796EDB6F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AEF4726-146E-4970-8155-BA3796EDB6F8}.Release|x64.ActiveCfg = Release|Any CPU
+		{1AEF4726-146E-4970-8155-BA3796EDB6F8}.Release|x64.Build.0 = Release|Any CPU
+		{5558666A-67FD-4684-997A-89FB6035B34A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5558666A-67FD-4684-997A-89FB6035B34A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5558666A-67FD-4684-997A-89FB6035B34A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5558666A-67FD-4684-997A-89FB6035B34A}.Debug|x64.Build.0 = Debug|Any CPU
+		{5558666A-67FD-4684-997A-89FB6035B34A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5558666A-67FD-4684-997A-89FB6035B34A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5558666A-67FD-4684-997A-89FB6035B34A}.Release|x64.ActiveCfg = Release|Any CPU
+		{5558666A-67FD-4684-997A-89FB6035B34A}.Release|x64.Build.0 = Release|Any CPU
+		{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}.Debug|x64.Build.0 = Debug|Any CPU
+		{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}.Release|x64.ActiveCfg = Release|Any CPU
+		{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -680,6 +728,9 @@ Global
 		{46E90AB2-D578-4EA4-A17B-451217417A9B} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
 		{236FACBF-F7BC-42D4-97BB-B9564C1AF832} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
 		{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
+		{9473EB68-FADB-4259-9199-74986F2A1E4E} = {14C2EDD9-09A5-48DD-99FA-AC51331C789F}
+		{1AEF4726-146E-4970-8155-BA3796EDB6F8} = {14C2EDD9-09A5-48DD-99FA-AC51331C789F}
+		{94626A6A-464F-4FC8-9ACE-F96A0F3EC8A3} = {A662B894-F584-4249-902F-47612C3E8E94}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {958786F8-D2E4-4AAC-949D-3CD908D8AE36}

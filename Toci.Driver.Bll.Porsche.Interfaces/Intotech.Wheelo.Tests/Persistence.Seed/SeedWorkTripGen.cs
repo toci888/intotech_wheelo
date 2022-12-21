@@ -304,6 +304,78 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
                 Acceptabledistance = distanceAcc
             });
 
+            ModelsEntities.Add(new Worktripgen()
+            {
+                Searchid = StringUtils.GetRandomString(32),
+                Idaccount = 23 + offset,
+                Latitudefrom = 52.40655122342916,
+                Longitudefrom = 16.92578850458502,
+                Latitudeto = 51.107230555909715,
+                Longitudeto = 17.038070201490435,
+                Fromhour = new TimeOnly(8, 00),
+                Tohour = new TimeOnly(16, 00),
+                Acceptabledistance = distanceAcc
+            });
+
+            ModelsEntities.Add(new Worktripgen()
+            {
+                Searchid = StringUtils.GetRandomString(32),
+                Idaccount = 24 + offset,
+                Latitudefrom = 52.41055122342916,
+                Longitudefrom = 16.92978850458502,
+                Latitudeto = 51.104230555909715,
+                Longitudeto = 17.034070201490435,
+                Fromhour = new TimeOnly(8, 00),
+                Tohour = new TimeOnly(16, 00),
+                Acceptabledistance = distanceAcc
+            });
+
+            ModelsEntities.Add(new Worktripgen()
+            {
+                Searchid = StringUtils.GetRandomString(32),
+                Idaccount = 25 + offset,
+                Latitudefrom = 52.40455122342916,
+                Longitudefrom = 16.92178850458502,
+                Latitudeto = 51.102230555909715,
+                Longitudeto = 17.031070201490435,
+                Fromhour = new TimeOnly(8, 00),
+                Tohour = new TimeOnly(16, 00),
+                Acceptabledistance = distanceAcc
+            });
+
+            ModelsEntities.Add(new Worktripgen()
+            {
+                Searchid = StringUtils.GetRandomString(32),
+                Idaccount = 26 + offset,
+                Latitudefrom = 52.40155122342916,
+                Longitudefrom = 16.92378850458502,
+                Latitudeto = 51.109230555909715,
+                Longitudeto = 17.036070201490435,
+                Fromhour = new TimeOnly(8, 00),
+                Tohour = new TimeOnly(16, 00),
+                Acceptabledistance = distanceAcc
+            });
+
+            ModelsEntities.Add(new Worktripgen()
+            {
+                Searchid = StringUtils.GetRandomString(32),
+                Idaccount = 27 + offset,
+                Latitudefrom = 52.40555122342916,
+                Longitudefrom = 16.92578850458502,
+                Latitudeto = 51.105230555909715,
+                Longitudeto = 17.035070201490435,
+                Fromhour = new TimeOnly(8, 00),
+                Tohour = new TimeOnly(16, 00),
+                Acceptabledistance = distanceAcc
+            });
+
+            /*
+             {"startLocation":{"place_id":"ChIJtwrh7NJEBEcR0b80A5gx6qQ","lat":"52.406376","lon":"16.925169","display_name":"Poznań, 62",
+            "address":{"name":"Poznań, 62","house_number":null,"road":null,"city":"Poznań","state":"Wielkopolskie","postcode":"62","country":"Polska",
+            "country_code":null}},"endLocation":{"place_id":"ChIJv4q11MLpD0cR9eAFwq5WCbc","lat":"51.107883","lon":"17.038538","display_name":"Wrocław, 51","address":{"name":"Wrocław, 51","house_number":null,"road":null,"city":"Wrocław","state":"Dolnośląskie","postcode":"51","country":"Polska","country_code":null}},
+            "startLocationTime":"14:39",
+            "endLocationTime":"16:00","idAccount":1000000047,"acceptableDistance":800}
+*/
             InsertCollection(ModelsEntities);
         }
     }

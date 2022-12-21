@@ -20,10 +20,11 @@ namespace Toci.Driver.Database.Persistence.Models
             FriendsuggestionIdsuggestedfriendNavigations = new HashSet<Friendsuggestion>();
             InvitationIdaccountNavigations = new HashSet<Invitation>();
             InvitationIdinvitedNavigations = new HashSet<Invitation>();
+            Occupationsmokercrats = new HashSet<Occupationsmokercrat>();
+            Pushtokens = new HashSet<Pushtoken>();
             Tripparticipants = new HashSet<Tripparticipant>();
             Trips = new HashSet<Trip>();
             Userextradata = new HashSet<Userextradatum>();
-            Worktrips = new HashSet<Worktrip>();
         }
 
         public int Id { get; set; }
@@ -38,8 +39,11 @@ namespace Toci.Driver.Database.Persistence.Models
         public string? Phonenumber { get; set; }
         public string? Refreshtoken { get; set; }
         public DateTime? Refreshtokenvalid { get; set; }
+        public bool? Allowsnotifications { get; set; }
+        public DateTime? Verificationcodevalid { get; set; }
 
         public virtual Role? IdroleNavigation { get; set; }
+        public virtual Accountmode? Accountmode { get; set; }
         public virtual ICollection<Accountmetadatum> Accountmetadata { get; set; }
         public virtual ICollection<Accountscollocation> AccountscollocationIdaccountNavigations { get; set; }
         public virtual ICollection<Accountscollocation> AccountscollocationIdcollocatedNavigations { get; set; }
@@ -53,9 +57,10 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual ICollection<Friendsuggestion> FriendsuggestionIdsuggestedfriendNavigations { get; set; }
         public virtual ICollection<Invitation> InvitationIdaccountNavigations { get; set; }
         public virtual ICollection<Invitation> InvitationIdinvitedNavigations { get; set; }
+        public virtual ICollection<Occupationsmokercrat> Occupationsmokercrats { get; set; }
+        public virtual ICollection<Pushtoken> Pushtokens { get; set; }
         public virtual ICollection<Tripparticipant> Tripparticipants { get; set; }
         public virtual ICollection<Trip> Trips { get; set; }
         public virtual ICollection<Userextradatum> Userextradata { get; set; }
-        public virtual ICollection<Worktrip> Worktrips { get; set; }
     }
 }
