@@ -29,6 +29,11 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             FacebookUserDto dto = JsonSerializer.Deserialize<FacebookUserDto>(json);
 
+            if (dto.email == null)
+            {
+                return null;
+            }
+
             dto.Json = json;
 
             string[] nameSurname = dto.name.Split(" ");

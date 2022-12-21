@@ -35,12 +35,22 @@ namespace Intotech.Wheelo.Bll.Porsche
             {
                 GoogleUserDto dto = GoogleGafService.GetUserByToken(token);
 
+                if (dto == null)
+                {
+                    return null;
+                }
+
                 return AccLogic.Select(m => m.Email == dto.email).FirstOrDefault();
             }
 
             if (method == "facebook")
             {
                 FacebookUserDto dto = FbGafService.GetUserByToken(token);
+
+                if (dto == null)
+                {
+                    return null;
+                }
 
                 return AccLogic.Select(m => m.Email == dto.email).FirstOrDefault();
             }

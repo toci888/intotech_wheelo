@@ -28,7 +28,12 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         {
             string json = Request(token, "userinfo/v2/me");
 
-            GoogleUserDto dto = JsonSerializer.Deserialize<GoogleUserDto>(json);    
+            GoogleUserDto dto = JsonSerializer.Deserialize<GoogleUserDto>(json);
+
+            if (dto.email == null)
+            {
+                return null;
+            }
 
             dto.Json = json;
 

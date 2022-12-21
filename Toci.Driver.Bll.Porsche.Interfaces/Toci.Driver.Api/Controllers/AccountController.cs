@@ -8,6 +8,8 @@ using Intotech.Wheelo.Bll.Porsche.Interfaces;
 using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
 using Intotech.Wheelo.Bll.Models.Account;
+using Intotech.Wheelo.Common.Interfaces;
+using Intotech.Wheelo.Common;
 
 namespace Toci.Driver.Api.Controllers;
 
@@ -43,6 +45,11 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
         if (lDto.Method == "facebook" || lDto.Method == "google")
         {
             Accountrole result = GafManager.RegisterByMethod(lDto.Method, lDto.Token);
+
+            if (result == null)
+            {
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
+            }
 
             return Service.GafLogin(result);
         }
