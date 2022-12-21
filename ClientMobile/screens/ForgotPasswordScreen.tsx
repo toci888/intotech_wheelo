@@ -5,26 +5,33 @@ import * as yup from "yup";
 import { Formik } from "formik";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import { Screen } from "../components/Screen";
 import { ModalHeader } from "../components/ModalHeader";
 import { useLoading } from "../hooks/useLoading";
 import { forgotPassword } from "../services/user";
 import { i18n } from "../i18n/i18n";
+import { User } from "../types/user";
 
 export const ForgotPasswordScreen = () => {
   const [emailSent, setEmailSent] = useState(false);
   const { setLoading } = useLoading();
+  const navigation = useNavigation();
 
   const handleSubmit = async (values: { email: string }) => {
     try {
       setLoading(true);
       const response = await forgotPassword(values.email);
-      if (response?.isSuccess) setEmailSent(true);
+      if (response?.isSuccess) {
+        setEmailSent(true);
+        navigation.navigate("EmailVerification", {user: values as User, type: "forgotPassword"});
+      }
     } catch (error) {
-      alert("Error placing email");
+      console.log("Error placing email");
     } finally {
       setLoading(false);
+      // navigation.navigate("ResetPassword", "asd");
     }
   };
 

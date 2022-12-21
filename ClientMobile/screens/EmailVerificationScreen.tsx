@@ -32,17 +32,17 @@ const animateCell = ({ hasValue, index, isFocused }: any) => {
     Animated.spring(animationsScale[index], {
       useNativeDriver: false,
       toValue: hasValue ? 0 : 1,
-      duration: hasValue ? 300 : 250,
+      // duration: hasValue ? 300 : 250,
     }),
   ]).start();
 };
 
 export const EmailVerificationScreen = ({route}:{
-  route: { params: User}
+  route: { params: {user: User, type: "email" | "forgotPassword"}}
 }) => {
   // const route = useRoute();
   const [value, setValue] = useState("");
-  const [emailVeryficationForm, setEmailVeryficationForm] = useState({});
+  const [emailVerificationForm, setEmailVerificationForm] = useState({});
   const { login } = useUser();
   const navigation = useNavigation();
   
@@ -53,20 +53,42 @@ export const EmailVerificationScreen = ({route}:{
   });
 
   const handleVerify = async () => {
-    const user = route.params as User;
-    setEmailVeryficationForm({ email: user.email, code: value });
+    console.log("GGGGGGG");
+    console.log(route);
+    const user = route.params.user as User;
+    setEmailVerificationForm({ email: user.email, code: value });
     try
     {
-      const { data } = await axios.post(`${endpoints.emailVerification}`, {
-        email: `${user.email}`,
-        code: Number(value),
-      });
-
-      if(data.methodResult) {
-        login(data.methodResult);
-        navigation.navigate("Root", {screen: "AccountRoot"});
+      if(route.params.type === "forgotPassword") {
+        console.log("forgotxdd", endpoints.resetPassword, {
+          email: `${user.email}`,
+          token: value,
+        })
+        const { data } = await axios.post(`${endpoints.resetPassword}`, {
+          email: `${user.email}`,
+          code: value,
+        });
+        console.log("DATAAAA", data)
+        if(data.methodResult) {
+          navigation.navigate("ResetPassword", {token: value});
+        } else {
+          commonAlert(data.errorMessage);
+        }
       } else {
-        commonAlert(data.errorMessage);
+        const { data } = await axios.post(`${endpoints.emailVerification}`, {
+          email: `${user.email}`,
+          code: Number(value),
+        });
+        console.log("UDALO", {email: `${user.email}`,
+        code: Number(value),
+      })
+
+        if(data.methodResult) {
+          login(data.methodResult);
+          navigation.navigate("Root", {screen: "AccountRoot"});
+        } else {
+          commonAlert(data.errorMessage);
+        }
       }
     }
     catch(error) 
@@ -75,7 +97,7 @@ export const EmailVerificationScreen = ({route}:{
     };
   };
 
-  // useEffect(() => {}, [emailVeryficationForm]);
+  // useEffect(() => {}, [emailVerificationForm]);
 
   const renderCell = ({ index, symbol, isFocused }: any) => {
     const hasValue = Boolean(symbol);
