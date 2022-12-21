@@ -37,6 +37,17 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             dto.Json = json;
 
+            string[] nameSurname = dto.name.Split(" ");
+
+            string name = string.Empty;
+            string surname = string.Empty;
+
+            if (nameSurname.Length == 2)
+            {
+                name = nameSurname[0];
+                surname = nameSurname[1];
+            }
+
             Account acc = AccountLogic.Select(m => m.Email == dto.email).FirstOrDefault();
 
             if (acc != null)
@@ -45,8 +56,8 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
                 if (string.IsNullOrEmpty(acc.Name) && string.IsNullOrEmpty(acc.Surname))
                 {
-                    acc.Name = dto.name;
-                    acc.Surname = dto.given_name;
+                    acc.Name = name;
+                    acc.Surname = surname;
                 }
 
                 acc.Image = dto.picture;
@@ -69,8 +80,8 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                     Emailconfirmed = dto.verified_email,
                     Idrole = CommonConstants.RoleUser,
                     Image = dto.picture,
-                    Name = dto.name,
-                    Surname = dto.given_name,
+                    Name = name,
+                    Surname = surname,
                     Refreshtokenvalid = refreshTokenValid,
                     Refreshtoken = refreshToken
                 });
