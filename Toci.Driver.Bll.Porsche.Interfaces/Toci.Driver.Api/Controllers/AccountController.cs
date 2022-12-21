@@ -8,6 +8,7 @@ using Intotech.Wheelo.Bll.Porsche.Interfaces;
 using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
 using Intotech.Wheelo.Bll.Models.Account;
+using Intotech.Wheelo.Bll.Models.Tiny;
 
 namespace Toci.Driver.Api.Controllers;
 
@@ -83,9 +84,9 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
     }
 
     [HttpPost("forgot-password")]
-    public ReturnedResponse<int> ForgotPassword([FromBody]string email)
+    public ReturnedResponse<int> ForgotPassword([FromBody] EmailDto email)
     {
-        return Service.ForgotPassword(email);
+        return Service.ForgotPassword(email.email);
     }
 
     [HttpPatch("{idAccount}/pushtoken")]
