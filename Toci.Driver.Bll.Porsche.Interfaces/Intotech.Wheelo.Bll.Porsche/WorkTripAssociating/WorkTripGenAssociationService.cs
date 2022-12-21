@@ -17,6 +17,9 @@ using Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces;
 using Intotech.Common;
 using System.Globalization;
 using Intotech.Wheelo.Bll.Persistence.Extensions;
+using Intotech.Wheelo.Notifications.Interfaces;
+using Intotech.Wheelo.Notifications.Interfaces.Models.DataNotification;
+using Intotech.Wheelo.Notifications.Interfaces.Models;
 
 namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 {
@@ -34,6 +37,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
         protected IVacollocationsgeolocationToAccountCollocationDto ToAccountCollocationDto;
         protected IFriendLogic FriendLogic;
         protected IWorkTripLogic WorkTripHistoryLogic;
+        protected INotificationManager NotificationManager;
 
         public WorkTripGenAssociationService(IWorktripgenLogic worktripgenLogic, 
             IVaworktripgengeolocationLogic vaworktripgengeolocationLogic,
@@ -42,7 +46,8 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             IAssociationCalculations associationCalculations,
             IVacollocationsgeolocationToAccountCollocationDto toAccountCollocationDto,
             IFriendLogic friendLogic,
-            IWorkTripLogic workTripHistoryLogic)
+            IWorkTripLogic workTripHistoryLogic,
+            INotificationManager notificationManager)
         {
             WorktripGenLogic = worktripgenLogic;
             VaworktripgengeolocationLogic = vaworktripgengeolocationLogic;
@@ -52,6 +57,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             ToAccountCollocationDto = toAccountCollocationDto;
             FriendLogic = friendLogic;
             WorkTripHistoryLogic = workTripHistoryLogic;
+            NotificationManager = notificationManager;
         }
 
         public virtual ReturnedResponse<TripGenCollocationDto> SetWorkTripGetCollocations(WorkTripGenDto workTripGen)
@@ -164,6 +170,12 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                         Distancefrom = distanceFrom,
                         Distanceto = distanceTo
                     });
+
+                    //NotificationManager.SendNotifications<AssociationNotification>(NotificationsKinds.Association, 
+                    //    new NotificationModelBase<AssociationNotification>(new List<string>() { "ExponentPushToken[rtWCLaAF92lqq4mIgmzvRV]", "ExponentPushToken[XqgL8PLm-p-XsCtlZ_dapr]" }, 
+                    //    new NotificationDataField<AssociationNotification>() { screen = "SignIn", screenParams = null, root = ""  }, "Asssssocjujemy", "Tytuł jakich mało", "Sub - Zero"));
+
+                    //ScreenParams = new AssociationNotification() { IdAccountAssociated = 100000027 }
                 }
             }
         }

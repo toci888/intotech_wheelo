@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Notifications.Interfaces.Models
 {
-    public class AssociationNotification
+    public class NotificationResponseDto
     {
     }
 }

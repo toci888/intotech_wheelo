@@ -7,8 +7,31 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Notifications.Interfaces.Models
 {
-    public abstract class NotificationModelBase
+    public class NotificationModelBase<TNotificationData>
     {
-        public abstract PushTicketRequest ToRequest();
+        protected List<string> PushTokens { get; set; }
+        protected NotificationDataField<TNotificationData> NotificationCustomData;
+
+        public NotificationModelBase(List<string> pushTokens, NotificationDataField<TNotificationData> notificationCustomData, string messageBody, 
+            string messageTitle, string messageSubtitle)
+        {
+            PushTokens = pushTokens;
+            NotificationCustomData = notificationCustomData;
+            MessageBody = messageBody;
+            MessageTitle = messageTitle;
+            MessageSubtitle = messageSubtitle;
+        }
+
+        protected string MessageBody { get; set; }
+
+        protected string MessageTitle { get; set; }
+
+        protected string MessageSubtitle { get; set; }
+
+        public virtual PushTicketRequest ToRequest()
+        {
+            return new PushTicketRequest() { PushTo = PushTokens, PushBody = MessageBody, PushData = NotificationCustomData, PushTitle = MessageTitle, 
+                PushSubTitle = MessageSubtitle };
+        }
     }
 }

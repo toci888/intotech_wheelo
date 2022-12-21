@@ -11,28 +11,20 @@ namespace Intotech.Wheelo.Notifications
 {
     public class NotificationManager : INotificationManager
     {
-        protected Dictionary<NotificationsKinds, Func<NotificationModelBase, PushTicketResponse>> NotificationsRunners;
-
         protected INotificationClient NotificationClient;
 
         public NotificationManager(INotificationClient notificationClient)
         {
             NotificationClient = notificationClient;
-
-            NotificationsRunners = new Dictionary<NotificationsKinds, Func<NotificationModelBase, PushTicketResponse>>()
-            {
-                { NotificationsKinds.Association, (notification) => NotificationClient.SendNotification(notification) }
-            };
         }
 
-        public virtual PushTicketResponse SendNotifications(NotificationsKinds notificationsKind, NotificationModelBase notificationModel)
+        public virtual NotificationResponseDto SendNotifications<TNotificationData>(NotificationsKinds notificationsKind, NotificationModelBase<TNotificationData> notificationModel)
         {
-            if (NotificationsRunners.ContainsKey(notificationsKind))
-            {
-                return NotificationsRunners[notificationsKind](notificationModel);
-            }
+            PushTicketResponse response = NotificationClient.SendNotification(notificationModel);
 
-            return null;
+            //response.Errors.
+
+            return new NotificationResponseDto(); // TODO
         }
     }
 }

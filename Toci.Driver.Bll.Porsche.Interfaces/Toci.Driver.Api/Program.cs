@@ -25,6 +25,8 @@ using Intotech.Wheelo.Bll.Porsche.WorkTripAssociating;
 using Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces;
 using Intotech.Wheelo.Bll.Models.ModelMappers;
 using Intotech.Wheelo.Bll.Models.Gaf;
+using Intotech.Wheelo.Notifications.Interfaces;
+using Intotech.Wheelo.Notifications;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -106,6 +108,8 @@ builder.Services.AddScoped<IGafManager, GafManager>();
 builder.Services.AddScoped<GafServiceBase<FacebookUserDto>, FacebookUserService>();
 builder.Services.AddScoped<GafServiceBase<GoogleUserDto>, GoogleUserService>();
 builder.Services.AddScoped<IVacollocationsgeolocationToAccountCollocationDto, VacollocationsgeolocationToAccountCollocationDto>();
+builder.Services.AddScoped<INotificationManager, NotificationManager>();
+builder.Services.AddScoped<INotificationClient, NotificationClient>();
 
 //builder.Services.AddScoped<IEmailManager, EmailManager>();
 

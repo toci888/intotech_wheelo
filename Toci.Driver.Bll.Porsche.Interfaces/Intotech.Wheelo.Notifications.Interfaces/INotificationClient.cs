@@ -10,6 +10,6 @@ namespace Intotech.Wheelo.Notifications.Interfaces
 {
     public interface INotificationClient
     {
-        PushTicketResponse SendNotification(NotificationModelBase notification);
+        PushTicketResponse SendNotification<TNotificationData>(NotificationModelBase<TNotificationData> notification);
     }
 }
