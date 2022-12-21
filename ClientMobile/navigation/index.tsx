@@ -49,7 +49,7 @@ export default function Navigation({
 }) {
   return (
     <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme}>
-      <RootNavigator />
+      <RootNavigator colorScheme={colorScheme}/>
     </NavigationContainer>
   );
 }
@@ -60,11 +60,12 @@ export default function Navigation({
  */
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-function RootNavigator() {
+function RootNavigator(props: any) {
   const { registerForPushNotificationsAsync, handleNotificationResponse } =
     useNotifications();
 
   useEffect(() => {
+    console.log("TU", props.colorScheme);
     registerForPushNotificationsAsync();
     Notifications.setNotificationHandler({
       handleNotification: async () => ({
@@ -73,12 +74,12 @@ function RootNavigator() {
         shouldSetBadge: true,
       }),
     });
-
+    
     const responseListener =
       Notifications.addNotificationResponseReceivedListener(
         handleNotificationResponse
       );
-
+      
     return () => {
       if (responseListener)
         Notifications.removeNotificationSubscription(responseListener);
