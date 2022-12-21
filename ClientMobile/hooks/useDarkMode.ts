@@ -1,5 +1,4 @@
 import * as Device from "expo-device";
-import * as Notifications from "expo-notifications";
 import { Alert, Linking, Platform } from "react-native";
 import { openSettings } from "expo-linking";
 
