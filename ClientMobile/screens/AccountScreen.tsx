@@ -1,4 +1,4 @@
-import { ScrollView, View, StyleSheet } from "react-native";
+import { ScrollView, View, StyleSheet, Linking } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Text, Button } from "@ui-kitten/components";
 
@@ -100,6 +100,8 @@ export const AccountScreen = () => {
       onPress: () => navigation.navigate("MyProperties"),
     },
   ];
+
+
 
   return (
     <Screen>

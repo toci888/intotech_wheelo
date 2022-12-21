@@ -11,8 +11,9 @@
     "Search": "Szukaj",
     "Alert": "Komunikat",
     "Welcome": "Witaj",
-    "ToenablePushNotificationspleasechangeyoursettings": "W celu włączenia powiadomień, włącz je w ustawieniach",
+    "ToEnablePushNotificationsPleaseChangeYourSettings": "W celu włączenia powiadomień, włącz je w ustawieniach",
     "OpenSettings": "Otwórz ustawienia",
     "Ok": "Ok",
-    "Permissiontoaccesslocationwasdenied": "Nie udzielono zgody na pobranie danych geograficznych."
+    "Permissiontoaccesslocationwasdenied": "Nie udzielono zgody na pobranie danych geograficznych.",
+    "UnableToViewWebsite": "Nie udało się otworzyć przeglądarki"
 }

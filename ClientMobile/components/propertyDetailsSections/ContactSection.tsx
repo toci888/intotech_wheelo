@@ -75,7 +75,7 @@ export const ContactSection = ({ collocation }: { collocation: CollocateAccount 
           appearance={"ghost"}
           onPress={() => {
             navigation.navigate("MessageProperty", {
-              propertyID: collocation.idAccount,
+              collocationID: collocation.idAccount,
               tour: true,
             });
           }}
@@ -87,7 +87,7 @@ export const ContactSection = ({ collocation }: { collocation: CollocateAccount 
           appearance={"ghost"}
           onPress={() => {
             navigation.navigate("MessageProperty", {
-              propertyID: collocation.idAccount,
+              collocationID: collocation.idAccount,
             });
           }}
         >

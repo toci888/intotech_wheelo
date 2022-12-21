@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Pressable } from "react-native";
+import { ColorSchemeName } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useEffect } from "react";
 import * as Notifications from "expo-notifications";
@@ -64,7 +64,7 @@ function RootNavigator(props: any) {
   const { registerForPushNotificationsAsync, handleNotificationResponse } =
     useNotifications();
 
-  useEffect(() => {
+  useEffect(() => {    
     console.log("TU", props.colorScheme);
     registerForPushNotificationsAsync();
     Notifications.setNotificationHandler({

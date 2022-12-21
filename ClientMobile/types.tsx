@@ -31,7 +31,6 @@ export type RootStackParamList = {
   MyProperties: undefined;
   ManageUnits: { collocationID: number };
   Review: { collocationID: number; propertyName: string };
-  WheeloMain: undefined;
   EmailVerification: any;
 };
 
