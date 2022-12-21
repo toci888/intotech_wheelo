@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { endpoints } from "../constants/constants";
 import { User } from "../types/user";
-import { handleError } from "../utils/handleError";
+import { commonAlert, handleError } from "../utils/handleError";
 import * as Crypto from 'expo-crypto';
 import { loginDto, registerDto, ThemeMode as boolean } from "../types";
 import { ReturnedResponse } from "../types";
@@ -67,12 +67,12 @@ export const appleLoginOrRegister = async (token: string) => {
 
 export const forgotPassword = async (email: string) => {
   try {
-    const { data } = await axios.post<{ emailSent: boolean }>(
-      endpoints.forgotPassword,
-      { email }
-    );
-
-    return data;
+    const { data } = await axios.post(endpoints.forgotPassword, { email });
+    
+    if(data.isSuccess === false) {
+      commonAlert(data.errorMessage)
+    }
+    return data as ReturnedResponse<number>;
   } catch (error) {
     handleError(error);
   }

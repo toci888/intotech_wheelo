@@ -67,7 +67,7 @@ export const endpoints = {
   register: userEndpoint + "/register",
   emailVerification: userEndpoint + "/confirm-email",
   login: userEndpoint + "/login",
-  forgotPassword: userEndpoint + "/forgotpassword",
+  forgotPassword: userEndpoint + "/forgot-password",
   resetPassword: userEndpoint + "/resetpassword",
   createProperty: collocationEndpoint,
   getCollocationByID: serverUrl+'/AssociationMapData/association-user' + "/",

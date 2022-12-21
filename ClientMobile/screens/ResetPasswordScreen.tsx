@@ -1,3 +1,4 @@
+import React from "react";
 import { StyleSheet } from "react-native";
 import { Button, Text } from "@ui-kitten/components";
 import * as yup from "yup";
@@ -10,6 +11,8 @@ import { ModalHeader } from "../components/ModalHeader";
 import { PasswordInput } from "../components/PasswordInput";
 import { useLoading } from "../hooks/useLoading";
 import { resetPassword } from "../services/user";
+import { commonAlert } from "../utils/handleError";
+import { i18n } from "../i18n/i18n";
 
 export const ResetPasswordScreen = ({
   route,
@@ -31,7 +34,7 @@ export const ResetPasswordScreen = ({
       );
       if (passwordReset) navigate("SignIn");
     } catch (error) {
-      alert("Unable to reset password");
+      commonAlert(i18n.t('UnableToResetPassword'));
     } finally {
       setLoading(false);
     }

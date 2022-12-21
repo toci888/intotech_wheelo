@@ -15,5 +15,13 @@
     "OpenSettings": "Otwórz ustawienia",
     "Ok": "Ok",
     "Permissiontoaccesslocationwasdenied": "Nie udzielono zgody na pobranie danych geograficznych.",
-    "UnableToViewWebsite": "Nie udało się otworzyć przeglądarki"
+    "UnableToViewWebsite": "Nie udało się otworzyć przeglądarki",
+    "UnableToResetPassword": "Nie udało się zresetować hasła.",
+    "ForgotYourPassword": "Zapomniałeś hasła?",
+    "Pleaseenteryouremailandwewillsendyoualinktochangeyourpassword": "Wprowadź swój adres e-mail, a my wyślemy Ci link do zmiany hasła.",
+    "Continue": "Kontynuuj",
+    "YourEmailAddress": "Twój Adres email",
+    "Youremailisrequired": "Adres email jest wymagany.",
+    "EmailSent": "E-Mail został wysłany!",
+    "AnemailcontaininginstructionsabouthowtochangeyourpasswordhasbeensenttoyouPleasecheckyourjunkmailorspamsectionifyoudonotseeanemail": "Wiadomość e-mail zawierająca instrukcje dotyczące zmiany hasła został do Ciebie wysłany. Sprawdź sekcję wiadomości-śmieci lub spamu jeśli nie widzisz wiadomości e-mail."
 }

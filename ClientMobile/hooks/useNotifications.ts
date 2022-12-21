@@ -9,6 +9,7 @@ import { i18n } from "../i18n/i18n";
 import { openURL } from "../utils/openURL";
 import * as WebBrowser from "expo-web-browser";
 import { useNavigation } from "@react-navigation/native";
+import { NotificationsParams } from "../types";
 
 export const useNotifications = () => {
   const { addPushToken, setAllowsNotifications, user } = useUser();
@@ -61,7 +62,7 @@ export const useNotifications = () => {
 
   // This listener is fired whenever a notification is received while the app is foregrounded
   const handleNotification = (notification: Notifications.Notification) => {
-    console.log("dostalem notyfikacje")
+    console.log("dostalem notyfikacje (handleNotification)")
     // could be useful if you want to display your own toast message
     // could also make a server call to refresh data in other part of the app
   };
@@ -70,18 +71,14 @@ export const useNotifications = () => {
   const handleNotificationResponse = (
     response: Notifications.NotificationResponse
   ) => {
-    const data: { url?: string } = response.notification.request.content.data;
-    
-    if (data) {
-      console.log("WESZLES", data);
-      // navigation.navigate("AccountRoot", {screen: "Settings"}) // types.tsx RootTabParamList / AccountTabParamList
-      // navigation.navigate("Root", {screen: "Saved"})
-      // navigation.navigate("Root", {screen: "AccountRoot"});
+
+    const data: NotificationsParams = response.notification.request.content.data;
+    console.log("DATA z notyfikacji", data)
+    if (data && data.root) {
+      navigation.navigate(data.root, {screen: data.screen, params: data.screenParams})
+    } else {
+      navigation.navigate(data.screen, {params: data.screenParams})
     }
-    // process.env
-    //Linking.openURL(data.url);
-    // WebBrowser.openBrowserAsync("WWW.GOOGLE.COM/kotki")
-    // openURL("WWW.GOOGLE.COM/kotki")
   };
 
   return {
