@@ -43,7 +43,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         {
             await Clients.Group(chatMessage.RoomName).SendAsync(ClientReceiveMessageCallback, chatMessage);
 
-            chatMessage.RoomId = 8;
+            //chatMessage.RoomId = 8;
 
             ChatLogic.SendMessage(chatMessage);
         }

@@ -63,13 +63,13 @@ export default class WheeloClient {
         await wheeloEngExists.requestConversation(json);
     }
 
-    chat = async (room, user, message, recMagCall) => {
+    chat = async (room, user, message, userId, roomId, recMagCall) => {
 
-        var wheeloEngExists = this.getEngine(room);
+        var wheeloEngExists = await this.getEngine(room);
 
         if (wheeloEngExists !== undefined)
         {
-            wheeloEngExists.sendMessage(message, user);
+            wheeloEngExists.sendMessage(message, user, userId, room, roomId);
 
             return wheeloEngExists;
         }
@@ -80,7 +80,7 @@ export default class WheeloClient {
 
         this.addEngineToMap(wheeloChatEngine, room);
 
-        await wheeloChatEngine.sendMessage(message, user);
+        await wheeloChatEngine.sendMessage(message, user, userId, room, roomId);
 
         return wheeloChatEngine;
     }

@@ -20,7 +20,7 @@ namespace Intotech.Wheelo.Chat.Api.Logic
                 Idauthor = chatMessage.User.UserId,
                 Idroom = chatMessage.RoomId,
                 Message1 = chatMessage.Message
-            }).Id > 0;
+            }).Id != "0";
         }
     }
 }

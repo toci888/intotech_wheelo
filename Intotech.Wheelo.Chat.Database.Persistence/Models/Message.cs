@@ -5,11 +5,11 @@ namespace Intotech.Wheelo.Chat.Database.Persistence.Models;
 
 public partial class Message
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
 
-    public int Idauthor { get; set; }
+    public string Idauthor { get; set; }
 
-    public int? Idroom { get; set; }
+    public string? Idroom { get; set; }
 
     public string Message1 { get; set; } = null!;
 

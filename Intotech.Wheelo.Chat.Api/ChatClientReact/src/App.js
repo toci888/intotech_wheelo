@@ -30,7 +30,8 @@ const App = () => {
   invited user Id: <input type="text" id="userIdInv"></input>
   invited user Name: <input type="text" id="userNameInv"></input>
   <div id="chatBox"></div>
-  <input type="submit" onClick={() => wheeloClient.chat('WheeloHeroes', "Julia", document.getElementById("messId").value, renderMsg)}></input>
+  <input type="submit" onClick={() => wheeloClient.chat('WheeloHeroes', "Julia", 
+    document.getElementById("messId").value, document.getElementById("userId").value, "1234", renderMsg)}></input>
   <input type="submit" value="Connect" onClick={() => wheeloClient.connect(document.getElementById("userId").value, document.getElementById("userName").value)}></input>
   <input type="submit" value="Invite" onClick={() => 
     wheeloClient.requestConversation(document.getElementById("userId").value, document.getElementById("userName").value, 

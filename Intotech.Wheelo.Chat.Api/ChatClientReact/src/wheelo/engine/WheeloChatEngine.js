@@ -71,14 +71,20 @@ export default class WheeloChatEngine {
         await this.connection.invoke(this.requestConversationDelegate, convDto);
     }
 
-    sendMessage = async (message, user) => {
+    sendMessage = async (message, user, userId, roomName, roomId) => {
         try {
-          
+          console.log({  User: 
+            { UserId: userId, UserName: user, UserSurname: "Johnny" },
+            Message: message,
+            RoomName: roomName,
+            RoomId: roomId
+        });
           await this.connection.invoke(this.sendMessageCallback, 
-            {  user: 
-                { UserId: 1, UserName: user },
+            {  User: 
+                { UserId: userId, UserName: user, UserSurname: "Johnny" },
                 Message: message,
-                RoomName: this.room
+                RoomName: roomName,
+                RoomId: roomId
             }); 
 
         } catch (e) {
