@@ -62,6 +62,13 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             //EmailManager = emailManager;
         }
 
+        public ReturnedResponse<AccountRoleDto> GafLogin(Accountrole accountrole)
+        {
+            AccountRoleDto result = GenerateJwt(accountrole);
+
+            return new ReturnedResponse<AccountRoleDto>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        }
+
         public ReturnedResponse<AccountRoleDto> Login(LoginDto loginDto)
         {
             Accountrole simpleaccount = AccRoleLogic.Select(m => m.Email == loginDto.Email && m.Password == loginDto.Password).FirstOrDefault();
@@ -395,6 +402,30 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 return null;
             }
 
+            AccountRoleDto userArd = DtoModelMapper.Map<AccountRoleDto, Accountrole>(userRole);
+
+            List<Claim> claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.NameIdentifier, userArd.Email),
+                new Claim(ClaimTypes.Name, $"{userArd.Name} {userArd.Surname}"),
+                new Claim(ClaimTypes.Role, $"{userArd.Rolename}"),
+            };
+
+            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey));
+            SigningCredentials cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            DateTime expires = DateTime.Now.AddDays(_authenticationSettings.JwtExpireDays);
+
+            JwtSecurityToken token = new JwtSecurityToken(_authenticationSettings.JwtIssuer,
+                _authenticationSettings.JwtIssuer, claims, expires: expires, signingCredentials: cred);
+
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+
+            userArd.AccessToken = tokenHandler.WriteToken(token);
+
+            return userArd;
+        }
+        protected AccountRoleDto GenerateJwt(Accountrole userRole)
+        {
             AccountRoleDto userArd = DtoModelMapper.Map<AccountRoleDto, Accountrole>(userRole);
 
             List<Claim> claims = new List<Claim>()

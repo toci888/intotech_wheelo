@@ -13,6 +13,8 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.User
     {
         ReturnedResponse<AccountRoleDto> Register(AccountRegisterDto sAccount);
 
+        ReturnedResponse<AccountRoleDto> GafLogin(Accountrole accountrole);
+
         ReturnedResponse<AccountRoleDto> Login(LoginDto loginDto);
 
         ReturnedResponse<AccountRoleDto> ConfirmEmail(EmailConfirmDto EcDto);

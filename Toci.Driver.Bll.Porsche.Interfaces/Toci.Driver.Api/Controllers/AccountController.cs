@@ -40,6 +40,13 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
     [HttpPost("login")]
     public ReturnedResponse<AccountRoleDto> Login(LoginDto lDto)
     {
+        if (lDto.Method == "facebook" || lDto.Method == "google")
+        {
+            Accountrole result = GafManager.RegisterByMethod(lDto.Method, lDto.Token);
+
+            return Service.GafLogin(result);
+        }
+
         ReturnedResponse<AccountRoleDto> sa = Service.Login(lDto);
 
         return sa;
