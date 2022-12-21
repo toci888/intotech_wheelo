@@ -23,6 +23,7 @@ export const loginUser = async (values: loginDto) => {
   try {
     values.password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, values.password);
     values.method = 'wheelo';
+    values.token = '';
 
     const { data } = await axios.post(endpoints.login, values);
     return data as ReturnedResponse<User>;
@@ -33,10 +34,10 @@ export const loginUser = async (values: loginDto) => {
 
 export const facebookLoginOrRegister = async (token: string) => {
   try {
-    const user: ReturnedResponse<User> = await axios.post(endpoints.login, {
-      token, method: 'facebook',
+    const { data } = await axios.post(endpoints.login, {
+      token, method: 'facebook', email: "", password: ""
     });
-    return user;
+    return data as ReturnedResponse<User>;
   } catch (error) {
     handleError(error);
   }
@@ -44,10 +45,10 @@ export const facebookLoginOrRegister = async (token: string) => {
 
 export const googleLoginOrRegister = async (token: string) => {
   try {
-    const user: ReturnedResponse<User> = await axios.post(endpoints.login, {
-      token, method: 'google',
+    const { data } = await axios.post(endpoints.login, {
+      token, method: 'google', email: "", password: ""
     });
-    return user;
+    return data as ReturnedResponse<User>;
   } catch (error) {
     handleError(error);
   }

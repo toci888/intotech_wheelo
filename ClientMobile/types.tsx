@@ -99,4 +99,5 @@ export type loginDto = {
   email: string;
   password: string;
   method?: string;
+  token?: string;
 }
