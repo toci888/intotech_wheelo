@@ -71,9 +71,7 @@ export const useNotifications = () => {
   const handleNotificationResponse = (
     response: Notifications.NotificationResponse
   ) => {
-
     const data: NotificationsParams = response.notification.request.content.data;
-    console.log("DATA z notyfikacji", data)
     if (data && data.root) {
       navigation.navigate(data.root, {screen: data.screen, params: data.screenParams})
     } else {

@@ -31,8 +31,7 @@ const animateCell = ({ hasValue, index, isFocused }: any) => {
     }),
     Animated.spring(animationsScale[index], {
       useNativeDriver: false,
-      toValue: hasValue ? 0 : 1,
-      // duration: hasValue ? 300 : 250,
+      toValue: hasValue ? 0 : 1
     }),
   ]).start();
 };
@@ -54,23 +53,17 @@ export const EmailVerificationScreen = ({route}:{
 
   const handleVerify = async () => {
     console.log("GGGGGGG");
-    console.log(route);
     const user = route.params.user as User;
     setEmailVerificationForm({ email: user.email, code: value });
     try
     {
       if(route.params.type === "forgotPassword") {
-        console.log("forgotxdd", endpoints.resetPassword, {
+        const { data } = await axios.post(`${endpoints.forgotPasswordCheckCode}`, {
           email: `${user.email}`,
-          token: value,
-        })
-        const { data } = await axios.post(`${endpoints.resetPassword}`, {
-          email: `${user.email}`,
-          code: value,
+          token: value
         });
-        console.log("DATAAAA", data)
-        if(data.methodResult) {
-          navigation.navigate("ResetPassword", {token: value});
+        if(data.isSuccess) {
+          navigation.navigate("ResetPassword", {token: value, email: user.email});
         } else {
           commonAlert(data.errorMessage);
         }
@@ -79,9 +72,6 @@ export const EmailVerificationScreen = ({route}:{
           email: `${user.email}`,
           code: Number(value),
         });
-        console.log("UDALO", {email: `${user.email}`,
-        code: Number(value),
-      })
 
         if(data.methodResult) {
           login(data.methodResult);
@@ -96,8 +86,6 @@ export const EmailVerificationScreen = ({route}:{
       console.log(error);
     };
   };
-
-  // useEffect(() => {}, [emailVerificationForm]);
 
   const renderCell = ({ index, symbol, isFocused }: any) => {
     const hasValue = Boolean(symbol);

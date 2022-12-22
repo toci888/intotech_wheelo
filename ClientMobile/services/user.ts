@@ -78,21 +78,22 @@ export const forgotPassword = async (email: string) => {
   }
 };
 
-export const resetPassword = async (password: string, token: string) => {
+export const resetPassword = async (password: string, token: string, email: string) => {
   try {
-    const { data } = await axios.post(
-      endpoints.resetPassword,
-      { password },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+    password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, password);
+    console.log("RESET PASSWORD", endpoints.resetPassword, { password, email, token })
+    const { data } = await axios.post(endpoints.resetPassword,
+      { password, email, token }
+      // {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // }
     );
 
     return data;
   } catch (error: any) {
-    if (error.response.status === 401) return alert("Invalid or Expired Token");
+    // if (error.response.status === 401) return alert("Invalid or Expired Token");
 
     alert("Unable to reset password.");
   }
