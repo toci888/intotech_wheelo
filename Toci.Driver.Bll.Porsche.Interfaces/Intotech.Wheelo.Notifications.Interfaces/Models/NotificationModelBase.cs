@@ -9,14 +9,22 @@ namespace Intotech.Wheelo.Notifications.Interfaces.Models
 {
     public class NotificationModelBase<TNotificationData>
     {
+        protected Dictionary<NotificationsKinds, NotificationDataField<TNotificationData>> NotificationKindDataMapper = new Dictionary<NotificationsKinds, NotificationDataField<TNotificationData>>()
+        {
+            { NotificationsKinds.Settings, new NotificationDataField<TNotificationData>() { root = "AccountRoot", screen = "Settings" } }
+        };
+
         protected List<string> PushTokens { get; set; }
         protected NotificationDataField<TNotificationData> NotificationCustomData;
 
-        public NotificationModelBase(List<string> pushTokens, NotificationDataField<TNotificationData> notificationCustomData, string messageBody, 
+        public NotificationModelBase(NotificationsKinds notificationKinds, List<string> pushTokens, TNotificationData notificationCustomData, string messageBody, 
             string messageTitle, string messageSubtitle)
         {
             PushTokens = pushTokens;
-            NotificationCustomData = notificationCustomData;
+
+            NotificationCustomData = ResolveKind(notificationKinds);
+
+            NotificationCustomData.screenParams = notificationCustomData;
             MessageBody = messageBody;
             MessageTitle = messageTitle;
             MessageSubtitle = messageSubtitle;
@@ -33,5 +41,34 @@ namespace Intotech.Wheelo.Notifications.Interfaces.Models
             return new PushTicketRequest() { PushTo = PushTokens, PushBody = MessageBody, PushData = NotificationCustomData, PushTitle = MessageTitle, 
                 PushSubTitle = MessageSubtitle };
         }
+
+        protected virtual NotificationDataField<TNotificationData> ResolveKind(NotificationsKinds notificationKinds)
+        {
+            if (NotificationKindDataMapper.ContainsKey(notificationKinds))
+            {
+                return NotificationKindDataMapper[notificationKinds];
+            }
+
+            return new NotificationDataField<TNotificationData>();
+        }
     }
 }
+
+/*
+     navigation.navigate("AccountRoot", {screen: "Settings"}) 
+navigation.navigate("Root", {screen: "Saved"})
+navigation.navigate("Root", {screen: "AccountRoot"});
+navigation.navigate("SignIn")
+navigation.navigate("SignUp", {screen: ""})
+navigation.navigate("SignUp")
+navigation.navigate("EditProperty", { collocationId: collocation.idAccount });
+navigation.navigate("Root", {
+screen: "Search",
+params: {
+  startLocation,
+  endLocation,
+  startLocationTime: startTime,
+  endLocationTime: endTime
+}
+}
+     */

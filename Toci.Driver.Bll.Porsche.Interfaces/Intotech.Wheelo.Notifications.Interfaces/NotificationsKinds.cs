@@ -8,6 +8,8 @@ namespace Intotech.Wheelo.Notifications.Interfaces
 {
     public enum NotificationsKinds
     {
+        Settings,
+        SignIn,
         Association,
         ChatMessage
     }

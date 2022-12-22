@@ -18,13 +18,13 @@ namespace Intotech.Wheelo.Notifications
             NotificationClient = notificationClient;
         }
 
-        public virtual NotificationResponseDto SendNotifications<TNotificationData>(NotificationsKinds notificationsKind, NotificationModelBase<TNotificationData> notificationModel)
+        public virtual NotificationResponseDto SendNotifications<TNotificationData>(NotificationModelBase<TNotificationData> notificationModel)
         {
             PushTicketResponse response = NotificationClient.SendNotification(notificationModel);
 
             //response.Errors.
 
             return new NotificationResponseDto(); // TODO
-        }
+        }         
     }
 }
