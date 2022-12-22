@@ -40,17 +40,26 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc.NotificationsTests
         public void NotificationSignInTest()
         {
             NotificationManager.SendNotifications<SignInNotification>( 
-                new NotificationModelBase<SignInNotification>(NotificationsKinds.SignIn, new List<string>() { PushTokenBartek },  //PushTokenKacper
+                new NotificationModelBase<SignInNotification>(NotificationsKinds.SignIn, new List<string>() { PushTokenKacper },  //
                 new SignInNotification(), "Sign In test body", "Sign In test", "Sign In test subtitle"));
+
+        }
+
+        [TestMethod]
+        public void NotificationSettingsInTest()
+        {
+            NotificationManager.SendNotifications<SignInNotification>(
+                new NotificationModelBase<SignInNotification>(NotificationsKinds.Settings, new List<string>() { PushTokenKacper },  //
+                new SignInNotification(), "settings test body", "settings test", "settings test subtitle"));
 
         }
 
         [TestMethod]
         public void NotificationSavedTest()
         {
-           // NotificationManager.SendNotifications<AssociationNotification>(NotificationsKinds.Association,
-             //   new NotificationModelBase<AssociationNotification>(new List<string>() { PushTokenBartek },  //PushTokenKacper
-               // new NotificationDataField<AssociationNotification>() { screen = "Saved", screenParams = null, root = "Root" }, "Saved test body", "Saved test", "Saved test subtitle"));
+            NotificationManager.SendNotifications<SignInNotification>(
+                 new NotificationModelBase<SignInNotification>(NotificationsKinds.Saved, new List<string>() { PushTokenKacper },  //
+                 new SignInNotification(), "saved test body", "saved test", "saved test subtitle"));
 
         }
 

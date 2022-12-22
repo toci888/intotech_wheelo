@@ -10,6 +10,8 @@ namespace Intotech.Wheelo.Notifications.Interfaces
     {
         Settings,
         SignIn,
+        Saved,
+        AccountRoot,
         Association,
         ChatMessage
     }

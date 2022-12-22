@@ -11,7 +11,10 @@ namespace Intotech.Wheelo.Notifications.Interfaces.Models
     {
         protected Dictionary<NotificationsKinds, NotificationDataField<TNotificationData>> NotificationKindDataMapper = new Dictionary<NotificationsKinds, NotificationDataField<TNotificationData>>()
         {
-            { NotificationsKinds.Settings, new NotificationDataField<TNotificationData>() { root = "AccountRoot", screen = "Settings" } }
+            { NotificationsKinds.Settings, new NotificationDataField<TNotificationData>() { root = "AccountRoot", screen = "Settings" } },
+            { NotificationsKinds.Saved, new NotificationDataField<TNotificationData>() { root = "Root", screen = "Saved" } },
+            { NotificationsKinds.AccountRoot, new NotificationDataField<TNotificationData>() { root = "Root", screen = "AccountRoot" } },
+            { NotificationsKinds.SignIn, new NotificationDataField<TNotificationData>() { root = "SignIn" } },
         };
 
         protected List<string> PushTokens { get; set; }
