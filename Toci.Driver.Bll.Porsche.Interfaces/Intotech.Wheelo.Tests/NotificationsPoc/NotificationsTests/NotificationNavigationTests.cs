@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using Intotech.Wheelo.Notifications;
 using Intotech.Wheelo.Notifications.Interfaces.Models.DataNotification;
 using Intotech.Wheelo.Notifications.Interfaces.Models;
+using Intotech.Wheelo.Common.Interfaces.Models;
+using System.Text.Json;
 
 namespace Intotech.Wheelo.Tests.NotificationsPoc.NotificationsTests
 {
@@ -64,14 +66,20 @@ namespace Intotech.Wheelo.Tests.NotificationsPoc.NotificationsTests
         }
 
         [TestMethod]
-        public void NotificationSettingsTest()
+        public void NotificationSearchTest()
         {
-           // NotificationManager.SendNotifications<AssociationNotification>(NotificationsKinds.Association,
-             //   new NotificationModelBase<AssociationNotification>(new List<string>() { PushTokenBartek },  //PushTokenKacper
-               // new NotificationDataField<AssociationNotification>() { screen = "Saved", screenParams = null, root = "Root" }, "Saved test body", "Saved test", "Saved test subtitle"));
+            WorkTripSearchDto searchDto = JsonSerializer.Deserialize<WorkTripSearchDto>(SearchJson(), new JsonSerializerOptions() { AllowTrailingCommas = true });
+
+            NotificationManager.SendNotifications<WorkTripSearchDto>(
+               new NotificationModelBase<WorkTripSearchDto>(NotificationsKinds.Search, new List<string>() { PushTokenKacper },  //PushTokenKacper
+                searchDto, "Search test body", "Search test", "Search test subtitle"));
 
         }
 
+        private string SearchJson()
+        {
+            return "{\r\n  \"endLocation\": {\r\n    \"address\": {\r\n      \"city\": \"Wrocław\",\r\n      \"country\": \"Polska\",\r\n      \"country_code\": null,\r\n      \"house_number\": null,\r\n      \"name\": \"Wrocław, 51\",\r\n      \"postcode\": \"51\",\r\n      \"road\": null,\r\n      \"state\": \"Dolnośląskie\",\r\n    },\r\n    \"display_name\": \"Wrocław, 51\",\r\n    \"lat\": \"51.107883\",\r\n    \"lon\": \"17.038538\",\r\n    \"place_id\": \"ChIJv4q11MLpD0cR9eAFwq5WCbc\",\r\n  },\r\n  \"endLocationTime\": \"16:00\",\r\n  \"startLocation\": {\r\n    \"address\": {\r\n      \"city\": \"Poznań\",\r\n      \"country\": \"Polska\",\r\n      \"country_code\": null,\r\n      \"house_number\": null,\r\n      \"name\": \"Poznań, 62\",\r\n      \"postcode\": \"62\",\r\n      \"road\": null,\r\n      \"state\": \"Wielkopolskie\",\r\n    },\r\n    \"display_name\": \"Poznań, 62\",\r\n    \"lat\": \"52.406376\",\r\n    \"lon\": \"16.925169\",\r\n    \"place_id\": \"ChIJtwrh7NJEBEcR0b80A5gx6qQ\",\r\n  },\r\n  \"startLocationTime\": \"08:00\"\r\n}";
+        }
     
     }
 }

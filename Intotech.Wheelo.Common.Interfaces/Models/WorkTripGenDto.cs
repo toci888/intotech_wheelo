@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Common.Interfaces.Models
 {
-    public class WorkTripGenDto
+    public class WorkTripGenDto : WorkTripSearchDto
     {
-        public GeographicLocation StartLocation { get; set; }
-        public GeographicLocation EndLocation { get; set; }
-        public string StartLocationTime { get; set; }
-        public string EndLocationTime { get; set; }
+        
         public double AcceptableDistance { get; set; }
         public int Idaccount { get; set; }
         public int IsDriver { get; set; }
