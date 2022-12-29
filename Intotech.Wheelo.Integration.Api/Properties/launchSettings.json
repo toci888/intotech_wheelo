@@ -27,6 +27,10 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    "warsztaty": {
+      "commandName": "Project",
+      "applicationUrl": "http://192.168.0.158:5108"
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json",
