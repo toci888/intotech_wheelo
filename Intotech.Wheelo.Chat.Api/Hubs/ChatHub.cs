@@ -13,6 +13,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         private const string ClientAddUserCallback = "AddUser";
         private const string InviteToConversation = "InviteToConversation";
         private const string UserOwnIdPattern = "accountId: {0}, accountName: {1} random ending";
+        private const string UsersRoomIdPattern = "{0}_{1}";
 
         protected ChatLogic ChatLogic;
 

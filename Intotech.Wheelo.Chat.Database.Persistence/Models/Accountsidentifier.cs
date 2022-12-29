@@ -9,5 +9,7 @@ public partial class Accountsidentifier
 
     public string Roomid { get; set; } = null!;
 
-    public int? Accountid { get; set; }
+    public int Idaccount { get; set; }
+
+    public DateTime? Createdat { get; set; }
 }

@@ -17,6 +17,8 @@ public partial class IntotechWheeloChatContext : DbContext
 
     public virtual DbSet<Accountsidentifier> Accountsidentifiers { get; set; }
 
+    public virtual DbSet<Conversationinvitation> Conversationinvitations { get; set; }
+
     public virtual DbSet<Message> Messages { get; set; }
 
     public virtual DbSet<Room> Rooms { get; set; }
@@ -35,10 +37,28 @@ public partial class IntotechWheeloChatContext : DbContext
 
             entity.ToTable("accountsidentifiers");
 
-            entity.HasIndex(e => e.Roomid, "accountsidentifiers_roomid_key").IsUnique();
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Createdat)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("createdat");
+            entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+            entity.Property(e => e.Roomid).HasColumnName("roomid");
+        });
+
+        modelBuilder.Entity<Conversationinvitation>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("conversationinvitations_pkey");
+
+            entity.ToTable("conversationinvitations");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Accountid).HasColumnName("accountid");
+            entity.Property(e => e.Createdat)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("createdat");
+            entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+            entity.Property(e => e.Idaccountinvited).HasColumnName("idaccountinvited");
             entity.Property(e => e.Roomid).HasColumnName("roomid");
         });
 
@@ -54,12 +74,8 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
             entity.Property(e => e.Idauthor).HasColumnName("idauthor");
-            entity.Property(e => e.Idroom).HasColumnName("idroom");
             entity.Property(e => e.Message1).HasColumnName("message");
-
-            entity.HasOne(d => d.IdroomNavigation).WithMany(p => p.Messages)
-                .HasForeignKey(d => d.Idroom)
-                .HasConstraintName("messages_idroom_fkey");
+            entity.Property(e => e.Roomid).HasColumnName("roomid");
         });
 
         modelBuilder.Entity<Room>(entity =>
@@ -88,12 +104,12 @@ public partial class IntotechWheeloChatContext : DbContext
             entity.ToTable("roomsaccounts");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Createdat)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("createdat");
             entity.Property(e => e.Idmember).HasColumnName("idmember");
-            entity.Property(e => e.Idroom).HasColumnName("idroom");
-
-            entity.HasOne(d => d.IdroomNavigation).WithMany(p => p.Roomsaccounts)
-                .HasForeignKey(d => d.Idroom)
-                .HasConstraintName("roomsaccounts_idroom_fkey");
+            entity.Property(e => e.Roomid).HasColumnName("roomid");
         });
 
         OnModelCreatingPartial(modelBuilder);

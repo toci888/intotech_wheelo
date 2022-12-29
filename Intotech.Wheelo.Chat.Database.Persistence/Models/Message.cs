@@ -9,11 +9,9 @@ public partial class Message
 
     public int Idauthor { get; set; }
 
-    public int? Idroom { get; set; }
+    public string Roomid { get; set; } = null!;
 
     public string Message1 { get; set; } = null!;
 
     public DateTime? Createdat { get; set; }
-
-    public virtual Room? IdroomNavigation { get; set; }
 }

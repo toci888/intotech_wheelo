@@ -22,7 +22,7 @@ namespace Intotech.Wheelo.Chat.Jaguar
 
         public virtual Message AddMessage(Message message)
         {
-            Room room = RoomLogic.Select(m => m.Id == message.Idroom).FirstOrDefault();
+            Room room = RoomLogic.Select(m => m.Roomid == message.Roomid).FirstOrDefault();
 
 
 

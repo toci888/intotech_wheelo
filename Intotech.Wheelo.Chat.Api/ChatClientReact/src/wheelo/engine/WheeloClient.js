@@ -65,7 +65,7 @@ export default class WheeloClient {
 
     chat = async (room, user, message, recMagCall) => {
 
-        var wheeloEngExists = this.getEngine(room);
+        var wheeloEngExists = await this.getEngine(room);
 
         if (wheeloEngExists !== undefined)
         {
