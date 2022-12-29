@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,7 @@
 ﻿using Intotech.Common;
 using Intotech.Wheelo.Chat.Api.Logic;
 using Intotech.Wheelo.Chat.Database.Persistence.Models;
+using Intotech.Wheelo.Chat.Jaguar.Interfaces;
 using Intotech.Wheelo.Chat.Models;
 using Microsoft.AspNetCore.SignalR;
 using System.Xml.Linq;
@@ -12,19 +13,23 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         private const string ClientReceiveMessageCallback = "ReceiveMessage";
         private const string ClientAddUserCallback = "AddUser";
         private const string InviteToConversation = "InviteToConversation";
-        private const string UserOwnIdPattern = "accountId: {0}, accountName: {1} random ending";
+        private const string UserOwnIdPattern = "accountId: {0} random ending";
         private const string UsersRoomIdPattern = "{0}_{1}";
 
         protected ChatLogic ChatLogic;
+        protected IChatUser ChatUser;
 
-        public ChatHub(ChatLogic chatLogic)
+        public ChatHub(ChatLogic chatLogic, IChatUser chatUser)
         {
             ChatLogic = chatLogic;
+            ChatUser = chatUser;
         }
 
-        public async Task ConnectUser(string accountId, string userName)
+        public async Task ConnectUser(int accountId)
         {
-            string userId = HashGenerator.Md5(string.Format(UserOwnIdPattern, accountId, userName));
+            ChatUserDto user = ChatUser.Connect(accountId);
+
+            string userId = HashGenerator.Md5(string.Format(UserOwnIdPattern, accountId));
 
             await JoinRoom(userId);
 

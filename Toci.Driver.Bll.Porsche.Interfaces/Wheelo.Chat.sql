@@ -1,3 +1,5 @@
+drop table UserActivity;
+drop table ConnectedUsers;
 drop table ConversationInvitations;
 drop table Messages;
 drop table RoomsAccounts;
@@ -43,5 +45,21 @@ create table ConversationInvitations
 	idAccount int not null,
 	idAccountInvited int not null,
 	roomId text not null,
+	createdat timestamp default now()
+);
+
+create table ConnectedUsers
+(
+	id serial primary key,
+	idAccount int not null,
+	createdat timestamp default now()
+);
+
+create table UserActivity
+(
+	id serial primary key,
+	idAccount int not null,
+	connectedFrom timestamp,
+	connectedTo timestamp,
 	createdat timestamp default now()
 );

@@ -17,6 +17,8 @@ public partial class IntotechWheeloChatContext : DbContext
 
     public virtual DbSet<Accountsidentifier> Accountsidentifiers { get; set; }
 
+    public virtual DbSet<Connecteduser> Connectedusers { get; set; }
+
     public virtual DbSet<Conversationinvitation> Conversationinvitations { get; set; }
 
     public virtual DbSet<Message> Messages { get; set; }
@@ -24,6 +26,8 @@ public partial class IntotechWheeloChatContext : DbContext
     public virtual DbSet<Room> Rooms { get; set; }
 
     public virtual DbSet<Roomsaccount> Roomsaccounts { get; set; }
+
+    public virtual DbSet<Useractivity> Useractivities { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -44,6 +48,20 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasColumnName("createdat");
             entity.Property(e => e.Idaccount).HasColumnName("idaccount");
             entity.Property(e => e.Roomid).HasColumnName("roomid");
+        });
+
+        modelBuilder.Entity<Connecteduser>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("connectedusers_pkey");
+
+            entity.ToTable("connectedusers");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Createdat)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("createdat");
+            entity.Property(e => e.Idaccount).HasColumnName("idaccount");
         });
 
         modelBuilder.Entity<Conversationinvitation>(entity =>
@@ -110,6 +128,26 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasColumnName("createdat");
             entity.Property(e => e.Idmember).HasColumnName("idmember");
             entity.Property(e => e.Roomid).HasColumnName("roomid");
+        });
+
+        modelBuilder.Entity<Useractivity>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("useractivity_pkey");
+
+            entity.ToTable("useractivity");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Connectedfrom)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("connectedfrom");
+            entity.Property(e => e.Connectedto)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("connectedto");
+            entity.Property(e => e.Createdat)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("createdat");
+            entity.Property(e => e.Idaccount).HasColumnName("idaccount");
         });
 
         OnModelCreatingPartial(modelBuilder);
