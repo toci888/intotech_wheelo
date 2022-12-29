@@ -17,6 +17,9 @@ using Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces;
 using Intotech.Common;
 using System.Globalization;
 using Intotech.Wheelo.Bll.Persistence.Extensions;
+using Intotech.Wheelo.Notifications.Interfaces;
+using Intotech.Wheelo.Notifications.Interfaces.Models.DataNotification;
+using Intotech.Wheelo.Notifications.Interfaces.Models;
 
 namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 {
@@ -34,6 +37,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
         protected IVacollocationsgeolocationToAccountCollocationDto ToAccountCollocationDto;
         protected IFriendLogic FriendLogic;
         protected IWorkTripLogic WorkTripHistoryLogic;
+        protected INotificationManager NotificationManager;
 
         public WorkTripGenAssociationService(IWorktripgenLogic worktripgenLogic, 
             IVaworktripgengeolocationLogic vaworktripgengeolocationLogic,
@@ -42,7 +46,8 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             IAssociationCalculations associationCalculations,
             IVacollocationsgeolocationToAccountCollocationDto toAccountCollocationDto,
             IFriendLogic friendLogic,
-            IWorkTripLogic workTripHistoryLogic)
+            IWorkTripLogic workTripHistoryLogic,
+            INotificationManager notificationManager)
         {
             WorktripGenLogic = worktripgenLogic;
             VaworktripgengeolocationLogic = vaworktripgengeolocationLogic;
@@ -52,6 +57,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             ToAccountCollocationDto = toAccountCollocationDto;
             FriendLogic = friendLogic;
             WorkTripHistoryLogic = workTripHistoryLogic;
+            NotificationManager = notificationManager;
         }
 
         public virtual ReturnedResponse<TripGenCollocationDto> SetWorkTripGetCollocations(WorkTripGenDto workTripGen)
@@ -164,6 +170,12 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                         Distancefrom = distanceFrom,
                         Distanceto = distanceTo
                     });
+
+                    //NotificationManager.SendNotifications<AssociationNotification>(NotificationsKinds.Association, 
+                    //    new NotificationModelBase<AssociationNotification>(new List<string>() { "ExponentPushToken[rtWCLaAF92lqq4mIgmzvRV]", "ExponentPushToken[XqgL8PLm-p-XsCtlZ_dapr]" }, 
+                    //    new NotificationDataField<AssociationNotification>() { screen = "SignIn", screenParams = null, root = ""  }, "Asssssocjujemy", "Tytuł jakich mało", "Sub - Zero"));
+
+                    //ScreenParams = new AssociationNotification() { IdAccountAssociated = 100000027 }
                 }
             }
         }
@@ -183,23 +195,23 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                 result.Isuser = true;
             }
 
-            string[] FromTime = workTripGen.StartLocationTime.Split(":");
-            string[] ToTime = workTripGen.EndLocationTime.Split(":");
+            string[] FromTime = workTripGen.startLocationTime.Split(":");
+            string[] ToTime = workTripGen.endLocationTime.Split(":");
 
-            result.Streetfrom = workTripGen.StartLocation.address.road;
-            result.Streetto = workTripGen.EndLocation.address.road;
-            result.Cityfrom = workTripGen.StartLocation.address.city;
-            result.Cityto = workTripGen.EndLocation.address.city;
-            result.Postcodefrom = workTripGen.StartLocation.address.postcode;
-            result.Postcodeto = workTripGen.EndLocation.address.postcode;
+            result.Streetfrom = workTripGen.startLocation.address.road;
+            result.Streetto = workTripGen.endLocation.address.road;
+            result.Cityfrom = workTripGen.startLocation.address.city;
+            result.Cityto = workTripGen.endLocation.address.city;
+            result.Postcodefrom = workTripGen.startLocation.address.postcode;
+            result.Postcodeto = workTripGen.endLocation.address.postcode;
             result.Acceptabledistance = workTripGen.AcceptableDistance;
             result.Fromhour = new TimeOnly(int.Parse(FromTime[0]), int.Parse(FromTime[1]));
             result.Tohour = new TimeOnly(int.Parse(ToTime[0]), int.Parse(ToTime[1]));
             result.Idaccount = workTripGen.Idaccount;
-            result.Latitudefrom = double.Parse(workTripGen.StartLocation.lat, CultureInfo.InvariantCulture); //.Replace(".", ","));
-            result.Latitudeto = double.Parse(workTripGen.EndLocation.lat, CultureInfo.InvariantCulture); //.Replace(".", ","));
-            result.Longitudefrom = double.Parse(workTripGen.StartLocation.lon, CultureInfo.InvariantCulture); //.Replace(".", ","));
-            result.Longitudeto = double.Parse(workTripGen.EndLocation.lon, CultureInfo.InvariantCulture); //.Replace(".", ","));
+            result.Latitudefrom = double.Parse(workTripGen.startLocation.lat, CultureInfo.InvariantCulture); //.Replace(".", ","));
+            result.Latitudeto = double.Parse(workTripGen.endLocation.lat, CultureInfo.InvariantCulture); //.Replace(".", ","));
+            result.Longitudefrom = double.Parse(workTripGen.startLocation.lon, CultureInfo.InvariantCulture); //.Replace(".", ","));
+            result.Longitudeto = double.Parse(workTripGen.endLocation.lon, CultureInfo.InvariantCulture); //.Replace(".", ","));
             result.Searchid = WorktripgenLogic.GetWorktripSearchId(result);
             result.Driverpassenger = workTripGen.IsDriver;
 

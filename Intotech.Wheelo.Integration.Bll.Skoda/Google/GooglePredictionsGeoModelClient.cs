@@ -14,7 +14,7 @@ namespace Intotech.Wheelo.Integration.Bll.Skoda.Google
     {
         public virtual GooglePredictionsGeoModel CallMapApi(string query)
         {
-            string uri = string.Format("maps/api/place/autocomplete/json?input={0}&language=pl&types=geocode&key={1}", query, ApiKey);
+            string uri = string.Format("maps/api/place/autocomplete/json?input={0}&components=country:pl&language=pl&types=geocode&key={1}", query, ApiKey);
 
             string json = HttpClient.GetAsync(uri).Result.Content.ReadAsStringAsync().Result;
 
