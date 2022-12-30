@@ -97,4 +97,22 @@ export default class WheeloClient {
 
         return wheeloEngExists;
     }
+
+    approveChat = async (firstParticipantId, secondParticipantId) => {
+
+        var roomId;
+        
+        if (firstParticipantId > secondParticipantId)
+        {
+            roomId = "accountId: " + secondParticipantId + ", accountId: " + firstParticipantId;
+        }
+        else
+        {
+            roomId = "accountId: " + firstParticipantId + ", accountId: " + secondParticipantId;
+        }
+
+        var wheeloEngExists = await this.getEngine(roomId);
+
+        wheeloEngExists.approveChat(firstParticipantId, secondParticipantId);
+    }
 }

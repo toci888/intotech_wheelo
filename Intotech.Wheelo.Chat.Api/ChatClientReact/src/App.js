@@ -38,6 +38,10 @@ const App = () => {
     wheeloClient.requestConversation(document.getElementById("userId").value, 
     document.getElementById("userIdInv").value)}></input>
   
+  <input type="submit" value="approve" onClick={() => 
+    wheeloClient.approveChat(document.getElementById("userId").value, 
+    document.getElementById("userIdInv").value)}></input>
+
   <div id="SignalR"></div>
 
 </div>

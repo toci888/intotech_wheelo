@@ -21,11 +21,12 @@ export default class WheeloChatEngine {
     //serverUrl = "http://192.168.0.158:5130/wheeloChat";
     ReceiveMessageCallback = "ReceiveMessage"; // react callback
     joinRoomDelegate = "JoinWheeloRoom"; //method in c#
-    sendMessageCallback = "SendMessage";
+    sendMessageCallback = "SendMessage"; 
     connectUserDelegate = "ConnectUser"; //method in c#
     addUserCallback = "AddUser"; // react callback
     inviteToConversationCallback = "InviteToConversation"; // react callback
     requestConversationDelegate = "RequestConversation"; //method in c#
+    approveChatDelegate = "ApproveChat"; // c#
 
     initialize = async () => {
 
@@ -97,5 +98,10 @@ export default class WheeloChatEngine {
         } catch (e) {
           console.log(e);
         }
-      }
+    }
+
+    approveChat = async (firstParticipantId, secondParticipantId) => {
+
+        await this.connection.invoke(this.approveChatDelegate, parseInt(firstParticipantId), parseInt(secondParticipantId));
+    }
 }

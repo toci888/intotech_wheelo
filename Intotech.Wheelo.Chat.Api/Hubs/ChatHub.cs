@@ -61,11 +61,25 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
                 chatMessage.RoomId = string.Format(UsersRoomIdPattern, chatMessage.ChatMessageAuthorId, chatMessage.ChatParticipantId);
             }
 
-            await JoinRoom(chatMessage.RoomId);
-
             chatMessage = ChatUserService.SendMessage(chatMessage);
 
             await Clients.Group(chatMessage.RoomId).SendAsync(ClientReceiveMessageCallback, chatMessage);
+        }
+
+        public async Task ApproveChat(int firstParticipantId, int secondParticipantId)
+        {
+            string roomId;
+
+            if (firstParticipantId > secondParticipantId)
+            {
+                roomId = string.Format(UsersRoomIdPattern, secondParticipantId, firstParticipantId);
+            }
+            else
+            {
+                roomId = string.Format(UsersRoomIdPattern, firstParticipantId, secondParticipantId);
+            }
+
+            await JoinRoom(roomId);
         }
 
         protected virtual async Task JoinRoom(string roomId)
