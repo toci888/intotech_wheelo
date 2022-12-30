@@ -1,7 +1,11 @@
+using Intotech.Wheelo.Bll.Persistence;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Api.Hubs;
 using Intotech.Wheelo.Chat.Api.Logic;
 using Intotech.Wheelo.Chat.Bll.Persistence;
 using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
+using Intotech.Wheelo.Chat.Dodge;
+using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Jaguar;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
 
@@ -27,9 +31,18 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddScoped<IMessagesService, MessagesService>();
+builder.Services.AddScoped<IChatUserService, ChatUserService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+
+
 builder.Services.AddScoped<ChatLogic, ChatLogic>();
 builder.Services.AddScoped<IMessageLogic, MessageLogic>();
 builder.Services.AddScoped<IRoomLogic, RoomLogic>();
+builder.Services.AddScoped<IConnecteduserLogic, ConnecteduserLogic>();
+builder.Services.AddScoped<IUseractivityLogic, UseractivityLogic>();
+builder.Services.AddScoped<IRoomsaccountLogic, RoomsaccountLogic>();
+builder.Services.AddScoped<IAccountLogic, AccountLogic>();
+
 
 var app = builder.Build();
 

@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Chat.Jaguar.Interfaces
 {
-    public interface IChatUser
+    public interface IChatUserService
     {
         ChatUserDto Connect(int accountId);
+
+        bool JoinRoom(int accountId, string roomId);
     }
 }

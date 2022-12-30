@@ -17,9 +17,9 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         private const string UsersRoomIdPattern = "{0}_{1}";
 
         protected ChatLogic ChatLogic;
-        protected IChatUser ChatUser;
+        protected IChatUserService ChatUser;
 
-        public ChatHub(ChatLogic chatLogic, IChatUser chatUser)
+        public ChatHub(ChatLogic chatLogic, IChatUserService chatUser)
         {
             ChatLogic = chatLogic;
             ChatUser = chatUser;
@@ -29,13 +29,13 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         {
             ChatUserDto user = ChatUser.Connect(accountId);
 
-            string userId = HashGenerator.Md5(string.Format(UserOwnIdPattern, accountId));
+            string roomId = HashGenerator.Md5(string.Format(UserOwnIdPattern, accountId));
 
-            await JoinRoom(userId);
+            await JoinRoom(roomId);
 
-            //TODO save id to db
+            ChatUser.JoinRoom(accountId, roomId);
 
-            await Clients.Group(userId).SendAsync(ClientAddUserCallback, userId);
+            await Clients.Group(roomId).SendAsync(ClientAddUserCallback, roomId);
         }
 
         public async Task RequestConversation(RequestConversationDto requestConversation)

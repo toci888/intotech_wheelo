@@ -38,13 +38,13 @@ export default class WheeloClient {
 
     }
 
-    connect = async(accountId, userName) => {
+    connect = async(accountId) => {
 
-        var roomId = "accountId: " + accountId + ", accountName: " + userName + " random ending";
+        var roomId = "accountId: " + accountId;
 
         var wheeloEngExists = await this.getEngine(roomId);
 
-        await wheeloEngExists.userConnect(accountId, userName);
+        await wheeloEngExists.userConnect(accountId);
     }
 
     requestConversation = async (invitingAccountId, invitingAccountName, invitedAccountId, invitedAccountName) => {
