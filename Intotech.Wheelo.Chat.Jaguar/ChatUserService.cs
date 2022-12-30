@@ -1,4 +1,5 @@
-﻿using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
+﻿using Intotech.Wheelo.Chat.Bll.Persistence;
+using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Database.Persistence.Models;
 using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
@@ -18,14 +19,20 @@ namespace Intotech.Wheelo.Chat.Jaguar
         protected IConnecteduserLogic ConnecteduserLogic;
         protected IUseractivityLogic UserActivityLogic;
         protected IRoomsaccountLogic RoomsAccountLogic;
+        protected IConversationinvitationLogic ConversationInvitationLogic;
+        protected IMessageLogic MessageLogic;
 
         public ChatUserService(IAccountService accountService, IConnecteduserLogic connecteduserLogic, 
-            IUseractivityLogic userActivityLogic, IRoomsaccountLogic roomsAccountLogic)
+            IUseractivityLogic userActivityLogic, IRoomsaccountLogic roomsAccountLogic,
+            IConversationinvitationLogic conversationInvitationLogic,
+            IMessageLogic messageLogic)
         {
             AccountService = accountService;
             ConnecteduserLogic = connecteduserLogic;
             UserActivityLogic = userActivityLogic;
             RoomsAccountLogic = roomsAccountLogic;
+            ConversationInvitationLogic = conversationInvitationLogic;
+            MessageLogic = messageLogic;
         }
 
         public virtual ChatUserDto Connect(int accountId)
@@ -38,9 +45,41 @@ namespace Intotech.Wheelo.Chat.Jaguar
             return new ChatUserDto() { UserId = accountId, UserName = userData.Name, UserSurname = userData.Surname };
         }
 
+        public virtual RequestConversationDto Invite(RequestConversationDto invitation)
+        {
+            Conversationinvitation check = ConversationInvitationLogic.Select(m => m.Idaccount == invitation.InvitingAccountId && m.Idaccountinvited == invitation.InvitedAccountId).FirstOrDefault();
+
+            if (check != null)
+            {
+                invitation.IsInvited = true;
+
+                return invitation;
+            }
+
+            Account userInviting = AccountService.GetAccount(invitation.InvitingAccountId);
+            Account userInvited = AccountService.GetAccount(invitation.InvitedAccountId);
+
+            invitation.InvitedUserName = userInvited.Name;
+            invitation.InvitingUserName = userInviting.Name;
+
+            ConversationInvitationLogic.Insert(new Conversationinvitation() { Idaccount = invitation.InvitingAccountId, 
+                Idaccountinvited = invitation.InvitedAccountId, Roomid = invitation.RoomId });
+
+            return invitation;
+        }
+
         public virtual bool JoinRoom(int accountId, string roomId)
         {
             return RoomsAccountLogic.Insert(new Roomsaccount() { Idmember = accountId, Roomid = roomId }).Id > 0;
+        }
+
+        public virtual ChatMessageDto SendMessage(ChatMessageDto chatMessage)
+        {
+            Message mess = MessageLogic.Insert(new Message() { Idauthor = chatMessage.ChatMessageAuthorId, Message1 = chatMessage.Message, Roomid = chatMessage.RoomId });
+
+            chatMessage.CreatedAt = mess.Createdat.Value;
+
+            return chatMessage;
         }
     }
 }

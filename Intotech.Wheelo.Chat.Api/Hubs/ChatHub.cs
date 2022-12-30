@@ -1,6 +1,6 @@
 ﻿using Intotech.Common;
-using Intotech.Wheelo.Chat.Api.Logic;
 using Intotech.Wheelo.Chat.Database.Persistence.Models;
+using Intotech.Wheelo.Chat.Jaguar;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
 using Intotech.Wheelo.Chat.Models;
 using Microsoft.AspNetCore.SignalR;
@@ -13,45 +13,59 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         private const string ClientReceiveMessageCallback = "ReceiveMessage";
         private const string ClientAddUserCallback = "AddUser";
         private const string InviteToConversation = "InviteToConversation";
-        private const string UserOwnIdPattern = "accountId: {0} random ending";
-        private const string UsersRoomIdPattern = "{0}_{1}";
+        private const string UserOwnIdPattern = "accountId: {0}";
+        private const string UsersRoomIdPattern = "accountId: {0}, accountId: {1}";
 
-        protected ChatLogic ChatLogic;
-        protected IChatUserService ChatUser;
+        protected IChatUserService ChatUserService;
 
-        public ChatHub(ChatLogic chatLogic, IChatUserService chatUser)
+        public ChatHub(IChatUserService chatUser)
         {
-            ChatLogic = chatLogic;
-            ChatUser = chatUser;
+            ChatUserService = chatUser;
         }
 
-        public async Task ConnectUser(int accountId)
+        public async Task ConnectUser(int accountId) // accountId room for synchronizations
         {
-            ChatUserDto user = ChatUser.Connect(accountId);
+            ChatUserDto user = ChatUserService.Connect(accountId);
 
-            string roomId = HashGenerator.Md5(string.Format(UserOwnIdPattern, accountId));
+            string roomId = string.Format(UserOwnIdPattern, accountId);
 
             await JoinRoom(roomId);
 
-            ChatUser.JoinRoom(accountId, roomId);
+            ChatUserService.JoinRoom(accountId, roomId);
 
-            await Clients.Group(roomId).SendAsync(ClientAddUserCallback, roomId);
+            user.RoomId = roomId;
+
+            await Clients.Group(roomId).SendAsync(ClientAddUserCallback, user);
         }
 
         public async Task RequestConversation(RequestConversationDto requestConversation)
         {
-            string invitedUserId = HashGenerator.Md5(string.Format(UserOwnIdPattern, requestConversation.InvitedAccountId, requestConversation.InvitedUserName));
+            string invitedUserId = string.Format(UserOwnIdPattern, requestConversation.InvitedAccountId);
 
-            await Clients.Group(invitedUserId).SendAsync(InviteToConversation, requestConversation.InvitingAccountId, requestConversation.InvitingUserName); 
+            requestConversation = ChatUserService.Invite(requestConversation);
+
+            if (!requestConversation.IsInvited)
+            {
+                await Clients.Group(invitedUserId).SendAsync(InviteToConversation, requestConversation);
+            }
         }
 
         public async Task SendMessage(ChatMessageDto chatMessage)
         {
-            await Clients.Group(chatMessage.RoomName).SendAsync(ClientReceiveMessageCallback, chatMessage);
+            if (chatMessage.ChatMessageAuthorId > chatMessage.ChatParticipantId)
+            {
+                chatMessage.RoomId = string.Format(UsersRoomIdPattern, chatMessage.ChatParticipantId, chatMessage.ChatMessageAuthorId);
+            }
+            else
+            {
+                chatMessage.RoomId = string.Format(UsersRoomIdPattern, chatMessage.ChatMessageAuthorId, chatMessage.ChatParticipantId);
+            }
 
-            chatMessage.RoomId = 8;
+            await JoinRoom(chatMessage.RoomId);
 
-            ChatLogic.SendMessage(chatMessage);
+            chatMessage = ChatUserService.SendMessage(chatMessage);
+
+            await Clients.Group(chatMessage.RoomId).SendAsync(ClientReceiveMessageCallback, chatMessage);
         }
 
         protected virtual async Task JoinRoom(string roomId)

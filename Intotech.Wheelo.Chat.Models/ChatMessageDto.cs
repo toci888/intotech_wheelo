@@ -2,10 +2,11 @@
 {
     public class ChatMessageDto
     {
-        public ChatUserDto User { get; set; }
+        public int ChatParticipantId { get; set; }
+        public int ChatMessageAuthorId { get; set; }
         public string Message { get; set; }
         public DateTime CreatedAt { get; set; }
         public string RoomName { get; set; }
-        public int RoomId { get; set; }
+        public string RoomId { get; set; }
     }
 }

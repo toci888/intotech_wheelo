@@ -11,6 +11,7 @@ namespace Intotech.Wheelo.Chat.Models
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string UserSurname { get; set; }
+        public string RoomId { get; set; }
 
     }
 }

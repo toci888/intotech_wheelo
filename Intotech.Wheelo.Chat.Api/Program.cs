@@ -1,7 +1,6 @@
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Api.Hubs;
-using Intotech.Wheelo.Chat.Api.Logic;
 using Intotech.Wheelo.Chat.Bll.Persistence;
 using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Dodge;
@@ -35,13 +34,14 @@ builder.Services.AddScoped<IChatUserService, ChatUserService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 
 
-builder.Services.AddScoped<ChatLogic, ChatLogic>();
 builder.Services.AddScoped<IMessageLogic, MessageLogic>();
 builder.Services.AddScoped<IRoomLogic, RoomLogic>();
 builder.Services.AddScoped<IConnecteduserLogic, ConnecteduserLogic>();
 builder.Services.AddScoped<IUseractivityLogic, UseractivityLogic>();
 builder.Services.AddScoped<IRoomsaccountLogic, RoomsaccountLogic>();
 builder.Services.AddScoped<IAccountLogic, AccountLogic>();
+builder.Services.AddScoped<IConversationinvitationLogic, ConversationinvitationLogic>();
+builder.Services.AddScoped<IMessageLogic, MessageLogic>();
 
 
 var app = builder.Build();
@@ -66,7 +66,7 @@ app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapHub<ChatHub>("/wheeloChat");
-    endpoints.MapHub<BroadcastHub>("/wheeloBroadcast");
+    //endpoints.MapHub<BroadcastHub>("/wheeloBroadcast");
 });
 
 app.Run();
