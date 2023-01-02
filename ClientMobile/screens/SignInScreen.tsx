@@ -42,7 +42,7 @@ export const SignInScreen = () => {
               const response: ReturnedResponse<User> | undefined = await nativeLogin(values);
               if (response && response.isSuccess === false) {
                 if(response.errorCode === 256) {
-                  navigation.navigate(`EmailVerification`, {user: values, type: "email"});
+                  navigation.navigate(`CodeVerification`, {user: values as User, type: "email"});
                 } else {
                   commonAlert(response.errorMessage)
                 }

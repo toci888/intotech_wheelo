@@ -24,7 +24,7 @@ export type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
   ForgotPassword: undefined;
-  ResetPassword: { token: string };
+  ResetPassword: { token: string, email: string };
   PropertyDetails: { collocationID: number };
   MessageProperty: { collocationID: number; tour?: boolean };
   AddProperty: undefined;
@@ -32,7 +32,7 @@ export type RootStackParamList = {
   MyProperties: undefined;
   ManageUnits: { collocationID: number };
   Review: { collocationID: number; propertyName: string };
-  EmailVerification: { params: User};
+  CodeVerification: { params: User};
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

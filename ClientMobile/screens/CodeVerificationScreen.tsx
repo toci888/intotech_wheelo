@@ -36,12 +36,12 @@ const animateCell = ({ hasValue, index, isFocused }: any) => {
   ]).start();
 };
 
-export const EmailVerificationScreen = ({route}:{
+export const CodeVerificationScreen = ({route}:{
   route: { params: {user: User, type: "email" | "forgotPassword"}}
 }) => {
   // const route = useRoute();
   const [value, setValue] = useState("");
-  const [emailVerificationForm, setEmailVerificationForm] = useState({});
+  const [codeVerificationForm, setCodeVerificationForm] = useState({});
   const { login } = useUser();
   const navigation = useNavigation();
   
@@ -54,7 +54,7 @@ export const EmailVerificationScreen = ({route}:{
   const handleVerify = async () => {
     console.log("GGGGGGG");
     const user = route.params.user as User;
-    setEmailVerificationForm({ email: user.email, code: value });
+    setCodeVerificationForm({ email: user.email, code: value });
     try
     {
       if(route.params.type === "forgotPassword") {

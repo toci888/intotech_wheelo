@@ -75,7 +75,7 @@ export const SignUpScreen = () => {
                 console.log("valuess", values)
                 if ((response.isSuccess === true && response.errorCode === 1)
                 || (response.isSuccess === false && response.errorCode === 16384)) {
-                  navigation.navigate("EmailVerification", {user: values, type: "email"});
+                  navigation.navigate("CodeVerification", {user: values, type: "email"});
                 }
                 else if(response.isSuccess === false) {
                   commonAlert(response.errorMessage)

@@ -25,7 +25,7 @@ export const ForgotPasswordScreen = () => {
       const response = await forgotPassword(values.email);
       if (response?.isSuccess) {
         setEmailSent(true);
-        navigation.navigate("EmailVerification", {user: values as User, type: "forgotPassword"});
+        navigation.navigate("CodeVerification", {user: values, type: "forgotPassword"});
       }
     } catch (error) {
       console.log("Error placing email");

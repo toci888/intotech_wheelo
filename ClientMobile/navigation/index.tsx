@@ -40,7 +40,7 @@ import { useNotifications } from "../hooks/useNotifications";
 import { AccountSettingsScreen } from "../screens/AccountSettingsScreen";
 import { ConversationsScreen } from "../screens/ConversationsScreen";
 import { MessagesScreen } from "../screens/MessagesScreen";
-import { EmailVerificationScreen } from "../screens/EmailVerificationScreen";
+import { CodeVerificationScreen } from "../screens/CodeVerificationScreen";
 
 export default function Navigation({
   colorScheme,
@@ -156,8 +156,8 @@ function RootNavigator(props: any) {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="EmailVerification"
-          component={EmailVerificationScreen}
+          name="CodeVerification"
+          component={CodeVerificationScreen}
           options={{ headerShown: false }}
         />
       </Stack.Group>
