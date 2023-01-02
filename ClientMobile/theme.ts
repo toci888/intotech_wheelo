@@ -6,6 +6,9 @@ export const theme = {
   "color-violet": "#6e53a6",
   "color-white": "#ffffff",
   "color-black": "#000000",
+  "color-blue": "#6b50a5",
+  "color-green": "#34c25f",
+  "color-check": "#5e4496",
   
 // stare kolory
   "color-gray": "#d3d3d3",

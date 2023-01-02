@@ -60,19 +60,23 @@ export const HeaderInput = ({ type, location, setLocation, time, setTime }:
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: Platform.OS === "ios" ? 10 : 30,
+    marginTop: 8,
+    marginBottom: Platform.OS === "ios" ? 5 : 15,
+    backgroundColor: theme["color-white"],
     borderWidth: 1,
     borderColor: theme["color-gray"],
-    borderRadius: 30,
+    borderRadius: 20,
     padding: 8,
     width: 250
   },
   dateContainer: {
+    marginTop: 8,
     marginLeft: 'auto',
-    marginBottom: Platform.OS === "ios" ? 10 : 30,
+    marginBottom: Platform.OS === "ios" ? 5 : 15,
+    backgroundColor: theme["color-white"],
     borderWidth: 1,
     borderColor: theme["color-gray"],
-    borderRadius: 30,
+    borderRadius: 20,
     padding: 8,
     width: 100,
     textAlign: 'center'
