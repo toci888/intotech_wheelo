@@ -10,6 +10,8 @@ import { getStateAbbreviation } from "../../utils/getStateAbbreviation";
 import { useUser } from "../../hooks/useUser";
 import { useSaveCollocationMutation } from "../../hooks/mutations/useSavePropertyMutation";
 import React from "react";
+import { commonAlert } from "../../utils/handleError";
+import { i18n } from "../../i18n/i18n";
 
 export const CollocationHeaderSection = ({ collocation }: { collocation: CollocateAccount }) => {
   const { user, setSavedProperties } = useUser();
@@ -30,7 +32,7 @@ export const CollocationHeaderSection = ({ collocation }: { collocation: Colloca
   };
 
   const handleHeartPress = () => {
-    if (!user) return alert("Please sign up or sign in to save properties");
+    if (!user) return commonAlert(i18n.t('PleaseSignUpOrSignInToSaveProperties'));
     let op: "add" | "remove" = "add";
     if (collocation?.areFriends) op = "remove";
 
@@ -44,7 +46,7 @@ export const CollocationHeaderSection = ({ collocation }: { collocation: Colloca
         message: "Check out this sweet apartment I found on JPArtments.com.",
       });
     } catch (error: unknown) {
-      alert("Sorry, we're unable to share");
+      commonAlert("Sorry, we're unable to share");
     }
   };
 

@@ -1,3 +1,4 @@
+import React from "react";
 import { StyleSheet } from "react-native";
 import { Chat, MessageType, defaultTheme } from "@flyerhq/react-native-chat-ui";
 import { useNavigation } from "@react-navigation/native";

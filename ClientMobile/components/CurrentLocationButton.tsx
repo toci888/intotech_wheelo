@@ -48,7 +48,7 @@ export const CurrentLocationButton = ({ style, location, setLocation
       />
       <TouchableOpacity onPress={async () => await getLocation()}>
         <Text style={styles.text} status={"info"}>
-          Use my current location
+          {i18n.t('UseMyCurrentLocation')}
         </Text>
       </TouchableOpacity>
     </Row>
