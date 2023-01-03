@@ -16,7 +16,6 @@ export const SearchScreen = ({route}: {
   
   return (
     <Screen>
-      asd
       <AnimatedListHeader
         startLocation={startLocation} endLocation={endLocation}
         setStartLocation={setStartLocation} setEndLocation={setEndLocation}

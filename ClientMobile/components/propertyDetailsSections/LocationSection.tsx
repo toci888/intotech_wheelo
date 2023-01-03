@@ -30,13 +30,13 @@ export const LocationSection = ({ collocation }: { collocation: CollocateAccount
         {/* {getStateAbbreviation(collocation.state)} {collocation.zip} */}
       </Text>
       <View style={styles.mapContainer}>
-        <Text>dane:{collocation.name},{collocation.latitudefrom},{collocation.latitudefrom}</Text>
+        <Text>dane:{collocation.name},{collocation.latitudefrom},{collocation.longitudefrom}</Text>
         <MapView
           provider={"google"}
           style={styles.map}
           initialRegion={{
             latitude: collocation.latitudefrom,
-            longitude: collocation.latitudefrom,
+            longitude: collocation.longitudefrom,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}

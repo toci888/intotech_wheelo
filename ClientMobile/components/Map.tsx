@@ -33,7 +33,7 @@ export const Map = ({
         provider={"google"}
         style={styles.map}
         userInterfaceStyle={"light"}
-        onPress={() => console.log("ASD")}
+        onPress={() => console.log("Mapa kliknięta")}
         region={initPolishRegion}
       />
     )
@@ -75,8 +75,8 @@ export const Map = ({
       setRegion({
         latitude: (Number(location.startLocation.lat) + Number(location.endLocation.lat)) / 2,
         longitude: (Number(location.startLocation.lon) + Number(location.endLocation.lon)) / 2,
-        latitudeDelta: (Number(location.startLocation.lat) + Number(location.endLocation.lat)) / 60,
-        longitudeDelta: (Number(location.startLocation.lon) + Number(location.endLocation.lon)) / 15,
+        latitudeDelta: Math.abs((Number(location.startLocation.lat)) - (Number(location.endLocation.lat))) + 2,
+        longitudeDelta: Math.abs((Number(location.startLocation.lon)) - (Number(location.endLocation.lon))) + 2,
       } as Region);
     } 
   }, [location]);
@@ -191,9 +191,8 @@ export const Map = ({
             collocation={collocation.methodResult.accountsCollocated[activeIndex]}
             style={styles.card}
             onPress={() =>{
-              // console.log("ASDFGH", collocation.methodResult.accountsCollocated[activeIndex])
               navigation.navigate("PropertyDetails", {
-                propertyID: collocation.methodResult.accountsCollocated[activeIndex].idAccount,
+                collocationID: collocation.methodResult.accountsCollocated[activeIndex].idAccount,
               })
             }
             }

@@ -47,10 +47,10 @@ export const CardInformation = ({
   };
 
   const manageUnitsNavigation = () =>
-    navigation.navigate("ManageUnits", { propertyID: collocation.idAccount });
+    navigation.navigate("ManageUnits", { collocationID: collocation.idAccount });
 
   const emailNavigation = () =>
-    navigation.navigate("MessageProperty", { propertyID: collocation.idAccount });
+    navigation.navigate("MessageProperty", { collocationID: collocation.idAccount });
 
   const editPropertyNavigation = () =>
     navigation.navigate("EditProperty", { collocationId: collocation.idAccount });

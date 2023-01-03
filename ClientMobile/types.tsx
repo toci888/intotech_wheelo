@@ -10,6 +10,7 @@ import {
 } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Location } from "./types/locationIQ";
+import { User } from "./types/user";
 
 declare global {
   namespace ReactNavigation {
@@ -21,18 +22,17 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   FindLocations: undefined;
   SignIn: undefined;
-  SignUp: { userId: string };
+  SignUp: undefined;
   ForgotPassword: undefined;
-  ResetPassword: { token: string };
-  PropertyDetails: { propertyID: number };
-  MessageProperty: { propertyID: number; tour?: boolean };
+  ResetPassword: { token: string, email: string };
+  PropertyDetails: { collocationID: number };
+  MessageProperty: { collocationID: number; tour?: boolean };
   AddProperty: undefined;
   EditProperty: { collocationId: number };
   MyProperties: undefined;
-  ManageUnits: { propertyID: number };
-  Review: { propertyID: number; propertyName: string };
-  WheeloMain: undefined;
-  EmailVerification: any;
+  ManageUnits: { collocationID: number };
+  Review: { collocationID: number; propertyName: string };
+  CodeVerification: { params: User};
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -99,4 +99,11 @@ export type loginDto = {
   email: string;
   password: string;
   method?: string;
+  token?: string;
+}
+
+export type NotificationsParams = { 
+  root?: string, 
+  screen?: string, 
+  screenParams?: Object
 }

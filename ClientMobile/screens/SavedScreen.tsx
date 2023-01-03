@@ -72,7 +72,7 @@ export const SavedScreen = () => {
             collocation={item}
             style={styles.card}
             onPress={() =>
-              navigation.navigate("PropertyDetails", { propertyID: item.idAccount })
+              navigation.navigate("PropertyDetails", { collocationID: item.idAccount })
             }
           />
         )}

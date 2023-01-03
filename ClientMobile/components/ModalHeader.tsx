@@ -1,3 +1,4 @@
+import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { View, StyleSheet, ViewStyle } from "react-native";
 import { Text } from "@ui-kitten/components";

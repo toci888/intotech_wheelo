@@ -25,7 +25,7 @@ androidHeight += androidNotch;
 
 export const HEADERHEIGHT = Platform.OS === "ios" ? iosHeight : androidHeight;
 
-export const server = "http://20.68.18.151";
+export const server = "http://20.71.35.167";
 
 const serverUrl = server + ":5105/api";
 const integrationApiUrl = server + ":5108/api";
@@ -67,8 +67,9 @@ export const endpoints = {
   register: userEndpoint + "/register",
   emailVerification: userEndpoint + "/confirm-email",
   login: userEndpoint + "/login",
-  forgotPassword: userEndpoint + "/forgotpassword",
-  resetPassword: userEndpoint + "/resetpassword",
+  forgotPassword: userEndpoint + "/forgot-password",
+  resetPassword: userEndpoint + "/reset-password",
+  forgotPasswordCheckCode: userEndpoint + "/forgot-password-check-code",
   createProperty: collocationEndpoint,
   getCollocationByID: serverUrl+'/AssociationMapData/association-user' + "/",
   getContactedPropertiesByUserID: contactedEndpoint,

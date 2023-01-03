@@ -1,3 +1,4 @@
+import React from "react";
 import { View, StyleSheet, ViewStyle, Text } from "react-native";
 import { Button } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";

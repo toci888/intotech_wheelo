@@ -1,18 +1,5 @@
-import { Apartment } from "./apartment";
-import { Review } from "./review";
-import { Pet } from "./pet";
-import { Score } from "./score";
 import { TempApartment } from "./tempApartment";
 import { Driver } from "../types";
-
-// export class response<T> {
-//   methodResult!: {
-//     T: T
-//   };
-//   errorMessage!: string;
-//   isSuccess!: boolean;
-//   errorCode!: number;
-// }
 
 export type Collocation = {
   methodResult: {
@@ -37,7 +24,7 @@ export type CollocateAccount = {
   tohour: string
   areFriends: boolean;
   phoneNumber: string;
-  isDriver: Driver;
+  driver: Driver;
 }
 
 export type CreateProperty = {

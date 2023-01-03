@@ -6,9 +6,14 @@ import { openSettings } from "expo-linking";
 import { useUser } from "./useUser";
 import { os } from "../constants/constants";
 import { i18n } from "../i18n/i18n";
+import { openURL } from "../utils/openURL";
+import * as WebBrowser from "expo-web-browser";
+import { useNavigation } from "@react-navigation/native";
+import { NotificationsParams } from "../types";
 
 export const useNotifications = () => {
   const { addPushToken, setAllowsNotifications, user } = useUser();
+  const navigation = useNavigation();
 
   const registerForPushNotificationsAsync = async (alertUser?: boolean) => {
     if (Device.isDevice) {
@@ -22,7 +27,7 @@ export const useNotifications = () => {
 
       if (finalStatus !== "granted") {
         if (alertUser)
-          Alert.alert(i18n.t('Alert'), i18n.t('ToenablePushNotificationspleasechangeyoursettings'),
+          Alert.alert(i18n.t('Alert'), i18n.t('ToEnablePushNotificationsPleaseChangeYourSettings'),
             [
               {
                 text: i18n.t('Ok'),
@@ -57,6 +62,7 @@ export const useNotifications = () => {
 
   // This listener is fired whenever a notification is received while the app is foregrounded
   const handleNotification = (notification: Notifications.Notification) => {
+    console.log("dostalem notyfikacje (handleNotification)")
     // could be useful if you want to display your own toast message
     // could also make a server call to refresh data in other part of the app
   };
@@ -65,9 +71,12 @@ export const useNotifications = () => {
   const handleNotificationResponse = (
     response: Notifications.NotificationResponse
   ) => {
-    const data: { url?: string } = response.notification.request.content.data;
-
-    if (data?.url) Linking.openURL(data.url);
+    const data: NotificationsParams = response.notification.request.content.data;
+    if (data && data.root) {
+      navigation.navigate(data.root, {screen: data.screen, params: data.screenParams})
+    } else {
+      navigation.navigate(data.screen, {params: data.screenParams})
+    }
   };
 
   return {

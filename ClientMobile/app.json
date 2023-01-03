@@ -7,6 +7,10 @@
     "icon": "./assets/images/icon.png",
     "scheme": "com.intotech.wheelo",
     "userInterfaceStyle": "automatic",
+    "notification":{
+      "icon": "./assets/images/icon.png",
+      "color": "#ee8172"
+    },
     "plugins": [
       "expo-notifications"
     ],

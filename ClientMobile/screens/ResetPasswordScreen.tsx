@@ -1,3 +1,4 @@
+import React from "react";
 import { StyleSheet } from "react-native";
 import { Button, Text } from "@ui-kitten/components";
 import * as yup from "yup";
@@ -10,11 +11,13 @@ import { ModalHeader } from "../components/ModalHeader";
 import { PasswordInput } from "../components/PasswordInput";
 import { useLoading } from "../hooks/useLoading";
 import { resetPassword } from "../services/user";
+import { commonAlert } from "../utils/handleError";
+import { i18n } from "../i18n/i18n";
 
 export const ResetPasswordScreen = ({
   route,
 }: {
-  route: { params: { token: string } };
+  route: { params: { token: string, email:string } };
 }) => {
   const { navigate } = useNavigation();
   const { setLoading } = useLoading();
@@ -27,11 +30,12 @@ export const ResetPasswordScreen = ({
       setLoading(true);
       const passwordReset = await resetPassword(
         values.password,
-        route.params.token
+        route.params.token,
+        route.params.email
       );
       if (passwordReset) navigate("SignIn");
     } catch (error) {
-      alert("Unable to reset password");
+      commonAlert(i18n.t('UnableToResetPassword'));
     } finally {
       setLoading(false);
     }
@@ -46,8 +50,8 @@ export const ResetPasswordScreen = ({
         </Text>
         <Formik
           initialValues={{
-            password: "",
-            passwordRepeat: "",
+            password: "Beatka123()",
+            passwordRepeat: "Beatka123()",
           }}
           validationSchema={yup.object().shape({
             password: yup

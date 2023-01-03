@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Pressable } from "react-native";
+import { ColorSchemeName } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useEffect } from "react";
 import * as Notifications from "expo-notifications";
@@ -40,7 +40,7 @@ import { useNotifications } from "../hooks/useNotifications";
 import { AccountSettingsScreen } from "../screens/AccountSettingsScreen";
 import { ConversationsScreen } from "../screens/ConversationsScreen";
 import { MessagesScreen } from "../screens/MessagesScreen";
-import { EmailVerificationScreen } from "../screens/EmailVerificationScreen";
+import { CodeVerificationScreen } from "../screens/CodeVerificationScreen";
 
 export default function Navigation({
   colorScheme,
@@ -49,7 +49,7 @@ export default function Navigation({
 }) {
   return (
     <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme}>
-      <RootNavigator />
+      <RootNavigator colorScheme={colorScheme}/>
     </NavigationContainer>
   );
 }
@@ -60,11 +60,12 @@ export default function Navigation({
  */
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-function RootNavigator() {
+function RootNavigator(props: any) {
   const { registerForPushNotificationsAsync, handleNotificationResponse } =
     useNotifications();
 
-  useEffect(() => {
+  useEffect(() => {    
+    console.log("TU", props.colorScheme);
     registerForPushNotificationsAsync();
     Notifications.setNotificationHandler({
       handleNotification: async () => ({
@@ -73,12 +74,12 @@ function RootNavigator() {
         shouldSetBadge: true,
       }),
     });
-
+    
     const responseListener =
       Notifications.addNotificationResponseReceivedListener(
         handleNotificationResponse
       );
-
+      
     return () => {
       if (responseListener)
         Notifications.removeNotificationSubscription(responseListener);
@@ -155,8 +156,8 @@ function RootNavigator() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="EmailVerification"
-          component={EmailVerificationScreen}
+          name="CodeVerification"
+          component={CodeVerificationScreen}
           options={{ headerShown: false }}
         />
       </Stack.Group>

@@ -1,62 +1,67 @@
+import React from "react";
 import { StyleSheet } from "react-native";
 import { Input, Button, Text } from "@ui-kitten/components";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import { Screen } from "../components/Screen";
 import { ModalHeader } from "../components/ModalHeader";
 import { useLoading } from "../hooks/useLoading";
 import { forgotPassword } from "../services/user";
-import React from "react";
+import { i18n } from "../i18n/i18n";
+import { User } from "../types/user";
 
 export const ForgotPasswordScreen = () => {
   const [emailSent, setEmailSent] = useState(false);
   const { setLoading } = useLoading();
+  const navigation = useNavigation();
 
   const handleSubmit = async (values: { email: string }) => {
     try {
       setLoading(true);
-      const emailSent = await forgotPassword(values.email);
-      if (emailSent?.emailSent) setEmailSent(true);
+      const response = await forgotPassword(values.email);
+      if (response?.isSuccess) {
+        setEmailSent(true);
+        navigation.navigate("CodeVerification", {user: values, type: "forgotPassword"});
+      }
     } catch (error) {
-      alert("Error placing email");
+      console.log("Error placing email");
     } finally {
       setLoading(false);
+      // navigation.navigate("ResetPassword", "asd");
     }
   };
 
   return (
     <KeyboardAwareScrollView bounces={false}>
       <Screen style={styles.container}>
-        <ModalHeader text="JPApartments" xShown />
+        <ModalHeader text={i18n.t('AppName')} xShown />
         {emailSent ? (
           <>
             <Text category={"h5"} style={styles.header}>
-              Email Sent!
+              {i18n.t('EmailSent')}
             </Text>
             <Text>
-              An email containing instructions about how to change your password
-              has been sent to you. Please check your junk mail or spam section
-              if you do not see an email.
+              {i18n.t('AnemailcontaininginstructionsabouthowtochangeyourpasswordhasbeensenttoyouPleasecheckyourjunkmailorspamsectionifyoudonotseeanemail')}
             </Text>
           </>
         ) : (
           <>
             <Text category={"h5"} style={styles.header}>
-              Forgot your password?
+              {i18n.t('ForgotYourPassword')}
             </Text>
             <Text>
-              Please enter your email, and we'll send you a link to change your
-              password.
+              {i18n.t('Pleaseenteryouremailandwewillsendyoualinktochangeyourpassword')}
             </Text>
             <Formik
               initialValues={{
-                email: "",
+                email: "new@wp.plxb",
               }}
               validationSchema={yup.object().shape({
-                email: yup.string().email().required("Your email is required."),
+                email: yup.string().email().required(i18n.t('Youremailisrequired')),
               })}
               onSubmit={handleSubmit}
             >
@@ -76,7 +81,7 @@ export const ForgotPasswordScreen = () => {
                       style={styles.input}
                       value={values.email}
                       onChangeText={handleChange("email")}
-                      placeholder="Your Email Address"
+                      placeholder={i18n.t('YourEmailAddress')}
                       keyboardType="email-address"
                       autoCapitalize="none"
                       autoComplete="email"
@@ -94,7 +99,7 @@ export const ForgotPasswordScreen = () => {
                       style={styles.button}
                       onPress={() => handleSubmit()}
                     >
-                      Continue
+                      {i18n.t('Continue')}
                     </Button>
                   </>
                 );
