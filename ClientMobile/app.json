@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "intotechwheelo",
+    "slug": "intotechwheelo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "com.intotech.wheelo",
+    "userInterfaceStyle": "automatic",
+    "plugins": [
+      "expo-notifications"
+    ],
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.intotech.wheelo"
+    },
+    "android": {
+      "package": "com.intotech.wheelo",
+      "googleServicesFile": "./google-services.json",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7fda874a-5f71-4e74-8203-13f3aeb2e419"
+      }
+    },
+    "owner": "kacper1337"
+  }
+}

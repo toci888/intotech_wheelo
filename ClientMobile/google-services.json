@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "102834178930",
+    "project_id": "wheelo-368119",
+    "storage_bucket": "wheelo-368119.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102834178930:android:d07f51b1b3563d0bbaebeb",
+        "android_client_info": {
+          "package_name": "com.intotech.wheelo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "102834178930-2ttlkgvfa9g29umbtuqtv90vjasf4mop.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdyRVnid0wy1ixonHj9Z2NtxjTPsqGHiw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "102834178930-2ttlkgvfa9g29umbtuqtv90vjasf4mop.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

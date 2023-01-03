@@ -1,0 +1,11 @@
+{
+    "AppName": "Wheelo",
+    "firstname": "Imię",
+    "lastname": "Nazwisko",
+    "email": "Email",
+    "password": "Hasło",
+    "SignUp": "Zarejestruj się",
+    "SignIn": "Zaloguj się",
+    "UnableToAuthorize": "Nie udało się zalogować",
+    "Search": "Szukaj tuttaj"
+}

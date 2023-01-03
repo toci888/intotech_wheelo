@@ -1,0 +1,18 @@
+{
+    "AppName": "Wheelo",
+    "firstname": "Imię",
+    "lastname": "Nazwisko",
+    "email": "Email",
+    "password": "Hasło",
+    "SignUp": "Zarejestruj się",
+    "SignIn": "Zaloguj się",
+    "SignOut": "Wyloguj się",
+    "UnableToAuthorize": "Nie udało się zautoryzować",
+    "Search": "Szukaj",
+    "Alert": "Komunikat",
+    "Welcome": "Witaj",
+    "ToenablePushNotificationspleasechangeyoursettings": "W celu włączenia powiadomień, włącz je w ustawieniach",
+    "OpenSettings": "Otwórz ustawienia",
+    "Ok": "Ok",
+    "Permissiontoaccesslocationwasdenied": "Nie udzielono zgody na pobranie danych geograficznych."
+}

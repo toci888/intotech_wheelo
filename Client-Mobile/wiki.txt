@@ -4,3 +4,55 @@ camelCase:
 
 PascalCase:
 Classess
+
+
+expo start --clear
+npm i --legacy-peer-deps
+
+npm i react-native-google-places-autocomplete
+npm install @unimodules/core
+
+! 
+
+expo whoami
+expo login
+https://expo.dev/login
+npm react-native -v
+https://expo.dev/accounts/kacper1337/projects/intotechwheelo
+
+expo whoami
+expo login
+Owner kacper1337 Kacper123.
+Slug intotechwheelo
+ID 7fda874a-5f71-4e74-8203-13f3aeb2e419
+
+npm i eas-cli 
+npx eas init --id 7fda874a-5f71-4e74-8203-13f3aeb2e419
+
+https://docs.expo.dev/guides/authentication/
+
+META
+https://developers.facebook.com/apps/1596113584178438/dashboard/
+1596113584178438
+
+moj token
+EAAWrqCc0xQYBAMCl0748zmQscSwuU7b6TkFL2aeIrIMyt0DiA3gxQVAVKMI2UGYmvbC6CzbuVwYYrUoY3nazXHZAVVKSQiXkBN96QeD834ZASn3YJXDs26spCHZBPvwuwuMFunPqrkeHxupc0mZCJ6NMpyPF4l4HnKJjOg0635pE8LUdGyE9njwFLjscfp0ZD
+https://graph.facebook.com/me?fields=id,name,email&access_token=EAAWrqCc0xQYBAMCl0748zmQscSwuU7b6TkFL2aeIrIMyt0DiA3gxQVAVKMI2UGYmvbC6CzbuVwYYrUoY3nazXHZAVVKSQiXkBN96QeD834ZASn3YJXDs26spCHZBPvwuwuMFunPqrkeHxupc0mZCJ6NMpyPF4l4HnKJjOg0635pE8LUdGyE9njwFLjscfp0ZD
+google
+https://www.googleapis.com/userinfo/v2/me
+Authorization
+Bearer ya29.a0AeTM1id81nIcNmo6bMRbxX-d3gEXJYZNJahppzpIQ9k18lFXnrLn-gRDmToPaVekoArtO5Z-DAnlGnl815t_Xy2t4LeCSNQZBdWe0suIaci9DJQb9wrbJrkceb2lk3Z5vg4_FrKF8arqAyivR05-pcLazZ2raCgYKASgSARMSFQHWtWOmLriSHOCMBUUpcbpJoYVQsw0163
+
+ya29.a0AeTM1id81nIcNmo6bMRbxX-d3gEXJYZNJahppzpIQ9k18lFXnrLn-gRDmToPaVekoArtO5Z-DAnlGnl815t_Xy2t4LeCSNQZBdWe0suIaci9DJQb9wrbJrkceb2lk3Z5vg4_FrKF8arqAyivR05-pcLazZ2raCgYKASgSARMSFQHWtWOmLriSHOCMBUUpcbpJoYVQsw0163
+
+iOS
+eyJraWQiOiJZdXlYb1kiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiaG9zdC5leHAuRXhwb25lbnQiLCJleHAiOjE2Njk0MDE2MTYsImlhdCI6MTY2OTMxNTIxNiwic3ViIjoiMDAxMjQyLjgyODhiMDM0ZGY5YzQzYTVhNjM3YjRhNTA0MzIyMjU2LjE4NDAiLCJjX2hhc2giOiI3TEZ4Mjl0Zmt3empvdWhOcTdQQlJ3IiwiZW1haWwiOiJtdzl3cmR5dHBzQHByaXZhdGVyZWxheS5hcHBsZWlkLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjoidHJ1ZSIsImlzX3ByaXZhdGVfZW1haWwiOiJ0cnVlIiwiYXV0aF90aW1lIjoxNjY5MzE1MjE2LCJub25jZV9zdXBwb3J0ZWQiOnRydWUsInJlYWxfdXNlcl9zdGF0dXMiOjJ9.DZDGTDEJ2UFIiP_efisSW1HVglEgsPpyRnMgL-PlJdk086vn5gVyfxbAFFdMq1PlNsjzQcsKxqULiFZz9CrmVFSW9wDTSnsdZ3xAoF9ivFh6zgyAZybI1J-mlGntVpWikN-6VLrJI_kGnvoKEiFVSAfsqr-f061d3A1gQsDw3B6fdMNGpuGfPv1L1gD6cLQWcAMGSVRdUUUyIq8hLp_vPDiPyc8oPKkGC7DoetWkE_xqVnuxS-G4li5Cy_FnhFFzi0Vt3LyQG6ik_-yhd4zzaRoC2TnXTRNc4drYiEZH2UhedqLNvEdLIouFPoTnmCerHo4MfltNeIUqJBGIvsJXFw
+https://jwt.io/
+https://appleid.apple.com/auth/keys
+
+
+
+https://apartmentsclone.tk/api/property/1
+https://api.locationiq.com/v1/search.php?key=pk.95fe8bb8ddbbc10ed656fe23d485c8f0&q&q=Tampa&format=json&dedupe=1&addressdetails=1&matchquality=1&normalizeaddress=1&normalizecity=1
+https://api.locationiq.com/v1/autocomplete.php?key=pk.95fe8bb8ddbbc10ed656fe23d485c8f0&q=polska&limit=10
+

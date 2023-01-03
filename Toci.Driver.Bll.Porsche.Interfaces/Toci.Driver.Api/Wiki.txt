@@ -4,5 +4,12 @@
 3. Check environment in client app
 
 
-Git skip files with IP (include environment.ts and launchSettings.json files):
+Git skip files with IP (include package-lock.json/environment.ts and launchSettings.json files in exactly folder - this can create problem with checkout bracnch):
 git update-index --assume-unchanged <file>
+
+npm i --force
+npm i --legacy-peer-deps
+
+
+FIREBASE EXPO:
+expo push:android:upload --api-key <KEY>
