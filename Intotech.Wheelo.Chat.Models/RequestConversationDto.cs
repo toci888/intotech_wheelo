@@ -8,8 +8,7 @@ namespace Intotech.Wheelo.Chat.Models
 {
     public class RequestConversationDto
     {
-        public int InvitedAccountId { get; set; }
-        public string InvitedUserName { get; set; }
+        public List<int> InvitedAccountIds { get; set; }
         public int InvitingAccountId { get; set; }
         public string InvitingUserName { get; set; }
         public string RoomId { get; set; }

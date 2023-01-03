@@ -58,15 +58,21 @@ export default class WheeloClient {
         await wheeloEngExists.userConnect(accountId);
     }
 
-    requestConversation = async (invitingAccountId, invitedAccountId) => {
+    requestConversation = async (invitingAccountId, invitingUserName, invitedAccountIds) => {
 
-        var roomId = "accountId: " + invitedAccountId + ", accountId: " + invitingAccountId;
+        var roomId = "accountId: " + invitingAccountId;
+        var invAccountIds = new Array();
+
+        for (const element of invitedAccountIds) {
+
+            roomId += ", accountId: " + element;
+            invAccountIds.push(parseInt(element));
+        }
 
         var json = {
-            InvitedAccountId: parseInt(invitedAccountId),
-            InvitedUserName: "",
+            InvitedAccountIds: invAccountIds,
             InvitingAccountId: parseInt(invitingAccountId),
-            InvitingUserName: "",
+            InvitingUserName: invitingUserName,
             RoomId: roomId
         }
 

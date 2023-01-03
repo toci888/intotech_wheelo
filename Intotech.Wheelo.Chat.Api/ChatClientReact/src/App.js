@@ -35,8 +35,7 @@ const App = () => {
   <input type="submit" value="Connect" onClick={() => wheeloClient.connect(document.getElementById("userId").value, 
       document.getElementById("userName").value)}></input>
   <input type="submit" value="Invite" onClick={() => 
-    wheeloClient.requestConversation(document.getElementById("userId").value, 
-    document.getElementById("userIdInv").value)}></input>
+    wheeloClient.requestConversation(document.getElementById("userId").value, "Ziutek", new Array(1000000027, 1000000029))}></input>
   
   <input type="submit" value="approve" onClick={() => 
     wheeloClient.approveChat(document.getElementById("userId").value, 

@@ -47,23 +47,30 @@ namespace Intotech.Wheelo.Chat.Jaguar
 
         public virtual RequestConversationDto Invite(RequestConversationDto invitation)
         {
-            Conversationinvitation check = ConversationInvitationLogic.Select(m => m.Idaccount == invitation.InvitingAccountId && m.Idaccountinvited == invitation.InvitedAccountId).FirstOrDefault();
-
-            if (check != null)
-            {
-                invitation.IsInvited = true;
-
-                return invitation;
-            }
-
             Account userInviting = AccountService.GetAccount(invitation.InvitingAccountId);
-            Account userInvited = AccountService.GetAccount(invitation.InvitedAccountId);
 
-            invitation.InvitedUserName = userInvited.Name;
             invitation.InvitingUserName = userInviting.Name;
 
-            ConversationInvitationLogic.Insert(new Conversationinvitation() { Idaccount = invitation.InvitingAccountId, 
-                Idaccountinvited = invitation.InvitedAccountId, Roomid = invitation.RoomId });
+            foreach (int accountId in invitation.InvitedAccountIds)
+            {
+                Conversationinvitation check = ConversationInvitationLogic.Select(m => m.Idaccount == invitation.InvitingAccountId && m.Idaccountinvited == accountId).FirstOrDefault();
+
+                if (check != null)
+                {
+                    invitation.IsInvited = true;
+
+                    return invitation;
+                }
+
+                Account userInvited = AccountService.GetAccount(accountId);
+
+                ConversationInvitationLogic.Insert(new Conversationinvitation()
+                {
+                    Idaccount = invitation.InvitingAccountId,
+                    Idaccountinvited = accountId,
+                    Roomid = invitation.RoomId
+                });
+            }
 
             return invitation;
         }

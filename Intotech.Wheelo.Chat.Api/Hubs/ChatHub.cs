@@ -12,7 +12,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
     {
         private const string ClientReceiveMessageCallback = "ReceiveMessage";
         private const string ClientAddUserCallback = "AddUser";
-        private const string InviteToConversation = "InviteToConversation";
+        private const string InviteToConversationCallback = "InviteToConversation";
         private const string UserOwnIdPattern = "accountId: {0}";
         private const string UsersRoomIdPattern = "accountId: {0}, accountId: {1}";
 
@@ -40,30 +40,17 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
         public async Task RequestConversation(RequestConversationDto requestConversation)
         {
-            string invitedUserId = string.Format(UserOwnIdPattern, requestConversation.InvitedAccountId);
-
             requestConversation = ChatUserService.Invite(requestConversation);
 
             if (!requestConversation.IsInvited)
             {
-                await Clients.Group(invitedUserId).SendAsync(InviteToConversation, requestConversation);
-            }
-        }
+                foreach (int accountId in requestConversation.InvitedAccountIds)
+                {
+                    string invitedUserId = string.Format(UserOwnIdPattern, accountId);
 
-        public async Task SendMessage(ChatMessageDto chatMessage)
-        {
-            if (chatMessage.ChatMessageAuthorId > chatMessage.ChatParticipantId)
-            {
-                chatMessage.RoomId = string.Format(UsersRoomIdPattern, chatMessage.ChatParticipantId, chatMessage.ChatMessageAuthorId);
+                    await Clients.Group(invitedUserId).SendAsync(InviteToConversationCallback, requestConversation);
+                }
             }
-            else
-            {
-                chatMessage.RoomId = string.Format(UsersRoomIdPattern, chatMessage.ChatMessageAuthorId, chatMessage.ChatParticipantId);
-            }
-
-            chatMessage = ChatUserService.SendMessage(chatMessage);
-
-            await Clients.Group(chatMessage.RoomId).SendAsync(ClientReceiveMessageCallback, chatMessage);
         }
 
         public async Task ApproveChat(int firstParticipantId, int secondParticipantId)
@@ -80,6 +67,22 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             }
 
             await JoinRoom(roomId);
+        }
+
+        public async Task SendMessage(ChatMessageDto chatMessage)
+        {
+            if (chatMessage.ChatMessageAuthorId > chatMessage.ChatParticipantId)
+            {
+                chatMessage.RoomId = string.Format(UsersRoomIdPattern, chatMessage.ChatParticipantId, chatMessage.ChatMessageAuthorId);
+            }
+            else
+            {
+                chatMessage.RoomId = string.Format(UsersRoomIdPattern, chatMessage.ChatMessageAuthorId, chatMessage.ChatParticipantId);
+            }
+
+            chatMessage = ChatUserService.SendMessage(chatMessage);
+
+            await Clients.Group(chatMessage.RoomId).SendAsync(ClientReceiveMessageCallback, chatMessage);
         }
 
         protected virtual async Task JoinRoom(string roomId)
