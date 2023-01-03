@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 10,
     position: "absolute",
-    top: 170,
+    top: 60,
     left: 15,
     borderRadius: 30,
   }
