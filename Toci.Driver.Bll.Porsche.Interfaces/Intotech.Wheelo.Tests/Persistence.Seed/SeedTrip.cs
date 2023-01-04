@@ -14,7 +14,7 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
             List<Trip> tripList = new List<Trip>();
 
             //1
-            tripList.Add(new Trip()
+            /*tripList.Add(new Trip()
             {
                 Fromhour = new TimeOnly(8, 0),
                 Tohour = new TimeOnly(16, 0),
@@ -106,7 +106,7 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
            
             // ?
 
-            InsertCollection(tripList);
+            InsertCollection(tripList); */
         }
     }
 }

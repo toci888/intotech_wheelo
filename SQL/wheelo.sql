@@ -7,13 +7,15 @@ drop table ResetPassword;
 drop table PasswordStrength;
 drop table FailedLoginAttempts;
 
-drop view VCollocationsGeoLocations;
+--
 
 drop table AccountModes;
 
 drop view VAWorkTripGenGeoLocations;
 drop view VWorkTripGenGeoLocations;
 drop view VACollocationsGeoLocations;
+
+drop view VCollocationsGeoLocations;
 
 drop table WorkTripGen;
 drop table NotUser;
@@ -33,7 +35,8 @@ drop view VFriendSuggestions;
 --select * from  Accounts;
 --select * from AccountsCollocations;
 drop view AccountsCarsLocations;
-drop view VCollocationsGeoLocations;
+
+--drop view VCollocationsGeoLocations;
 
 drop view VAccountsCollocationsWorkTrip;
 drop table WorkTrip;
@@ -51,6 +54,7 @@ drop table AccountsLocations cascade;
 drop table UserExtraData;
 drop table Accounts cascade;
 drop table Roles cascade;
+
 --drop table Occupations;
 drop table GeographicRegion;
 

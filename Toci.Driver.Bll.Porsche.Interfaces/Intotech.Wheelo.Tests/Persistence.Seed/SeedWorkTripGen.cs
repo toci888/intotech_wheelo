@@ -369,6 +369,58 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
                 Acceptabledistance = distanceAcc
             });
 
+            ModelsEntities.Add(new Worktripgen()
+            {
+                Searchid = StringUtils.GetRandomString(32),
+                Idaccount = 28 + offset,
+                Latitudefrom = 52.40155122342916,
+                Longitudefrom = 16.92978850458502,
+                Latitudeto = 51.101230555909715,
+                Longitudeto = 17.032070201490435,
+                Fromhour = new TimeOnly(7, 00),
+                Tohour = new TimeOnly(16, 00),
+                Acceptabledistance = distanceAcc
+            });
+            //new seeds
+            ModelsEntities.Add(new Worktripgen()
+            {
+                Searchid = StringUtils.GetRandomString(32),
+                Idaccount = 29 + offset,
+                Latitudefrom = 52.40255122342916,
+                Longitudefrom = 16.92878850458502,
+                Latitudeto = 51.102230555909715,
+                Longitudeto = 17.035070201490435,
+                Fromhour = new TimeOnly(7, 05),
+                Tohour = new TimeOnly(10, 00),
+                Acceptabledistance = distanceAcc
+            });
+
+            ModelsEntities.Add(new Worktripgen()
+            {
+                Searchid = StringUtils.GetRandomString(32),
+                Idaccount = 30 + offset,
+                Latitudefrom = 52.40155122342916,
+                Longitudefrom = 16.92978850458502,
+                Latitudeto = 51.103230555909715,
+                Longitudeto = 17.036070201490435,
+                Fromhour = new TimeOnly(7, 15),
+                Tohour = new TimeOnly(7, 30),
+                Acceptabledistance = distanceAcc
+            });
+
+            ModelsEntities.Add(new Worktripgen()
+            {
+                Searchid = StringUtils.GetRandomString(32),
+                Idaccount = 31 + offset,
+                Latitudefrom = 52.40055122342916,
+                Longitudefrom = 16.92078850458502,
+                Latitudeto = 51.100230555909715,
+                Longitudeto = 17.030070201490435,
+                Fromhour = new TimeOnly(6, 15),
+                Tohour = new TimeOnly(7, 00),
+                Acceptabledistance = distanceAcc
+            });
+
             /*
              {"startLocation":{"place_id":"ChIJtwrh7NJEBEcR0b80A5gx6qQ","lat":"52.406376","lon":"16.925169","display_name":"Poznań, 62",
             "address":{"name":"Poznań, 62","house_number":null,"road":null,"city":"Poznań","state":"Wielkopolskie","postcode":"62","country":"Polska",
