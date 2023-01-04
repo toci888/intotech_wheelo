@@ -28,7 +28,7 @@ export const AccountScreen = () => {
   const supportButtons = [
     {
       label: "Help Center",
-      onPress: () => console.log("navigate to Help Center"),
+      onPress: () => console.log("navigate to Help Center"), //navigation.navigate("AddProperty")
     },
     {
       label: "Terms and Conditions",
@@ -134,7 +134,8 @@ export const AccountScreen = () => {
               data={rentalManagementButtons}
               header={"Rental Manager Tools"}
             />
-            <ButtonList data={supportButtons} header={"Support"} />
+            <ButtonList data={firstSignedOutButtons} header="Properties" borderTop />
+            <ButtonList data={supportButtons} header="Support" marginTop borderTop />
             <View style={[styles.specialMarginVertical, styles.defaultMarginHorizontal,]}>
               <Button appearance={"ghost"} style={styles.button} onPress={logout}>
                 {i18n.t('SignOut')}
@@ -143,8 +144,6 @@ export const AccountScreen = () => {
           </>
         ) : (
           <>
-            <ButtonList data={firstSignedOutButtons} borderTop />
-            <ButtonList data={supportButtons} header="Support" marginTop />
             <Text appearance={"hint"} style={[styles.brandText, styles.specialMarginVertical]}>
               {i18n.t('AppName').toUpperCase()}
             </Text>

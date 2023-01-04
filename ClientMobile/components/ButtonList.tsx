@@ -1,3 +1,4 @@
+import React from "react";
 import { Pressable, StyleSheet, View, ViewStyle } from "react-native";
 import { Text } from "@ui-kitten/components";
 
