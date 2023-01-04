@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { Chat, MessageType, defaultTheme } from "@flyerhq/react-native-chat-ui";
 import { useNavigation } from "@react-navigation/native";
 
@@ -33,7 +33,7 @@ export const MessagesScreen = ({
   if (!user) return <SignUpOrSignInScreen />;
   if (conversation.isLoading) return <Loading />;
 
-  if (!conversation.data) return <Text>... Unable to get chat</Text>;
+  if (!conversation.data) return <><Text>... Unable to get chat</Text></>;
 
   const handleSendPress = (message: MessageType.PartialText) => {
     if (conversation)

@@ -25,7 +25,7 @@ const fetchConversations = async (
   // const conversations: ConversationsRes[] = response.data;
   const conversations: ConversationsRes[] = [{
     ID: 1,
-    CreatedAt: '01-01-2022',
+    CreatedAt: '02/01/2022',
     tenantID: 2,
     ownerID: 3,
     propertyID: 4,
@@ -41,7 +41,7 @@ const fetchConversations = async (
     tenantEmail: 'tenantemail',
     messages: [{
       ID: 1,
-      CreatedAt: '01-01-2022',
+      CreatedAt: '01/01/2022',
       senderID: 2,
       receiverID: 3,
       text: 'textasd'
