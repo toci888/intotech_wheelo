@@ -18,6 +18,7 @@ import { User } from "./types/user";
 import { socket } from "./constants/socket";
 import { queryKeys } from "./constants/constants";
 import { refreshTokens } from "./services/tokens";
+import WheeloClient from "./chatlib/WheeloClient";
 
 const queryClient = new QueryClient();
 LogBox.ignoreAllLogs();
@@ -40,6 +41,10 @@ export default function App() {
           SecureStore.setItemAsync("user", JSON.stringify(userObj));
         }
         setUser(userObj);
+
+        const chatClient = new WheeloClient(() => {}, () => {}, () => {});
+
+        chatClient.connect(userObj.id);
 
         socket.auth = {
           userID: userObj.id,
