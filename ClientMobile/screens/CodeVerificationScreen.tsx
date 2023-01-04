@@ -11,6 +11,8 @@ import { useUser } from "../hooks/useUser";
 import { ReturnedResponse } from "../types";
 import { User } from "../types/user";
 import { commonAlert } from "../utils/handleError";
+import { ModalHeader } from "../components/ModalHeader";
+import { i18n } from "../i18n/i18n";
 
 const { Value, Text: AnimatedText } = Animated;
 
@@ -132,6 +134,7 @@ export const CodeVerificationScreen = ({route}:{
 
   return (
     <SafeAreaView style={styles.root}>
+      <ModalHeader text={i18n.t('AppName')} xShown />
       <Text style={styles.title}>Email Verification</Text>
       <Image style={styles.icon} source={source} />
       <Text style={styles.subTitle}>

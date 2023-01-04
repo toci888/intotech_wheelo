@@ -43,6 +43,7 @@ import { ConversationsScreen } from "../screens/ConversationsScreen";
 import { MessagesScreen } from "../screens/MessagesScreen";
 import { CodeVerificationScreen } from "../screens/CodeVerificationScreen";
 import { useUser } from "../hooks/useUser";
+import { i18n } from "../i18n/i18n";
 
 export default function Navigation({
   colorScheme,
@@ -165,7 +166,7 @@ function BottomTabNavigator() {
       }}
     >
       <BottomTab.Screen
-        name="Search"
+        name={i18n.t('Search')}
         component={SearchScreen}
         options={{
           headerShown: false,
@@ -175,12 +176,12 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="Saved"
+        name={i18n.t('Messages')}
         component={SavedScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="heart-outline" color={color} />
+            <TabBarIcon name="tooltip-text-outline" color={color} />
           ),
         }}
       />
@@ -189,9 +190,9 @@ function BottomTabNavigator() {
         component={AccountStack}
         options={{
           headerShown: false,
-          tabBarLabel: "Account",
+          tabBarLabel: i18n.t('Account'),
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="account-circle-outline" color={color} />
+            <TabBarIcon name="account" color={color} />
           ),
         }}
       />
@@ -241,19 +242,19 @@ const AuthScreenStack = () => (
       name="SignIn"
       component={SignInScreen}
       options={{ headerShown: false }} />
-      <AuthStack.Screen
+    <AuthStack.Screen
       name="SignUp"
       component={SignUpScreen}
       options={{ headerShown: false }} />
-      <AuthStack.Screen
+    <AuthStack.Screen
       name="ForgotPassword"
       component={ForgotPasswordScreen}
       options={{ headerShown: false }} />
-      <AuthStack.Screen
+    <AuthStack.Screen
       name="ResetPassword"
       component={ResetPasswordScreen}
       options={{ headerShown: false }} />
-      <AuthStack.Screen
+    <AuthStack.Screen
       name="CodeVerification"
       component={CodeVerificationScreen}
       options={{ headerShown: false }} />

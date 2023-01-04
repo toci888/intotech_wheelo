@@ -28,5 +28,7 @@
     "PleaseSignUpOrSignInToSaveProperties": "W celu zapisania, proszę się zalogować.",
     "UseMyCurrentLocation": "Użyj mojej lokalizacji",
     "UnableToGetCollocationDetails": "Nie udało się pobrać danych kolokacji ...",
-    "UnableToGetCollocationMessage": "Nie udało się pobrać informacji."
+    "UnableToGetCollocationMessage": "Nie udało się pobrać informacji.",
+    "Messages": "Wiadomości",
+    "Account": "Konto"
 }
