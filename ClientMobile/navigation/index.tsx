@@ -24,6 +24,7 @@ import { ResetPasswordScreen } from "../screens/ResetPasswordScreen";
 import { MessagePropertyScreen } from "../screens/MessagePropertyScreen";
 import {
   AccountTabParamList,
+  AuthParamList,
   RootStackParamList,
   RootTabParamList,
   RootTabScreenProps,
@@ -41,6 +42,7 @@ import { AccountSettingsScreen } from "../screens/AccountSettingsScreen";
 import { ConversationsScreen } from "../screens/ConversationsScreen";
 import { MessagesScreen } from "../screens/MessagesScreen";
 import { CodeVerificationScreen } from "../screens/CodeVerificationScreen";
+import { useUser } from "../hooks/useUser";
 
 export default function Navigation({
   colorScheme,
@@ -49,7 +51,7 @@ export default function Navigation({
 }) {
   return (
     <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme}>
-      <RootNavigator colorScheme={colorScheme}/>
+      <RootNavigator colorScheme={colorScheme} />
     </NavigationContainer>
   );
 }
@@ -63,9 +65,11 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator(props: any) {
   const { registerForPushNotificationsAsync, handleNotificationResponse } =
     useNotifications();
+  const { user } = useUser();
 
-  useEffect(() => {    
+  useEffect(() => {
     console.log("TU", props.colorScheme);
+    console.log("USER", user);
     registerForPushNotificationsAsync();
     Notifications.setNotificationHandler({
       handleNotification: async () => ({
@@ -74,19 +78,19 @@ function RootNavigator(props: any) {
         shouldSetBadge: true,
       }),
     });
-    
+
     const responseListener =
       Notifications.addNotificationResponseReceivedListener(
         handleNotificationResponse
       );
-      
+
     return () => {
       if (responseListener)
         Notifications.removeNotificationSubscription(responseListener);
     };
   }, []);
 
-  return (
+  return user ? (
     <Stack.Navigator>
       <Stack.Screen
         name="Root"
@@ -98,26 +102,6 @@ function RootNavigator(props: any) {
         <Stack.Screen
           name="FindLocations"
           component={FindLocationsScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignIn"
-          component={SignInScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignUp"
-          component={SignUpScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ForgotPassword"
-          component={ForgotPasswordScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ResetPassword"
-          component={ResetPasswordScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -161,8 +145,9 @@ function RootNavigator(props: any) {
           options={{ headerShown: false }}
         />
       </Stack.Group>
-    </Stack.Navigator>
-  );
+    </Stack.Navigator>)
+    :
+    <AuthScreenStack />
 }
 
 /**
@@ -243,6 +228,36 @@ const AccountStack = () => (
       }}
     />
   </AccountStackNavigator.Navigator>
+);
+
+const AuthStack = createNativeStackNavigator<AuthParamList>();
+const AuthScreenStack = () => (
+  <AuthStack.Navigator initialRouteName="Account">
+    <AuthStack.Screen
+      name="Account"
+      component={AccountScreen}
+      options={{ headerShown: false }} />
+    <AuthStack.Screen
+      name="SignIn"
+      component={SignInScreen}
+      options={{ headerShown: false }} />
+      <AuthStack.Screen
+      name="SignUp"
+      component={SignUpScreen}
+      options={{ headerShown: false }} />
+      <AuthStack.Screen
+      name="ForgotPassword"
+      component={ForgotPasswordScreen}
+      options={{ headerShown: false }} />
+      <AuthStack.Screen
+      name="ResetPassword"
+      component={ResetPasswordScreen}
+      options={{ headerShown: false }} />
+      <AuthStack.Screen
+      name="CodeVerification"
+      component={CodeVerificationScreen}
+      options={{ headerShown: false }} />
+  </AuthStack.Navigator>
 );
 
 /**

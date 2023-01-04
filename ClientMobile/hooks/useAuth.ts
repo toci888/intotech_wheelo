@@ -52,7 +52,6 @@ export const useAuth = () => {
   const handleSignInUser = (user?: User) => {
     if (user) {
       login(user);
-      goBack();
     }
   };
 

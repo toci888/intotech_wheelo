@@ -51,6 +51,15 @@ export type AccountTabParamList = {
   Messages: { conversationID: number; recipientName: string };
 };
 
+export type AuthParamList = {
+  Account: undefined;
+  SignIn: undefined;
+  SignUp: undefined;
+  ForgotPassword: undefined;
+  ResetPassword: undefined;
+  CodeVerification: undefined;
+};
+
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
   CompositeScreenProps<
     BottomTabScreenProps<RootTabParamList, Screen>,
