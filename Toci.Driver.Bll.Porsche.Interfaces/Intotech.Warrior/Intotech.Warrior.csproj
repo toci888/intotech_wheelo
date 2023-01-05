@@ -23,6 +23,7 @@
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.ReflectiveTools\Intotech.ReflectiveTools.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
     <ProjectReference Include="..\..\Intotech.Wheelo.Chat.Jaguar\Intotech.Wheelo.Chat.Jaguar.csproj" />
+    <ProjectReference Include="..\..\Intotech.Wheelo.Chat.Tests\Intotech.Wheelo.Chat.Tests.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Bentley.Interfaces\Intotech.Wheelo.Bll.Bentley.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Bentley\Intotech.Wheelo.Bll.Bentley.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Models\Intotech.Wheelo.Bll.Models.csproj" />

@@ -266,9 +266,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WheeloSqlMigrations", "Whee
 		19-12-2022 wheelo.sql = 19-12-2022 wheelo.sql
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Notifications.Interfaces", "Intotech.Wheelo.Notifications.Interfaces\Intotech.Wheelo.Notifications.Interfaces.csproj", "{5558666A-67FD-4684-997A-89FB6035B34A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Notifications.Interfaces", "Intotech.Wheelo.Notifications.Interfaces\Intotech.Wheelo.Notifications.Interfaces.csproj", "{5558666A-67FD-4684-997A-89FB6035B34A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Notifications", "Intotech.Wheelo.Notifications\Intotech.Wheelo.Notifications.csproj", "{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Notifications", "Intotech.Wheelo.Notifications\Intotech.Wheelo.Notifications.csproj", "{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Tests", "..\Intotech.Wheelo.Chat.Tests\Intotech.Wheelo.Chat.Tests.csproj", "{ED37397B-F1A6-4347-A6BF-E2B6797EECAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -686,6 +688,14 @@ Global
 		{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}.Release|x64.ActiveCfg = Release|Any CPU
 		{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}.Release|x64.Build.0 = Release|Any CPU
+		{ED37397B-F1A6-4347-A6BF-E2B6797EECAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED37397B-F1A6-4347-A6BF-E2B6797EECAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED37397B-F1A6-4347-A6BF-E2B6797EECAB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{ED37397B-F1A6-4347-A6BF-E2B6797EECAB}.Debug|x64.Build.0 = Debug|Any CPU
+		{ED37397B-F1A6-4347-A6BF-E2B6797EECAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED37397B-F1A6-4347-A6BF-E2B6797EECAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED37397B-F1A6-4347-A6BF-E2B6797EECAB}.Release|x64.ActiveCfg = Release|Any CPU
+		{ED37397B-F1A6-4347-A6BF-E2B6797EECAB}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -731,6 +741,7 @@ Global
 		{9473EB68-FADB-4259-9199-74986F2A1E4E} = {14C2EDD9-09A5-48DD-99FA-AC51331C789F}
 		{1AEF4726-146E-4970-8155-BA3796EDB6F8} = {14C2EDD9-09A5-48DD-99FA-AC51331C789F}
 		{94626A6A-464F-4FC8-9ACE-F96A0F3EC8A3} = {A662B894-F584-4249-902F-47612C3E8E94}
+		{ED37397B-F1A6-4347-A6BF-E2B6797EECAB} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {958786F8-D2E4-4AAC-949D-3CD908D8AE36}

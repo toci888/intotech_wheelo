@@ -7,6 +7,7 @@ using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Porsche;
 using Intotech.Wheelo.Bll.Porsche.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.User;
+using Intotech.Wheelo.Chat.Tests.Persistence.Seed;
 using Intotech.Wheelo.Common.Interfaces.Models;
 using Intotech.Wheelo.Social.Tests.Persistence.Seed;
 using Intotech.Wheelo.Tests.Persistence.Seed;
@@ -19,10 +20,11 @@ Console.WriteLine("Warrior is seeding your dbs....");
 
 //new SeedRole().Insert();
 
-UsersCollocationLogic uc = new UsersCollocationLogic();
+//UsersCollocationLogic uc = new UsersCollocationLogic();
 
 //uc.DeleteByColumnId("Idaccount", 1000000014);
 
+new ChatSeedManager().SeedAllDb();
 
 new WheeloMainSeedManager().SeedAllDb();
 
