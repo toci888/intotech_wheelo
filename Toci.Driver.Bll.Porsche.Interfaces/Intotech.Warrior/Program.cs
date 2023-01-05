@@ -3,6 +3,7 @@ using Intotech.ReflectiveTools.SourceGenerators.ModelsToTypescript;
 using Intotech.Warrior;
 using Intotech.Wheelo.Bll.Models.Gaf;
 using Intotech.Wheelo.Bll.Models.Social;
+using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Porsche;
 using Intotech.Wheelo.Bll.Porsche.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.User;
@@ -17,6 +18,11 @@ Console.WriteLine("Warrior is seeding your dbs....");
 
 
 //new SeedRole().Insert();
+
+UsersCollocationLogic uc = new UsersCollocationLogic();
+
+//uc.DeleteByColumnId("Idaccount", 1000000014);
+
 
 new WheeloMainSeedManager().SeedAllDb();
 

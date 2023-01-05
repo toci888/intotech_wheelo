@@ -8,7 +8,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public int Id { get; set; }
         public int Idaccount { get; set; }
         public string Searchid { get; set; } = null!;
-        public bool Isuser { get; set; }
         public double Latitudefrom { get; set; }
         public double Longitudefrom { get; set; }
         public double Latitudeto { get; set; }
@@ -24,9 +23,10 @@ namespace Toci.Driver.Database.Persistence.Models
         public TimeOnly? Fromhour { get; set; }
         public TimeOnly? Tohour { get; set; }
         public double? Acceptabledistance { get; set; }
-        public DateTime? Createdat { get; set; }
         public int Driverpassenger { get; set; }
+        public DateTime? Createdat { get; set; }
 
+        public virtual Account IdaccountNavigation { get; set; } = null!;
         public virtual Geographicregion? IdgeographiclocationfromNavigation { get; set; }
         public virtual Geographicregion? IdgeographiclocationtoNavigation { get; set; }
     }

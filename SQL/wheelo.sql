@@ -428,9 +428,8 @@ create table NotUser
 create table WorkTripGen
 (
 	id serial primary key,
-    IdAccount int not null, --references Accounts (id), NotUser
+    IdAccount int not null references Accounts (id), --references Accounts (id), NotUser
 	searchId text not null,
-	isUser bool not null default false,
     LatitudeFrom double precision not null, --+
 	LongitudeFrom double precision not null,-- +
 	LatitudeTo double precision not null,

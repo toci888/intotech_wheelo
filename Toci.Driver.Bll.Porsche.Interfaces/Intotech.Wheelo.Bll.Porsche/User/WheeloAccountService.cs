@@ -151,7 +151,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 if (simpleaccount.Emailconfirmed.Value && simpleaccount.Password == sAccount.Password)
                 {
                     //login from registration - all data ok
-                    return new ReturnedResponse<AccountRoleDto>(Login(new LoginDto() { Email = sAccount.Email, Password = sAccount.Password }).MethodResult, I18nTranslation.Translation(I18nTags.Success), false, ErrorCodes.Success);
+                    return new ReturnedResponse<AccountRoleDto>(Login(new LoginDto() { Email = sAccount.Email, Password = sAccount.Password }).MethodResult, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
                 }
 
                 if (!simpleaccount.Emailconfirmed.Value)

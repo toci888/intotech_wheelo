@@ -190,11 +190,6 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
         {
             Worktripgen result = new Worktripgen();
 
-            if (workTripGen.Idaccount > WorktripgenLogic.AccountIdOffset)
-            {
-                result.Isuser = true;
-            }
-
             string[] FromTime = workTripGen.startLocationTime.Split(":");
             string[] ToTime = workTripGen.endLocationTime.Split(":");
 

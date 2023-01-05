@@ -10,8 +10,8 @@ namespace Toci.Driver.Database.Persistence.Models
         public string? Token { get; set; }
         public string? Method { get; set; }
         public string? Tokendatajson { get; set; }
-        public DateTime? Createdat { get; set; }
         public int Origin { get; set; }
+        public DateTime? Createdat { get; set; }
 
         public virtual Account? IdaccountNavigation { get; set; }
     }
