@@ -2,11 +2,23 @@
 {
     public class ChatMessageDto
     {
-        public int ChatParticipantId { get; set; }
-        public int ChatMessageAuthorId { get; set; }
-        public string Message { get; set; }
+        public int SenderID { get; set; }
+        public string Text { get; set; }
         public DateTime CreatedAt { get; set; }
-        public string RoomName { get; set; }
-        public string RoomId { get; set; }
+        public string ID { get; set; }
     }
+    /*
+         ID: 999, --
+    CreatedAt: '02/01/2022', -- 
+    ownerID: 3, --
+    ownerFirstName: 'ownerfirstname2', --
+    ownerLastName: 'ownerlast', --
+    ownerEmail: 'ownerEMail', --
+    messages: [{
+      ID: 1,
+      CreatedAt: '01/01/2022',
+      senderID: 2,
+      text: 'textasd2xx'
+    },
+     */
 }

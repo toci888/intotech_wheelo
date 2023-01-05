@@ -18,6 +18,7 @@ create table Rooms
 (
 	id serial primary key,
 	roomId text not null unique,
+	ownerId int not null,
 	type int not null default 1, -- 1 - two people chat, 2 - more people chat
 	createdat timestamp default now()
 );

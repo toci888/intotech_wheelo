@@ -1,4 +1,5 @@
-﻿using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
+﻿using Intotech.Wheelo.Chat.Bll.Persistence;
+using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Database.Persistence.Models;
 using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
@@ -10,12 +11,14 @@ namespace Intotech.Wheelo.Chat.Jaguar;
 public class ConversationService : IConversationService
 {
     protected IMessageLogic MessageLogic;
+    protected IRoomLogic RoomLogic;
     protected IAccountService AccountService;
 
-    public ConversationService(IMessageLogic messageLogic, IAccountService accountService)
+    public ConversationService(IMessageLogic messageLogic, IAccountService accountService, IRoomLogic roomLogic)
     {
         MessageLogic = messageLogic;
         AccountService = accountService;
+        RoomLogic = roomLogic;
     }
 
     public virtual List<ConversationDto> GetConversationById(string roomId)
@@ -28,16 +31,22 @@ public class ConversationService : IConversationService
 
         Dictionary<int, MessageAuthorDto> authorsData = GetDistinctNames(distinctAuthors);
 
+        Room room = RoomLogic.Select(m => m.Roomid == roomId).First();
+
+        ConversationDto resElement = new ConversationDto();
+
+        //resElement.OwnerID = messages.First.Idauthor;
+       // resElement.CreatedAt = message.Createdat.Value;
+
         foreach (Message message in messages)
         {
-            ConversationDto resElement = new ConversationDto();
+            
 
-            resElement.ChatMessageAuthorId = message.Idauthor;
-            resElement.CreatedAt = message.Createdat.Value;
-            resElement.Message = message.Message1;
-            resElement.RoomId = message.Roomid;
-            resElement.MessageAuthorFirstName = authorsData[message.Idauthor].MessageAuthorFirstName;
-            resElement.MessageAuthorLastName = authorsData[message.Idauthor].MessageAuthorLastName;
+            
+            //resElement. = message.Message1;
+            //resElement.RoomId = message.Roomid;
+            //resElement.MessageAuthorFirstName = authorsData[message.Idauthor].MessageAuthorFirstName;
+            //resElement.MessageAuthorLastName = authorsData[message.Idauthor].MessageAuthorLastName;
 
             result.Add(resElement);
         }

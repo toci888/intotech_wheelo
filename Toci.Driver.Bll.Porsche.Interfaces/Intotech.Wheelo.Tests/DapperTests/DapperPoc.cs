@@ -13,7 +13,7 @@ namespace Intotech.Wheelo.Tests.DapperTests
         [TestMethod]
         public void Test()
         {
-            
+            //SqlConnection 
         }
 
         //protected virtual SqlConnection GetPostgreConnection()

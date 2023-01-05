@@ -71,7 +71,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
         public async Task SendMessage(ChatMessageDto chatMessage)
         {
-            if (chatMessage.ChatMessageAuthorId > chatMessage.ChatParticipantId)
+           /* if (chatMessage.ChatMessageAuthorId > chatMessage.ChatParticipantId)
             {
                 chatMessage.RoomId = string.Format(UsersRoomIdPattern, chatMessage.ChatParticipantId, chatMessage.ChatMessageAuthorId);
             }
@@ -83,6 +83,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             chatMessage = ChatUserService.SendMessage(chatMessage);
 
             await Clients.Group(chatMessage.RoomId).SendAsync(ClientReceiveMessageCallback, chatMessage);
+           */
         }
 
         protected virtual async Task JoinRoom(string roomId)

@@ -9,6 +9,8 @@ public partial class Room
 
     public string Roomid { get; set; } = null!;
 
+    public int Ownerid { get; set; }
+
     public int Type { get; set; }
 
     public DateTime? Createdat { get; set; }

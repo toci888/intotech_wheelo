@@ -82,9 +82,9 @@ namespace Intotech.Wheelo.Chat.Jaguar
 
         public virtual ChatMessageDto SendMessage(ChatMessageDto chatMessage)
         {
-            Message mess = MessageLogic.Insert(new Message() { Idauthor = chatMessage.ChatMessageAuthorId, Message1 = chatMessage.Message, Roomid = chatMessage.RoomId });
+           // Message mess = MessageLogic.Insert(new Message() { Idauthor = chatMessage.ChatMessageAuthorId, Message1 = chatMessage.Message, Roomid = chatMessage.RoomId });
 
-            chatMessage.CreatedAt = mess.Createdat.Value;
+           //chatMessage.CreatedAt = mess.Createdat.Value;
 
             return chatMessage;
         }
