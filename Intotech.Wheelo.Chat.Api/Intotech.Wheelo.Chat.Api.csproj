@@ -13,13 +13,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="ChatClientReact\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Bll.Interfaces\Intotech.Common.Bll.Interfaces.csproj" />
     <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Bll\Intotech.Common.Bll.csproj" />
+    <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Microservices\Intotech.Common.Microservices.csproj" />
     <ProjectReference Include="..\..\Intotech.Common\Intotech.Common\Intotech.Common.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Chat.Bll.Persistence\Intotech.Wheelo.Chat.Bll.Persistence.csproj" />
