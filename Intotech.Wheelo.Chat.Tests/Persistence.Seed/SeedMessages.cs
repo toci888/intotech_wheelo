@@ -13,9 +13,11 @@ public class SeedMessages : SeedChatLogic<Message>
 
         string roomId = HashGenerator.Md5("1000000014, 1000000017");
 
+        Random rnd = new Random();
+
         for (int i = 0; i < 50; i++)
-        {
-            Message newMessage = new Message() { Idauthor = chatParticipants[i % 2], Roomid = roomId, Message1 = StringUtils.GetRandomText(25)};
+        {                                                                                                                               // cadewi yhiklo
+            Message newMessage = new Message() { Idauthor = chatParticipants[rnd.Next(1)], Roomid = roomId, Message1 = StringUtils.GetRandomText(25)};
 
             messages.Add(newMessage);
         }
