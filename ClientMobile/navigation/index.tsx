@@ -166,9 +166,10 @@ function BottomTabNavigator() {
       }}
     >
       <BottomTab.Screen
-        name={i18n.t('Search')}
+        name="Search"
         component={SearchScreen}
         options={{
+          tabBarLabel: i18n.t('Search'),
           headerShown: false,
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="magnify" color={color} />
@@ -176,9 +177,10 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name={i18n.t('Messages')}
+        name='Saved'
         component={SavedScreen}
         options={{
+          tabBarLabel: i18n.t('Messages'),
           headerShown: false,
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="tooltip-text-outline" color={color} />
@@ -189,8 +191,8 @@ function BottomTabNavigator() {
         name="AccountRoot"
         component={AccountStack}
         options={{
-          headerShown: false,
           tabBarLabel: i18n.t('Account'),
+          headerShown: false,
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="account" color={color} />
           ),
