@@ -157,7 +157,7 @@ export const SavedScreen = () => {
           appearance={getButtonAppearance(0)}
           onPress={() => handleButtonPress(0)}
         >
-          Favorites
+          Friends
         </Button>
         <Button
           style={[styles.button, styles.contactedButton]}
@@ -165,7 +165,7 @@ export const SavedScreen = () => {
           appearance={getButtonAppearance(1)}
           onPress={() => handleButtonPress(1)}
         >
-          Contacted
+          Suggested
         </Button>
         <Button
           style={[styles.button, styles.applicationButton]}
@@ -173,7 +173,7 @@ export const SavedScreen = () => {
           appearance={getButtonAppearance(2)}
           onPress={() => handleButtonPress(2)}
         >
-          Applications
+          Invited
         </Button>
         <Text>asd</Text>
       </Row>
