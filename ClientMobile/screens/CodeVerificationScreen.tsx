@@ -54,7 +54,6 @@ export const CodeVerificationScreen = ({route}:{
   });
 
   const handleVerify = async () => {
-    console.log("GGGGGGG");
     const user = route.params.user as User;
     setCodeVerificationForm({ email: user.email, code: value });
     try
@@ -77,7 +76,10 @@ export const CodeVerificationScreen = ({route}:{
 
         if(data.methodResult) {
           login(data.methodResult);
-          navigation.navigate("Root", {screen: "AccountRoot"});
+          console.log("route.paramshere", route.params)
+          console.log("rdatashere", data.methodResult)
+          // navigation.navigate("Root", {screen: "Search"});
+          // navigation.goBack();
         } else {
           commonAlert(data.errorMessage);
         }

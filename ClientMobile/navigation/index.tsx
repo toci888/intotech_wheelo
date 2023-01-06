@@ -25,6 +25,7 @@ import { MessagePropertyScreen } from "../screens/MessagePropertyScreen";
 import {
   AccountTabParamList,
   AuthParamList,
+  ChatTabParamList,
   RootStackParamList,
   RootTabParamList,
   RootTabScreenProps,
@@ -140,11 +141,6 @@ function RootNavigator(props: any) {
           component={ReviewScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="CodeVerification"
-          component={CodeVerificationScreen}
-          options={{ headerShown: false }}
-        />
       </Stack.Group>
     </Stack.Navigator>)
     :
@@ -180,10 +176,21 @@ function BottomTabNavigator() {
         name='Saved'
         component={SavedScreen}
         options={{
-          tabBarLabel: i18n.t('Messages'),
+          tabBarLabel: "Osoby",
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="tooltip-text-outline" color={color} />
+            <TabBarIcon name="cards-heart" color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name='Saved2'
+        component={ChatStack}
+        options={{
+          tabBarLabel: i18n.t('Chat'),
+          headerShown: false,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="chat-outline" color={color} />
           ),
         }}
       />
@@ -215,22 +222,28 @@ const AccountStack = () => (
       component={AccountSettingsScreen}
       options={{
         headerTitle: "Account Settings",
-        headerBackTitle: "Back",
-      }}
-    />
-    <AccountStackNavigator.Screen
-      name="Conversations"
-      component={ConversationsScreen}
-      options={{ headerTitle: "Conversations", headerBackTitle: "Back" }}
-    />
-    <AccountStackNavigator.Screen
-      name="Messages"
-      component={MessagesScreen}
-      options={{
-        headerBackTitle: "Back",
+        headerBackTitle: i18n.t("Back"),
       }}
     />
   </AccountStackNavigator.Navigator>
+);
+
+const ChatStackNavigator = createNativeStackNavigator<ChatTabParamList>();
+const ChatStack = () => (
+  <ChatStackNavigator.Navigator initialRouteName="Chat">
+    <ChatStackNavigator.Screen
+      name="Conversations"
+      component={ConversationsScreen}
+      options={{ headerTitle: i18n.t("Chat"), headerBackTitle: i18n.t("Back") }}
+    /> 
+    <ChatStackNavigator.Screen
+      name="Messages"
+      component={MessagesScreen}
+      options={{
+        headerBackTitle: i18n.t("Back"),
+      }}
+    />
+  </ChatStackNavigator.Navigator>
 );
 
 const AuthStack = createNativeStackNavigator<AuthParamList>();

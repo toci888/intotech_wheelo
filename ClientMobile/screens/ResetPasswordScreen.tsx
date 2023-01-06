@@ -33,7 +33,10 @@ export const ResetPasswordScreen = ({
         route.params.token,
         route.params.email
       );
-      if (passwordReset) navigate("SignIn");
+      if (passwordReset) {
+        navigate("SignIn");
+        commonAlert(passwordReset.errorMessage)
+      }
     } catch (error) {
       commonAlert(i18n.t('UnableToResetPassword'));
     } finally {
@@ -50,8 +53,8 @@ export const ResetPasswordScreen = ({
         </Text>
         <Formik
           initialValues={{
-            password: "Beatka123()",
-            passwordRepeat: "Beatka123()",
+            password: "Beatka123(",
+            passwordRepeat: "Beatka123(",
           }}
           validationSchema={yup.object().shape({
             password: yup

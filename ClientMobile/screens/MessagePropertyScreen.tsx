@@ -61,7 +61,7 @@ export const MessagePropertyScreen = ({
     );
     if (index >= 0) {
       navigateToMessageScreen(
-        conversations.data[index].ID,
+        conversations.data[index].id,
         conversations.data[index].recipientName
       );
     }

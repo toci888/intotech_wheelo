@@ -29,7 +29,7 @@ export const server = "http://51.107.0.138";
 
 const serverUrl = server + ":5105/api";
 const integrationApiUrl = server + ":5108/api";
-const chatUrl = "http://192.168.30.24:3000";
+const chatUrl = server + ":5130/api";
 
 const location = "/location";
 const google = "/GoogleMap";
@@ -48,7 +48,7 @@ const userEndpoint = serverUrl + user;
 const collocationEndpoint = serverUrl + property;
 const apartmentEndpoint = serverUrl + apartment;
 const reviewEndpoint = serverUrl + review;
-const conversationEndpoint = serverUrl + conversation;
+const conversationEndpoint = chatUrl + conversation;
 const messagesEndpoint = serverUrl + messages;
 const contactedEndpoint = (id: number) => `${userEndpoint}/${id}/properties/contacted`;
 const savedEndpoint = (id: number) => `${userEndpoint}/${id}/collocations/saved`;
@@ -86,8 +86,8 @@ export const endpoints = {
   allowsNotifications: allowsNotificationsEndpoint,
   themeMode: themeModeEndpoint,
   createConversation: conversationEndpoint,
-  getConversationByID: conversationEndpoint + "/",
-  getConversationsByUserID: conversationEndpoint + "/user/",
+  getConversationByID: conversationEndpoint,
+  getConversationsByUserID: conversationEndpoint,
   createMessage: messagesEndpoint,
   refreshTokens: refreshTokenEndpoint,
   currentLocation: currentLocationEndpoint

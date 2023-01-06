@@ -165,7 +165,7 @@ export const SavedScreen = () => {
           appearance={getButtonAppearance(1)}
           onPress={() => handleButtonPress(1)}
         >
-          Suggested
+          Associated
         </Button>
         <Button
           style={[styles.button, styles.applicationButton]}

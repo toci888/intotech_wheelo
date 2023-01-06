@@ -15,6 +15,8 @@ const createMessage = (
   conversationID: number,
   senderID: number,
   receiverID: number,
+  authorFirstName: string,
+  authorLastName: string,
   text: string,
   token?: string
 ) =>
@@ -25,6 +27,8 @@ const createMessage = (
       senderID,
       receiverID,
       text,
+      authorFirstName,
+      authorLastName,
     },
     {
       headers: {
@@ -43,18 +47,24 @@ export const useCreateMessageMutation = () => {
       author,
       senderID,
       receiverID,
+      authorFirstName,
+      authorLastName,
       text,
     }: {
       conversationID: number;
       author: Author;
       senderID: number;
       receiverID: number;
+      authorFirstName: string,
+      authorLastName: string,
       text: string;
     }) =>
       createMessage(
         conversationID,
         senderID,
         receiverID,
+        authorFirstName,
+        authorLastName,
         text,
         user?.accessToken
       ),
@@ -65,6 +75,8 @@ export const useCreateMessageMutation = () => {
         conversationID,
         receiverID,
         senderID,
+        authorFirstName,
+        authorLastName
       }) => {
         await queryClient.cancelQueries(queryKeys.conversations);
         await queryClient.cancelQueries(queryKeys.selectedConversation);
@@ -95,15 +107,17 @@ export const useCreateMessageMutation = () => {
         if (prevConversations) {
           const newConversations = [...prevConversations];
           const index = newConversations.findIndex(
-            (i) => i.ID === conversationID
+            (i) => i.id === conversationID
           );
 
           newConversations[index].messages.unshift({
-            CreatedAt: new Date().toString(),
-            ID: Date.now(),
+            createdAt: new Date().toString(),
+            id: Date.now(),
             receiverID,
             senderID,
             text,
+            authorFirstName,
+            authorLastName
           });
 
           queryClient.setQueryData(queryKeys.conversations, newConversations);
