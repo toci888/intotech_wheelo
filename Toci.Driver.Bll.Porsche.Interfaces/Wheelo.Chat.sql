@@ -19,7 +19,7 @@ create table Rooms
 	id serial primary key,
 	roomId text not null unique,
 	ownerId int not null,
-	type int not null default 1, -- 1 - two people chat, 2 - more people chat
+	roomName text,
 	createdat timestamp default now()
 );
 
@@ -30,7 +30,7 @@ create table RoomsAccounts
 	roomId text not null,
 	createdat timestamp default now()
 );
-
+--select * from Messages;
 create table Messages
 (
 	id serial primary key,
