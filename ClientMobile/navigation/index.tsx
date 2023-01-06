@@ -178,6 +178,7 @@ function BottomTabNavigator() {
         options={{
           tabBarLabel: "Osoby",
           headerShown: false,
+          tabBarBadge: 5,
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="cards-heart" color={color} />
           ),
