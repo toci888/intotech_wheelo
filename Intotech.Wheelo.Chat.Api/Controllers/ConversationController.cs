@@ -1,4 +1,5 @@
-﻿using Intotech.Common.Microservices;
+﻿using System.Reflection.Metadata.Ecma335;
+using Intotech.Common.Microservices;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
 using Intotech.Wheelo.Chat.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,12 @@ namespace Intotech.Wheelo.Chat.Api.Controllers
         public ConversationDto GetConversationById(string roomId)
         {
             return Service.GetConversationById(roomId);
+        }
+
+        [HttpGet("get-conversations-by-user-id")]
+        public List<ConversationDto> GetConversationsByAccountId(int userId)
+        {
+            return Service.GetConversationsByAccountId(userId);
         }
     }
 }

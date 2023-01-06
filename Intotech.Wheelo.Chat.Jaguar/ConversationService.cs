@@ -13,12 +13,14 @@ public class ConversationService : IConversationService
     protected IMessageLogic MessageLogic;
     protected IRoomLogic RoomLogic;
     protected IAccountService AccountService;
+    protected IRoomsaccountLogic RoomsAccountLogic;
 
-    public ConversationService(IMessageLogic messageLogic, IAccountService accountService, IRoomLogic roomLogic)
+    public ConversationService(IMessageLogic messageLogic, IAccountService accountService, IRoomLogic roomLogic, IRoomsaccountLogic roomsAccountLogic)
     {
         MessageLogic = messageLogic;
         AccountService = accountService;
         RoomLogic = roomLogic;
+        RoomsAccountLogic = roomsAccountLogic;
     }
 
     public virtual ConversationDto GetConversationById(string roomId)
@@ -56,6 +58,20 @@ public class ConversationService : IConversationService
         }
 
         return resElement;
+    }
+
+    public virtual List<ConversationDto> GetConversationsByAccountId(int accountId)
+    {
+        List<ConversationDto> conversations = new List<ConversationDto>();
+
+        List<string> rooms = RoomsAccountLogic.Select(m => m.Idmember == accountId).Select(m => m.Roomid).ToList();
+
+        foreach (string roomId in rooms)
+        {
+            conversations.Add(GetConversationById(roomId));
+        }
+
+        return conversations;
     }
 
     protected virtual Dictionary<int, MessageAuthorDto> GetDistinctNames(List<Message> distinctAuthors)
