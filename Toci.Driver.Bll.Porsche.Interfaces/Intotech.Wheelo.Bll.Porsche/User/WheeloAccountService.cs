@@ -199,20 +199,27 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             {
                 if (account.Verificationcode != EcDto.Code)
                 {
-                    ReturnedResponse<AccountRoleDto> isHAckResult = IsHack<AccountRoleDto>(account.Id, RegistrationBadVerificationCodeKind);
+                    return IsHack<AccountRoleDto>(account.Id, RegistrationBadVerificationCodeKind);
                 }
+                else
+                {
+                    
+                    account.Emailconfirmed = true;
+                    string refreshToken = account.Refreshtoken =
+                        StringUtils.GetRandomString(AccountLogicConstants.RefreshTokenMaxLength);
+                    account.Refreshtokenvalid = DateTime.Now.AddDays(AccountLogicConstants.RefreshTokenValidDays);
 
-                account.Emailconfirmed = true;
-                string refreshToken = account.Refreshtoken = StringUtils.GetRandomString(AccountLogicConstants.RefreshTokenMaxLength);
-                account.Refreshtokenvalid = DateTime.Now.AddDays(AccountLogicConstants.RefreshTokenValidDays);
+                    AccLogic.Update(account);
 
-                AccLogic.Update(account);
+                    AccountRoleDto accountRoleDto = GenerateJwt(new LoginDto()
+                        { Email = account.Email, Password = account.Password });
 
-                AccountRoleDto accountRoleDto = GenerateJwt(new LoginDto() { Email = account.Email, Password = account.Password });
+                    accountRoleDto.Refreshtoken = refreshToken;
 
-                accountRoleDto.Refreshtoken = refreshToken;
 
-                return new ReturnedResponse<AccountRoleDto>(accountRoleDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                    return new ReturnedResponse<AccountRoleDto>(accountRoleDto,
+                        I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                }
             }
         }
 
@@ -547,7 +554,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 return new ReturnedResponse<TResponse>(default(TResponse), I18nTranslation.Translation(I18nTags.UnderAttack), false, ErrorCodes.UnderAttack);
             }
 
-            return new ReturnedResponse<TResponse>(default(TResponse), string.Empty, true, ErrorCodes.Success);
+            return new ReturnedResponse<TResponse>(default(TResponse), I18nTranslation.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
           //  }
         }
 
