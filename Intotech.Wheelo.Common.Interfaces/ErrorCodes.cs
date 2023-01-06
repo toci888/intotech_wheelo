@@ -10,6 +10,7 @@ namespace Intotech.Wheelo.Common.Interfaces
     {
         public const int WorkTripFormNotFilled = 2; // | 10 100
         public const int FailVerifyingAccount = 4;
+        public const int LoggedInViaRegistration = 5;
         public const int NoData = 8;
         public const int FriendshipNotFound = 16;
         public const int DataAlreadyExistInDatabase = 32;
