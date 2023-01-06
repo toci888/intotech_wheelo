@@ -182,8 +182,8 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 
         protected virtual bool IsCollocationDuplicate(int accountId, int collocatedAccountId)
         {
-            return AccountscollocationLogic.Select(m => m.Idaccount == accountId && 
-                m.Idcollocated == collocatedAccountId).FirstOrDefault() != null;
+            return AccountscollocationLogic.Select(m => (m.Idaccount == accountId && 
+                m.Idcollocated == collocatedAccountId) || (m.Idaccount == collocatedAccountId && m.Idcollocated == accountId)).FirstOrDefault() != null;
         }
 
         protected virtual Worktripgen MapWorkTrip(WorkTripGenDto workTripGen)
