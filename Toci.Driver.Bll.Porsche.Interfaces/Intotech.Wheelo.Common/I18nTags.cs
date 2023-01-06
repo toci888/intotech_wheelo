@@ -35,5 +35,6 @@
         public const string EmailDoesNotExist = "_emailDoesNotExist";
         public const string WrongOperations = "_wrongOperations";
         public const string WrongData = "_wrongData";
+        public const string PasswordChangeSuccess = "_passwordChangedSuccessfully";
     }
 }

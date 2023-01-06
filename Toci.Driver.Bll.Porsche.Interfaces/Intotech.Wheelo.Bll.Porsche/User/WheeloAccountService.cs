@@ -357,7 +357,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             AccLogic.Update(acc);
 
-            return new ReturnedResponse<int?>(null, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<int?>(null, I18nTranslation.Translation(I18nTags.PasswordChangeSuccess), true, ErrorCodes.Success);
         }
 
         public ReturnedResponse<TokensModel> CreateNewAccessToken(string accessToken, string refreshToken)
