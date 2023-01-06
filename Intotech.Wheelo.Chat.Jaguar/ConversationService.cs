@@ -21,10 +21,8 @@ public class ConversationService : IConversationService
         RoomLogic = roomLogic;
     }
 
-    public virtual List<ConversationDto> GetConversationById(string roomId)
+    public virtual ConversationDto GetConversationById(string roomId)
     {
-        List<ConversationDto> result = new List<ConversationDto>();
-
         List<Message> messages = MessageLogic.Select(m => m.Roomid == roomId).OrderBy(m => m.Createdat).ToList();
 
         List<Message> distinctAuthors = messages.DistinctBy(m => m.Idauthor).ToList();
@@ -33,25 +31,31 @@ public class ConversationService : IConversationService
 
         Room room = RoomLogic.Select(m => m.Roomid == roomId).First();
 
+        Account acc = AccountService.GetAccount(room.Ownerid);
+
         ConversationDto resElement = new ConversationDto();
 
-        //resElement.OwnerID = messages.First.Idauthor;
-       // resElement.CreatedAt = message.Createdat.Value;
+        resElement.OwnerID = room.Ownerid;
+        resElement.CreatedAt = room.Createdat.Value;
+        resElement.TenantID = resElement.ID = room.Roomid;
+        resElement.OwnerFirstName = acc.Name;
+        resElement.OwnerLastName = acc.Surname;
+        resElement.Messages = new List<ChatMessageDto>();
 
         foreach (Message message in messages)
         {
-            
-
-            
-            //resElement. = message.Message1;
-            //resElement.RoomId = message.Roomid;
-            //resElement.MessageAuthorFirstName = authorsData[message.Idauthor].MessageAuthorFirstName;
-            //resElement.MessageAuthorLastName = authorsData[message.Idauthor].MessageAuthorLastName;
-
-            result.Add(resElement);
+            resElement.Messages.Add(new ChatMessageDto()
+            {
+                CreatedAt = message.Createdat.Value,
+                SenderID = message.Idauthor,
+                Text = message.Message1,
+                ID = message.Id,
+                AuthorFirstName = authorsData[message.Idauthor].MessageAuthorFirstName,
+                AuthorLastName = authorsData[message.Idauthor].MessageAuthorLastName
+            });
         }
 
-        return result;
+        return resElement;
     }
 
     protected virtual Dictionary<int, MessageAuthorDto> GetDistinctNames(List<Message> distinctAuthors)

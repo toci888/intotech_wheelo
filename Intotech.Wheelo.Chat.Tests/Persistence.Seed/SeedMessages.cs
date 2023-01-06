@@ -16,8 +16,10 @@ public class SeedMessages : SeedChatLogic<Message>
         Random rnd = new Random();
 
         for (int i = 0; i < 50; i++)
-        {                                                                                                                               // cadewi yhiklo
-            Message newMessage = new Message() { Idauthor = chatParticipants[rnd.Next(1)], Roomid = roomId, Message1 = StringUtils.CreateChat(rnd.Next(4,15))};
+        {                                                                    
+            // cadewi yhiklo
+            int index = rnd.Next(0, 2);
+            Message newMessage = new Message() { Idauthor = chatParticipants[index], Roomid = roomId, Message1 = StringUtils.CreateChat(rnd.Next(4,15))};
 
             messages.Add(newMessage);
         }

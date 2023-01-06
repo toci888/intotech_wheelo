@@ -5,7 +5,9 @@
         public int SenderID { get; set; }
         public string Text { get; set; }
         public DateTime CreatedAt { get; set; }
-        public string ID { get; set; }
+        public int ID { get; set; }
+        public string AuthorFirstName { get; set; }
+        public string AuthorLastName { get; set; }
     }
     /*
          ID: 999, --
