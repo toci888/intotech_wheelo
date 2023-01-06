@@ -1,7 +1,7 @@
 import React from "react";
 import MapViewDirections from "react-native-maps-directions";
 import MapView, { LatLng, Polyline, Region } from "react-native-maps";
-import { View, StyleSheet, Platform, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Platform, TouchableOpacity, Dimensions } from "react-native";
 import { useState, useEffect, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -20,11 +20,14 @@ export const Map = ({
   location: SearchScreenParams;
 }) => {
 
+  const height = 520;
+  const AspectRatio = Dimensions.get("window").width / height;
+
   const initPolishRegion = {
-    latitude: 51,
-    longitude: 19,
-    latitudeDelta: 10,
-    longitudeDelta: 10,
+    latitude: 52.069435496141445,
+    longitude: 19.48032192638433,
+    latitudeDelta: 10 * AspectRatio,
+    longitudeDelta: 24.12073376108494 - 14.124687099434178,
   }
 
   if(location == undefined) {
@@ -63,22 +66,40 @@ export const Map = ({
   // const searchProperties = searchProperties.data?.isSuccess ? searchProperties.data : {};
 
   const navigation = useNavigation();
+  const edgePaddingValue = 60;
+
+  const edgePadding = {
+    top: edgePaddingValue,
+    right: edgePaddingValue,
+    bottom: edgePaddingValue,
+    left: edgePaddingValue,
+  };
 
   useEffect(() => {
     if (location.startLocation.display_name === "Map Area") return;
 
     searchProperties.refetch();
 
-    mapRef?.current?.fitToCoordinates(coords);
+    mapRef?.current?.fitToCoordinates(coords,{edgePadding});
 
     if (!isNaN(Number(location.startLocation.lat))) {
-      setRegion({
-        latitude: (Number(location.startLocation.lat) + Number(location.endLocation.lat)) / 2,
-        longitude: (Number(location.startLocation.lon) + Number(location.endLocation.lon)) / 2,
-        latitudeDelta: Math.abs((Number(location.startLocation.lat)) - (Number(location.endLocation.lat))) + 2,
-        longitudeDelta: Math.abs((Number(location.startLocation.lon)) - (Number(location.endLocation.lon))) + 2,
-      } as Region);
-    } 
+      if(Number(location.startLocation.lon) - Number(location.endLocation.lon)){
+        setRegion({
+          latitude: (Number(location.startLocation.lat) + Number(location.endLocation.lat)) / 2,
+          longitude: (Number(location.startLocation.lon) + Number(location.endLocation.lon)) / 2,
+          latitudeDelta: (Number(location.startLocation.lon) - Number(location.endLocation.lon)) * AspectRatio,
+          longitudeDelta: (Number(location.startLocation.lon) - Number(location.endLocation.lon)),
+        } as Region);
+      } 
+      else{
+        setRegion({
+          latitude: (Number(location.startLocation.lat) + Number(location.endLocation.lat)) / 2,
+          longitude: (Number(location.startLocation.lon) + Number(location.endLocation.lon)) / 2,
+          latitudeDelta: (Number(location.endLocation.lon) - Number(location.startLocation.lon)) * AspectRatio,
+          longitudeDelta: (Number(location.endLocation.lon) - Number(location.startLocation.lon)),
+        } as Region);
+      }
+      }      
   }, [location]);
 
   const unFocusProperty = () => {
@@ -211,6 +232,7 @@ const styles = StyleSheet.create({
   map: {
     height: "100%",
     width: "100%",
+    flex: 1,
   },
   card: {
     position: "absolute",
@@ -220,7 +242,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 10,
     position: "absolute",
-    top: 60,
+    top: 170,
     left: 15,
     borderRadius: 30,
   }

@@ -1,13 +1,12 @@
 import { Animated, View, StyleSheet, TouchableOpacity, } from "react-native";
 import React, { useState } from "react";
-import { Text, Button, Divider } from "@ui-kitten/components";
+import { Text, Button } from "@ui-kitten/components";
 
 import { LISTMARGIN } from "../constants/constants";
 import { HeaderInput } from "./HeaderInput";
 import { Location } from "../types/locationIQ";
 import { useNavigation } from "@react-navigation/native";
 import { i18n } from "../i18n/i18n";
-import { TopBar } from "./TopBar";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Row } from "./Row";
 import { theme } from "../theme";
