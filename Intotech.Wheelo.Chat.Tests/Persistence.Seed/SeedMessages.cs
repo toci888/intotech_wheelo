@@ -10,16 +10,14 @@ public class SeedMessages : SeedChatLogic<Message>
         List<Message> messages = new List<Message>();
 
         List<int> chatParticipants = new List<int>() { 1000000015, 1000000018 };
-
-        string roomId = HashGenerator.Md5("1000000015, 1000000018");
-
+        
         Random rnd = new Random();
 
         for (int i = 0; i < 50; i++)
         {                                                                    
             // cadewi yhiklo
             int index = rnd.Next(0, 2);
-            Message newMessage = new Message() { Idauthor = chatParticipants[index], Roomid = roomId, Message1 = StringUtils.CreateChat(rnd.Next(4,15))};
+            Message newMessage = new Message() { Idauthor = chatParticipants[index], Idroom = 1, Message1 = StringUtils.CreateChat(rnd.Next(4,15))};
 
             messages.Add(newMessage);
         }

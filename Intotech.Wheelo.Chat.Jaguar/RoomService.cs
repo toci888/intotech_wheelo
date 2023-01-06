@@ -31,7 +31,7 @@ public class RoomService : IRoomService
         chatMembers.Add(author);
 
         RoomsDto result = new RoomsDto();
-
+        
         result.RoomMembers = new List<RoomMembersDto>();
 
         foreach (int memberId in members)
@@ -42,22 +42,18 @@ public class RoomService : IRoomService
 
             result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = member .Createdat.Value, AccountId = member.Id, FirstName = member .Name, LastName = member.Surname });
         }
-        
-        string accountIds = string.Join(", ", chatMembers.Select(m => m.Id).OrderBy(m => m).Select(m => m.ToString()));
-
-        result.OwnerId = authorId;
-        result.RoomId = HashGenerator.Md5(accountIds);
-
-        foreach (Account chatMember in chatMembers)
-        {
-            RoomsAccountLogic.Insert(new Roomsaccount() { Roomid = result.RoomId, Idmember = chatMember.Id });
-        }
-
         //Kacper, Julia, Bartek
         result.RoomName = string.Join(", ", chatMembers.Select(m => m.Name));
 
-        RoomLogic.Insert(new Room() { Ownerid = authorId, Roomid = result.RoomId, Roomname = result.RoomName });
+        Room room = RoomLogic.Insert(new Room() { Ownerid = authorId, Roomid = result.RoomId, Roomname = result.RoomName });
 
+        result.OwnerId = authorId;
+
+        foreach (Account chatMember in chatMembers)
+        {
+            RoomsAccountLogic.Insert(new Roomsaccount() { Idroom = room.Id, Idmember = chatMember.Id });
+        }
+        
         return result;
     }
 }

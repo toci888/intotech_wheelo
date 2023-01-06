@@ -31,7 +31,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
             await JoinRoom(roomId);
 
-            ChatUserService.JoinRoom(accountId, roomId);
+            ChatUserService.JoinRoom(accountId, 1);
 
             user.RoomId = roomId;
 

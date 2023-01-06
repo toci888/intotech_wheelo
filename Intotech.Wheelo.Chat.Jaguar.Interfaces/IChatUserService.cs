@@ -11,7 +11,7 @@ namespace Intotech.Wheelo.Chat.Jaguar.Interfaces
     {
         ChatUserDto Connect(int accountId);
 
-        bool JoinRoom(int accountId, string roomId);
+        bool JoinRoom(int accountId, int roomId);
 
         RequestConversationDto Invite(RequestConversationDto invitation);
 

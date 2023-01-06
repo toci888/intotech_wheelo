@@ -68,16 +68,16 @@ namespace Intotech.Wheelo.Chat.Jaguar
                 {
                     Idaccount = invitation.InvitingAccountId,
                     Idaccountinvited = accountId,
-                    Roomid = invitation.RoomId
+                    Idroom = invitation.RoomId
                 });
             }
 
             return invitation;
         }
 
-        public virtual bool JoinRoom(int accountId, string roomId)
+        public virtual bool JoinRoom(int accountId, int roomId)
         {
-            return RoomsAccountLogic.Insert(new Roomsaccount() { Idmember = accountId, Roomid = roomId }).Id > 0;
+            return RoomsAccountLogic.Insert(new Roomsaccount() { Idmember = accountId, Idroom = roomId }).Id > 0;
         }
 
         public virtual ChatMessageDto SendMessage(ChatMessageDto chatMessage)
