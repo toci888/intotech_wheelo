@@ -23,15 +23,20 @@ public class ConversationService : IConversationService
         RoomsAccountLogic = roomsAccountLogic;
     }
 
-    public virtual ConversationDto GetConversationById(string roomId, bool isAccountIdRequest = false)
+    public virtual ConversationDto GetConversationById(int roomId, bool isAccountIdRequest = false)
     {
-        List<Message> messages = MessageLogic.Select(m => m.Roomid == roomId).OrderBy(m => m.Createdat).ToList();
+        List<Message> messages = MessageLogic.Select(m => m.Idroom == roomId).OrderBy(m => m.Createdat).ToList();
 
         List<Message> distinctAuthors = messages.DistinctBy(m => m.Idauthor).ToList();
 
         Dictionary<int, MessageAuthorDto> authorsData = GetDistinctNames(distinctAuthors);
 
-        Room room = RoomLogic.Select(m => m.Roomid == roomId).First();
+        Room room = RoomLogic.Select(m => m.Id == roomId).FirstOrDefault();
+
+        if (room == null)
+        {
+            return null;
+        }
 
         Account acc = AccountService.GetAccount(room.Ownerid);
 
@@ -70,9 +75,9 @@ public class ConversationService : IConversationService
     {
         List<ConversationDto> conversations = new List<ConversationDto>();
 
-        List<string> rooms = RoomsAccountLogic.Select(m => m.Idmember == accountId).Select(m => m.Roomid).ToList();
+        List<int> roomsIds = RoomsAccountLogic.Select(m => m.Idmember == accountId).Select(m => m.Idroom).ToList();
 
-        foreach (string roomId in rooms)
+        foreach (int roomId in roomsIds)
         {
             conversations.Add(GetConversationById(roomId, true));
         }

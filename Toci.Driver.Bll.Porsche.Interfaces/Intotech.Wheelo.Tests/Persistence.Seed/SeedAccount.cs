@@ -36,7 +36,9 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
             //22CE8D06972A4DEF08FD462C470E60ED1849700D18D96FB472778DB639D1830C
             List<Account> accounts = new List<Account>()
             {
-                new Account() { Name = "Bartek", Surname = "Zapart", Email = "bzapart@gmail.com", Password = HashGenerator.HashSHA256("beatka"), Refreshtoken = "cntgfu347frgwhu293", Idrole = 2 }
+                new Account() { Name = "Bartek", Surname = "Zapart", Email = "bzapart@gmail.com", Password = HashGenerator.Md5("Beatka123(").ToLower(), Emailconfirmed = true, Verificationcode = 8888, Refreshtoken = "cntgfu347frgwhu293", Idrole = 2 },
+                new Account() { Name = "Wojtek", Surname = "Ruchała", Email = "warriorr@poczta.fm", Password = HashGenerator.Md5("Beatka123(").ToLower(), Emailconfirmed = true, Verificationcode = 8888, Refreshtoken = "ef2456t2tewtt24tt4", Idrole = 2 }
+
             };
 
             Random rnd = new Random();

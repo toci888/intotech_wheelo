@@ -11,7 +11,7 @@ namespace Intotech.Wheelo.Chat.Models
         public List<int> InvitedAccountIds { get; set; }
         public int InvitingAccountId { get; set; }
         public string InvitingUserName { get; set; }
-        public string RoomId { get; set; }
+        public int RoomId { get; set; }
         public bool IsInvited { get; set; }
     }
 }

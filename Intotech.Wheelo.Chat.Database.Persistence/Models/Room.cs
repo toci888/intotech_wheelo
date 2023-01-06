@@ -14,4 +14,12 @@ public partial class Room
     public string? Roomname { get; set; }
 
     public DateTime? Createdat { get; set; }
+
+    public virtual ICollection<Accountsidentifier> Accountsidentifiers { get; } = new List<Accountsidentifier>();
+
+    public virtual ICollection<Conversationinvitation> Conversationinvitations { get; } = new List<Conversationinvitation>();
+
+    public virtual ICollection<Message> Messages { get; } = new List<Message>();
+
+    public virtual ICollection<Roomsaccount> Roomsaccounts { get; } = new List<Roomsaccount>();
 }

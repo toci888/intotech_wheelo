@@ -47,7 +47,12 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
             entity.Property(e => e.Idaccount).HasColumnName("idaccount");
-            entity.Property(e => e.Roomid).HasColumnName("roomid");
+            entity.Property(e => e.Idroom).HasColumnName("idroom");
+
+            entity.HasOne(d => d.IdroomNavigation).WithMany(p => p.Accountsidentifiers)
+                .HasForeignKey(d => d.Idroom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("accountsidentifiers_idroom_fkey");
         });
 
         modelBuilder.Entity<Connecteduser>(entity =>
@@ -77,7 +82,12 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasColumnName("createdat");
             entity.Property(e => e.Idaccount).HasColumnName("idaccount");
             entity.Property(e => e.Idaccountinvited).HasColumnName("idaccountinvited");
-            entity.Property(e => e.Roomid).HasColumnName("roomid");
+            entity.Property(e => e.Idroom).HasColumnName("idroom");
+
+            entity.HasOne(d => d.IdroomNavigation).WithMany(p => p.Conversationinvitations)
+                .HasForeignKey(d => d.Idroom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("conversationinvitations_idroom_fkey");
         });
 
         modelBuilder.Entity<Message>(entity =>
@@ -92,8 +102,13 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
             entity.Property(e => e.Idauthor).HasColumnName("idauthor");
+            entity.Property(e => e.Idroom).HasColumnName("idroom");
             entity.Property(e => e.Message1).HasColumnName("message");
-            entity.Property(e => e.Roomid).HasColumnName("roomid");
+
+            entity.HasOne(d => d.IdroomNavigation).WithMany(p => p.Messages)
+                .HasForeignKey(d => d.Idroom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("messages_idroom_fkey");
         });
 
         modelBuilder.Entity<Room>(entity =>
@@ -126,7 +141,12 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
             entity.Property(e => e.Idmember).HasColumnName("idmember");
-            entity.Property(e => e.Roomid).HasColumnName("roomid");
+            entity.Property(e => e.Idroom).HasColumnName("idroom");
+
+            entity.HasOne(d => d.IdroomNavigation).WithMany(p => p.Roomsaccounts)
+                .HasForeignKey(d => d.Idroom)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("roomsaccounts_idroom_fkey");
         });
 
         modelBuilder.Entity<Useractivity>(entity =>

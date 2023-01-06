@@ -15,7 +15,7 @@ namespace Intotech.Wheelo.Chat.Api.Controllers
         }
 
         [HttpGet("get-conversation-by-id")]
-        public ConversationDto GetConversationById(string roomId)
+        public ConversationDto GetConversationById(int roomId)
         {
             return Service.GetConversationById(roomId);
         }
