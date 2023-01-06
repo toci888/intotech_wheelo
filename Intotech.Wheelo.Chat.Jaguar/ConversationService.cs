@@ -37,9 +37,10 @@ public class ConversationService : IConversationService
 
         ConversationDto resElement = new ConversationDto();
 
+        resElement.TenantID = resElement.ID = room.Id;
         resElement.OwnerID = room.Ownerid;
         resElement.CreatedAt = room.Createdat.Value;
-        resElement.TenantID = resElement.ID = room.Roomid;
+         //= room.Roomid;
         resElement.OwnerFirstName = acc.Name;
         resElement.OwnerLastName = acc.Surname;
         resElement.Messages = new List<ChatMessageDto>();

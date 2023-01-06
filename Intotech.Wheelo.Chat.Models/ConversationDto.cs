@@ -2,9 +2,9 @@
 
 public class ConversationDto 
 {
-    public string ID { get; set; }
+    public int ID { get; set; }
     public int OwnerID { get; set; }
-    public string TenantID { get; set; }
+    public int TenantID { get; set; }
     public string OwnerFirstName { get; set; }
     public string OwnerLastName { get; set; }
     public DateTime CreatedAt { get; set; }

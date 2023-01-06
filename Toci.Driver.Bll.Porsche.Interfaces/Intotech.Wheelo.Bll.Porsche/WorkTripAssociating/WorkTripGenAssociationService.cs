@@ -133,8 +133,8 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             double distance = workTripGenRecord.Acceptabledistance.Value / DistanceDivisor;
 
             List<Worktripgen> collocations = WorktripGenLogic.Select(worktrip => worktrip.Idaccount != workTripGenRecord.Idaccount &&
-                workTripGenRecord.Fromhour.Value.IsBetween(worktrip.Fromhour.Value.AddMinutes(-MinutesInterval), worktrip.Fromhour.Value.AddMinutes(MinutesInterval)) &&
-                workTripGenRecord.Tohour.Value.IsBetween(worktrip.Tohour.Value.AddMinutes(-MinutesInterval), worktrip.Tohour.Value.AddMinutes(MinutesInterval)) &&
+               workTripGenRecord.Fromhour.Value.IsBetween(worktrip.Fromhour.Value.AddMinutes(-MinutesInterval), worktrip.Fromhour.Value.AddMinutes(MinutesInterval)) &&
+               workTripGenRecord.Tohour.Value.IsBetween(worktrip.Tohour.Value.AddMinutes(-MinutesInterval), worktrip.Tohour.Value.AddMinutes(MinutesInterval)) &&
 
                 (workTripGenRecord.Latitudefrom - distance) <= worktrip.Latitudefrom &&
                 (workTripGenRecord.Latitudefrom + distance) >= worktrip.Latitudefrom &&

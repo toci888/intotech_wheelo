@@ -16,20 +16,7 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
 
         public override void Insert()
         {
-            Worktripgen wt = new Worktripgen()
-            {
-                Searchid = StringUtils.GetRandomString(32),
-                Idaccount = 2 + offset,
-                Latitudefrom = 52.24602984098752,
-                Longitudefrom = 21.08428642005573,
-                Latitudeto = 52.20678607141056,
-                Longitudeto = 21.0108489021064,
-                Fromhour = new TimeOnly(8, 0),
-                Tohour = new TimeOnly(16, 0),
-                Acceptabledistance = distanceAcc
-            }; //52.23151900096433, 21.083137973493866
-
-            ModelsEntities.Add(wt);
+  
 
             //new seeds
 
@@ -39,16 +26,19 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
                 ModelsEntities.Add(new Worktripgen()
                 {
                     Searchid = StringUtils.GetRandomString(32),
-                    Idaccount = r.Next(0, 32) + offset,
-                    Latitudefrom = r.NextDouble() + 52,//52.40655122342916,
-                    Longitudefrom = r.NextDouble() + 16,//16.92378850458502,
-                    Latitudeto = r.NextDouble() + 51,//(51.103230555909715,
-                    Longitudeto = r.NextDouble() + 17,//(17.032070201490435,
+                    Idaccount = i+ 1 + offset,
+                    Latitudefrom = r.Next(1, 9) / divider + 52.40,//52.40655122342916,
+                    Longitudefrom = r.Next(1, 9) / divider + 16.92,//16.92378850458502,
+                    Latitudeto = r.Next(1, 9) / divider + 51.10,//(51.103230555909715,
+                    Longitudeto = r.Next(1, 9) / divider + 17.03,//(17.032070201490435,
                     Fromhour = new TimeOnly(8, 00),
                     Tohour = new TimeOnly(16, 00),
                     Acceptabledistance = distanceAcc
                 });
             }
+
+        //from: 52.406, 16.925 poznan
+        //to: 51.107, 17.038 wroclaw
 
             // int result = r.Next(0, 3) * 15;
 
