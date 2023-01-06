@@ -8,8 +8,9 @@ namespace Intotech.Wheelo.Chat.Models
 {
     public class RoomsDto
     {
-        public int RoomId { get; set; }
+        public int OwnerId { get; set; }
+        public string RoomId { get; set; }
         public string RoomName { get; set; }
-        public List<ChatUserDto> RoomUsers { get; set; }
+        public List<RoomMembersDto> RoomMembers { get; set; }
     }
 }

@@ -11,7 +11,7 @@ public partial class Room
 
     public int Ownerid { get; set; }
 
-    public int Type { get; set; }
+    public string? Roomname { get; set; }
 
     public DateTime? Createdat { get; set; }
 }

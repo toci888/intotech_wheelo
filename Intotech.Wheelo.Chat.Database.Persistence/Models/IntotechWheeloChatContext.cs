@@ -111,9 +111,7 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasColumnName("createdat");
             entity.Property(e => e.Ownerid).HasColumnName("ownerid");
             entity.Property(e => e.Roomid).HasColumnName("roomid");
-            entity.Property(e => e.Type)
-                .HasDefaultValueSql("1")
-                .HasColumnName("type");
+            entity.Property(e => e.Roomname).HasColumnName("roomname");
         });
 
         modelBuilder.Entity<Roomsaccount>(entity =>
