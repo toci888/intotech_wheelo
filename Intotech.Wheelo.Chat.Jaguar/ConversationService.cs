@@ -23,7 +23,7 @@ public class ConversationService : IConversationService
         RoomsAccountLogic = roomsAccountLogic;
     }
 
-    public virtual ConversationDto GetConversationById(string roomId)
+    public virtual ConversationDto GetConversationById(string roomId, bool isAccountIdRequest = false)
     {
         List<Message> messages = MessageLogic.Select(m => m.Roomid == roomId).OrderBy(m => m.Createdat).ToList();
 
@@ -55,6 +55,11 @@ public class ConversationService : IConversationService
                 AuthorFirstName = authorsData[message.Idauthor].MessageAuthorFirstName,
                 AuthorLastName = authorsData[message.Idauthor].MessageAuthorLastName
             });
+
+            if (isAccountIdRequest)
+            {
+                break;
+            }
         }
 
         return resElement;
@@ -68,7 +73,7 @@ public class ConversationService : IConversationService
 
         foreach (string roomId in rooms)
         {
-            conversations.Add(GetConversationById(roomId));
+            conversations.Add(GetConversationById(roomId, true));
         }
 
         return conversations;

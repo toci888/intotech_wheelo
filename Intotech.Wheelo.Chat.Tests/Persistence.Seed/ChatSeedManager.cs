@@ -5,6 +5,7 @@ public class ChatSeedManager
     public void SeedAllDb()
     {
         new SeedRooms().Insert();
+        new SeedRoomsAccounts().Insert();
         new SeedMessages().Insert();
     }
 }
