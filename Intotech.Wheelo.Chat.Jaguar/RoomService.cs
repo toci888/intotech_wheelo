@@ -48,14 +48,25 @@ public class RoomService : IRoomService
         result.RoomName = string.Join(", ", chatMembers.Select(m => m.Name));
         result.RoomId = HashGenerator.Md5(string.Format(RoomIdPattern, authorId));
 
-        Room room = RoomLogic.Insert(new Room() { Ownerid = authorId, Roomid = result.RoomId, Roomname = result.RoomName });
+        Room testRoomExists = RoomLogic.Select(m => m.Roomid == result.RoomId).FirstOrDefault();
+
+        if (testRoomExists == null)
+        {
+            Room room = RoomLogic.Insert(new Room() { Ownerid = authorId, Roomid = result.RoomId, Roomname = result.RoomName });
+
+            result.IdRoom = room.Id;
+        }
+        else
+        {
+            result.IdRoom = testRoomExists.Id;
+        }
 
         result.OwnerId = authorId;
-        result.IdRoom = room.Id;
+
 
         foreach (Account chatMember in chatMembers)
         {
-            RoomsAccountLogic.Insert(new Roomsaccount() { Idroom = room.Id, Idmember = chatMember.Id });
+            RoomsAccountLogic.Insert(new Roomsaccount() { Idroom = result.IdRoom, Idmember = chatMember.Id });
         }
         
         return result;

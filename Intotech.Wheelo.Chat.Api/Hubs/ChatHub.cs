@@ -10,8 +10,8 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 {
     public class ChatHub : Hub
     {
-        private const string ClientReceiveMessageCallback = "ReceiveMessage";
-        private const string ClientAddUserCallback = "AddUser";
+        private const string ClientReceiveMessageCallback = "getMessage";
+        private const string ClientAddUserCallback = "session";
         private const string InviteToConversationCallback = "InviteToConversation";
         private const string RoomIdPattern = "{0}_RoomIdText";
 
@@ -24,6 +24,17 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             RoomService = roomService;
         }
 
+        //public override Task OnConnectedAsync()
+        //{
+        //    //string roomId = HashGenerator.Md5(Context.ConnectionId);
+        //    //HttpRequestMessage
+        //    JoinRoom(Context.UserIdentifier);
+           
+        //    Clients.Group(Context.UserIdentifier).SendAsync("session", new { data = new { sessionID = Context.UserIdentifier } });
+
+        //    return base.OnConnectedAsync();
+        //}
+
         public async Task ConnectUser(int accountId) // accountId room for synchronizations
         {
             ChatUserDto user = ChatUserService.Connect(accountId);
@@ -32,11 +43,11 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
             await JoinRoom(result.RoomId);
 
-            ChatUserService.JoinRoom(accountId, 1);
+            ChatUserService.JoinRoom(accountId, result.IdRoom);
 
-            user.RoomId = result.IdRoom;
+            user.SessionId = result.IdRoom;
 
-            await Clients.Group(result.RoomId).SendAsync(ClientAddUserCallback, user);
+            await Clients.Group(result.IdRoom.ToString()).SendAsync(ClientAddUserCallback, user);
         }
 
         public async Task RequestConversation(RequestConversationDto requestConversation)
@@ -65,7 +76,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         {
             chatMessage = ChatUserService.SendMessage(chatMessage);
 
-            await Clients.Group(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, chatMessage);
+            await Clients.Group(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, new { data = new { chatMessage } });
            
         }
 
