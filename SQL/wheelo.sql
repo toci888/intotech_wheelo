@@ -114,7 +114,7 @@ create table Invitations
 	origin int,
 	CreatedAt timestamp default now()
 );
-select * from VInvitations;
+-- select * from VInvitations;
 
 create or replace view VInvitations as
 select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, 
