@@ -33,5 +33,7 @@
     "Account": "Konto",
     "Back": "Wróć",
     "Chat": "Czat",
-    "YouHaveNoMessages": "Nie masz żadnych wiadomości"
+    "YouHaveNoMessages": "Nie masz żadnych wiadomości",
+    "SeeMore": "Więcej",
+    "SeeLess": "Mniej"
 }
