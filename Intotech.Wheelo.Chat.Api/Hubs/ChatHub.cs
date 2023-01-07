@@ -41,13 +41,21 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
             RoomsDto result = RoomService.CreateRoom(accountId, new List<int>());
 
-            await JoinRoom(result.RoomId);
+            await JoinRoom(result.IdRoom);
 
             ChatUserService.JoinRoom(accountId, result.IdRoom);
 
             user.SessionId = result.IdRoom;
 
-            await Clients.Group(result.IdRoom.ToString()).SendAsync(ClientAddUserCallback, user);
+            await Clients.Group(result.IdRoom.ToString()).SendAsync(ClientAddUserCallback, new { data = user.SessionId }); //new { sessionID = user.SessionId } 
+        }
+
+        public async Task SendMessage(ChatMessageDto chatMessage)
+        {
+            chatMessage = ChatUserService.SendMessage(chatMessage);
+
+            await Clients.Group(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, new { data = new { chatMessage } });
+
         }
 
         public async Task RequestConversation(RequestConversationDto requestConversation)
@@ -72,13 +80,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             await JoinRoom(result.IdRoom);
         }
 
-        public async Task SendMessage(ChatMessageDto chatMessage)
-        {
-            chatMessage = ChatUserService.SendMessage(chatMessage);
-
-            await Clients.Group(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, new { data = new { chatMessage } });
-           
-        }
+        
 
         protected virtual async Task JoinRoom(int roomId)
         {
