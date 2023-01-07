@@ -12,7 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddSignalR();
+builder.Services.AddSignalR(e => {
+    e.MaximumReceiveMessageSize = 10240000;
+    e.HandshakeTimeout = TimeSpan.FromSeconds(30);
+    e.ClientTimeoutInterval = TimeSpan.FromMinutes(10);
+});
 builder.Services.AddControllers();
 
 builder.WebHost.ConfigureKestrel(options =>
@@ -42,6 +46,7 @@ builder.Services.AddScoped<IMessagesService, MessagesService>();
 builder.Services.AddScoped<IChatUserService, ChatUserService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IConversationService, ConversationService>();
+builder.Services.AddScoped<IRoomService, RoomService>();
 
 
 builder.Services.AddScoped<IMessageLogic, MessageLogic>();

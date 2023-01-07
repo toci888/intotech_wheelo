@@ -11,6 +11,8 @@ namespace Intotech.Wheelo.Chat.Jaguar;
 
 public class RoomService : IRoomService
 {
+    private const string RoomIdPattern = "{0}_RoomIdText";
+
     protected IAccountService AccountService;
     protected IRoomLogic RoomLogic;
     protected IRoomsaccountLogic RoomsAccountLogic;
@@ -44,10 +46,12 @@ public class RoomService : IRoomService
         }
         //Kacper, Julia, Bartek
         result.RoomName = string.Join(", ", chatMembers.Select(m => m.Name));
+        result.RoomId = HashGenerator.Md5(string.Format(RoomIdPattern, authorId));
 
         Room room = RoomLogic.Insert(new Room() { Ownerid = authorId, Roomid = result.RoomId, Roomname = result.RoomName });
 
         result.OwnerId = authorId;
+        result.IdRoom = room.Id;
 
         foreach (Account chatMember in chatMembers)
         {

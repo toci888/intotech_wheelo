@@ -13,29 +13,30 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         private const string ClientReceiveMessageCallback = "ReceiveMessage";
         private const string ClientAddUserCallback = "AddUser";
         private const string InviteToConversationCallback = "InviteToConversation";
-        private const string UserOwnIdPattern = "accountId: {0}";
-        private const string UsersRoomIdPattern = "accountId: {0}, accountId: {1}";
+        private const string RoomIdPattern = "{0}_RoomIdText";
 
         protected IChatUserService ChatUserService;
+        protected IRoomService RoomService;
 
-        public ChatHub(IChatUserService chatUser)
+        public ChatHub(IChatUserService chatUser, IRoomService roomService)
         {
             ChatUserService = chatUser;
+            RoomService = roomService;
         }
 
         public async Task ConnectUser(int accountId) // accountId room for synchronizations
         {
             ChatUserDto user = ChatUserService.Connect(accountId);
 
-            string roomId = string.Format(UserOwnIdPattern, accountId);
+            RoomsDto result = RoomService.CreateRoom(accountId, new List<int>());
 
-            await JoinRoom(roomId);
+            await JoinRoom(result.RoomId);
 
             ChatUserService.JoinRoom(accountId, 1);
 
-            user.RoomId = roomId;
+            user.RoomId = result.IdRoom;
 
-            await Clients.Group(roomId).SendAsync(ClientAddUserCallback, user);
+            await Clients.Group(result.RoomId).SendAsync(ClientAddUserCallback, user);
         }
 
         public async Task RequestConversation(RequestConversationDto requestConversation)
@@ -46,44 +47,31 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             {
                 foreach (int accountId in requestConversation.InvitedAccountIds)
                 {
-                    string invitedUserId = string.Format(UserOwnIdPattern, accountId);
+                    string invitedUserId = string.Format(RoomIdPattern, accountId);
 
                     await Clients.Group(invitedUserId).SendAsync(InviteToConversationCallback, requestConversation);
                 }
             }
         }
 
-        public async Task ApproveChat(int firstParticipantId, int secondParticipantId)
+        public async Task ApproveChat(int ownerId, List<int> participantsIds)
         {
-            string roomId;
+            RoomsDto result = RoomService.CreateRoom(ownerId, participantsIds);
 
-            if (firstParticipantId > secondParticipantId)
-            {
-                roomId = string.Format(UsersRoomIdPattern, secondParticipantId, firstParticipantId);
-            }
-            else
-            {
-                roomId = string.Format(UsersRoomIdPattern, firstParticipantId, secondParticipantId);
-            }
-
-            await JoinRoom(roomId);
+            await JoinRoom(result.IdRoom);
         }
 
         public async Task SendMessage(ChatMessageDto chatMessage)
         {
-           /* if (chatMessage.ChatMessageAuthorId > chatMessage.ChatParticipantId)
-            {
-                chatMessage.RoomId = string.Format(UsersRoomIdPattern, chatMessage.ChatParticipantId, chatMessage.ChatMessageAuthorId);
-            }
-            else
-            {
-                chatMessage.RoomId = string.Format(UsersRoomIdPattern, chatMessage.ChatMessageAuthorId, chatMessage.ChatParticipantId);
-            }
-
             chatMessage = ChatUserService.SendMessage(chatMessage);
 
-            await Clients.Group(chatMessage.RoomId).SendAsync(ClientReceiveMessageCallback, chatMessage);
-           */
+            await Clients.Group(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, chatMessage);
+           
+        }
+
+        protected virtual async Task JoinRoom(int roomId)
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
         }
 
         protected virtual async Task JoinRoom(string roomId)
