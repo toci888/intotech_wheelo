@@ -40,64 +40,68 @@ export default function App() {
           SecureStore.setItemAsync("user", JSON.stringify(userObj));
         }
         setUser(userObj);
-
-        socket.auth = {
-          userID: userObj.id,
-          username:
-            userObj.firstName && userObj.lastName
-              ? `${userObj.firstName} ${userObj.lastName}`
-              : `${userObj.email}`,
-          accessToken: userObj.accessToken,
-        };
-
-        socket.connect();
+        // socket.auth = {
+        //   userID: userObj.id,
+        //   username:
+        //     userObj.firstName && userObj.lastName
+        //       ? `${userObj.firstName} ${userObj.lastName}`
+        //       : `${userObj.email}`,
+        //   accessToken: userObj.accessToken,
+        // };
+        
+        await socket.start();
+        await socket.invoke("ConnectUser", userObj.id);
       }
     }
     getUser().then(() => {
       socket.on(
         "getMessage",
         (data: {
+          id: number;
           senderID: number;
-          senderName: string;
-          conversationID: number;
           text: string;
+          createdAt: Date;
+          authorFirstName: string;
+          authorLastName: string;
         }) => {
+          console.log("BARTEK STRZELIŁ", data);
           queryClient.invalidateQueries(queryKeys.conversations);
           queryClient.invalidateQueries(queryKeys.selectedConversation);
 
           Notifications.scheduleNotificationAsync({
             content: {
-              title: data.senderName,
+              title: data.authorFirstName,
               body: data.text,
               data: {
                 // will need to change url in prod build (use process.ENV && eas.json)
-                url: `exp://192.168.30.24:19000/--/messages/${data.conversationID}/${data.senderName}`,
+                url: `exp://192.168.1.5:19000/--/messages/${data.id}/${data.authorFirstName}`,
               },
             },
             trigger: null,
           });
         }
       );
-      socket.on("session", (data: { sessionID: string }) => {
-        socket.auth = { sessionID: data.sessionID };
-        if (user) {
-          const updatedUser = { ...user };
-          updatedUser.sessionID = data.sessionID;
-          setUser(updatedUser);
-          SecureStore.setItemAsync("user", JSON.stringify(updatedUser));
-        }
+      socket.on("session", (data: any) => {
+        console.log("SESJAA", data);
+        // socket.auth = { sessionID: data.sessionID };
+        // if (user) {
+        //   const updatedUser = { ...user };
+        //   updatedUser.sessionID = data.sessionID;
+        //   setUser(updatedUser);
+        //   SecureStore.setItemAsync("user", JSON.stringify(updatedUser));
+        // }
       });
 
       socket.on("connect_error", (err) => {
         if (err.message === "Invalid userID" && user) {
-          socket.auth = {
-            userID: user?.id,
-            username:
-              user.firstName && user.lastName
-                ? `${user.firstName} ${user.lastName}`
-                : `${user.email}`,
-          };
-          socket.connect();
+          // socket.auth = {
+          //   userID: user?.id,
+          //   username:
+          //     user.firstName && user.lastName
+          //       ? `${user.firstName} ${user.lastName}`
+          //       : `${user.email}`,
+          // };
+          socket.start();
         }
       });
     });

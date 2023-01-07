@@ -30,7 +30,7 @@ export const server = "http://51.107.0.138"; // julia
 
 const serverUrl = server + ":5105/api";
 const integrationApiUrl = server + ":5108/api";
-const chatUrl = server + ":5130/api";
+const chatUrl = server + ":5130/wheeloChat";
 
 const location = "/location";
 const google = "/GoogleMap";
