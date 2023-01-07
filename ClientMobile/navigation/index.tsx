@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName } from "react-native";
+import { ColorSchemeName, useColorScheme, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useEffect } from "react";
 import * as Notifications from "expo-notifications";
@@ -27,9 +27,9 @@ import {
   RootStackParamList,
   RootTabParamList,
   RootTabScreenProps,
+  ThemeMode,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
-import { theme } from "../theme";
 import { CollocationDetailsScreen } from "../screens/CollocationDetailsScreen";
 import { AddPropertyScreen } from "../screens/AddPropertyScreen";
 import { EditPropertyScreen } from "../screens/EditPropertyScreen";
@@ -41,6 +41,7 @@ import { AccountSettingsScreen } from "../screens/AccountSettingsScreen";
 import { ConversationsScreen } from "../screens/ConversationsScreen";
 import { MessagesScreen } from "../screens/MessagesScreen";
 import { CodeVerificationScreen } from "../screens/CodeVerificationScreen";
+import { theme } from "../theme";
 
 export default function Navigation({
   colorScheme,
@@ -172,11 +173,23 @@ function RootNavigator(props: any) {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
+  const colorScheme = useColorScheme();
+
+  const themeTabBarStyle = 
+  colorScheme === 'light' ? styles.lightThemeTabBar : styles.darkThemeTabBar;  
+  const themeIconStyle = 
+  colorScheme === 'light' ? styles.lightThemeIcon : styles.darkThemeIcon;
+
   return (
     <BottomTab.Navigator
       initialRouteName="Search"
       screenOptions={{
+        tabBarLabel: "Search",
+        tabBarLabelStyle: {
+          color: themeIconStyle["color"],
+        },
         tabBarActiveTintColor: theme["color-primary-500"],
+        tabBarStyle: themeTabBarStyle,
       }}
     >
       <BottomTab.Screen
@@ -194,6 +207,10 @@ function BottomTabNavigator() {
         component={SavedScreen}
         options={{
           headerShown: false,
+          tabBarLabel: "Saved",
+          tabBarLabelStyle: {
+            color: themeIconStyle["color"],
+          },
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="heart-outline" color={color} />
           ),
@@ -205,6 +222,9 @@ function BottomTabNavigator() {
         options={{
           headerShown: false,
           tabBarLabel: "Account",
+          tabBarLabelStyle: {
+            color: themeIconStyle["color"],
+          },
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="account-circle-outline" color={color} />
           ),
@@ -252,7 +272,26 @@ function TabBarIcon(props: {
   name: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
   color: string;
 }) {
+  const colorScheme = useColorScheme();
+  const themeIconStyle = 
+  colorScheme === 'light' ? styles.lightThemeIcon : styles.darkThemeIcon;
+
   return (
-    <MaterialCommunityIcons size={30} style={{ marginBottom: -3 }} {...props} />
+    <MaterialCommunityIcons size={30} style={[{ marginBottom: -3 }, themeIconStyle]} {...props} />
   );
 }
+
+const styles = StyleSheet.create ({
+  lightThemeTabBar: {
+    backgroundColor: theme["color-olivine"],
+  },
+  darkThemeTabBar: {
+    backgroundColor: theme["color-blue"],
+  },
+  lightThemeIcon: {
+    color: theme["color-black"],
+  },
+  darkThemeIcon: {
+    color: theme["color-white"],
+  },
+});

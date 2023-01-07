@@ -9,6 +9,7 @@ export const theme = {
   "color-blue": "#6b50a5",
   "color-green": "#34c25f",
   "color-check": "#5e4496",
+  "color-olivine": "#94AF5A",
   
 // stare kolory
   "color-gray": "#d3d3d3",
