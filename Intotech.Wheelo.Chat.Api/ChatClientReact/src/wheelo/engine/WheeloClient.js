@@ -7,13 +7,17 @@ export default class WheeloClient {
         this.receiveMessageCall = receiveMsgCall;
         this.connectedCall = connectedCallback;
         this.inviteToConvCall = inviteToConv;
+
+        this.wheeloChatEngine = new WheeloChatEngine(this.receiveMessageCall, this.connectedCall, this.inviteToConvCall);
+        this.wheeloChatEngine.initialize();
     }
 
     receiveMessageCall;
     connectedCall;
     inviteToConvCall;
+    wheeloChatEngine;
 
-    engineMap = [];
+    /*engineMap = [];
 
     addEngineToMap = (wheeloChatEngine, room) => {
 
@@ -47,78 +51,36 @@ export default class WheeloClient {
     useWheeloChatEngine = () => {
 
 
-    }
+    }*/
 
     connect = async(accountId) => {
 
-        var roomId = "accountId: " + accountId;
-
-        var wheeloEngExists = await this.getEngine(roomId);
-
-        await wheeloEngExists.userConnect(accountId);
+        await this.wheeloChatEngine.userConnect(accountId);
     }
 
     requestConversation = async (invitingAccountId, invitingUserName, invitedAccountIds) => {
 
-        var roomId = "accountId: " + invitingAccountId;
         var invAccountIds = new Array();
 
-        for (const element of invitedAccountIds) {
-
-            roomId += ", accountId: " + element;
-            invAccountIds.push(parseInt(element));
-        }
-
         var json = {
-            InvitedAccountIds: invAccountIds,
+            InvitedAccountIds: invitedAccountIds,
             InvitingAccountId: parseInt(invitingAccountId),
-            InvitingUserName: invitingUserName,
-            RoomId: roomId
+            InvitingUserName: invitingUserName
         }
 
-        var wheeloEngExists = await this.getEngine(roomId);
-
-        await wheeloEngExists.requestConversation(json);
+        await this.wheeloChatEngine.requestConversation(json);
     }
 
-    chat = async (authorId, recipientId, message) => {
+    chat = async (authorId, roomId, message) => {
 
         authorId = parseInt(authorId);
-        recipientId = parseInt(recipientId);
+        roomId = parseInt(roomId);
 
-        var roomId;
-        
-        if (authorId > recipientId)
-        {
-            roomId = "accountId: " + recipientId + ", accountId: " + authorId;
-        }
-        else
-        {
-            roomId = "accountId: " + authorId + ", accountId: " + recipientId;
-        }
-
-        var wheeloEngExists = await this.getEngine(roomId);
-
-        wheeloEngExists.sendMessage(authorId, recipientId, message);
-
-        return wheeloEngExists;
+        await this.wheeloChatEngine.sendMessage(authorId, roomId, message);
     }
 
-    approveChat = async (firstParticipantId, secondParticipantId) => {
+    approveChat = async (participantId, roomId) => {
 
-        var roomId;
-        
-        if (firstParticipantId > secondParticipantId)
-        {
-            roomId = "accountId: " + secondParticipantId + ", accountId: " + firstParticipantId;
-        }
-        else
-        {
-            roomId = "accountId: " + firstParticipantId + ", accountId: " + secondParticipantId;
-        }
-
-        var wheeloEngExists = await this.getEngine(roomId);
-
-        wheeloEngExists.approveChat(firstParticipantId, secondParticipantId);
+        await this.wheeloChatEngine.approveChat(participantId, roomId);
     }
 }

@@ -15,9 +15,8 @@ export default class WheeloChatEngine {
     receiveMessageCall;
     connectedCall;
     inviteToConvCall;
-    connectionId;
 
-    serverUrl = "https://192.168.43.58:5130/wheeloChat";
+    serverUrl = "http://localhost:5130/wheeloChat";
     //serverUrl = "http://192.168.0.158:5130/wheeloChat";
     ReceiveMessageCallback = "ReceiveMessage"; // react callback
     joinRoomDelegate = "JoinWheeloRoom"; //method in c#
@@ -30,12 +29,12 @@ export default class WheeloChatEngine {
 
     initialize = async () => {
 
-        //this.room = room;
-
         this.connection = new HubConnectionBuilder()
             .withUrl(this.serverUrl)
             .configureLogging(LogLevel.Information)
             .build();
+
+        console.log("Connection: ", this.connection);
 
         this.connection.on(this.ReceiveMessageCallback, (msgDto) => {
             
@@ -46,8 +45,7 @@ export default class WheeloChatEngine {
         this.connection.on(this.addUserCallback, (chatUser) => {
 
             console.log("Connected with data: ", chatUser);
-            this.connectionId = chatUser.roomId;
-
+        
             this.connectedCall(chatUser);
         });
 
@@ -61,16 +59,11 @@ export default class WheeloChatEngine {
             this.connection = null;
         });
 
-        try{
-
-            await this.connection.start();
-        }
-        catch (e) {
-            console.log(e);
-        }
+        await this.connection.start();
     }
 
     userConnect = async (accountId) => {
+
         console.log("accountId", accountId);
         try{
             await this.connection.invoke(this.connectUserDelegate, parseInt(accountId));
@@ -100,8 +93,8 @@ export default class WheeloChatEngine {
         }
     }
 
-    approveChat = async (firstParticipantId, secondParticipantId) => {
+    approveChat = async (participantId, roomId) => {
 
-        await this.connection.invoke(this.approveChatDelegate, parseInt(firstParticipantId), parseInt(secondParticipantId));
+        await this.connection.invoke(this.approveChatDelegate, parseInt(participantId), parseInt(roomId));
     }
 }
