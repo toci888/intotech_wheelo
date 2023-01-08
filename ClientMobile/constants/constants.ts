@@ -25,8 +25,7 @@ androidHeight += androidNotch;
 
 export const HEADERHEIGHT = Platform.OS === "ios" ? iosHeight : androidHeight;
 
-// export const server = "http://4.231.89.226"; // kacper
-export const server = "http://51.107.0.138"; // julia
+export const server = "http://4.231.89.226"; // kacper
 
 const serverUrl = server + ":5105/api";
 const integrationApiUrl = server + ":5108/api";

@@ -48,9 +48,15 @@ export default function App() {
         //       : `${userObj.email}`,
         //   accessToken: userObj.accessToken,
         // };
-        
-        await socket.start();
-        await socket.invoke("ConnectUser", userObj.id);
+        console.log("TUTAJ")
+        try {
+          await socket.start();
+          await socket.invoke("ConnectUser", userObj.id, socket.connectionId);
+        } catch (e) {
+          console.log("ERRORR ERROR", e)
+        }
+        console.log("CONID", socket.connectionId)
+        console.log("juser", userObj.id)
       }
     }
     getUser().then(() => {
@@ -64,7 +70,7 @@ export default function App() {
           authorFirstName: string;
           authorLastName: string;
         }) => {
-          console.log("BARTEK STRZELIŁ", data);
+          console.log("BARTEK STRZELIŁ");
           queryClient.invalidateQueries(queryKeys.conversations);
           queryClient.invalidateQueries(queryKeys.selectedConversation);
 
@@ -81,8 +87,8 @@ export default function App() {
           });
         }
       );
-      socket.on("session", (data: any) => {
-        console.log("SESJAA", data);
+      socket.on("session", () => {
+        console.log("SESJAA");
         // socket.auth = { sessionID: data.sessionID };
         // if (user) {
         //   const updatedUser = { ...user };
