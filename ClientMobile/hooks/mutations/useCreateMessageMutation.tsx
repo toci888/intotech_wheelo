@@ -142,7 +142,7 @@ export const useCreateMessageMutation = () => {
         _,
         { author, conversationID, receiverID, senderID, text }
       ) => {
-        socket.emit("sendMessage", {
+        socket.invoke("sendMessage", {
           senderID,
           conversationID,
           receiverID,

@@ -9,5 +9,5 @@ export type User = {
   pushToken?: string;
   sessionID?: string;
   accessToken: string;
-  refreshToken: string;
+  refreshtoken: string;
 };

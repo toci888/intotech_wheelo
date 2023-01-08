@@ -65,7 +65,7 @@ export const useCreateConversationMutation = () => {
       ) => {
         queryClient.invalidateQueries(queryKeys.contactedProperties);
         queryClient.invalidateQueries(queryKeys.conversations);
-        socket.emit("sendMessage", {
+        socket.invoke("sendMessage", {
           senderID: tenantID,
           conversationID: data.id,
           receiverID: ownerID,
