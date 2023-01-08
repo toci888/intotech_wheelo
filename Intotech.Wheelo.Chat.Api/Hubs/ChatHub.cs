@@ -47,7 +47,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
             user.SessionId = result.IdRoom;
 
-            await Clients.Group(result.IdRoom.ToString()).SendAsync(ClientAddUserCallback, new { data = user.SessionId }); //new { sessionID = user.SessionId } 
+            await Clients.Group(result.IdRoom.ToString()).SendAsync(ClientAddUserCallback); //new { sessionID = user.SessionId }  // , new { data = user.SessionId }
         }
 
         public async Task SendMessage(ChatMessageDto chatMessage)

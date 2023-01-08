@@ -8,6 +8,9 @@ const App = () => {
  
   const wheeloClient = new WheeloClient((msg) => { document.getElementById("SignalR").innerHTML = msg.message; }, () => {}, () => {});
 
+  wheeloClient.connect(1000000027);
+//  wheeloClient.chat(1000000027, 4, "Siema Kacper !");
+
   var renderMsg = (user, msg) => {
 
     document.getElementById('chatBox').innerHTML += '<div>' + msg + '<span style="color:green;">' + user + '</span></div>';
@@ -37,8 +40,7 @@ const App = () => {
     wheeloClient.requestConversation(document.getElementById("userId").value, "Ziutek", new Array(1000000027, 1000000029))}></input>
   
   <input type="submit" value="approve" onClick={() => 
-    wheeloClient.approveChat(document.getElementById("userId").value, 
-    document.getElementById("userIdInv").value)}></input>
+   wheeloClient.chat(1000000027, 4, "Siema Kacper !")}></input>
 
   <div id="SignalR"></div>
 
