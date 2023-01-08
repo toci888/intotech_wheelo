@@ -8,7 +8,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://20.68.18.151:5105"
+      "applicationUrl": "http://4.231.89.226:5105"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -27,8 +27,8 @@
       "applicationUrl": "http://192.168.0.153:5105"
     },
     "bartek": {
-        "commandName": "Project",
-        "applicationUrl": "http://192.168.43.59:5105"
+      "commandName": "Project",
+      "applicationUrl": "http://192.168.43.59:5105"
     },
     "Julia": {
       "commandName": "Project",
