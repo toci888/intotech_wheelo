@@ -66,7 +66,7 @@ export default class WheeloChatEngine {
 
         console.log("accountId", accountId);
         try{
-            await this.connection.invoke(this.connectUserDelegate, parseInt(accountId));
+            await this.connection.invoke(this.connectUserDelegate, parseInt(accountId), "");
         }
         catch (e) {
             console.log(e);
