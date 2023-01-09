@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Intotech.Common;
 using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Models.ModelMappers
@@ -20,8 +21,8 @@ namespace Intotech.Wheelo.Bll.Models.ModelMappers
                 Latitudeto = dbModel.Latitudeto.Value,
                 Longitudefrom = dbModel.Longitudefrom.Value,
                 Longitudeto = dbModel.Longitudeto.Value,
-                Fromhour = dbModel.Fromhour.Value.Hour.ToString() + ":" + dbModel.Fromhour.Value.Minute.ToString(),
-                Tohour = dbModel.Tohour.Value.Hour.ToString() + ":" + dbModel.Tohour.Value.Minute.ToString(),
+                Fromhour = TimeUtils.GetCorrectTime(dbModel.Fromhour.Value.Hour) + ":" + TimeUtils.GetCorrectTime(dbModel.Fromhour.Value.Minute), // 8:0 -> 08:00
+                Tohour = TimeUtils.GetCorrectTime(dbModel.Tohour.Value.Hour) + ":" + TimeUtils.GetCorrectTime(dbModel.Tohour.Value.Minute),
                 Name = dbModel.Name,
                 Surname = dbModel.Surname,
                 Driver = (Driver)dbModel.Isdriver.Value,
@@ -40,8 +41,8 @@ namespace Intotech.Wheelo.Bll.Models.ModelMappers
                 Latitudeto = dbModel.Latitudeto.Value,
                 Longitudefrom = dbModel.Longitudefrom.Value,
                 Longitudeto = dbModel.Longitudeto.Value,
-                Fromhour = dbModel.Fromhour.Value.Hour.ToString() + ":" + dbModel.Fromhour.Value.Minute.ToString(),
-                Tohour = dbModel.Tohour.Value.Hour.ToString() + ":" + dbModel.Tohour.Value.Minute.ToString(),
+                Fromhour = TimeUtils.GetCorrectTime(dbModel.Fromhour.Value.Hour) + ":" + TimeUtils.GetCorrectTime(dbModel.Fromhour.Value.Minute),
+                Tohour = TimeUtils.GetCorrectTime(dbModel.Tohour.Value.Hour) + ":" + TimeUtils.GetCorrectTime(dbModel.Tohour.Value.Minute),
                 Name = dbModel.Name,
                 Surname = dbModel.Surname,
                 Driver = (Driver)dbModel.Isdriver.Value,
@@ -60,8 +61,8 @@ namespace Intotech.Wheelo.Bll.Models.ModelMappers
                 Latitudeto = dbModel.Latitudeto.Value,
                 Longitudefrom = dbModel.Longitudefrom.Value,
                 Longitudeto = dbModel.Longitudeto.Value,
-                Fromhour = dbModel.Fromhour.Value.Hour.ToString() + ":" + dbModel.Fromhour.Value.Minute.ToString(),
-                Tohour = dbModel.Tohour.Value.Hour.ToString() + ":" + dbModel.Tohour.Value.Minute.ToString(),
+                Fromhour = TimeUtils.GetCorrectTime(dbModel.Fromhour.Value.Hour) + ":" + TimeUtils.GetCorrectTime(dbModel.Fromhour.Value.Minute),
+                Tohour = TimeUtils.GetCorrectTime(dbModel.Tohour.Value.Hour) + ":" + TimeUtils.GetCorrectTime(dbModel.Tohour.Value.Minute),
                 Name = dbModel.Name,
                 Surname = dbModel.Surname,
                 Driver = (Driver)dbModel.Driverpassenger.Value,
