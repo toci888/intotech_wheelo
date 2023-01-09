@@ -36,7 +36,6 @@ export default class WheeloChatEngine {
             .withUrl(this.serverUrl, {
                 accessTokenFactory: () => "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImJ6YXBhcnRAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkJhcnRlayBaYXBhcnQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNjczNDU3NjUxLCJpc3MiOiJodHRwOi8vaW50b3RlY2guY29tLnBsIiwiYXVkIjoiaHR0cDovL2ludG90ZWNoLmNvbS5wbCJ9.wLubK-bSPgnfgVwMcHgq8BHn7WKSUlqblToRLUreIZc"
               })
-            
             .configureLogging(LogLevel.Error)
             .build();
 

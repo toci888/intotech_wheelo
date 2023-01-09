@@ -84,6 +84,17 @@ builder.Services.AddAuthentication(option =>
         ValidAudience = "http://intotech.com.pl",
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Int0t3chWheelo!@#SuperSecr3tByGh05tr1d3r"))
     };
+    cfg.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = ctx => {
+            if (ctx.Request.Query.ContainsKey("access_token"))
+            {
+                ctx.Token = ctx.Request.Query["access_token"];
+            }
+
+            return Task.CompletedTask;
+    }
+    };
 });
 /*
  "JwtKey": "Int0t3chWheelo!@#SuperSecr3tByGh05tr1d3r",
