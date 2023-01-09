@@ -29,7 +29,7 @@ export const server = "http://4.231.89.226"; // kacper
 
 const serverUrl = server + ":5105/api";
 const integrationApiUrl = server + ":5108/api";
-const chatUrl = server + ":5130/wheeloChat";
+const chatUrl = server + ":5130/";
 
 const location = "/location";
 const google = "/GoogleMap";
@@ -48,7 +48,8 @@ const userEndpoint = serverUrl + user;
 const collocationEndpoint = serverUrl + property;
 const apartmentEndpoint = serverUrl + apartment;
 const reviewEndpoint = serverUrl + review;
-const conversationEndpoint = chatUrl + conversation;
+const conversationEndpoint = chatUrl + "api" + conversation;
+const conversationWheeloChatEndpoint = chatUrl + "wheeloChat" + conversation;
 const messagesEndpoint = serverUrl + messages;
 const contactedEndpoint = (id: number) => `${userEndpoint}/${id}/properties/contacted`;
 const savedEndpoint = (id: number) => `${userEndpoint}/${id}/collocations/saved`;
@@ -85,8 +86,8 @@ export const endpoints = {
   alterPushToken: pushTokenEndpoint,
   allowsNotifications: allowsNotificationsEndpoint,
   themeMode: themeModeEndpoint,
-  createConversation: conversationEndpoint,
-  getConversationByID: conversationEndpoint,
+  createConversation: conversationWheeloChatEndpoint, //?
+  getConversationByID: conversationWheeloChatEndpoint,
   getConversationsByUserID: conversationEndpoint,
   createMessage: messagesEndpoint,
   refreshTokens: refreshTokenEndpoint,
