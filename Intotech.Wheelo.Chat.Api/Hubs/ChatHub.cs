@@ -35,26 +35,30 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         //    return base.OnConnectedAsync();
         //}
 
-        public async Task ConnectUser(int accountId) // accountId room for synchronizations
+        public async Task ConnectUser(int accountId, string accessToken) // accountId room for synchronizations
         {
-            ChatUserDto user = ChatUserService.Connect(accountId);
+           //string test = Context.ConnectionId;
+
+            ChatUserDto data = ChatUserService.Connect(accountId);
 
             RoomsDto result = RoomService.CreateRoom(accountId, new List<int>());
 
-            await JoinRoom(result.IdRoom);
+            await JoinRoom(result.IdRoom); //connectionId
 
             ChatUserService.JoinRoom(accountId, result.IdRoom);
 
-            user.SessionId = result.IdRoom;
+            data.SessionId = result.IdRoom;
 
-            await Clients.Group(result.IdRoom.ToString()).SendAsync(ClientAddUserCallback); //new { sessionID = user.SessionId }  // , new { data = user.SessionId }
+            await Clients.Group(result.IdRoom.ToString()).SendAsync(ClientAddUserCallback, new { data }); //new { sessionID = user.SessionId }  // , new { data = user.SessionId }
         }
 
         public async Task SendMessage(ChatMessageDto chatMessage)
         {
+            string test = Context.ConnectionId;
+
             chatMessage = ChatUserService.SendMessage(chatMessage);
 
-            await Clients.Group(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, new { data = new { chatMessage } });
+            await Clients.Group(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
 
         }
 
@@ -80,7 +84,10 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             await JoinRoom(result.IdRoom);
         }
 
-        
+        protected virtual async Task JoinRoom(int roomId, string connectionId)
+        {
+            await Groups.AddToGroupAsync(connectionId, roomId.ToString());
+        }
 
         protected virtual async Task JoinRoom(int roomId)
         {
