@@ -39,6 +39,11 @@ namespace Intotech.Wheelo.Chat.Jaguar
         {
             Account userData = AccountService.GetAccount(accountId);
 
+            if (userData == null)
+            {
+                return null;
+            }
+
             ConnecteduserLogic.Insert(new Connecteduser() { Idaccount = accountId }); // TODO what if 2 or more locations
             UserActivityLogic.Insert(new Useractivity() { Idaccount = accountId, Connectedfrom = DateTime.Now });
 

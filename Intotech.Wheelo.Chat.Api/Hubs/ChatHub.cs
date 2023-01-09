@@ -41,6 +41,11 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
             ChatUserDto data = ChatUserService.Connect(accountId);
 
+            if (data == null)
+            {
+                await Clients.Caller.SendAsync("connect_error", "Invalid userId");
+            }
+
             RoomsDto result = RoomService.CreateRoom(accountId, new List<int>());
 
             await JoinRoom(result.IdRoom); //connectionId
