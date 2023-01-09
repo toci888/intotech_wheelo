@@ -61,7 +61,7 @@ public class ConversationService : IConversationService
                 RoomID = roomId,
                 AuthorFirstName = authorsData[message.Idauthor].MessageAuthorFirstName,
                 AuthorLastName = authorsData[message.Idauthor].MessageAuthorLastName
-            });
+            }) ;
 
             if (isAccountIdRequest)
             {
