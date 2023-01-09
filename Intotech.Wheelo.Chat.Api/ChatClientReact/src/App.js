@@ -41,6 +41,9 @@ const App = () => {
   <input type="submit" value="approve" onClick={() => 
    wheeloClient.chat(1000000027, 4, "Siema Kacper !")}></input>
 
+<input type="submit" value="Poc" onClick={() => 
+wheeloClient.ProofOfConcept(1000000027)}></input>
+
   <div id="SignalR"></div>
 
 </div>

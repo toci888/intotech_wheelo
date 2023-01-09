@@ -5,9 +5,12 @@ using Intotech.Wheelo.Chat.Jaguar.Interfaces;
 using Intotech.Wheelo.Chat.Models;
 using Microsoft.AspNetCore.SignalR;
 using System.Xml.Linq;
+using Microsoft.AspNetCore.Authorization;
+using Intotech.Wheelo.Chat.Api.Attributes;
 
 namespace Intotech.Wheelo.Chat.Api.Hubs
 {
+    
     public class ChatHub : Hub
     {
         private const string ClientReceiveMessageCallback = "getMessage";
@@ -29,19 +32,28 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         //    //string roomId = HashGenerator.Md5(Context.ConnectionId);
         //    //HttpRequestMessage
         //    JoinRoom(Context.UserIdentifier);
-           
+
         //    Clients.Group(Context.UserIdentifier).SendAsync("session", new { data = new { sessionID = Context.UserIdentifier } });
 
         //    return base.OnConnectedAsync();
         //}
 
+        [Authorize(Roles = "User")]
+        public async Task ProofOfConcept(int accountId)
+        {
+            string doopa = Context.User.Identity.Name;
+
+            await this.Clients.User(accountId.ToString()).SendAsync("PocResponse", Context.UserIdentifier);
+        }
+
         public async Task ConnectUser(int accountId, string accessToken) // accountId room for synchronizations
         {
-           //string test = Context.ConnectionId;
-
+            
+            //string test = Context.ConnectionId;
+            //Clients.User().SendAsync()
             ChatUserDto data = ChatUserService.Connect(accountId);
 
-            if (data == null)
+            if (data == null) 
             {
                 await Clients.Caller.SendAsync("connect_error", "Invalid userId");
             }

@@ -79,6 +79,11 @@ export default class WheeloClient {
         await this.wheeloChatEngine.sendMessage(authorId, roomId, message);
     }
 
+    ProofOfConcept = async(userId )=> {
+
+        await this.wheeloChatEngine.ProofOfConcept(userId);
+    }
+
     approveChat = async (participantId, roomId) => {
 
         await this.wheeloChatEngine.approveChat(participantId, roomId);

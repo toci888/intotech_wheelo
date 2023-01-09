@@ -58,6 +58,7 @@ public class ConversationService : IConversationService
                 SenderID = message.Idauthor,
                 Text = message.Message1,
                 ID = message.Id,
+                RoomID = roomId,
                 AuthorFirstName = authorsData[message.Idauthor].MessageAuthorFirstName,
                 AuthorLastName = authorsData[message.Idauthor].MessageAuthorLastName
             });

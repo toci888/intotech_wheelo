@@ -1,3 +1,4 @@
+using Intotech.Wheelo.Bll.Models;
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Api.Hubs;
@@ -7,6 +8,11 @@ using Intotech.Wheelo.Chat.Dodge;
 using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Jaguar;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,6 +64,33 @@ builder.Services.AddScoped<IAccountLogic, AccountLogic>();
 builder.Services.AddScoped<IConversationinvitationLogic, ConversationinvitationLogic>();
 builder.Services.AddScoped<IMessageLogic, MessageLogic>();
 
+//builder.Services.AddAuthentication(sharedopt => sharedopt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme)
+//    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, (configureOptions) => { });
+// .AddPolicyScheme("User", "User", configureOptions => { });
+
+
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultAuthenticateScheme = "Bearer";
+    option.DefaultScheme = "Bearer";
+    option.DefaultChallengeScheme = "Bearer";
+}).AddJwtBearer(cfg =>
+{
+    cfg.RequireHttpsMetadata = false;
+    cfg.SaveToken = true;
+    cfg.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = "http://intotech.com.pl",
+        ValidAudience = "http://intotech.com.pl",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Int0t3chWheelo!@#SuperSecr3tByGh05tr1d3r"))
+    };
+});
+/*
+ "JwtKey": "Int0t3chWheelo!@#SuperSecr3tByGh05tr1d3r",
+    "JwtExpireDays": 2,
+    "JwtIssuer": "http://intotech.com.pl"
+ */
+
 
 var app = builder.Build();
 
@@ -70,13 +103,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
 app.MapControllers();
 
 app.UseCors();
 
 app.UseRouting();
+
+app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {

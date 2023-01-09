@@ -8,6 +8,7 @@
         public int ID { get; set; }
         public string AuthorFirstName { get; set; }
         public string AuthorLastName { get; set; }
+        public int RoomID { get; set; }
     }
     /*
          ID: 999, --

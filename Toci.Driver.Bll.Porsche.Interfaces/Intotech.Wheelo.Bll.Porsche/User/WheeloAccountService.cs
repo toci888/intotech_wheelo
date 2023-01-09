@@ -366,7 +366,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             string email = clPr.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier).First().Value;
 
-            Account account = AccLogic.Select(m => m.Email == email).First();
+            Account account = AccLogic.Select(m => m.Email == email).FirstOrDefault();
 
             if (account == null)
             {
