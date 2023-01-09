@@ -25,11 +25,11 @@ androidHeight += androidNotch;
 
 export const HEADERHEIGHT = Platform.OS === "ios" ? iosHeight : androidHeight;
 
-export const server = "http://51.107.0.138";
+export const server = "http://4.231.89.226"; // kacper
 
 const serverUrl = server + ":5105/api";
 const integrationApiUrl = server + ":5108/api";
-const chatUrl = "http://192.168.30.24:3000";
+const chatUrl = server + ":5130/wheeloChat";
 
 const location = "/location";
 const google = "/GoogleMap";
@@ -40,15 +40,15 @@ const apartment = "/apartment";
 const review = "/review";
 const conversation = "/conversation";
 const messages = "/messages";
-const refresh = "/refresh";
-const refreshTokenEndpoint = serverUrl + refresh;
+const refresh = "/refresh-token";
+const refreshTokenEndpoint = serverUrl + user + refresh;
 const locationEndpoint = serverUrl + location;
 const googleEndpoint = integrationApiUrl + google;
 const userEndpoint = serverUrl + user;
 const collocationEndpoint = serverUrl + property;
 const apartmentEndpoint = serverUrl + apartment;
 const reviewEndpoint = serverUrl + review;
-const conversationEndpoint = serverUrl + conversation;
+const conversationEndpoint = chatUrl + conversation;
 const messagesEndpoint = serverUrl + messages;
 const contactedEndpoint = (id: number) => `${userEndpoint}/${id}/properties/contacted`;
 const savedEndpoint = (id: number) => `${userEndpoint}/${id}/collocations/saved`;
@@ -86,8 +86,8 @@ export const endpoints = {
   allowsNotifications: allowsNotificationsEndpoint,
   themeMode: themeModeEndpoint,
   createConversation: conversationEndpoint,
-  getConversationByID: conversationEndpoint + "/",
-  getConversationsByUserID: conversationEndpoint + "/user/",
+  getConversationByID: conversationEndpoint,
+  getConversationsByUserID: conversationEndpoint,
   createMessage: messagesEndpoint,
   refreshTokens: refreshTokenEndpoint,
   currentLocation: currentLocationEndpoint

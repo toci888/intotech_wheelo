@@ -1,7 +1,9 @@
 export type Message = {
-  ID: number;
-  CreatedAt: string;
+  id: number;
+  createdAt: string;
   senderID: number;
   receiverID: number;
   text: string;
+  authorFirstName: string,
+  authorLastName: string,
 };

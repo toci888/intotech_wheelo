@@ -22,12 +22,11 @@ export const MessagesScreen = ({
     : route.params.recipientName;
   const navigation = useNavigation();
   navigation.setOptions({
-    title: title,
+    title: title
   });
   const { user } = useUser();
-  const conversation = useSelectedConversationQuery(
-    route.params.conversationID
-  );
+  console.log("CONVID", route.params)
+  const conversation = useSelectedConversationQuery(route.params.conversationID);
   const createMessage = useCreateMessageMutation();
 
   if (!user) return <SignUpOrSignInScreen />;
@@ -39,10 +38,12 @@ export const MessagesScreen = ({
     if (conversation)
       createMessage.mutate({
         author: conversation.data.author,
-        conversationID: conversation.data.ID,
+        conversationID: conversation.data.id,
         receiverID: conversation.data.receiverID,
         senderID: user.id,
         text: message.text,
+        authorFirstName: conversation.data.messages[0].author.firstName ? conversation.data.messages[0].author.firstName : "",
+        authorLastName: conversation.data.messages[0].author.lastName ? conversation.data.messages[0].author.lastName : ""
       });
   };
 

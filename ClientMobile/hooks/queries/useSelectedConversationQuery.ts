@@ -5,46 +5,43 @@ import { MessageType } from "@flyerhq/react-native-chat-ui";
 import { endpoints, queryKeys } from "../../constants/constants";
 import { Message } from "../../types/message";
 import { useUser } from "../useUser";
-import { getStateAbbreviation } from "../../utils/getStateAbbreviation";
-import { SelectedConversation } from "../../types/conversation";
+import { Author, SelectedConversation } from "../../types/conversation";
 
 const fetchConversation = async (
   conversationID: number,
   userID?: number,
   token?: string
 ): Promise<SelectedConversation> => {
+  console.log("URLlala", `${endpoints.getConversationsByUserID}${userID}`)
   const response = await axios.get(
-    `${endpoints.getConversationByID}${conversationID}`,
+    `${endpoints.getConversationByID}/get-conversation-by-id?roomId=${conversationID}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }
-  );
+  ); 
 
   const data: ConversationRes = response.data;
-  const tenantAuthor = {
+
+  const tenantAuthor: Author = {
     id: data.tenantID.toString(),
-    firstName: data.tenantFirstName ? data.tenantFirstName : data.tenantEmail,
-    lastName:
-      data.tenantFirstName && data.tenantLastName ? data.tenantLastName : "",
+    firstName: data.messages[0].authorFirstName ? data.messages[0].authorFirstName : data.tenantEmail,
+    lastName: data.messages[0].authorFirstName && data.messages[0].authorLastName ? data.messages[0].authorLastName : "",
   };
 
-  const ownerAuthor = {
+  const ownerAuthor: Author = {
     id: data.ownerID.toString(),
-    firstName: data.propertyName
-      ? data.propertyName
-      : `${data.street}, ${data.city}, ${getStateAbbreviation(data.state)}`,
+    firstName: data.ownerFirstName ? data.ownerFirstName : "",
     lastName: "",
   };
 
   const messages: MessageType.Any[] = [];
   for (let m of data.messages) {
     const message: MessageType.Any = {
-      id: m.ID.toString(),
-      author:
-        m.senderID.toString() === ownerAuthor.id ? ownerAuthor : tenantAuthor,
-      createdAt: new Date(m.CreatedAt).getTime(),
+      id: m.id.toString(),
+      author: m.senderID.toString() === ownerAuthor.id ? ownerAuthor : tenantAuthor,
+      createdAt: new Date(m.createdAt).getTime(),
       text: m.text,
       type: "text",
     };
@@ -52,7 +49,7 @@ const fetchConversation = async (
   }
 
   const conversation: SelectedConversation = {
-    ID: data.ID,
+    id: data.id,
     receiverID: userID === data.ownerID ? data.tenantID : data.ownerID,
     messages,
     author: userID === data.ownerID ? ownerAuthor : tenantAuthor,
@@ -70,18 +67,13 @@ export const useSelectedConversationQuery = (conversationID: number) => {
 };
 
 type ConversationRes = {
-  ID: number;
+  id: number;
   CreatedAt: string;
-  tenantID: number;
   ownerID: number;
-  propertyID: number;
-  propertyName?: string;
-  street: string;
-  city: string;
-  state: string;
   ownerFirstName: string;
   ownerLastName: string;
   ownerEmail: string;
+  tenantID: number;
   tenantFirstName?: string;
   tenantLastName?: string;
   tenantEmail: string;

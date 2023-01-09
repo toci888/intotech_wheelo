@@ -27,80 +27,70 @@ export default function App() {
   const colorScheme = useColorScheme();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-
+  
   useEffect(() => {
     async function getUser() {
       const user = await SecureStore.getItemAsync("user");
       if (user) {
         const userObj: User = JSON.parse(user);
-        const newTokens = await refreshTokens(userObj.refreshToken);
+        const newTokens = await refreshTokens(userObj.accessToken, userObj.refreshtoken);
         if (newTokens) {
           userObj.accessToken = newTokens.accessToken;
-          userObj.refreshToken = newTokens.refreshToken;
+          userObj.refreshtoken = newTokens.refreshToken;
           SecureStore.setItemAsync("user", JSON.stringify(userObj));
         }
         setUser(userObj);
 
-        socket.auth = {
-          userID: userObj.id,
-          username:
-            userObj.firstName && userObj.lastName
-              ? `${userObj.firstName} ${userObj.lastName}`
-              : `${userObj.email}`,
-          accessToken: userObj.accessToken,
-        };
+        socket.on(
+          "getMessage",
+          (message: { chatMessage: {
+            id: number;
+            senderID: number;
+            text: string;
+            createdAt: Date;
+            authorFirstName: string;
+            authorLastName: string;
+          }}) => {
+            let data = message.chatMessage;
 
-        socket.connect();
+            queryClient.invalidateQueries(queryKeys.conversations);
+            queryClient.invalidateQueries(queryKeys.selectedConversation);
+  
+            Notifications.scheduleNotificationAsync({
+              content: {
+                title: data.authorFirstName,
+                body: data.text,
+                data: {
+                  // will need to change url in prod build (use process.ENV && eas.json)
+                  url: `exp://192.168.1.5:19000/--/messages/${data.id}/${data.authorFirstName}`,
+                },
+              },
+              trigger: null,
+            });
+          }
+        );
+        socket.on("session", (sessionData: {data: {userId: number, userName: string, userSurname: string, sessionId: number}}) => {
+          let data = sessionData.data;
+
+          if (userObj) {
+            const updatedUser = { ...userObj };
+            updatedUser.sessionID = data.sessionId.toString();
+            setUser(updatedUser);
+            SecureStore.setItemAsync("user", JSON.stringify(updatedUser));
+          }
+        });
+        socket.on("connect_error", (err) => {
+          if (err.message === "Invalid userID" && user) {
+            socket.start();
+          }
+        });
+        
+        await socket.start();
+        await socket.invoke("ConnectUser", userObj.id, userObj.accessToken);
       }
     }
-    getUser().then(() => {
-      socket.on(
-        "getMessage",
-        (data: {
-          senderID: number;
-          senderName: string;
-          conversationID: number;
-          text: string;
-        }) => {
-          queryClient.invalidateQueries(queryKeys.conversations);
-          queryClient.invalidateQueries(queryKeys.selectedConversation);
 
-          Notifications.scheduleNotificationAsync({
-            content: {
-              title: data.senderName,
-              body: data.text,
-              data: {
-                // will need to change url in prod build (use process.ENV && eas.json)
-                url: `exp://192.168.30.24:19000/--/messages/${data.conversationID}/${data.senderName}`,
-              },
-            },
-            trigger: null,
-          });
-        }
-      );
-      socket.on("session", (data: { sessionID: string }) => {
-        socket.auth = { sessionID: data.sessionID };
-        if (user) {
-          const updatedUser = { ...user };
-          updatedUser.sessionID = data.sessionID;
-          setUser(updatedUser);
-          SecureStore.setItemAsync("user", JSON.stringify(updatedUser));
-        }
-      });
-
-      socket.on("connect_error", (err) => {
-        if (err.message === "Invalid userID" && user) {
-          socket.auth = {
-            userID: user?.id,
-            username:
-              user.firstName && user.lastName
-                ? `${user.firstName} ${user.lastName}`
-                : `${user.email}`,
-          };
-          socket.connect();
-        }
-      });
-    });
+    getUser();
 
     return () => {
       socket.off("getMesssage");

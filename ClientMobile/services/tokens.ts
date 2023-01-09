@@ -2,13 +2,14 @@ import axios from "axios";
 
 import { endpoints } from "../constants/constants";
 
-export const refreshTokens = async (refreshToken: string) => {
+export const refreshTokens = async (accessToken: string, refreshToken: string) => {
   try {
     const { data } = await axios.post<{
       accessToken: string;
       refreshToken: string;
     }>(endpoints.refreshTokens, {
-      refreshToken,
+      accessToken,
+      refreshToken
     });
 
     return data;

@@ -80,7 +80,7 @@ export const useAuth = () => {
       const user = await loginUser(values);
       
       handleSignInUser(user?.methodResult);
-
+      
       return user;
     } catch (error) {
       handleAuthError();

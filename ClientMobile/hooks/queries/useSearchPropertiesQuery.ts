@@ -16,8 +16,8 @@ const fetchProperties = async (startAndEndLocation: SearchScreenParams, userId?:
     endLocation: startAndEndLocation.endLocation,
     startLocationTime: startAndEndLocation.startLocationTime,
     endLocationTime: startAndEndLocation.endLocationTime,
-    idAccount: userId ? userId : 1000000045,
-    acceptableDistance: 800
+    idAccount: userId,
+    acceptableDistance: 30000
   });
   
   const data = response.data as Collocation;

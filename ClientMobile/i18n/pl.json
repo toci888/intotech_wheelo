@@ -30,5 +30,10 @@
     "UnableToGetCollocationDetails": "Nie udało się pobrać danych kolokacji ...",
     "UnableToGetCollocationMessage": "Nie udało się pobrać informacji.",
     "Messages": "Wiadomości",
-    "Account": "Konto"
+    "Account": "Konto",
+    "Back": "Wróć",
+    "Chat": "Czat",
+    "YouHaveNoMessages": "Nie masz żadnych wiadomości",
+    "SeeMore": "Więcej",
+    "SeeLess": "Mniej"
 }

@@ -31,9 +31,9 @@ export const AnimatedListHeader = ({
   const submit = async () => {
     console.log(startLocation.display_name)
     console.log(endLocation.display_name)
-
+    // console.log("WSPOLRZEDNIE", startLocation, endLocation)
     if(startLocation.display_name !== i18n.t('Search') && endLocation.display_name !== i18n.t('Search')) {
-
+      
       navigation.navigate("Root", {
         screen: "Search",
         params: {
@@ -51,27 +51,6 @@ export const AnimatedListHeader = ({
       <View
           style={[styles.defaultMarginHorizontal, {"marginTop": 10}]}
         >
-        <Row style={styles.row}>
-          <TouchableOpacity onPress={() => console.log("press a bell")}>
-            <MaterialCommunityIcons
-              name={"bell-outline"}
-              size={28}
-              color={theme["color-white"]} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text category="h3" style={{"textTransform": "uppercase", "color": theme["color-white"]}} onPress={() => console.log("press a logo")}>Wheelo</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => console.log("press a cog")}>
-            <MaterialCommunityIcons
-              name={"cog"}
-              size={28}
-              color={theme["color-white"]} />
-          </TouchableOpacity>
-        </Row>
-        <Text category="h3" style={{"textTransform": "capitalize", "color": theme["color-white"]}}>Cześć,
-          {/* TODO - dorobić wyświetlanie zalogowanego użytkownika */}
-          <Text category="h3" style={{"textTransform": "capitalize", "color": theme["color-green"]}}> Dawid.</Text>
-        </Text>
       </View>    
       <View style={styles.defaultMarginHorizontal}>
         <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>

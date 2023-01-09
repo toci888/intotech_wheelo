@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Location } from "../types/locationIQ";
 import { RecentSearchButton } from "./RecentSearchButton";
 import { getFormattedLocationText } from "../utils/getFormattedLocationText";
+import { i18n } from "../i18n/i18n";
 
 export const RecentSearchList = ({
   recentSearches, style, type, location, setLocation 
@@ -49,7 +50,7 @@ export const RecentSearchList = ({
               />
             ) : null
           )}
-          <ShowButton text="See More" />
+          <ShowButton text={i18n.t("SeeMore")} />
         </>
       );
 
@@ -63,7 +64,7 @@ export const RecentSearchList = ({
             onPress={() => handleRecentSearchButtonPress(i)}
           />
         ))}
-        {recentSearches.length > 2 ? <ShowButton text="See Less" /> : null}
+        {recentSearches.length > 2 ? <ShowButton text={i18n.t("SeeLess")} /> : null}
       </>
     );
   };

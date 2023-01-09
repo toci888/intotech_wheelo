@@ -1,5 +1,9 @@
-import { io } from "socket.io-client";
+import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 
 import { endpoints } from "./constants";
 
-export const socket = io(endpoints.chat, { autoConnect: false });
+export const socket = new HubConnectionBuilder()
+    .withUrl(endpoints.chat)
+    .configureLogging(LogLevel.Information)
+    .withAutomaticReconnect()
+    .build();
