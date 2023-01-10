@@ -9,6 +9,7 @@ import { theme } from "../theme";
 import { useSelectedConversationQuery } from "../hooks/queries/useSelectedConversationQuery";
 import { Loading } from "../components/Loading";
 import { useCreateMessageMutation } from "../hooks/mutations/useCreateMessageMutation";
+import { i18n } from "../i18n/i18n";
 
 export const MessagesScreen = ({
   route,
@@ -32,7 +33,7 @@ export const MessagesScreen = ({
   if (!user) return <SignUpOrSignInScreen />;
   if (conversation.isLoading) return <Loading />;
 
-  if (!conversation.data) return <><Text>... Unable to get chat</Text></>;
+  if (!conversation.data) return <><Text>{i18n.t('UnableToGetChat')}</Text></>;
 
   const handleSendPress = (message: MessageType.PartialText) => {
     if (conversation)

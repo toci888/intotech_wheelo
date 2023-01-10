@@ -113,7 +113,7 @@ export const useCreateMessageMutation = () => {
           newConversations[index].messages.unshift({
             createdAt: new Date().toString(),
             id: Date.now(),
-            receiverID,
+            roomID: receiverID,
             senderID,
             text,
             authorFirstName,

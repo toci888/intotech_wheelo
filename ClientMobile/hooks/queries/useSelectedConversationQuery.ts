@@ -12,7 +12,7 @@ const fetchConversation = async (
   userID?: number,
   token?: string
 ): Promise<SelectedConversation> => {
-  console.log("URLlala", `${endpoints.getConversationsByUserID}${userID}`)
+  console.log("CzatKlik", `${endpoints.getConversationsByUserID}${userID}`, token)
   const response = await axios.get(
     `${endpoints.getConversationByID}/get-conversation-by-id?roomId=${conversationID}`,
     {

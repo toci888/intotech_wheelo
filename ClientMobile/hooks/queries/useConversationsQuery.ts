@@ -13,7 +13,7 @@ const fetchConversations = async (
 ): Promise<TransformedConversation[]> => {
   if (!userID) return [];
 
-  userID= 1000000015;
+  console.log("BEFOREE", `${endpoints.getConversationsByUserID}/get-conversations-by-user-id?userId=${userID}`, token, userID)
   const response = await axios.get(
     `${endpoints.getConversationsByUserID}/get-conversations-by-user-id?userId=${userID}`,
     {
@@ -29,23 +29,34 @@ const fetchConversations = async (
   const data: TransformedConversation[] = [];
   for (let i of conversations) {
     // recipientName represents the person other than curr user in the conversation
-    let recipientName = "";
-    if (userID === i.tenantID)
-      // could alternatively display the owner's name here
-      recipientName = i.propertyName ? i.propertyName : `${i.street}, ${i.city}, ${getStateAbbreviation(i.state)}`;
-    else
-      recipientName = i.messages[0].authorFirstName && i.messages[0].authorLastName
+    let recipientName = i.messages[0] && i.messages[0].authorFirstName && i.messages[0].authorLastName
                         ? `${i.messages[0].authorFirstName} ${i.messages[0].authorLastName}`
                         : "Nie podano imienia oraz nazwiska";
-
-    data.push({
-      id: i.id,
-      propertyID: i.propertyID,
-      recipientName,
-      messages: i.messages,
-    });
+    if (i.messages[0]) {
+      data.push({
+        id: i.id,
+        // collocationID: i.propertyID,
+        recipientName,
+        messages: i.messages,
+      });
+    }
+    // data.push({
+    //   id: i.id,
+    //   // collocationID: i.propertyID,
+    //   recipientName,
+    //   messages: [{
+    //     id: 2,
+    //     createdAt: "x",
+    //     senderID: 2,
+    //     roomID: 2,
+    //     text: "x",
+    //     authorFirstName: "x",
+    //     authorLastName: "x",
+    //   }]
+    //   //i.messages,
+    // });
   }
-
+  console.log("DATAGGG", data)
   return data;
 };
 

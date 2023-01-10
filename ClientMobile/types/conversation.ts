@@ -19,7 +19,7 @@ export type SelectedConversation = {
 
 export type TransformedConversation = {
   id: number;
-  propertyID: number;
+  // collocationID: number;
   recipientName: string;
   messages: Message[];
 };

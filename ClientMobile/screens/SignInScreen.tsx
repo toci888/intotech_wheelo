@@ -29,7 +29,7 @@ export const SignInScreen = () => {
           </Text>
           <Formik
             initialValues={{
-              email: "1111111191kapi@gmail.com",
+              email: "bartek@gg.pl",
               password: "Beatka123(",
             }}
             validationSchema={yup.object().shape({

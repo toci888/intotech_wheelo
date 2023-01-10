@@ -2,8 +2,8 @@ export type Message = {
   id: number;
   createdAt: string;
   senderID: number;
-  receiverID: number;
+  roomID: number;
   text: string;
-  authorFirstName: string,
-  authorLastName: string,
+  authorFirstName: string;
+  authorLastName: string;
 };

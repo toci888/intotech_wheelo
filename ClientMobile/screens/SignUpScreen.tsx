@@ -32,7 +32,7 @@ export const SignUpScreen = () => {
   const [user, setUser] = useState<IUser>({
     firstName: "Kacper",
     lastName: "Wyb",
-    email: "1111111191kapi@gmail.com",
+    email: "bartek@gg.pl",
     password: "Beatka123(",
   });
   const navigation = useNavigation();

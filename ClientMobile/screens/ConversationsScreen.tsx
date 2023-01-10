@@ -20,11 +20,13 @@ export const ConversationsScreen = () => {
 
   if (conversations.isLoading) return <Loading />;
 
-  if (!conversations?.data || conversations.data.length === 0)
+  if (!conversations?.data || conversations.data.length === 0) {
+    console.log("conversations?.dataHere", conversations)
     return <Text>{i18n.t('YouHaveNoMessages')}</Text>;
+  }
 
   const handleMessagePress = (conversationID: number, recipientName: string ) => {
-    console.log("RESSEA", conversationID, recipientName)
+    console.log("Message Pressed", conversationID, recipientName)
     navigate("Messages", {
       conversationID,
       recipientName,

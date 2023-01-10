@@ -35,5 +35,6 @@
     "Chat": "Czat",
     "YouHaveNoMessages": "Nie masz żadnych wiadomości",
     "SeeMore": "Więcej",
-    "SeeLess": "Mniej"
+    "SeeLess": "Mniej",
+    "UnableToGetChat": "Nie udało się pobrać informacji czatu"
 }
