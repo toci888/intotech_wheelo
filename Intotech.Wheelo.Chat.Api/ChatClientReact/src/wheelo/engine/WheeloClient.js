@@ -58,17 +58,10 @@ export default class WheeloClient {
         await this.wheeloChatEngine.userConnect(accountId);
     }
 
-    requestConversation = async (invitingAccountId, invitingUserName, invitedAccountIds) => {
+    requestConversation = async () => {
 
-        var invAccountIds = new Array();
-
-        var json = {
-            InvitedAccountIds: invitedAccountIds,
-            InvitingAccountId: parseInt(invitingAccountId),
-            InvitingUserName: invitingUserName
-        }
-
-        await this.wheeloChatEngine.requestConversation(json);
+   
+        await this.wheeloChatEngine.requestConversation();
     }
 
     chat = async (authorId, roomId, message) => {

@@ -18,16 +18,16 @@ export default class WheeloChatEngine {
     connectedCall;
     inviteToConvCall;
 
-    serverUrl = "http://localhost:5130/wheeloChat";
-    //serverUrl = "http://4.231.89.226:5130/wheeloChat";
+    //serverUrl = "http://localhost:5130/wheeloChat";
+    serverUrl = "http://4.231.89.226:5130/wheeloChat";
     //serverUrl = "http://192.168.0.158:5130/wheeloChat"; 
     ReceiveMessageCallback = "ReceiveMessage"; // react callback
     joinRoomDelegate = "JoinWheeloRoom"; //method in c#
     sendMessageCallback = "SendMessage"; 
     connectUserDelegate = "ConnectUser"; //method in c#
-    addUserCallback = "AddUser"; // react callback
+    addUserCallback = "session"; // react callback
     inviteToConversationCallback = "InviteToConversation"; // react callback
-    requestConversationDelegate = "RequestConversation"; //method in c#
+    requestConversationDelegate = "CreateRoom"; //method in c#
     approveChatDelegate = "ApproveChat"; // c#
 
     initialize = async () => {
@@ -53,6 +53,14 @@ export default class WheeloChatEngine {
             
         });
 
+        this.connection.on("RoomEstablished", (dto) => {
+
+            console.log("RoomEstablished", dto);
+
+            this.connection.invoke("JoinRoom", dto.idRoom);
+            
+        });
+
         this.connection.on(this.addUserCallback, (chatUser) => {
 
             console.log("Connected with data: ", chatUser);
@@ -73,20 +81,20 @@ export default class WheeloChatEngine {
         await this.connection.start();
     }
 
-    userConnect = async (accountId) => {
+    userConnect = async (email) => {
 
-        console.log("accountId", accountId);
+        console.log("accountId", email);
         try{
-            await this.connection.invoke(this.connectUserDelegate, parseInt(accountId), "");
+            await this.connection.invoke(this.connectUserDelegate, email);
         }
         catch (e) {
             console.log(e);
         }
     }
 
-    requestConversation = async (convDto) => {
+    requestConversation = async () => {
         
-        await this.connection.invoke(this.requestConversationDelegate, convDto);
+        await this.connection.invoke(this.requestConversationDelegate, "bzapart@gmail.com", new Array("warriorr@poczta.fm", "1111111191kapi@gmail.com", "bartek@gg.pl"));
     }
 
     ProofOfConcept = async(userId) => {

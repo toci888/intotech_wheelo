@@ -44,6 +44,12 @@ const App = () => {
 <input type="submit" value="Poc" onClick={() => 
 wheeloClient.ProofOfConcept(1000000027)}></input>
 
+<input type="submit" value="Connect user email" onClick={() => 
+wheeloClient.connect("bzapart@gmail.com")}></input>  
+
+<input type="submit" value="Create room for emails" onClick={() => 
+wheeloClient.requestConversation()}></input>
+
   <div id="SignalR"></div>
 
 </div>
