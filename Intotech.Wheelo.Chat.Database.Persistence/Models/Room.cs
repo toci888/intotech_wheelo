@@ -7,8 +7,6 @@ public partial class Room
 {
     public int Id { get; set; }
 
-    public string Roomid { get; set; } = null!;
-
     public string Ownerid { get; set; } = null!;
 
     public string? Roomname { get; set; }
