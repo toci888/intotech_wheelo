@@ -50,7 +50,7 @@ public class RoomService : IRoomService
 
         //Room testRoomExists = RoomLogic.Select(m => m.Roomid == result.RoomId).FirstOrDefault();
 
-        Room room = RoomLogic.Insert(new Room() { Ownerid = hostEmail, Roomid = result.RoomId, Roomname = result.RoomName });
+        Room room = RoomLogic.Insert(new Room() { Ownerid = hostEmail, Roomname = result.RoomName });
 
         result.IdRoom = room.Id;
 
