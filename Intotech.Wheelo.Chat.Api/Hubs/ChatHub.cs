@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.SignalR;
 using System.Xml.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Intotech.Wheelo.Chat.Api.Attributes;
+using Toci.Driver.Database.Persistence.Models;
+using Intotech.Wheelo.Bll.Models.Gaf;
 
 namespace Intotech.Wheelo.Chat.Api.Hubs
 {
@@ -14,6 +16,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
     public class ChatHub : Hub
     {
         private const string ClientReceiveMessageCallback = "getMessage";
+        private const string RoomEstablished = "RoomEstablished";
         private const string ClientAddUserCallback = "session";
         private const string InviteToConversationCallback = "InviteToConversation";
         private const string RoomIdPattern = "{0}_RoomIdText";
@@ -76,6 +79,24 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             // await Clients.Group(result.IdRoom.ToString()).SendAsync(ClientAddUserCallback, new { data }); //new { sessionID = user.SessionId }  // , new { data = user.SessionId }
         }
 
+        [Authorize(Roles = "User")]
+        public async Task CreateRoom(string hostEmail, List<string> members)
+        {
+
+            RoomsDto room = RoomService.CreateRoom(hostEmail, members);
+
+            foreach (RoomMembersDto member in room.RoomMembers)
+            {
+                Clients.User(member.Email).SendAsync(RoomEstablished, new { room });
+            }
+        }
+
+        [Authorize(Roles = "User")]
+        public virtual async Task JoinRoom(int roomId)
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
+        }
+
         /*public async Task SendMessage(ChatMessageDto chatMessage)
         {
             string test = Context.ConnectionId;
@@ -113,10 +134,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             await Groups.AddToGroupAsync(connectionId, roomId.ToString());
         }
 
-        protected virtual async Task JoinRoom(int roomId)
-        {
-            await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
-        }
+        
 
         protected virtual async Task JoinRoom(string roomId)
         {

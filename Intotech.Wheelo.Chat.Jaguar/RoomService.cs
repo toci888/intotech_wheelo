@@ -24,53 +24,51 @@ public class RoomService : IRoomService
         RoomsAccountLogic = roomsAccountLogic;
     }
 
-    public RoomsDto CreateRoom(int authorId, List<int> members)
+    public RoomsDto CreateRoom(string hostEmail, List<string> members)
     {
         RoomsDto result = new RoomsDto();
-        /*
+        
         List<Account> chatMembers = new List<Account>();
 
-        Account author = AccountService.GetAccount(authorId);
+        Account author = AccountService.GetAccount(hostEmail);
 
         chatMembers.Add(author);
-
-        
         
         result.RoomMembers = new List<RoomMembersDto>();
 
-        foreach (int memberId in members)
+        foreach (string memberEmail in members)
         {
-            Account member = AccountService.GetAccount(memberId);
+            Account member = AccountService.GetAccount(memberEmail);
 
             chatMembers.Add(member);
 
-            result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = member .Createdat.Value, AccountId = member.Id, FirstName = member .Name, LastName = member.Surname });
+            result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = member .Createdat.Value, AccountId = member.Id, Email = member.Email, FirstName = member .Name, LastName = member.Surname });
         }
         //Kacper, Julia, Bartek
         result.RoomName = string.Join(", ", chatMembers.Select(m => m.Name));
-        result.RoomId = HashGenerator.Md5(string.Format(RoomIdPattern, authorId));
+       // result.RoomId = HashGenerator.Md5(string.Format(RoomIdPattern, authorId));
 
         Room testRoomExists = RoomLogic.Select(m => m.Roomid == result.RoomId).FirstOrDefault();
 
-        if (testRoomExists == null)
-        {
-            Room room = RoomLogic.Insert(new Room() { Ownerid = authorId, Roomid = result.RoomId, Roomname = result.RoomName });
+        //if (testRoomExists == null)
+        //{
+        //    Room room = RoomLogic.Insert(new Room() { Ownerid = authorId, Roomid = result.RoomId, Roomname = result.RoomName });
 
-            result.IdRoom = room.Id;
-        }
-        else
-        {
-            result.IdRoom = testRoomExists.Id;
-        }
+        //    result.IdRoom = room.Id;
+        //}
+        //else
+        //{
+        //    result.IdRoom = testRoomExists.Id;
+        //}
 
-        result.OwnerId = authorId;
+        result.OwnerEmail = hostEmail;
 
 
         foreach (Account chatMember in chatMembers)
         {
             RoomsAccountLogic.Insert(new Roomsaccount() { Idroom = result.IdRoom, Memberemail = chatMember.Email });
         }
-        */
+        
         return result;
     }
 }
