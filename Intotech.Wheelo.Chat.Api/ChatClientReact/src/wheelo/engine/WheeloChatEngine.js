@@ -55,9 +55,9 @@ export default class WheeloChatEngine {
 
         this.connection.on("RoomEstablished", (dto) => {
 
-            console.log("RoomEstablished", dto);
+            console.log("RoomEstablished, invoking JoinRoom", dto.room, dto.room.idRoom);
 
-            this.connection.invoke("JoinRoom", dto.idRoom);
+            this.connection.invoke("JoinRoom", parseInt(dto.room.idRoom));
             
         });
 
