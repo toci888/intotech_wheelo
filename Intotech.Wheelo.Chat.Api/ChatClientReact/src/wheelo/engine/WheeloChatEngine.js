@@ -20,7 +20,7 @@ export default class WheeloChatEngine {
 
     serverUrl = "http://localhost:5130/wheeloChat";
     //serverUrl = "http://4.231.89.226:5130/wheeloChat";
-    //serverUrl = "http://192.168.0.158:5130/wheeloChat";
+    //serverUrl = "http://192.168.0.158:5130/wheeloChat"; 
     ReceiveMessageCallback = "ReceiveMessage"; // react callback
     joinRoomDelegate = "JoinWheeloRoom"; //method in c#
     sendMessageCallback = "SendMessage"; 
@@ -69,8 +69,7 @@ export default class WheeloChatEngine {
         this.connection.onclose(e => {
             this.connection = null;
         });
-        //this.connection.qs = { "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImJ6YXBhcnRAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkJhcnRlayBaYXBhcnQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTY3MzQ1MTI0OCwiaXNzIjoiaHR0cDovL2ludG90ZWNoLmNvbS5wbCIsImF1ZCI6Imh0dHA6Ly9pbnRvdGVjaC5jb20ucGwifQ.VuURd6KCk9sasy7T1Gku1FpjVCNTqWRS43wC2swtEzE" };
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImJ6YXBhcnRAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkJhcnRlayBaYXBhcnQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTY3MzQ1MTI0OCwiaXNzIjoiaHR0cDovL2ludG90ZWNoLmNvbS5wbCIsImF1ZCI6Imh0dHA6Ly9pbnRvdGVjaC5jb20ucGwifQ.VuURd6KCk9sasy7T1Gku1FpjVCNTqWRS43wC2swtEzE
+        
         await this.connection.start();
     }
 

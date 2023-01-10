@@ -43,10 +43,11 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         {
             string doopa = Context.User.Identity.Name;
 
-            await this.Clients.User(accountId.ToString()).SendAsync("PocResponse", Context.UserIdentifier);
+            await this.Clients.User(Context.UserIdentifier).SendAsync("PocResponse", Context.UserIdentifier);
         }
 
-        public async Task ConnectUser(int accountId, string accessToken) // accountId room for synchronizations
+        [Authorize(Roles = "User")]
+        public async Task ConnectUser(int accountId) // accountId room for synchronizations
         {
             
             //string test = Context.ConnectionId;
@@ -60,15 +61,19 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
                 return;
             }
 
-            RoomsDto result = RoomService.CreateRoom(accountId, new List<int>());
+            data.SessionId = Context.UserIdentifier;
 
-            await JoinRoom(result.IdRoom); //connectionId
+            await this.Clients.User(Context.UserIdentifier).SendAsync(ClientAddUserCallback, new { data });
 
-            ChatUserService.JoinRoom(accountId, result.IdRoom);
+            //RoomsDto result = RoomService.CreateRoom(accountId, new List<int>());
 
-            data.SessionId = result.IdRoom;
+            //await JoinRoom(result.IdRoom); //connectionId
 
-            await Clients.Group(result.IdRoom.ToString()).SendAsync(ClientAddUserCallback, new { data }); //new { sessionID = user.SessionId }  // , new { data = user.SessionId }
+            // ChatUserService.JoinRoom(accountId, result.IdRoom);
+
+            //  data.SessionId = result.IdRoom;
+
+            // await Clients.Group(result.IdRoom.ToString()).SendAsync(ClientAddUserCallback, new { data }); //new { sessionID = user.SessionId }  // , new { data = user.SessionId }
         }
 
         public async Task SendMessage(ChatMessageDto chatMessage)
