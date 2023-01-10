@@ -7,7 +7,7 @@ public partial class Roomsaccount
 {
     public int Id { get; set; }
 
-    public int Idmember { get; set; }
+    public string Memberemail { get; set; } = null!;
 
     public int Idroom { get; set; }
 

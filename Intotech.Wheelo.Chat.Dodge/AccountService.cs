@@ -18,9 +18,9 @@ namespace Intotech.Wheelo.Chat.Dodge
             AccountLogic = accountLogic;
         }
 
-        public virtual Account GetAccount(int accountId)
+        public virtual Account GetAccount(string email)
         {
-            return AccountLogic.Select(m => m.Id == accountId).FirstOrDefault();
+            return AccountLogic.Select(m => m.Email == email).FirstOrDefault();
         }
     }
 }

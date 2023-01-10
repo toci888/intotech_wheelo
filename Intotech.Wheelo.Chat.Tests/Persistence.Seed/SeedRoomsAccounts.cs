@@ -9,11 +9,11 @@ public class SeedRoomsAccounts : SeedChatLogic<Roomsaccount>
     {
         List<Roomsaccount> list = new List<Roomsaccount>();
 
-        Roomsaccount ra = new Roomsaccount() { Idroom = 1, Idmember = 1000000018 };
+        Roomsaccount ra = new Roomsaccount() { Idroom = 1, Memberemail = "bzapart@gmail.com" };
 
         list.Add(ra);
 
-        list.Add(new Roomsaccount() { Idmember = 1000000015, Idroom = 1 });
+        list.Add(new Roomsaccount() { Memberemail = "warriorr@poczta.fm", Idroom = 1 });
 
         InsertCollection(list);
     }

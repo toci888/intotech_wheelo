@@ -9,7 +9,7 @@ public class SeedMessages : SeedChatLogic<Message>
     {
         List<Message> messages = new List<Message>();
 
-        List<int> chatParticipants = new List<int>() { 1000000015, 1000000018 };
+        List<string> chatParticipants = new List<string>() { "bzapart@gmail.com", "warriorr@poczta.fm" };
         
         Random rnd = new Random();
 
@@ -17,7 +17,7 @@ public class SeedMessages : SeedChatLogic<Message>
         {                                                                    
             // cadewi yhiklo
             int index = rnd.Next(0, 2);
-            Message newMessage = new Message() { Idauthor = chatParticipants[index], Idroom = 1, Message1 = StringUtils.CreateChat(rnd.Next(4,15))};
+            Message newMessage = new Message() { Authoremail = chatParticipants[index], Idroom = 1, Message1 = StringUtils.CreateChat(rnd.Next(4,15))};
 
             messages.Add(newMessage);
         }

@@ -26,13 +26,15 @@ public class RoomService : IRoomService
 
     public RoomsDto CreateRoom(int authorId, List<int> members)
     {
+        RoomsDto result = new RoomsDto();
+        /*
         List<Account> chatMembers = new List<Account>();
 
         Account author = AccountService.GetAccount(authorId);
 
         chatMembers.Add(author);
 
-        RoomsDto result = new RoomsDto();
+        
         
         result.RoomMembers = new List<RoomMembersDto>();
 
@@ -66,9 +68,9 @@ public class RoomService : IRoomService
 
         foreach (Account chatMember in chatMembers)
         {
-            RoomsAccountLogic.Insert(new Roomsaccount() { Idroom = result.IdRoom, Idmember = chatMember.Id });
+            RoomsAccountLogic.Insert(new Roomsaccount() { Idroom = result.IdRoom, Memberemail = chatMember.Email });
         }
-        
+        */
         return result;
     }
 }

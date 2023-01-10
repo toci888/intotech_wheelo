@@ -9,7 +9,7 @@ public partial class Accountsidentifier
 
     public int Idroom { get; set; }
 
-    public int Idaccount { get; set; }
+    public string Email { get; set; } = null!;
 
     public DateTime? Createdat { get; set; }
 

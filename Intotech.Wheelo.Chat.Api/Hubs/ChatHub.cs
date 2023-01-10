@@ -47,12 +47,12 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         }
 
         [Authorize(Roles = "User")]
-        public async Task ConnectUser(int accountId) // accountId room for synchronizations
+        public async Task ConnectUser(string email) // accountId room for synchronizations
         {
             
             //string test = Context.ConnectionId;
             //Clients.User().SendAsync()
-            ChatUserDto data = ChatUserService.Connect(accountId);
+            ChatUserDto data = ChatUserService.Connect(email);
 
             if (data == null) 
             {
@@ -76,7 +76,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             // await Clients.Group(result.IdRoom.ToString()).SendAsync(ClientAddUserCallback, new { data }); //new { sessionID = user.SessionId }  // , new { data = user.SessionId }
         }
 
-        public async Task SendMessage(ChatMessageDto chatMessage)
+        /*public async Task SendMessage(ChatMessageDto chatMessage)
         {
             string test = Context.ConnectionId;
 
@@ -101,7 +101,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             }
         }
 
-        public async Task ApproveChat(int ownerId, List<int> participantsIds)
+        public async Task ApproveConversation(int ownerId, List<int> participantsIds)
         {
             RoomsDto result = RoomService.CreateRoom(ownerId, participantsIds);
 
@@ -121,6 +121,6 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         protected virtual async Task JoinRoom(string roomId)
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, roomId);
-        }
+        }*/
     }
 }

@@ -7,7 +7,7 @@ public partial class Message
 {
     public int Id { get; set; }
 
-    public int Idauthor { get; set; }
+    public string Authoremail { get; set; } = null!;
 
     public int Idroom { get; set; }
 

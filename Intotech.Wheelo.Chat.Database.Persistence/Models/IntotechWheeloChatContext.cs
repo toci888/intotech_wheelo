@@ -46,7 +46,7 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
-            entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+            entity.Property(e => e.Email).HasColumnName("email");
             entity.Property(e => e.Idroom).HasColumnName("idroom");
 
             entity.HasOne(d => d.IdroomNavigation).WithMany(p => p.Accountsidentifiers)
@@ -66,7 +66,7 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
-            entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+            entity.Property(e => e.Email).HasColumnName("email");
         });
 
         modelBuilder.Entity<Conversationinvitation>(entity =>
@@ -80,8 +80,8 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
-            entity.Property(e => e.Idaccount).HasColumnName("idaccount");
-            entity.Property(e => e.Idaccountinvited).HasColumnName("idaccountinvited");
+            entity.Property(e => e.Email).HasColumnName("email");
+            entity.Property(e => e.Emailinvited).HasColumnName("emailinvited");
             entity.Property(e => e.Idroom).HasColumnName("idroom");
 
             entity.HasOne(d => d.IdroomNavigation).WithMany(p => p.Conversationinvitations)
@@ -97,11 +97,11 @@ public partial class IntotechWheeloChatContext : DbContext
             entity.ToTable("messages");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Authoremail).HasColumnName("authoremail");
             entity.Property(e => e.Createdat)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
-            entity.Property(e => e.Idauthor).HasColumnName("idauthor");
             entity.Property(e => e.Idroom).HasColumnName("idroom");
             entity.Property(e => e.Message1).HasColumnName("message");
 
@@ -140,8 +140,8 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
-            entity.Property(e => e.Idmember).HasColumnName("idmember");
             entity.Property(e => e.Idroom).HasColumnName("idroom");
+            entity.Property(e => e.Memberemail).HasColumnName("memberemail");
 
             entity.HasOne(d => d.IdroomNavigation).WithMany(p => p.Roomsaccounts)
                 .HasForeignKey(d => d.Idroom)
@@ -166,7 +166,7 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
-            entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+            entity.Property(e => e.Email).HasColumnName("email");
         });
 
         OnModelCreatingPartial(modelBuilder);

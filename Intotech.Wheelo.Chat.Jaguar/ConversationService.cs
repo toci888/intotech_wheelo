@@ -27,9 +27,9 @@ public class ConversationService : IConversationService
     {
         List<Message> messages = MessageLogic.Select(m => m.Idroom == roomId).OrderBy(m => m.Createdat).ToList();
 
-        List<Message> distinctAuthors = messages.DistinctBy(m => m.Idauthor).ToList();
+        List<Message> distinctAuthors = messages.DistinctBy(m => m.Authoremail).ToList();
 
-        Dictionary<int, MessageAuthorDto> authorsData = GetDistinctNames(distinctAuthors);
+        Dictionary<string, MessageAuthorDto> authorsData = GetDistinctNames(distinctAuthors);
 
         Room room = RoomLogic.Select(m => m.Id == roomId).FirstOrDefault();
 
@@ -43,7 +43,7 @@ public class ConversationService : IConversationService
         ConversationDto resElement = new ConversationDto();
 
         resElement.TenantID = resElement.ID = room.Id;
-        resElement.OwnerID = room.Ownerid;
+       // resElement.OwnerID = room.Ownerid;
         resElement.CreatedAt = room.Createdat.Value;
          //= room.Roomid;
         resElement.OwnerFirstName = acc.Name;
@@ -55,12 +55,12 @@ public class ConversationService : IConversationService
             resElement.Messages.Add(new ChatMessageDto()
             {
                 CreatedAt = message.Createdat.Value,
-                SenderID = message.Idauthor,
+                SenderID = message.Authoremail,
                 Text = message.Message1,
                 ID = message.Id,
                 RoomID = roomId,
-                AuthorFirstName = authorsData[message.Idauthor].MessageAuthorFirstName,
-                AuthorLastName = authorsData[message.Idauthor].MessageAuthorLastName
+                AuthorFirstName = authorsData[message.Authoremail].MessageAuthorFirstName,
+                AuthorLastName = authorsData[message.Authoremail].MessageAuthorLastName
             }) ;
 
             if (isAccountIdRequest)
@@ -72,11 +72,11 @@ public class ConversationService : IConversationService
         return resElement;
     }
 
-    public virtual List<ConversationDto> GetConversationsByAccountId(int accountId)
+    public virtual List<ConversationDto> GetConversationsByAccountId(string email)
     {
         List<ConversationDto> conversations = new List<ConversationDto>();
 
-        List<int> roomsIds = RoomsAccountLogic.Select(m => m.Idmember == accountId).Select(m => m.Idroom).ToList();
+        List<int> roomsIds = RoomsAccountLogic.Select(m => m.Memberemail == email).Select(m => m.Idroom).ToList();
 
         foreach (int roomId in roomsIds)
         {
@@ -86,20 +86,20 @@ public class ConversationService : IConversationService
         return conversations;
     }
 
-    protected virtual Dictionary<int, MessageAuthorDto> GetDistinctNames(List<Message> distinctAuthors)
+    protected virtual Dictionary<string, MessageAuthorDto> GetDistinctNames(List<Message> distinctAuthors)
     {
-        Dictionary<int, MessageAuthorDto> result = new Dictionary<int, MessageAuthorDto>();
+        Dictionary<string, MessageAuthorDto> result = new Dictionary<string, MessageAuthorDto>();
 
         foreach (Message message in distinctAuthors)
         {
             MessageAuthorDto resElement = new MessageAuthorDto();
 
-            Account acc = AccountService.GetAccount(message.Idauthor);
+            Account acc = AccountService.GetAccount(message.Authoremail);
 
             resElement.MessageAuthorFirstName = acc.Name;
             resElement.MessageAuthorLastName = acc.Surname;
 
-            result.Add(message.Idauthor, resElement);
+            result.Add(message.Authoremail, resElement);
         }
 
         return result;

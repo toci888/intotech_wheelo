@@ -9,12 +9,12 @@ namespace Intotech.Wheelo.Chat.Jaguar.Interfaces
 {
     public interface IChatUserService
     {
-        ChatUserDto Connect(int accountId);
+        ChatUserDto Connect(string email);
 
-        bool JoinRoom(int accountId, int roomId);
+        //bool JoinRoom(int accountId, int roomId);
 
-        RequestConversationDto Invite(RequestConversationDto invitation);
+        //RequestConversationDto Invite(RequestConversationDto invitation);
 
-        ChatMessageDto SendMessage(ChatMessageDto chatMessage);
+        //ChatMessageDto SendMessage(ChatMessageDto chatMessage);
     }
 }

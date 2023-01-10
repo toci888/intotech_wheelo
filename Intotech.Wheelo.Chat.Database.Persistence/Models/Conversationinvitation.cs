@@ -7,9 +7,9 @@ public partial class Conversationinvitation
 {
     public int Id { get; set; }
 
-    public int Idaccount { get; set; }
+    public string Email { get; set; } = null!;
 
-    public int Idaccountinvited { get; set; }
+    public string Emailinvited { get; set; } = null!;
 
     public int Idroom { get; set; }
 

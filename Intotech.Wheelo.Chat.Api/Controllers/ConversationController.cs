@@ -23,9 +23,9 @@ namespace Intotech.Wheelo.Chat.Api.Controllers
         }
 
         [HttpGet("get-conversations-by-user-id")]
-        public List<ConversationDto> GetConversationsByAccountId(int userId)
+        public List<ConversationDto> GetConversationsByAccountId(string email)
         {
-            return Service.GetConversationsByAccountId(userId);
+            return Service.GetConversationsByAccountId(email);
         }
     }
 }

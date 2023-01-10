@@ -9,6 +9,6 @@ namespace Intotech.Wheelo.Chat.Dodge.Interfaces
 {
     public interface IAccountService
     {
-        Account GetAccount(int accountId);
+        Account GetAccount(string email);
     }
 }
