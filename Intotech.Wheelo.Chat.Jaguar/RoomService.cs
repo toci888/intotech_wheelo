@@ -46,9 +46,13 @@ public class RoomService : IRoomService
         }
         //Kacper, Julia, Bartek
         result.RoomName = string.Join(", ", chatMembers.Select(m => m.Name));
-       // result.RoomId = HashGenerator.Md5(string.Format(RoomIdPattern, authorId));
+        // result.RoomId = HashGenerator.Md5(string.Format(RoomIdPattern, authorId));
 
-        Room testRoomExists = RoomLogic.Select(m => m.Roomid == result.RoomId).FirstOrDefault();
+        //Room testRoomExists = RoomLogic.Select(m => m.Roomid == result.RoomId).FirstOrDefault();
+
+        Room room = RoomLogic.Insert(new Room() { Ownerid = hostEmail, Roomid = result.RoomId, Roomname = result.RoomName });
+
+        result.IdRoom = room.Id;
 
         //if (testRoomExists == null)
         //{
