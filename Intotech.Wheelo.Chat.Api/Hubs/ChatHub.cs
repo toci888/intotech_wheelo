@@ -73,7 +73,10 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         {
             chatMessage = ChatUserService.SendMessage(chatMessage);
 
-            await Clients.Group(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
+            if (chatMessage != null)
+            {
+                await Clients.Group(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
+            }
 
         }
         

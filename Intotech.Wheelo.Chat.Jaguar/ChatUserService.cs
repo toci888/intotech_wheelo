@@ -1,6 +1,7 @@
 ﻿using Intotech.Wheelo.Chat.Bll.Persistence;
 using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Database.Persistence.Models;
+using Intotech.Wheelo.Chat.Dodge;
 using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
 using Intotech.Wheelo.Chat.Models;
@@ -52,9 +53,18 @@ namespace Intotech.Wheelo.Chat.Jaguar
 
         public virtual ChatMessageDto SendMessage(ChatMessageDto chatMessage)
         {
+            Account acc = AccountService.GetAccount(chatMessage.SenderID);
+
+            if (acc == null)
+            {
+                return null;
+            }
+
             Message mess = MessageLogic.Insert(new Message() { Authoremail = chatMessage.SenderID, Message1 = chatMessage.Text, Idroom = chatMessage.ID });
 
             chatMessage.CreatedAt = mess.Createdat.Value;
+            chatMessage.AuthorFirstName = acc.Name;
+            chatMessage.AuthorLastName = acc.Surname;
 
             return chatMessage;
         }
