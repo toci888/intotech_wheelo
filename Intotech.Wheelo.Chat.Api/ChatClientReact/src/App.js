@@ -38,8 +38,8 @@ const App = () => {
   <input type="submit" value="Invite" onClick={() => 
     wheeloClient.requestConversation(document.getElementById("userId").value, "Ziutek", new Array(1000000027, 1000000029))}></input>
   
-  <input type="submit" value="approve" onClick={() => 
-   wheeloClient.chat(1000000027, 4, "Siema Kacper !")}></input>
+  <input type="submit" value="Send Message xd" onClick={() => 
+   wheeloClient.chat("bzapart@gmail.com", 2, "Siema Kacper !")}></input>
 
 <input type="submit" value="Poc" onClick={() => 
 wheeloClient.ProofOfConcept(1000000027)}></input>

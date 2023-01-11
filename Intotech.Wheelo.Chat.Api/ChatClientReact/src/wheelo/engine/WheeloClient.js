@@ -66,7 +66,6 @@ export default class WheeloClient {
 
     chat = async (authorId, roomId, message) => {
 
-        authorId = parseInt(authorId);
         roomId = parseInt(roomId);
 
         await this.wheeloChatEngine.sendMessage(authorId, roomId, message);
