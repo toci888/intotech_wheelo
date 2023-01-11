@@ -94,6 +94,8 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         [Authorize(Roles = "User")]
         public virtual async Task JoinRoom(int roomId)
         {
+            RoomService.ApproveRoom(roomId, Context.UserIdentifier, true);
+
             await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
         }
 

@@ -29,6 +29,7 @@ create table RoomsAccounts
 	id serial primary key,
 	memberEmail text not null,
 	idRoom int references Rooms(id) not null,
+	isApproved bool default false,
 	createdat timestamp default now()
 );
 --select * from Messages;

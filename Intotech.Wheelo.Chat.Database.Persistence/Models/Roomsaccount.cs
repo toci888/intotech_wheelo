@@ -11,6 +11,8 @@ public partial class Roomsaccount
 
     public int Idroom { get; set; }
 
+    public bool? Isapproved { get; set; }
+
     public DateTime? Createdat { get; set; }
 
     public virtual Room IdroomNavigation { get; set; } = null!;

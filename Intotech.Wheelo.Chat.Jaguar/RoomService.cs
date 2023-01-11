@@ -11,8 +11,6 @@ namespace Intotech.Wheelo.Chat.Jaguar;
 
 public class RoomService : IRoomService
 {
-    private const string RoomIdPattern = "{0}_RoomIdText";
-
     protected IAccountService AccountService;
     protected IRoomLogic RoomLogic;
     protected IRoomsaccountLogic RoomsAccountLogic;
@@ -22,6 +20,22 @@ public class RoomService : IRoomService
         AccountService = accountService;
         RoomLogic = roomLogic;
         RoomsAccountLogic = roomsAccountLogic;
+    }
+
+    public virtual bool ApproveRoom(int roomId, string email, bool decision)
+    {
+        Roomsaccount roomAccount = RoomsAccountLogic.Select(m => m.Memberemail == email && m.Idroom == roomId).FirstOrDefault();
+
+        if (roomAccount != null)
+        {
+            roomAccount.Isapproved = decision;
+
+            RoomsAccountLogic.Update(roomAccount);
+
+            return true;
+        }
+
+        return false;
     }
 
     public RoomsDto CreateRoom(string hostEmail, List<string> members)
@@ -49,25 +63,10 @@ public class RoomService : IRoomService
 
         //Kacper, Julia, Bartek
         result.RoomName = string.Join(", ", chatMembers.Select(m => m.Name));
-        // result.RoomId = HashGenerator.Md5(string.Format(RoomIdPattern, authorId));
-
-        //Room testRoomExists = RoomLogic.Select(m => m.Roomid == result.RoomId).FirstOrDefault();
-
+  
         Room room = RoomLogic.Insert(new Room() { Ownerid = hostEmail, Roomname = result.RoomName });
 
         result.IdRoom = room.Id;
-
-        //if (testRoomExists == null)
-        //{
-        //    Room room = RoomLogic.Insert(new Room() { Ownerid = authorId, Roomid = result.RoomId, Roomname = result.RoomName });
-
-        //    result.IdRoom = room.Id;
-        //}
-        //else
-        //{
-        //    result.IdRoom = testRoomExists.Id;
-        //}
-
         result.OwnerEmail = hostEmail;
 
 

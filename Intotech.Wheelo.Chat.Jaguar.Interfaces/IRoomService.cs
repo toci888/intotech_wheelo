@@ -6,4 +6,6 @@ public interface IRoomService
 {
     RoomsDto CreateRoom(string hostEmail, List<string> members);
 
+    bool ApproveRoom(int roomId, string email, bool decision);
+
 }

@@ -138,6 +138,9 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
             entity.Property(e => e.Idroom).HasColumnName("idroom");
+            entity.Property(e => e.Isapproved)
+                .HasDefaultValueSql("false")
+                .HasColumnName("isapproved");
             entity.Property(e => e.Memberemail).HasColumnName("memberemail");
 
             entity.HasOne(d => d.IdroomNavigation).WithMany(p => p.Roomsaccounts)
