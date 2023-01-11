@@ -77,4 +77,9 @@ public class RoomService : IRoomService
         
         return result;
     }
+
+    public virtual List<int> GetAllRooms(string email)
+    {
+        return RoomsAccountLogic.Select(m => m.Memberemail == email).Select(m => m.Idroom).ToList();
+    }
 }

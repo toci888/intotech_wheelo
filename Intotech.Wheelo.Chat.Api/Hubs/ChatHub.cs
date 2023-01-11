@@ -45,6 +45,13 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
             data.SessionId = Context.UserIdentifier;
 
+            List<int> userRoomIds = RoomService.GetAllRooms(Context.UserIdentifier);
+
+            foreach (int userRoomId in userRoomIds)
+            {
+                await Groups.AddToGroupAsync(Context.ConnectionId, userRoomId.ToString());
+            }
+
             await this.Clients.User(Context.UserIdentifier).SendAsync(ClientAddUserCallback, new { data });
         }
 
@@ -75,6 +82,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
             if (chatMessage != null)
             {
+                //await Groups.AddToGroupAsync(Context.ConnectionId, chatMessage.ID.ToString());
                 await Clients.Group(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
             }
 

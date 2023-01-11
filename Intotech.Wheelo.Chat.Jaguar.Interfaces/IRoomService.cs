@@ -8,4 +8,6 @@ public interface IRoomService
 
     bool ApproveRoom(int roomId, string email, bool decision);
 
+    List<int> GetAllRooms(string email);
+
 }
