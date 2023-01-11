@@ -21,7 +21,7 @@ export default class WheeloChatEngine {
     //serverUrl = "http://localhost:5130/wheeloChat";
     serverUrl = "http://4.231.89.226:5130/wheeloChat";
     //serverUrl = "http://192.168.0.158:5130/wheeloChat"; 
-    ReceiveMessageCallback = "ReceiveMessage"; // react callback
+    ReceiveMessageCallback = "getMessage"; // react callback
     joinRoomDelegate = "JoinWheeloRoom"; //method in c#
     sendMessageCallback = "SendMessage"; 
     connectUserDelegate = "ConnectUser"; //method in c#
@@ -42,7 +42,7 @@ export default class WheeloChatEngine {
         console.log("Connection: ", this.connection);
 
         this.connection.on(this.ReceiveMessageCallback, (msgDto) => {
-            
+            console.log("getMessage", msgDto);
             this.receiveMessageCall(msgDto);
             //this.messages = [...this.messages, { user, message }];
         });
@@ -104,7 +104,7 @@ export default class WheeloChatEngine {
 
     sendMessage = async (authorAccountId, targetId, message) => {
         try {
-          
+          console.log("dafaq", authorAccountId);
           await this.connection.invoke(this.sendMessageCallback, 
             {
              SenderID: authorAccountId,
@@ -112,9 +112,17 @@ export default class WheeloChatEngine {
              ID: targetId,
              CreatedAt: "2023-01-07",
              AuthorFirstName: "Bartek",
-             AuthorLastName: "Zapart"
+             AuthorLastName: "Zapart",
+             RoomID: targetId
             }); 
-
+/*
+        public string SenderID { get; set; }
+        public string Text { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public int ID { get; set; }
+        public string AuthorFirstName { get; set; }
+        public string AuthorLastName { get; set; }
+        public int RoomID { get; set; }*/
         } catch (e) {
           console.log(e);
         }

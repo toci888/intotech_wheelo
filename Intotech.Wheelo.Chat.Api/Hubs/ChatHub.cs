@@ -98,7 +98,8 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
             await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
         }
-       
+
+        [Authorize(Roles = "User")]
         public async Task SendMessage(ChatMessageDto chatMessage)
         {
             chatMessage = ChatUserService.SendMessage(chatMessage);
