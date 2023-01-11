@@ -1,4 +1,7 @@
+import React from "react";
 import { light } from "@eva-design/eva";
+import { dark } from "@eva-design/eva";
+import { DarkTheme, DefaultTheme } from "@react-navigation/native";
 
 export const theme = {
   ...light,
@@ -59,3 +62,24 @@ export const theme = {
   "color-danger-800": "#83070A",
   "color-danger-900": "#6C040E",
 };
+
+// const myDarkTheme = {
+//   "color-violet": "#6e53a6",
+//   "color-white": "#ffffff",
+//   "color-black": "#000000",
+//   "color-blue": "#6b50a5",
+//   "color-green": "#34c25f",
+//   "color-check": "#5e4496",
+// }
+
+// const myLightTheme = {
+//   "color-violet": "#6e53a6",
+//   "color-white": "#ffffff",
+//   "color-black": "#000000",
+//   "color-blue": "yellow",
+//   "color-green": "#34c25f",
+//   "color-check": "#5e4496",
+// }
+
+// export const theme = DefaultTheme.dark ? 
+// {...dark, ...myDarkTheme} : { ...light, ...myLightTheme};

@@ -8,14 +8,17 @@ import { getStateAbbreviation } from "../../utils/getStateAbbreviation";
 import { useUser } from "../useUser";
 
 const fetchConversations = async (
-  userID?: number,
+  email?: string,
   token?: string
 ): Promise<TransformedConversation[]> => {
-  if (!userID) return [];
+  if (!email) return [];
 
-  console.log("BEFOREE", `${endpoints.getConversationsByUserID}/get-conversations-by-user-id?userId=${userID}`, token, userID)
-  const response = await axios.get(
-    `${endpoints.getConversationsByUserID}/get-conversations-by-user-id?userId=${userID}`,
+  console.log("BEFOREE", `${endpoints.getConversationsByUserEmail}/get-conversations-by-user-email ${email}`, token, email)
+  const response = await axios.post(
+    `${endpoints.getConversationsByUserEmail}/get-conversations-by-user-email`,
+    {
+      email
+    },
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -24,7 +27,6 @@ const fetchConversations = async (
   );
 
   const conversations: ConversationsRes[] = response.data;
-  console.log("CONVVV", conversations)
   
   const data: TransformedConversation[] = [];
   for (let i of conversations) {
@@ -65,7 +67,7 @@ export const useConversationsQuery = () => {
 
   return useQuery(
     queryKeys.conversations,
-    () => fetchConversations(user?.id, user?.accessToken),
+    () => fetchConversations(user?.email, user?.accessToken),
     {
       retry: false,
     }

@@ -5,7 +5,7 @@
  */
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName } from "react-native";
@@ -22,14 +22,8 @@ import { SignUpScreen } from "../screens/SignUpScreen";
 import { ForgotPasswordScreen } from "../screens/ForgotPasswordScreen";
 import { ResetPasswordScreen } from "../screens/ResetPasswordScreen";
 import { MessagePropertyScreen } from "../screens/MessagePropertyScreen";
-import {
-  AccountTabParamList,
-  AuthParamList,
-  ChatTabParamList,
-  RootStackParamList,
-  RootTabParamList,
-  RootTabScreenProps,
-} from "../types";
+import { AccountTabParamList, AuthParamList, ChatTabParamList,
+  RootStackParamList, RootTabParamList, RootTabScreenProps } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { theme } from "../theme";
 import { CollocationDetailsScreen } from "../screens/CollocationDetailsScreen";
@@ -51,8 +45,15 @@ export default function Navigation({
 }: {
   colorScheme: ColorSchemeName;
 }) {
+  DefaultTheme.dark = colorScheme === "dark" ? true : false;
+  // DarkTheme.colors = { primary: 'blue', border: 'green', card: 'aqua', 
+  //               notification: 'pink', background: 'gray', text: 'red'}
+  const myTheme = DefaultTheme.dark ? DarkTheme : DefaultTheme
+
+  myTheme.colors = Object.assign(myTheme.colors, theme)
+  
   return (
-    <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme}>
+    <NavigationContainer linking={LinkingConfiguration} theme={myTheme}>
       <RootNavigator colorScheme={colorScheme} />
     </NavigationContainer>
   );
@@ -65,8 +66,7 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator(props: any) {
-  const { registerForPushNotificationsAsync, handleNotificationResponse } =
-    useNotifications();
+  const { registerForPushNotificationsAsync, handleNotificationResponse } = useNotifications();
   const { user } = useUser();
 
   useEffect(() => {

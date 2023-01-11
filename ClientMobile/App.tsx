@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import * as SecureStore from "expo-secure-store";
 import { LogBox } from "react-native";
 import * as Notifications from "expo-notifications";
+// import { useNavigation } from "@react-navigation/native";
 
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
@@ -23,16 +24,19 @@ const queryClient = new QueryClient();
 LogBox.ignoreAllLogs();
 
 export default function App() {
+  // const navigation = useNavigation();
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   
+
   useEffect(() => {
     async function getUser() {
       const user = await SecureStore.getItemAsync("user");
       if (user) {
         const userObj: User = JSON.parse(user);
+        console.log("JUSRE", userObj)
         const newTokens = await refreshTokens(userObj.accessToken, userObj.refreshtoken);
         if (newTokens) {
           userObj.accessToken = newTokens.accessToken;
@@ -40,7 +44,7 @@ export default function App() {
           SecureStore.setItemAsync("user", JSON.stringify(userObj));
         }
         setUser(userObj);
-
+        
         socket.on(
           "getMessage",
           (message: { chatMessage: {
@@ -80,13 +84,26 @@ export default function App() {
           }
         });
         socket.on("connect_error", (err) => {
-          if (err.message === "Invalid userID" && user) {
+          console.log("BLAD signalR", err)
+          if (err.message === "Invalid user id" && user) {
             socket.start();
           }
         });
-        
+        socket.on("roomestablished", (roomData:{ room: {idRoom: number, ownerEmail: string, roomId: string, roomName: string, roomMembers: any}}) => {
+          let data = roomData.room;
+
+          console.log('bartoo', data);
+        });
+
         await socket.start();
-        await socket.invoke("ConnectUser", userObj.id, userObj.accessToken);
+        await socket.invoke("ConnectUser", userObj.email);
+
+        await socket.invoke("CreateRoom", userObj.email, ['warriorr@poczta.fm', 'bzapart@gmail.com']);
+
+        console.log("USER ID", userObj)
+        
+      } else {
+        // navigation.navigate("Account") //TODO!
       }
     }
 
@@ -102,6 +119,7 @@ export default function App() {
   if (!isLoadingComplete) {
     return null;
   } else {
+    
     return (
       <LoadingContext.Provider value={{ loading, setLoading }}>
         <AuthContext.Provider value={{ user, setUser }}>

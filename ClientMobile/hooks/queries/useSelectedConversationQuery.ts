@@ -12,7 +12,7 @@ const fetchConversation = async (
   userID?: number,
   token?: string
 ): Promise<SelectedConversation> => {
-  console.log("CzatKlik", `${endpoints.getConversationsByUserID}${userID}`, token)
+  console.log("CzatKlik", `${endpoints.getConversationByID}/get-conversation-by-id?roomId=${conversationID}`, token)
   const response = await axios.get(
     `${endpoints.getConversationByID}/get-conversation-by-id?roomId=${conversationID}`,
     {
@@ -21,6 +21,7 @@ const fetchConversation = async (
       },
     }
   ); 
+  console.log("XXZXZC", response.data)
 
   const data: ConversationRes = response.data;
 
@@ -33,7 +34,7 @@ const fetchConversation = async (
   const ownerAuthor: Author = {
     id: data.ownerID.toString(),
     firstName: data.ownerFirstName ? data.ownerFirstName : "",
-    lastName: "",
+    lastName:  data.ownerLastName ? data.ownerLastName : "",
   };
 
   const messages: MessageType.Any[] = [];

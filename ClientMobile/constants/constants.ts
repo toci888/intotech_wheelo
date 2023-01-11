@@ -25,7 +25,7 @@ androidHeight += androidNotch;
 
 export const HEADERHEIGHT = Platform.OS === "ios" ? iosHeight : androidHeight;
 
-export const server = "http://4.231.89.226"; // kacper
+export const server = "http://4.231.89.226";
 
 const serverUrl = server + ":5105/api";
 const integrationApiUrl = server + ":5108/api";
@@ -41,6 +41,7 @@ const review = "/review";
 const conversation = "/conversation";
 const messages = "/messages";
 const refresh = "/refresh-token";
+const wheeloChat = "wheeloChat"
 const refreshTokenEndpoint = serverUrl + user + refresh;
 const locationEndpoint = serverUrl + location;
 const googleEndpoint = integrationApiUrl + google;
@@ -49,7 +50,7 @@ const collocationEndpoint = serverUrl + property;
 const apartmentEndpoint = serverUrl + apartment;
 const reviewEndpoint = serverUrl + review;
 const conversationEndpoint = chatUrl + "api" + conversation;
-const conversationWheeloChatEndpoint = chatUrl + "wheeloChat" + conversation;
+const conversationWheeloChatEndpoint = chatUrl + wheeloChat + conversation;
 const messagesEndpoint = serverUrl + messages;
 const contactedEndpoint = (id: number) => `${userEndpoint}/${id}/properties/contacted`;
 const savedEndpoint = (id: number) => `${userEndpoint}/${id}/collocations/saved`;
@@ -60,7 +61,7 @@ const currentLocationEndpoint = (latitude: number, longitude: number) => `${goog
 
 
 export const endpoints = {
-  chat: chatUrl,
+  chat: chatUrl + wheeloChat,
   autoComplete: googleEndpoint + "/address-autocomplete",
   recognizePlaceId: googleEndpoint + "/recognize-place-id",
   search: locationEndpoint + "/search",
@@ -87,8 +88,8 @@ export const endpoints = {
   allowsNotifications: allowsNotificationsEndpoint,
   themeMode: themeModeEndpoint,
   createConversation: conversationWheeloChatEndpoint, //?
-  getConversationByID: conversationWheeloChatEndpoint,
-  getConversationsByUserID: conversationEndpoint,
+  getConversationByID: conversationEndpoint,
+  getConversationsByUserEmail: conversationEndpoint,
   createMessage: messagesEndpoint,
   refreshTokens: refreshTokenEndpoint,
   currentLocation: currentLocationEndpoint

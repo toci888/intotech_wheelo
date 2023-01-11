@@ -3,11 +3,7 @@ import axios from "axios";
 
 import { endpoints, queryKeys } from "../../constants/constants";
 import { socket } from "../../constants/socket";
-import {
-  SelectedConversation,
-  TransformedConversation,
-  Author,
-} from "../../types/conversation";
+import { SelectedConversation, TransformedConversation, Author, } from "../../types/conversation";
 import { MessageType } from "@flyerhq/react-native-chat-ui/lib/types";
 import { useUser } from "../useUser";
 
@@ -19,23 +15,16 @@ const createMessage = (
   authorLastName: string,
   text: string,
   token?: string
-) =>
-  axios.post(
-    `${endpoints.createMessage}`,
-    {
-      conversationID,
-      senderID,
-      receiverID,
-      text,
-      authorFirstName,
-      authorLastName,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+) => 
+  socket.invoke('sendMessage',  {
+    SenderID: 'bzapart@gmail.com',
+    Text: text,
+    ID: 1,
+    CreatedAt: "2023-01-07",
+    AuthorFirstName: "Bartek",
+    AuthorLastName: "Zapart",
+    RoomID: 1
+   });
 
 export const useCreateMessageMutation = () => {
   const queryClient = useQueryClient();

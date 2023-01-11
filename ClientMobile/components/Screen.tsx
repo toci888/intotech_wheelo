@@ -1,10 +1,7 @@
-import {
-  SafeAreaView,
-  StyleSheet,
-  ViewStyle,
-  Platform,
-  StatusBar,
-} from "react-native";
+import React from "react";
+import { SafeAreaView, StyleSheet, ViewStyle,
+  Platform, StatusBar } from "react-native";
+  import { DefaultTheme } from "@react-navigation/native";
 
 import { Loading } from "./Loading";
 import { useLoading } from "../hooks/useLoading";
@@ -20,7 +17,7 @@ export const Screen = ({
 
   return (
     <SafeAreaView style={[styles.container, style]}>
-      <StatusBar barStyle={"dark-content"} />
+      <StatusBar barStyle={DefaultTheme.dark? "light-content" : "dark-content"} />
       {loading ? <Loading /> : children}
     </SafeAreaView>
   );
