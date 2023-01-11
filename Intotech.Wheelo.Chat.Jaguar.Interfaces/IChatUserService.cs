@@ -15,6 +15,6 @@ namespace Intotech.Wheelo.Chat.Jaguar.Interfaces
 
         //RequestConversationDto Invite(RequestConversationDto invitation);
 
-        //ChatMessageDto SendMessage(ChatMessageDto chatMessage);
+        ChatMessageDto SendMessage(ChatMessageDto chatMessage);
     }
 }

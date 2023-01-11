@@ -50,6 +50,15 @@ namespace Intotech.Wheelo.Chat.Jaguar
             return new ChatUserDto() { UserId = email, UserName = userData.Name, UserSurname = userData.Surname, SessionId = email };
         }
 
+        public virtual ChatMessageDto SendMessage(ChatMessageDto chatMessage)
+        {
+            Message mess = MessageLogic.Insert(new Message() { Authoremail = chatMessage.SenderID, Message1 = chatMessage.Text, Idroom = chatMessage.ID });
+
+            chatMessage.CreatedAt = mess.Createdat.Value;
+
+            return chatMessage;
+        }
+
         /*public virtual RequestConversationDto Invite(RequestConversationDto invitation)
         {
             Account userInviting = AccountService.GetAccount(invitation.InvitingAccountId);
@@ -85,13 +94,6 @@ namespace Intotech.Wheelo.Chat.Jaguar
             return RoomsAccountLogic.Insert(new Roomsaccount() { Idmember = accountId, Idroom = roomId }).Id > 0;
         }
 
-        public virtual ChatMessageDto SendMessage(ChatMessageDto chatMessage)
-        {
-            Message mess = MessageLogic.Insert(new Message() { Idauthor = chatMessage.SenderID, Message1 = chatMessage.Text, Idroom = chatMessage.ID });
-
-           chatMessage.CreatedAt = mess.Createdat.Value;
-
-            return chatMessage;
-        }*/
+        */
     }
 }

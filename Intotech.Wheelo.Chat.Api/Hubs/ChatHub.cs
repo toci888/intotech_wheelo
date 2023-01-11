@@ -98,49 +98,47 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
             await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
         }
-
-        /*public async Task SendMessage(ChatMessageDto chatMessage)
+       
+        public async Task SendMessage(ChatMessageDto chatMessage)
         {
-            string test = Context.ConnectionId;
-
             chatMessage = ChatUserService.SendMessage(chatMessage);
 
             await Clients.Group(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
 
         }
+        /*
+       public async Task RequestConversation(RequestConversationDto requestConversation)
+       {
+           requestConversation = ChatUserService.Invite(requestConversation);
 
-        public async Task RequestConversation(RequestConversationDto requestConversation)
-        {
-            requestConversation = ChatUserService.Invite(requestConversation);
+           if (!requestConversation.IsInvited)
+           {
+               foreach (int accountId in requestConversation.InvitedAccountIds)
+               {
+                   string invitedUserId = string.Format(RoomIdPattern, accountId);
 
-            if (!requestConversation.IsInvited)
-            {
-                foreach (int accountId in requestConversation.InvitedAccountIds)
-                {
-                    string invitedUserId = string.Format(RoomIdPattern, accountId);
+                   await Clients.Group(invitedUserId).SendAsync(InviteToConversationCallback, requestConversation);
+               }
+           }
+       }
 
-                    await Clients.Group(invitedUserId).SendAsync(InviteToConversationCallback, requestConversation);
-                }
-            }
-        }
+       public async Task ApproveConversation(int ownerId, List<int> participantsIds)
+       {
+           RoomsDto result = RoomService.CreateRoom(ownerId, participantsIds);
 
-        public async Task ApproveConversation(int ownerId, List<int> participantsIds)
-        {
-            RoomsDto result = RoomService.CreateRoom(ownerId, participantsIds);
+           await JoinRoom(result.IdRoom);
+       }
 
-            await JoinRoom(result.IdRoom);
-        }
+       protected virtual async Task JoinRoom(int roomId, string connectionId)
+       {
+           await Groups.AddToGroupAsync(connectionId, roomId.ToString());
+       }
 
-        protected virtual async Task JoinRoom(int roomId, string connectionId)
-        {
-            await Groups.AddToGroupAsync(connectionId, roomId.ToString());
-        }
 
-        
 
-        protected virtual async Task JoinRoom(string roomId)
-        {
-            await Groups.AddToGroupAsync(Context.ConnectionId, roomId);
-        }*/
+       protected virtual async Task JoinRoom(string roomId)
+       {
+           await Groups.AddToGroupAsync(Context.ConnectionId, roomId);
+       }*/
     }
 }
