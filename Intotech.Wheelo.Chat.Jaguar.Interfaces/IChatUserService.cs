@@ -10,11 +10,6 @@ namespace Intotech.Wheelo.Chat.Jaguar.Interfaces
     public interface IChatUserService
     {
         ChatUserDto Connect(string email);
-
-        //bool JoinRoom(int accountId, int roomId);
-
-        //RequestConversationDto Invite(RequestConversationDto invitation);
-
         ChatMessageDto SendMessage(ChatMessageDto chatMessage);
     }
 }
