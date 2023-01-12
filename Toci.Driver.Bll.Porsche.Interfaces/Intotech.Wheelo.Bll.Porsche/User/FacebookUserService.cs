@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Intotech.Common.ImageManagement;
 using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Porsche.User
@@ -16,11 +17,13 @@ namespace Intotech.Wheelo.Bll.Porsche.User
     {
         protected IAccountLogic AccountLogic;
         protected IUserExtraDataLogic UserExtraDataLogic;
+        protected ImageManager ImageManager;
 
         public FacebookUserService(IAccountLogic accountLogic, IUserExtraDataLogic userExtraDataLogic) : base("https://graph.facebook.com/")
         {
             AccountLogic = accountLogic;
             UserExtraDataLogic = userExtraDataLogic;
+            ImageManager = new ImageManager("fb");
         }
 
         public override FacebookUserDto GetUserByToken(string token)
@@ -59,7 +62,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                     acc.Surname = surname;
                 }
 
-                acc.Image = dto.picture.data.url;
+                acc.Image = ImageManager.GetImageBase64(dto.picture.data.url);
 
                 AccountLogic.Update(acc);
 
