@@ -12,6 +12,10 @@ namespace Intotech.Wheelo.Chat.Api.Controllers
    //[Authorize(Roles = "User")]
     public class ConversationController : ApiSimpleControllerBase<IConversationService>
     {
+        public class EmailDto
+        {
+            public string Email { get; set; }
+        }
         public ConversationController(IConversationService service) : base(service)
         {
         }
@@ -22,10 +26,10 @@ namespace Intotech.Wheelo.Chat.Api.Controllers
             return Service.GetConversationById(roomId);
         }
 
-        [HttpGet("get-conversations-by-user-id")]
-        public List<ConversationDto> GetConversationsByAccountId(string email)
+        [HttpPost("get-conversations-by-user-email")]
+        public List<ConversationDto> GetConversationsByAccountId(EmailDto email)
         {
-            return Service.GetConversationsByAccountId(email);
+            return Service.GetConversationsByAccountId(email.Email);
         }
     }
 }
