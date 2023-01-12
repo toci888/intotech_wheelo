@@ -78,7 +78,12 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
         public virtual ReturnedResponse<bool> SetTripNotCurrent(int tripId, int inititatorAccountId) //zmienione 1.12.22
         {
-            Trip trip = TripLogic.Select(m => m.Id == tripId && m.Idinitiatoraccount == inititatorAccountId).First();
+            Trip trip = TripLogic.Select(m => m.Id == tripId && m.Idinitiatoraccount == inititatorAccountId).FirstOrDefault();
+
+            if (trip == null)
+            {
+                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
+            }
 
             trip.Iscurrent = false;
 

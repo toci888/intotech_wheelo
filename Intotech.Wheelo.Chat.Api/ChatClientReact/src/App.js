@@ -8,7 +8,7 @@ const App = () => {
  
   const wheeloClient = new WheeloClient((msg) => { document.getElementById("SignalR").innerHTML = msg.message; }, () => {}, () => {});
 
-  wheeloClient.connect(1000000027);
+  //wheeloClient.connect(1000000027);
 //  wheeloClient.chat(1000000027, 4, "Siema Kacper !");
 
   var renderMsg = (user, msg) => {
@@ -39,7 +39,7 @@ const App = () => {
     wheeloClient.requestConversation(document.getElementById("userId").value, "Ziutek", new Array(1000000027, 1000000029))}></input>
   
   <input type="submit" value="Send Message xd" onClick={() => 
-   wheeloClient.chat("bzapart@gmail.com", 2, "Siema Kacper !")}></input>
+   wheeloClient.chat("bzapart@gmail.com", 1, "Siema Kacper !")}></input>
 
 <input type="submit" value="Poc" onClick={() => 
 wheeloClient.ProofOfConcept(1000000027)}></input>
