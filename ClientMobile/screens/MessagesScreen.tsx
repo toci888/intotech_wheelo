@@ -41,7 +41,7 @@ export const MessagesScreen = ({
         author: conversation.data.author,
         conversationID: conversation.data.id,
         receiverID: conversation.data.receiverID,
-        senderID: user.id,
+        senderID: user.email,
         text: message.text,
         authorFirstName: conversation.data.messages[0].author.firstName ? conversation.data.messages[0].author.firstName : "",
         authorLastName: conversation.data.messages[0].author.lastName ? conversation.data.messages[0].author.lastName : ""

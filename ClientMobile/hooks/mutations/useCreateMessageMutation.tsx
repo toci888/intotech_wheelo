@@ -9,7 +9,7 @@ import { useUser } from "../useUser";
 
 const createMessage = (
   conversationID: number,
-  senderID: number,
+  senderID: string,
   receiverID: number,
   authorFirstName: string,
   authorLastName: string,
@@ -17,13 +17,13 @@ const createMessage = (
   token?: string
 ) => 
   socket.invoke('sendMessage',  {
-    SenderID: 'bzapart@gmail.com',
-    Text: text,
-    ID: 1,
-    CreatedAt: "2023-01-07",
-    AuthorFirstName: "Bartek",
-    AuthorLastName: "Zapart",
-    RoomID: 1
+    senderID,
+    text,
+    ID: conversationID, //to delete
+    CreatedAt: new Date(),
+    authorFirstName,
+    authorLastName,
+    RoomID: conversationID
    });
 
 export const useCreateMessageMutation = () => {
@@ -42,7 +42,7 @@ export const useCreateMessageMutation = () => {
     }: {
       conversationID: number;
       author: Author;
-      senderID: number;
+      senderID: string;
       receiverID: number;
       authorFirstName: string,
       authorLastName: string,
@@ -131,13 +131,13 @@ export const useCreateMessageMutation = () => {
         _,
         { author, conversationID, receiverID, senderID, text }
       ) => {
-        socket.invoke("sendMessage", {
-          senderID,
-          conversationID,
-          receiverID,
-          text,
-          senderName: `${author.firstName} ${author.lastName}`,
-        });
+        // socket.invoke("sendMessage", {
+        //   senderID,
+        //   conversationID,
+        //   receiverID,
+        //   text,
+        //   senderName: `${author.firstName} ${author.lastName}`,
+        // });
       },
       onSettled: () => {
         queryClient.invalidateQueries(queryKeys.conversations);

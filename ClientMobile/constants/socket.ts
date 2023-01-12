@@ -2,10 +2,9 @@ import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 
 import { endpoints } from "./constants";
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImJhcnRla0BnZy5wbCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJTdGVmYW5pYSBEemlld3Vsc2tpIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImV4cCI6MTY3MzYzMTQ0OSwiaXNzIjoiaHR0cDovL2ludG90ZWNoLmNvbS5wbCIsImF1ZCI6Imh0dHA6Ly9pbnRvdGVjaC5jb20ucGwifQ.co-CSfDlsdq4EHHtskho6Y7ixdBC15ItFxxcZIbwbfA';
 export const socket = new HubConnectionBuilder()
     .withUrl(endpoints.chat
-        , { accessTokenFactory: () => token }
+        , { accessTokenFactory: () => "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImJhcnRla0BnZy5wbCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJXb2p0ZWsgUnVjaGHFgmEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNjczNzI1MjA1LCJpc3MiOiJodHRwOi8vaW50b3RlY2guY29tLnBsIiwiYXVkIjoiaHR0cDovL2ludG90ZWNoLmNvbS5wbCJ9.7mqanxIXejoF01IVxhZKvEvTNi1mEyMknzbE849Ziog" }
     )
     .configureLogging(LogLevel.Information)
     .withAutomaticReconnect()

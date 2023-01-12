@@ -37,12 +37,12 @@ export default function App() {
       if (user) {
         const userObj: User = JSON.parse(user);
         console.log("JUSRE", userObj)
-        const newTokens = await refreshTokens(userObj.accessToken, userObj.refreshtoken);
-        if (newTokens) {
-          userObj.accessToken = newTokens.accessToken;
-          userObj.refreshtoken = newTokens.refreshToken;
-          SecureStore.setItemAsync("user", JSON.stringify(userObj));
-        }
+        // const newTokens = await refreshTokens(userObj.accessToken, userObj.refreshtoken);
+        // if (newTokens) {
+        //   userObj.accessToken = newTokens.accessToken;
+        //   userObj.refreshtoken = newTokens.refreshToken;
+        //   SecureStore.setItemAsync("user", JSON.stringify(userObj));
+        // }
         setUser(userObj);
         
         socket.on(
@@ -64,12 +64,15 @@ export default function App() {
               content: {
                 title: data.authorFirstName,
                 body: data.text,
+                
                 data: {
-                  // will need to change url in prod build (use process.ENV && eas.json)
-                  url: `exp://192.168.1.5:19000/--/messages/${data.id}/${data.authorFirstName}`,
+                //   // will need to change url in prod build (use process.ENV && eas.json)
+                  // url: `exp://localhost:19000/messages/${data.id}/${data.authorFirstName}`,
+                  url: `exp://192.168.1.5:19000/messages/${data.id}/${data.authorFirstName}`,
                 },
               },
-              trigger: null,
+              
+              trigger: null //opoznienie{ seconds: 4 },
             });
           }
         );
