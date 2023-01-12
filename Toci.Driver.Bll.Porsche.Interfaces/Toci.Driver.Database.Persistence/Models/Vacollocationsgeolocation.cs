@@ -9,6 +9,8 @@ namespace Toci.Driver.Database.Persistence.Models
         public int? Accountidcollocated { get; set; }
         public string? Name { get; set; }
         public string? Surname { get; set; }
+        public string? Namecollocated { get; set; }
+        public string? Surnamecollocated { get; set; }
         public double? Latitudefrom { get; set; }
         public double? Longitudefrom { get; set; }
         public double? Latitudeto { get; set; }

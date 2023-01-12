@@ -41,7 +41,7 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
 
             if (collocationSource != null)
             {
-                AccountCollocationDto result = VacollocationsgeolocationToAccountCollocation.Map(collocationSource);
+                AccountCollocationDto result = VacollocationsgeolocationToAccountCollocation.Map(collocationSource, accountId);
 
                 return new ReturnedResponse<AccountCollocationDto>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
             }

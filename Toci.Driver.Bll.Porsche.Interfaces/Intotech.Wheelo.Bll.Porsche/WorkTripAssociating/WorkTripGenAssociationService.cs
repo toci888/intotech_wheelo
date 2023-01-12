@@ -100,7 +100,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 
             foreach (Vacollocationsgeolocation item in data)
             {
-                AccountCollocationDto element = ToAccountCollocationDto.Map(item);
+                AccountCollocationDto element = ToAccountCollocationDto.Map(item, accountId);
 
                 element.AreFriends = FriendLogic.AreFriends(accountId, element.idAccount);
 
@@ -121,7 +121,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                 return new ReturnedResponse<AccountCollocationDto>(null, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
             }
 
-            AccountCollocationDto resultDto = ToAccountCollocationDto.Map(data);
+            AccountCollocationDto resultDto = ToAccountCollocationDto.Map(data, sourceAccountId);
 
             resultDto.AreFriends = FriendLogic.AreFriends(sourceAccountId, associatedAccountId);
 

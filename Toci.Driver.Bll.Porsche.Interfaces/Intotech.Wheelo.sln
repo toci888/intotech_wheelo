@@ -261,6 +261,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WheeloSqlMigrations", "WheeloSqlMigrations", "{94626A6A-464F-4FC8-9ACE-F96A0F3EC8A3}"
 	ProjectSection(SolutionItems) = preProject
 		16-12-2022 wheelo.sql = 16-12-2022 wheelo.sql
+		12-01-2023 wheelo.sql = 12-01-2023 wheelo.sql
 		17-12-2022 wheelo.sql = 17-12-2022 wheelo.sql
 		18-12-2022 wheelo.sql = 18-12-2022 wheelo.sql
 		19-12-2022 wheelo.sql = 19-12-2022 wheelo.sql
@@ -270,7 +271,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Notificatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Notifications", "Intotech.Wheelo.Notifications\Intotech.Wheelo.Notifications.csproj", "{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Tests", "..\Intotech.Wheelo.Chat.Tests\Intotech.Wheelo.Chat.Tests.csproj", "{ED37397B-F1A6-4347-A6BF-E2B6797EECAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Tests", "..\Intotech.Wheelo.Chat.Tests\Intotech.Wheelo.Chat.Tests.csproj", "{ED37397B-F1A6-4347-A6BF-E2B6797EECAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

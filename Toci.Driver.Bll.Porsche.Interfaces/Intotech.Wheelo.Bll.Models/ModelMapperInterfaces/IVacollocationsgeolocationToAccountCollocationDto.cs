@@ -10,12 +10,12 @@ namespace Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces
 { 
     public interface IVacollocationsgeolocationToAccountCollocationDto
     {
-        AccountCollocationDto Map(Vacollocationsgeolocation dbModel);
+        AccountCollocationDto Map(Vacollocationsgeolocation dbModel, int accountId);
 
         AccountCollocationDto Map(Vcollocationsgeolocation dbModel);
 
         AccountCollocationDto Map(Vaworktripgengeolocation dbModel);
 
-        List<AccountCollocationDto> Map(List<Vacollocationsgeolocation> associationsList);
+        List<AccountCollocationDto> Map(List<Vacollocationsgeolocation> associationsList, int accountId);
     }
 }

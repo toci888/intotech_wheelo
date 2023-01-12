@@ -32,19 +32,30 @@ namespace Intotech.Wheelo.Bll.Models.ModelMappers
             return result;
         }
 
-        public virtual AccountCollocationDto Map(Vacollocationsgeolocation dbModel) 
+        public virtual AccountCollocationDto Map(Vacollocationsgeolocation dbModel, int accountId) 
         {
+            int accId = dbModel.Idaccount.Value;
+            string name = dbModel.Name;
+            string surname = dbModel.Surname;
+
+            if (dbModel.Idaccount.Value == accountId)
+            {
+                accId = dbModel.Accountidcollocated.Value;
+                name = dbModel.Namecollocated;
+                surname = dbModel.Surnamecollocated;
+            }
+
             AccountCollocationDto result = new AccountCollocationDto()
             {
-                idAccount = dbModel.Accountidcollocated.Value,
+                idAccount = accId,
                 Latitudefrom = dbModel.Latitudefrom.Value,
                 Latitudeto = dbModel.Latitudeto.Value,
                 Longitudefrom = dbModel.Longitudefrom.Value,
                 Longitudeto = dbModel.Longitudeto.Value,
                 Fromhour = dbModel.Fromhour.Value.ToString(),// TimeUtils.GetCorrectTime(dbModel.Fromhour.Value.Hour) + ":" + TimeUtils.GetCorrectTime(dbModel.Fromhour.Value.Minute),
                 Tohour = dbModel.Tohour.Value.ToString(), //TimeUtils.GetCorrectTime(dbModel.Tohour.Value.Hour) + ":" + TimeUtils.GetCorrectTime(dbModel.Tohour.Value.Minute),
-                Name = dbModel.Name,
-                Surname = dbModel.Surname,
+                Name = name,
+                Surname = surname,
                 Driver = (Driver)dbModel.Isdriver.Value,
                 Image = dbModel.Image
             };
@@ -72,13 +83,13 @@ namespace Intotech.Wheelo.Bll.Models.ModelMappers
             return result;
         }
 
-        public virtual List<AccountCollocationDto> Map(List<Vacollocationsgeolocation> associationsList)
+        public virtual List<AccountCollocationDto> Map(List<Vacollocationsgeolocation> associationsList, int accountId)
         {
             List<AccountCollocationDto> result = new List<AccountCollocationDto>();
 
             foreach (Vacollocationsgeolocation item in associationsList)
             {
-                result.Add(Map(item));
+                result.Add(Map(item, accountId));
             }
 
             return result;
