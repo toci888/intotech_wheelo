@@ -68,7 +68,7 @@ export default function App() {
                 data: {
                 //   // will need to change url in prod build (use process.ENV && eas.json)
                   // url: `exp://localhost:19000/messages/${data.id}/${data.authorFirstName}`,
-                  url: `exp://192.168.1.5:19000/messages/${data.id}/${data.authorFirstName}`,
+                  url: `https://expo.dev/@kacper1337/intotechwheelo?serviceType=classic&distribution=expo-go/messages`,
                 },
               },
               
