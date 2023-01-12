@@ -25,7 +25,7 @@ androidHeight += androidNotch;
 
 export const HEADERHEIGHT = Platform.OS === "ios" ? iosHeight : androidHeight;
 
-export const server = "http://4.231.89.226";
+export const server = "http://20.203.135.11";
 
 const serverUrl = server + ":5105/api";
 const integrationApiUrl = server + ":5108/api";
