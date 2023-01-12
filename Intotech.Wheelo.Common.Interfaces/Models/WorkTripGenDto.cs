@@ -11,6 +11,6 @@ namespace Intotech.Wheelo.Common.Interfaces.Models
         
         public double AcceptableDistance { get; set; }
         public int Idaccount { get; set; }
-        public int IsDriver { get; set; }
+        public int DriverPassenger { get; set; }
     }
 }

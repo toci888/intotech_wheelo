@@ -12,5 +12,9 @@ namespace Intotech.Wheelo.Common.Interfaces
         public const int GoogleOrigin = 2;
 
         public const int RoleUser = 1;
+
+        public const int IsPassenger = 1;
+        public const int IsDriver = 2;
+        public const int IsDriverPassenger = 3;
     }
 }

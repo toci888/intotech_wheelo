@@ -94,7 +94,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 
             resultDto.SourceAccount = ToAccountCollocationDto.Map(collocationSource);
 
-            List<Vacollocationsgeolocation> data = VacollocationsgeolocationLogic.Select(m => m.Idaccount == accountId).ToList();
+            List<Vacollocationsgeolocation> data = VacollocationsgeolocationLogic.Select(m => m.Idaccount == accountId || m.Accountidcollocated == accountId).ToList();
 
             resultDto.AccountsCollocated = new List<AccountCollocationDto>();
 
@@ -131,11 +131,17 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
         protected virtual void Collocate(Worktripgen workTripGenRecord)
         {
             double distance = workTripGenRecord.Acceptabledistance.Value / DistanceDivisor;
+            int IsDriverPassenger = CommonConstants.IsPassenger;
+
+            if (workTripGenRecord.Driverpassenger == CommonConstants.IsPassenger)
+            {
+                IsDriverPassenger = CommonConstants.IsDriver;
+            }
 
             List<Worktripgen> collocations = WorktripGenLogic.Select(worktrip => worktrip.Idaccount != workTripGenRecord.Idaccount &&
                workTripGenRecord.Fromhour.Value.IsBetween(worktrip.Fromhour.Value.AddMinutes(-MinutesInterval), worktrip.Fromhour.Value.AddMinutes(MinutesInterval)) &&
                workTripGenRecord.Tohour.Value.IsBetween(worktrip.Tohour.Value.AddMinutes(-MinutesInterval), worktrip.Tohour.Value.AddMinutes(MinutesInterval)) &&
-
+                worktrip.Driverpassenger >= IsDriverPassenger &&
                 (workTripGenRecord.Latitudefrom - distance) <= worktrip.Latitudefrom &&
                 (workTripGenRecord.Latitudefrom + distance) >= worktrip.Latitudefrom &&
                 (workTripGenRecord.Longitudefrom + distance) >= worktrip.Longitudefrom &&
@@ -155,14 +161,15 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 
                 WheeloUtils.PotentialSwapIds(ref accountId, ref collocatedAccountId);
 
+                
+                decimal distanceFrom = (decimal)AssociationCalculation.DistanceInKmBetweenEarthCoordinates(workTripGenRecord.Latitudefrom,
+                    workTripGenRecord.Longitudefrom, worktrip.Latitudefrom, worktrip.Longitudefrom) * DistanceNormalize;
+
+                decimal distanceTo = (decimal)AssociationCalculation.DistanceInKmBetweenEarthCoordinates(workTripGenRecord.Latitudeto,
+                    workTripGenRecord.Longitudeto, worktrip.Latitudeto, worktrip.Longitudeto) * DistanceNormalize;
+
                 if (!IsCollocationDuplicate(accountId, collocatedAccountId))
                 {
-                    decimal distanceFrom = (decimal)AssociationCalculation.DistanceInKmBetweenEarthCoordinates(workTripGenRecord.Latitudefrom,
-                        workTripGenRecord.Longitudefrom, worktrip.Latitudefrom, worktrip.Longitudefrom) * DistanceNormalize;
-
-                    decimal distanceTo = (decimal)AssociationCalculation.DistanceInKmBetweenEarthCoordinates(workTripGenRecord.Latitudeto,
-                        workTripGenRecord.Longitudeto, worktrip.Latitudeto, worktrip.Longitudeto) * DistanceNormalize;
-
                     AccountscollocationLogic.Insert(new Accountscollocation()
                     {
                         Idaccount = accountId,
@@ -170,13 +177,14 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                         Distancefrom = distanceFrom,
                         Distanceto = distanceTo
                     });
+                }
 
                     //NotificationManager.SendNotifications<AssociationNotification>(NotificationsKinds.Association, 
                     //    new NotificationModelBase<AssociationNotification>(new List<string>() { "ExponentPushToken[rtWCLaAF92lqq4mIgmzvRV]", "ExponentPushToken[XqgL8PLm-p-XsCtlZ_dapr]" }, 
                     //    new NotificationDataField<AssociationNotification>() { screen = "SignIn", screenParams = null, root = ""  }, "Asssssocjujemy", "Tytuł jakich mało", "Sub - Zero"));
 
                     //ScreenParams = new AssociationNotification() { IdAccountAssociated = 100000027 }
-                }
+                
             }
         }
 
@@ -208,7 +216,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             result.Longitudefrom = double.Parse(workTripGen.startLocation.lon, CultureInfo.InvariantCulture); //.Replace(".", ","));
             result.Longitudeto = double.Parse(workTripGen.endLocation.lon, CultureInfo.InvariantCulture); //.Replace(".", ","));
             result.Searchid = WorktripgenLogic.GetWorktripSearchId(result);
-            result.Driverpassenger = workTripGen.IsDriver;
+            result.Driverpassenger = workTripGen.DriverPassenger; //1 passenger, 2 driver, 3 both
 
             return result;
         }
