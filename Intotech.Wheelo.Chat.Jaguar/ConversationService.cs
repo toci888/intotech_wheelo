@@ -25,7 +25,7 @@ public class ConversationService : IConversationService
 
     public virtual ConversationDto GetConversationById(int roomId, bool isAccountIdRequest = false)
     {
-        List<Message> messages = MessageLogic.Select(m => m.Idroom == roomId).OrderBy(m => m.Createdat).ToList();
+        List<Message> messages = MessageLogic.Select(m => m.Idroom == roomId).OrderByDescending(m => m.Createdat).ToList();
 
         List<Message> distinctAuthors = messages.DistinctBy(m => m.Authoremail).ToList();
 
@@ -43,7 +43,7 @@ public class ConversationService : IConversationService
         ConversationDto resElement = new ConversationDto();
 
         resElement.TenantID = resElement.ID = room.Id;
-       // resElement.OwnerID = room.Ownerid;
+        resElement.OwnerID = room.Ownerid;
         resElement.CreatedAt = room.Createdat.Value;
          //= room.Roomid;
         resElement.OwnerFirstName = acc.Name;
