@@ -5,6 +5,7 @@ using Intotech.Wheelo.Bll.Porsche.Interfaces.WorkTripAssociating;
 using Intotech.Wheelo.Common.Interfaces.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ using Intotech.Wheelo.Bll.Persistence.Extensions;
 using Intotech.Wheelo.Notifications.Interfaces;
 using Intotech.Wheelo.Notifications.Interfaces.Models.DataNotification;
 using Intotech.Wheelo.Notifications.Interfaces.Models;
+using Npgsql;
 
 namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 {
@@ -110,22 +112,27 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             return new ReturnedResponse<TripGenCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual ReturnedResponse<AccountCollocationDto> GetAccountDataForMarker(int sourceAccountId, int associatedAccountId)
+        public virtual ReturnedResponse<AccountCollocationDto> GetAccountDataForMarker(int sourceAccountId,
+            int associatedAccountId)
         {
             WheeloUtils.PotentialSwapIds(ref sourceAccountId, ref associatedAccountId);
 
-            Vacollocationsgeolocation data = VacollocationsgeolocationLogic.Select(m => m.Idaccount == sourceAccountId && m.Accountidcollocated == associatedAccountId).FirstOrDefault();
+            Vacollocationsgeolocation data = VacollocationsgeolocationLogic
+                .Select(m => m.Idaccount == sourceAccountId && m.Accountidcollocated == associatedAccountId)
+                .FirstOrDefault();
 
             if (data == null)
             {
-                return new ReturnedResponse<AccountCollocationDto>(null, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
+                return new ReturnedResponse<AccountCollocationDto>(null, I18nTranslation.Translation(I18nTags.NoData),
+                    false, ErrorCodes.NoData);
             }
 
             AccountCollocationDto resultDto = ToAccountCollocationDto.Map(data, sourceAccountId);
 
             resultDto.AreFriends = FriendLogic.AreFriends(sourceAccountId, associatedAccountId);
 
-            return new ReturnedResponse<AccountCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<AccountCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success),
+                true, ErrorCodes.Success);
         }
 
         protected virtual void Collocate(Worktripgen workTripGenRecord)
@@ -138,7 +145,27 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                 IsDriverPassenger = CommonConstants.IsDriver;
             }
 
-            List<Worktripgen> collocations = WorktripGenLogic.Select(worktrip => worktrip.Idaccount != workTripGenRecord.Idaccount &&
+            Stopwatch stw = new Stopwatch();
+
+            stw.Start();
+            string rawSelect = "select * from Worktripgen where idaccount != " + workTripGenRecord.Idaccount + " and Fromhour between '" +
+                               workTripGenRecord.Fromhour.Value.AddMinutes(-MinutesInterval) + "' and '" + workTripGenRecord.Fromhour.Value.AddMinutes(MinutesInterval) +
+                               "' and Tohour between '" + workTripGenRecord.Tohour.Value.AddMinutes(-MinutesInterval) + "' and '" + 
+                               workTripGenRecord.Tohour.Value.AddMinutes(MinutesInterval) + "' and Driverpassenger >= " + IsDriverPassenger + " and Latitudefrom >= " +
+                               StringUtils.ReplaceCommaWithDot(workTripGenRecord.Latitudefrom - distance) + " and Latitudefrom <= " + 
+                               StringUtils.ReplaceCommaWithDot(workTripGenRecord.Latitudefrom + distance) + " and Longitudefrom <= " +
+                               StringUtils.ReplaceCommaWithDot(workTripGenRecord.Longitudefrom + distance) + " and Longitudefrom >= " + 
+                               StringUtils.ReplaceCommaWithDot(workTripGenRecord.Longitudefrom - distance) + " and Latitudeto >= " +
+                               StringUtils.ReplaceCommaWithDot(workTripGenRecord.Latitudeto - distance) + " and Latitudeto <= " + 
+                               StringUtils.ReplaceCommaWithDot(workTripGenRecord.Latitudeto + distance) + " and Longitudeto <= " +
+                               StringUtils.ReplaceCommaWithDot(workTripGenRecord.Longitudeto + distance) + " and Longitudeto >= " + 
+                               StringUtils.ReplaceCommaWithDot(workTripGenRecord.Longitudeto - distance) + ";";
+
+            List<Worktripgen> collocations = WorktripGenLogic.RawSelect(rawSelect, WorktripGenLogic.MapFromReader).ToList();
+
+            long elapsedNpgsql = stw.ElapsedTicks;
+            stw.Stop();
+            /*List<Worktripgen> collocations = WorktripGenLogic.Select(worktrip => worktrip.Idaccount != workTripGenRecord.Idaccount &&
                workTripGenRecord.Fromhour.Value.IsBetween(worktrip.Fromhour.Value.AddMinutes(-MinutesInterval), worktrip.Fromhour.Value.AddMinutes(MinutesInterval)) &&
                workTripGenRecord.Tohour.Value.IsBetween(worktrip.Tohour.Value.AddMinutes(-MinutesInterval), worktrip.Tohour.Value.AddMinutes(MinutesInterval)) &&
                 worktrip.Driverpassenger >= IsDriverPassenger &&
@@ -151,9 +178,11 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                 (workTripGenRecord.Latitudeto + distance) >= worktrip.Latitudeto &&
                 (workTripGenRecord.Longitudeto + distance) >= worktrip.Longitudeto &&
                 (workTripGenRecord.Longitudeto - distance) <= worktrip.Longitudeto
-            ).ToList();
+            ).ToList();*/
 
-    
+           // long elapsedBoth = stw.ElapsedTicks;
+           // stw.Stop();
+
             foreach (Worktripgen worktrip in collocations)
             {
                 int accountId = workTripGenRecord.Idaccount;
