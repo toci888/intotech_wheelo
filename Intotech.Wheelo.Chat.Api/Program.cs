@@ -89,7 +89,7 @@ builder.Services.AddAuthentication(option =>
         OnMessageReceived = ctx => {
             if (ctx.Request.Query.ContainsKey("access_token"))
             {
-                ctx.Token = ctx.Request.Query["access_token"];
+                ctx.Token = ctx.Request.Query["access_token"]; // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImJhcnRla0BnZy5wbCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJXb2p0ZWsgUnVjaGHFgmEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTY3MzcyNDM4MywiaXNzIjoiaHR0cDovL2ludG90ZWNoLmNvbS5wbCIsImF1ZCI6Imh0dHA6Ly9pbnRvdGVjaC5jb20ucGwifQ.iBZx7ZfDiqs81MhKl4ioiAg4_kTMAOOja_UGTvX-xZo"; 
             }
 
             return Task.CompletedTask;
