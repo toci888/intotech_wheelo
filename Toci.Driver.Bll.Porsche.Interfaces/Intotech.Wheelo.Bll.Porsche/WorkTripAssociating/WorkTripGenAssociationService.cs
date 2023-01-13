@@ -230,6 +230,8 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                 WorkTripHistoryLogic.Insert(worktripHistoryRecord);
 
                 WorktripGenLogic.Delete(worktripgenRecord);
+
+                int count = AccountscollocationLogic.Delete("Accountcollocations","idaccount = " + worktripgenRecord.Idaccount + " or idcollocated = " + worktripgenRecord.Idaccount);
             }
 
             return workTrips.Count();
