@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toci.Driver.Dal.Invitation.Interfaces", "Toci.Driver.Dal.Invitation.Interfaces\Toci.Driver.Dal.Invitation.Interfaces.csproj", "{6307169E-918C-43C4-802B-7F035296C0AF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{61CCF297-620A-40F2-9052-7A5396FA48E4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toci.Driver.Api", "Toci.Driver.Api\Toci.Driver.Api.csproj", "{CC8F734F-78EC-48CF-8EF5-710FFCE78DEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Api", "Toci.Driver.Api\Intotech.Wheelo.Api.csproj", "{CC8F734F-78EC-48CF-8EF5-710FFCE78DEC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toci.Driver.Database.Persistence", "Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj", "{F3FF1397-B4D7-4130-97BE-31DF7DD190EA}"
 EndProject
@@ -281,14 +279,6 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6307169E-918C-43C4-802B-7F035296C0AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6307169E-918C-43C4-802B-7F035296C0AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6307169E-918C-43C4-802B-7F035296C0AF}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{6307169E-918C-43C4-802B-7F035296C0AF}.Debug|x64.Build.0 = Debug|Any CPU
-		{6307169E-918C-43C4-802B-7F035296C0AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6307169E-918C-43C4-802B-7F035296C0AF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6307169E-918C-43C4-802B-7F035296C0AF}.Release|x64.ActiveCfg = Release|Any CPU
-		{6307169E-918C-43C4-802B-7F035296C0AF}.Release|x64.Build.0 = Release|Any CPU
 		{CC8F734F-78EC-48CF-8EF5-710FFCE78DEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CC8F734F-78EC-48CF-8EF5-710FFCE78DEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC8F734F-78EC-48CF-8EF5-710FFCE78DEC}.Debug|x64.ActiveCfg = Debug|Any CPU

@@ -19,7 +19,7 @@ export default class WheeloChatEngine {
     inviteToConvCall;
 
     //serverUrl = "http://localhost:5130/wheeloChat";
-    serverUrl = "http://4.231.89.226:5130/wheeloChat";
+    serverUrl = "http://20.203.135.11:5130/wheeloChat";
     //serverUrl = "http://192.168.0.158:5130/wheeloChat"; 
     ReceiveMessageCallback = "getMessage"; // react callback
     joinRoomDelegate = "JoinWheeloRoom"; //method in c#
@@ -94,7 +94,7 @@ export default class WheeloChatEngine {
 
     requestConversation = async () => {
         
-        await this.connection.invoke(this.requestConversationDelegate, "bzapart@gmail.com", new Array("warriorr@poczta.fm", "1111111191kapi@gmail.com", "bartek@gg.pl"));
+        await this.connection.invoke(this.requestConversationDelegate, "bzapart@gmail.com", new Array("warriorr@poczta.fm", "bartek@gg.pl"));
     }
 
     ProofOfConcept = async(userId) => {

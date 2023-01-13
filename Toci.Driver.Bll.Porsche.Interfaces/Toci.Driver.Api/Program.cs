@@ -3,9 +3,7 @@ using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating;
-using Intotech.Wheelo.Bll.Porsche.Interfaces.PersistenceAggregation;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
-using Intotech.Wheelo.Bll.Porsche.PersistenceAggregation;
 using Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa;
 using Intotech.Wheelo.Bll.Porsche;
 using Microsoft.Extensions.Configuration;
@@ -90,7 +88,6 @@ AuthenticationSettings authenticationSettings = new AuthenticationSettings();
 
 // -------
 builder.Services.AddScoped<IAssociationCalculations, AssociationCalculations>();
-builder.Services.AddScoped<IAccountCollocationMatch<IUsersLocationLogic, IAccountscollocationLogic>, AccountCollocationMatch>();
 builder.Services.AddScoped<ICollocator<IWorkTripLogic, IAccountscollocationLogic>, Collocator>();
 builder.Services.AddScoped<ITripManager, TripManager>();
 builder.Services.AddScoped<IInstantOccasion, InstantOccasion>();
