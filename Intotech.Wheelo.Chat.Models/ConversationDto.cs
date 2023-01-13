@@ -3,7 +3,7 @@
 public class ConversationDto 
 {
     public int ID { get; set; }
-    public int OwnerID { get; set; }
+    public string OwnerID { get; set; }
     public int TenantID { get; set; }
     public string OwnerFirstName { get; set; }
     public string OwnerLastName { get; set; }
