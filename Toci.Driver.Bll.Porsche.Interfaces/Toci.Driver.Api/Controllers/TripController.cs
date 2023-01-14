@@ -1,9 +1,9 @@
 ﻿using Intotech.Common.Microservices;
-using Intotech.Wheelo.Bll.Models;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating;
 using Intotech.Common.Bll.ComplexResponses;
 using Microsoft.AspNetCore.Mvc;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Wheelo.Bll.Models.Trip;
 
 namespace Toci.Driver.Api.Controllers
 {
@@ -20,6 +20,12 @@ namespace Toci.Driver.Api.Controllers
         public ReturnedResponse<Trip> CreateTrip(TripDto trip)
         {
             return Service.CreateTrip(trip);
+        }
+
+        [HttpPatch("confirm-trip-participation")]
+        public ReturnedResponse<bool> ConfirmTripParticipation(TripParticipationConfirmationDto tripAccountConfirm)
+        {
+            return Service.ConfirmTripParticipation(tripAccountConfirm);
         }
 
         [HttpPost]
@@ -45,7 +51,7 @@ namespace Toci.Driver.Api.Controllers
 
         [HttpGet]
         [Route("get-trip")]
-        public ReturnedResponse<Trip> GetTrip(int tripId) //dodałam RR 1.12.22
+        public ReturnedResponse<TripWithParticipantsDto> GetTrip(int tripId) //dodałam RR 1.12.22
         {
             return Service.GetTrip(tripId);
         }

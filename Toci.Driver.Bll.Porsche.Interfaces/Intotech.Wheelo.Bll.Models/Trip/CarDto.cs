@@ -1,4 +1,4 @@
-﻿namespace Intotech.Wheelo.Bll.Models;
+﻿namespace Intotech.Wheelo.Bll.Models.Trip;
 
 public class CarDto
 {

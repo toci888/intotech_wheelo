@@ -8,9 +8,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Intotech.Wheelo.Bll.Models;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Common;
+using Intotech.Wheelo.Bll.Models.Trip;
+using Intotech.Wheelo.Bll.Persistence;
 
 namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 {
@@ -33,6 +34,31 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
         public ReturnedResponse<int> AddTripParticipant(int tripId, int accountId)
         {
             return new ReturnedResponse<int>(TripparticipantLogic.Insert(new Tripparticipant() { Idtrip = tripId, Idaccount = accountId }).Id, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        }
+
+        public virtual ReturnedResponse<bool> ConfirmTripParticipation(TripParticipationConfirmationDto tripAccountConfirm)
+        {
+            Trip trip = TripLogic.Select(m => m.Idinitiatoraccount == tripAccountConfirm.InitiatorAccountId && m.Iscurrent == true).FirstOrDefault();
+
+            if (trip == null)
+            {
+                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.DataIntegrityViolated);
+            }
+
+            Tripparticipant tripParticipant = TripparticipantLogic
+                .Select(m => m.Idtrip == trip.Id && m.Idaccount == tripAccountConfirm.PassengerAccountId)
+                .FirstOrDefault();
+
+            if (tripParticipant == null)
+            {
+                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.DataIntegrityViolated);
+            }
+
+            tripParticipant.Isconfirmed = true;
+
+            TripparticipantLogic.Update(tripParticipant);
+
+            return new ReturnedResponse<bool>(true, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<Trip> CreateTrip(TripDto trip)
@@ -73,9 +99,20 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             return new ReturnedResponse<List<Trip>>(TripLogic.Select(m => m.Idinitiatoraccount == inititatorAccountId).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success); 
         }
 
-        public virtual ReturnedResponse<Trip> GetTrip(int tripId) //zmienione 1.12.22
+        public virtual ReturnedResponse<TripWithParticipantsDto> GetTrip(int tripId) //zmienione 1.12.22
         {
-            return new ReturnedResponse<Trip>(TripLogic.Select(m => m.Id == tripId).First(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            Trip trip = TripLogic.Select(m => m.Id == tripId).FirstOrDefault();
+
+            if (trip == null)
+            {
+                return new ReturnedResponse<TripWithParticipantsDto>(null, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.DataIntegrityViolated);
+            }
+
+            TripWithParticipantsDto tripWithParticipants = DtoModelMapper.Map<TripWithParticipantsDto, Trip>(trip);
+
+            tripWithParticipants.Participants = VTripparticipantLogic.Select(m => m.Tripid == tripId).ToList();
+
+            return new ReturnedResponse<TripWithParticipantsDto>(tripWithParticipants, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<List<Vtripsparticipant>> GetTripParticipants(int accountId)

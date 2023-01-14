@@ -1,11 +1,11 @@
 ﻿using Intotech.Common;
 using Intotech.Common.Bll.ComplexResponses;
-using Intotech.Wheelo.Bll.Models;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Driver;
 using Intotech.Wheelo.Common.Interfaces;
 using Intotech.Wheelo.Common;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Wheelo.Bll.Models.Trip;
 
 namespace Intotech.Wheelo.Bll.Porsche.Driver;
 

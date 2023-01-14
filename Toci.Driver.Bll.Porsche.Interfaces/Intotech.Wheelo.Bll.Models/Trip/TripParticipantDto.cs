@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Intotech.Wheelo.Bll.Models
+namespace Intotech.Wheelo.Bll.Models.Trip
 {
     public class TripParticipantDto
     {
