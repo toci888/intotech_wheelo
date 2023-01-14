@@ -17,7 +17,7 @@ namespace Toci.Driver.Api.Controllers
 
         [HttpPost]
         [Route("create-trip")]
-        public ReturnedResponse<Trip> CreateTrip(TripDto trip)
+        public ReturnedResponse<TripWithParticipantsDto> CreateTrip(TripDto trip)
         {
             return Service.CreateTrip(trip);
         }
@@ -43,10 +43,10 @@ namespace Toci.Driver.Api.Controllers
         }
 
         [HttpGet]
-        [Route("get-all-trips")]
-        public ReturnedResponse<List<Trip>> GetAllTrips(int accountId)
+        [Route("get-all-trips/{idAccount}")]
+        public ReturnedResponse<List<TripWithParticipantsDto>> GetAllTrips(int idAccount)
         {
-            return Service.GetAllTrips(accountId);
+            return Service.GetAllTrips(idAccount);
         }
 
         [HttpGet]
@@ -58,7 +58,7 @@ namespace Toci.Driver.Api.Controllers
 
         [HttpGet]
         [Route("get-initiator-trips")]
-        public ReturnedResponse<List<Trip>> GetInitiatorTrips(int inititatorAccountId)
+        public ReturnedResponse<List<TripWithParticipantsDto>> GetInitiatorTrips(int inititatorAccountId)
         {
             return Service.GetInitiatorTrips(inititatorAccountId);
         }

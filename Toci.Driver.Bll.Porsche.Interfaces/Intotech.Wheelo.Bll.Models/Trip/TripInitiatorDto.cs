@@ -1,8 +1,6 @@
-﻿using Toci.Driver.Database.Persistence.Models;
+﻿namespace Intotech.Wheelo.Bll.Models.Trip;
 
-namespace Intotech.Wheelo.Bll.Models.Trip;
-
-public class TripWithParticipantsDto
+public class TripInitiatorDto
 {
     public int Id { get; set; }
     public int Idinitiatoraccount { get; set; }
@@ -16,6 +14,4 @@ public class TripWithParticipantsDto
     public string? Summary { get; set; }
     public DateTime? Createdat { get; set; }
     public int? Leftseats { get; set; }
-    public List<Vtripsparticipant> Participants { get; set; }
-
 }
