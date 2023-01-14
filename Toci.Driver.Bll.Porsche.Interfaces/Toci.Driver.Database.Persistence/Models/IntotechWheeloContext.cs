@@ -230,8 +230,6 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.ToView("accountscarslocations");
 
-                entity.Property(e => e.Accountid).HasColumnName("accountid");
-
                 entity.Property(e => e.Availableseats).HasColumnName("availableseats");
 
                 entity.Property(e => e.Brand).HasColumnName("brand");
@@ -243,6 +241,8 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.Property(e => e.Colour).HasColumnName("colour");
 
                 entity.Property(e => e.Email).HasColumnName("email");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
                 entity.Property(e => e.Model).HasColumnName("model");
 

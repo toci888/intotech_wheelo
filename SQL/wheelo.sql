@@ -320,7 +320,7 @@ join WorkTrip wt on U2.id = wt.idaccount ;
 --select * from AccountsCollocations;
 
 create or replace view AccountsCarsLocations as 
-select acc.id as accountId, acc.name, acc.surname, acc.email, acl.streetfrom, acl.streetto, acl.cityfrom, acl.cityto,
+select acc.id as idAccount, acc.name, acc.surname, acc.email, acl.streetfrom, acl.streetto, acl.cityfrom, acl.cityto,
 c.RegistrationPlate, c.AvailableSeats, cb.Brand, cm.Model, col.name as colour, col.rgb
 from Accounts acc join WorkTrip acl on acc.id = acl.IdAccount
 join cars c on acc.id = c.IdAccounts

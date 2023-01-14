@@ -19,7 +19,7 @@ namespace Toci.Driver.Api.Controllers
         [Route("create-trip")]
         public ReturnedResponse<Trip> CreateTrip(TripDto trip)
         {
-            return Service.CreateTrip(trip, trip.AccountIds);
+            return Service.CreateTrip(trip);
         }
 
         [HttpPost]

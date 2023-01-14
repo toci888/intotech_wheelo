@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Intotech.Wheelo.Bll.Models;
 using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating
 {
     public interface ITripService
     {
-        ReturnedResponse<Trip> CreateTrip(Trip trip, List<int> accountIds);
+        ReturnedResponse<Trip> CreateTrip(TripDto trip);
         ReturnedResponse<int> AddTripParticipant(int tripId, int accountId);
 
         ReturnedResponse<bool> SetTripNotCurrent(int tripId, int inititatorAccountId);

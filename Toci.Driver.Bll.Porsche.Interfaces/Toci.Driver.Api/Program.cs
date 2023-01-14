@@ -25,6 +25,8 @@ using Intotech.Wheelo.Bll.Models.ModelMappers;
 using Intotech.Wheelo.Bll.Models.Gaf;
 using Intotech.Wheelo.Notifications.Interfaces;
 using Intotech.Wheelo.Notifications;
+using Intotech.Wheelo.Bll.Porsche.Driver;
+using Intotech.Wheelo.Bll.Porsche.Interfaces.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -94,6 +96,7 @@ builder.Services.AddScoped<IFriendsSuggestionsService, FriendsSuggestionsService
 builder.Services.AddScoped<IFriendsService, FriendsService>();
 builder.Services.AddScoped<IInvitationService, InvitationService>();
 builder.Services.AddScoped<IGafManager, GafManager>();
+builder.Services.AddScoped<IDriverCarService, DriverCarService>();
 builder.Services.AddScoped<IWheeloAccountService, WheeloAccountService>();
 builder.Services.AddScoped<IAccountMetadataService, AccountMetadataService>();
 builder.Services.AddScoped<IAssociationMapDataSubService, AssociationMapDataSubService>();

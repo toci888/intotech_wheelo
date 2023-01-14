@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Intotech.Wheelo.Notifications\Intotech.Wheelo.Notifications.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Driver\" />
+  </ItemGroup>
+
 </Project>

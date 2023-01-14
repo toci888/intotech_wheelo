@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Intotech.Wheelo.Bll.Models;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Common;
 
 namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 {
@@ -33,20 +35,27 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             return new ReturnedResponse<int>(TripparticipantLogic.Insert(new Tripparticipant() { Idtrip = tripId, Idaccount = accountId }).Id, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual ReturnedResponse<Trip> CreateTrip(Trip trip, List<int> accountIds)
+        public virtual ReturnedResponse<Trip> CreateTrip(TripDto trip)
         {
             trip.Iscurrent = true;
 
-            Accountscarslocation accountscarslocation = VAccountsCarsLocationLogic.Select(m => m.Accountid == trip.Idinitiatoraccount).First();
+            Accountscarslocation accountscarslocation = VAccountsCarsLocationLogic.Select(m => m.Idaccount == trip.Idinitiatoraccount).FirstOrDefault();
+
+            if (accountscarslocation == null)
+            {
+                return new ReturnedResponse<Trip>(null, I18nTranslation.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
+            }
 
             //trip.Summary
-            trip.Leftseats = accountscarslocation.Availableseats - accountIds.Count();
+            trip.Leftseats = accountscarslocation.Availableseats - trip.AccountIds.Count();
 
-            Trip newTrip = TripLogic.Insert(trip);
+            Trip dbTrip = DtoModelMapper.Map<Trip, TripDto>(trip);
 
-            foreach (int accountId in accountIds)
+            Trip newTrip = TripLogic.Insert(dbTrip);
+
+            foreach (int accountId in trip.AccountIds)
             {
-                TripparticipantLogic.Insert(new Tripparticipant() { Idaccount = accountId, Idtrip = newTrip.Id, Isoccasion = false });
+                TripparticipantLogic.Insert(new Tripparticipant() { Idaccount = accountId, Idtrip = newTrip.Id, Isoccasion = false, Isconfirmed = false });
             }
 
             return new ReturnedResponse<Trip>(newTrip, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
