@@ -11,8 +11,8 @@ namespace Toci.Driver.Database.Persistence.Models
         }
 
         public int Id { get; set; }
-        public int? Idinitiatoraccount { get; set; }
-        public int? Idworktrip { get; set; }
+        public int Idinitiatoraccount { get; set; }
+        public int Idworktrip { get; set; }
         public DateOnly? Tripdate { get; set; }
         public bool? Iscurrent { get; set; }
         public TimeOnly? Fromhour { get; set; }
@@ -21,8 +21,8 @@ namespace Toci.Driver.Database.Persistence.Models
         public DateTime? Createdat { get; set; }
         public int? Leftseats { get; set; }
 
-        public virtual Account? IdinitiatoraccountNavigation { get; set; }
-        public virtual Worktrip? IdworktripNavigation { get; set; }
+        public virtual Account IdinitiatoraccountNavigation { get; set; } = null!;
+        public virtual Worktripgen IdworktripNavigation { get; set; } = null!;
         public virtual ICollection<Tripparticipant> Tripparticipants { get; set; }
     }
 }

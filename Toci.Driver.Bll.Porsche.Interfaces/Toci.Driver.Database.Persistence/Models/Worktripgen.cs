@@ -5,6 +5,11 @@ namespace Toci.Driver.Database.Persistence.Models
 {
     public partial class Worktripgen
     {
+        public Worktripgen()
+        {
+            Trips = new HashSet<Trip>();
+        }
+
         public int Id { get; set; }
         public int Idaccount { get; set; }
         public string Searchid { get; set; } = null!;
@@ -29,5 +34,6 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual Account IdaccountNavigation { get; set; } = null!;
         public virtual Geographicregion? IdgeographiclocationfromNavigation { get; set; }
         public virtual Geographicregion? IdgeographiclocationtoNavigation { get; set; }
+        public virtual ICollection<Trip> Trips { get; set; }
     }
 }

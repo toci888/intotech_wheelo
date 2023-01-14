@@ -751,11 +751,13 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.HasOne(d => d.IdinitiatoraccountNavigation)
                     .WithMany(p => p.Trips)
                     .HasForeignKey(d => d.Idinitiatoraccount)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("trips_idinitiatoraccount_fkey");
 
                 entity.HasOne(d => d.IdworktripNavigation)
                     .WithMany(p => p.Trips)
                     .HasForeignKey(d => d.Idworktrip)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("trips_idworktrip_fkey");
             });
 
@@ -774,6 +776,10 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.Property(e => e.Idtrip).HasColumnName("idtrip");
 
+                entity.Property(e => e.Isconfirmed)
+                    .HasColumnName("isconfirmed")
+                    .HasDefaultValueSql("false");
+
                 entity.Property(e => e.Isoccasion)
                     .HasColumnName("isoccasion")
                     .HasDefaultValueSql("false");
@@ -781,11 +787,13 @@ namespace Toci.Driver.Database.Persistence.Models
                 entity.HasOne(d => d.IdaccountNavigation)
                     .WithMany(p => p.Tripparticipants)
                     .HasForeignKey(d => d.Idaccount)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("tripparticipants_idaccount_fkey");
 
                 entity.HasOne(d => d.IdtripNavigation)
                     .WithMany(p => p.Tripparticipants)
                     .HasForeignKey(d => d.Idtrip)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("tripparticipants_idtrip_fkey");
             });
 
