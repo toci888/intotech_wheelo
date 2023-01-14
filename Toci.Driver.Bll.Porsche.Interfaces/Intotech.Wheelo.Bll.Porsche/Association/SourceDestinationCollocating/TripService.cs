@@ -12,14 +12,14 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 {
-    public class TripManager : ITripManager
+    public class TripService : ITripService
     {
         protected ITripLogic TripLogic;
         protected ITripparticipantLogic TripparticipantLogic;
         protected IVTripsParticipantsLogic VTripparticipantLogic;
         protected IAccountsCarsLocationLogic VAccountsCarsLocationLogic;
 
-        public TripManager(ITripLogic tripLogic, ITripparticipantLogic tripparticipantLogic, 
+        public TripService(ITripLogic tripLogic, ITripparticipantLogic tripparticipantLogic, 
             IVTripsParticipantsLogic vTripparticipantLogic, IAccountsCarsLocationLogic vAccountsCarsLocationLogic)
         {
             TripLogic = tripLogic;

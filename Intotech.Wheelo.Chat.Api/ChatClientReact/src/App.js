@@ -39,7 +39,7 @@ const App = () => {
     wheeloClient.requestConversation(document.getElementById("userId").value, "Ziutek", new Array(1000000027, 1000000029))}></input>
   
   <input type="submit" value="Send Message xd" onClick={() => 
-   wheeloClient.chat("bzapart@gmail.com", 1, "Siema Kacper !")}></input>
+   wheeloClient.chat("bzapart@gmail.com", 1, "Siema Kacper Koksie !")}></input>
 
 <input type="submit" value="Poc" onClick={() => 
 wheeloClient.ProofOfConcept(1000000027)}></input>

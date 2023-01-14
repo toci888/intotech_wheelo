@@ -16,6 +16,9 @@ drop view VWorkTripGenGeoLocations;
 drop view VACollocationsGeoLocations;
 
 drop view VCollocationsGeoLocations;
+drop view VTripsParticipants;
+drop table TripParticipants;
+drop table Trips;
 
 drop table WorkTripGen;
 drop table NotUser;
@@ -23,9 +26,7 @@ drop table NotUser;
 drop table AccountMetadata;
 drop table Occupations;
 drop table StatisticsTrips;
-drop view VTripsParticipants;
-drop table TripParticipants;
-drop table Trips;
+
 drop view AccountRoles;
 drop view VFriends;
 drop view VInvitations;
@@ -346,39 +347,6 @@ join Roles on Roles.id = Accounts.idRole;
 --select * from accounts;
 --select * from AccountRoles
 
-create table Trips
-(
-	id serial primary key,
-    IdInitiatorAccount int references Accounts (id), -- person, who initiated the trip, who drives his/her car
-	IdWorkTrip int references WorkTrip(id),
-	TripDate date,
-	IsCurrent bool default false,
-	FromHour time, -- 0 60 -> 1 
-    ToHour time,
-	Summary text,
-	CreatedAt Timestamp default now(),
-	LeftSeats int
-);
-
-create table TripParticipants
-(
-	id serial primary key,
-	IdTrip int references Trips (id), --1 => 2
-	IdAccount int references Accounts (id),
-	IsOccasion bool default false,
-	CreatedAt Timestamp default now()
-);
-
-create or replace view VTripsParticipants as
-select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
-U2.Id as SuggestedAccountId, tr.TripDate, tr.Summary, tr.id as tripId, tr.IsCurrent, tr.FromHour, tr.ToHour,
-tr.LeftSeats, tp.IsOccasion
-from Trips tr join TripParticipants tp on tr.id = tp.IdTrip
-join Accounts U1 on U1.Id = tr.IdInitiatorAccount 
-join Accounts U2 on U2.Id = tp.IdAccount ;
-
-
-
 create table StatisticsTrips
 (
 	id serial primary key,
@@ -448,6 +416,39 @@ create table WorkTripGen
 	DriverPassenger int not null default 1, -- 1 passenger, 2 driver, 3 both
 	CreatedAt timestamp default now()
 );
+
+create table Trips
+(
+	id serial primary key,
+    IdInitiatorAccount int references Accounts (id) not null, -- person, who initiated the trip, who drives his/her car
+	IdWorkTrip int references WorkTripGen(id) not null,
+	TripDate date,
+	IsCurrent bool default false,
+	FromHour time, -- 0 60 -> 1 
+    ToHour time,
+	Summary text,
+	CreatedAt Timestamp default now(),
+	LeftSeats int
+);
+
+create table TripParticipants
+(
+	id serial primary key,
+	IdTrip int references Trips (id) not null, --1 => 2
+	IdAccount int references Accounts (id) not null,
+	IsConfirmed bool default false,
+	IsOccasion bool default false,
+	CreatedAt Timestamp default now()
+);
+
+create or replace view VTripsParticipants as
+select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
+U2.Id as SuggestedAccountId, tr.TripDate, tr.Summary, tr.id as tripId, tr.IsCurrent, tr.FromHour, tr.ToHour,
+tr.LeftSeats, tp.IsOccasion
+from Trips tr join TripParticipants tp on tr.id = tp.IdTrip
+join Accounts U1 on U1.Id = tr.IdInitiatorAccount 
+join Accounts U2 on U2.Id = tp.IdAccount ;
+
 
 create or replace view VWorkTripGenGeoLocations as --select people, who belong to the group collocated
 select acc.idaccount, a.id as accountIdCollocated, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,

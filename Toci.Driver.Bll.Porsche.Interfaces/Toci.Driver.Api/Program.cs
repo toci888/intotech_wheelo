@@ -88,8 +88,7 @@ AuthenticationSettings authenticationSettings = new AuthenticationSettings();
 
 // -------
 builder.Services.AddScoped<IAssociationCalculations, AssociationCalculations>();
-builder.Services.AddScoped<ICollocator<IWorkTripLogic, IAccountscollocationLogic>, Collocator>();
-builder.Services.AddScoped<ITripManager, TripManager>();
+builder.Services.AddScoped<ITripService, TripService>();
 builder.Services.AddScoped<IInstantOccasion, InstantOccasion>();
 builder.Services.AddScoped<IFriendsSuggestionsService, FriendsSuggestionsService>();
 builder.Services.AddScoped<IFriendsService, FriendsService>();

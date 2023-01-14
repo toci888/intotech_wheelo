@@ -9,9 +9,9 @@ namespace Toci.Driver.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TripController : ApiSimpleControllerBase<ITripManager>
+    public class TripController : ApiSimpleControllerBase<ITripService>
     {
-        public TripController(ITripManager logic) : base(logic)
+        public TripController(ITripService logic) : base(logic)
         {
         }
 

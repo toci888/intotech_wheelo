@@ -8,7 +8,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating
 {
-    public interface ITripManager
+    public interface ITripService
     {
         ReturnedResponse<Trip> CreateTrip(Trip trip, List<int> accountIds);
         ReturnedResponse<int> AddTripParticipant(int tripId, int accountId);
