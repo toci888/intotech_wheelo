@@ -54,7 +54,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
         public virtual ReturnedResponse<List<Trip>> GetAllTrips(int accountId)
         {
-            List<int> tripsIds = TripparticipantLogic.Select(m => m.Idaccount == accountId).Select(m => m.Idtrip.Value).ToList();
+            List<int> tripsIds = TripparticipantLogic.Select(m => m.Idaccount == accountId).Select(m => m.Idtrip).ToList();
 
             return new ReturnedResponse<List<Trip>>(TripLogic.Select(m => tripsIds.Contains(m.Id)).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
