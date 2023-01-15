@@ -12,11 +12,17 @@ using Intotech.Wheelo.Common.Interfaces.Models;
 using Intotech.Wheelo.Social.Tests.Persistence.Seed;
 using Intotech.Wheelo.Tests.Persistence.Seed;
 using System.Reflection;
+using Intotech.Wheelo.Proxies.IntotechWheeloApi;
+using Intotech.Wheelo.Proxies.IntotechWheeloApi.Models;
 using Toci.Driver.Database.Persistence.Models;
 
 
 Console.WriteLine("Warrior is seeding your dbs....");
 
+AccountProxy ap = new AccountProxy();
+ 
+AccountRegisterResponseDto registerResult = ap.Register(new AccountRegisterDto() { email = "glockajulia@gmail.com", firstName = "Julia", lastName = "Głocka", password = "Beatka123()" });
+int a = 0;
 
 //new SeedRole().Insert();
 
