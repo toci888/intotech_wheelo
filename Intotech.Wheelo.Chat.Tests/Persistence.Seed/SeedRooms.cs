@@ -9,9 +9,9 @@ public class SeedRooms : SeedChatLogic<Room>
     {
         List<Room> rooms = new List<Room>();
 
-        //rooms.Add(new Room() { Roomid = HashGenerator.Md5("1000000015, 1000000018"), Ownerid = 1000000015 });
-        //rooms.Add(new Room() { Roomid = HashGenerator.Md5("1000000014, 1000000018"), Ownerid = 1000000014 });
-        //rooms.Add(new Room() { Roomid = HashGenerator.Md5("1000000015, 1000000023"), Ownerid = 1000000023 });
+        rooms.Add(new Room() { Roomname = "Bartek", Ownerid = "bzapart@gmail.com"});
+        rooms.Add(new Room() { Roomname = "Kacper", Ownerid = "bartek@gg.pl"});
+        rooms.Add(new Room() { Roomname = "Warrior", Ownerid = "warriorr@poczta.fm"});
 
         InsertCollection(rooms);
     }

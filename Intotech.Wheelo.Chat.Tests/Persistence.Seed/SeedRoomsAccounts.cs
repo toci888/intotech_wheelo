@@ -14,6 +14,7 @@ public class SeedRoomsAccounts : SeedChatLogic<Roomsaccount>
         list.Add(ra);
 
         list.Add(new Roomsaccount() { Memberemail = "warriorr@poczta.fm", Idroom = 1 });
+        list.Add(new Roomsaccount() { Memberemail = "bartek@gg.pl", Idroom = 1 });
 
         InsertCollection(list);
     }

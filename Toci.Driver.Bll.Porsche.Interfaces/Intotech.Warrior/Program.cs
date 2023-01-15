@@ -19,10 +19,11 @@ using Toci.Driver.Database.Persistence.Models;
 
 Console.WriteLine("Warrior is seeding your dbs....");
 
-AccountProxy ap = new AccountProxy();
+/*AccountProxy ap = new AccountProxy();
  
 AccountRegisterResponseDto registerResult = ap.Register(new AccountRegisterDto() { email = "glockajulia@gmail.com", firstName = "Julia", lastName = "Głocka", password = "Beatka123()" });
 int a = 0;
+*/
 
 //new SeedRole().Insert();
 
@@ -32,7 +33,7 @@ int a = 0;
 
 //new ChatSeedManager().SeedAllDb();
 
-new WheeloMainSeedManager().SeedAllDb();
+//new WheeloMainSeedManager().SeedAllDb();
 
 new SocialSeedManager().SeedAllDb();
 
