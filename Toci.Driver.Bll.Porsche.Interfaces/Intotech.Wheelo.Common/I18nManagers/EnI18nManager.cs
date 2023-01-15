@@ -29,7 +29,22 @@ namespace Intotech.Wheelo.Common.I18nManagers
                 { GetKey(Language, I18nTags.Spanish), new I18nModel() { Language = Language, Tag = I18nTags.Spanish, Content = "Spanish" } },
                 { GetKey(Language, I18nTags.Swedish), new I18nModel() { Language = Language, Tag = I18nTags.Swedish, Content = "Swedish" } },
                 { GetKey(Language, I18nTags.Error), new I18nModel() { Language = Language, Tag = I18nTags.Error, Content = "Error" } },
-
+                { GetKey(Language, I18nTags.DataAlreadyExistInDatabase), new I18nModel() { Language = Language, Tag = I18nTags.DataAlreadyExistInDatabase, Content = "Data already exist in the database."} },
+                { GetKey(Language, I18nTags.DefaultModeCreated), new I18nModel() { Language = Language, Tag = I18nTags.DefaultModeCreated, Content = "Default mode created."} },
+                { GetKey(Language, I18nTags.ErrorPleaseLogInToApp), new I18nModel() { Language = Language, Tag = I18nTags.ErrorPleaseLogInToApp, Content = "Error. Please log in to application."} },
+                { GetKey(Language, I18nTags.EmailDoesNotExist), new I18nModel() { Language = Language, Tag = I18nTags.EmailDoesNotExist, Content = "E-mail address doesn't exist."} },
+                { GetKey(Language, I18nTags.FriendshipNotFound), new I18nModel() { Language = Language, Tag = I18nTags.FriendshipNotFound, Content = "Friendship not found."} },
+               /* { GetKey(Language, I18nTags.LanguageCodeEn), new I18nModel() { Language = Language, Tag = I18nTags.LanguageCodeEn, Content = "Kod języka: angielski."} },
+                { GetKey(Language, I18nTags.LanguageCodePl), new I18nModel() { Language = Language, Tag = I18nTags.LanguageCodePl, Content = "Kod języka: polski."} }, */
+                { GetKey(Language, I18nTags.NoData), new I18nModel() { Language = Language, Tag = I18nTags.NoData, Content = "No data."} },
+                { GetKey(Language, I18nTags.NoWorkTripData), new I18nModel() { Language = Language, Tag = I18nTags.NoWorkTripData, Content = "No work trip data."} },
+                { GetKey(Language, I18nTags.PasswordChangeSuccess), new I18nModel() { Language = Language, Tag = I18nTags.PasswordChangeSuccess, Content = "Password change success."} },
+                { GetKey(Language, I18nTags.PleaseConfirmYourWheeloAccountRegistration), new I18nModel() { Language = Language, Tag = I18nTags.PleaseConfirmYourWheeloAccountRegistration, Content = "Please, confirm your Wheelo account registration."} },
+                { GetKey(Language, I18nTags.PleaseLogIn), new I18nModel() { Language = Language, Tag = I18nTags.PleaseLogIn, Content = "Please, log in."} },
+                { GetKey(Language, I18nTags.RefreshTokenExpiredPleaseLogIn), new I18nModel() { Language = Language, Tag = I18nTags.RefreshTokenExpiredPleaseLogIn, Content = "Refresh token expired. Please, log in."} },
+                { GetKey(Language, I18nTags.UnderAttack), new I18nModel() { Language = Language, Tag = I18nTags.UnderAttack, Content = "Under attack"} },
+                { GetKey(Language, I18nTags.WrongData), new I18nModel() { Language = Language, Tag = I18nTags.WrongData, Content = "Wrong data."} },
+                { GetKey(Language, I18nTags.WrongOperations), new I18nModel() { Language = Language, Tag = I18nTags.WrongOperations, Content = "Wrong operations."} },
             };
         }
     }
