@@ -4,11 +4,8 @@ import { useMutation, useQueryClient } from "react-query";
 
 import { endpoints, queryKeys } from "../../constants/constants";
 import { socket } from "../../constants/socket";
-import { useApiClient } from "../../services/useApiClient";
 import { Conversation, CreateConversation } from "../../types/conversation";
 import { useUser } from "../useUser";
-
-
 
 const createConversation = (values: CreateConversation, token?: string) =>
   axios.post<Conversation>(
@@ -33,7 +30,6 @@ export const useCreateConversationMutation = () => {
   const queryClient = useQueryClient();
   const { navigate } = useNavigation();
   const { user } = useUser();
-  const api = useApiClient();
 
   return useMutation(
     ({

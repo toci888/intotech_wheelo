@@ -2,8 +2,7 @@ import axios from 'axios';
 import { useUser } from '../hooks/useUser';
 import { User } from '../types/user';
 
-export const useApiClient = () => {
-  const { user } = useUser();
+export const useApiClient = (user: User | null) => {
 
   const headers = () => {
     return {

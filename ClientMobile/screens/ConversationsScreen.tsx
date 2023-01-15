@@ -21,7 +21,6 @@ export const ConversationsScreen = () => {
   if (conversations.isLoading) return <Loading />;
 
   if (!conversations?.data || conversations.data.length === 0) {
-    console.log("conversations?.dataHere", conversations)
     return <Text>{i18n.t('YouHaveNoMessages')}</Text>;
   }
 
@@ -35,7 +34,7 @@ export const ConversationsScreen = () => {
 
   return (
     <FlatList
-      showsVerticalScrollIndicator={false}
+      showsVerticalScrollIndicator={false} //wroc
       data={conversations.data}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (

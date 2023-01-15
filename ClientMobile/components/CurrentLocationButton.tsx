@@ -32,7 +32,7 @@ export const CurrentLocationButton = ({ style, location, setLocation
     let lat =  currentLocation.coords.latitude; //52.38705 16.88180 52.38512
     let lon = currentLocation.coords.longitude; // 16.879011
     
-    const {data} = await useApiClient.get(`${endpoints.currentLocation(lat, lon)}`);
+    const {data} = await axios.get(`${endpoints.currentLocation(lat, lon)}`);
 
     setLocation(data);
     navigation.goBack();
