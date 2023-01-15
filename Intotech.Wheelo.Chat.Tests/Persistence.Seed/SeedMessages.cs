@@ -13,11 +13,12 @@ public class SeedMessages : SeedChatLogic<Message>
         
         Random rnd = new Random();
 
+        for (int j = 1; j < 11; j++)
         for (int i = 0; i < 50; i++)
         {                                                                    
             // cadewi yhiklo
             int index = rnd.Next(0, 3);
-            Message newMessage = new Message() { Authoremail = chatParticipants[index], Idroom = 1, Message1 = StringUtils.CreateChat(rnd.Next(4,15))};
+            Message newMessage = new Message() { Authoremail = chatParticipants[index], Idroom = j, Message1 = StringUtils.CreateChat(rnd.Next(4,15))};
 
             messages.Add(newMessage);
         }
