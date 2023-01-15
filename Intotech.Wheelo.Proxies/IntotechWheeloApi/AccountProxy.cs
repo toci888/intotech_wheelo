@@ -16,10 +16,6 @@ public class AccountProxy : HttpClientProxyBase, IAccountProxy
 
     public virtual AccountRegisterResponseDto Register(AccountRegisterDto registerDto)
     {
-        HttpContent content = JsonContent.Create(registerDto);
-
-        HttpResponseMessage response = HttpProxy.PostAsync(apiAccountRegisterResource, content).Result;
-
-        return JObject.Parse(response.Content.ReadAsStringAsync().Result).ToObject<AccountRegisterResponseDto>();
+        return ApiPost<AccountRegisterDto, AccountRegisterResponseDto>(registerDto, apiAccountRegisterResource);
     }
 }
