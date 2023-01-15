@@ -21,8 +21,6 @@ const fetchConversation = async (
       },
     }
   ); 
-  console.log("XXZXZC", response.data)
-
   const data: ConversationRes = response.data;
 
   const tenantAuthor: Author = {

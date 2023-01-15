@@ -70,8 +70,6 @@ function RootNavigator(props: any) {
   const { user } = useUser();
 
   useEffect(() => {
-    console.log("TU", props.colorScheme);
-    console.log("USER", user);
     registerForPushNotificationsAsync();
     Notifications.setNotificationHandler({
       handleNotification: async () => ({

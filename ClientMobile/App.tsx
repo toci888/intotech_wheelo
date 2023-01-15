@@ -30,11 +30,11 @@ export default function App() {
   const [loading, setLoading] = useState<boolean>(false);
   const [first, setfirst] = useState({});
 
-  useEffect(() => {
-    console.log("XXXXXXX", colorScheme);
-    updateTheme(colorScheme)
-    setfirst({});
-  }, [colorScheme]);
+  // useEffect(() => {
+  //   console.log("XXXXXXX", colorScheme);
+  //   updateTheme(colorScheme)
+  //   setfirst({});
+  // }, [colorScheme]);
 
   useEffect(() => {
     async function getUser() {
@@ -101,7 +101,7 @@ export default function App() {
         socket.on("roomestablished", (roomData:{ room: {idRoom: number, ownerEmail: string, roomId: string, roomName: string, roomMembers: any}}) => {
           let data = roomData.room;
 
-          console.log('bartoo', data);
+          console.log('roomestablished', data);
         });
 
         await socket.start();

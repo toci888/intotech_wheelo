@@ -25,7 +25,6 @@ const fetchConversations = async (
       },
     }
   );
-  console.log("UDALO SIE", response.data)
   const conversations: ConversationsRes[] = response.data;
   
   const data: TransformedConversation[] = [];

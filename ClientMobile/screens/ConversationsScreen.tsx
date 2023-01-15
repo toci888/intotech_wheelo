@@ -34,7 +34,7 @@ export const ConversationsScreen = () => {
 
   return (
     <FlatList
-      showsVerticalScrollIndicator={false} //wroc
+      showsVerticalScrollIndicator={true}
       data={conversations.data}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
