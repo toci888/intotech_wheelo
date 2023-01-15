@@ -1,18 +1,4 @@
-Naming convention:
-camelCase:
-
-
-PascalCase:
-Classess
-
-
 expo start --clear
-npm i --legacy-peer-deps
-
-npm i react-native-google-places-autocomplete
-npm install @unimodules/core
-
-! 
 
 expo whoami
 expo login
@@ -20,8 +6,6 @@ https://expo.dev/login
 npm react-native -v
 https://expo.dev/accounts/kacper1337/projects/intotechwheelo
 
-expo whoami
-expo login
 Owner kacper1337 Kacper123.
 Slug intotechwheelo
 ID 7fda874a-5f71-4e74-8203-13f3aeb2e419

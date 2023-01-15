@@ -8,15 +8,14 @@ import { useState, useEffect } from "react";
 import * as SecureStore from "expo-secure-store";
 import { LogBox } from "react-native";
 import * as Notifications from "expo-notifications";
-// import { useNavigation } from "@react-navigation/native";
 
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
-import { theme } from "./theme";
+import { theme, updateTheme } from "./theme";
 import { AuthContext, LoadingContext } from "./context";
 import { User } from "./types/user";
-import { socket } from "./constants/socket";
+import { createSocket, socket } from "./constants/socket";
 import { queryKeys } from "./constants/constants";
 import { refreshTokens } from "./services/tokens";
 
@@ -29,7 +28,13 @@ export default function App() {
   const colorScheme = useColorScheme();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  
+  const [first, setfirst] = useState({});
+
+  useEffect(() => {
+    console.log("XXXXXXX", colorScheme);
+    updateTheme(colorScheme)
+    setfirst({});
+  }, [colorScheme]);
 
   useEffect(() => {
     async function getUser() {
@@ -37,6 +42,7 @@ export default function App() {
       if (user) {
         const userObj: User = JSON.parse(user);
         console.log("JUSRE", userObj)
+        createSocket(userObj.accessToken);
         // const newTokens = await refreshTokens(userObj.accessToken, userObj.refreshtoken);
         // if (newTokens) {
         //   userObj.accessToken = newTokens.accessToken;
@@ -104,9 +110,6 @@ export default function App() {
         await socket.invoke("CreateRoom", userObj.email, ['warriorr@poczta.fm', 'bzapart@gmail.com']);
 
         console.log("USER ID", userObj)
-        
-      } else {
-        // navigation.navigate("Account") //TODO!
       }
     }
 

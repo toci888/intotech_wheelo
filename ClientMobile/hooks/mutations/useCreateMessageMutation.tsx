@@ -15,8 +15,8 @@ const createMessage = (
   authorLastName: string,
   text: string,
   token?: string
-) => 
-  socket.invoke('sendMessage',  {
+) => {
+  return socket.invoke('sendMessage',  {
     senderID,
     text,
     ID: conversationID, //to delete
@@ -25,6 +25,7 @@ const createMessage = (
     authorLastName,
     RoomID: conversationID
    });
+  }
 
 export const useCreateMessageMutation = () => {
   const queryClient = useQueryClient();
@@ -129,15 +130,16 @@ export const useCreateMessageMutation = () => {
       },
       onSuccess: (
         _,
-        { author, conversationID, receiverID, senderID, text }
+        { author, conversationID, receiverID, senderID, text, authorFirstName, authorLastName }
       ) => {
-        // socket.invoke("sendMessage", {
-        //   senderID,
-        //   conversationID,
-        //   receiverID,
-        //   text,
-        //   senderName: `${author.firstName} ${author.lastName}`,
-        // });
+        createMessage(
+          conversationID,
+          senderID,
+          receiverID,
+          authorFirstName,
+          authorLastName,
+          text,
+        );
       },
       onSettled: () => {
         queryClient.invalidateQueries(queryKeys.conversations);

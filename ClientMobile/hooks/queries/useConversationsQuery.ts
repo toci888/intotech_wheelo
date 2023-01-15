@@ -42,22 +42,8 @@ const fetchConversations = async (
         messages: i.messages,
       });
     }
-    // data.push({
-    //   id: i.id,
-    //   // collocationID: i.propertyID,
-    //   recipientName,
-    //   messages: [{
-    //     id: 2,
-    //     createdAt: "x",
-    //     senderID: 2,
-    //     roomID: 2,
-    //     text: "x",
-    //     authorFirstName: "x",
-    //     authorLastName: "x",
-    //   }]
-    //   //i.messages,
-    // });
   }
+
   console.log("DATAGGG", data)
   return data;
 };

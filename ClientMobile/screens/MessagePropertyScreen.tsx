@@ -57,7 +57,7 @@ export const MessagePropertyScreen = ({
 
   if (conversations?.data && conversations.data.length > 0) {
     const index = conversations.data.findIndex(
-      (i) => i.collocationID === route.params.collocationID
+      (i) => i.id === route.params.collocationID
     );
     if (index >= 0) {
       navigateToMessageScreen(

@@ -34,7 +34,7 @@ export const MessagesScreen = ({
   if (conversation.isLoading) return <Loading />;
 
   if (!conversation.data) return <><Text>{i18n.t('UnableToGetChat')}</Text></>;
-
+  console.log("WSzYSTMESSA", conversation)
   const handleSendPress = (message: MessageType.PartialText) => {
     if (conversation)
       createMessage.mutate({

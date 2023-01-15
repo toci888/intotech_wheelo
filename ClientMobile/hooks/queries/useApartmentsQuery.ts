@@ -13,5 +13,7 @@ const fetchApartments = async (propertyID: number): Promise<Apartment[]> => {
   return data;
 };
 
-export const useApartmentsQuery = (propertyID: number) =>
+export const useApartmentsQuery = (propertyID: number) => {
   useQuery(queryKeys.apartments, () => fetchApartments(propertyID));
+
+}
