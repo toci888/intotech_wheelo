@@ -46,6 +46,11 @@ public class RoomService : IRoomService
 
         Account author = AccountService.GetAccount(hostEmail);
 
+        if (author == null)
+        {
+            return null;
+        }
+
         chatMembers.Add(author);
         
         result.RoomMembers = new List<RoomMembersDto>();
@@ -54,9 +59,12 @@ public class RoomService : IRoomService
         {
             Account member = AccountService.GetAccount(memberEmail);
 
-            chatMembers.Add(member);
+            if (member != null)
+            {
+                chatMembers.Add(member);
 
-            result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = member .Createdat.Value, AccountId = member.Id, Email = member.Email, FirstName = member .Name, LastName = member.Surname });
+                result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = member.Createdat.Value, AccountId = member.Id, Email = member.Email, FirstName = member.Name, LastName = member.Surname });
+            }
         }
 
         result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = author.Createdat.Value, AccountId = author.Id, Email = author.Email, FirstName = author.Name, LastName = author.Surname });

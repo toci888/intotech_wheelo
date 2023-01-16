@@ -45,7 +45,8 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
             List<Account> accounts = new List<Account>()
             {
                 new Account() { Name = "Bartek", Surname = "Zapart", Image = Base64EncodedImages[0], Email = "bzapart@gmail.com", Password = "fbd623cdcf27c1cf99595b52154e699d1ae95e7c48bd7c34ba73d0091a5b2af2", Emailconfirmed = true, Verificationcode = 8888, Refreshtoken = "cntgfu347frgwhu293", Idrole = 1 },
-                new Account() { Name = "Wojtek", Surname = "Ruchała", Image = Base64EncodedImages[1], Email = "warriorr@poczta.fm", Password = "fbd623cdcf27c1cf99595b52154e699d1ae95e7c48bd7c34ba73d0091a5b2af2", Emailconfirmed = true, Verificationcode = 8888, Refreshtoken = "ef2456t2tewtt24tt4", Idrole = 1 }
+                new Account() { Name = "Wojtek", Surname = "Ruchała", Image = Base64EncodedImages[1], Email = "warriorr@poczta.fm", Password = "fbd623cdcf27c1cf99595b52154e699d1ae95e7c48bd7c34ba73d0091a5b2af2", Emailconfirmed = true, Verificationcode = 8888, Refreshtoken = "ef2456t2tewtt24tt4", Idrole = 1 },
+                new Account() { Name = "Julia", Surname = "Wesoła", Image = Base64EncodedImages[2], Email = "bartek@gg.pl", Password = "fbd623cdcf27c1cf99595b52154e699d1ae95e7c48bd7c34ba73d0091a5b2af2", Emailconfirmed = true, Verificationcode = 8888, Refreshtoken = "ef2456t2tewtt24tgdsft34grewt4", Idrole = 1 }
 
             };
             
