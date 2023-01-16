@@ -126,7 +126,7 @@ export const Map = ({
       <MapView
         provider={"google"}
         style={styles.map}
-        userInterfaceStyle={"light"}
+        userInterfaceStyle={"dark"} //TODO!
         ref={mapRef}
         onPress={handleMapPress}
         region={region}

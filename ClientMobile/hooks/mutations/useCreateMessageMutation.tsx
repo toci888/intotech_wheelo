@@ -25,7 +25,7 @@ const createMessage = (
     authorLastName,
     RoomID: conversationID
    });
-  }
+}
 
 export const useCreateMessageMutation = () => {
   const queryClient = useQueryClient();
@@ -40,6 +40,7 @@ export const useCreateMessageMutation = () => {
       authorFirstName,
       authorLastName,
       text,
+      imageUrl
     }: {
       conversationID: number;
       author: Author;
@@ -48,6 +49,7 @@ export const useCreateMessageMutation = () => {
       authorFirstName: string,
       authorLastName: string,
       text: string;
+      imageUrl: string;
     }) =>
       createMessage(
         conversationID,
@@ -55,8 +57,8 @@ export const useCreateMessageMutation = () => {
         receiverID,
         authorFirstName,
         authorLastName,
-        text,
-        user?.accessToken
+        imageUrl,
+        text
       ),
     {
       onMutate: async ({
@@ -66,7 +68,8 @@ export const useCreateMessageMutation = () => {
         receiverID,
         senderID,
         authorFirstName,
-        authorLastName
+        authorLastName,
+        imageUrl
       }) => {
         await queryClient.cancelQueries(queryKeys.conversations);
         await queryClient.cancelQueries(queryKeys.selectedConversation);
@@ -107,7 +110,8 @@ export const useCreateMessageMutation = () => {
             senderID,
             text,
             authorFirstName,
-            authorLastName
+            authorLastName,
+            imageUrl
           });
 
           queryClient.setQueryData(queryKeys.conversations, newConversations);
@@ -132,6 +136,13 @@ export const useCreateMessageMutation = () => {
         _,
         { author, conversationID, receiverID, senderID, text, authorFirstName, authorLastName }
       ) => {
+        // // socket.invoke("sendMessage", {
+        // //   senderID,
+        // //   conversationID,
+        // //   receiverID,
+        // //   text,
+        // //   senderName: `${author.firstName} ${author.lastName}`,
+        // // });
         createMessage(
           conversationID,
           senderID,

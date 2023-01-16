@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Platform } from "react-native";
 import { Chat, MessageType, defaultTheme } from "@flyerhq/react-native-chat-ui";
 import { useNavigation } from "@react-navigation/native";
 import { useActionSheet } from '@expo/react-native-action-sheet'
 import DocumentPicker from 'react-native-document-picker'
 import { launchImageLibrary } from 'react-native-image-picker'
+import FileViewer from 'react-native-file-viewer'
+import { PreviewData } from '@flyerhq/react-native-link-preview'
 
 import { useUser } from "../hooks/useUser";
 import { SignUpOrSignInScreen } from "./SignUpOrSignInScreen";
@@ -43,6 +45,7 @@ export const MessagesScreen = ({
   if (!conversation.data) return <><Text>{i18n.t('UnableToGetChat')}</Text></>;
   
   const handleSendPress = (message: MessageType.PartialText) => {
+    console.log("MESSAGExx", message)
     if (conversation)
       createMessage.mutate({
         author: conversation.data.author,
@@ -51,7 +54,8 @@ export const MessagesScreen = ({
         senderID: user.email,
         text: message.text,
         authorFirstName: conversation.data.messages[0].author.firstName ? conversation.data.messages[0].author.firstName : "",
-        authorLastName: conversation.data.messages[0].author.lastName ? conversation.data.messages[0].author.lastName : ""
+        authorLastName: conversation.data.messages[0].author.lastName ? conversation.data.messages[0].author.lastName : "",
+        imageUrl: conversation.data.messages[0].author.imageUrl ? conversation.data.messages[0].author.imageUrl : ""
       });
   };
 
@@ -95,6 +99,7 @@ export const MessagesScreen = ({
         }
       }
     )
+    console.log("CLICK1")
   }
 
   const handleImageSelection = () => {
@@ -126,14 +131,43 @@ export const MessagesScreen = ({
     )
   }
 
+  const handlePreviewDataFetched = ({
+    message,
+    previewData,
+  }: {
+    message: MessageType.Text
+    previewData: PreviewData
+  }) => {
+    console.log("handlePreviewDataFetched??")
+    conversation.data.messages = conversation.data.messages.map<MessageType.Any>((m) =>
+      m.id === message.id ? { ...m, previewData } : m
+    )
+  }
+
+  const handleMessagePress = async (message: MessageType.Any) => {
+    console.log("KLIK MEsSAGE", message)
+    if (message.type === 'file') {
+      console.log("NO LECE")
+      try {
+        // await FileViewer.open(message.uri, { showOpenWithDialog: true })
+      } catch { }
+    }
+  }
+
   return (
     <Chat
       messages={conversation.data.messages}
       onSendPress={handleSendPress}
       user={conversation.data.author}
       onAttachmentPress={handleAttachmentPress}
+      onMessagePress={handleMessagePress}
+      onPreviewDataFetched={handlePreviewDataFetched}
       sendButtonVisibilityMode="always"
       enableAnimation
+      showUserNames
+      showUserAvatars
+      // l10nOverride={{ inputPlaceholder: 'Here' }}
+      // locale='en'
       textInputProps={{
         style: styles.textInputProps,
       }}

@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     top: 0,
     right: 0,
     left: 0,
-    backgroundColor: theme["color-blue"],
+    backgroundColor: theme["color-primary-700"],
   },
   defaultMarginHorizontal: {
     marginHorizontal: LISTMARGIN,

@@ -4,6 +4,7 @@ export type Message = {
   senderID: string;
   roomID: number;
   text: string;
+  imageUrl: string;
   authorFirstName: string;
   authorLastName: string;
 };
