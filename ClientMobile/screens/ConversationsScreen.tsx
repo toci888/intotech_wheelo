@@ -44,7 +44,7 @@ export const ConversationsScreen = () => {
         >
           <Row style={styles.row}>
             <Text style={styles.messageTitle} numberOfLines={1}>
-              {item.recipientName}
+              {item.recipientName} RoomId:{item.id}
             </Text>
             <Text appearance="hint">
               {new Date(item.messages[0].createdAt).toLocaleDateString()}

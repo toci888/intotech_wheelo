@@ -1,8 +1,21 @@
-import React from "react";
 import { light, dark } from "@eva-design/eva";
-import { DefaultTheme } from "@react-navigation/native";
+
+import useColorScheme from "./hooks/useColorScheme";
+import { themes } from "./constants/constants";
+
+const customColors = {
+  "color-violet": "#6e53a6",
+  "color-white": "#ffffff",
+  "color-black": "#000000",
+  "color-blue": "#6b50a5",
+  "color-green": "#34c25f",
+  "color-check": "#5e4496",
+  "color-gray": "#d3d3d3",
+  "color-light-gray": "#e5eaef",
+}
 
 const importedTheme = {
+  ...customColors,
   "color-primary-100": "#F8C6E9",
   "color-primary-200": "#F291DD",
   "color-primary-300": "#D856C7",
@@ -50,35 +63,209 @@ const importedTheme = {
   "color-danger-900": "#4B042F"
 }
 
-const lightTheme = {
-  ...light,
-  ...importedTheme,
-  "color-violet": "#6e53a6",
-  "color-white": "#ffffff",
-  "color-black": "#000000",
-  "color-blue": "#6b50a5",
-  "color-green": "#34c25f",
-  "color-check": "#5e4496",
-  "color-gray": "#d3d3d3",
-  "color-light-gray": "#e5eaef",
-};
 
-const darkTheme = {
-  ...light, //todo!
-  ...importedTheme,
-  "color-violet": "#6e53a6",
-  "color-white": "#ffffff",
-  "color-black": "#000000",
-  "color-blue": "#6b50a5",
-  "color-green": "#34c25f",
-  "color-check": "#5e4496",
-  "color-gray": "#d3d3d3",
-  "color-light-gray": "#e5eaef",
-};
-
-export const updateTheme = (color: 'light' | 'dark') => {
-  console.log("XXXXDDDDD", color);
-  theme = color === 'dark' ?  {...dark, ...darkTheme} : { ...light, ...lightTheme};
+export const updateTheme = () => {
+  const colorScheme = useColorScheme();
+  
+  theme = colorScheme === themes.dark ? {...dark, ...importedTheme} : { ...light, ...importedTheme};
 }
 
-export let theme = DefaultTheme.dark ? {...dark, ...darkTheme} : { ...light, ...lightTheme};
+export let theme: any = importedTheme;
+
+export const mapDarkStyle = [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#212121"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#212121"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.country",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.locality",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#bdbdbd"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#181818"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#1b1b1b"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#2c2c2c"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#8a8a8a"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#373737"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#3c3c3c"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway.controlled_access",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#4e4e4e"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#000000"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#3d3d3d"
+      }
+    ]
+  }
+];
+
+export const mapStandardStyle = [
+  {
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+];

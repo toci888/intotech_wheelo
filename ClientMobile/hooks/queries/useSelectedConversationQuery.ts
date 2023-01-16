@@ -39,9 +39,9 @@ const fetchConversation = async (
   // const image = `https://avatars.githubusercontent.com/u/14123304?v=4`
   const messages: MessageType.Any[] = [];
   for (let m of data.messages) {
-    // console.log("AJM", m)
-    // const image = m.imageUrl;
-    // console.log("AJM2", image)
+    console.log("ASSDA", m)
+    console.log("ASSD2A", data.tenantID)
+    const image = m.imageUrl;
     const message: MessageType.Any = {
       id: m.id.toString(),
       author: m.senderID.toString() === ownerAuthor.id ? {...ownerAuthor, imageUrl:image} 

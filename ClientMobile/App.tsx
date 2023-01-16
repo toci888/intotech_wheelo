@@ -12,7 +12,7 @@ import * as Notifications from "expo-notifications";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
-import { theme, updateTheme } from "./theme";
+import { theme } from "./theme";
 import { AuthContext, LoadingContext } from "./context";
 import { User } from "./types/user";
 import { createSocket, socket } from "./constants/socket";
@@ -23,18 +23,10 @@ const queryClient = new QueryClient();
 LogBox.ignoreAllLogs();
 
 export default function App() {
-  // const navigation = useNavigation();
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [first, setfirst] = useState({});
-
-  // useEffect(() => {
-  //   console.log("XXXXXXX", colorScheme);
-  //   updateTheme(colorScheme)
-  //   setfirst({});
-  // }, [colorScheme]);
 
   useEffect(() => {
     async function getUser() {

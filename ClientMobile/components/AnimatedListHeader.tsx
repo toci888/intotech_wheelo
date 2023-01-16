@@ -2,12 +2,13 @@ import { Animated, View, StyleSheet, TouchableOpacity, } from "react-native";
 import React, { useState } from "react";
 import { Text, Button } from "@ui-kitten/components";
 
-import { LISTMARGIN } from "../constants/constants";
+import { LISTMARGIN, themes } from "../constants/constants";
 import { HeaderInput } from "./HeaderInput";
 import { Location } from "../types/locationIQ";
 import { useNavigation } from "@react-navigation/native";
 import { i18n } from "../i18n/i18n";
 import { theme } from "../theme";
+import useColorScheme from "../hooks/useColorScheme";
 
 export const AnimatedListHeader = ({
   startLocation,
@@ -20,18 +21,14 @@ export const AnimatedListHeader = ({
   setStartLocation: (startLocation: Location) => void;
   setEndLocation: (endLocation: Location) => void;
 }) => {
+  const colorScheme = useColorScheme();
+  const navigation = useNavigation();
 
   const [startTime, setStartTime] = useState<string>("08:00");
   const [endTime, setEndTime] = useState<string>("16:00");
-
-  const navigation = useNavigation();
   
   const submit = async () => {
-    console.log(startLocation.display_name)
-    console.log(endLocation.display_name)
-    // console.log("WSPOLRZEDNIE", startLocation, endLocation)
     if(startLocation.display_name !== i18n.t('Search') && endLocation.display_name !== i18n.t('Search')) {
-      
       navigation.navigate("Root", {
         screen: "Search",
         params: {
@@ -45,8 +42,8 @@ export const AnimatedListHeader = ({
   }
 
   return (
-    <Animated.View style={styles.container}>    
-      <View
+    <Animated.View style={[styles.container, {backgroundColor: colorScheme === themes.dark ? theme["color-primary-700"] : theme["color-primary-400"]}]}>
+      <View 
           style={[styles.defaultMarginHorizontal, {"marginTop": 10}]}
         >
       </View>    
@@ -81,7 +78,6 @@ const styles = StyleSheet.create({
     top: 0,
     right: 0,
     left: 0,
-    backgroundColor: theme["color-primary-700"],
   },
   defaultMarginHorizontal: {
     marginHorizontal: LISTMARGIN,

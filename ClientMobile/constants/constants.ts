@@ -111,3 +111,8 @@ export const os = {
   android: "android",
   ios: "ios"
 }
+
+export const themes = {
+  dark: "dark",
+  light: "light"
+}
