@@ -11,9 +11,8 @@ public class ConversationDto
     public string OwnerFirstName { get; set; }
     public string OwnerLastName { get; set; }
     public DateTime CreatedAt { get; set; }
-
     public List<ChatMessageDto> Messages { get; set; }
-    public string ImageUrl { get; set; }
+    public List<MessageAuthorDto> UsersData { get; set; }
     
 }
 

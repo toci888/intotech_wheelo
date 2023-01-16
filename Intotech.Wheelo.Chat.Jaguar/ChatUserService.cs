@@ -48,7 +48,7 @@ namespace Intotech.Wheelo.Chat.Jaguar
             ConnecteduserLogic.Insert(new Connecteduser() { Email = email }); // TODO what if 2 or more locations
             UserActivityLogic.Insert(new Useractivity() { Email = email, Connectedfrom = DateTime.Now });
 
-            return new ChatUserDto() { UserId = email, UserName = userData.Name, UserSurname = userData.Surname, SessionId = email };
+            return new ChatUserDto() { SenderID = email, UserName = userData.Name, UserSurname = userData.Surname, ImageUrl = userData.Image, IdAccount = userData.Id, SessionId = email };
         }
 
         public virtual ChatMessageDto SendMessage(ChatMessageDto chatMessage)

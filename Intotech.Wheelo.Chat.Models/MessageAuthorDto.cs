@@ -4,6 +4,7 @@ namespace Intotech.Wheelo.Chat.Models;
 
 public class MessageAuthorDto
 {
+    public string SenderID { get; set; }
     public string MessageAuthorFirstName { get; set; }
     public string MessageAuthorLastName { get; set; }
     public int AccountId { get; set; }
