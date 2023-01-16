@@ -1,8 +1,11 @@
-﻿namespace Intotech.Wheelo.Chat.Models;
+﻿using Intotech.Wheelo.Common.ImageService;
+
+namespace Intotech.Wheelo.Chat.Models;
 
 public class ConversationDto 
 {
     public int ID { get; set; }
+    public int IdAccount { get; set; }
     public string OwnerID { get; set; }
     public int TenantID { get; set; }
     public string OwnerFirstName { get; set; }
@@ -10,6 +13,10 @@ public class ConversationDto
     public DateTime CreatedAt { get; set; }
 
     public List<ChatMessageDto> Messages { get; set; }
+    public string ImageUrl
+    {
+        get { return ImageServiceUtils.GetImageUrl(IdAccount); }
+    }
 }
 
 /*
