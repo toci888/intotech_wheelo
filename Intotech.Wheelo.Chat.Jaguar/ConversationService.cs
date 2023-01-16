@@ -64,7 +64,8 @@ public class ConversationService : IConversationService
                     IdAccount = authorsData.ContainsKey(message.Authoremail) ? authorsData[message.Authoremail].AccountId : 0,
                     RoomID = roomId,
                     AuthorFirstName = authorsData.ContainsKey(message.Authoremail) ? authorsData[message.Authoremail].MessageAuthorFirstName : string.Empty,
-                    AuthorLastName = authorsData.ContainsKey(message.Authoremail) ? authorsData[message.Authoremail].MessageAuthorLastName : string.Empty
+                    AuthorLastName = authorsData.ContainsKey(message.Authoremail) ? authorsData[message.Authoremail].MessageAuthorLastName : string.Empty,
+                    ImageUrl = authorsData.ContainsKey(message.Authoremail) ? authorsData[message.Authoremail].ImageUrl : string.Empty
                 });
 
                 if (isAccountIdRequest)
@@ -111,6 +112,7 @@ public class ConversationService : IConversationService
             resElement.MessageAuthorFirstName = acc.Name;
             resElement.MessageAuthorLastName = acc.Surname;
             resElement.AccountId = acc.Id;
+            resElement.ImageUrl = acc.Image;
 
             result.Add(message.Authoremail, resElement);
         }

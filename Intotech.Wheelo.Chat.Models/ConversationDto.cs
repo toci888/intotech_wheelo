@@ -13,10 +13,8 @@ public class ConversationDto
     public DateTime CreatedAt { get; set; }
 
     public List<ChatMessageDto> Messages { get; set; }
-    public string ImageUrl
-    {
-        get { return ImageServiceUtils.GetImageUrl(IdAccount); }
-    }
+    public string ImageUrl { get; set; }
+    
 }
 
 /*

@@ -7,4 +7,5 @@ public class MessageAuthorDto
     public string MessageAuthorFirstName { get; set; }
     public string MessageAuthorLastName { get; set; }
     public int AccountId { get; set; }
+    public string ImageUrl { get; set; }
 }
