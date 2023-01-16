@@ -40,37 +40,43 @@ public class ConversationService : IConversationService
 
         Account acc = AccountService.GetAccount(room.Ownerid);
 
-        ConversationDto resElement = new ConversationDto();
-
-        resElement.TenantID = resElement.ID = room.Id;
-        resElement.OwnerID = room.Ownerid;
-        resElement.IdAccount = acc.Id;
-        resElement.CreatedAt = room.Createdat.Value;
-         //= room.Roomid;
-        resElement.OwnerFirstName = acc.Name;
-        resElement.OwnerLastName = acc.Surname;
-        resElement.Messages = new List<ChatMessageDto>();
-
-        foreach (Message message in messages)
+        if (acc != null)
         {
-            resElement.Messages.Add(new ChatMessageDto()
-            {
-                CreatedAt = message.Createdat.Value,
-                SenderID = message.Authoremail,
-                Text = message.Message1,
-                ID = message.Id,
-                RoomID = roomId,
-                AuthorFirstName = authorsData[message.Authoremail].MessageAuthorFirstName,
-                AuthorLastName = authorsData[message.Authoremail].MessageAuthorLastName
-            }) ;
+            ConversationDto resElement = new ConversationDto();
 
-            if (isAccountIdRequest)
+            resElement.TenantID = resElement.ID = room.Id;
+            resElement.OwnerID = room.Ownerid;
+            resElement.IdAccount = acc.Id;
+            resElement.CreatedAt = room.Createdat.Value;
+            //= room.Roomid;
+            resElement.OwnerFirstName = acc.Name;
+            resElement.OwnerLastName = acc.Surname;
+            resElement.Messages = new List<ChatMessageDto>();
+
+            foreach (Message message in messages)
             {
-                break;
+                resElement.Messages.Add(new ChatMessageDto()
+                {
+                    CreatedAt = message.Createdat.Value,
+                    SenderID = message.Authoremail,
+                    Text = message.Message1,
+                    ID = message.Id,
+                    IdAccount = authorsData.ContainsKey(message.Authoremail) ? authorsData[message.Authoremail].AccountId : 0,
+                    RoomID = roomId,
+                    AuthorFirstName = authorsData.ContainsKey(message.Authoremail) ? authorsData[message.Authoremail].MessageAuthorFirstName : string.Empty,
+                    AuthorLastName = authorsData.ContainsKey(message.Authoremail) ? authorsData[message.Authoremail].MessageAuthorLastName : string.Empty
+                });
+
+                if (isAccountIdRequest)
+                {
+                    break;
+                }
             }
+
+            return resElement;
         }
 
-        return resElement;
+        return null;
     }
 
     public virtual List<ConversationDto> GetConversationsByAccountId(string email)
@@ -97,8 +103,14 @@ public class ConversationService : IConversationService
 
             Account acc = AccountService.GetAccount(message.Authoremail);
 
+            if (acc == null)
+            {
+                continue;
+            }
+
             resElement.MessageAuthorFirstName = acc.Name;
             resElement.MessageAuthorLastName = acc.Surname;
+            resElement.AccountId = acc.Id;
 
             result.Add(message.Authoremail, resElement);
         }
