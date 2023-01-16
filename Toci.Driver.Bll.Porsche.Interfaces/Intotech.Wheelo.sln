@@ -258,8 +258,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Integration
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WheeloSqlMigrations", "WheeloSqlMigrations", "{94626A6A-464F-4FC8-9ACE-F96A0F3EC8A3}"
 	ProjectSection(SolutionItems) = preProject
-		16-12-2022 wheelo.sql = 16-12-2022 wheelo.sql
 		12-01-2023 wheelo.sql = 12-01-2023 wheelo.sql
+		16-12-2022 wheelo.sql = 16-12-2022 wheelo.sql
 		17-12-2022 wheelo.sql = 17-12-2022 wheelo.sql
 		18-12-2022 wheelo.sql = 18-12-2022 wheelo.sql
 		19-12-2022 wheelo.sql = 19-12-2022 wheelo.sql
@@ -273,7 +273,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Tests"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HttpClient.Proxies", "HttpClient.Proxies", "{DE2E2051-FE7D-434F-8B4A-26EADBD180CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Proxies", "..\Intotech.Wheelo.Proxies\Intotech.Wheelo.Proxies.csproj", "{9E10F3E3-0366-4AEE-94C8-17566A7CC8FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Proxies", "..\Intotech.Wheelo.Proxies\Intotech.Wheelo.Proxies.csproj", "{9E10F3E3-0366-4AEE-94C8-17566A7CC8FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.ImageService", "..\Intotech.ImageService\Intotech.Wheelo.ImageService.csproj", "{7CCB0ABB-DBA4-47F2-B33F-CAE755AE198C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.ImageService.Bll", "..\Intotech.ImageService.Bll\Intotech.Wheelo.ImageService.Bll.csproj", "{597343F5-43AB-4289-86A7-11C522AF9DB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -699,6 +703,22 @@ Global
 		{9E10F3E3-0366-4AEE-94C8-17566A7CC8FB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9E10F3E3-0366-4AEE-94C8-17566A7CC8FB}.Release|x64.ActiveCfg = Release|Any CPU
 		{9E10F3E3-0366-4AEE-94C8-17566A7CC8FB}.Release|x64.Build.0 = Release|Any CPU
+		{7CCB0ABB-DBA4-47F2-B33F-CAE755AE198C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CCB0ABB-DBA4-47F2-B33F-CAE755AE198C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CCB0ABB-DBA4-47F2-B33F-CAE755AE198C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7CCB0ABB-DBA4-47F2-B33F-CAE755AE198C}.Debug|x64.Build.0 = Debug|Any CPU
+		{7CCB0ABB-DBA4-47F2-B33F-CAE755AE198C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CCB0ABB-DBA4-47F2-B33F-CAE755AE198C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CCB0ABB-DBA4-47F2-B33F-CAE755AE198C}.Release|x64.ActiveCfg = Release|Any CPU
+		{7CCB0ABB-DBA4-47F2-B33F-CAE755AE198C}.Release|x64.Build.0 = Release|Any CPU
+		{597343F5-43AB-4289-86A7-11C522AF9DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{597343F5-43AB-4289-86A7-11C522AF9DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{597343F5-43AB-4289-86A7-11C522AF9DB3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{597343F5-43AB-4289-86A7-11C522AF9DB3}.Debug|x64.Build.0 = Debug|Any CPU
+		{597343F5-43AB-4289-86A7-11C522AF9DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{597343F5-43AB-4289-86A7-11C522AF9DB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{597343F5-43AB-4289-86A7-11C522AF9DB3}.Release|x64.ActiveCfg = Release|Any CPU
+		{597343F5-43AB-4289-86A7-11C522AF9DB3}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

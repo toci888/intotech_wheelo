@@ -23,7 +23,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         {
             AccountLogic = accountLogic;
             UserExtraDataLogic = userExtraDataLogic;
-            //ImageManager = new ImageManager("fb");
+            ImageManager = new ImageManager();
         }
 
         public override FacebookUserDto GetUserByToken(string token)
@@ -62,7 +62,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                     acc.Surname = surname;
                 }
 
-                //acc.Image = dto.picture.data.url; // ImageManager.GetImageBase64(dto.picture.data.url);
+                acc.Image = ImageManager.GetImageBase64(dto.picture.data.url); //dto.picture.data.url
 
                 AccountLogic.Update(acc);
 
