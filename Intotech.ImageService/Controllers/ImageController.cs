@@ -28,7 +28,7 @@ public class ImageController : Controller
         NameValueCollection queryStringData = HttpUtility.ParseQueryString(Request.QueryString.Value);
 
         string dataId = queryStringData[QsDataId];
-
+        //@(Model.ImageBase64)
         int accountId = int.Parse(dataId);
 
         string imageBase64 = ImageRetrieveLogic.GetImageForUser(accountId, queryStringData[QsQueryValid]);

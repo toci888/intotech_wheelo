@@ -10,6 +10,6 @@ public static class ImageServiceUtils
     {
         string token = HashGenerator.Md5(string.Format("{0}_{1}", Salt, accountId));
 
-        return "http://20.203.135.11:5072/image?dataId=" + accountId + "&queryValid=" + token;
+        return "https://20.203.135.11:5072/image?dataId=" + accountId + "&queryValid=" + token;
     }
 }
