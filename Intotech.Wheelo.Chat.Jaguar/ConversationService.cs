@@ -44,6 +44,7 @@ public class ConversationService : IConversationService
 
         resElement.TenantID = resElement.ID = room.Id;
         resElement.OwnerID = room.Ownerid;
+        resElement.IdAccount = acc.Id;
         resElement.CreatedAt = room.Createdat.Value;
          //= room.Roomid;
         resElement.OwnerFirstName = acc.Name;

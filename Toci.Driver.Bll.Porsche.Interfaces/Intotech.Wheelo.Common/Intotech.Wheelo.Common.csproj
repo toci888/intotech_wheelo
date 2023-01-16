@@ -16,4 +16,8 @@
     <ProjectReference Include="..\..\Intotech.Wheelo.Common.Interfaces\Intotech.Wheelo.Common.Interfaces.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ImageService\" />
+  </ItemGroup>
+
 </Project>

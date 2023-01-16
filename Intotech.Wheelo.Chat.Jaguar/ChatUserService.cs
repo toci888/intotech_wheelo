@@ -65,6 +65,7 @@ namespace Intotech.Wheelo.Chat.Jaguar
             chatMessage.CreatedAt = mess.Createdat.Value;
             chatMessage.AuthorFirstName = acc.Name;
             chatMessage.AuthorLastName = acc.Surname;
+            chatMessage.IdAccount = acc.Id;
 
             return chatMessage;
         }
