@@ -20,6 +20,8 @@
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
     <PackageReference Include="Npgsql" Version="7.0.1" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.3" />
+    <PackageReference Include="SixLabors.Shapes" Version="1.0.0-beta0009" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +56,16 @@
     <ProjectReference Include="..\Intotech.Wheelo.Social.Database.Persistence\Intotech.Wheelo.Social.Database.Persistence.csproj" />
     <ProjectReference Include="..\Toci.Driver.Api\Intotech.Wheelo.Api.csproj" />
     <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SixLabors.ImageSharp.Drawing">
+      <HintPath>..\..\Lib\SixLabors.ImageSharp.Drawing.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
