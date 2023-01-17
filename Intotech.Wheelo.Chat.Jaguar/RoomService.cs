@@ -63,11 +63,11 @@ public class RoomService : IRoomService
             {
                 chatMembers.Add(member);
 
-                result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = member.Createdat.Value, IdAccount = member.Id, Email = member.Email, FirstName = member.Name, LastName = member.Surname });
+                result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = member.Createdat.Value, AccountId = member.Id, Email = member.Email, FirstName = member.Name, LastName = member.Surname });
             }
         }
 
-        result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = author.Createdat.Value, IdAccount = author.Id, Email = author.Email, FirstName = author.Name, LastName = author.Surname });
+        result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = author.Createdat.Value, AccountId = author.Id, Email = author.Email, FirstName = author.Name, LastName = author.Surname });
 
         //Kacper, Julia, Bartek
         result.RoomName = string.Join(", ", chatMembers.Select(m => m.Name));
