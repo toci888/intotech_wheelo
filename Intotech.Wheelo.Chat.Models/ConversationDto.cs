@@ -12,7 +12,7 @@ public class ConversationDto
     public string OwnerLastName { get; set; }
     public DateTime CreatedAt { get; set; }
     public List<ChatMessageDto> Messages { get; set; }
-    public List<MessageAuthorDto> UsersData { get; set; }
+    public List<MessageAuthorDto> RoomParticipants { get; set; }
     
 }
 

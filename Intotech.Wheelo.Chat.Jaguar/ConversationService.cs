@@ -79,7 +79,7 @@ public class ConversationService : IConversationService
 
             if (!isAccountIdRequest)
             {
-                resElement.UsersData = DistinctAuthors.Values.ToList();
+                resElement.RoomParticipants = GetRoomParticipants(roomId).Values.ToList();
             }
 
             return resElement;
@@ -102,6 +102,30 @@ public class ConversationService : IConversationService
         }
 
         result.UsersData = DistinctAuthors.Values.ToList();
+
+        return result;
+    }
+
+    protected virtual Dictionary<string, MessageAuthorDto> GetRoomParticipants(int roomId)
+    {
+        Dictionary<string, MessageAuthorDto> result = new Dictionary<string, MessageAuthorDto>();   
+
+        List<Roomsaccount> roomsAccounts = RoomsAccountLogic.Select(m => m.Idroom == roomId).ToList();
+
+        foreach (Roomsaccount item in roomsAccounts)
+        {
+            Account acc = AccountService.GetAccount(item.Memberemail);
+
+            MessageAuthorDto resElement = new MessageAuthorDto();
+
+            resElement.MessageAuthorFirstName = acc.Name;
+            resElement.MessageAuthorLastName = acc.Surname;
+            resElement.AccountId = acc.Id;
+            resElement.ImageUrl = acc.Image;
+            resElement.SenderID = acc.Email;
+
+            result.Add(item.Memberemail, resElement);
+        }
 
         return result;
     }
