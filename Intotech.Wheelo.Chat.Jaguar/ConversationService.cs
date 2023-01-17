@@ -60,13 +60,13 @@ public class ConversationService : IConversationService
                 resElement.Messages.Add(new ChatMessageDto()
                 {
                     CreatedAt = message.Createdat.Value,
-                    SenderID = message.Authoremail,
+                    SenderEmail = message.Authoremail,
                     Text = message.Message1,
                     ID = message.Id,
-                    IdAccount = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].IdAccount : 0,
+                    IdAccount = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].Id : 0,
                     RoomID = roomId,
-                    AuthorFirstName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].MessageAuthorFirstName : string.Empty,
-                    AuthorLastName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].MessageAuthorLastName : string.Empty,
+                    AuthorFirstName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].FirstName : string.Empty,
+                    AuthorLastName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].LastName : string.Empty,
                     //ImageUrl = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].ImageUrl : string.Empty
                 });
 
@@ -94,7 +94,7 @@ public class ConversationService : IConversationService
 
         result.Conversations = new List<ConversationDto>();
 
-        List<int> roomsIds = RoomsAccountLogic.Select(m => m.Memberemail == email).Select(m => m.Idroom).ToList();
+        List<int> roomsIds = RoomsAccountLogic.Select(m => m.Memberemail == email).Select(m => m.Idroom).Take(3).ToList();
 
         foreach (int roomId in roomsIds)
         {
@@ -118,9 +118,9 @@ public class ConversationService : IConversationService
 
             MessageAuthorDto resElement = new MessageAuthorDto();
 
-            resElement.MessageAuthorFirstName = acc.Name;
-            resElement.MessageAuthorLastName = acc.Surname;
-            resElement.IdAccount = acc.Id;
+            resElement.FirstName = acc.Name;
+            resElement.LastName = acc.Surname;
+            resElement.Id = acc.Id;
             resElement.ImageUrl = acc.Image;
             resElement.SenderEmail = acc.Email;
 
@@ -148,9 +148,9 @@ public class ConversationService : IConversationService
                 continue;
             }
 
-            resElement.MessageAuthorFirstName = acc.Name;
-            resElement.MessageAuthorLastName = acc.Surname;
-            resElement.IdAccount = acc.Id;
+            resElement.FirstName = acc.Name;
+            resElement.LastName = acc.Surname;
+            resElement.Id = acc.Id;
             resElement.ImageUrl = acc.Image;
             resElement.SenderEmail = acc.Email;
 

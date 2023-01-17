@@ -2,6 +2,9 @@
 
 @{
 
-    @(Model.ImageBase64)
+    for (int i = 0; i < Model.ImageBase64.Length; i++)
+    {
+        @(Model.ImageBase64[i]);
+    }
 
 }

@@ -5,8 +5,12 @@ namespace Intotech.Wheelo.Chat.Models;
 public class MessageAuthorDto
 {
     public string SenderEmail { get; set; }
-    public string MessageAuthorFirstName { get; set; }
-    public string MessageAuthorLastName { get; set; }
-    public int IdAccount { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public int Id { get; set; }
     public string ImageUrl { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime LastSeen { get; set; }
+    public DateTime UpdatedAt { get; set; }
+    public string Role { get; set; }
 }

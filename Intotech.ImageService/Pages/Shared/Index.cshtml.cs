@@ -5,7 +5,7 @@ namespace Intotech.ImageService.Pages
 {
     public class IndexModel : PageModel
     {
-        public string ImageBase64 { get; set; }
+        public byte[] ImageBase64 { get; set; } //string
 
 
     }

@@ -53,20 +53,20 @@ namespace Intotech.Wheelo.Chat.Jaguar
 
         public virtual ChatMessageDto SendMessage(ChatMessageDto chatMessage)
         {
-            Account acc = AccountService.GetAccount(chatMessage.SenderID);
+            Account acc = AccountService.GetAccount(chatMessage.SenderEmail);
 
             if (acc == null)
             {
                 return null;
             }
 
-            Message mess = MessageLogic.Insert(new Message() { Authoremail = chatMessage.SenderID, Message1 = chatMessage.Text, Idroom = chatMessage.ID });
+            Message mess = MessageLogic.Insert(new Message() { Authoremail = chatMessage.SenderEmail, Message1 = chatMessage.Text, Idroom = chatMessage.ID });
 
             chatMessage.CreatedAt = mess.Createdat.Value;
             chatMessage.AuthorFirstName = acc.Name;
             chatMessage.AuthorLastName = acc.Surname;
             chatMessage.IdAccount = acc.Id;
-           // chatMessage.ImageUrl = acc.Image; // TODO Hub request
+            chatMessage.ImageUrl = acc.Image;
 
             return chatMessage;
         }
