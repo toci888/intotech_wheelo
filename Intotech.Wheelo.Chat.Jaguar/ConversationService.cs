@@ -46,11 +46,11 @@ public class ConversationService : IConversationService
         {
             ConversationDto resElement = new ConversationDto();
 
-            resElement.TenantID = resElement.ID = room.Id;
-            resElement.OwnerID = room.Ownerid;
+            resElement.ID = room.Id;
+            resElement.RoomName = room.Roomname;
+            resElement.OwnerEmail = room.Ownerid;
             resElement.IdAccount = acc.Id;
             resElement.CreatedAt = room.Createdat.Value;
-            //= room.Roomid;
             resElement.OwnerFirstName = acc.Name;
             resElement.OwnerLastName = acc.Surname;
             resElement.Messages = new List<ChatMessageDto>();
@@ -122,7 +122,7 @@ public class ConversationService : IConversationService
             resElement.MessageAuthorLastName = acc.Surname;
             resElement.AccountId = acc.Id;
             resElement.ImageUrl = acc.Image;
-            resElement.SenderID = acc.Email;
+            resElement.SenderEmail = acc.Email;
 
             result.Add(item.Memberemail, resElement);
         }
@@ -152,7 +152,7 @@ public class ConversationService : IConversationService
             resElement.MessageAuthorLastName = acc.Surname;
             resElement.AccountId = acc.Id;
             resElement.ImageUrl = acc.Image;
-            resElement.SenderID = acc.Email;
+            resElement.SenderEmail = acc.Email;
 
             DistinctAuthors.Add(message.Authoremail, resElement);
         }
