@@ -15,6 +15,8 @@ public class ConversationService : IConversationService
     protected IAccountService AccountService;
     protected IRoomsaccountLogic RoomsAccountLogic;
 
+    protected Dictionary<string, MessageAuthorDto> DistinctAuthors = new Dictionary<string, MessageAuthorDto>();
+
     public ConversationService(IMessageLogic messageLogic, IAccountService accountService, IRoomLogic roomLogic, IRoomsaccountLogic roomsAccountLogic)
     {
         MessageLogic = messageLogic;
@@ -29,7 +31,7 @@ public class ConversationService : IConversationService
 
         List<Message> distinctAuthors = messages.DistinctBy(m => m.Authoremail).ToList();
 
-        Dictionary<string, MessageAuthorDto> authorsData = GetDistinctNames(distinctAuthors);
+        GetDistinctNames(distinctAuthors);
 
         Room room = RoomLogic.Select(m => m.Id == roomId).FirstOrDefault();
 
@@ -52,7 +54,7 @@ public class ConversationService : IConversationService
             resElement.OwnerFirstName = acc.Name;
             resElement.OwnerLastName = acc.Surname;
             resElement.Messages = new List<ChatMessageDto>();
-
+            
             foreach (Message message in messages)
             {
                 resElement.Messages.Add(new ChatMessageDto()
@@ -61,20 +63,24 @@ public class ConversationService : IConversationService
                     SenderID = message.Authoremail,
                     Text = message.Message1,
                     ID = message.Id,
-                    IdAccount = authorsData.ContainsKey(message.Authoremail) ? authorsData[message.Authoremail].AccountId : 0,
+                    IdAccount = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].AccountId : 0,
                     RoomID = roomId,
-                    AuthorFirstName = authorsData.ContainsKey(message.Authoremail) ? authorsData[message.Authoremail].MessageAuthorFirstName : string.Empty,
-                    AuthorLastName = authorsData.ContainsKey(message.Authoremail) ? authorsData[message.Authoremail].MessageAuthorLastName : string.Empty,
-                    //ImageUrl = authorsData.ContainsKey(message.Authoremail) ? authorsData[message.Authoremail].ImageUrl : string.Empty
+                    AuthorFirstName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].MessageAuthorFirstName : string.Empty,
+                    AuthorLastName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].MessageAuthorLastName : string.Empty,
+                    //ImageUrl = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].ImageUrl : string.Empty
                 });
 
                 if (isAccountIdRequest)
                 {
+                    //resElement.UsersData = DistinctAuthors.Values.ToList();
                     break;
                 }
             }
 
-            resElement.UsersData = authorsData.Values.ToList();
+            if (!isAccountIdRequest)
+            {
+                resElement.UsersData = DistinctAuthors.Values.ToList();
+            }
 
             return resElement;
         }
@@ -82,26 +88,33 @@ public class ConversationService : IConversationService
         return null;
     }
 
-    public virtual List<ConversationDto> GetConversationsByAccountId(string email)
+    public virtual FullConversationsDto GetConversationsByAccountId(string email)
     {
-        List<ConversationDto> conversations = new List<ConversationDto>();
+        FullConversationsDto result = new FullConversationsDto();
+
+        result.Conversations = new List<ConversationDto>();
 
         List<int> roomsIds = RoomsAccountLogic.Select(m => m.Memberemail == email).Select(m => m.Idroom).ToList();
 
         foreach (int roomId in roomsIds)
         {
-            conversations.Add(GetConversationById(roomId, true));
+            result.Conversations.Add(GetConversationById(roomId, true));
         }
 
-        return conversations;
+        result.UsersData = DistinctAuthors.Values.ToList();
+
+        return result;
     }
 
     protected virtual Dictionary<string, MessageAuthorDto> GetDistinctNames(List<Message> distinctAuthors)
     {
-        Dictionary<string, MessageAuthorDto> result = new Dictionary<string, MessageAuthorDto>();
-
         foreach (Message message in distinctAuthors)
         {
+            if (DistinctAuthors.ContainsKey(message.Authoremail))
+            {
+                continue;
+            }
+
             MessageAuthorDto resElement = new MessageAuthorDto();
 
             Account acc = AccountService.GetAccount(message.Authoremail);
@@ -117,9 +130,9 @@ public class ConversationService : IConversationService
             resElement.ImageUrl = acc.Image;
             resElement.SenderID = acc.Email;
 
-            result.Add(message.Authoremail, resElement);
+            DistinctAuthors.Add(message.Authoremail, resElement);
         }
 
-        return result;
+        return DistinctAuthors;
     }
 }
