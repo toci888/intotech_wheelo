@@ -275,9 +275,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HttpClient.Proxies", "HttpC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Proxies", "..\Intotech.Wheelo.Proxies\Intotech.Wheelo.Proxies.csproj", "{9E10F3E3-0366-4AEE-94C8-17566A7CC8FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.ImageService", "..\Intotech.ImageService\Intotech.Wheelo.ImageService.csproj", "{7CCB0ABB-DBA4-47F2-B33F-CAE755AE198C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.ImageService", "..\Intotech.ImageService\Intotech.Wheelo.ImageService.csproj", "{7CCB0ABB-DBA4-47F2-B33F-CAE755AE198C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.ImageService.Bll", "..\Intotech.ImageService.Bll\Intotech.Wheelo.ImageService.Bll.csproj", "{597343F5-43AB-4289-86A7-11C522AF9DB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.ImageService.Bll", "..\Intotech.ImageService.Bll\Intotech.Wheelo.ImageService.Bll.csproj", "{597343F5-43AB-4289-86A7-11C522AF9DB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.HttpClient.Proxies.Test", "..\Intotech.Wheelo.HttpClient.Proxies.Test\Intotech.Wheelo.HttpClient.Proxies.Test.csproj", "{87F0CBD0-9D61-4300-A7CB-799FA5486C71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -719,6 +721,14 @@ Global
 		{597343F5-43AB-4289-86A7-11C522AF9DB3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{597343F5-43AB-4289-86A7-11C522AF9DB3}.Release|x64.ActiveCfg = Release|Any CPU
 		{597343F5-43AB-4289-86A7-11C522AF9DB3}.Release|x64.Build.0 = Release|Any CPU
+		{87F0CBD0-9D61-4300-A7CB-799FA5486C71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87F0CBD0-9D61-4300-A7CB-799FA5486C71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87F0CBD0-9D61-4300-A7CB-799FA5486C71}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{87F0CBD0-9D61-4300-A7CB-799FA5486C71}.Debug|x64.Build.0 = Debug|Any CPU
+		{87F0CBD0-9D61-4300-A7CB-799FA5486C71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87F0CBD0-9D61-4300-A7CB-799FA5486C71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87F0CBD0-9D61-4300-A7CB-799FA5486C71}.Release|x64.ActiveCfg = Release|Any CPU
+		{87F0CBD0-9D61-4300-A7CB-799FA5486C71}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -766,6 +776,7 @@ Global
 		{94626A6A-464F-4FC8-9ACE-F96A0F3EC8A3} = {A662B894-F584-4249-902F-47612C3E8E94}
 		{ED37397B-F1A6-4347-A6BF-E2B6797EECAB} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
 		{9E10F3E3-0366-4AEE-94C8-17566A7CC8FB} = {DE2E2051-FE7D-434F-8B4A-26EADBD180CD}
+		{87F0CBD0-9D61-4300-A7CB-799FA5486C71} = {DE2E2051-FE7D-434F-8B4A-26EADBD180CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {958786F8-D2E4-4AAC-949D-3CD908D8AE36}

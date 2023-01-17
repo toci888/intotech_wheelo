@@ -7,6 +7,6 @@ public class MessageAuthorDto
     public string SenderEmail { get; set; }
     public string MessageAuthorFirstName { get; set; }
     public string MessageAuthorLastName { get; set; }
-    public int AccountId { get; set; }
+    public int IdAccount { get; set; }
     public string ImageUrl { get; set; }
 }

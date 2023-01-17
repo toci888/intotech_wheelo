@@ -63,7 +63,7 @@ public class ConversationService : IConversationService
                     SenderID = message.Authoremail,
                     Text = message.Message1,
                     ID = message.Id,
-                    IdAccount = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].AccountId : 0,
+                    IdAccount = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].IdAccount : 0,
                     RoomID = roomId,
                     AuthorFirstName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].MessageAuthorFirstName : string.Empty,
                     AuthorLastName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].MessageAuthorLastName : string.Empty,
@@ -120,7 +120,7 @@ public class ConversationService : IConversationService
 
             resElement.MessageAuthorFirstName = acc.Name;
             resElement.MessageAuthorLastName = acc.Surname;
-            resElement.AccountId = acc.Id;
+            resElement.IdAccount = acc.Id;
             resElement.ImageUrl = acc.Image;
             resElement.SenderEmail = acc.Email;
 
@@ -150,7 +150,7 @@ public class ConversationService : IConversationService
 
             resElement.MessageAuthorFirstName = acc.Name;
             resElement.MessageAuthorLastName = acc.Surname;
-            resElement.AccountId = acc.Id;
+            resElement.IdAccount = acc.Id;
             resElement.ImageUrl = acc.Image;
             resElement.SenderEmail = acc.Email;
 

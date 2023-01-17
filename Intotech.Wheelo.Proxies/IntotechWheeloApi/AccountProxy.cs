@@ -9,6 +9,7 @@ namespace Intotech.Wheelo.Proxies.IntotechWheeloApi;
 public class AccountProxy : HttpClientProxyBase, IAccountProxy
 {
     protected string apiAccountRegisterResource = "api/Account/register";
+    protected string apiAccountLoginResource = "api/Account/login";
 
     public AccountProxy() : base(ServersUrls.IntotechWheeloApiUrl)
     {
