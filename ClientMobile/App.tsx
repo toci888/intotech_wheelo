@@ -33,7 +33,7 @@ export default function App() {
       const user = await SecureStore.getItemAsync("user");
       if (user) {
         const userObj: User = JSON.parse(user);
-        console.log("JUSRE", userObj)
+
         createSocket(userObj.accessToken);
         // const newTokens = await refreshTokens(userObj.accessToken, userObj.refreshtoken);
         // if (newTokens) {
@@ -93,7 +93,7 @@ export default function App() {
         socket.on("roomestablished", (roomData:{ room: {idRoom: number, ownerEmail: string, roomId: string, roomName: string, roomMembers: any}}) => {
           let data = roomData.room;
 
-          console.log('roomestablished', data);
+          // console.log('roomestablished', data);
         });
 
         await socket.start();
@@ -101,7 +101,7 @@ export default function App() {
 
         await socket.invoke("CreateRoom", userObj.email, ['warriorr@poczta.fm', 'bzapart@gmail.com']);
 
-        console.log("USER ID", userObj)
+        console.log("USER ID", JSON.stringify(userObj))
       }
     }
 

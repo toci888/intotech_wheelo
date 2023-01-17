@@ -34,9 +34,19 @@ eyJraWQiOiJZdXlYb1kiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGU
 https://jwt.io/
 https://appleid.apple.com/auth/keys
 
+expo doctor --fix-dependencies
+expo install [package-name ...]
+expo update
+
+WARNING: expo-cli has not yet been tested against Node.js v18.13.0.
+If you encounter any issues, please report them to https://github.com/expo/expo-cli/issues
+
+expo-cli supports following Node.js versions:
+* >=12.13.0 <15.0.0 (Maintenance LTS)
+* >=16.0.0 <17.0.0 (Active LTS)
 
 
-https://apartmentsclone.tk/api/property/1
-https://api.locationiq.com/v1/search.php?key=pk.95fe8bb8ddbbc10ed656fe23d485c8f0&q&q=Tampa&format=json&dedupe=1&addressdetails=1&matchquality=1&normalizeaddress=1&normalizecity=1
-https://api.locationiq.com/v1/autocomplete.php?key=pk.95fe8bb8ddbbc10ed656fe23d485c8f0&q=polska&limit=10
-
+additionally
+npm install -g react-native-git-upgrade
+npm install -g @react-native-community/cli
+react-native-git-upgrade
