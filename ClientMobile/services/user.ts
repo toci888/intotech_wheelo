@@ -24,7 +24,7 @@ export const loginUser = async (values: loginDto) => {
     values.password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, values.password);
     values.method = 'wheelo';
     values.token = '';
-
+    console.log("HASZ", values.password)
     const { data } = await axios.post(endpoints.login, values);
     return data as ReturnedResponse<User>;
   } catch (error) {

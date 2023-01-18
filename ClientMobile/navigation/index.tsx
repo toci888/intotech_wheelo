@@ -39,21 +39,17 @@ import { MessagesScreen } from "../screens/MessagesScreen";
 import { CodeVerificationScreen } from "../screens/CodeVerificationScreen";
 import { useUser } from "../hooks/useUser";
 import { i18n } from "../i18n/i18n";
+import { themes } from "../constants/constants";
 
 export default function Navigation({
   colorScheme,
 }: {
   colorScheme: ColorSchemeName;
 }) {
-  DefaultTheme.dark = colorScheme === "dark" ? true : false;
-  // DarkTheme.colors = { primary: 'blue', border: 'green', card: 'aqua', 
-  //               notification: 'pink', background: 'gray', text: 'red'}
-  const myTheme = DefaultTheme.dark ? DarkTheme : DefaultTheme
+  DefaultTheme.dark = colorScheme === themes.dark ? true : false;
 
-  myTheme.colors = Object.assign(myTheme.colors, theme)
-  
   return (
-    <NavigationContainer linking={LinkingConfiguration} theme={myTheme}>
+    <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme.dark ? DarkTheme : DefaultTheme}>
       <RootNavigator colorScheme={colorScheme} />
     </NavigationContainer>
   );
