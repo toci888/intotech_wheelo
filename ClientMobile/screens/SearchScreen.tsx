@@ -24,5 +24,3 @@ export const SearchScreen = ({route}: {
     </Screen>
   );
 };
-
-

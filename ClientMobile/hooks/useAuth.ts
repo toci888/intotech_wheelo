@@ -52,7 +52,6 @@ export const useAuth = () => {
   const handleSignInUser = (user?: User) => {
     if (user) {
       login(user);
-      goBack();
     }
   };
 
@@ -81,7 +80,7 @@ export const useAuth = () => {
       const user = await loginUser(values);
       
       handleSignInUser(user?.methodResult);
-
+      
       return user;
     } catch (error) {
       handleAuthError();

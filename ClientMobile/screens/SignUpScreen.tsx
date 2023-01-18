@@ -30,14 +30,10 @@ type SignUpProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>
 
 export const SignUpScreen = () => {
   const [user, setUser] = useState<IUser>({
-    firstName: "asd",
-    lastName: "qwe",
-    email: "new@wp.plxb",
-    password: "zxcD@#gry123",
-    // firstName: "",
-    // lastName: "",
-    // email: "",
-    // password: "",
+    firstName: "Kacper",
+    lastName: "Wyb",
+    email: "bartek@gg.pl",
+    password: "Beatka123(",
   });
   const navigation = useNavigation();
   const { appleAuth, facebookAuth, googleAuth, nativeRegister } = useAuth();
@@ -73,11 +69,13 @@ export const SignUpScreen = () => {
               const response: ReturnedResponse<User> | undefined = await nativeRegister(values);
               if(response) {
                 console.log("valuess", values)
+                console.log("response", response)
                 if ((response.isSuccess === true && response.errorCode === 1)
                 || (response.isSuccess === false && response.errorCode === 16384)) {
                   navigation.navigate("CodeVerification", {user: values, type: "email"});
                 }
                 else if(response.isSuccess === false) {
+                  console.log("response.isSuccess", response)
                   commonAlert(response.errorMessage)
                 }
               }

@@ -11,6 +11,8 @@ import { callPhoneNumber } from "../utils/callPhoneNumber";
 import { getStateAbbreviation } from "../utils/getStateAbbreviation";
 import { useUser } from "../hooks/useUser";
 import { useSaveCollocationMutation } from "../hooks/mutations/useSavePropertyMutation";
+import { commonAlert } from "../utils/handleError";
+import { i18n } from "../i18n/i18n";
 
 export const CardInformation = ({
   collocation,
@@ -38,7 +40,7 @@ export const CardInformation = ({
   };
 
   const handleStarPress = () => {
-    if (!user) return alert("Please sign up or sign in to save properties");
+    if (!user) return commonAlert(i18n.t('PleaseSignUpOrSignInToSaveProperties'));
     let op: "add" | "remove" = "add";
     if (collocation?.areFriends) op = "remove";
 

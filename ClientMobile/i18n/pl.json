@@ -24,5 +24,17 @@
     "YourEmailAddress": "Twój Adres email",
     "Youremailisrequired": "Adres email jest wymagany.",
     "EmailSent": "E-Mail został wysłany!",
-    "AnemailcontaininginstructionsabouthowtochangeyourpasswordhasbeensenttoyouPleasecheckyourjunkmailorspamsectionifyoudonotseeanemail": "Wiadomość e-mail zawierająca instrukcje dotyczące zmiany hasła został do Ciebie wysłany. Sprawdź sekcję wiadomości-śmieci lub spamu jeśli nie widzisz wiadomości e-mail."
+    "AnemailcontaininginstructionsabouthowtochangeyourpasswordhasbeensenttoyouPleasecheckyourjunkmailorspamsectionifyoudonotseeanemail": "Wiadomość e-mail zawierająca instrukcje dotyczące zmiany hasła został do Ciebie wysłany. Sprawdź sekcję wiadomości-śmieci lub spamu jeśli nie widzisz wiadomości e-mail.",
+    "PleaseSignUpOrSignInToSaveProperties": "W celu zapisania, proszę się zalogować.",
+    "UseMyCurrentLocation": "Użyj mojej lokalizacji",
+    "UnableToGetCollocationDetails": "Nie udało się pobrać danych kolokacji ...",
+    "UnableToGetCollocationMessage": "Nie udało się pobrać informacji.",
+    "Messages": "Wiadomości",
+    "Account": "Konto",
+    "Back": "Wróć",
+    "Chat": "Czat",
+    "YouHaveNoMessages": "Nie masz żadnych wiadomości",
+    "SeeMore": "Więcej",
+    "SeeLess": "Mniej",
+    "UnableToGetChat": "Nie udało się pobrać informacji czatu"
 }

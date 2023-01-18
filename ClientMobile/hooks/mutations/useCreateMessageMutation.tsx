@@ -3,35 +3,29 @@ import axios from "axios";
 
 import { endpoints, queryKeys } from "../../constants/constants";
 import { socket } from "../../constants/socket";
-import {
-  SelectedConversation,
-  TransformedConversation,
-  Author,
-} from "../../types/conversation";
+import { SelectedConversation, TransformedConversation, Author, } from "../../types/conversation";
 import { MessageType } from "@flyerhq/react-native-chat-ui/lib/types";
 import { useUser } from "../useUser";
 
 const createMessage = (
   conversationID: number,
-  senderID: number,
+  senderID: string,
   receiverID: number,
+  authorFirstName: string,
+  authorLastName: string,
   text: string,
   token?: string
-) =>
-  axios.post(
-    `${endpoints.createMessage}`,
-    {
-      conversationID,
-      senderID,
-      receiverID,
-      text,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+) => {
+  return socket.invoke('sendMessage',  {
+    senderID,
+    text,
+    ID: conversationID, //to delete
+    CreatedAt: new Date(),
+    authorFirstName,
+    authorLastName,
+    RoomID: conversationID
+   });
+}
 
 export const useCreateMessageMutation = () => {
   const queryClient = useQueryClient();
@@ -43,20 +37,28 @@ export const useCreateMessageMutation = () => {
       author,
       senderID,
       receiverID,
+      authorFirstName,
+      authorLastName,
       text,
+      imageUrl
     }: {
       conversationID: number;
       author: Author;
-      senderID: number;
+      senderID: string;
       receiverID: number;
+      authorFirstName: string,
+      authorLastName: string,
       text: string;
+      imageUrl: string;
     }) =>
       createMessage(
         conversationID,
         senderID,
         receiverID,
-        text,
-        user?.accessToken
+        authorFirstName,
+        authorLastName,
+        imageUrl,
+        text
       ),
     {
       onMutate: async ({
@@ -65,6 +67,9 @@ export const useCreateMessageMutation = () => {
         conversationID,
         receiverID,
         senderID,
+        authorFirstName,
+        authorLastName,
+        imageUrl
       }) => {
         await queryClient.cancelQueries(queryKeys.conversations);
         await queryClient.cancelQueries(queryKeys.selectedConversation);
@@ -95,15 +100,18 @@ export const useCreateMessageMutation = () => {
         if (prevConversations) {
           const newConversations = [...prevConversations];
           const index = newConversations.findIndex(
-            (i) => i.ID === conversationID
+            (i) => i.id === conversationID
           );
 
           newConversations[index].messages.unshift({
-            CreatedAt: new Date().toString(),
-            ID: Date.now(),
-            receiverID,
+            createdAt: new Date().toString(),
+            id: Date.now(),
+            roomID: receiverID,
             senderID,
             text,
+            authorFirstName,
+            authorLastName,
+            imageUrl
           });
 
           queryClient.setQueryData(queryKeys.conversations, newConversations);
@@ -126,15 +134,23 @@ export const useCreateMessageMutation = () => {
       },
       onSuccess: (
         _,
-        { author, conversationID, receiverID, senderID, text }
+        { author, conversationID, receiverID, senderID, text, authorFirstName, authorLastName }
       ) => {
-        socket.emit("sendMessage", {
-          senderID,
+        // // socket.invoke("sendMessage", {
+        // //   senderID,
+        // //   conversationID,
+        // //   receiverID,
+        // //   text,
+        // //   senderName: `${author.firstName} ${author.lastName}`,
+        // // });
+        createMessage(
           conversationID,
+          senderID,
           receiverID,
+          authorFirstName,
+          authorLastName,
           text,
-          senderName: `${author.firstName} ${author.lastName}`,
-        });
+        );
       },
       onSettled: () => {
         queryClient.invalidateQueries(queryKeys.conversations);

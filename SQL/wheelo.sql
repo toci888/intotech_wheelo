@@ -530,7 +530,7 @@ create table OccupationSmokerCrat
 --INSERTY:
 --insert into FailedLoginAttempts (IdAccount, ts1) values (AcountIndentifiers, timestamps)
 --insert into SimplePasswords (IdAccount) values (AcountIndentifiers)
---ew. blokada jeśli gdzieś damy boolean np czy simple password czy nie
+--ew. blokada je�li gdzie� damy boolean np czy simple password czy nie
 --bolakada1:
 --select IdAccount
 --from FailedLoginAttempts

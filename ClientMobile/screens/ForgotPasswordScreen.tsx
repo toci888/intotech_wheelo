@@ -13,6 +13,7 @@ import { useLoading } from "../hooks/useLoading";
 import { forgotPassword } from "../services/user";
 import { i18n } from "../i18n/i18n";
 import { User } from "../types/user";
+import { commonAlert } from "../utils/handleError";
 
 export const ForgotPasswordScreen = () => {
   const [emailSent, setEmailSent] = useState(false);
@@ -58,7 +59,7 @@ export const ForgotPasswordScreen = () => {
             </Text>
             <Formik
               initialValues={{
-                email: "new@wp.plxb",
+                email: "bartek@gg.pl",
               }}
               validationSchema={yup.object().shape({
                 email: yup.string().email().required(i18n.t('Youremailisrequired')),

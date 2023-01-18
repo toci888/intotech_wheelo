@@ -1,3 +1,4 @@
+import React from "react";
 import { FlatList, Pressable, StyleSheet } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
@@ -8,6 +9,7 @@ import { useUser } from "../hooks/useUser";
 import { SignUpOrSignInScreen } from "./SignUpOrSignInScreen";
 import { theme } from "../theme";
 import { Row } from "../components/Row";
+import { i18n } from "../i18n/i18n";
 
 export const ConversationsScreen = () => {
   const { user } = useUser();
@@ -18,41 +20,34 @@ export const ConversationsScreen = () => {
 
   if (conversations.isLoading) return <Loading />;
 
-  if (!conversations?.data || conversations.data.length === 0)
-    return <Text>You have no messages</Text>;
+  if (!conversations?.data || conversations.data.length === 0) {
+    return <Text>{i18n.t('YouHaveNoMessages')}</Text>;
+  }
 
-  const handleMessagePress = (
-    conversationID: number,
-    recipientName: string
-  ) => {
-    navigate("Root", {
-      screen: "AccountRoot",
-      params: {
-        screen: "Messages",
-        params: {
-          conversationID,
-          recipientName,
-        },
-      },
+  const handleMessagePress = (conversationID: number, recipientName: string ) => {
+    console.log("Message Pressed", conversationID, recipientName)
+    navigate("Messages", {
+      conversationID,
+      recipientName,
     });
-  };
+  }
 
   return (
     <FlatList
-      showsVerticalScrollIndicator={false}
+      showsVerticalScrollIndicator={true}
       data={conversations.data}
-      keyExtractor={(item) => item.ID.toString()}
+      keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
         <Pressable
           style={styles.message}
-          onPress={() => handleMessagePress(item.ID, item.recipientName)}
+          onPress={() => handleMessagePress(item.id, item.recipientName)}
         >
           <Row style={styles.row}>
             <Text style={styles.messageTitle} numberOfLines={1}>
               {item.recipientName}
             </Text>
             <Text appearance="hint">
-              {new Date(item.messages[0].CreatedAt).toLocaleDateString()}
+              {new Date(item.messages[0].createdAt).toLocaleDateString()}
             </Text>
           </Row>
           <Text numberOfLines={2} appearance="hint" style={styles.messageText}>

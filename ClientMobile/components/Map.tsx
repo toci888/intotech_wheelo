@@ -126,7 +126,7 @@ export const Map = ({
       <MapView
         provider={"google"}
         style={styles.map}
-        userInterfaceStyle={"light"}
+        userInterfaceStyle={"dark"} //TODO!
         ref={mapRef}
         onPress={handleMapPress}
         region={region}
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 10,
     position: "absolute",
-    top: 170,
+    top: 60,
     left: 15,
     borderRadius: 30,
   }

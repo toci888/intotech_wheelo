@@ -3,7 +3,7 @@ import { MessageType } from "@flyerhq/react-native-chat-ui/lib/types";
 import { Message } from "./message";
 
 export type Conversation = {
-  ID: number;
+  id: number;
   ownerID: number;
   tenantID: number;
   propertyID: number;
@@ -11,15 +11,15 @@ export type Conversation = {
 };
 
 export type SelectedConversation = {
-  ID: number;
+  id: number;
   receiverID: number;
   messages: MessageType.Any[];
   author: Author;
 };
 
 export type TransformedConversation = {
-  ID: number;
-  propertyID: number;
+  id: number;
+  // collocationID: number;
   recipientName: string;
   messages: Message[];
 };

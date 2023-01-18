@@ -18,6 +18,7 @@ import { SignUpOrSignInScreen } from "./SignUpOrSignInScreen";
 import { useConversationsQuery } from "../hooks/queries/useConversationsQuery";
 import { useCreateConversationMutation } from "../hooks/mutations/useCreateConversationMutation";
 import { Loading } from "../components/Loading";
+import { i18n } from "../i18n/i18n";
 
 export const MessagePropertyScreen = ({
   route,
@@ -34,7 +35,7 @@ export const MessagePropertyScreen = ({
   console.log("zxcvb", user)
   console.log("zx2vb", collocation)
   if (!user) return <SignUpOrSignInScreen />;
-  if (!collocation) return <Text>Unable to get property message...</Text>;
+  if (!collocation) return <Text>{i18n.t('UnableToGetCollocationMessage')}</Text>;
   if (conversations.isLoading) return <Loading />;
 
   const navigateToMessageScreen = (
@@ -56,11 +57,11 @@ export const MessagePropertyScreen = ({
 
   if (conversations?.data && conversations.data.length > 0) {
     const index = conversations.data.findIndex(
-      (i) => i.propertyID === route.params.collocationID
+      (i) => i.id === route.params.collocationID
     );
     if (index >= 0) {
       navigateToMessageScreen(
-        conversations.data[index].ID,
+        conversations.data[index].id,
         conversations.data[index].recipientName
       );
     }

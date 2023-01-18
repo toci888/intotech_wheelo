@@ -1,7 +1,7 @@
 import { TouchableOpacity, Platform, StyleSheet, View } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { DefaultTheme, useNavigation } from "@react-navigation/native";
 
 import { theme } from "../theme";
 import { Row } from "./Row";
@@ -37,8 +37,8 @@ export const HeaderInput = ({ type, location, setLocation, time, setTime }:
         
         <DateTimePicker
           locale="pl_PL"
-          isDarkModeEnabled={false}
-          textColor="black" //razem, bialy sam nie dziala
+          isDarkModeEnabled={DefaultTheme.dark}
+          textColor={DefaultTheme.dark ? "white" : "black"} //razem, bialy sam nie dziala
           date={new Date(`July 1, 1999, ${time}`)}
 
           display="spinner" 
@@ -47,11 +47,11 @@ export const HeaderInput = ({ type, location, setLocation, time, setTime }:
           onConfirm={(selectedDate: Date) => {
             if (selectedDate) {
               setShowDate(false);
-              setTime(selectedDate.toTimeString().substring(0, 5))
+              setTime(selectedDate.toTimeString().split(' ')[0].substring(0,5))
             }
           }}
           onCancel={() => { setShowDate(false); }}
-          onChange={(selectedTime) => {setTime(selectedTime.toLocaleString().substring(12, 17))}}
+          onChange={(selectedTime) => {setTime(selectedTime.toLocaleString().split(', ')[1].substring(0,5))}}
         />
       </TouchableOpacity>
     </View>

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import * as SecureStore from "expo-secure-store";
 import { useQueryClient } from "react-query";
 import * as Notifications from "expo-notifications";
+import { DefaultTheme } from "@react-navigation/native";
 
 import { AuthContext } from "../context";
 import { User } from "../types/user";
@@ -24,18 +25,9 @@ export const useUser = () => {
   const login = (user: User) => {
     setAndStoreUser(user);
     // Nothing else is working so this is my last resort
-    const searchCollocations: CollocateAccount[] | undefined = queryClient.getQueryData(
-      queryKeys.searchCollocations
-    );
+    const searchCollocations: CollocateAccount[] | undefined = queryClient.getQueryData(queryKeys.searchCollocations);
 
-    socket.auth = {
-      userID: user.id,
-      username:
-        user.firstName && user.lastName
-          ? `${user.firstName} ${user.lastName}`
-          : `${user.email}`,
-    };
-    socket.connect();
+    socket.start();
     if (searchCollocations) {
       for (let i of searchCollocations) {
         i.areFriends = false;
@@ -50,7 +42,7 @@ export const useUser = () => {
       const prevUser = { ...user };
       setUser(null);
       SecureStore.deleteItemAsync("user");
-      socket.disconnect();
+      socket.stop();
       queryClient.clear();
       try {
         const token = (await Notifications.getExpoPushTokenAsync()).data;
@@ -109,7 +101,7 @@ export const useUser = () => {
       const prevUser = { ...user };
       updatedUser.darkMode = darkMode;
       setAndStoreUser(updatedUser);
-
+      DefaultTheme.dark = !DefaultTheme.dark;
       try {
         await alterThemeMode(user.id, darkMode, user.accessToken);
       } catch (error) {

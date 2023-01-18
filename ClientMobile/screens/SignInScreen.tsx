@@ -29,8 +29,8 @@ export const SignInScreen = () => {
           </Text>
           <Formik
             initialValues={{
-              email: "new@wp.plxb",
-              password: "zxcD@#gry123",
+              email: "bartek@gg.pl",
+              password: "Beatka123(",
             }}
             validationSchema={yup.object().shape({
               email: yup.string().email().required("Email jest wymagany."),

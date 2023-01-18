@@ -33,6 +33,7 @@ export type RootStackParamList = {
   ManageUnits: { collocationID: number };
   Review: { collocationID: number; propertyName: string };
   CodeVerification: { params: User};
+  Messages: { conversationID: number; recipientName: string };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -41,6 +42,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 export type RootTabParamList = {
   Search: undefined | SearchScreenParams;
   Saved: undefined;
+  Saved2: undefined;
   AccountRoot: NavigatorScreenParams<AccountTabParamList> | undefined;
 };
 
@@ -49,6 +51,21 @@ export type AccountTabParamList = {
   Settings: undefined;
   Conversations: undefined;
   Messages: { conversationID: number; recipientName: string };
+};
+
+export type ChatTabParamList = {
+  Chat: undefined;
+  Conversations: undefined;
+  Messages: { conversationID: number; recipientName: string };
+};
+
+export type AuthParamList = {
+  Account: undefined;
+  SignIn: undefined;
+  SignUp: undefined;
+  ForgotPassword: undefined;
+  ResetPassword: undefined;
+  CodeVerification: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =

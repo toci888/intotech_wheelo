@@ -12,10 +12,10 @@ import * as Notifications from "expo-notifications";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
-import { theme } from "./theme";
+import { theme, updateTheme } from "./theme";
 import { AuthContext, LoadingContext } from "./context";
 import { User } from "./types/user";
-import { socket } from "./constants/socket";
+import { createSocket, socket } from "./constants/socket";
 import { queryKeys } from "./constants/constants";
 import { refreshTokens } from "./services/tokens";
 import WheeloClient from "./chatlib/WheeloClient";
@@ -24,88 +24,97 @@ const queryClient = new QueryClient();
 LogBox.ignoreAllLogs();
 
 export default function App() {
+  // const navigation = useNavigation();
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [first, setfirst] = useState({});
+
+  // useEffect(() => {
+  //   console.log("XXXXXXX", colorScheme);
+  //   updateTheme(colorScheme)
+  //   setfirst({});
+  // }, [colorScheme]);
 
   useEffect(() => {
     async function getUser() {
       const user = await SecureStore.getItemAsync("user");
       if (user) {
         const userObj: User = JSON.parse(user);
-        const newTokens = await refreshTokens(userObj.refreshToken);
-        if (newTokens) {
-          userObj.accessToken = newTokens.accessToken;
-          userObj.refreshToken = newTokens.refreshToken;
-          SecureStore.setItemAsync("user", JSON.stringify(userObj));
-        }
+        console.log("JUSRE", userObj)
+        createSocket(userObj.accessToken);
+        // const newTokens = await refreshTokens(userObj.accessToken, userObj.refreshtoken);
+        // if (newTokens) {
+        //   userObj.accessToken = newTokens.accessToken;
+        //   userObj.refreshtoken = newTokens.refreshToken;
+        //   SecureStore.setItemAsync("user", JSON.stringify(userObj));
+        // }
         setUser(userObj);
+        
+        socket.on(
+          "getMessage",
+          (message: { chatMessage: {
+            id: number;
+            senderID: number;
+            text: string;
+            createdAt: Date;
+            authorFirstName: string;
+            authorLastName: string;
+          }}) => {
+            let data = message.chatMessage;
 
-        const chatClient = new WheeloClient(() => {}, () => {}, () => {});
+            queryClient.invalidateQueries(queryKeys.conversations);
+            queryClient.invalidateQueries(queryKeys.selectedConversation);
+  
+            Notifications.scheduleNotificationAsync({
+              content: {
+                title: data.authorFirstName,
+                body: data.text,
+                
+                data: {
+                //   // will need to change url in prod build (use process.ENV && eas.json)
+                  // url: `exp://localhost:19000/messages/${data.id}/${data.authorFirstName}`,
+                  url: `https://expo.dev/@kacper1337/intotechwheelo?serviceType=classic&distribution=expo-go/messages`,
+                },
+              },
+              
+              trigger: null //opoznienie{ seconds: 4 },
+            });
+          }
+        );
+        socket.on("session", (sessionData: {data: {userId: number, userName: string, userSurname: string, sessionId: number}}) => {
+          let data = sessionData.data;
 
-        chatClient.connect(userObj.id);
+          if (userObj) {
+            const updatedUser = { ...userObj };
+            updatedUser.sessionID = data.sessionId.toString();
+            setUser(updatedUser);
+            SecureStore.setItemAsync("user", JSON.stringify(updatedUser));
+          }
+        });
+        socket.on("connect_error", (err) => {
+          console.log("BLAD signalR", err)
+          if (err.message === "Invalid user id" && user) {
+            socket.start();
+          }
+        });
+        socket.on("roomestablished", (roomData:{ room: {idRoom: number, ownerEmail: string, roomId: string, roomName: string, roomMembers: any}}) => {
+          let data = roomData.room;
 
-        socket.auth = {
-          userID: userObj.id,
-          username:
-            userObj.firstName && userObj.lastName
-              ? `${userObj.firstName} ${userObj.lastName}`
-              : `${userObj.email}`,
-          accessToken: userObj.accessToken,
-        };
+          console.log('roomestablished', data);
+        });
 
-        socket.connect();
+        await socket.start();
+        await socket.invoke("ConnectUser", userObj.email);
+
+        await socket.invoke("CreateRoom", userObj.email, ['warriorr@poczta.fm', 'bzapart@gmail.com']);
+
+        console.log("USER ID", userObj)
       }
     }
-    getUser().then(() => {
-      socket.on(
-        "getMessage",
-        (data: {
-          senderID: number;
-          senderName: string;
-          conversationID: number;
-          text: string;
-        }) => {
-          queryClient.invalidateQueries(queryKeys.conversations);
-          queryClient.invalidateQueries(queryKeys.selectedConversation);
 
-          Notifications.scheduleNotificationAsync({
-            content: {
-              title: data.senderName,
-              body: data.text,
-              data: {
-                // will need to change url in prod build (use process.ENV && eas.json)
-                url: `exp://192.168.30.24:19000/--/messages/${data.conversationID}/${data.senderName}`,
-              },
-            },
-            trigger: null,
-          });
-        }
-      );
-      socket.on("session", (data: { sessionID: string }) => {
-        socket.auth = { sessionID: data.sessionID };
-        if (user) {
-          const updatedUser = { ...user };
-          updatedUser.sessionID = data.sessionID;
-          setUser(updatedUser);
-          SecureStore.setItemAsync("user", JSON.stringify(updatedUser));
-        }
-      });
-
-      socket.on("connect_error", (err) => {
-        if (err.message === "Invalid userID" && user) {
-          socket.auth = {
-            userID: user?.id,
-            username:
-              user.firstName && user.lastName
-                ? `${user.firstName} ${user.lastName}`
-                : `${user.email}`,
-          };
-          socket.connect();
-        }
-      });
-    });
+    getUser();
 
     return () => {
       socket.off("getMesssage");
@@ -117,6 +126,7 @@ export default function App() {
   if (!isLoadingComplete) {
     return null;
   } else {
+    
     return (
       <LoadingContext.Provider value={{ loading, setLoading }}>
         <AuthContext.Provider value={{ user, setUser }}>

@@ -18,6 +18,7 @@ import { LocationSection } from "../components/propertyDetailsSections/LocationS
 import { ReviewSection } from "../components/propertyDetailsSections/ReviewSection";
 import { endpoints, queryKeys } from "../constants/constants";
 import { useSelectedCollocationQuery } from "../hooks/queries/useSelectedPropertyQuery";
+import { i18n } from "../i18n/i18n";
 
 export const CollocationDetailsScreen = ({
   route,
@@ -25,7 +26,7 @@ export const CollocationDetailsScreen = ({
   route: { params: { collocationID: number } };
 }) => {
   const collocation = useSelectedCollocationQuery(route.params.collocationID);
-  if (!collocation.data) return <Text>Unable to get collocation details ...</Text>;
+  if (!collocation.data) return <Text>{i18n.t('UnableToGetCollocationDetails')}</Text>;
   
   return (
     <Screen>

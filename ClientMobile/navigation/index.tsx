@@ -5,7 +5,7 @@
  */
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName } from "react-native";
@@ -22,12 +22,8 @@ import { SignUpScreen } from "../screens/SignUpScreen";
 import { ForgotPasswordScreen } from "../screens/ForgotPasswordScreen";
 import { ResetPasswordScreen } from "../screens/ResetPasswordScreen";
 import { MessagePropertyScreen } from "../screens/MessagePropertyScreen";
-import {
-  AccountTabParamList,
-  RootStackParamList,
-  RootTabParamList,
-  RootTabScreenProps,
-} from "../types";
+import { AccountTabParamList, AuthParamList, ChatTabParamList,
+  RootStackParamList, RootTabParamList, RootTabScreenProps } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { theme } from "../theme";
 import { CollocationDetailsScreen } from "../screens/CollocationDetailsScreen";
@@ -41,15 +37,24 @@ import { AccountSettingsScreen } from "../screens/AccountSettingsScreen";
 import { ConversationsScreen } from "../screens/ConversationsScreen";
 import { MessagesScreen } from "../screens/MessagesScreen";
 import { CodeVerificationScreen } from "../screens/CodeVerificationScreen";
+import { useUser } from "../hooks/useUser";
+import { i18n } from "../i18n/i18n";
 
 export default function Navigation({
   colorScheme,
 }: {
   colorScheme: ColorSchemeName;
 }) {
+  DefaultTheme.dark = colorScheme === "dark" ? true : false;
+  // DarkTheme.colors = { primary: 'blue', border: 'green', card: 'aqua', 
+  //               notification: 'pink', background: 'gray', text: 'red'}
+  const myTheme = DefaultTheme.dark ? DarkTheme : DefaultTheme
+
+  myTheme.colors = Object.assign(myTheme.colors, theme)
+  
   return (
-    <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme}>
-      <RootNavigator colorScheme={colorScheme}/>
+    <NavigationContainer linking={LinkingConfiguration} theme={myTheme}>
+      <RootNavigator colorScheme={colorScheme} />
     </NavigationContainer>
   );
 }
@@ -61,11 +66,10 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator(props: any) {
-  const { registerForPushNotificationsAsync, handleNotificationResponse } =
-    useNotifications();
+  const { registerForPushNotificationsAsync, handleNotificationResponse } = useNotifications();
+  const { user } = useUser();
 
-  useEffect(() => {    
-    console.log("TU", props.colorScheme);
+  useEffect(() => {
     registerForPushNotificationsAsync();
     Notifications.setNotificationHandler({
       handleNotification: async () => ({
@@ -74,19 +78,19 @@ function RootNavigator(props: any) {
         shouldSetBadge: true,
       }),
     });
-    
+
     const responseListener =
       Notifications.addNotificationResponseReceivedListener(
         handleNotificationResponse
       );
-      
+
     return () => {
       if (responseListener)
         Notifications.removeNotificationSubscription(responseListener);
     };
   }, []);
 
-  return (
+  return user ? (
     <Stack.Navigator>
       <Stack.Screen
         name="Root"
@@ -98,26 +102,6 @@ function RootNavigator(props: any) {
         <Stack.Screen
           name="FindLocations"
           component={FindLocationsScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignIn"
-          component={SignInScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignUp"
-          component={SignUpScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ForgotPassword"
-          component={ForgotPasswordScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ResetPassword"
-          component={ResetPasswordScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -155,14 +139,10 @@ function RootNavigator(props: any) {
           component={ReviewScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="CodeVerification"
-          component={CodeVerificationScreen}
-          options={{ headerShown: false }}
-        />
       </Stack.Group>
-    </Stack.Navigator>
-  );
+    </Stack.Navigator>)
+    :
+    <AuthScreenStack />
 }
 
 /**
@@ -183,6 +163,7 @@ function BottomTabNavigator() {
         name="Search"
         component={SearchScreen}
         options={{
+          tabBarLabel: i18n.t('Search'),
           headerShown: false,
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="magnify" color={color} />
@@ -190,12 +171,25 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="Saved"
+        name='Saved'
         component={SavedScreen}
         options={{
+          tabBarLabel: "Osoby",
+          headerShown: false,
+          tabBarBadge: 5,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="cards-heart" color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name='Saved2'
+        component={ChatStack}
+        options={{
+          tabBarLabel: i18n.t('Chat'),
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="heart-outline" color={color} />
+            <TabBarIcon name="chat-outline" color={color} />
           ),
         }}
       />
@@ -203,10 +197,10 @@ function BottomTabNavigator() {
         name="AccountRoot"
         component={AccountStack}
         options={{
+          tabBarLabel: i18n.t('Account'),
           headerShown: false,
-          tabBarLabel: "Account",
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="account-circle-outline" color={color} />
+            <TabBarIcon name="account" color={color} />
           ),
         }}
       />
@@ -227,22 +221,58 @@ const AccountStack = () => (
       component={AccountSettingsScreen}
       options={{
         headerTitle: "Account Settings",
-        headerBackTitle: "Back",
-      }}
-    />
-    <AccountStackNavigator.Screen
-      name="Conversations"
-      component={ConversationsScreen}
-      options={{ headerTitle: "Conversations", headerBackTitle: "Back" }}
-    />
-    <AccountStackNavigator.Screen
-      name="Messages"
-      component={MessagesScreen}
-      options={{
-        headerBackTitle: "Back",
+        headerBackTitle: i18n.t("Back"),
       }}
     />
   </AccountStackNavigator.Navigator>
+);
+
+const ChatStackNavigator = createNativeStackNavigator<ChatTabParamList>();
+const ChatStack = () => (
+  <ChatStackNavigator.Navigator initialRouteName="Chat">
+    <ChatStackNavigator.Screen
+      name="Conversations"
+      component={ConversationsScreen}
+      options={{ headerTitle: i18n.t("Chat"), headerBackTitle: i18n.t("Back") }}
+    /> 
+    <ChatStackNavigator.Screen
+      name="Messages"
+      component={MessagesScreen}
+      options={{
+        headerBackTitle: i18n.t("Back"),
+      }}
+    />
+  </ChatStackNavigator.Navigator>
+);
+
+const AuthStack = createNativeStackNavigator<AuthParamList>();
+const AuthScreenStack = () => (
+  <AuthStack.Navigator initialRouteName="Account">
+    <AuthStack.Screen
+      name="Account"
+      component={AccountScreen}
+      options={{ headerShown: false }} />
+    <AuthStack.Screen
+      name="SignIn"
+      component={SignInScreen}
+      options={{ headerShown: false }} />
+    <AuthStack.Screen
+      name="SignUp"
+      component={SignUpScreen}
+      options={{ headerShown: false }} />
+    <AuthStack.Screen
+      name="ForgotPassword"
+      component={ForgotPasswordScreen}
+      options={{ headerShown: false }} />
+    <AuthStack.Screen
+      name="ResetPassword"
+      component={ResetPasswordScreen}
+      options={{ headerShown: false }} />
+    <AuthStack.Screen
+      name="CodeVerification"
+      component={CodeVerificationScreen}
+      options={{ headerShown: false }} />
+  </AuthStack.Navigator>
 );
 
 /**

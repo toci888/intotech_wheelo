@@ -8,68 +8,42 @@ import { getStateAbbreviation } from "../../utils/getStateAbbreviation";
 import { useUser } from "../useUser";
 
 const fetchConversations = async (
-  userID?: number,
+  email?: string,
   token?: string
 ): Promise<TransformedConversation[]> => {
-  if (!userID) return [];
+  if (!email) return [];
 
-  // const response = await axios.get(
-  //   `${endpoints.getConversationsByUserID}${userID}`,
-  //   {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   }
-  // );
-
-  // const conversations: ConversationsRes[] = response.data;
-  const conversations: ConversationsRes[] = [{
-    ID: 1,
-    CreatedAt: '01-01-2022',
-    tenantID: 2,
-    ownerID: 3,
-    propertyID: 4,
-    propertyName: 'proname',
-    street: 'street',
-    city: 'city',
-    state: 'state',
-    ownerFirstName: 'ownerfirstname',
-    ownerLastName: 'ownerlast',
-    ownerEmail: 'ownerEMail',
-    tenantFirstName: 'tenantFirst',
-    tenantLastName: 'tenantlast',
-    tenantEmail: 'tenantemail',
-    messages: [{
-      ID: 1,
-      CreatedAt: '01-01-2022',
-      senderID: 2,
-      receiverID: 3,
-      text: 'textasd'
-    }]
-  }]
+  console.log("BEFOREE", `${endpoints.getConversationsByUserEmail}/get-conversations-by-user-email ${email}`, token, email)
+  const response = await axios.post(
+    `${endpoints.getConversationsByUserEmail}/get-conversations-by-user-email`,
+    {
+      email
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const conversations: ConversationsRes[] = response.data;
+  
   const data: TransformedConversation[] = [];
   for (let i of conversations) {
     // recipientName represents the person other than curr user in the conversation
-    let recipientName = "";
-    if (userID === i.tenantID)
-      // could alternatively display the owner's name here
-      recipientName = i.propertyName
-        ? i.propertyName
-        : `${i.street}, ${i.city}, ${getStateAbbreviation(i.state)}`;
-    else
-      recipientName =
-        i.tenantFirstName && i.tenantLastName
-          ? `${i.tenantFirstName} ${i.tenantLastName}`
-          : i.tenantEmail;
-
-    data.push({
-      ID: i.ID,
-      propertyID: i.propertyID,
-      recipientName,
-      messages: i.messages,
-    });
+    let recipientName = i.messages[0] && i.messages[0].authorFirstName && i.messages[0].authorLastName
+                        ? `${i.messages[0].authorFirstName} ${i.messages[0].authorLastName}`
+                        : "Nie podano imienia oraz nazwiska";
+    if (i.messages[0]) {
+      data.push({
+        id: i.id,
+        // collocationID: i.propertyID,
+        recipientName,
+        messages: i.messages,
+      });
+    }
   }
 
+  console.log("DATAGGG", data)
   return data;
 };
 
@@ -78,7 +52,7 @@ export const useConversationsQuery = () => {
 
   return useQuery(
     queryKeys.conversations,
-    () => fetchConversations(user?.id, user?.accessToken),
+    () => fetchConversations(user?.email, user?.accessToken),
     {
       retry: false,
     }
@@ -86,7 +60,7 @@ export const useConversationsQuery = () => {
 };
 
 type ConversationsRes = {
-  ID: number;
+  id: number;
   CreatedAt: string;
   tenantID: number;
   ownerID: number;
