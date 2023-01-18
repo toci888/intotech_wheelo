@@ -1,7 +1,7 @@
 import React from "react";
 import MapViewDirections from "react-native-maps-directions";
 import MapView, { LatLng, Polyline, Region } from "react-native-maps";
-import { View, StyleSheet, Platform, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Platform, TouchableOpacity, ColorSchemeName } from "react-native";
 import { useState, useEffect, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -13,14 +13,15 @@ import { Card } from "./Card";
 import { googleAPIKEY, themes } from "../constants/constants";
 import { SearchScreenParams } from "../types";
 import { useSearchPropertiesQuery } from "../hooks/queries/useSearchPropertiesQuery";
-import useColorScheme from "../hooks/useColorScheme";
 
 export const Map = ({
   location,
+  colorScheme
 }: {
   location: SearchScreenParams;
+  colorScheme: ColorSchemeName
 }) => {
-  const colorScheme = useColorScheme();
+  
   
   const initPolishRegion = {
     latitude: 51,
@@ -34,7 +35,7 @@ export const Map = ({
       <MapView
         provider={"google"}
         style={styles.map}
-        userInterfaceStyle={colorScheme}
+        // userInterfaceStyle={colorScheme}
         onPress={() => console.log("Mapa kliknięta")}
         region={initPolishRegion}
         customMapStyle={colorScheme === themes.dark ? mapDarkStyle : mapStandardStyle}
