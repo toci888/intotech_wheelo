@@ -102,9 +102,19 @@ export const useCreateMessageMutation = () => {
           const index = newConversations.findIndex(
             (i) => i.id === conversationID
           );
-
+            console.log("MESSAGGGGEE", {
+              createdAt: new Date().toString(),
+              id: Date.now(),
+              roomID: conversationID,
+              senderEmail: user?.email as string,
+              text,
+              authorFirstName,
+              authorLastName,
+              imageUrl,
+              idAccount: idAccount
+            })
           newConversations[index].messages.unshift({
-            createdAt: new Date().toString(),
+            createdAt: Date.now(),
             id: Date.now(),
             roomID: conversationID,
             senderEmail: user?.email as string,
@@ -114,7 +124,7 @@ export const useCreateMessageMutation = () => {
             imageUrl,
             idAccount: idAccount
           });
-
+          console.log("MESSAGGGGEExd");
           queryClient.setQueryData(queryKeys.conversations, newConversations);
         }
 

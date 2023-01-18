@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useColorScheme } from "react-native";
 
 import { Screen } from "../components/Screen";
 import { AnimatedListHeader } from "../components/AnimatedListHeader";
@@ -7,7 +8,7 @@ import { Map } from "../components/Map";
 import { SearchScreenParams } from "../types";
 import { i18n } from "../i18n/i18n";
 import { Location } from "../types/locationIQ";
-import { useColorScheme } from "react-native";
+
 
 export const SearchScreen = ({route}: {
   route: { params: SearchScreenParams };

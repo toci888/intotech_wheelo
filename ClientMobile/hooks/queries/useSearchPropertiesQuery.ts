@@ -17,7 +17,8 @@ const fetchProperties = async (startAndEndLocation: SearchScreenParams, userId?:
     startLocationTime: startAndEndLocation.startLocationTime,
     endLocationTime: startAndEndLocation.endLocationTime,
     idAccount: userId,
-    acceptableDistance: 30000
+    acceptableDistance: 800,
+    driverPassenger: 2
   });
   
   const data = response.data as Collocation;

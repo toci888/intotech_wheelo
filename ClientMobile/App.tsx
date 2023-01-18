@@ -54,10 +54,10 @@ export default function App() {
             authorLastName: string;
           }}) => {
             let data = message.chatMessage;
-
+            console.log("ODEBRALEM", data)
             queryClient.invalidateQueries(queryKeys.conversations);
             queryClient.invalidateQueries(queryKeys.selectedConversation);
-  
+            
             Notifications.scheduleNotificationAsync({
               content: {
                 title: data.authorFirstName,
