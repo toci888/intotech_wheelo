@@ -47,10 +47,11 @@ export const MessagesScreen = ({
     console.log("MESSAGExx", message)
     if (conversation)
       createMessage.mutate({
+        idAccount: user.id,
         author: conversation.data.author,
         conversationID: conversation.data.id,
-        receiverID: conversation.data.receiverID,
-        senderID: user.email,
+        receiverID: conversation.data.id,
+        senderEmail: user.email,
         text: message.text,
         authorFirstName: conversation.data.messages[0].author.firstName ? conversation.data.messages[0].author.firstName : "",
         authorLastName: conversation.data.messages[0].author.lastName ? conversation.data.messages[0].author.lastName : "",

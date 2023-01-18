@@ -1,4 +1,4 @@
-import { MessageType } from "@flyerhq/react-native-chat-ui/lib/types";
+import { MessageType, User } from "@flyerhq/react-native-chat-ui/lib/types";
 
 import { Message } from "./message";
 
@@ -14,7 +14,7 @@ export type SelectedConversation = {
   id: number;
   receiverID: string;
   messages: MessageType.Any[];
-  author: Author;
+  author: User;
 };
 
 export type TransformedConversation = {

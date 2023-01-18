@@ -46,14 +46,14 @@ const fetchConversation = async (
         firstName: auth.authorFirstName, 
         lastName: auth.authorLastName,
         imageUrl: auth.imageUrl
-      } as Author;
+      } as User;
     }
   })
   const conversation: SelectedConversation = {
     id: data.id,
-    receiverID: convAuthor[0] ? convAuthor[0].senderEmail : "",
+    receiverID: convAuthor[0] ? convAuthor[0].id : "",
     messages,
-    author: convAuthor[0] as Author
+    author: convAuthor[0] as User
   };
 
   return conversation;
