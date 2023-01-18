@@ -107,7 +107,7 @@ export const useCreateMessageMutation = () => {
             createdAt: new Date().toString(),
             id: Date.now(),
             roomID: receiverID,
-            senderID,
+            senderEmail: senderID,
             text,
             authorFirstName,
             authorLastName,

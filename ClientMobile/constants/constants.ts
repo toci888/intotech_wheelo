@@ -88,8 +88,8 @@ export const endpoints = {
   allowsNotifications: allowsNotificationsEndpoint,
   themeMode: themeModeEndpoint,
   createConversation: conversationWheeloChatEndpoint, //?
-  getConversationByID: conversationEndpoint,
-  getConversationsByUserEmail: conversationEndpoint,
+  getConversationByID: conversationEndpoint + "/get-conversation-by-id",
+  getConversationsByUserEmail: conversationEndpoint + "/get-conversations-by-user-email",
   createMessage: messagesEndpoint,
   refreshTokens: refreshTokenEndpoint,
   currentLocation: currentLocationEndpoint

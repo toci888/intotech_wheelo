@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, Text, Platform } from "react-native";
-import { Chat, MessageType, defaultTheme } from "@flyerhq/react-native-chat-ui";
+import { Chat, MessageType, defaultTheme, User } from "@flyerhq/react-native-chat-ui";
 import { useNavigation } from "@react-navigation/native";
 import { useActionSheet } from '@expo/react-native-action-sheet'
 import DocumentPicker from 'react-native-document-picker'
@@ -157,7 +157,7 @@ export const MessagesScreen = ({
     <Chat
       messages={conversation.data.messages}
       onSendPress={handleSendPress}
-      user={conversation.data.author}
+      user={conversation.data.author as User}
       onAttachmentPress={handleAttachmentPress}
       onMessagePress={handleMessagePress}
       onPreviewDataFetched={handlePreviewDataFetched}
