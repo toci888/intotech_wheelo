@@ -8,7 +8,7 @@ namespace Intotech.Wheelo.Chat.Models
 {
     public class ChatUserDto
     {
-        public string SenderID { get; set; }
+        public string SenderEmail { get; set; }
         public int IdAccount { get; set; }
         public string UserName { get; set; }
         public string UserSurname { get; set; }
