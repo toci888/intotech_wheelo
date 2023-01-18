@@ -8,7 +8,6 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { Screen } from "../components/Screen";
 import { Row } from "../components/Row";
 import { theme } from "../theme";
-import { properties } from "../data/properties";
 import { Card } from "../components/Card";
 import { CollocateAccount, Collocation } from "../types/collocation";
 import { SignUpAndSignInButtons } from "../components/SignUpAndSignInButtons";

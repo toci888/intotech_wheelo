@@ -88,8 +88,8 @@ export const endpoints = {
   allowsNotifications: allowsNotificationsEndpoint,
   themeMode: themeModeEndpoint,
   createConversation: conversationWheeloChatEndpoint, //?
-  getConversationByID: conversationEndpoint,
-  getConversationsByUserEmail: conversationEndpoint,
+  getConversationByID: conversationEndpoint + "/get-conversation-by-id",
+  getConversationsByUserEmail: conversationEndpoint + "/get-conversations-by-user-email",
   createMessage: messagesEndpoint,
   refreshTokens: refreshTokenEndpoint,
   currentLocation: currentLocationEndpoint
@@ -110,4 +110,9 @@ export const queryKeys = {
 export const os = {
   android: "android",
   ios: "ios"
+}
+
+export const themes = {
+  dark: "dark",
+  light: "light"
 }

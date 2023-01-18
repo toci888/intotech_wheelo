@@ -22,8 +22,8 @@ import { SignUpScreen } from "../screens/SignUpScreen";
 import { ForgotPasswordScreen } from "../screens/ForgotPasswordScreen";
 import { ResetPasswordScreen } from "../screens/ResetPasswordScreen";
 import { MessagePropertyScreen } from "../screens/MessagePropertyScreen";
-import { AccountTabParamList, AuthParamList, ChatTabParamList,
-  RootStackParamList, RootTabParamList, RootTabScreenProps } from "../types";
+import { AccountTabParamList, AuthParamList, ChatTabParamList, 
+  RootStackParamList, RootTabParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { theme } from "../theme";
 import { CollocationDetailsScreen } from "../screens/CollocationDetailsScreen";
@@ -59,10 +59,6 @@ export default function Navigation({
   );
 }
 
-/**
- * A root stack navigator is often used for displaying modals on top of all other content.
- * https://reactnavigation.org/docs/modal
- */
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator(props: any) {

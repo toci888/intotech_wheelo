@@ -15,7 +15,7 @@ const fetchConversations = async (
 
   console.log("BEFOREE", `${endpoints.getConversationsByUserEmail}/get-conversations-by-user-email ${email}`, token, email)
   const response = await axios.post(
-    `${endpoints.getConversationsByUserEmail}/get-conversations-by-user-email`,
+    `${endpoints.getConversationsByUserEmail}`,
     {
       email
     },
@@ -25,25 +25,19 @@ const fetchConversations = async (
       },
     }
   );
-  const conversations: ConversationsRes[] = response.data;
+  const conversations: ConversationsRes[] = response.data.conversations;
   
   const data: TransformedConversation[] = [];
-  for (let i of conversations) {
-    // recipientName represents the person other than curr user in the conversation
-    let recipientName = i.messages[0] && i.messages[0].authorFirstName && i.messages[0].authorLastName
-                        ? `${i.messages[0].authorFirstName} ${i.messages[0].authorLastName}`
-                        : "Nie podano imienia oraz nazwiska";
-    if (i.messages[0]) {
+  for (let c of conversations) {
+    if (c.messages[0]) {
       data.push({
-        id: i.id,
-        // collocationID: i.propertyID,
-        recipientName,
-        messages: i.messages,
+        id: c.id,
+        recipientName: c.roomName,
+        messages: c.messages,
       });
     }
   }
 
-  console.log("DATAGGG", data)
   return data;
 };
 
@@ -61,19 +55,13 @@ export const useConversationsQuery = () => {
 
 type ConversationsRes = {
   id: number;
+  idAccount: number;
+  roomName: string;
   CreatedAt: string;
   tenantID: number;
   ownerID: number;
-  propertyID: number;
-  propertyName: string;
-  street: string;
-  city: string;
-  state: string;
   ownerFirstName: string;
   ownerLastName: string;
   ownerEmail: string;
-  tenantFirstName: string;
-  tenantLastName: string;
-  tenantEmail: string;
   messages: Message[];
 };

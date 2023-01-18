@@ -12,7 +12,7 @@ import * as Notifications from "expo-notifications";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
-import { theme, updateTheme } from "./theme";
+import { theme } from "./theme";
 import { AuthContext, LoadingContext } from "./context";
 import { User } from "./types/user";
 import { createSocket, socket } from "./constants/socket";
@@ -24,25 +24,17 @@ const queryClient = new QueryClient();
 LogBox.ignoreAllLogs();
 
 export default function App() {
-  // const navigation = useNavigation();
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [first, setfirst] = useState({});
-
-  // useEffect(() => {
-  //   console.log("XXXXXXX", colorScheme);
-  //   updateTheme(colorScheme)
-  //   setfirst({});
-  // }, [colorScheme]);
 
   useEffect(() => {
     async function getUser() {
       const user = await SecureStore.getItemAsync("user");
       if (user) {
         const userObj: User = JSON.parse(user);
-        console.log("JUSRE", userObj)
+
         createSocket(userObj.accessToken);
         // const newTokens = await refreshTokens(userObj.accessToken, userObj.refreshtoken);
         // if (newTokens) {
@@ -102,7 +94,7 @@ export default function App() {
         socket.on("roomestablished", (roomData:{ room: {idRoom: number, ownerEmail: string, roomId: string, roomName: string, roomMembers: any}}) => {
           let data = roomData.room;
 
-          console.log('roomestablished', data);
+          // console.log('roomestablished', data);
         });
 
         await socket.start();
@@ -110,7 +102,7 @@ export default function App() {
 
         await socket.invoke("CreateRoom", userObj.email, ['warriorr@poczta.fm', 'bzapart@gmail.com']);
 
-        console.log("USER ID", userObj)
+        console.log("USER ID", JSON.stringify(userObj))
       }
     }
 

@@ -1,25 +1,28 @@
 import React from "react";
 import MapViewDirections from "react-native-maps-directions";
 import MapView, { LatLng, Polyline, Region } from "react-native-maps";
-import { View, StyleSheet, Platform, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Platform, TouchableOpacity, ColorSchemeName } from "react-native";
 import { useState, useEffect, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { CollocateAccount, Collocation } from "../types/collocation";
 import { MapMarker } from "./MapMarker";
-import { theme } from "../theme";
+import { mapDarkStyle, mapStandardStyle, theme } from "../theme";
 import { Card } from "./Card";
-import { googleAPIKEY } from "../constants/constants";
+import { googleAPIKEY, themes } from "../constants/constants";
 import { SearchScreenParams } from "../types";
 import { useSearchPropertiesQuery } from "../hooks/queries/useSearchPropertiesQuery";
 
 export const Map = ({
   location,
+  colorScheme
 }: {
   location: SearchScreenParams;
+  colorScheme: ColorSchemeName
 }) => {
-
+  
+  
   const initPolishRegion = {
     latitude: 51,
     longitude: 19,
@@ -27,14 +30,15 @@ export const Map = ({
     longitudeDelta: 10,
   }
 
-  if(location == undefined) {
+  if(!location || location == undefined) {
     return (
       <MapView
         provider={"google"}
         style={styles.map}
-        userInterfaceStyle={"light"}
+        // userInterfaceStyle={colorScheme}
         onPress={() => console.log("Mapa kliknięta")}
         region={initPolishRegion}
+        customMapStyle={colorScheme === themes.dark ? mapDarkStyle : mapStandardStyle}
       />
     )
   }
@@ -60,7 +64,6 @@ export const Map = ({
 
   const searchProperties = useSearchPropertiesQuery(location);
   let collocation: Collocation = searchProperties.data?.isSuccess ? searchProperties.data as Collocation : {} as Collocation;
-  // const searchProperties = searchProperties.data?.isSuccess ? searchProperties.data : {};
 
   const navigation = useNavigation();
 
@@ -130,12 +133,8 @@ export const Map = ({
         ref={mapRef}
         onPress={handleMapPress}
         region={region}
+        customMapStyle={colorScheme === themes.dark ? mapDarkStyle : mapStandardStyle}
       >
-      {/* <Polyline
-          coordinates={coords}
-          strokeColor={'rgb(0, 0, 0)'}
-          strokeWidth={6}
-        /> */}
 
       {!isNaN(Number(location.startLocation.lat)) && !isNaN(Number(location.startLocation.lon)) 
       && !isNaN(Number(location.endLocation.lat)) && !isNaN(Number(location.endLocation.lon)) 

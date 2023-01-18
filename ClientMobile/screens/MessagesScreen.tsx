@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, Text, Platform } from "react-native";
-import { Chat, MessageType, defaultTheme } from "@flyerhq/react-native-chat-ui";
+import { Chat, MessageType, defaultTheme, User } from "@flyerhq/react-native-chat-ui";
 import { useNavigation } from "@react-navigation/native";
 import { useActionSheet } from '@expo/react-native-action-sheet'
 import DocumentPicker from 'react-native-document-picker'
@@ -15,7 +15,6 @@ import { useSelectedConversationQuery } from "../hooks/queries/useSelectedConver
 import { Loading } from "../components/Loading";
 import { useCreateMessageMutation } from "../hooks/mutations/useCreateMessageMutation";
 import { i18n } from "../i18n/i18n";
-import { Message } from "../types/message";
 
 export const MessagesScreen = ({
   route,
@@ -48,10 +47,11 @@ export const MessagesScreen = ({
     console.log("MESSAGExx", message)
     if (conversation)
       createMessage.mutate({
+        idAccount: user.id,
         author: conversation.data.author,
         conversationID: conversation.data.id,
-        receiverID: conversation.data.receiverID,
-        senderID: user.email,
+        receiverID: conversation.data.id,
+        senderEmail: user.email,
         text: message.text,
         authorFirstName: conversation.data.messages[0].author.firstName ? conversation.data.messages[0].author.firstName : "",
         authorLastName: conversation.data.messages[0].author.lastName ? conversation.data.messages[0].author.lastName : "",
@@ -99,7 +99,7 @@ export const MessagesScreen = ({
         }
       }
     )
-    console.log("CLICK1")
+    console.log("CLICK1 handleAttachmentPress")
   }
 
   const handleImageSelection = () => {
@@ -147,7 +147,7 @@ export const MessagesScreen = ({
   const handleMessagePress = async (message: MessageType.Any) => {
     console.log("KLIK MEsSAGE", message)
     if (message.type === 'file') {
-      console.log("NO LECE")
+      console.log("NO LECE file")
       try {
         // await FileViewer.open(message.uri, { showOpenWithDialog: true })
       } catch { }
@@ -158,7 +158,7 @@ export const MessagesScreen = ({
     <Chat
       messages={conversation.data.messages}
       onSendPress={handleSendPress}
-      user={conversation.data.author}
+      user={conversation.data.author as User}
       onAttachmentPress={handleAttachmentPress}
       onMessagePress={handleMessagePress}
       onPreviewDataFetched={handlePreviewDataFetched}
