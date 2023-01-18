@@ -39,21 +39,20 @@ const fetchConversation = async (
     messages.push(message);
   };
   
-  const convAuthor = data.messages.map((auth: Message) => {
-    if(auth.idAccount === userID) {
-      return {
-        id: auth.senderEmail,
-        firstName: auth.authorFirstName, 
-        lastName: auth.authorLastName,
-        imageUrl: auth.imageUrl
-      } as User;
-    }
-  })
+  let message = data.messages.find(( auth: Message ) => auth.idAccount === userID)
+  const convAuthor = {
+    id: message!.senderEmail,
+    firstName: message!.authorFirstName, 
+    lastName: message!.authorLastName,
+    imageUrl: message!.imageUrl
+  } as User;
+
+  console.log("DOTARŁEM", convAuthor)
   const conversation: SelectedConversation = {
     id: data.id,
-    receiverID: convAuthor[0] ? convAuthor[0].id : "",
+    receiverID: convAuthor.id,
     messages,
-    author: convAuthor[0] as User
+    author: convAuthor
   };
 
   return conversation;
