@@ -48,11 +48,11 @@ builder.Services.AddCors(options =>
     });
 });
 
-//builder.Services.AddScoped<IMessagesService, MessagesService>();
-//builder.Services.AddScoped<IChatUserService, ChatUserService>();
-//builder.Services.AddScoped<IAccountService, AccountService>();
-//builder.Services.AddScoped<IConversationService, ConversationService>();
-//builder.Services.AddScoped<IRoomService, RoomService>();
+builder.Services.AddScoped<IMessagesService, MessagesService>();
+builder.Services.AddScoped<IChatUserService, ChatUserService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IConversationService, ConversationService>();
+builder.Services.AddScoped<IRoomService, RoomService>();
 
 
 builder.Services.AddScoped<IMessageLogic, MessageLogic>();

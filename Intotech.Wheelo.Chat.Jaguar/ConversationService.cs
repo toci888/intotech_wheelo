@@ -4,6 +4,7 @@ using Intotech.Wheelo.Chat.Database.Persistence.Models;
 using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
 using Intotech.Wheelo.Chat.Models;
+using Intotech.Wheelo.Common.ImageService;
 using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Chat.Jaguar;
@@ -121,7 +122,7 @@ public class ConversationService : IConversationService
             resElement.FirstName = acc.Name;
             resElement.LastName = acc.Surname;
             resElement.Id = acc.Id;
-            resElement.ImageUrl = acc.Image;
+            resElement.ImageUrl = ImageServiceUtils.GetImageUrl(acc.Id);
             resElement.SenderEmail = acc.Email;
 
             result.Add(item.Memberemail, resElement);
@@ -151,7 +152,7 @@ public class ConversationService : IConversationService
             resElement.FirstName = acc.Name;
             resElement.LastName = acc.Surname;
             resElement.Id = acc.Id;
-            resElement.ImageUrl = acc.Image;
+            resElement.ImageUrl = ImageServiceUtils.GetImageUrl(acc.Id);
             resElement.SenderEmail = acc.Email;
 
             DistinctAuthors.Add(message.Authoremail, resElement);

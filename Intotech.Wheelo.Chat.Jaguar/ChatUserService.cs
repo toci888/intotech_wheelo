@@ -5,6 +5,7 @@ using Intotech.Wheelo.Chat.Dodge;
 using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
 using Intotech.Wheelo.Chat.Models;
+using Intotech.Wheelo.Common.ImageService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,7 +67,7 @@ namespace Intotech.Wheelo.Chat.Jaguar
             chatMessage.AuthorFirstName = acc.Name;
             chatMessage.AuthorLastName = acc.Surname;
             chatMessage.IdAccount = acc.Id;
-            chatMessage.ImageUrl = acc.Image;
+            chatMessage.ImageUrl = ImageServiceUtils.GetImageUrl(acc.Id);
 
             return chatMessage;
         }
