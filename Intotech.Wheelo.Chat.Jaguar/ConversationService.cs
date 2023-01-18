@@ -68,7 +68,7 @@ public class ConversationService : IConversationService
                     RoomID = roomId,
                     AuthorFirstName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].FirstName : string.Empty,
                     AuthorLastName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].LastName : string.Empty,
-                    //ImageUrl = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].ImageUrl : string.Empty
+                    ImageUrl = DistinctAuthors.ContainsKey(message.Authoremail) ? ImageServiceUtils.GetImageUrl(DistinctAuthors[message.Authoremail].Id) : string.Empty
                 });
 
                 if (isAccountIdRequest)
