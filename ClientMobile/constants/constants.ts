@@ -29,7 +29,7 @@ export const server = "http://20.203.135.11";
 
 const serverUrl = server + ":5105/api";
 const integrationApiUrl = server + ":5108/api";
-const chatUrl = server + ":5130/";
+const chatUrl = server + ":5130/"; //check
 
 const location = "/location";
 const google = "/GoogleMap";
@@ -42,6 +42,7 @@ const conversation = "/conversation";
 const messages = "/messages";
 const refresh = "/refresh-token";
 const wheeloChat = "wheeloChat"
+const friends = "/friends"
 const refreshTokenEndpoint = serverUrl + user + refresh;
 const locationEndpoint = serverUrl + location;
 const googleEndpoint = integrationApiUrl + google;
@@ -78,7 +79,7 @@ export const endpoints = {
   getAssociationsByUserID: serverUrl + '/AssociationMapData/associations-users',
   getPropertiesByUserID: collocationEndpoint + "/userid/",
   getPropertiesByBoundingBox: collocationEndpoint + "/search",
-  deleteProperty: collocationEndpoint + "/",
+  deleteFriend: serverUrl + friends + "/unfriend",
   updateProperty: collocationEndpoint + "/update/",
   getApartmentsByPropertyID: apartmentEndpoint + "/property/",
   updateApartments: apartmentEndpoint + "/property/",

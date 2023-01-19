@@ -31,15 +31,15 @@ export const AnimatedListHeader = ({
       <View style={[styles.defaultMarginHorizontal, {"marginTop": 10}]} />
       <View style={styles.defaultMarginHorizontal}>
         <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-          <Text category="h6" style={{ marginRight: "auto"}}>Gdzie mieszkasz?</Text>
-          <Text category="h6" style={{ marginLeft: "auto"}}>O której wyjeżdżasz?</Text>
+          <Text category="h6" style={{ marginRight: "auto"}}>{i18n.t('WhereDoYouLive')}</Text>
+          <Text category="h6" style={{ marginLeft: "auto"}}>{i18n.t('WhatTimeAreYouGo')}</Text>
         </View>
 
         <HeaderInput type="start" location={startLocation} setLocation={setStartLocation} time={startTime} setTime={setStartTime} />
 
         <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-          <Text category="h6" style={{ marginRight: "auto"}}>Gdzie pracujesz?</Text>
-          <Text category="h6" style={{ marginLeft: "auto"}}>O której wracasz?</Text>
+          <Text category="h6" style={{ marginRight: "auto"}}>{i18n.t('WhereAreYouWorking')}</Text>
+          <Text category="h6" style={{ marginLeft: "auto"}}>{i18n.t('WhatTimeAreYouComingBack')}</Text>
         </View>
         <HeaderInput type="end" location={endLocation} setLocation={setEndLocation} time={endTime} setTime={setEndTime} />
         {startLocation.lat && endLocation.lat && 

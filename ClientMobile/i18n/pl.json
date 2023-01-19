@@ -41,5 +41,9 @@
     "Driver": "Kierowca",
     "Friends": "Znajomi",
     "Associated": "Powiązani",
-    "Invited": "Zaproszenia"
+    "Invited": "Zaproszenia",
+    "WhereDoYouLive":"Gdzie mieszkasz?",
+    "WhatTimeAreYouGo":"O której wyjeżdżasz?",
+    "WhereAreYouWorking":"Gdzie pracujesz?",
+    "WhatTimeAreYouComingBack":"O której wracasz?"
 }

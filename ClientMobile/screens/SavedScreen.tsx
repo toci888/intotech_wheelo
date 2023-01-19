@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList, TouchableOpacity, Platform } from "react-native";
 import { Button, Text } from "@ui-kitten/components";
 import { useState } from "react";
 import LottieView from "lottie-react-native";
@@ -17,6 +17,8 @@ import { useSavedCollocationsQuery } from "../hooks/queries/useSavedCollocations
 import { useContactedPropertiesQuery } from "../hooks/queries/useContactedPropertiesQuery";
 import { i18n } from "../i18n/i18n";
 import { useInvitedFriendsQuery } from "../hooks/queries/useInvitedFriendsQuery";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { LISTMARGIN } from "../constants/constants";
 
 export const SavedScreen = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -64,7 +66,27 @@ export const SavedScreen = () => {
   };
 
   const getPropertiesFlatList = (collocation: CollocateAccount[]) => {
-    return (
+    return (<>
+      <TouchableOpacity
+      style={{
+        marginTop: Platform.OS === "ios" ? 50 : 30,
+        borderWidth: 1,
+        borderColor: theme["color-gray"],
+        borderRadius: 30,
+        padding: 10,
+      }}
+      onPress={() => {console.log('szukamy');/*navigation.navigate("FindLocations")*/}}
+    >
+      <Row style={[{ alignItems: "center"}, styles.defaultMarginHorizontal ]}>
+        <Text style={styles.text}>{i18n.t('Search')}</Text>
+        <MaterialCommunityIcons
+          name="magnify"
+          color={theme["color-primary-500"]}
+          size={28}
+          style={{marginLeft:'auto'}}
+        />
+      </Row>
+    </TouchableOpacity>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={collocation}
@@ -81,6 +103,7 @@ export const SavedScreen = () => {
         )}
         keyExtractor={(item) => item.idAccount.toString()}
       />
+      </>
     );
   };
 
@@ -222,4 +245,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   card: { marginVertical: 10 },
+  defaultMarginHorizontal: {
+    marginHorizontal: LISTMARGIN,
+  },
 });
