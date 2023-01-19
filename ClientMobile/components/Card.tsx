@@ -46,7 +46,7 @@ export const Card = ({
     >
       <ImageCarousel
         onImagePress={onPress}
-        images={collocation.image}
+        images={collocation.images}
         chevronsShown
       />
 

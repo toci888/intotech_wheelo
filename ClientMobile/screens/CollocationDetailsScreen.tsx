@@ -35,9 +35,9 @@ export const CollocationDetailsScreen = ({
         keyExtractor={(item) => item.idAccount.toString()}
         renderItem={({ item }) => (
           <>
-            {item.image ? (
+            {item.images ? (
               <ImageCarousel
-                images={item.image}
+                images={item.images}
                 indexShown
                 imageStyle={styles.image}
               />
