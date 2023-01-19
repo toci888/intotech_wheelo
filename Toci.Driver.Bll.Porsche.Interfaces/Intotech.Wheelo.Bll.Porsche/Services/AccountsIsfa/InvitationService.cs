@@ -31,13 +31,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 
         public virtual ReturnedResponse<Vinvitation> InviteToFriends(int invitingAccountId, int invitedAccountId)
         {
-            if (invitingAccountId > invitedAccountId)
-            {
-                int swap = invitingAccountId;
-                invitingAccountId = invitedAccountId;
-                invitedAccountId = swap;
-            }
-
+            WheeloUtils.PotentialSwapIds(ref invitingAccountId, ref invitedAccountId);
             Invitation invitation = InvitationLogic.Select(m => m.Idinvited == invitedAccountId && m.Idaccount == invitingAccountId).FirstOrDefault();
 
             if (invitation == null)
@@ -45,7 +39,9 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
                 InvitationLogic.Insert(new Invitation() { Idaccount = invitingAccountId, Idinvited = invitedAccountId });
             }
 
-            return new ReturnedResponse<Vinvitation>(VinvitationLogic.Select(m => m.Accountid == invitingAccountId).FirstOrDefault(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            Vinvitation result =  VinvitationLogic.Select(m => m.Accountid == invitingAccountId && m.Suggestedaccountid == invitedAccountId).FirstOrDefault();
+
+            return new ReturnedResponse<Vinvitation>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }

@@ -11,6 +11,12 @@ namespace Toci.Driver.Api.Controllers
     [Route("api/[controller]")]
     public class InvitationsController : ApiSimpleControllerBase<IInvitationService>
     {
+        public class InvitationPostDto
+        {
+            public int InvitingAccountId { get; set; }
+            public int InvitedAccountId { get; set; }
+        }
+
         public InvitationsController(IInvitationService logic) : base(logic)
         {
             
@@ -24,9 +30,9 @@ namespace Toci.Driver.Api.Controllers
 
         [HttpPost]
         [Route("invite-to-friends")]
-        public ReturnedResponse<Vinvitation> InviteAssociated(int invitingAccountId, int invitedAccountId)
+        public ReturnedResponse<Vinvitation> InviteAssociated(InvitationPostDto invitation)
         {
-            return Service.InviteToFriends(invitingAccountId, invitedAccountId);
+            return Service.InviteToFriends(invitation.InvitingAccountId, invitation.InvitedAccountId);
         }
     }
 }
