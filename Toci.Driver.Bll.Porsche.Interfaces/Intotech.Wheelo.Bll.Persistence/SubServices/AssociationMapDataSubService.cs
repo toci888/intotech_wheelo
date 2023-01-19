@@ -35,6 +35,25 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
             VacollocationsgeolocationToAccountCollocation = vacollocationsgeolocationToAccountCollocationDto;
         }
 
+        public virtual ReturnedResponse<List<AccountCollocationDto>> GetCollocationsUsers(int accountId)
+        {
+            List<Vacollocationsgeolocation> collocationSource = VacollocationsgeolocationLogic.Select(m => m.Idaccount == accountId || m.Accountidcollocated == accountId).ToList();
+
+            List<AccountCollocationDto> result = new List<AccountCollocationDto>();
+
+            if (collocationSource != null)
+            {
+                foreach (Vacollocationsgeolocation item in collocationSource)
+                {
+                    result.Add(VacollocationsgeolocationToAccountCollocation.Map(item, accountId));
+                }
+                
+                return new ReturnedResponse<List<AccountCollocationDto>>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            }
+
+            return new ReturnedResponse<List<AccountCollocationDto>>(null, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
+        }
+
         public virtual ReturnedResponse<AccountCollocationDto> GetCollocationUser(int accountId)
         {
             Vacollocationsgeolocation collocationSource = VacollocationsgeolocationLogic.Select(m => m.Accountidcollocated == accountId).FirstOrDefault();
@@ -49,22 +68,7 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
             return new ReturnedResponse<AccountCollocationDto>(null, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
         }
 
-        public virtual ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId, string searchId) // DEPRECATED
-        {
-            TripCollocationDto resultDto = new TripCollocationDto();
 
-            Vcollocationsgeolocation collocationSource = VcollocationsgeolocationLogic.Select(m => m.Idaccount == accountId).FirstOrDefault();
-
-            if (collocationSource == null)
-            {
-                return new ReturnedResponse<TripCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
-            }
-
-            resultDto.SourceAccount = collocationSource;
-            resultDto.AccountsCollocated = VacollocationsgeolocationLogic.Select(m => m.Idaccount == accountId).ToList();
-
-            return new ReturnedResponse<TripCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
-        }
 
 
     }

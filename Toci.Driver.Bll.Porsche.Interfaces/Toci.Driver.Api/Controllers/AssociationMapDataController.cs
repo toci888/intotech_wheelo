@@ -16,16 +16,16 @@ namespace Toci.Driver.Api.Controllers
         {
         }
 
-        [HttpGet("association-map-data")]
-        public ReturnedResponse<TripCollocationDto> GetTripCollocation(int accountId) //DEPRECATED
-        {
-            return Service.GetTripCollocation(accountId, "");
-        }
-
         [HttpGet("association-user/{idAccount}")]
         public ReturnedResponse<AccountCollocationDto> GetCollocationUser(int idAccount)
         {
             return Service.GetCollocationUser(idAccount);
+        }
+
+        [HttpGet("associations-users/{idAccount}")]
+        public ReturnedResponse<List<AccountCollocationDto>> GetCollocationsUsers(int idAccount)
+        {
+            return Service.GetCollocationsUsers(idAccount);
         }
     }
 }
