@@ -90,6 +90,13 @@ export enum Driver {
   'both' = 3
 }
 
+export enum Relationship {
+  'notFriends' = 1,
+  'invited' = 2,
+  'suggested' = 3,
+  'friend' = 4
+}
+
 type Response = {
   errorMessage: string;
   isSuccess: boolean;

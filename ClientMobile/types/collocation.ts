@@ -22,7 +22,7 @@ export type CollocateAccount = {
   longitudeto: number,
   fromhour: string,
   tohour: string
-  areFriends: boolean;
+  relationshipStatus: boolean;
   phoneNumber: string;
   driver: Driver;
 }

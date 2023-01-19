@@ -42,7 +42,7 @@ export const CardInformation = ({
   const handleStarPress = () => {
     if (!user) return commonAlert(i18n.t('PleaseSignUpOrSignInToSaveProperties'));
     let op: "add" | "remove" = "add";
-    if (collocation?.areFriends) op = "remove";
+    if (collocation?.relationshipStatus) op = "remove";
 
     alterUsersSavedProperties(collocation.idAccount, op);
     saveCollocation.mutate({ collocationID: collocation.idAccount, op });
@@ -64,7 +64,7 @@ export const CardInformation = ({
           <Text category={"s1"}>{collocation.name + " " + collocation.surname}</Text>
           <Pressable onPress={handleStarPress} style={styles.heartContainer}>
             <MaterialCommunityIcons
-              name={collocation?.areFriends ? "star" : "star-outline"}
+              name={collocation?.relationshipStatus ? "star" : "star-outline"}
               color={theme["color-primary-500"]}
               size={24}
             />

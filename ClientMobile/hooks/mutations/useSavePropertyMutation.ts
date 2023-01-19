@@ -47,7 +47,7 @@ export const useSaveCollocationMutation = () => {
         if (prevSelectedProperty?.idAccount === collocationID) {
           const newSelectedProperty = { ...prevSelectedProperty };
 
-          newSelectedProperty.areFriends = !newSelectedProperty.areFriends;
+          newSelectedProperty.relationshipStatus = !newSelectedProperty.relationshipStatus;
           queryClient.setQueryData(
             queryKeys.selectedCollocation,
             newSelectedProperty
@@ -67,12 +67,12 @@ export const useSaveCollocationMutation = () => {
 
           if (prevSearchedProperties)
             for (let i of prevSearchedProperties) {
-              if (i.idAccount === collocationID) i.areFriends = false;
+              if (i.idAccount === collocationID) i.relationshipStatus = false;
             }
         } else if (op === "add") {
           if (prevSearchedProperties) {
             for (let i of prevSearchedProperties) {
-              if (i.idAccount === collocationID) i.areFriends = true;
+              if (i.idAccount === collocationID) i.relationshipStatus = true;
             }
           }
         }
