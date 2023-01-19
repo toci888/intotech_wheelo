@@ -36,5 +36,7 @@
     "YouHaveNoMessages": "Nie masz żadnych wiadomości",
     "SeeMore": "Więcej",
     "SeeLess": "Mniej",
-    "UnableToGetChat": "Nie udało się pobrać informacji czatu"
+    "UnableToGetChat": "Nie udało się pobrać informacji czatu",
+    "Passenger": "Pasażer",
+    "Driver": "Kierowca"
 }

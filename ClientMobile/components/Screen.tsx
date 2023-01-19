@@ -1,10 +1,10 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, ViewStyle, Platform, StatusBar } from "react-native";
-import { DefaultTheme } from "@react-navigation/native";
 
 import { Loading } from "./Loading";
 import { useLoading } from "../hooks/useLoading";
 import { os } from "../constants/constants";
+import useColorScheme from "../hooks/useColorScheme";
 
 export const Screen = ({
   children,
@@ -14,10 +14,10 @@ export const Screen = ({
   style?: ViewStyle;
 }) => {
   const { loading } = useLoading();
-
+  const colorScheme = useColorScheme();
   return (
     <SafeAreaView style={[styles.container, style]}>
-      <StatusBar barStyle={DefaultTheme.dark? "light-content" : "dark-content"} />
+      <StatusBar barStyle={colorScheme === "dark" ? "light-content" : "dark-content"} />
       {loading ? <Loading /> : children}
     </SafeAreaView>
   );
