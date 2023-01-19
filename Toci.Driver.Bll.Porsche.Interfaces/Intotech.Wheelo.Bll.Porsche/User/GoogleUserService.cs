@@ -1,4 +1,5 @@
 ﻿using Intotech.Common;
+using Intotech.Common.ImageManagement;
 using Intotech.Wheelo.Bll.Models.Gaf;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Common.Interfaces;
@@ -17,11 +18,13 @@ namespace Intotech.Wheelo.Bll.Porsche.User
     {
         protected IAccountLogic AccountLogic;
         protected IUserExtraDataLogic UserExtraDataLogic;
+        protected ImageManager ImageManager;
 
         public GoogleUserService(IAccountLogic accountLogic, IUserExtraDataLogic userExtraDataLogic) : base("https://www.googleapis.com/")
         {
             AccountLogic = accountLogic;
             UserExtraDataLogic = userExtraDataLogic;
+            ImageManager = new ImageManager();
         }
 
         public override GoogleUserDto GetUserByToken(string token)
@@ -60,7 +63,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                     acc.Surname = surname;
                 }
 
-                acc.Image = dto.picture;
+                acc.Image = ImageManager.GetImageBase64(dto.picture); // dto.picture; //ImageManager.GetImageBase64(dto.picture.data.url);
 
                 AccountLogic.Update(acc);
 
@@ -79,7 +82,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                     Email = dto.email,
                     Emailconfirmed = dto.verified_email,
                     Idrole = CommonConstants.RoleUser,
-                    Image = dto.picture,
+                    Image = ImageManager.GetImageBase64(dto.picture),
                     Name = name,
                     Surname = surname,
                     Refreshtokenvalid = refreshTokenValid,
