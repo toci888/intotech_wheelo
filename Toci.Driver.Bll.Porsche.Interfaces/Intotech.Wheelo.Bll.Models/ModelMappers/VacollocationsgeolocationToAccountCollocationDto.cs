@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Intotech.Common;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Wheelo.Common.ImageService;
 
 namespace Intotech.Wheelo.Bll.Models.ModelMappers
 {
@@ -26,7 +27,7 @@ namespace Intotech.Wheelo.Bll.Models.ModelMappers
                 Name = dbModel.Name,
                 Surname = dbModel.Surname,
                 Driver = (Driver)dbModel.Isdriver.Value,
-                Image = dbModel.Image
+                Image = ImageServiceUtils.GetImageUrl(dbModel.Accountid.Value)
             };
 
             return result;
@@ -57,7 +58,7 @@ namespace Intotech.Wheelo.Bll.Models.ModelMappers
                 Name = name,
                 Surname = surname,
                 Driver = (Driver)dbModel.Isdriver.Value,
-                Image = dbModel.Image
+                Image = ImageServiceUtils.GetImageUrl(accId)
             };
 
             return result;
@@ -77,7 +78,7 @@ namespace Intotech.Wheelo.Bll.Models.ModelMappers
                 Name = dbModel.Name,
                 Surname = dbModel.Surname,
                 Driver = (Driver)dbModel.Driverpassenger.Value,
-                Image = dbModel.Image
+                Image = ImageServiceUtils.GetImageUrl(dbModel.Idaccount.Value)
             };
 
             return result;
