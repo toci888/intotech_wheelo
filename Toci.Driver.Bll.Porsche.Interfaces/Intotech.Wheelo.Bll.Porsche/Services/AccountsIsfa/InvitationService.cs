@@ -1,4 +1,5 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
 using Intotech.Wheelo.Common;
@@ -25,6 +26,19 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
         {
             VinvitationLogic = vinvitationLogic;      
             InvitationLogic = invitationLogic;
+        }
+        
+
+        public virtual ReturnedResponse<bool> CancelInvitation(int invitingAccountId, int invitedAccountId)
+        {
+            Invitation fr = InvitationLogic.Select(m => m.Idaccount == invitingAccountId && m.Idinvited == invitedAccountId).FirstOrDefault();
+
+            if (fr == null)
+            {
+                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.FriendshipNotFound), false, ErrorCodes.FriendshipNotFound);
+            }
+
+            return new ReturnedResponse<bool>(InvitationLogic.Delete(fr) > 0, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public ReturnedResponse<List<Vinvitation>> GetInvitedAccounts(int accountId)

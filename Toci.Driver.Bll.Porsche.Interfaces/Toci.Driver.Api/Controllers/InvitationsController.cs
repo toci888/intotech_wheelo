@@ -34,5 +34,12 @@ namespace Toci.Driver.Api.Controllers
         {
             return Service.InviteToFriends(invitation.InvitingAccountId, invitation.InvitedAccountId);
         }
+
+        [HttpDelete]
+        [Route("cancel-invitation")]
+        public ReturnedResponse<bool> CancelInvitation(int InvitingAccountId, int InvitedAccountId)
+        {
+            return Service.CancelInvitation(InvitingAccountId, InvitedAccountId);
+        }
     }
 }

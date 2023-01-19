@@ -12,6 +12,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa
     {
         ReturnedResponse<List<Vinvitation>> GetInvitedAccounts(int accountId);
         ReturnedResponse<Vinvitation> InviteToFriends(int invitingAccountId, int invitedAccountId);
+        ReturnedResponse<bool> CancelInvitation(int invitingAccountId, int invitedAccountId);
 
     }
 }
