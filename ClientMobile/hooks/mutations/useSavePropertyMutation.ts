@@ -4,6 +4,7 @@ import axios from "axios";
 import { useUser } from "../useUser";
 import { endpoints, queryKeys } from "../../constants/constants";
 import { CollocateAccount } from "../../types/collocation";
+import { commonAlert } from "../../utils/handleError";
 
 const saveOrUnsaveCollocation = (
   collocationID: number,
@@ -11,11 +12,12 @@ const saveOrUnsaveCollocation = (
   userID?: number,
   token?: string
 ) =>
-  axios.patch(
-    `${endpoints.alterSavedPropertiesByUserID(userID as number)}`,
+  axios.post(
+    'http://20.203.135.11:5105/api/Invitations/invite-to-friends',
+    // `${endpoints.alterSavedPropertiesByUserID(userID as number)}`,
     {
-      collocationID,
-      op,
+      invitingAccountId: userID,
+      invitedAccountId: collocationID
     },
     {
       headers: {
@@ -87,6 +89,13 @@ export const useSaveCollocationMutation = () => {
           prevSearchedProperties,
           prevSelectedProperty,
         };
+      },
+      onSuccess: (
+        { data },
+        // { propertyName, ownerID, text, tenantID, senderName }
+      ) => {
+        console.log("UDALO SIE", data) //TODO
+        commonAlert("udało się dodac")
       },
       onError: (err, vars, context) => {
         queryClient.setQueryData(

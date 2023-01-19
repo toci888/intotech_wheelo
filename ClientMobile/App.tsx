@@ -58,20 +58,20 @@ export default function App() {
             queryClient.invalidateQueries(queryKeys.conversations);
             queryClient.invalidateQueries(queryKeys.selectedConversation);
             
-            Notifications.scheduleNotificationAsync({
-              content: {
-                title: data.authorFirstName,
-                body: data.text,
+            // Notifications.scheduleNotificationAsync({
+            //   content: {
+            //     title: data.authorFirstName,
+            //     body: data.text,
                 
-                data: {
-                //   // will need to change url in prod build (use process.ENV && eas.json)
-                  // url: `exp://localhost:19000/messages/${data.id}/${data.authorFirstName}`,
-                  url: `https://expo.dev/@kacper1337/intotechwheelo?serviceType=classic&distribution=expo-go/messages`,
-                },
-              },
+            //     data: {
+            //     //   // will need to change url in prod build (use process.ENV && eas.json)
+            //       // url: `exp://localhost:19000/messages/${data.id}/${data.authorFirstName}`,
+            //       url: `https://expo.dev/@kacper1337/intotechwheelo?serviceType=classic&distribution=expo-go/messages`,
+            //     },
+            //   },
               
-              trigger: null //opoznienie{ seconds: 4 },
-            });
+            //   trigger: null //opoznienie{ seconds: 4 },
+            // });
           }
         );
         socket.on("session", (sessionData: {data: {userId: number, userName: string, userSurname: string, sessionId: number}}) => {

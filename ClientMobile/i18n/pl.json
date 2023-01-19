@@ -38,5 +38,8 @@
     "SeeLess": "Mniej",
     "UnableToGetChat": "Nie udało się pobrać informacji czatu",
     "Passenger": "Pasażer",
-    "Driver": "Kierowca"
+    "Driver": "Kierowca",
+    "Friends": "Znajomi",
+    "Associated": "Powiązani",
+    "Invited": "Zaproszenia"
 }

@@ -90,7 +90,7 @@ export const MessagePropertyScreen = ({
       <Screen style={styles.container}>
         {/* {Platform.OS === "ios" ? <ModalHeader /> : null} */}
         <Row style={styles.row}>
-          {collocation.images && collocation.images.length > 0 ? (
+          {collocation.image && collocation.image.length > 0 ? (
             <Image style={styles.image} source={{uri: 'base64Icon'}}/>
             // <Image style={styles.image} source={{ property.methodResult.accountsCollocated[propertyID].image }} />
           ) : null}

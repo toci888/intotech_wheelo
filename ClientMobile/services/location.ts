@@ -32,7 +32,8 @@ export const getLocationByPlaceId = async (placeId: string) => {
 
 export const searchLocations = async (text: string) => {
   try {
-    const url = `https://api.locationiq.com/v1/search.php?key=pk.95fe8bb8ddbbc10ed656fe23d485c8f0&q&q=Tampa&format=json&dedupe=1&addressdetails=1&matchquality=1&normalizeaddress=1&normalizecity=1`;
+    const url = `${endpoints.autoComplete}?query=${text}`; //add property screen
+
     const { data } = await axios.get<Location[]>(url);
     if (data) return data;
 

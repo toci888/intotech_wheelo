@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, ViewStyle, StyleSheet, TouchableOpacity, View, Modal, Dimensions } from "react-native";
+import { Pressable, ViewStyle, StyleSheet, TouchableOpacity, View, Modal, Dimensions, Image } from "react-native";
 import { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button } from "@ui-kitten/components";
@@ -46,7 +46,7 @@ export const Card = ({
     >
       <ImageCarousel
         onImagePress={onPress}
-        images={collocation.images}
+        images={[collocation.image]}
         chevronsShown
       />
 
@@ -123,4 +123,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6.27,
     elevation: 10,
   },
+  image: {
+
+  }
 });

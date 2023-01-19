@@ -10,9 +10,9 @@ const fetchProperties = async (
   token?: string
 ): Promise<CollocateAccount[]> => {
   if (!userID) return [];
-
+  console.log("ssd", `${endpoints.getInvitedFriendsByUserID}?idAccount=${userID}`)
   const response = await axios.get(
-    `${endpoints.getAssociationsByUserID}/${userID}`,
+    `${endpoints.getInvitedFriendsByUserID}?idAccount=${userID}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -25,7 +25,7 @@ const fetchProperties = async (
   return data;
 };
 
-export const useContactedPropertiesQuery = () => {
+export const useInvitedFriendsQuery = () => {
   const { user } = useUser();
   const queryInfo = useQuery(
     queryKeys.contactedProperties,

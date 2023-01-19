@@ -8,6 +8,7 @@ import { Location } from "../types/locationIQ";
 import { theme } from "../theme";
 import useColorScheme from "../hooks/useColorScheme";
 import { HeaderFilterButtons } from "./HeaderFilterButtons";
+import { i18n } from "../i18n/i18n";
 
 export const AnimatedListHeader = ({
   startLocation,
@@ -41,7 +42,9 @@ export const AnimatedListHeader = ({
           <Text category="h6" style={{ marginLeft: "auto"}}>O której wracasz?</Text>
         </View>
         <HeaderInput type="end" location={endLocation} setLocation={setEndLocation} time={endTime} setTime={setEndTime} />
-        <HeaderFilterButtons startLocation={startLocation} endLocation={endLocation} startTime={startTime} endTime={endTime} />
+        {startLocation.lat && endLocation.lat && 
+          <HeaderFilterButtons startLocation={startLocation} endLocation={endLocation} startTime={startTime} endTime={endTime} />
+        }
       </View>
     </Animated.View>
   );

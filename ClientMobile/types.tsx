@@ -85,8 +85,8 @@ export enum ThemeMode {
 }
 
 export enum Driver {
-  'driver' = 1,
-  'passenger' = 2,
+  'passenger' = 1,
+  'driver' = 2,
   'both' = 3
 }
 

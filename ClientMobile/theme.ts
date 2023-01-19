@@ -16,6 +16,7 @@ const customColors = {
 
 const importedTheme = {
   ...customColors,
+  ...light, //todel
   "color-primary-100": "#F8C6E9",
   "color-primary-200": "#F291DD",
   "color-primary-300": "#D856C7",

@@ -32,7 +32,7 @@ export const ReviewScreen = ({
 
   const createReview = useCreateReviewMutation();
 
-  if (!user) return <SignUpOrSignInScreen />;
+  // if (!user) return <SignUpOrSignInScreen />;
 
   return (
     <KeyboardAwareScrollView bounces={false}>

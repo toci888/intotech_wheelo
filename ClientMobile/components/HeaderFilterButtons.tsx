@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Location } from "../types/locationIQ";
 import { theme } from "../theme";
 import { i18n } from "../i18n/i18n";
-import { SearchScreenParams } from "../types";
+import { Driver, SearchScreenParams } from "../types";
 
 export const HeaderFilterButtons = ({ 
     startLocation, 
@@ -21,7 +21,16 @@ export const HeaderFilterButtons = ({
   }) => {
   const navigation = useNavigation();
 
+  const [passenger, setPassenger] = useState(false);
+  const [driver, setDriver] = useState(false);
+
   const submit = async () => {
+    let driverPassenger: Driver;
+    if(!driver && passenger) driverPassenger = Driver.passenger
+    else if(driver && !passenger) driverPassenger = Driver.driver
+    else if(driver && passenger) driverPassenger = Driver.both
+    else return;
+
     navigation.navigate("Root", {
       screen: "Search",
       params: {
@@ -29,7 +38,7 @@ export const HeaderFilterButtons = ({
         endLocation,
         startLocationTime: startTime,
         endLocationTime: endTime,
-        driverPassenger: 2,
+        driverPassenger,
         acceptableDistance: 800
       } as SearchScreenParams
     });
@@ -39,15 +48,15 @@ export const HeaderFilterButtons = ({
     <View style={styles.container}>
       <View style = {{ flexDirection: 'row', marginHorizontal: 10 }}>
         <View style = {{ flexDirection: 'row', marginRight: "auto" }}>
-          <TouchableOpacity onPress={() => console.log("Passenger")} style={{marginRight: 20}} >
-            <Text style={styles.textButton}>{i18n.t('Passenger')}</Text>
+          <TouchableOpacity onPress={() => setPassenger(!passenger)} style={{marginRight: 20}} >
+            <Text style={[styles.textButton, passenger ? styles.textSelectedButton:styles.textUnSelectedButton]}>{i18n.t('Passenger')}</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => console.log("Driver")}>
-            <Text style={styles.textButton}>{i18n.t('Driver')}</Text>
+          <TouchableOpacity onPress={() => setDriver(!driver)}>
+            <Text style={[styles.textButton, driver ? styles.textSelectedButton:styles.textUnSelectedButton]}>{i18n.t('Driver')}</Text>
           </TouchableOpacity>
         </View>
       
-        {startLocation && startLocation.display_name !== i18n.t('Search') && endLocation.display_name !== i18n.t('Search') &&
+        {startLocation && startLocation.lat && endLocation.lat && ( passenger || driver ) &&
           <TouchableOpacity onPress={() => submit()}>
             <MaterialCommunityIcons 
               name="check-circle"
@@ -76,6 +85,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderColor: theme["color-gray"],
     marginHorizontal: 3,
+  },
+  textSelectedButton: {
+    color: 'white',
+    backgroundColor: 'grey'
+  },
+  textUnSelectedButton: {
+    color: 'grey',
+    backgroundColor: 'white'
   },
   button: {
 

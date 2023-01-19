@@ -15,14 +15,16 @@ import { useUser } from "../hooks/useUser";
 import { Loading } from "../components/Loading";
 import { useSavedCollocationsQuery } from "../hooks/queries/useSavedCollocationsQuery";
 import { useContactedPropertiesQuery } from "../hooks/queries/useContactedPropertiesQuery";
+import { i18n } from "../i18n/i18n";
+import { useInvitedFriendsQuery } from "../hooks/queries/useInvitedFriendsQuery";
 
 export const SavedScreen = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const { user } = useUser();
   const navigation = useNavigation();
   const savedCollocations = useSavedCollocationsQuery();
-  const contactedProperties = useContactedPropertiesQuery();
-  const applicationProperties = undefined;
+  const associatedCollocations = useContactedPropertiesQuery();
+  const invitedFriends = useInvitedFriendsQuery();
 
   // Refetching saved properties doesn't occur after login
   useFocusEffect(() => {
@@ -30,8 +32,9 @@ export const SavedScreen = () => {
       (!savedCollocations.data || savedCollocations.data.length === 0) &&
       user && user?.savedCollocations && user.savedCollocations.length > 0
     ) {
-      // savedCollocations.refetch();
-      // contactedProperties.refetch();
+      savedCollocations.refetch();
+      associatedCollocations.refetch();
+      invitedFriends.refetch();
     }
   });
 
@@ -44,7 +47,7 @@ export const SavedScreen = () => {
     setActiveIndex(index);
   };
 
-  if (savedCollocations.isLoading || contactedProperties.isLoading)
+  if (savedCollocations.isLoading || associatedCollocations.isLoading || invitedFriends.isLoading)
     return <Loading />;
 
   const getBodyText = (heading: string, subHeading: string) => {
@@ -70,6 +73,7 @@ export const SavedScreen = () => {
           <Card
             collocation={item}
             style={styles.card}
+            myCollocation={true}
             onPress={() =>
               navigation.navigate("PropertyDetails", { collocationID: item.idAccount })
             }
@@ -83,7 +87,7 @@ export const SavedScreen = () => {
   const getBody = () => {
     if (activeIndex === 0) {
       if (savedCollocations?.data && savedCollocations.data.length > 0)
-        return getPropertiesFlatList(savedCollocations.data[0].methodResult.accountsCollocated);
+        return getPropertiesFlatList(savedCollocations.data);
       return (
         <>
           <LottieView
@@ -103,9 +107,10 @@ export const SavedScreen = () => {
         </>
       );
     }
+    // console.log("TESCIK", associatedCollocations)
     if (activeIndex === 1) {
-      if (contactedProperties?.data && contactedProperties.data.length > 0)
-        return getPropertiesFlatList(contactedProperties.data[0].methodResult.accountsCollocated);
+      if (associatedCollocations?.data && associatedCollocations.data.length > 0)
+        return getPropertiesFlatList(associatedCollocations.data);
       return (
         <>
           <LottieView
@@ -125,8 +130,9 @@ export const SavedScreen = () => {
         </>
       );
     }
-    if (applicationProperties)
-      return getPropertiesFlatList(applicationProperties);
+    if (activeIndex === 2)
+      if (invitedFriends?.data && invitedFriends.data.length > 0)
+        return getPropertiesFlatList(invitedFriends.data);
     return (
       <>
         <LottieView
@@ -156,7 +162,7 @@ export const SavedScreen = () => {
           appearance={getButtonAppearance(0)}
           onPress={() => handleButtonPress(0)}
         >
-          Friends
+          {i18n.t("Friends")}
         </Button>
         <Button
           style={[styles.button, styles.contactedButton]}
@@ -164,7 +170,7 @@ export const SavedScreen = () => {
           appearance={getButtonAppearance(1)}
           onPress={() => handleButtonPress(1)}
         >
-          Associated
+          {i18n.t('Associated')}
         </Button>
         <Button
           style={[styles.button, styles.applicationButton]}
@@ -172,9 +178,8 @@ export const SavedScreen = () => {
           appearance={getButtonAppearance(2)}
           onPress={() => handleButtonPress(2)}
         >
-          Invited
+          {i18n.t('Invited')}
         </Button>
-        <Text>asd</Text>
       </Row>
       <View style={styles.container}>{getBody()}</View>
     </Screen>
