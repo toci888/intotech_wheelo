@@ -31,7 +31,8 @@ public class VFriendsToFriendsDto : IAccountIsfaToDto<Vfriend, FriendsDto>
             Tohour = dbModel.Tohour.Value.ToString(), //TimeUtils.GetCorrectTime(dbModel.Tohour.Value.Hour) + ":" + TimeUtils.GetCorrectTime(dbModel.Tohour.Value.Minute),
             Name = name,
             Surname = surname,
-            Image = ImageServiceUtils.GetImageUrl(accId)
+            Image = ImageServiceUtils.GetImageUrl(accId),
+            Driver = dbModel.Driverpassenger.Value
         };
 
         return result;

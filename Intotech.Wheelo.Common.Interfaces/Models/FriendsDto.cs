@@ -13,5 +13,6 @@ public class FriendsDto
     public string Fromhour { get; set; }
     public string Tohour { get; set; }
     public string PhoneNumber { get; set; }
+    public int Driver { get; set; }
 
 }
