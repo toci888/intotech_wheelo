@@ -77,7 +77,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 DateTime refreshTokenValid = DateTime.Now.AddDays(AccountLogicConstants.RefreshTokenValidDays);
 
                 acc = AccountLogic.Insert(new Account() { Email = dto.email, Emailconfirmed = true, Idrole = CommonConstants.RoleUser, 
-                    Image = dto.picture.data.url, Name = name, Surname = surname, Refreshtoken = refreshToken, Refreshtokenvalid = refreshTokenValid });
+                    Image = ImageManager.GetImageBase64(dto.picture.data.url), Name = name, Surname = surname, Refreshtoken = refreshToken, Refreshtokenvalid = refreshTokenValid });
 
                 UserExtraDataLogic.Insert(new Userextradatum() { Idaccount = acc.Id, Origin = CommonConstants.FacebookOrigin, Token = token, Tokendatajson = json });
             }
