@@ -8,14 +8,9 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces
 { 
-    public interface IVacollocationsgeolocationToAccountCollocationDto
+    public interface IVacollocationsgeolocationToAccountCollocationDto : IAccountIsfaToDto<Vacollocationsgeolocation, AccountCollocationDto>
     {
-        AccountCollocationDto Map(Vacollocationsgeolocation dbModel, int accountId);
-
         AccountCollocationDto Map(Vcollocationsgeolocation dbModel);
-
         AccountCollocationDto Map(Vaworktripgengeolocation dbModel);
-
-        List<AccountCollocationDto> Map(List<Vacollocationsgeolocation> associationsList, int accountId);
     }
 }

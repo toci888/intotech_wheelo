@@ -1010,19 +1010,35 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.ToView("vfriends");
 
-                entity.Property(e => e.Accountid).HasColumnName("accountid");
+                entity.Property(e => e.Driverpassenger).HasColumnName("driverpassenger");
 
-                entity.Property(e => e.Friendaccountid).HasColumnName("friendaccountid");
+                entity.Property(e => e.Friendidaccount).HasColumnName("friendidaccount");
 
                 entity.Property(e => e.Friendname).HasColumnName("friendname");
 
                 entity.Property(e => e.Friendsurname).HasColumnName("friendsurname");
 
+                entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+
+                entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
+
+                entity.Property(e => e.Latitudeto).HasColumnName("latitudeto");
+
+                entity.Property(e => e.Longitudefrom).HasColumnName("longitudefrom");
+
+                entity.Property(e => e.Longitudeto).HasColumnName("longitudeto");
+
                 entity.Property(e => e.Method).HasColumnName("method");
 
                 entity.Property(e => e.Name).HasColumnName("name");
 
+                entity.Property(e => e.Searchid).HasColumnName("searchid");
+
                 entity.Property(e => e.Surname).HasColumnName("surname");
+
+                entity.Property(e => e.Tohour).HasColumnName("tohour");
             });
 
             modelBuilder.Entity<Vfriendsuggestion>(entity =>

@@ -9,7 +9,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces;
+using Intotech.Wheelo.Common.Interfaces.Models;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Wheelo.Bll.Persistence;
 
 namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 {
@@ -17,16 +20,22 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
     {
         protected IVfriendLogic VfriendLogic;
         protected IFriendLogic FriendLogic;
+        protected IAccountIsfaToDto<Vfriend, FriendsDto> AccountsMapper;
 
-        public FriendsService(IVfriendLogic vfriendLogic, IFriendLogic friendLogic)
+        public FriendsService(IVfriendLogic vfriendLogic, IFriendLogic friendLogic, IAccountIsfaToDto<Vfriend, FriendsDto> accountsMapper)
         {
             VfriendLogic = vfriendLogic;
             FriendLogic = friendLogic;
+            AccountsMapper = accountsMapper;
         }
 
-        public virtual ReturnedResponse<List<Vfriend>> GetVfriends(int accountId)
+        public virtual ReturnedResponse<List<FriendsDto>> GetVfriends(int accountId)
         {
-            return new ReturnedResponse<List<Vfriend>>(VfriendLogic.Select(m => m.Accountid == accountId || m.Friendaccountid == accountId).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            List<Vfriend> friends = VfriendLogic.Select(m => m.Idaccount == accountId || m.Friendidaccount == accountId).ToList();
+            
+            List<FriendsDto> frDto = AccountsMapper.Map(friends, accountId);
+
+            return new ReturnedResponse<List<FriendsDto>>(frDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<bool> Unfriend(int accountId, int idFriendToRemove)
@@ -59,7 +68,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
                 FriendLogic.Insert(new Friend() { Idaccount = friend.Idaccount, Idfriend = friend.Idfriend, Method = friend.Method });
             }
 
-            return new ReturnedResponse<Vfriend>(VfriendLogic.Select(m => m.Accountid == friend.Idaccount && m.Friendaccountid == friend.Idfriend).First(),
+            return new ReturnedResponse<Vfriend>(VfriendLogic.Select(m => m.Idaccount == friend.Idaccount && m.Friendidaccount == friend.Idfriend).First(),
                 I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
 
         }

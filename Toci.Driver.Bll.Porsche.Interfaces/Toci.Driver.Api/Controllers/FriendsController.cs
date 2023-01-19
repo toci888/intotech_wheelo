@@ -2,6 +2,7 @@
 using Intotech.Common.Microservices;
 using Intotech.Wheelo.Bll.Models.Isfa;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
+using Intotech.Wheelo.Common.Interfaces.Models;
 using Microsoft.AspNetCore.Mvc;
 using Toci.Driver.Database.Persistence.Models;
 
@@ -17,7 +18,7 @@ namespace Toci.Driver.Api.Controllers
 
         [HttpGet]
         [Route("your-friends/{idAccount}")]
-        public ReturnedResponse<List<Vfriend>> GetVfriends(int idAccount)
+        public ReturnedResponse<List<FriendsDto>> GetVfriends(int idAccount)
         {
             return Service.GetVfriends(idAccount);
         }

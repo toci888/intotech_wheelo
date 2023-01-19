@@ -14,6 +14,9 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 {
     public class InvitationService : IInvitationService
     {
+        public const int InvitationOriginCollocations = 1;
+        public const int InvitationOriginSuggestions = 2;
+
         protected IVinvitationLogic VinvitationLogic;
         protected IInvitationLogic InvitationLogic;
 
@@ -31,7 +34,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 
         public virtual ReturnedResponse<Vinvitation> InviteToFriends(int invitingAccountId, int invitedAccountId)
         {
-            WheeloUtils.PotentialSwapIds(ref invitingAccountId, ref invitedAccountId);
+            //WheeloUtils.PotentialSwapIds(ref invitingAccountId, ref invitedAccountId);
             Invitation invitation = InvitationLogic.Select(m => m.Idinvited == invitedAccountId && m.Idaccount == invitingAccountId).FirstOrDefault();
 
             if (invitation == null)
