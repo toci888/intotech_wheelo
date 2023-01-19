@@ -20,13 +20,15 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
     {
         protected IVfriendLogic VfriendLogic;
         protected IFriendLogic FriendLogic;
+        protected IAccountLogic AccountLogic;
         protected IAccountIsfaToDto<Vfriend, FriendsDto> AccountsMapper;
 
-        public FriendsService(IVfriendLogic vfriendLogic, IFriendLogic friendLogic, IAccountIsfaToDto<Vfriend, FriendsDto> accountsMapper)
+        public FriendsService(IVfriendLogic vfriendLogic, IFriendLogic friendLogic, IAccountIsfaToDto<Vfriend, FriendsDto> accountsMapper, IAccountLogic accountLogic)
         {
             VfriendLogic = vfriendLogic;
             FriendLogic = friendLogic;
             AccountsMapper = accountsMapper;
+            AccountLogic = accountLogic;
         }
 
         public virtual ReturnedResponse<List<FriendsDto>> GetVfriends(int accountId)
@@ -61,11 +63,23 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
         {
             friend = friend.RefreshSwapDto();
 
-            Friend testFr = FriendLogic.Select(m => m.Idaccount == friend.Idaccount && m.Idfriend == friend.Idfriend).FirstOrDefault();
+            Account acc1 = AccountLogic.Select(m => m.Id == friend.Idaccount).FirstOrDefault();
 
-            if (testFr == null)
+            if (acc1 != null)
             {
-                FriendLogic.Insert(new Friend() { Idaccount = friend.Idaccount, Idfriend = friend.Idfriend, Method = friend.Method });
+                Account acc2 = AccountLogic.Select(m => m.Id == friend.Idfriend).FirstOrDefault();
+
+                if (acc2 != null)
+                {
+                    Friend testFr = FriendLogic
+                        .Select(m => m.Idaccount == friend.Idaccount && m.Idfriend == friend.Idfriend).FirstOrDefault();
+
+                    if (testFr == null)
+                    {
+                        FriendLogic.Insert(new Friend()
+                            { Idaccount = friend.Idaccount, Idfriend = friend.Idfriend, Method = friend.Method });
+                    }
+                }
             }
 
             return new ReturnedResponse<Vfriend>(VfriendLogic.Select(m => m.Idaccount == friend.Idaccount && m.Friendidaccount == friend.Idfriend).First(),
