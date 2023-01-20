@@ -1072,21 +1072,21 @@ namespace Toci.Driver.Database.Persistence.Models
 
                 entity.ToView("vinvitations");
 
-                entity.Property(e => e.Accountid).HasColumnName("accountid");
-
                 entity.Property(e => e.Createdat)
                     .HasColumnType("timestamp without time zone")
                     .HasColumnName("createdat");
 
-                entity.Property(e => e.Name).HasColumnName("name");
+                entity.Property(e => e.Firstname).HasColumnName("firstname");
 
-                entity.Property(e => e.Suggestedaccountid).HasColumnName("suggestedaccountid");
+                entity.Property(e => e.Idaccount).HasColumnName("idaccount");
 
-                entity.Property(e => e.Suggestedname).HasColumnName("suggestedname");
+                entity.Property(e => e.Idaccountinvited).HasColumnName("idaccountinvited");
 
-                entity.Property(e => e.Suggestedsurname).HasColumnName("suggestedsurname");
+                entity.Property(e => e.Invitedfirstname).HasColumnName("invitedfirstname");
 
-                entity.Property(e => e.Surname).HasColumnName("surname");
+                entity.Property(e => e.Invitedlastname).HasColumnName("invitedlastname");
+
+                entity.Property(e => e.Lastname).HasColumnName("lastname");
             });
 
             modelBuilder.Entity<Vtripsparticipant>(entity =>

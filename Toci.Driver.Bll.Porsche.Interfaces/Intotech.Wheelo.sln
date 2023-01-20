@@ -264,6 +264,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WheeloSqlMigrations", "Whee
 		18-12-2022 wheelo.sql = 18-12-2022 wheelo.sql
 		19-01-2023 wheelo.sql = 19-01-2023 wheelo.sql
 		19-12-2022 wheelo.sql = 19-12-2022 wheelo.sql
+		20-02-2023 wheelo.sql = 20-02-2023 wheelo.sql
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Notifications.Interfaces", "Intotech.Wheelo.Notifications.Interfaces\Intotech.Wheelo.Notifications.Interfaces.csproj", "{5558666A-67FD-4684-997A-89FB6035B34A}"
