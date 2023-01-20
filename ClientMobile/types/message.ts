@@ -1,7 +1,7 @@
 export type Message = {
   id: number;
   idAccount: number;
-  createdAt: string;
+  createdAt: number;
   senderEmail: string;
   roomID: number;
   text: string;

@@ -3,14 +3,18 @@ import { useMutation, useQueryClient } from "react-query";
 
 import { endpoints, queryKeys } from "../../constants/constants";
 import { CollocateAccount } from "../../types/collocation";
+import { commonAlert } from "../../utils/handleError";
 import { useUser } from "../useUser";
 
-const deleteCollocation = (propertyID: number, token?: string) =>
-  axios.delete(`${endpoints.deleteProperty}${propertyID}`, {
+const deleteCollocation = (friendID: number, userId?: number, token?: string) => {
+//http://20.203.135.11:5105/api/Friends/unfriend?accountId=1&idFriendToRemove=2
+  console.log('usuwanie',`${endpoints.deleteFriend}?accountId=${userId}&idFriendToRemove=${friendID}`);
+  return axios.delete(`${endpoints.deleteFriend}?accountId=${userId}&idFriendToRemove=${friendID}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+}
 
 export const useDeleteCollocationMutation = () => {
   const queryClient = useQueryClient();
@@ -18,7 +22,7 @@ export const useDeleteCollocationMutation = () => {
 
   return useMutation(
     ({ collocationID }: { collocationID: number }) =>
-      deleteCollocation(collocationID, user?.accessToken),
+      deleteCollocation(collocationID, user?.id, user?.accessToken),
     {
       onMutate: async ({ collocationID }) => {
         await queryClient.cancelQueries(queryKeys.myProperties);
@@ -34,6 +38,10 @@ export const useDeleteCollocationMutation = () => {
         }
 
         return { prevProperties };
+      },
+      onSuccess: (data) => {
+        commonAlert('udalo sie usunac');
+        console.log('removee data', data.data)
       },
       onError: (err, newTodo, context) => {
         if (context?.prevProperties)

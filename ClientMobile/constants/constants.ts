@@ -29,7 +29,7 @@ export const server = "http://20.203.135.11";
 
 const serverUrl = server + ":5105/api";
 const integrationApiUrl = server + ":5108/api";
-const chatUrl = server + ":5130/";
+const chatUrl = server + ":5130/"; //check
 
 const location = "/location";
 const google = "/GoogleMap";
@@ -42,6 +42,7 @@ const conversation = "/conversation";
 const messages = "/messages";
 const refresh = "/refresh-token";
 const wheeloChat = "wheeloChat"
+const friends = "/friends"
 const refreshTokenEndpoint = serverUrl + user + refresh;
 const locationEndpoint = serverUrl + location;
 const googleEndpoint = integrationApiUrl + google;
@@ -52,8 +53,8 @@ const reviewEndpoint = serverUrl + review;
 const conversationEndpoint = chatUrl + "api" + conversation;
 const conversationWheeloChatEndpoint = chatUrl + wheeloChat + conversation;
 const messagesEndpoint = serverUrl + messages;
-const contactedEndpoint = (id: number) => `${userEndpoint}/${id}/properties/contacted`;
-const savedEndpoint = (id: number) => `${userEndpoint}/${id}/collocations/saved`;
+// const contactedEndpoint = (id: number) => `${serverUrl}/Invitations/view-invitations${id}`;
+const friendsEndpoint = (id: number) => `${serverUrl}/Friends/your-friends/${id}`;
 const pushTokenEndpoint = (id: number) => `${userEndpoint}/${id}/pushtoken`;
 const allowsNotificationsEndpoint = (id: number) => `${userEndpoint}/${id}/settings/notifications`;
 const themeModeEndpoint = (idAccount: number, darkModeEnabled: boolean) => `${userEndpoint}/${idAccount}/settings/theme-mode?darkmode=${darkModeEnabled}`;
@@ -73,17 +74,18 @@ export const endpoints = {
   resetPassword: userEndpoint + "/reset-password",
   forgotPasswordCheckCode: userEndpoint + "/forgot-password-check-code",
   createProperty: collocationEndpoint,
-  getCollocationByID: serverUrl+'/AssociationMapData/association-user' + "/",
-  getContactedPropertiesByUserID: contactedEndpoint,
+  getCollocationByID: serverUrl + '/AssociationMapData/association-user/',
+  getInvitedFriendsByUserID: serverUrl + '/Invitations/view-invitations',
+  getAssociationsByUserID: serverUrl + '/AssociationMapData/associations-users',
   getPropertiesByUserID: collocationEndpoint + "/userid/",
   getPropertiesByBoundingBox: collocationEndpoint + "/search",
-  deleteProperty: collocationEndpoint + "/",
+  deleteFriend: serverUrl + friends + "/unfriend",
   updateProperty: collocationEndpoint + "/update/",
   getApartmentsByPropertyID: apartmentEndpoint + "/property/",
   updateApartments: apartmentEndpoint + "/property/",
   createReview: reviewEndpoint + "/property/",
-  getSavedPropertiesByUserID: savedEndpoint,
-  alterSavedPropertiesByUserID: savedEndpoint,
+  getFriendsByUserID: friendsEndpoint,
+  alterSavedPropertiesByUserID: friendsEndpoint,
   alterPushToken: pushTokenEndpoint,
   allowsNotifications: allowsNotificationsEndpoint,
   themeMode: themeModeEndpoint,

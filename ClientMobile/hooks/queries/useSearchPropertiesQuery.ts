@@ -17,8 +17,9 @@ const fetchProperties = async (startAndEndLocation: SearchScreenParams, userId?:
     startLocationTime: startAndEndLocation.startLocationTime,
     endLocationTime: startAndEndLocation.endLocationTime,
     idAccount: userId,
-    acceptableDistance: 30000
-  });
+    acceptableDistance: startAndEndLocation.acceptableDistance,
+    driverPassenger: startAndEndLocation.driverPassenger,
+  } as SearchScreenParams);
   
   const data = response.data as Collocation;
 
@@ -40,8 +41,8 @@ export const useSearchPropertiesQuery = (startAndEndLocation: SearchScreenParams
 
   if (data && data.isSuccess !== false)
     for (let accountCollocated of data.methodResult.accountsCollocated) {
-      accountCollocated.areFriends = false;
-      if (user?.savedCollocations?.includes(accountCollocated.idAccount)) accountCollocated.areFriends = true;
+      accountCollocated.relationshipStatus = false;
+      if (user?.savedCollocations?.includes(accountCollocated.idAccount)) accountCollocated.relationshipStatus = true;
     }
 
   return {

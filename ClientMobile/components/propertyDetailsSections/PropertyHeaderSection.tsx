@@ -34,7 +34,7 @@ export const CollocationHeaderSection = ({ collocation }: { collocation: Colloca
   const handleHeartPress = () => {
     if (!user) return commonAlert(i18n.t('PleaseSignUpOrSignInToSaveProperties'));
     let op: "add" | "remove" = "add";
-    if (collocation?.areFriends) op = "remove";
+    if (collocation?.relationshipStatus) op = "remove";
 
     alterUsersSavedProperties(collocation.idAccount, op);
     saveCollocation.mutate({ collocationID: collocation.idAccount, op } as any);
@@ -74,7 +74,7 @@ export const CollocationHeaderSection = ({ collocation }: { collocation: Colloca
           />
           <MaterialCommunityIcons
             onPress={handleHeartPress}
-            name={collocation?.areFriends ? "heart" : "heart-outline"}
+            name={collocation?.relationshipStatus ? "heart" : "heart-outline"}
             size={30}
             color={theme["color-primary-500"]}
           />

@@ -50,3 +50,7 @@ additionally
 npm install -g react-native-git-upgrade
 npm install -g @react-native-community/cli
 react-native-git-upgrade
+
+Errors:
+No suitable URL request handler found for: - problem z wczytaniem zdjęcia
+Card.tsx -> <ImageCarousel onImagePress={onPress} images={collocation.image!!} />

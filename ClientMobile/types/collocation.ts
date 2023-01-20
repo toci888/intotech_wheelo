@@ -13,7 +13,7 @@ export type Collocation = {
 
 export type CollocateAccount = {
   idAccount: number,
-  image: string[],
+  image: string,
   name: string,
   surname: string,
   latitudefrom: number,
@@ -22,7 +22,7 @@ export type CollocateAccount = {
   longitudeto: number,
   fromhour: string,
   tohour: string
-  areFriends: boolean;
+  relationshipStatus: boolean;
   phoneNumber: string;
   driver: Driver;
 }

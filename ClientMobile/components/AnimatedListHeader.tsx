@@ -1,14 +1,14 @@
-import { Animated, View, StyleSheet, TouchableOpacity, } from "react-native";
+import { Animated, View, StyleSheet} from "react-native";
 import React, { useState } from "react";
-import { Text, Button } from "@ui-kitten/components";
+import { Text } from "@ui-kitten/components";
 
-import { LISTMARGIN, themes } from "../constants/constants";
+import { LISTMARGIN } from "../constants/constants";
 import { HeaderInput } from "./HeaderInput";
 import { Location } from "../types/locationIQ";
-import { useNavigation } from "@react-navigation/native";
-import { i18n } from "../i18n/i18n";
 import { theme } from "../theme";
 import useColorScheme from "../hooks/useColorScheme";
+import { HeaderFilterButtons } from "./HeaderFilterButtons";
+import { i18n } from "../i18n/i18n";
 
 export const AnimatedListHeader = ({
   startLocation,
@@ -22,52 +22,29 @@ export const AnimatedListHeader = ({
   setEndLocation: (endLocation: Location) => void;
 }) => {
   const colorScheme = useColorScheme();
-  const navigation = useNavigation();
 
   const [startTime, setStartTime] = useState<string>("08:00");
   const [endTime, setEndTime] = useState<string>("16:00");
   
-  const submit = async () => {
-    if(startLocation.display_name !== i18n.t('Search') && endLocation.display_name !== i18n.t('Search')) {
-      navigation.navigate("Root", {
-        screen: "Search",
-        params: {
-          startLocation,
-          endLocation,
-          startLocationTime: startTime,
-          endLocationTime: endTime
-        }
-      } as any);
-    }
-  }
-
   return (
-    <Animated.View style={[styles.container, {backgroundColor: colorScheme === themes.dark ? theme["color-primary-700"] : theme["color-primary-400"]}]}>
-      <View 
-          style={[styles.defaultMarginHorizontal, {"marginTop": 10}]}
-        >
-      </View>    
+    <Animated.View style={[styles.container, {backgroundColor: colorScheme === "dark" ? theme["color-primary-700"] : theme["color-white"]}]}>
+      <View style={[styles.defaultMarginHorizontal, {"marginTop": 10}]} />
       <View style={styles.defaultMarginHorizontal}>
         <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-          <Text category="h6" style={{ marginRight: "auto", color: theme["color-white"] }}>Gdzie mieszkasz?</Text>
-          <Text category="h6" style={{ marginLeft: "auto", color: theme["color-white"] }}>O której wyjeżdżasz?</Text>
+          <Text category="h6" style={{ marginRight: "auto"}}>{i18n.t('WhereDoYouLive')}</Text>
+          <Text category="h6" style={{ marginLeft: "auto"}}>{i18n.t('WhatTimeAreYouGo')}</Text>
         </View>
 
         <HeaderInput type="start" location={startLocation} setLocation={setStartLocation} time={startTime} setTime={setStartTime} />
 
         <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-          <Text category="h6" style={{ marginRight: "auto", color: theme["color-white"] }}>Gdzie pracujesz?</Text>
-          <Text category="h6" style={{ marginLeft: "auto", color: theme["color-white"] }}>O której wracasz?</Text>
+          <Text category="h6" style={{ marginRight: "auto"}}>{i18n.t('WhereAreYouWorking')}</Text>
+          <Text category="h6" style={{ marginLeft: "auto"}}>{i18n.t('WhatTimeAreYouComingBack')}</Text>
         </View>
         <HeaderInput type="end" location={endLocation} setLocation={setEndLocation} time={endTime} setTime={setEndTime} />
-
-        {
-          startLocation.display_name !== i18n.t('Search') && endLocation.display_name !== i18n.t('Search') &&
-            <Button style={{ marginBottom: 10, borderRadius: 20, }} onPress={() => { submit(); }} >
-              {evaProps => <Text {...evaProps} style={{ fontSize: 18, fontWeight: "500", color: theme["color-white"], textTransform: "uppercase" }}>{i18n.t("FindAvailableConnections")}</Text>}
-            </Button>
+        {startLocation.lat && endLocation.lat && 
+          <HeaderFilterButtons startLocation={startLocation} endLocation={endLocation} startTime={startTime} endTime={endTime} />
         }
-
       </View>
     </Animated.View>
   );

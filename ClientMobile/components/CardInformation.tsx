@@ -8,7 +8,6 @@ import { theme } from "../theme";
 import { CollocateAccount } from "../types/collocation";
 import { Row } from "./Row";
 import { callPhoneNumber } from "../utils/callPhoneNumber";
-import { getStateAbbreviation } from "../utils/getStateAbbreviation";
 import { useUser } from "../hooks/useUser";
 import { useSaveCollocationMutation } from "../hooks/mutations/useSavePropertyMutation";
 import { commonAlert } from "../utils/handleError";
@@ -29,20 +28,22 @@ export const CardInformation = ({
     collocationID: number,
     type: "add" | "remove"
   ) => {
-    let newProperties: number[] = user?.savedCollocations
+    let newCollocations: number[] = user?.savedCollocations
       ? [...user.savedCollocations]
       : [];
 
-    if (type === "add") newProperties.push(collocationID);
-    else newProperties = newProperties.filter((i) => i !== collocationID);
+    if (type === "add") newCollocations.push(collocationID);
+    else newCollocations = newCollocations.filter((i) => i !== collocationID);
 
-    setSavedProperties(newProperties);
+    setSavedProperties(newCollocations);
   };
 
   const handleStarPress = () => {
     if (!user) return commonAlert(i18n.t('PleaseSignUpOrSignInToSaveProperties'));
+    // commonAlert('klik');
+    console.log('kik', user)
     let op: "add" | "remove" = "add";
-    if (collocation?.areFriends) op = "remove";
+    if (collocation?.relationshipStatus) op = "remove";
 
     alterUsersSavedProperties(collocation.idAccount, op);
     saveCollocation.mutate({ collocationID: collocation.idAccount, op });
@@ -64,7 +65,7 @@ export const CardInformation = ({
           <Text category={"s1"}>{collocation.name + " " + collocation.surname}</Text>
           <Pressable onPress={handleStarPress} style={styles.heartContainer}>
             <MaterialCommunityIcons
-              name={collocation?.areFriends ? "star" : "star-outline"}
+              name={collocation?.relationshipStatus ? "star" : "star-outline"}
               color={theme["color-primary-500"]}
               size={24}
             />
@@ -76,17 +77,6 @@ export const CardInformation = ({
           {collocation.phoneNumber}
         </Text>
       ) : null}
-
-      {/* {property?.includedUtilities && property.includedUtilities.length > 0 ? (
-        <Text category={"c1"} style={styles.defaultMarginTop}>
-          {property.includedUtilities.map((tag, index) => {
-            return property.includedUtilities &&
-              index === property.includedUtilities.length - 1
-              ? tag
-              : `${tag}, `;
-          })}
-        </Text>
-      ) : null} */}
 
       <Row style={[styles.defaultMarginTop, styles.rowJustification]}>
         <Button
@@ -125,7 +115,7 @@ export const CardInformation = ({
             {property.apartments.length > 1 ? "Units" : "Unit"}
           </Text>
         ) : null} */}
-        UNITS
+        
         <Button
           appearance={"ghost"}
           status="info"

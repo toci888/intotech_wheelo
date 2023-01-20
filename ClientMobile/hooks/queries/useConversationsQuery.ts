@@ -13,7 +13,6 @@ const fetchConversations = async (
 ): Promise<TransformedConversation[]> => {
   if (!email) return [];
 
-  console.log("BEFOREE", `${endpoints.getConversationsByUserEmail}/get-conversations-by-user-email ${email}`, token, email)
   const response = await axios.post(
     `${endpoints.getConversationsByUserEmail}`,
     {

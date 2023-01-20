@@ -1,8 +1,3 @@
-/**
- * Learn more about using TypeScript with React Navigation:
- * https://reactnavigation.org/docs/typescript/
- */
-
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import {
   CompositeScreenProps,
@@ -79,6 +74,8 @@ export type SearchScreenParams = {
   startLocationTime: string;
   endLocation: Location;
   endLocationTime: string;
+  driverPassenger: number;
+  acceptableDistance?: number;
 };
 
 export enum ThemeMode {
@@ -88,9 +85,16 @@ export enum ThemeMode {
 }
 
 export enum Driver {
-  'driver' = 1,
-  'passenger' = 2,
+  'passenger' = 1,
+  'driver' = 2,
   'both' = 3
+}
+
+export enum Relationship {
+  'notFriends' = 1,
+  'invited' = 2,
+  'suggested' = 3,
+  'friend' = 4
 }
 
 type Response = {

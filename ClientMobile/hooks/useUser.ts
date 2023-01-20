@@ -30,8 +30,8 @@ export const useUser = () => {
     socket.start();
     if (searchCollocations) {
       for (let i of searchCollocations) {
-        i.areFriends = false;
-        if (user.savedCollocations?.includes(i.idAccount)) i.areFriends = true;
+        i.relationshipStatus = false;
+        if (user.savedCollocations?.includes(i.idAccount)) i.relationshipStatus = true;
       }
       queryClient.setQueryData(queryKeys.searchCollocations, searchCollocations);
     }

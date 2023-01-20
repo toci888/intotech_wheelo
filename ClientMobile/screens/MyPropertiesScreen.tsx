@@ -22,7 +22,7 @@ export const MyPropertiesScreen = () => {
     navigation.navigate("AddProperty");
   };
 
-  if (!user) return <SignUpOrSignInScreen />;
+  // if (!user) return <SignUpOrSignInScreen />;
 
   if (properties.isLoading) return <Loading />;
 

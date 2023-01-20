@@ -25,7 +25,7 @@ export const HeaderInput = ({ type, location, setLocation, time, setTime }:
     <View style={{flexDirection: 'row'}}>
       <TouchableOpacity style={styles.container} onPress={() => { navigation.navigate("FindLocations", {type, location, setLocation} as any) }}>
         <Row style={{alignItems: 'center'}}>
-          <Text style={styles.input}>{typeof(location) === 'string' ? location : location.display_name}</Text>
+          <Text style={[styles.input]}>{typeof(location) === 'string' ? location : location.display_name}</Text>
           <MaterialIcons name="gps-fixed" size={24} color={theme["color-primary-500"]} style={styles.icon}/>
         </Row>
       </TouchableOpacity>

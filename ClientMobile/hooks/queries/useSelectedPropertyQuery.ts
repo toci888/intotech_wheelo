@@ -20,7 +20,7 @@ export const useSelectedCollocationQuery = (collocationID: number) => {
   );
 
   const data = queryInfo?.data as CollocateAccount;
-  if (data) if (user?.savedCollocations?.includes(data.idAccount)) data.areFriends = true;
+  if (data) if (user?.savedCollocations?.includes(data.idAccount)) data.relationshipStatus = true;
   
   return {
     ...queryInfo,

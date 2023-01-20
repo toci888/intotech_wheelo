@@ -36,5 +36,14 @@
     "YouHaveNoMessages": "Nie masz żadnych wiadomości",
     "SeeMore": "Więcej",
     "SeeLess": "Mniej",
-    "UnableToGetChat": "Nie udało się pobrać informacji czatu"
+    "UnableToGetChat": "Nie udało się pobrać informacji czatu",
+    "Passenger": "Pasażer",
+    "Driver": "Kierowca",
+    "Friends": "Znajomi",
+    "Associated": "Powiązani",
+    "Invited": "Zaproszenia",
+    "WhereDoYouLive":"Gdzie mieszkasz?",
+    "WhatTimeAreYouGo":"O której wyjeżdżasz?",
+    "WhereAreYouWorking":"Gdzie pracujesz?",
+    "WhatTimeAreYouComingBack":"O której wracasz?"
 }

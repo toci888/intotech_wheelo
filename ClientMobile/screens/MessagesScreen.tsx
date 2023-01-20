@@ -38,7 +38,7 @@ export const MessagesScreen = ({
   const createMessage = useCreateMessageMutation();
   // const [messages, setMessages] = useState({} as any)
 
-  if (!user) return <SignUpOrSignInScreen />;
+  // if (!user) return <SignUpOrSignInScreen />;
   if (conversation.isLoading) return <Loading />;
 
   if (!conversation.data) return <><Text>{i18n.t('UnableToGetChat')}</Text></>;
