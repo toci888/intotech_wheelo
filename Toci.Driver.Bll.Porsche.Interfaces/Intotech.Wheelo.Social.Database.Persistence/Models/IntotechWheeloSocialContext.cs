@@ -17,6 +17,8 @@ public partial class IntotechWheeloSocialContext : DbContext
 
     public virtual DbSet<Commenttype> Commenttypes { get; set; }
 
+    public virtual DbSet<Expense> Expenses { get; set; }
+
     public virtual DbSet<Group> Groups { get; set; }
 
     public virtual DbSet<Groupmember> Groupmembers { get; set; }
@@ -45,6 +47,22 @@ public partial class IntotechWheeloSocialContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Type).HasColumnName("type");
+        });
+
+        modelBuilder.Entity<Expense>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("expenses_pkey");
+
+            entity.ToTable("expenses");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Amount).HasColumnName("amount");
+            entity.Property(e => e.Createdat)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("createdat");
+            entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+            entity.Property(e => e.Kind).HasColumnName("kind");
         });
 
         modelBuilder.Entity<Group>(entity =>

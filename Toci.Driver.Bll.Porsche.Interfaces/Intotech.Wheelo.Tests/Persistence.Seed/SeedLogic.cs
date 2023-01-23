@@ -7,6 +7,7 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed;
 [TestClass]
 public abstract class SeedLogic<TModel> : SeedBase<TModel> where TModel : class
 {
+    protected int AccountIdOffset = 1000000000;
     protected List<TModel> ModelsEntities = new List<TModel>();
     protected override DbContext GetEfHandle()
     {

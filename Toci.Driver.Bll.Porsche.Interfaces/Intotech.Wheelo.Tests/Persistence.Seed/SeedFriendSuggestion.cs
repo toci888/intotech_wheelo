@@ -35,8 +35,16 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
             list.Add(new Friendsuggestion() { Idaccount = 19, Idsuggested = 4, Idsuggestedfriend = 22 });
             list.Add(new Friendsuggestion() { Idaccount = 20, Idsuggested = 5, Idsuggestedfriend = 11 });
 
+            foreach (Friendsuggestion sugg in list)
+            {
+                sugg.Idsuggestedfriend += AccountIdOffset;
+                sugg.Idsuggested += AccountIdOffset;
+                sugg.Idaccount += AccountIdOffset;
 
-            InsertCollection(list);
+                ModelsEntities.Add(sugg);
+            }
+
+            InsertCollection(ModelsEntities);
         }
     }
 }

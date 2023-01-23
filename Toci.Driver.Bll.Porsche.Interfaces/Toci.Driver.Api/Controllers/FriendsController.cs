@@ -1,5 +1,8 @@
-﻿using Intotech.Common.Microservices;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Microservices;
+using Intotech.Wheelo.Bll.Models.Isfa;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
+using Intotech.Wheelo.Common.Interfaces.Models;
 using Microsoft.AspNetCore.Mvc;
 using Toci.Driver.Database.Persistence.Models;
 
@@ -14,17 +17,23 @@ namespace Toci.Driver.Api.Controllers
         }
 
         [HttpGet]
-        [Route("get-friends")]
-        public List<Vfriend> GetVfriends(int accountId)
+        [Route("your-friends/{idAccount}")]
+        public ReturnedResponse<List<FriendsDto>> GetVfriends(int idAccount)
         {
-            return Logic.GetVfriends(accountId);
+            return Service.GetVfriends(idAccount);
+        }
+
+        [HttpPost("friend")]
+        public ReturnedResponse<Vfriend> AddFriend(NewFriendAddDto friend)
+        {
+            return Service.AddFriend(friend);
         }
 
         [HttpDelete]
-        [Route("Unfriend")]
-        public bool Unfriend(int accountId, int idFriendToRemove)
+        [Route("unfriend")]
+        public ReturnedResponse<bool> Unfriend(int accountId, int idFriendToRemove)
         {
-            return Logic.Unfriend(accountId, idFriendToRemove);
+            return Service.Unfriend(accountId, idFriendToRemove);
         }
     }
 }

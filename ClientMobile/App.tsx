@@ -18,6 +18,7 @@ import { User } from "./types/user";
 import { createSocket, socket } from "./constants/socket";
 import { queryKeys } from "./constants/constants";
 import { refreshTokens } from "./services/tokens";
+import WheeloClient from "./chatlib/WheeloClient";
 
 const queryClient = new QueryClient();
 LogBox.ignoreAllLogs();

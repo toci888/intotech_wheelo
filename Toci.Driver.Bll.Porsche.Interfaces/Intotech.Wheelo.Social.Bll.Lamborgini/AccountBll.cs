@@ -1,4 +1,6 @@
-﻿using Intotech.Wheelo.Bll.Persistence.Interfaces;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Persistence;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,21 +13,22 @@ namespace Intotech.Wheelo.Social.Bll.Lamborgini
 {
     public class AccountBll : IAccountBll
     {
-        protected IAccountLogic AccountLogic;
+        //protected IAccountRoleLogic AccountLogic;
+        protected AccountLogic AccountLogic;
 
-        public AccountBll(IAccountLogic accountLogic)
+        public AccountBll() //IAccountRoleLogic accountLogic
         {
-            AccountLogic = accountLogic;
+            AccountLogic = new AccountLogic();
         }
 
-        public virtual Accountrole GetUserAccounts(int accountId)
+        public virtual Account GetUserAccounts(int accountId)
         {
-            return AccountLogic.Select(m => m.Id.Value == accountId).FirstOrDefault();
+            return AccountLogic.Select(m => m.Id == accountId).FirstOrDefault(); //HttpClient -> api wheelo (nie social czasami)
         }
 
-        public virtual List<Accountrole> GetUsersAccounts(List<int> accountIds)
+        public virtual List<Account> GetUsersAccounts(List<int> accountIds)
         {
-            return AccountLogic.Select(m => accountIds.Contains(m.Id.Value)).ToList();
+            return AccountLogic.Select(m => accountIds.Contains(m.Id)).ToList();
         }
     }
 }

@@ -13,18 +13,9 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
         {
             List<Car> cars = new List<Car>();
 
-            cars.Add(new Car() { Idaccounts = 1, Availableseats = 3, Idcolours = 3, Idcarsbrands = 1, Idcarsmodels = 1, Registrationplate = "OPO 80F4" });
-            cars.Add(new Car() { Idaccounts = 2, Availableseats = 4, Idcolours = 8, Idcarsbrands = 3, Idcarsmodels = 7, Registrationplate = "OP 1667L" });
-            cars.Add(new Car() { Idaccounts = 3, Availableseats = 2, Idcolours = 15, Idcarsbrands = 6, Idcarsmodels = 41, Registrationplate = "WSC 12457" });
-            cars.Add(new Car() { Idaccounts = 2, Availableseats = 2, Idcolours = 13, Idcarsbrands = 36, Idcarsmodels = 239, Registrationplate = "ZAK 4567L" });
-            cars.Add(new Car() { Idaccounts = 2, Availableseats = 2, Idcolours = 38, Idcarsbrands = 36, Idcarsmodels = 240, Registrationplate = "KRA 2435P" });
-            cars.Add(new Car() { Idaccounts = 2, Availableseats = 2, Idcolours = 31, Idcarsbrands = 36, Idcarsmodels = 241, Registrationplate = "KAT 4532A" });
-            cars.Add(new Car() { Idaccounts = 2, Availableseats = 4, Idcolours = 8, Idcarsbrands = 197, Idcarsmodels = 1864, Registrationplate = "GDA 9986K" });
-            cars.Add(new Car() { Idaccounts = 2, Availableseats = 4, Idcolours = 45, Idcarsbrands = 197, Idcarsmodels = 1865, Registrationplate = "WAW 3434B" });
-            cars.Add(new Car() { Idaccounts = 2, Availableseats = 2, Idcolours = 43, Idcarsbrands = 197, Idcarsmodels = 1866, Registrationplate = "BIA 5432Z" });
-            cars.Add(new Car() { Idaccounts = 2, Availableseats = 2, Idcolours = 8, Idcarsbrands = 628, Idcarsmodels = 82, Registrationplate = "WRO 1234D" });
-            cars.Add(new Car() { Idaccounts = 2, Availableseats = 2, Idcolours = 2, Idcarsbrands = 9, Idcarsmodels = 2403, Registrationplate = "SZC 1453Z" });
-            //9
+            cars.Add(new Car() { Idaccounts = 1 + AccountIdOffset, Availableseats = 3, Idcolours = 3, Idcarsbrands = 1, Idcarsmodels = 1, Registrationplate = "OPO 80F4" });
+            cars.Add(new Car() { Idaccounts = 2 + AccountIdOffset, Availableseats = 4, Idcolours = 8, Idcarsbrands = 3, Idcarsmodels = 7, Registrationplate = "OP 1667L" });
+            cars.Add(new Car() { Idaccounts = 3 + AccountIdOffset, Availableseats = 2, Idcolours = 15, Idcarsbrands = 6, Idcarsmodels = 41, Registrationplate = "WSC 12457" });
 
             InsertCollection(cars);
         }

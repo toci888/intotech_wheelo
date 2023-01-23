@@ -1,4 +1,5 @@
-﻿using Intotech.Common.Microservices;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Microservices;
 using Intotech.Wheelo.Bll.Models.Social;
 using Intotech.Wheelo.Social.Bll.Pontiac.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +16,9 @@ namespace Intotech.Wheelo.Social.Api.Controllers
 
         [HttpGet]
         [Route("get-meeting-for-user")]
-        public OrganizemeetingDto GetMeetingForUser(int accountId)
+        public ReturnedResponse<OrganizemeetingDto> GetMeetingForUser(int accountId)
         {
-            return Logic.GetMeetingForUser(accountId);
+            return Service.GetMeetingForUser(accountId);
         }
     }
 }

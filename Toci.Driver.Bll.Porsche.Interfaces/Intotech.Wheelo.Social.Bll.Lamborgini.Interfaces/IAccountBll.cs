@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,8 @@ namespace Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces
 {
     public interface IAccountBll
     {
-        List<Accountrole> GetUsersAccounts(List<int> accountIds);
+        List<Account> GetUsersAccounts(List<int> accountIds);
 
-        Accountrole GetUserAccounts(int accountId);
+        Account GetUserAccounts(int accountId);
     }
 }

@@ -2,10 +2,14 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll.Interfaces\Intotech.Common.Bll.Interfaces.csproj" />
@@ -18,6 +22,9 @@
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.ExcelLibrary.Extensions\Intotech.ExcelLibrary.Extensions.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.ReflectiveTools\Intotech.ReflectiveTools.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
+    <ProjectReference Include="..\..\Intotech.Wheelo.Chat.Jaguar\Intotech.Wheelo.Chat.Jaguar.csproj" />
+    <ProjectReference Include="..\..\Intotech.Wheelo.Chat.Tests\Intotech.Wheelo.Chat.Tests.csproj" />
+    <ProjectReference Include="..\..\Intotech.Wheelo.Proxies\Intotech.Wheelo.Proxies.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Bentley.Interfaces\Intotech.Wheelo.Bll.Bentley.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Bentley\Intotech.Wheelo.Bll.Bentley.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Models\Intotech.Wheelo.Bll.Models.csproj" />
@@ -36,7 +43,7 @@
     <ProjectReference Include="..\Intotech.Wheelo.Social.Database.Persistence\Intotech.Wheelo.Social.Database.Persistence.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Social.Tests\Intotech.Wheelo.Social.Tests.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Tests\Intotech.Wheelo.Tests.csproj" />
-    <ProjectReference Include="..\Toci.Driver.Api\Toci.Driver.Api.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Api\Intotech.Wheelo.Api.csproj" />
     <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
   </ItemGroup>
 

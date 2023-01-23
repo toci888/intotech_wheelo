@@ -1,5 +1,8 @@
 ﻿using Intotech.Common;
+using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Models.Social;
+using Intotech.Wheelo.Common;
+using Intotech.Wheelo.Common.Interfaces;
 using Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces;
 using Intotech.Wheelo.Social.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Social.Bll.Pontiac.Interfaces;
@@ -26,7 +29,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
             GroupMemberLogic = groupMemberLogic;
         }
 
-        public virtual GroupMemberAddDto AddMemberToGroup(Groupmember model)
+        public virtual ReturnedResponse<GroupMemberAddDto> AddMemberToGroup(Groupmember model)
         {
             Groupmember memberAdded = GroupMemberLogic.Insert(model);
 
@@ -39,24 +42,24 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
 
             groupMemberAddDto.GroupName = group.Name;
 
-            return groupMemberAddDto;
+            return new ReturnedResponse<GroupMemberAddDto>(groupMemberAddDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual GroupMemebersDto GetGroupWithMembers(int groupId)
+        public virtual ReturnedResponse<GroupMembersDto> GetGroupWithMembers(int groupId)
         {
-            GroupMemebersDto result = new GroupMemebersDto();
+            GroupMembersDto result = new GroupMembersDto();
 
             Group group = GroupLogic.Select(m => m.Id == groupId).First();
             List<Groupmember> groupmembers = GroupMemberLogic.Select(m => m.Idgroups == groupId).ToList();
 
-            List<Accountrole> accountroles = AccountLogic.GetUsersAccounts(groupmembers.Select(m => m.Idaccount).ToList());
+            List<Account> accountroles = AccountLogic.GetUsersAccounts(groupmembers.Select(m => m.Idaccount).ToList());
 
             result.GroupName = group.Name;
             result.GroupId = group.Id;
 
             result.GroupMembers = accountroles;
 
-            return result;
+            return new ReturnedResponse<GroupMembersDto>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }

@@ -1,5 +1,9 @@
-﻿using Intotech.Wheelo.Bll.Bentley.Interfaces;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Bentley.Interfaces;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Intotech.Wheelo.Common;
+using Intotech.Wheelo.Common.Interfaces;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +23,14 @@ namespace Intotech.Wheelo.Bll.Bentley
             CarsBrandLogic = carsBrandLogic;
             CarsModelLogic = carsModelLogic;
         }
-        public virtual List<Carsbrand> GetCarsBrandsForWildcard(string beginning)
+        public virtual ReturnedResponse<List<Carsbrand>> GetCarsBrandsForWildcard(string beginning)
         {
-            return CarsBrandLogic.Select(m => m.Brand.ToLower().StartsWith(beginning.ToLower())).ToList();
+            return new ReturnedResponse<List<Carsbrand>>(CarsBrandLogic.Select(m => m.Brand.ToLower().StartsWith(beginning.ToLower())).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual List<Carsmodel> GetModelsForBrandForWildcard(int carBrand, string beginning)
+        public virtual ReturnedResponse<List<Carsmodel>> GetModelsForBrandForWildcard(int carBrand, string beginning)
         {
-            return CarsModelLogic.Select(m => m.Idcarsbrands == carBrand && m.Model.StartsWith(beginning)).ToList();
+            return new ReturnedResponse<List<Carsmodel>>(CarsModelLogic.Select(m => m.Idcarsbrands == carBrand && m.Model.StartsWith(beginning)).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }

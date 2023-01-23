@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Models.Isfa;
+using Intotech.Wheelo.Common.Interfaces.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +12,10 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa
 {
     public interface IFriendsService
     {
-        List<Vfriend> GetVfriends(int accountId);
+        ReturnedResponse<List<FriendsDto>> GetVfriends(int accountId);
 
-        bool Unfriend(int accountId, int idFriendToRemove);
+        ReturnedResponse<Vfriend> AddFriend(NewFriendAddDto friend);
+
+        ReturnedResponse<bool> Unfriend(int accountId, int idFriendToRemove);
     }
 }

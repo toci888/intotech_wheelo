@@ -1,4 +1,5 @@
-﻿using Intotech.Wheelo.Bll.Models.Social;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Models.Social;
 using Intotech.Wheelo.Social.Database.Persistence.Models;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac.Interfaces
 {
     public interface IGroupManager
     {
-        GroupMemebersDto GetGroupWithMembers(int groupId);
+        ReturnedResponse<GroupMembersDto> GetGroupWithMembers(int groupId);
 
-        GroupMemberAddDto AddMemberToGroup(Groupmember model);
+        ReturnedResponse<GroupMemberAddDto> AddMemberToGroup(Groupmember model);
     }
 }

@@ -13,11 +13,11 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
     {
         private static int timeInterval = 15;
 
-        protected IUsersCollocationLogic UsersCollocationLogic;
+        protected IAccountscollocationLogic UsersCollocationLogic;
         protected ITripLogic TripsLogic;
         protected ITripparticipantLogic TripparticipantLogic;
 
-        public InstantOccasion(IUsersCollocationLogic usersCollocationLogic, ITripLogic tripsLogic, 
+        public InstantOccasion(IAccountscollocationLogic usersCollocationLogic, ITripLogic tripsLogic, 
             ITripparticipantLogic tripparticipantLogic)
         {
             UsersCollocationLogic = usersCollocationLogic;
@@ -50,13 +50,13 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
             if (fromTo)
             {
-                return TripsLogic.Select(m => accountCollocations.Contains(m.Idinitiatoraccount.Value) &&
+                return TripsLogic.Select(m => accountCollocations.Contains(m.Idinitiatoraccount) &&
                 m.Leftseats.Value > 0 && m.Iscurrent.Value && 
                 m.Fromhour.Value.IsBetween(timeFromTo.AddMinutes(-timeInterval), timeFromTo.AddMinutes(timeInterval)) &&
                 m.Tripdate == new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)).ToList();
             }
 
-            return TripsLogic.Select(m => accountCollocations.Contains(m.Idinitiatoraccount.Value) &&
+            return TripsLogic.Select(m => accountCollocations.Contains(m.Idinitiatoraccount) &&
                 m.Leftseats.Value > 0 && m.Iscurrent.Value &&
                 m.Tohour.Value.IsBetween(timeFromTo.AddMinutes(-timeInterval), timeFromTo.AddMinutes(timeInterval)) &&
                 m.Tripdate == new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)).ToList();

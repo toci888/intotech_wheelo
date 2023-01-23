@@ -16,7 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IAccountLogic, AccountLogic>();
+//builder.Services.AddScoped<IAccountRoleLogic, AccountRoleLogic>();
 builder.Services.AddScoped<ICommentLogic, CommentLogic>();
 builder.Services.AddScoped<ICommenttypeLogic, CommenttypeLogic>();
 builder.Services.AddScoped<IGroupLogic, GroupLogic>();
@@ -26,6 +26,7 @@ builder.Services.AddScoped<IGroupspostscommentLogic, GroupspostscommentLogic>();
 builder.Services.AddScoped<IMeetingskippedaccountLogic, MeetingskippedaccountLogic>();
 builder.Services.AddScoped<IOrganizemeetingLogic, OrganizemeetingLogic>();
 builder.Services.AddScoped<IUsercommentLogic, UsercommentLogic>();
+builder.Services.AddScoped<IExpenseLogic, ExpenseLogic>();
 
 
 
@@ -33,6 +34,7 @@ builder.Services.AddScoped<IAccountBll, AccountBll>();
 
 builder.Services.AddScoped<IGroupManager, GroupManager>();
 builder.Services.AddScoped<IOrganizeMeetingManager, OrganizeMeetingManager>();
+builder.Services.AddScoped<IExpensesService, ExpensesService>();
 
 var app = builder.Build();
 

@@ -12,8 +12,8 @@ namespace Intotech.Wheelo.Bll.Models.Social
     {
         public string GroupName { get; set; }
 
-        public Accountrole AddedMember { get; set; }
+        public Toci.Driver.Database.Persistence.Models.Account AddedMember { get; set; }
 
-        public Accountrole MemberWhoAdded { get; set; }
+        public Toci.Driver.Database.Persistence.Models.Account MemberWhoAdded { get; set; }
     }
 }

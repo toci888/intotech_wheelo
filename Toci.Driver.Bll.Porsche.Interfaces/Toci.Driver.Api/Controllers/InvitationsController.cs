@@ -1,4 +1,5 @@
-﻿using Intotech.Common.Microservices;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Microservices;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
 using Microsoft.AspNetCore.Mvc;
@@ -10,16 +11,35 @@ namespace Toci.Driver.Api.Controllers
     [Route("api/[controller]")]
     public class InvitationsController : ApiSimpleControllerBase<IInvitationService>
     {
+        public class InvitationPostDto
+        {
+            public int InvitingAccountId { get; set; }
+            public int InvitedAccountId { get; set; }
+        }
+
         public InvitationsController(IInvitationService logic) : base(logic)
         {
             
         }
 
-        [HttpPost]
-        [Route("invite-associated")]
-        public Vinvitation InviteAssociated(int invitingAccountId, int invitedAccountId)
+        [HttpGet("view-invitations")]
+        public ReturnedResponse<List<Vinvitation>> GetInvitations(int idAccount)
         {
-            return Logic.InviteToFriends(invitingAccountId, invitedAccountId);
+            return Service.GetInvitedAccounts(idAccount);
+        }
+
+        [HttpPost]
+        [Route("invite-to-friends")]
+        public ReturnedResponse<Vinvitation> InviteAssociated(InvitationPostDto invitation)
+        {
+            return Service.InviteToFriends(invitation.InvitingAccountId, invitation.InvitedAccountId);
+        }
+
+        [HttpDelete]
+        [Route("cancel-invitation")]
+        public ReturnedResponse<bool> CancelInvitation(int InvitingAccountId, int InvitedAccountId)
+        {
+            return Service.CancelInvitation(InvitingAccountId, InvitedAccountId);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,9 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa
 {
     public interface IInvitationService
     {
-        List<Vinvitation> GetInvitedAccounts(int accountId);
-        Vinvitation InviteToFriends(int invitingAccountId, int invitedAccountId);
+        ReturnedResponse<List<Vinvitation>> GetInvitedAccounts(int accountId);
+        ReturnedResponse<Vinvitation> InviteToFriends(int invitingAccountId, int invitedAccountId);
+        ReturnedResponse<bool> CancelInvitation(int invitingAccountId, int invitedAccountId);
 
     }
 }

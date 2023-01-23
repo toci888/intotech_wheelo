@@ -11,15 +11,17 @@ public class WheeloMainSeedManager
     [TestMethod]
     public void SeedAllDb()
     {
-        // new SeedAutomaticCars().Insert();
+
+       // new SeedWorkTripGen().Insert();
+
+
         new CarsXmlParser().Insert();
         new SeedCarsModelsParser().Insert();
         new ColourTxtParser().Insert();
+        new ProfessionsTxtParser().Insert();
         new SeedRole().Insert();
         new SeedAccount().Insert();
-        new SeedWorktrip().Insert();
-        //new SeedCarsbrand().Insert();
-        //new SeedCarsModels().Insert();
+        new SeedWorkTripGen().Insert();
         new SeedCars().Insert();
         new SeedFriendSuggestion().Insert();
         new SeedFriends().Insert();
@@ -27,7 +29,7 @@ public class WheeloMainSeedManager
         new SeedTripParticipants().Insert();
         new SeedInvitation().Insert();
 
-        new Shit().CalcCollocations();
+        // new Shit().CalcCollocations();
     }
 
     [TestMethod]

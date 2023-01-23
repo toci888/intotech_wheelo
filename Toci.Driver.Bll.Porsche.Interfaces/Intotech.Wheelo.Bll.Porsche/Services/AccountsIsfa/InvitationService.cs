@@ -1,5 +1,9 @@
-﻿using Intotech.Wheelo.Bll.Persistence.Interfaces;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Persistence;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
+using Intotech.Wheelo.Common;
+using Intotech.Wheelo.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +15,9 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 {
     public class InvitationService : IInvitationService
     {
+        public const int InvitationOriginCollocations = 1;
+        public const int InvitationOriginSuggestions = 2;
+
         protected IVinvitationLogic VinvitationLogic;
         protected IInvitationLogic InvitationLogic;
 
@@ -20,17 +27,38 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
             VinvitationLogic = vinvitationLogic;      
             InvitationLogic = invitationLogic;
         }
+        
 
-        public List<Vinvitation> GetInvitedAccounts(int accountId)
+        public virtual ReturnedResponse<bool> CancelInvitation(int invitingAccountId, int invitedAccountId)
         {
-            return VinvitationLogic.Select(invitation=>invitation.Accountid==accountId).ToList();
+            Invitation fr = InvitationLogic.Select(m => m.Idaccount == invitingAccountId && m.Idinvited == invitedAccountId).FirstOrDefault();
+
+            if (fr == null)
+            {
+                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.FriendshipNotFound), false, ErrorCodes.FriendshipNotFound);
+            }
+
+            return new ReturnedResponse<bool>(InvitationLogic.Delete(fr) > 0, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual Vinvitation InviteToFriends(int invitingAccountId, int invitedAccountId)
+        public ReturnedResponse<List<Vinvitation>> GetInvitedAccounts(int accountId)
         {
-            InvitationLogic.Insert(new Invitation() { Idaccount = invitingAccountId, Idinvited = invitedAccountId });
+            return new ReturnedResponse<List<Vinvitation>>(VinvitationLogic.Select(invitation => invitation.Accountid == accountId || invitation.Suggestedaccountid == accountId).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        }
 
-            return VinvitationLogic.Select(m => m.Accountid == invitingAccountId).FirstOrDefault();
+        public virtual ReturnedResponse<Vinvitation> InviteToFriends(int invitingAccountId, int invitedAccountId)
+        {
+            //WheeloUtils.PotentialSwapIds(ref invitingAccountId, ref invitedAccountId);
+            Invitation invitation = InvitationLogic.Select(m => m.Idinvited == invitedAccountId && m.Idaccount == invitingAccountId).FirstOrDefault();
+
+            if (invitation == null)
+            {
+                InvitationLogic.Insert(new Invitation() { Idaccount = invitingAccountId, Idinvited = invitedAccountId });
+            }
+
+            Vinvitation result =  VinvitationLogic.Select(m => m.Accountid == invitingAccountId && m.Suggestedaccountid == invitedAccountId).FirstOrDefault();
+
+            return new ReturnedResponse<Vinvitation>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }

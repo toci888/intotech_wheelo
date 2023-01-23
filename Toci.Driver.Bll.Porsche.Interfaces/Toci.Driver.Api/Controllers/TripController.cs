@@ -1,66 +1,73 @@
 ﻿using Intotech.Common.Microservices;
-using Intotech.Wheelo.Bll.Models;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating;
+using Intotech.Common.Bll.ComplexResponses;
 using Microsoft.AspNetCore.Mvc;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Wheelo.Bll.Models.Trip;
 
 namespace Toci.Driver.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TripController : ApiSimpleControllerBase<ITripManager>
+    public class TripController : ApiSimpleControllerBase<ITripService>
     {
-        public TripController(ITripManager logic) : base(logic)
+        public TripController(ITripService logic) : base(logic)
         {
         }
 
         [HttpPost]
         [Route("create-trip")]
-        public Trip CreateTrip(TripDto trip)
+        public ReturnedResponse<TripWithParticipantsDto> CreateTrip(TripDto trip)
         {
-            return Logic.CreateTrip(trip, trip.AccountIds);
+            return Service.CreateTrip(trip);
+        }
+
+        [HttpPatch("confirm-trip-participation")]
+        public ReturnedResponse<bool> ConfirmTripParticipation(TripParticipationConfirmationDto tripAccountConfirm)
+        {
+            return Service.ConfirmTripParticipation(tripAccountConfirm);
         }
 
         [HttpPost]
         [Route("add-trip-participant")]
-        public int AddTripParticipant(TripParticipantDto tripParticipantDto)
+        public ReturnedResponse<int> AddTripParticipant(TripParticipantDto tripParticipantDto) //dodałam RR 1.12.22
         {
-            return Logic.AddTripParticipant(tripParticipantDto.TripId, tripParticipantDto.AccountId);
+            return Service.AddTripParticipant(tripParticipantDto.TripId, tripParticipantDto.AccountId);
         }
 
         [HttpPost]
         [Route("set-trip-not-current")]
-        public bool SetTripNotCurrent(TripParticipantDto tripInitiatorDto)
+        public ReturnedResponse<bool> SetTripNotCurrent(TripParticipantDto tripInitiatorDto) //dodałam RR 1.12.22
         {
-            return Logic.SetTripNotCurrent(tripInitiatorDto.TripId, tripInitiatorDto.AccountId);
+            return Service.SetTripNotCurrent(tripInitiatorDto.TripId, tripInitiatorDto.AccountId);
         }
 
         [HttpGet]
-        [Route("get-all-trips")]
-        public List<Trip> GetAllTrips(int accountId)
+        [Route("get-all-trips/{idAccount}")]
+        public ReturnedResponse<List<TripWithParticipantsDto>> GetAllTrips(int idAccount)
         {
-            return Logic.GetAllTrips(accountId);
+            return Service.GetAllTrips(idAccount);
         }
 
         [HttpGet]
         [Route("get-trip")]
-        public Trip GetTrip(int tripId)
+        public ReturnedResponse<TripWithParticipantsDto> GetTrip(int tripId) //dodałam RR 1.12.22
         {
-            return Logic.GetTrip(tripId);
+            return Service.GetTrip(tripId);
         }
 
         [HttpGet]
         [Route("get-initiator-trips")]
-        public List<Trip> GetInitiatorTrips(int inititatorAccountId)
+        public ReturnedResponse<List<TripWithParticipantsDto>> GetInitiatorTrips(int inititatorAccountId)
         {
-            return Logic.GetInitiatorTrips(inititatorAccountId);
+            return Service.GetInitiatorTrips(inititatorAccountId);
         }
 
         [HttpGet]
         [Route("get-trip-participants")]
-        public List<Vtripsparticipant> GetTripParticipants(int accountId)
+        public ReturnedResponse<List<Vtripsparticipant>> GetTripParticipants(int accountId)
         {
-            return Logic.GetTripParticipants(accountId);
+            return Service.GetTripParticipants(accountId);
         }
     }
 }

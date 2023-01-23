@@ -13,12 +13,12 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
         {
             List<Invitation> list = new List<Invitation>();
 
-            list.Add(new Invitation() { Idaccount=1, Idinvited = 4, Origin=1 });
-            list.Add(new Invitation() { Idaccount = 2, Idinvited = 5, Origin = 2 });
-            list.Add(new Invitation() { Idaccount = 3, Idinvited = 6, Origin = 2 });
-            list.Add(new Invitation() { Idaccount = 4, Idinvited = 14, Origin = 1 });
-            list.Add(new Invitation() { Idaccount = 5, Idinvited = 45, Origin = 2 });
-            list.Add(new Invitation() { Idaccount = 6, Idinvited = 36, Origin = 2 });
+            list.Add(new Invitation() { Idaccount= 1 + AccountIdOffset, Idinvited = 4 + AccountIdOffset, Origin=1 });
+            list.Add(new Invitation() { Idaccount = 2 + AccountIdOffset, Idinvited = 5 + AccountIdOffset, Origin = 2 });
+            list.Add(new Invitation() { Idaccount = 3 + AccountIdOffset, Idinvited = 6 + AccountIdOffset, Origin = 2 });
+            list.Add(new Invitation() { Idaccount = 4 + AccountIdOffset, Idinvited = 14 + AccountIdOffset, Origin = 1 });
+            list.Add(new Invitation() { Idaccount = 5 + AccountIdOffset, Idinvited = 45 + AccountIdOffset, Origin = 2 });
+            list.Add(new Invitation() { Idaccount = 6 + AccountIdOffset, Idinvited = 36 + AccountIdOffset, Origin = 2 });
 
             InsertCollection(list);
         }

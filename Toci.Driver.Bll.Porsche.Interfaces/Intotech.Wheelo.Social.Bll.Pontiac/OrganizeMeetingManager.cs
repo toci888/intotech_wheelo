@@ -1,5 +1,8 @@
 ﻿using Intotech.Common;
+using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Models.Social;
+using Intotech.Wheelo.Common;
+using Intotech.Wheelo.Common.Interfaces;
 using Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces;
 using Intotech.Wheelo.Social.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Social.Bll.Pontiac.Interfaces;
@@ -27,13 +30,13 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
             MeetingskippedaccountLogic = meetingskippedaccountLogic;
         }
 
-        public virtual OrganizemeetingDto GetMeetingForUser(int accountId)
+        public virtual ReturnedResponse<OrganizemeetingDto> GetMeetingForUser(int accountId)
         {
             Organizemeeting orgM = OrganizemeetingLogic.Select(m => m.Idaccount == accountId && m.Isover == false).First();
 
             OrganizemeetingDto result = DtoModelMapper.Map<OrganizemeetingDto, Organizemeeting>(orgM);
 
-            return GetMeetingDto(accountId, result);
+            return new ReturnedResponse<OrganizemeetingDto>(GetMeetingDto(accountId, result), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual OrganizemeetingDto OrganizeMeeting(CreateMeetingDto meeting)
@@ -54,7 +57,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
 
         protected virtual OrganizemeetingDto GetMeetingDto(int accountId, OrganizemeetingDto result)
         {
-            Accountrole accR = AccountManager.GetUserAccounts(accountId);
+            Account accR = AccountManager.GetUserAccounts(accountId);
 
             result.OrganizerEmail = accR.Email;
             result.OrganizerName = accR.Name;
