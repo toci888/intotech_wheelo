@@ -114,7 +114,22 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
                 Leftseats = 3,
                 Tripdate = new DateOnly(2022, 11, DateTime.Now.Day + 1)
             });
-           
+
+            for (int j = 0; j < 20; j++)
+            {
+                tripList.Add(new Trip()
+                {
+                    Fromhour = new TimeOnly(8, 0),
+                    Tohour = new TimeOnly(16, 0),
+                    Idinitiatoraccount = 10 + j + AccountIdOffset,
+                    Idworktrip = i++,
+                    Iscurrent = true,
+                    Leftseats = 3,
+                    Tripdate = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1)
+                });
+
+            }
+
             // ?
 
             InsertCollection(tripList); 

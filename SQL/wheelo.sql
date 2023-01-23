@@ -1,4 +1,6 @@
-﻿drop table OccupationSmokerCrat;
+﻿drop view StatsProvider;
+
+drop table OccupationSmokerCrat;
 drop table PushTokens;
 
 drop table ResetPassword;
@@ -562,3 +564,11 @@ create table OccupationSmokerCrat
 --select * from CarsBrands;
 
 --select * from CarsModels;
+
+
+create or replace view StatsProvider as
+select Tr.tripdate, count (Tr.id) as countCars, 
+(select count (id) from tripparticipants where idtrip in 
+ (select id from trips where tripdate = Tr.tripdate)) as countPeople
+from trips Tr group by Tr.tripdate;
+

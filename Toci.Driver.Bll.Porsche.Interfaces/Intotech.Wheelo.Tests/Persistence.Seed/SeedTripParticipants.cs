@@ -20,6 +20,18 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
             ModelsEntities.Add(new Tripparticipant() { Idaccount = 7 + AccountIdOffset, Idtrip = 3, Isoccasion = false });
             ModelsEntities.Add(new Tripparticipant() { Idaccount = 8 + AccountIdOffset, Idtrip = 3, Isoccasion = false });
             ModelsEntities.Add(new Tripparticipant() { Idaccount = 9 + AccountIdOffset, Idtrip = 3, Isoccasion = false });
+
+            int beginIdtrip = 4;
+
+            for (int i = 0; i < 80; i++)
+            {
+                ModelsEntities.Add(new Tripparticipant() { Idaccount = 10 + i + AccountIdOffset, Idtrip = beginIdtrip, Isoccasion = false });
+
+                if (i % 4 == 0)
+                {
+                    beginIdtrip++;
+                }
+            }
 //9 ModelówEntities
             InsertCollection(ModelsEntities);
         }
