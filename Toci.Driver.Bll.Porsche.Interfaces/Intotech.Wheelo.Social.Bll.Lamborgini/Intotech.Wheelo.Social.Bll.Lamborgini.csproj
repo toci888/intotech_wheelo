@@ -10,7 +10,7 @@
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Persistence.Interfaces\Intotech.Wheelo.Bll.Persistence.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Persistence\Intotech.Wheelo.Bll.Persistence.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces\Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces.csproj" />
-    <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Database.Persistence\Intotech.Wheelo.Database.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

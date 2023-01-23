@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{61CCF2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Api", "Toci.Driver.Api\Intotech.Wheelo.Api.csproj", "{CC8F734F-78EC-48CF-8EF5-710FFCE78DEC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toci.Driver.Database.Persistence", "Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj", "{F3FF1397-B4D7-4130-97BE-31DF7DD190EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Database.Persistence", "Toci.Driver.Database.Persistence\Intotech.Wheelo.Database.Persistence.csproj", "{F3FF1397-B4D7-4130-97BE-31DF7DD190EA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{A662B894-F584-4249-902F-47612C3E8E94}"
 	ProjectSection(SolutionItems) = preProject

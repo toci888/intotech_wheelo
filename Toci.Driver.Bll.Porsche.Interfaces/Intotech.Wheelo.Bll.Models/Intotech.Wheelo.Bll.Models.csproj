@@ -16,7 +16,7 @@
     <ProjectReference Include="..\..\Intotech.Wheelo.Common.Interfaces\Intotech.Wheelo.Common.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Common\Intotech.Wheelo.Common.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Social.Database.Persistence\Intotech.Wheelo.Social.Database.Persistence.csproj" />
-    <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Database.Persistence\Intotech.Wheelo.Database.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -44,7 +44,7 @@
     <ProjectReference Include="..\Intotech.Wheelo.Social.Tests\Intotech.Wheelo.Social.Tests.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Tests\Intotech.Wheelo.Tests.csproj" />
     <ProjectReference Include="..\Toci.Driver.Api\Intotech.Wheelo.Api.csproj" />
-    <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Database.Persistence\Intotech.Wheelo.Database.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Database.Persistence\Intotech.Wheelo.Database.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
