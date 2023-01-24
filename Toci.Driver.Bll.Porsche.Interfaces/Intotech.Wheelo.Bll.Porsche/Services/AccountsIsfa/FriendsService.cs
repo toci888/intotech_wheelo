@@ -40,6 +40,15 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
             return new ReturnedResponse<List<FriendsDto>>(frDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
+        public virtual ReturnedResponse<List<FriendsDto>> SearchVfriends(int accountId, string query)
+        {
+            List<Vfriend> friends = VfriendLogic.Select(m => (m.Idaccount == accountId || m.Friendidaccount == accountId) && 
+                                                             (m.Friendname.Contains(query) || m.Friendsurname.Contains(query))).ToList();
+            List<FriendsDto> frDto = AccountsMapper.Map(friends, accountId);
+
+            return new ReturnedResponse<List<FriendsDto>>(frDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        }
+
         public virtual ReturnedResponse<bool> Unfriend(int accountId, int idFriendToRemove)
         {
             if (accountId > idFriendToRemove)

@@ -13,6 +13,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa
     public interface IFriendsService
     {
         ReturnedResponse<List<FriendsDto>> GetVfriends(int accountId);
+        ReturnedResponse<List<FriendsDto>> SearchVfriends(int accountId, string query);
 
         ReturnedResponse<Vfriend> AddFriend(NewFriendAddDto friend);
 
