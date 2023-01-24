@@ -40,7 +40,7 @@ export const ButtonList = ({
             let arr: any[] = [
               styles.option,
               {
-                backgroundColor: pressed ? theme["color-gray"] : "#f2f2f2",
+                backgroundColor: pressed ? theme["color-gray"] : "",
               },
             ];
 
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     paddingVertical: 12,
-    backgroundColor: "#f1f7e5",
+    // backgroundColor: "#f1f7e5",
     borderBottomWidth: 1,
     borderBottomColor: theme["color-gray"],
   },

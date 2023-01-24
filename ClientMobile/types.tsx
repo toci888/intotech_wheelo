@@ -29,6 +29,8 @@ export type RootStackParamList = {
   Review: { collocationID: number; propertyName: string };
   CodeVerification: { params: User};
   Messages: { conversationID: number; recipientName: string };
+  Conversations: undefined;
+  Chat: {screen:string};
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -37,7 +39,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 export type RootTabParamList = {
   Search: undefined | SearchScreenParams;
   Saved: undefined;
-  Saved2: undefined;
+  Chat: undefined;
   AccountRoot: NavigatorScreenParams<AccountTabParamList> | undefined;
 };
 

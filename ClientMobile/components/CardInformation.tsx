@@ -16,9 +16,11 @@ import { i18n } from "../i18n/i18n";
 export const CardInformation = ({
   collocation,
   myCollocation,
+  conversationID
 }: {
   collocation: CollocateAccount;
   myCollocation?: boolean;
+  conversationID?: number;
 }) => {
   const navigation = useNavigation();
   const { user, setSavedProperties } = useUser();
@@ -123,6 +125,21 @@ export const CardInformation = ({
           onPress={manageUnitsNavigation}
         >
           Manage Units
+        </Button>
+        <Button
+          appearance={"ghost"}
+          status="info"
+          size={"small"}
+          onPress={() => {conversationID ?
+            navigation.navigate("Messages", {
+              conversationID: 0,
+              recipientName: collocation?.name,
+            }) : 
+            navigation.navigate("Chat", {screen:"Conversations"})
+        }
+        }
+        >
+          Chat
         </Button>
       </Row>
 

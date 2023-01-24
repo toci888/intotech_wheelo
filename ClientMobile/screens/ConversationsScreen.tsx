@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderBottomColor: theme["color-light-gray"],
     borderBottomWidth: 1,
-    backgroundColor: "white",
+    // backgroundColor: "white",
   },
   messageTitle: { fontWeight: "bold", width: "80%" },
   row: { justifyContent: "space-between" },

@@ -45,7 +45,7 @@ export default function Navigation({
   DefaultTheme.dark = colorScheme === themes.dark ? true : false;
   // DarkTheme.colors = { primary: gray, border: gray, card: gray, 
   //               notification: gray, background: gray, text: gray};
-  // DarkTheme.colors = { ...DarkTheme.colors, text: 'white'};
+  DarkTheme.colors = { ...DarkTheme.colors, text: 'white'};
 
   return (
     <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme.dark ? DarkTheme : DefaultTheme}>
@@ -130,6 +130,11 @@ function RootNavigator(props: any) {
           component={ReviewScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="Conversations"
+          component={ConversationsScreen}
+          options={{ headerTitle: i18n.t("Chat"), headerBackTitle: i18n.t("Back") }}
+        /> 
       </Stack.Group>
     </Stack.Navigator>)
     :
@@ -170,7 +175,7 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name='Saved2'
+        name='Chat'
         component={ChatStack}
         options={{
           tabBarLabel: i18n.t('Chat'),
