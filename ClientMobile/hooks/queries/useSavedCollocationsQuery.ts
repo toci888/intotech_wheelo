@@ -6,7 +6,7 @@ import { ReturnedResponse } from "../../types";
 import { CollocateAccount, Collocation } from "../../types/collocation";
 import { useUser } from "../useUser";
 
-const fetchProperties = async (
+const fetchFriends = async (
   userID?: number,
   token?: string
 ): Promise<CollocateAccount[]> => {
@@ -27,12 +27,12 @@ const fetchProperties = async (
   return data;
 };
 
-export const useSavedCollocationsQuery = () => {
+export const useFriendsQuery = () => {
   const { user } = useUser();
 
   return useQuery(
     queryKeys.savedProperties,
-    () => fetchProperties(user?.id, user?.accessToken),
+    () => fetchFriends(user?.id, user?.accessToken),
     {
       retry: false,
     }

@@ -9,9 +9,9 @@ import { CollocateAccount } from "../types/collocation";
 import { Row } from "./Row";
 import { callPhoneNumber } from "../utils/callPhoneNumber";
 import { useUser } from "../hooks/useUser";
-import { useSaveCollocationMutation } from "../hooks/mutations/useSavePropertyMutation";
 import { commonAlert } from "../utils/handleError";
 import { i18n } from "../i18n/i18n";
+import { useSaveCollocationMutation } from "../hooks/mutations/useSaveCollocationMutation";
 
 export const CardInformation = ({
   collocation,
@@ -130,12 +130,16 @@ export const CardInformation = ({
           appearance={"ghost"}
           status="info"
           size={"small"}
-          onPress={() => {conversationID ?
-            navigation.navigate("Messages", {
-              conversationID: 0,
-              recipientName: collocation?.name,
-            }) : 
-            navigation.navigate("Chat", {screen:"Conversations"})
+          onPress={() => {
+          //   saveCollocation.data?.data.map((x: CollocateAccount) => {
+          //   console.log("dana", x)
+          // }) 
+          // ?
+          //   navigation.navigate("Messages", {
+          //     conversationID: 0,
+          //     recipientName: collocation?.name,
+          //   }) : 
+          navigation.navigate("Chat", {screen:"Conversations"})
         }
         }
         >

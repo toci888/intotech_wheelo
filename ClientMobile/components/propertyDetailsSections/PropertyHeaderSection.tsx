@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { Share, View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text } from "@ui-kitten/components";
@@ -8,10 +9,9 @@ import { theme } from "../../theme";
 import { Row } from "../Row";
 import { getStateAbbreviation } from "../../utils/getStateAbbreviation";
 import { useUser } from "../../hooks/useUser";
-import { useSaveCollocationMutation } from "../../hooks/mutations/useSavePropertyMutation";
-import React from "react";
 import { commonAlert } from "../../utils/handleError";
 import { i18n } from "../../i18n/i18n";
+import { useSaveCollocationMutation } from "../../hooks/mutations/useSaveCollocationMutation";
 
 export const CollocationHeaderSection = ({ collocation }: { collocation: CollocateAccount }) => {
   const { user, setSavedProperties } = useUser();

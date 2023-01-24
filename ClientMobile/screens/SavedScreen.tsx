@@ -13,7 +13,7 @@ import { CollocateAccount, Collocation } from "../types/collocation";
 import { SignUpAndSignInButtons } from "../components/SignUpAndSignInButtons";
 import { useUser } from "../hooks/useUser";
 import { Loading } from "../components/Loading";
-import { useSavedCollocationsQuery as useFriendsQuery } from "../hooks/queries/useSavedCollocationsQuery";
+import { useFriendsQuery } from "../hooks/queries/useSavedCollocationsQuery";
 import { useContactedPropertiesQuery } from "../hooks/queries/useContactedPropertiesQuery";
 import { i18n } from "../i18n/i18n";
 import { useInvitedFriendsQuery } from "../hooks/queries/useInvitedFriendsQuery";
