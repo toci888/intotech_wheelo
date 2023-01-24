@@ -9,7 +9,7 @@ import { User } from "../types/user";
 import { CollocateAccount } from "../types/collocation";
 import { queryKeys } from "../constants/constants";
 import { alterThemeMode, alterAllowsNotifications, alterPushToken } from "../services/user";
-import { socket } from "../constants/socket";
+import { createSocket, socket } from "../constants/socket";
 import { ThemeMode } from "../types";
 
 export const useUser = () => {
@@ -24,10 +24,12 @@ export const useUser = () => {
 
   const login = (user: User) => {
     setAndStoreUser(user);
-    // Nothing else is working so this is my last resort
+    
     const searchCollocations: CollocateAccount[] | undefined = queryClient.getQueryData(queryKeys.searchCollocations);
 
+    createSocket(user.accessToken);
     socket.start();
+
     if (searchCollocations) {
       for (let i of searchCollocations) {
         i.relationshipStatus = false;
