@@ -40,12 +40,22 @@ export default function Navigation({
 }: {
   colorScheme: ColorSchemeName;
 }) {
-  // const gray = theme["color-primary-400"];
-  // const dark = theme["color-primary-700"];
+
   DefaultTheme.dark = colorScheme === themes.dark ? true : false;
-  // DarkTheme.colors = { primary: gray, border: gray, card: gray, 
-  //               notification: gray, background: gray, text: gray};
-  DarkTheme.colors = { ...DarkTheme.colors, text: 'white'};
+
+  DefaultTheme.colors = {...DefaultTheme.colors, 
+    primary: 'yellow', 
+    notification: 'red', 
+    background: 'pink',
+    text: 'black'
+  };
+
+  DarkTheme.colors = {...DarkTheme.colors, 
+    primary: '#78007D',
+    notification: 'red', 
+    background: '#121212',
+    text: 'white'
+  };
 
   return (
     <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme.dark ? DarkTheme : DefaultTheme}>

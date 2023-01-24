@@ -9,15 +9,16 @@ import { FacebookButton } from "./FacebookButton";
 import { AppleButton } from "./AppleButton";
 import { OrDivider } from "./OrDivider";
 import { useAuth } from "../hooks/useAuth";
+import useTheme from "../hooks/useTheme";
 
 export const SignUpAndSignInButtons = ({ style }: { style?: ViewStyle }) => {
   const navigation = useNavigation();
   const { nativeLogin, facebookAuth, googleAuth, appleAuth } = useAuth();
-
+  const { colors } = useTheme();
   return (
     <View style={style}>
       <Text style={styles.bodyText}>Zaloguj się, aby rozpocząć</Text>
-      <Button onPress={() => navigation.navigate("SignIn")}>Zaloguj</Button>
+      <Button onPress={() => navigation.navigate("SignIn")} style={{backgroundColor: colors.primary}}>Zaloguj</Button>
       <Text style={styles.bodyText}>
         Nie masz jeszcze konta?{" "}
         <Text style={styles.link} onPress={() => navigation.navigate("SignUp")}>
