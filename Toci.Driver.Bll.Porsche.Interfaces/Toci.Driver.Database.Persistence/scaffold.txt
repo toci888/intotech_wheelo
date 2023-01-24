@@ -4,4 +4,4 @@ Install-Package Microsoft.EntityFrameworkCore.Design -version 5
 
 dotnet tool install --global dotnet-ef
 
-dotnet ef dbcontext scaffold "Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka" Npgsql.EntityFrameworkCore.PostgreSQL -o Models --project Toci.Driver.Database.Persistence -f
+dotnet ef dbcontext scaffold "Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka" Npgsql.EntityFrameworkCore.PostgreSQL -o Models --project Intotech.Wheelo.Database.Persistence -f
