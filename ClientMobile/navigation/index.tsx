@@ -250,36 +250,35 @@ const ChatStack = () => (
 const AuthStack = createNativeStackNavigator<AuthParamList>();
 const AuthScreenStack = () => (
   <AuthStack.Navigator initialRouteName="Account">
-    <AuthStack.Screen
-      name="Account"
-      component={AccountScreen}
-      options={{ headerShown: false }} />
-    <AuthStack.Screen
-      name="SignIn"
-      component={SignInScreen}
-      options={{ headerShown: false }} />
-    <AuthStack.Screen
-      name="SignUp"
-      component={SignUpScreen}
-      options={{ headerShown: false }} />
-    <AuthStack.Screen
-      name="ForgotPassword"
-      component={ForgotPasswordScreen}
-      options={{ headerShown: false }} />
-    <AuthStack.Screen
-      name="ResetPassword"
-      component={ResetPasswordScreen}
-      options={{ headerShown: false }} />
-    <AuthStack.Screen
-      name="CodeVerification"
-      component={CodeVerificationScreen}
-      options={{ headerShown: false }} />
+    <AuthStack.Group>
+      <AuthStack.Screen
+        name="Account"
+        component={AccountScreen}
+        options={{ headerShown: false }} />
+      <AuthStack.Screen
+        name="SignIn"
+        component={SignInScreen}
+        options={{ headerShown: false }} />
+      <AuthStack.Screen
+        name="SignUp"
+        component={SignUpScreen}
+        options={{ headerShown: false }} />
+      <AuthStack.Screen
+        name="ForgotPassword"
+        component={ForgotPasswordScreen}
+        options={{ headerShown: false }} />
+      <AuthStack.Screen
+        name="ResetPassword"
+        component={ResetPasswordScreen}
+        options={{ headerShown: false }} />
+      <AuthStack.Screen
+        name="CodeVerification"
+        component={CodeVerificationScreen}
+        options={{ headerShown: false }} />
+    </AuthStack.Group>
   </AuthStack.Navigator>
 );
 
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
   color: string;
