@@ -10,11 +10,13 @@ import { SignUpOrSignInScreen } from "./SignUpOrSignInScreen";
 import { theme } from "../theme";
 import { Row } from "../components/Row";
 import { i18n } from "../i18n/i18n";
+import useTheme from "../hooks/useTheme";
 
 export const ConversationsScreen = () => {
   const { user } = useUser();
   const conversations = useConversationsQuery();
   const { navigate } = useNavigation();
+  const { colors } = useTheme();
 
   if (!user) return <SignUpOrSignInScreen />;
 
@@ -43,7 +45,7 @@ export const ConversationsScreen = () => {
           onPress={() => handleMessagePress(item.id, item.recipientName)}
         >
           <Row style={styles.row}>
-            <Text style={styles.messageTitle} numberOfLines={1}>
+            <Text style={[styles.messageTitle, {color: colors.text}]} numberOfLines={1}>
               {item.recipientName} RoomId:{item.id}
             </Text>
             <Text appearance="hint">

@@ -43,11 +43,13 @@ export default function Navigation({
 
   DefaultTheme.dark = colorScheme === themes.dark ? true : false;
 
-  DefaultTheme.colors = {...DefaultTheme.colors, 
+  DefaultTheme.colors = {
     primary: 'yellow', 
     notification: 'red', 
-    background: 'pink',
-    text: 'black'
+    background: '#6adbc7',
+    text: 'black',
+    border: '#6adbc7',
+    card: '#6adbc7'
   };
 
   DarkTheme.colors = {...DarkTheme.colors, 
