@@ -23,8 +23,8 @@ export const Loading = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: Dimensions.get("screen").height,
-    width: Dimensions.get("screen").width,
+    height: Dimensions.get("window").height,//Dimensions.get("screen").height,
+    width: Dimensions.get("window").width,//Dimensions.get("screen").width,
     justifyContent: "center",
     alignItems: "center",
   },
