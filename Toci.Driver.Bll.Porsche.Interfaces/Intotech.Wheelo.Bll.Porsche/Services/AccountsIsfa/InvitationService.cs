@@ -1,4 +1,5 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Models.Isfa;
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
@@ -9,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Intotech.Common;
+using Intotech.Wheelo.Common.ImageService;
 using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
@@ -41,9 +44,23 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
             return new ReturnedResponse<bool>(InvitationLogic.Delete(fr) > 0, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public ReturnedResponse<List<Vinvitation>> GetInvitedAccounts(int accountId)
+        public virtual ReturnedResponse<List<VInvitationDto>> GetInvitedAccounts(int accountId)
         {
-            return new ReturnedResponse<List<Vinvitation>>(VinvitationLogic.Select(invitation => invitation.Accountid == accountId || invitation.Suggestedaccountid == accountId).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            List<VInvitationDto> invitedResult = new List<VInvitationDto>();
+
+            List<Vinvitation> currentInvitations = VinvitationLogic.Select(invitation => invitation.Idaccount == accountId).ToList();
+
+            foreach (Vinvitation item in currentInvitations)
+            {
+                VInvitationDto element = DtoModelMapper.Map<VInvitationDto, Vinvitation>(item);
+
+                element.InvitedImageUrl = ImageServiceUtils.GetImageUrl(element.Idaccountinvited.Value);
+                element.InvitingImageUrl = ImageServiceUtils.GetImageUrl(element.Idaccount.Value);
+
+                invitedResult.Add(element);
+            }
+
+            return new ReturnedResponse<List<VInvitationDto>>(invitedResult, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<Vinvitation> InviteToFriends(int invitingAccountId, int invitedAccountId)
@@ -56,7 +73,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
                 InvitationLogic.Insert(new Invitation() { Idaccount = invitingAccountId, Idinvited = invitedAccountId });
             }
 
-            Vinvitation result =  VinvitationLogic.Select(m => m.Accountid == invitingAccountId && m.Suggestedaccountid == invitedAccountId).FirstOrDefault();
+            Vinvitation result =  VinvitationLogic.Select(m => m.Idaccount == invitingAccountId && m.Idaccountinvited == invitedAccountId).FirstOrDefault();
 
             return new ReturnedResponse<Vinvitation>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }

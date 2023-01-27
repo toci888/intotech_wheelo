@@ -23,6 +23,12 @@ namespace Toci.Driver.Api.Controllers
             return Service.GetVfriends(idAccount);
         }
 
+        [HttpGet("your-friends-search/{idAccount}")]
+        public ReturnedResponse<List<FriendsDto>> SearchVfriends(int idAccount, string query)
+        {
+            return Service.SearchVfriends(idAccount, query);
+        }
+
         [HttpPost("friend")]
         public ReturnedResponse<Vfriend> AddFriend(NewFriendAddDto friend)
         {

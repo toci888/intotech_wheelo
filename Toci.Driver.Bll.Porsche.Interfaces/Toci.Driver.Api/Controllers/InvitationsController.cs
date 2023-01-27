@@ -1,5 +1,6 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Common.Microservices;
+using Intotech.Wheelo.Bll.Models.Isfa;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
 using Microsoft.AspNetCore.Mvc;
@@ -22,8 +23,8 @@ namespace Toci.Driver.Api.Controllers
             
         }
 
-        [HttpGet("view-invitations")]
-        public ReturnedResponse<List<Vinvitation>> GetInvitations(int idAccount)
+        [HttpGet("view-invitations/{idAccount}")]
+        public ReturnedResponse<List<VInvitationDto>> GetInvitations(int idAccount)
         {
             return Service.GetInvitedAccounts(idAccount);
         }

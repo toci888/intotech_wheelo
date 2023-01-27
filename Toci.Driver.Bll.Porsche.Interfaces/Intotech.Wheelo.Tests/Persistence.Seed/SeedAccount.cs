@@ -52,7 +52,7 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
             
             
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 150; i++)
             {
                 accounts.Add(new Account() { Name = Names[rnd.Next(0, Names.Count - 1)], Surname = Surnames[rnd.Next(0, Surnames.Count - 1)], Image = Base64EncodedImages[rnd.Next(0, 3)], Password = "fbd623cdcf27c1cf99595b52154e699d1ae95e7c48bd7c34ba73d0091a5b2af2", Email = StringUtils.GetRandomText(12), Refreshtoken = StringUtils.GetRandomText(18), Idrole = 1 });
             }
