@@ -72,7 +72,19 @@ export const useNotifications = () => {
     response: Notifications.NotificationResponse
   ) => {
     const data: NotificationsParams = response.notification.request.content.data;
-    if (data && data.root) {
+    // const x = { "root": "Root", "screen": "Chat", "screenParams": { conversationID: 0, recipientName: 'arek'}}
+    if (Object.keys(data).length === 0) {
+      console.log("Pusta notyfikacja", data)
+      // navigation.navigate("Root", {screen: "Chat", params: data.screenParams})
+          //  navigation.navigate("Chat", {screen: "Messages", params: {
+          //     conversationID: 1,
+          //     recipientName: "Arek",
+          //   }})
+
+      // navigation.navigate("Chat", {screen:"Conversations"})
+      // return;
+    }
+    else if (data && data.root) {
       navigation.navigate(data.root, {screen: data.screen, params: data.screenParams})
     } else {
       navigation.navigate(data.screen, {params: data.screenParams})

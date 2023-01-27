@@ -29,7 +29,7 @@ export const AnimatedListHeader = ({
   const [endTime, setEndTime] = useState<string>("16:00");
   
   return (
-    <Animated.View style={[styles.container, {backgroundColor: colors.background}]}>
+    <Animated.View style={[styles.container, {backgroundColor: colors.secondary}]}>
       <View style={[styles.defaultMarginHorizontal, {"marginTop": 10}]} />
       <View style={styles.defaultMarginHorizontal}>
         <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>

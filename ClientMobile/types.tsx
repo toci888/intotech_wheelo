@@ -39,7 +39,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 export type RootTabParamList = {
   Search: undefined | SearchScreenParams;
   Saved: undefined;
-  Chat: undefined;
+  Chat: NavigatorScreenParams<ChatTabParamList> | undefined;
   AccountRoot: NavigatorScreenParams<AccountTabParamList> | undefined;
 };
 
