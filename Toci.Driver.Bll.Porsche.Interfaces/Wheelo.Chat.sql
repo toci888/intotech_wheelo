@@ -5,6 +5,7 @@ drop table Messages;
 drop table RoomsAccounts;
 drop table AccountsIdentifiers;
 drop table Rooms;
+drop table AccountChat;
 
 create table AccountChat
 (
