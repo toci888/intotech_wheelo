@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -24,7 +25,16 @@ export const ManageUnitsScreen = ({
 }: {
   route: { params: { propertyID: number } };
 }) => {
-  const apartments = useApartmentsQuery(route.params.propertyID);
+  const apartments = {data: [{
+    ID: 1,
+    unit: 'UNIT',
+    bedrooms: 2,
+    bathrooms: 3,
+    sqFt: "sqFT",
+    active: true,
+    editName: true,
+    availableOn: new Date(),
+  }]}//useApartmentsQuery(route.params.propertyID);
   const editApartments = useEditApartmentMutation();
 
   const apartmentData = apartments.data;

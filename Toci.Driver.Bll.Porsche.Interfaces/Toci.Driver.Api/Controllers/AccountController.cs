@@ -113,4 +113,11 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
     {
         return Service.GetAllUsers();
     }
+
+    [HttpGet("EnigmaticUrlAuthorized")]
+    [Authorize(Roles = "User")]
+    public List<Account> GetAllUsersAuth()
+    {
+        return Service.GetAllUsers();
+    }
 }

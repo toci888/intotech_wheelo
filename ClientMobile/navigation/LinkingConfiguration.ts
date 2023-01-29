@@ -17,6 +17,7 @@ const linking: LinkingOptions<RootStackParamList> = {
         screens: {
           Search: "search",
           Saved: "saved",
+          Chat: "chat",
           AccountRoot: {
             initialRouteName: "account" as any,
             screens: {

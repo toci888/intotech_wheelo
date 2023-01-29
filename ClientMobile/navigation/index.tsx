@@ -40,16 +40,35 @@ export default function Navigation({
 }: {
   colorScheme: ColorSchemeName;
 }) {
-  // const gray = theme["color-primary-400"];
-  // const dark = theme["color-primary-700"];
+
   DefaultTheme.dark = colorScheme === themes.dark ? true : false;
-  // DarkTheme.colors = { primary: gray, border: gray, card: gray, 
-  //               notification: gray, background: gray, text: gray};
-  // DarkTheme.colors = { ...DarkTheme.colors, text: 'white'};
+
+  DefaultTheme.colors = {
+    primary: 'white', 
+    notification: 'red', 
+    background: '#2395c6',
+    text: 'black',
+    border: '#6adbc7',
+    card: '#6adbc7'
+  };
+
+  DarkTheme.colors = {...DarkTheme.colors, 
+    primary: '#efefef',
+    notification: 'red', 
+    background: '#8523c6',
+    text: 'white'
+  };
+
+  const MyTheme = DefaultTheme.dark ? DarkTheme : DefaultTheme;
+
+  //MyTheme.colors = DefaultTheme.dark ? Object.assign({secondary: 'red'}, MyTheme.colors) : Object.assign({secondary: 'orange'}, MyTheme.colors);
+    
+  console.log("Colours clg", MyTheme.colors);
+  
 
   return (
-    <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme.dark ? DarkTheme : DefaultTheme}>
-      <RootNavigator colorScheme={colorScheme} />
+    <NavigationContainer linking={LinkingConfiguration} theme={MyTheme}>
+      <RootNavigator />
     </NavigationContainer>
   );
 }
@@ -130,6 +149,11 @@ function RootNavigator(props: any) {
           component={ReviewScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="Conversations"
+          component={ConversationsScreen}
+          options={{ headerTitle: i18n.t("Chat"), headerBackTitle: i18n.t("Back") }}
+        /> 
       </Stack.Group>
     </Stack.Navigator>)
     :
@@ -170,7 +194,7 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name='Saved2'
+        name='Chat'
         component={ChatStack}
         options={{
           tabBarLabel: i18n.t('Chat'),
@@ -235,36 +259,35 @@ const ChatStack = () => (
 const AuthStack = createNativeStackNavigator<AuthParamList>();
 const AuthScreenStack = () => (
   <AuthStack.Navigator initialRouteName="Account">
-    <AuthStack.Screen
-      name="Account"
-      component={AccountScreen}
-      options={{ headerShown: false }} />
-    <AuthStack.Screen
-      name="SignIn"
-      component={SignInScreen}
-      options={{ headerShown: false }} />
-    <AuthStack.Screen
-      name="SignUp"
-      component={SignUpScreen}
-      options={{ headerShown: false }} />
-    <AuthStack.Screen
-      name="ForgotPassword"
-      component={ForgotPasswordScreen}
-      options={{ headerShown: false }} />
-    <AuthStack.Screen
-      name="ResetPassword"
-      component={ResetPasswordScreen}
-      options={{ headerShown: false }} />
-    <AuthStack.Screen
-      name="CodeVerification"
-      component={CodeVerificationScreen}
-      options={{ headerShown: false }} />
+    <AuthStack.Group>
+      <AuthStack.Screen
+        name="Account"
+        component={AccountScreen}
+        options={{ headerShown: false }} />
+      <AuthStack.Screen
+        name="SignIn"
+        component={SignInScreen}
+        options={{ headerShown: false }} />
+      <AuthStack.Screen
+        name="SignUp"
+        component={SignUpScreen}
+        options={{ headerShown: false }} />
+      <AuthStack.Screen
+        name="ForgotPassword"
+        component={ForgotPasswordScreen}
+        options={{ headerShown: false }} />
+      <AuthStack.Screen
+        name="ResetPassword"
+        component={ResetPasswordScreen}
+        options={{ headerShown: false }} />
+      <AuthStack.Screen
+        name="CodeVerification"
+        component={CodeVerificationScreen}
+        options={{ headerShown: false }} />
+    </AuthStack.Group>
   </AuthStack.Navigator>
 );
 
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
   color: string;

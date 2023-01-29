@@ -9,20 +9,25 @@ import { CollocateAccount } from "../types/collocation";
 import { Row } from "./Row";
 import { callPhoneNumber } from "../utils/callPhoneNumber";
 import { useUser } from "../hooks/useUser";
-import { useSaveCollocationMutation } from "../hooks/mutations/useSavePropertyMutation";
 import { commonAlert } from "../utils/handleError";
 import { i18n } from "../i18n/i18n";
+import { useSaveCollocationMutation } from "../hooks/mutations/useSaveCollocationMutation";
+import { useConversationsQuery } from "../hooks/queries/useConversationsQuery";
+import { TransformedConversation } from "../types/conversation";
 
 export const CardInformation = ({
   collocation,
   myCollocation,
+  conversationID
 }: {
   collocation: CollocateAccount;
   myCollocation?: boolean;
+  conversationID?: number;
 }) => {
   const navigation = useNavigation();
   const { user, setSavedProperties } = useUser();
   const saveCollocation = useSaveCollocationMutation();
+  const conversations = useConversationsQuery();
 
   const alterUsersSavedProperties = (
     collocationID: number,
@@ -37,6 +42,29 @@ export const CardInformation = ({
 
     setSavedProperties(newCollocations);
   };
+
+  const handleChatButtonPress = () => {
+      //   saveCollocation.data?.data.map((x: CollocateAccount) => {
+      //   console.log("dana", x)
+      // }) 
+      // ?
+      //   navigation.navigate("Messages", {
+      //     conversationID: 0,
+      //     recipientName: collocation?.name,
+      //   }) : 
+      console.log('klik')
+      conversations.data?.map((x: TransformedConversation) => {
+        console.log("tutaj: ", x.id, x.recipientName)
+        if(collocation.name === x.recipientName) {
+          console.log("znalazlem: ", x.id, x.recipientName)
+        } else {
+          console.log("Nie pasuje: ", x.id, x.recipientName);
+          return;
+        }
+      })
+      console.log("Kuniec")
+      // navigation.navigate("Chat", {screen:"Conversations"})
+  }
 
   const handleStarPress = () => {
     if (!user) return commonAlert(i18n.t('PleaseSignUpOrSignInToSaveProperties'));
@@ -123,6 +151,14 @@ export const CardInformation = ({
           onPress={manageUnitsNavigation}
         >
           Manage Units
+        </Button>
+        <Button
+          appearance={"ghost"}
+          status="info"
+          size={"small"}
+          onPress={handleChatButtonPress}
+        >
+          Chat
         </Button>
       </Row>
 

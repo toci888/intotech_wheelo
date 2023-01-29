@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, FlatList, TouchableOpacity, Platform } from "react-native";
-import { Button, Text } from "@ui-kitten/components";
+import { Button, Input, Text } from "@ui-kitten/components";
 import { useState } from "react";
 import LottieView from "lottie-react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
@@ -13,32 +13,63 @@ import { CollocateAccount, Collocation } from "../types/collocation";
 import { SignUpAndSignInButtons } from "../components/SignUpAndSignInButtons";
 import { useUser } from "../hooks/useUser";
 import { Loading } from "../components/Loading";
-import { useSavedCollocationsQuery } from "../hooks/queries/useSavedCollocationsQuery";
+import { useFriendsQuery } from "../hooks/queries/useSavedCollocationsQuery";
 import { useContactedPropertiesQuery } from "../hooks/queries/useContactedPropertiesQuery";
 import { i18n } from "../i18n/i18n";
 import { useInvitedFriendsQuery } from "../hooks/queries/useInvitedFriendsQuery";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { LISTMARGIN } from "../constants/constants";
+import { LISTMARGIN, os } from "../constants/constants";
 
 export const SavedScreen = () => {
+  const [value, setValue] = useState<string>();
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const { user } = useUser();
   const navigation = useNavigation();
-  const savedCollocations = useSavedCollocationsQuery();
+  const friends = useFriendsQuery();
   const associatedCollocations = useContactedPropertiesQuery();
   const invitedFriends = useInvitedFriendsQuery();
 
   // Refetching saved properties doesn't occur after login
   useFocusEffect(() => {
-    if (
-      (!savedCollocations.data || savedCollocations.data.length === 0) &&
+    if ( //TODO! time out 0.5 sec
+      (!friends.data || friends.data.length === 0) &&
       user && user?.savedCollocations && user.savedCollocations.length > 0
     ) {
-      savedCollocations.refetch();
+      friends.refetch();
       associatedCollocations.refetch();
       invitedFriends.refetch();
     }
   });
+
+  const handleChange = async (val: string) => {
+    setValue(val);
+    console.log(value)
+    if (activeIndex === 0 && friends.data) {
+      let results: CollocateAccount[] = [];
+      friends.data.map(collocation =>{
+        if(collocation.name.includes(val)) {
+          results.push(collocation);
+        }
+      })
+      console.log("WYNIKI", results)
+      friends.data = results;
+    }
+    // if (val.length > 2) await getSuggestions(val);
+    // else if (val.length === 0) setSuggestions([]);
+  };
+
+  const handleSubmitEditing = async () => {
+    // await getSuggestions(value);
+    console.log("WYBRALES", value)
+    // // If only 1 suggestion appears, it's better UX for them to just press enter on the
+    // // keyboard, but if they are searching for a specific address & multiple appear,
+    // // the user needs to choose
+    // if (
+    //   (type === "autocomplete" && suggestions.length > 0) ||
+    //   suggestions.length === 1
+    // )
+    //   handleSuggestionPress(suggestions[0]);
+  };
 
   const getButtonAppearance = (buttonIndex: number) => {
     if (activeIndex === buttonIndex) return "filled";
@@ -49,7 +80,7 @@ export const SavedScreen = () => {
     setActiveIndex(index);
   };
 
-  if (savedCollocations.isLoading || associatedCollocations.isLoading || invitedFriends.isLoading)
+  if (friends.isLoading || associatedCollocations.isLoading || invitedFriends.isLoading)
     return <Loading />;
 
   const getBodyText = (heading: string, subHeading: string) => {
@@ -67,26 +98,33 @@ export const SavedScreen = () => {
 
   const getPropertiesFlatList = (collocation: CollocateAccount[]) => {
     return (<>
-      <TouchableOpacity
-      style={{
-        marginTop: Platform.OS === "ios" ? 50 : 30,
-        borderWidth: 1,
-        borderColor: theme["color-gray"],
-        borderRadius: 30,
-        padding: 10,
-      }}
-      onPress={() => {console.log('szukamy');/*navigation.navigate("FindLocations")*/}}
-    >
-      <Row style={[{ alignItems: "center"}, styles.defaultMarginHorizontal ]}>
-        <Text style={styles.text}>{i18n.t('Search')}</Text>
-        <MaterialCommunityIcons
-          name="magnify"
-          color={theme["color-primary-500"]}
-          size={28}
-          style={{marginLeft:'auto'}}
-        />
-      </Row>
-    </TouchableOpacity>
+      <View style={{marginTop: Platform.OS === os.ios ? 10 : 10}}>
+        <Row style={[{ alignItems: "center"}, styles.defaultMarginHorizontal ]}>
+          <MaterialCommunityIcons
+            name="magnify"
+            color={theme["color-primary-500"]}
+            size={28}
+            style={{alignItems: 'center', }}
+            // style={{marginLeft:10, alignItems: 'center', marginRight: 'auto'}}
+          />
+          <Input
+            keyboardType="default"
+            selectionColor={theme["color-primary-500"]}
+            placeholder={i18n.t('Search')}
+            size={"medium"}
+            value={value}
+            onChangeText={handleChange}
+            onSubmitEditing={handleSubmitEditing}
+            style={{width: '80%'}}
+          />
+          <MaterialCommunityIcons
+            name="magnify"
+            color={theme["color-primary-500"]}
+            size={28}
+            // style={{marginLeft:10, alignItems: 'center', marginRight: 'auto'}}
+          />
+        </Row>
+      </View>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={collocation}
@@ -109,8 +147,8 @@ export const SavedScreen = () => {
 
   const getBody = () => {
     if (activeIndex === 0) {
-      if (savedCollocations?.data && savedCollocations.data.length > 0)
-        return getPropertiesFlatList(savedCollocations.data);
+      if (friends?.data && friends.data.length > 0)
+        return getPropertiesFlatList(friends.data);
       return (
         <>
           <LottieView
@@ -130,7 +168,7 @@ export const SavedScreen = () => {
         </>
       );
     }
-    // console.log("TESCIK", associatedCollocations)
+    
     if (activeIndex === 1) {
       if (associatedCollocations?.data && associatedCollocations.data.length > 0)
         return getPropertiesFlatList(associatedCollocations.data);
