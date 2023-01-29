@@ -8,6 +8,7 @@ using Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa;
 using Intotech.Wheelo.Bll.Porsche;
 using Microsoft.Extensions.Configuration;
 using System.Net;
+using System.Text;
 using Toci.Driver.Bll.Porsche.Association;
 using Toci.Driver.Bll.Porsche.Interfaces.Association;
 using Intotech.Wheelo.Bll.Porsche.Interfaces;
@@ -28,7 +29,9 @@ using Intotech.Wheelo.Notifications;
 using Intotech.Wheelo.Bll.Porsche.Driver;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Driver;
 using Intotech.Wheelo.Common.Interfaces.Models;
+using Microsoft.IdentityModel.Tokens;
 using Toci.Driver.Database.Persistence.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -116,6 +119,23 @@ builder.Services.AddScoped<INotificationClient, NotificationClient>();
 //builder.Services.AddScoped<IEmailManager, EmailManager>();
 
 builder.Services.AddSingleton(authenticationSettings);
+
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultAuthenticateScheme = "Bearer";
+    option.DefaultScheme = "Bearer";
+    option.DefaultChallengeScheme = "Bearer";
+}).AddJwtBearer(cfg =>
+{
+    cfg.RequireHttpsMetadata = false;
+    cfg.SaveToken = true;
+    cfg.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = authenticationSettings.JwtIssuer,
+        ValidAudience = authenticationSettings.JwtIssuer,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey))
+    };
+}); ; //.AddPolicyScheme();
 
 builder.Services.AddControllers().AddJsonOptions(options => {
     options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;

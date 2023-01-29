@@ -44,26 +44,26 @@ export default function Navigation({
   DefaultTheme.dark = colorScheme === themes.dark ? true : false;
 
   DefaultTheme.colors = {
-    primary: 'yellow', 
+    primary: 'white', 
     notification: 'red', 
-    background: '#6adbc7',
+    background: '#2395c6',
     text: 'black',
     border: '#6adbc7',
     card: '#6adbc7'
   };
 
   DarkTheme.colors = {...DarkTheme.colors, 
-    primary: '#78007D',
+    primary: '#efefef',
     notification: 'red', 
-    background: '#121212',
+    background: '#8523c6',
     text: 'white'
   };
 
   const MyTheme = DefaultTheme.dark ? DarkTheme : DefaultTheme;
 
-  MyTheme.colors = DefaultTheme.dark ? Object.assign({secondary: 'red'}, MyTheme.colors) : Object.assign({secondary: 'orange'}, MyTheme.colors);
+  //MyTheme.colors = DefaultTheme.dark ? Object.assign({secondary: 'red'}, MyTheme.colors) : Object.assign({secondary: 'orange'}, MyTheme.colors);
     
-  console.log(MyTheme.colors);
+  console.log("Colours clg", MyTheme.colors);
   
 
   return (
