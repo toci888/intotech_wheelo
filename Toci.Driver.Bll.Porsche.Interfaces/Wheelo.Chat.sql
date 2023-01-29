@@ -6,6 +6,16 @@ drop table RoomsAccounts;
 drop table AccountsIdentifiers;
 drop table Rooms;
 
+create table AccountChat
+(
+	id serial primary key,
+	memberEmail text not null,
+	idAccount int not null,
+	firstname text,
+	lastname text,
+	pushToken text,
+	hasManyAccount bool
+);
 
 create table Rooms
 (
