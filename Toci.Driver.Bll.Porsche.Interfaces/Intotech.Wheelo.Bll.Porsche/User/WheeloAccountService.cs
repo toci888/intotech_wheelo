@@ -22,6 +22,7 @@ using System.Security.Claims;
 using Intotech.Wheelo.Common.Logging;
 using System.Security.Principal;
 using Newtonsoft.Json.Linq;
+using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
 
 namespace Intotech.Wheelo.Bll.Porsche.User
 {
@@ -35,6 +36,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         protected IResetpasswordLogic ResetpasswordLogic;
         protected IPushtokenLogic PushtokenLogic;
         protected IEmailManager EmailManager = new EmailManager("pl");
+        protected IAccountChatLogic AccountChatLogic;
 
         public const int MinutesVerificationCodeValid = 15;
 
@@ -49,7 +51,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         public const int LoginEmailNotVerifiedPasswdDontMatch = 5;
 
         public WheeloAccountService(AuthenticationSettings authenticationSettings, IAccountLogic accLogic, IAccountRoleLogic accRoleLogic,
-            IAccountmodeLogic accountmodeLogic,
+            IAccountmodeLogic accountmodeLogic, IAccountChatLogic chatLogic,
             IFailedloginattemptLogic failedloginattemptLogic, IResetpasswordLogic resetpasswordLogic, IPushtokenLogic pushtokenLogic
             /*, IEmailManager emailManager*/)
         {
@@ -60,6 +62,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             FailedloginattemptLogic = failedloginattemptLogic;
             ResetpasswordLogic = resetpasswordLogic;
             PushtokenLogic = pushtokenLogic;
+            AccountChatLogic = chatLogic;
             //EmailManager = emailManager;
         }
 
@@ -449,6 +452,15 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
 
             userArd.AccessToken = tokenHandler.WriteToken(token);
+
+            AccountChatLogic.Insert(new Chat.Database.Persistence.Models.Accountchat()
+            {
+                Firstname = userArd.FirstName,
+                Lastname = userArd.LastName,
+                Idaccount = userArd.Id.Value,
+                Memberemail = userArd.Email,
+                Hasmanyaccount = true // TODO linia 427 lista?
+            });
 
             return userArd;
         }

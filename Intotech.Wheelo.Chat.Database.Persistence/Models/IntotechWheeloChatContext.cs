@@ -15,6 +15,8 @@ public partial class IntotechWheeloChatContext : DbContext
     {
     }
 
+    public virtual DbSet<Accountchat> Accountchats { get; set; }
+
     public virtual DbSet<Accountsidentifier> Accountsidentifiers { get; set; }
 
     public virtual DbSet<Connecteduser> Connectedusers { get; set; }
@@ -35,6 +37,21 @@ public partial class IntotechWheeloChatContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Accountchat>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("accountchat_pkey");
+
+            entity.ToTable("accountchat");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Firstname).HasColumnName("firstname");
+            entity.Property(e => e.Hasmanyaccount).HasColumnName("hasmanyaccount");
+            entity.Property(e => e.Idaccount).HasColumnName("idaccount");
+            entity.Property(e => e.Lastname).HasColumnName("lastname");
+            entity.Property(e => e.Memberemail).HasColumnName("memberemail");
+            entity.Property(e => e.Pushtoken).HasColumnName("pushtoken");
+        });
+
         modelBuilder.Entity<Accountsidentifier>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("accountsidentifiers_pkey");

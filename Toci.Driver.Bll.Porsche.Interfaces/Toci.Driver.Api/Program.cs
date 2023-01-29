@@ -32,6 +32,8 @@ using Intotech.Wheelo.Common.Interfaces.Models;
 using Microsoft.IdentityModel.Tokens;
 using Toci.Driver.Database.Persistence.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
+using Intotech.Wheelo.Chat.Bll.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -90,6 +92,7 @@ builder.Services.AddScoped<IFailedloginattemptLogic, FailedloginattemptLogic>();
 builder.Services.AddScoped<IResetpasswordLogic, ResetpasswordLogic>();
 builder.Services.AddScoped<IPushtokenLogic, PushtokenLogic>();
 builder.Services.AddScoped<IOccupationSmokerCratLogic, OccupationSmokerCratLogic>();
+builder.Services.AddScoped<IAccountChatLogic, AccountChatLogic>();
 
 AuthenticationSettings authenticationSettings = new AuthenticationSettings();
 
