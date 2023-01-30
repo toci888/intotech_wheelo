@@ -425,7 +425,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         protected AccountRoleDto GenerateJwt(LoginDto user)
         {
             Accountrole userRole = AccRoleLogic.Select(x => x.Email == user.Email && x.Password == user.Password).FirstOrDefault();
-
+            
             if (userRole is null)
             {
                 //throw new Exception("Invalid username or password");
@@ -433,6 +433,10 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 return null;
             }
 
+            return GenerateJwt(userRole);
+        }
+        protected AccountRoleDto GenerateJwt(Accountrole userRole)
+        {
             AccountRoleDto userArd = DtoModelMapper.Map<AccountRoleDto, Accountrole>(userRole);
 
             List<Claim> claims = new List<Claim>()
@@ -461,30 +465,6 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 Memberemail = userArd.Email,
                 Hasmanyaccount = true // TODO linia 427 lista?
             });
-
-            return userArd;
-        }
-        protected AccountRoleDto GenerateJwt(Accountrole userRole)
-        {
-            AccountRoleDto userArd = DtoModelMapper.Map<AccountRoleDto, Accountrole>(userRole);
-
-            List<Claim> claims = new List<Claim>()
-            {
-                new Claim(ClaimTypes.NameIdentifier, userArd.Email),
-                new Claim(ClaimTypes.Name, $"{userArd.Name} {userArd.Surname}"),
-                new Claim(ClaimTypes.Role, $"{userArd.Rolename}"),
-            };
-
-            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey));
-            SigningCredentials cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            DateTime expires = DateTime.Now.AddDays(_authenticationSettings.JwtExpireDays);
-
-            JwtSecurityToken token = new JwtSecurityToken(_authenticationSettings.JwtIssuer,
-                _authenticationSettings.JwtIssuer, claims, expires: expires, signingCredentials: cred);
-
-            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-
-            userArd.AccessToken = tokenHandler.WriteToken(token);
 
             return userArd;
         }
