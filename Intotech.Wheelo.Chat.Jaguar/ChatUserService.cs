@@ -5,7 +5,9 @@ using Intotech.Wheelo.Chat.Dodge;
 using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
 using Intotech.Wheelo.Chat.Models;
+using Intotech.Wheelo.Chat.Models.Caching;
 using Intotech.Wheelo.Common.ImageService;
+using Intotech.Wheelo.Common.Interfaces.CachingService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,11 +25,12 @@ namespace Intotech.Wheelo.Chat.Jaguar
         protected IRoomsaccountLogic RoomsAccountLogic;
         protected IConversationinvitationLogic ConversationInvitationLogic;
         protected IMessageLogic MessageLogic;
+        protected ICachingService CachingService;
 
         public ChatUserService(IAccountService accountService, IConnecteduserLogic connecteduserLogic, 
             IUseractivityLogic userActivityLogic, IRoomsaccountLogic roomsAccountLogic,
             IConversationinvitationLogic conversationInvitationLogic,
-            IMessageLogic messageLogic)
+            IMessageLogic messageLogic, ICachingService cachingService)
         {
             AccountService = accountService;
             ConnecteduserLogic = connecteduserLogic;
@@ -35,21 +38,37 @@ namespace Intotech.Wheelo.Chat.Jaguar
             RoomsAccountLogic = roomsAccountLogic;
             ConversationInvitationLogic = conversationInvitationLogic;
             MessageLogic = messageLogic;
+            CachingService = cachingService;
         }
 
         public virtual ChatUserDto Connect(string email)
         {
-            Account userData = AccountService.GetAccount(email);
+            UserCacheDto userCached = CachingService.Get<UserCacheDto>(email);
 
-            if (userData == null)
+            if (userCached == null)
             {
-                return null;
+                Account userData = AccountService.GetAccount(email);
+
+                if (userData == null)
+                {
+                    return null;
+                }
+
+                userCached.IdAccount = userData.Id;
+                userCached.ImageUrl = userData.Image;
+                userCached.SenderEmail = userData.Email;
+                userCached.UserName = userData.Name;
+                userCached.UserSurname = userData.Surname;
+                userCached.SessionId = userData.Email;
+
+                CachingService.Set(userData.Email, userCached);
             }
 
             ConnecteduserLogic.Insert(new Connecteduser() { Email = email }); // TODO what if 2 or more locations
             UserActivityLogic.Insert(new Useractivity() { Email = email, Connectedfrom = DateTime.Now });
 
-            return new ChatUserDto() { SenderEmail = email, UserName = userData.Name, UserSurname = userData.Surname, ImageUrl = userData.Image, IdAccount = userData.Id, SessionId = email };
+            return new ChatUserDto() { SenderEmail = email, UserName = userCached.UserName, UserSurname = userCached.UserSurname, 
+                ImageUrl = userCached.ImageUrl, IdAccount = userCached.IdAccount, SessionId = email };
         }
 
         public virtual ChatMessageDto SendMessage(ChatMessageDto chatMessage)

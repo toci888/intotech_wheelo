@@ -10,6 +10,7 @@ using Intotech.Wheelo.Chat.Api.Attributes;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Models.Gaf;
 using AutoMapper.Execution;
+using Intotech.Wheelo.Common.Interfaces.CachingService;
 
 namespace Intotech.Wheelo.Chat.Api.Hubs
 {
@@ -24,11 +25,13 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
         protected IChatUserService ChatUserService;
         protected IRoomService RoomService;
+        protected ICachingService CachingService;
 
-        public ChatHub(IChatUserService chatUser, IRoomService roomService)
+        public ChatHub(IChatUserService chatUser, IRoomService roomService, ICachingService cachingService)
         {
             ChatUserService = chatUser;
             RoomService = roomService;
+            CachingService = cachingService;
         }
 
         

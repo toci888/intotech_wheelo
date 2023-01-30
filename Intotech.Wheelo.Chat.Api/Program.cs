@@ -8,11 +8,13 @@ using Intotech.Wheelo.Chat.Dodge;
 using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Jaguar;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
+using Intotech.Wheelo.Common.Interfaces.CachingService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Intotech.Wheelo.Common.CachingService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +55,7 @@ builder.Services.AddScoped<IChatUserService, ChatUserService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IConversationService, ConversationService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
+builder.Services.AddScoped<ICachingService, CachingService>();
 
 
 builder.Services.AddScoped<IMessageLogic, MessageLogic>();
