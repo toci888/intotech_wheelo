@@ -7,4 +7,5 @@ public class RoomMembersDto
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public DateTime CreatedAt { get; set; }
+    public string[] PushTokens { get; set; }
 }

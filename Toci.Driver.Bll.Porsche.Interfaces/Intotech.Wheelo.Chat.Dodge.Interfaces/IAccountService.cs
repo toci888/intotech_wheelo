@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intotech.Wheelo.Chat.Models.Caching;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Intotech.Wheelo.Chat.Dodge.Interfaces
 {
     public interface IAccountService
     {
-        Account GetAccount(string email);
+        UserCacheDto GetAccount(string email);
+        UserCacheDto GetAccount(int idAccount);
     }
 }

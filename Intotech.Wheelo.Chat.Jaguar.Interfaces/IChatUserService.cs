@@ -9,7 +9,7 @@ namespace Intotech.Wheelo.Chat.Jaguar.Interfaces
 {
     public interface IChatUserService
     {
-        ChatUserDto Connect(string email);
+        ChatUserDto Connect(int idAccount);
         ChatMessageDto SendMessage(ChatMessageDto chatMessage);
     }
 }

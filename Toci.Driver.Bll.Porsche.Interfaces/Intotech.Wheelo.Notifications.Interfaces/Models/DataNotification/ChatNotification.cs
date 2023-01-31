@@ -8,7 +8,10 @@ namespace Intotech.Wheelo.Notifications.Interfaces.Models.DataNotification
 {
     public class ChatNotification
     {
-        // TODO Fields for chat here
         public int RoomId { get; set; }
+        public string AuthorEmail { get; set; }
+        public string Message { get; set; }
+        public int AuthorAccountId { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

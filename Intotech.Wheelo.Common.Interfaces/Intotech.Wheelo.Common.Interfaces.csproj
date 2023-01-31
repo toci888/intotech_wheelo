@@ -10,4 +10,12 @@
     <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Bll.Interfaces\Intotech.Common.Bll.Interfaces.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CachingService\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Enyim.Memcached2" Version="0.6.0-preview" />
+  </ItemGroup>
+
 </Project>

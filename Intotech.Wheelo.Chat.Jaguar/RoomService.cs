@@ -5,6 +5,8 @@ using Intotech.Wheelo.Chat.Database.Persistence.Models;
 using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
 using Intotech.Wheelo.Chat.Models;
+using Intotech.Wheelo.Chat.Models.Caching;
+using System.Security.Principal;
 using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Chat.Jaguar;
@@ -42,9 +44,9 @@ public class RoomService : IRoomService
     {
         RoomsDto result = new RoomsDto();
         
-        List<Account> chatMembers = new List<Account>();
+        List<UserCacheDto> chatMembers = new List<UserCacheDto>();
 
-        Account author = AccountService.GetAccount(hostEmail);
+        UserCacheDto author = AccountService.GetAccount(hostEmail);
 
         if (author == null)
         {
@@ -57,20 +59,20 @@ public class RoomService : IRoomService
 
         foreach (string memberEmail in members)
         {
-            Account member = AccountService.GetAccount(memberEmail);
+            UserCacheDto member = AccountService.GetAccount(memberEmail);
 
             if (member != null)
             {
                 chatMembers.Add(member);
 
-                result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = member.Createdat.Value, IdAccount = member.Id, Email = member.Email, FirstName = member.Name, LastName = member.Surname });
+                result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = member.AccountCreatedAt, IdAccount = member.IdAccount, Email = member.SenderEmail, FirstName = member.UserName, LastName = member.UserSurname, PushTokens = member.PushTokens });
             }
         }
 
-        result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = author.Createdat.Value, IdAccount = author.Id, Email = author.Email, FirstName = author.Name, LastName = author.Surname });
+        result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = author.AccountCreatedAt, IdAccount = author.IdAccount, Email = author.SenderEmail, FirstName = author.UserName, LastName = author.UserSurname, PushTokens = author.PushTokens });
 
         //Kacper, Julia, Bartek
-        result.RoomName = string.Join(", ", chatMembers.Select(m => m.Name));
+        result.RoomName = string.Join(", ", chatMembers.Select(m => m.UserName));
   
         Room room = RoomLogic.Insert(new Room() { Ownerid = hostEmail, Roomname = result.RoomName });
 
@@ -78,9 +80,9 @@ public class RoomService : IRoomService
         result.OwnerEmail = hostEmail;
 
 
-        foreach (Account chatMember in chatMembers)
+        foreach (UserCacheDto chatMember in chatMembers)
         {
-            RoomsAccountLogic.Insert(new Roomsaccount() { Idroom = result.IdRoom, Memberemail = chatMember.Email });
+            RoomsAccountLogic.Insert(new Roomsaccount() { Idroom = result.IdRoom, Memberemail = chatMember.SenderEmail });
         }
         
         return result;
@@ -89,5 +91,53 @@ public class RoomService : IRoomService
     public virtual List<int> GetAllRooms(string email)
     {
         return RoomsAccountLogic.Select(m => m.Memberemail == email).Select(m => m.Idroom).ToList();
+    }
+
+    public virtual RoomsDto GetRoom(int roomId)
+    {
+        Room room = RoomLogic.Select(m => m.Id == roomId).FirstOrDefault();
+
+        if (room == null)
+        {
+            return null;
+        }
+
+        RoomsDto result = new RoomsDto();
+
+        result.IdRoom = room.Id;
+        result.RoomName = room.Roomname;
+        result.OwnerEmail = room.Ownerid;
+        //TODO isapproved
+        List<string> membersEmails = RoomsAccountLogic.Select(m => m.Idroom == room.Id).Select(m => m.Memberemail).ToList();
+
+        result.RoomMembers = new List<RoomMembersDto>();
+
+        foreach (string member in membersEmails)
+        {
+            RoomMembersDto roomMember = GetRoomMemberByEmail(member);
+
+            if (roomMember != null)
+            {
+                result.RoomMembers.Add(roomMember);
+            }
+        }
+
+        return result;
+    }
+
+    protected virtual RoomMembersDto GetRoomMemberByEmail(string memberEmail)
+    {
+        UserCacheDto member = AccountService.GetAccount(memberEmail);
+
+        if (member == null)
+        {
+            return null;
+        }
+
+        return new RoomMembersDto()
+        {
+            CreatedAt = member.AccountCreatedAt, IdAccount = member.IdAccount, Email = member.SenderEmail,
+            FirstName = member.UserName, LastName = member.UserSurname, PushTokens = member.PushTokens
+        };
     }
 }

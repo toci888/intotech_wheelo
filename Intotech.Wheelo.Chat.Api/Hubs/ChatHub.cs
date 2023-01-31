@@ -10,6 +10,7 @@ using Intotech.Wheelo.Chat.Api.Attributes;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Models.Gaf;
 using AutoMapper.Execution;
+using Intotech.Wheelo.Common.Interfaces.CachingService;
 
 namespace Intotech.Wheelo.Chat.Api.Hubs
 {
@@ -24,18 +25,23 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
         protected IChatUserService ChatUserService;
         protected IRoomService RoomService;
+        protected ICachingService CachingService;
+        protected IChatNotificationsService ChatNotificationsService;
 
-        public ChatHub(IChatUserService chatUser, IRoomService roomService)
+        public ChatHub(IChatUserService chatUser, IRoomService roomService, ICachingService cachingService, 
+            IChatNotificationsService chatNotificationsService)
         {
             ChatUserService = chatUser;
             RoomService = roomService;
+            CachingService = cachingService;
+            ChatNotificationsService = chatNotificationsService;
         }
 
         
         [Authorize(Roles = "User")]
-        public async Task ConnectUser(string email) // accountId room for synchronizations
+        public async Task ConnectUser(int idAccount) // accountId room for synchronizations
         {
-            ChatUserDto data = ChatUserService.Connect(email);
+            ChatUserDto data = ChatUserService.Connect(idAccount);
 
             if (data == null) 
             {
@@ -85,6 +91,8 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             {
                 //await Groups.AddToGroupAsync(Context.ConnectionId, chatMessage.ID.ToString());
                 await Clients.OthersInGroup(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
+
+                ChatNotificationsService.SendChatNotifications(chatMessage.ID, chatMessage.SenderEmail, chatMessage);
             }
 
         }

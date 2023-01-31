@@ -1,0 +1,4 @@
+﻿https://sourceforge.net/projects/memcached-win/
+
+dotnet add package Enyim.Memcached2 --version 0.6.0-preview
+
