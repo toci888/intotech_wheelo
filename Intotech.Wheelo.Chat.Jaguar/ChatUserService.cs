@@ -43,25 +43,11 @@ namespace Intotech.Wheelo.Chat.Jaguar
 
         public virtual ChatUserDto Connect(string email)
         {
-            UserCacheDto userCached = CachingService.Get<UserCacheDto>(email);
+            UserCacheDto userCached = GetUser(email);
 
             if (userCached == null)
             {
-                Account userData = AccountService.GetAccount(email);
-
-                if (userData == null)
-                {
-                    return null;
-                }
-
-                userCached.IdAccount = userData.Id;
-                userCached.ImageUrl = userData.Image;
-                userCached.SenderEmail = userData.Email;
-                userCached.UserName = userData.Name;
-                userCached.UserSurname = userData.Surname;
-                userCached.SessionId = userData.Email;
-
-                CachingService.Set(userData.Email, userCached);
+                return null;
             }
 
             ConnecteduserLogic.Insert(new Connecteduser() { Email = email }); // TODO what if 2 or more locations
@@ -73,22 +59,38 @@ namespace Intotech.Wheelo.Chat.Jaguar
 
         public virtual ChatMessageDto SendMessage(ChatMessageDto chatMessage)
         {
-            Account acc = AccountService.GetAccount(chatMessage.SenderEmail);
-
-            if (acc == null)
-            {
-                return null;
-            }
+            UserCacheDto userCached = GetUser(chatMessage.SenderEmail);
 
             Message mess = MessageLogic.Insert(new Message() { Authoremail = chatMessage.SenderEmail, Message1 = chatMessage.Text, Idroom = chatMessage.ID });
 
             chatMessage.CreatedAt = mess.Createdat.Value;
-            chatMessage.AuthorFirstName = acc.Name;
-            chatMessage.AuthorLastName = acc.Surname;
-            chatMessage.IdAccount = acc.Id;
-            chatMessage.ImageUrl = ImageServiceUtils.GetImageUrl(acc.Id);
+            chatMessage.AuthorFirstName = userCached.UserName;
+            chatMessage.AuthorLastName = userCached.UserSurname;
+            chatMessage.IdAccount = userCached.IdAccount;
+            chatMessage.ImageUrl = ImageServiceUtils.GetImageUrl(userCached.IdAccount);
 
             return chatMessage;
+        }
+
+        protected virtual UserCacheDto GetUser(string email)
+        {
+            UserCacheDto userCached = CachingService.Get<UserCacheDto>(email);
+
+            if (userCached == null)
+            {
+                UserCacheDto userData = AccountService.GetAccount(email);
+
+                if (userData == null)
+                {
+                    return null;
+                }
+
+                CachingService.Set(userData.SenderEmail, userData);
+
+                userCached = userData;
+            }
+
+            return userCached;
         }
 
         /*public virtual RequestConversationDto Invite(RequestConversationDto invitation)

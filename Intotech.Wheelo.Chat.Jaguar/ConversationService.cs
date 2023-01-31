@@ -4,6 +4,7 @@ using Intotech.Wheelo.Chat.Database.Persistence.Models;
 using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
 using Intotech.Wheelo.Chat.Models;
+using Intotech.Wheelo.Chat.Models.Caching;
 using Intotech.Wheelo.Common.ImageService;
 using Toci.Driver.Database.Persistence.Models;
 
@@ -41,7 +42,7 @@ public class ConversationService : IConversationService
             return null;
         }
 
-        Account acc = AccountService.GetAccount(room.Ownerid);
+        UserCacheDto acc = AccountService.GetAccount(room.Ownerid);
 
         if (acc != null)
         {
@@ -50,10 +51,10 @@ public class ConversationService : IConversationService
             resElement.ID = room.Id;
             resElement.RoomName = room.Roomname;
             resElement.OwnerEmail = room.Ownerid;
-            resElement.IdAccount = acc.Id;
+            resElement.IdAccount = acc.IdAccount;
             resElement.CreatedAt = room.Createdat.Value;
-            resElement.OwnerFirstName = acc.Name;
-            resElement.OwnerLastName = acc.Surname;
+            resElement.OwnerFirstName = acc.UserName;
+            resElement.OwnerLastName = acc.UserSurname;
             resElement.Messages = new List<ChatMessageDto>();
             
             foreach (Message message in messages)
@@ -115,15 +116,15 @@ public class ConversationService : IConversationService
 
         foreach (Roomsaccount item in roomsAccounts)
         {
-            Account acc = AccountService.GetAccount(item.Memberemail);
+            UserCacheDto acc = AccountService.GetAccount(item.Memberemail);
 
             MessageAuthorDto resElement = new MessageAuthorDto();
 
-            resElement.FirstName = acc.Name;
-            resElement.LastName = acc.Surname;
-            resElement.Id = acc.Id;
-            resElement.ImageUrl = ImageServiceUtils.GetImageUrl(acc.Id);
-            resElement.SenderEmail = acc.Email;
+            resElement.FirstName = acc.UserName;
+            resElement.LastName = acc.UserSurname;
+            resElement.Id = acc.IdAccount;
+            resElement.ImageUrl = ImageServiceUtils.GetImageUrl(acc.IdAccount);
+            resElement.SenderEmail = acc.SenderEmail;
 
             result.Add(item.Memberemail, resElement);
         }
@@ -142,18 +143,18 @@ public class ConversationService : IConversationService
 
             MessageAuthorDto resElement = new MessageAuthorDto();
 
-            Account acc = AccountService.GetAccount(message.Authoremail);
+            UserCacheDto acc = AccountService.GetAccount(message.Authoremail);
 
             if (acc == null)
             {
                 continue;
             }
 
-            resElement.FirstName = acc.Name;
-            resElement.LastName = acc.Surname;
-            resElement.Id = acc.Id;
-            resElement.ImageUrl = ImageServiceUtils.GetImageUrl(acc.Id);
-            resElement.SenderEmail = acc.Email;
+            resElement.FirstName = acc.UserName;
+            resElement.LastName = acc.UserSurname;
+            resElement.Id = acc.IdAccount;
+            resElement.ImageUrl = ImageServiceUtils.GetImageUrl(acc.IdAccount);
+            resElement.SenderEmail = acc.SenderEmail;
 
             DistinctAuthors.Add(message.Authoremail, resElement);
         }

@@ -9,4 +9,6 @@ public class UserCacheDto
     public string UserSurname { get; set; }
     public string SessionId { get; set; }
     public string ImageUrl { get; set; }
+    public DateTime AccountCreatedAt { get; set; }
+    public string[] PushTokens { get; set; }
 }
