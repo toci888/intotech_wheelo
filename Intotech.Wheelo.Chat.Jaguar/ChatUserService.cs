@@ -67,6 +67,7 @@ namespace Intotech.Wheelo.Chat.Jaguar
             chatMessage.CreatedAt = mess.Createdat.Value;
             chatMessage.AuthorFirstName = userCached.UserName;
             chatMessage.AuthorLastName = userCached.UserSurname;
+            chatMessage.SenderEmail = userCached.SenderEmail;
             chatMessage.IdAccount = userCached.IdAccount;
             chatMessage.ImageUrl = ImageServiceUtils.GetImageUrl(userCached.IdAccount);
 
