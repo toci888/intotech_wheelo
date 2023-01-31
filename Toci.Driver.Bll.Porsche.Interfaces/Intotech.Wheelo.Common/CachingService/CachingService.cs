@@ -15,7 +15,14 @@ public class CachingService : ICachingService
     {
         if (MemcacheClient != null)
         {
-            return MemcacheClient.SetAsync(key, cacheEntity).Result;
+            try
+            {
+                return MemcacheClient.SetAsync(key, cacheEntity).Result;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         return false;

@@ -86,7 +86,7 @@ namespace Intotech.Wheelo.Chat.Jaguar
                     return null;
                 }
 
-                CachingService.Set(userData.SenderEmail, userData);
+                CachingService.Set(idAccount.ToString(), userData);
 
                 return userData;
             }
