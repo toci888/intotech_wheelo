@@ -14,9 +14,11 @@ public static class MemcachedClient
         if (memCluster == null)
         {
             memCluster = new MemcachedCluster(MemcachedAddress);
+            memCluster.Start();
+
             client = memCluster.GetClient();
         }
 
-        return client;
+       return client;
     }
 }

@@ -60,6 +60,7 @@ builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<ICachingService, CachingService>();
 builder.Services.AddScoped<IChatNotificationsService, ChatNotificationsService>();
 builder.Services.AddScoped<INotificationManager, NotificationManager>();
+builder.Services.AddScoped<INotificationClient, NotificationClient>();
 
 
 builder.Services.AddScoped<IMessageLogic, MessageLogic>();
@@ -70,6 +71,7 @@ builder.Services.AddScoped<IRoomsaccountLogic, RoomsaccountLogic>();
 builder.Services.AddScoped<IAccountLogic, AccountLogic>();
 builder.Services.AddScoped<IConversationinvitationLogic, ConversationinvitationLogic>();
 builder.Services.AddScoped<IMessageLogic, MessageLogic>();
+builder.Services.AddScoped<IPushtokenLogic, PushtokenLogic>();
 
 //builder.Services.AddAuthentication(sharedopt => sharedopt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme)
 //    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, (configureOptions) => { });
