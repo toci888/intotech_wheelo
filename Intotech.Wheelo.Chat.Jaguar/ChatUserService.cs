@@ -41,25 +41,26 @@ namespace Intotech.Wheelo.Chat.Jaguar
             CachingService = cachingService;
         }
 
-        public virtual ChatUserDto Connect(string email)
+        public virtual ChatUserDto Connect(int idAccount)
         {
-            UserCacheDto userCached = GetUser(email);
+            UserCacheDto userCached = GetUser(idAccount);
 
             if (userCached == null)
             {
                 return null;
             }
 
-            ConnecteduserLogic.Insert(new Connecteduser() { Email = email }); // TODO what if 2 or more locations
-            UserActivityLogic.Insert(new Useractivity() { Email = email, Connectedfrom = DateTime.Now });
+            ConnecteduserLogic.Insert(new Connecteduser() { Email = userCached.SenderEmail }); // TODO what if 2 or more locations
+            UserActivityLogic.Insert(new Useractivity() { Email = userCached.SenderEmail, Connectedfrom = DateTime.Now });
 
-            return new ChatUserDto() { SenderEmail = email, UserName = userCached.UserName, UserSurname = userCached.UserSurname, 
-                ImageUrl = userCached.ImageUrl, IdAccount = userCached.IdAccount, SessionId = email };
+            return new ChatUserDto() { SenderEmail = userCached.SenderEmail, UserName = userCached.UserName, UserSurname = userCached.UserSurname, 
+                ImageUrl = userCached.ImageUrl, IdAccount = userCached.IdAccount, SessionId = userCached.SenderEmail
+            };
         }
 
         public virtual ChatMessageDto SendMessage(ChatMessageDto chatMessage)
         {
-            UserCacheDto userCached = GetUser(chatMessage.SenderEmail);
+            UserCacheDto userCached = GetUser(chatMessage.IdAccount);
 
             Message mess = MessageLogic.Insert(new Message() { Authoremail = chatMessage.SenderEmail, Message1 = chatMessage.Text, Idroom = chatMessage.ID });
 
@@ -72,13 +73,13 @@ namespace Intotech.Wheelo.Chat.Jaguar
             return chatMessage;
         }
 
-        protected virtual UserCacheDto GetUser(string email)
+        protected virtual UserCacheDto GetUser(int idAccount)
         {
-            UserCacheDto userCached = CachingService.Get<UserCacheDto>(email);
+            UserCacheDto userCached = CachingService.Get<UserCacheDto>(idAccount.ToString());
 
             if (userCached == null)
             {
-                UserCacheDto userData = AccountService.GetAccount(email);
+                UserCacheDto userData = AccountService.GetAccount(idAccount);
 
                 if (userData == null)
                 {

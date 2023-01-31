@@ -11,5 +11,6 @@ namespace Intotech.Wheelo.Chat.Dodge.Interfaces
     public interface IAccountService
     {
         UserCacheDto GetAccount(string email);
+        UserCacheDto GetAccount(int idAccount);
     }
 }

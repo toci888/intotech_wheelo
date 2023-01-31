@@ -39,9 +39,9 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
         
         [Authorize(Roles = "User")]
-        public async Task ConnectUser(string email) // accountId room for synchronizations
+        public async Task ConnectUser(int idAccount) // accountId room for synchronizations
         {
-            ChatUserDto data = ChatUserService.Connect(email);
+            ChatUserDto data = ChatUserService.Connect(idAccount);
 
             if (data == null) 
             {

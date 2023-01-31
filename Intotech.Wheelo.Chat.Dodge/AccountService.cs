@@ -30,6 +30,23 @@ namespace Intotech.Wheelo.Chat.Dodge
                 return null;
             }
 
+            return GetAccount(account);
+        }
+
+        public virtual UserCacheDto GetAccount(int idAccount)
+        {
+            Account account = AccountLogic.Select(m => m.Id == idAccount).FirstOrDefault();
+
+            if (account == null)
+            {
+                return null;
+            }
+
+            return GetAccount(account);
+        }
+
+        protected virtual UserCacheDto GetAccount(Account account)
+        {
             UserCacheDto ucDto = new UserCacheDto();
 
             ucDto.UserSurname = account.Surname;
