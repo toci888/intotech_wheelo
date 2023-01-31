@@ -26,12 +26,15 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         protected IChatUserService ChatUserService;
         protected IRoomService RoomService;
         protected ICachingService CachingService;
+        protected IChatNotificationsService ChatNotificationsService;
 
-        public ChatHub(IChatUserService chatUser, IRoomService roomService, ICachingService cachingService)
+        public ChatHub(IChatUserService chatUser, IRoomService roomService, ICachingService cachingService, 
+            IChatNotificationsService chatNotificationsService)
         {
             ChatUserService = chatUser;
             RoomService = roomService;
             CachingService = cachingService;
+            ChatNotificationsService = chatNotificationsService;
         }
 
         
@@ -88,6 +91,8 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             {
                 //await Groups.AddToGroupAsync(Context.ConnectionId, chatMessage.ID.ToString());
                 await Clients.OthersInGroup(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
+
+                ChatNotificationsService.SendChatNotifications(chatMessage.ID, chatMessage.SenderEmail, chatMessage);
             }
 
         }

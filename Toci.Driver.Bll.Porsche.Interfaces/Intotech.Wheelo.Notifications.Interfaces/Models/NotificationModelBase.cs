@@ -16,6 +16,7 @@ namespace Intotech.Wheelo.Notifications.Interfaces.Models
             { NotificationsKinds.AccountRoot, new NotificationDataField<TNotificationData>() { root = "Root", screen = "AccountRoot" } },
             { NotificationsKinds.SignIn, new NotificationDataField<TNotificationData>() { root = "SignIn" } },
             { NotificationsKinds.Search, new NotificationDataField<TNotificationData>() { root = "Root", screen = "Search" } },
+            { NotificationsKinds.ChatMessage, new NotificationDataField<TNotificationData>() { root = "Root", screen = "Chat" } }, // TODO WRONG for sure
         };
 
         protected List<string> PushTokens { get; set; }

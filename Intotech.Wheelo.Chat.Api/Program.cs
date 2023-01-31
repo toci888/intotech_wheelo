@@ -15,6 +15,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Intotech.Wheelo.Common.CachingService;
+using Intotech.Wheelo.Notifications;
+using Intotech.Wheelo.Notifications.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,6 +58,8 @@ builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IConversationService, ConversationService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<ICachingService, CachingService>();
+builder.Services.AddScoped<IChatNotificationsService, ChatNotificationsService>();
+builder.Services.AddScoped<INotificationManager, NotificationManager>();
 
 
 builder.Services.AddScoped<IMessageLogic, MessageLogic>();
