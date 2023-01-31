@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Common\Intotech.Wheelo.Common.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Notifications.Interfaces\Intotech.Wheelo.Notifications.Interfaces.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Notifications\Intotech.Wheelo.Notifications.csproj" />
   </ItemGroup>
 
   <ItemGroup>

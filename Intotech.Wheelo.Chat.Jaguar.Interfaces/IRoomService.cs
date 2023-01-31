@@ -10,4 +10,6 @@ public interface IRoomService
 
     List<int> GetAllRooms(string email);
 
+    RoomsDto GetRoom(int roomId);
+
 }
