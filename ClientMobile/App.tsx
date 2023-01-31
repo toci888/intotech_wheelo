@@ -18,7 +18,6 @@ import { User } from "./types/user";
 import { createSocket, socket } from "./constants/socket";
 import { queryKeys } from "./constants/constants";
 import { refreshTokens } from "./services/tokens";
-import WheeloClient from "./chatlib/WheeloClient";
 
 const queryClient = new QueryClient();
 LogBox.ignoreAllLogs();
@@ -41,7 +40,7 @@ export default function App() {
         //   userObj.accessToken = newTokens.accessToken;
         //   userObj.refreshtoken = newTokens.refreshToken;
         //   SecureStore.setItemAsync("user", JSON.stringify(userObj));
-        // }
+        // } TODO!
         setUser(userObj);
         
         socket.on(
@@ -67,7 +66,8 @@ export default function App() {
                 data: {
                 //   // will need to change url in prod build (use process.ENV && eas.json)
                   // url: `exp://localhost:19000/messages/${data.id}/${data.authorFirstName}`,
-                  url: `https://expo.dev/@kacper1337/intotechwheelo?serviceType=classic&distribution=expo-go/messages`,
+                  // url: `https://expo.dev/@kacper1337/intotechwheelo?serviceType=classic&distribution=expo-go/messages`,
+                  url: `exp://localhost:19000/messages/1/adi`,
                 },
               },
               

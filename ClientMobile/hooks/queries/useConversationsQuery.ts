@@ -28,7 +28,7 @@ const fetchConversations = async (
   
   const data: TransformedConversation[] = [];
   for (let c of conversations) {
-    if (c.messages[0]) {
+    if (c && c.messages[0]) {
       data.push({
         id: c.id,
         recipientName: c.roomName,
