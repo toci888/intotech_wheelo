@@ -11,6 +11,7 @@ import { theme } from "../theme";
 import { Row } from "../components/Row";
 import { i18n } from "../i18n/i18n";
 import useTheme from "../hooks/useTheme";
+import { socket } from "../constants/socket";
 
 export const ConversationsScreen = () => {
   const { user } = useUser();
@@ -26,7 +27,8 @@ export const ConversationsScreen = () => {
     return <Text>{i18n.t('YouHaveNoMessages')}</Text>;
   }
 
-  const handleMessagePress = (conversationID: number, recipientName: string ) => {
+  const handleMessagePress = async (conversationID: number, recipientName: string ) => {
+    await socket.invoke("JoinRoom", conversationID);
     console.log("Message Pressed", conversationID, recipientName)
     navigate("Chat", {
       screen: "Messages",
