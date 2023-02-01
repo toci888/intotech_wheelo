@@ -92,7 +92,7 @@ export default function App() {
         await socket.start();
         await socket.invoke("ConnectUser", userObj.id);
 
-        await socket.invoke("CreateRoom", userObj.email, ['warriorr@poczta.fm', 'bzapart@gmail.com']);
+        //await socket.invoke("CreateRoom", userObj.email, ['warriorr@poczta.fm', 'bzapart@gmail.com']);
 
         console.log("USER ID", JSON.stringify(userObj))
       }
