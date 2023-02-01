@@ -28,9 +28,12 @@ export const ConversationsScreen = () => {
 
   const handleMessagePress = (conversationID: number, recipientName: string ) => {
     console.log("Message Pressed", conversationID, recipientName)
-    navigate("Messages", {
-      conversationID,
-      recipientName,
+    navigate("Chat", {
+      screen: "Messages",
+      params: {
+          conversationID,
+          recipientName,
+      },
     });
   }
 

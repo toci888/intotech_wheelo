@@ -148,14 +148,14 @@ export const useCreateMessageMutation = () => {
         { author, senderEmail, conversationID, idAccount, text, authorFirstName, authorLastName }
       ) => {
 
-        createMessage(
-          conversationID,
-          idAccount,
-          senderEmail,
-          authorFirstName,
-          authorLastName,
-          text
-        );
+        // createMessage(
+        //   conversationID,
+        //   idAccount,
+        //   senderEmail,
+        //   authorFirstName,
+        //   authorLastName,
+        //   text
+        // );
       },
       onSettled: () => {
         queryClient.invalidateQueries(queryKeys.conversations);

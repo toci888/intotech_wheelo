@@ -17,14 +17,18 @@ const linking: LinkingOptions<RootStackParamList> = {
         screens: {
           Search: "search",
           Saved: "saved",
-          Chat: "chat",
+          Chat: {
+            initialRouteName: "chat" as any,
+            screens: {
+              Conversations: "conversations",
+              Messages: { path: "messages/:conversationID/:recipientName" },
+            }
+          },
           AccountRoot: {
             initialRouteName: "account" as any,
             screens: {
               Account: "account",
               Settings: "settings",
-              Conversations: "conversations",
-              Messages: { path: "messages/:conversationID/:recipientName" },
             },
           },
         },
@@ -36,8 +40,10 @@ const linking: LinkingOptions<RootStackParamList> = {
       ResetPassword: { path: "resetpassword/:token" },
       SignIn: "signin",
       SignUp: "signup",
-      CodeVerification: "codeVerification"
+      CodeVerification: "codeVerification",
+      NotFound: '*'
     },
+
   },
 };
 

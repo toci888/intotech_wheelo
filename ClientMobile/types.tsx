@@ -1,8 +1,5 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import {
-  CompositeScreenProps,
-  NavigatorScreenParams,
-} from "@react-navigation/native";
+import { CompositeScreenProps, NavigatorScreenParams } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Location } from "./types/locationIQ";
 import { User } from "./types/user";
@@ -28,9 +25,8 @@ export type RootStackParamList = {
   ManageUnits: { collocationID: number };
   Review: { collocationID: number; propertyName: string };
   CodeVerification: { params: User};
-  Messages: { conversationID: number; recipientName: string };
-  Conversations: undefined;
-  Chat: {screen:string};
+  Chat: NavigatorScreenParams<ChatTabParamList> | undefined;
+  NotFound: any;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -46,12 +42,9 @@ export type RootTabParamList = {
 export type AccountTabParamList = {
   Account: undefined;
   Settings: undefined;
-  Conversations: undefined;
-  Messages: { conversationID: number; recipientName: string };
 };
 
 export type ChatTabParamList = {
-  Chat: undefined;
   Conversations: undefined;
   Messages: { conversationID: number; recipientName: string };
 };

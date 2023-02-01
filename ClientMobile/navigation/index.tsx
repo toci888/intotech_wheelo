@@ -62,9 +62,6 @@ export default function Navigation({
   const MyTheme = DefaultTheme.dark ? DarkTheme : DefaultTheme;
 
   //MyTheme.colors = DefaultTheme.dark ? Object.assign({secondary: 'red'}, MyTheme.colors) : Object.assign({secondary: 'orange'}, MyTheme.colors);
-    
-  console.log("Colours clg", MyTheme.colors);
-  
 
   return (
     <NavigationContainer linking={LinkingConfiguration} theme={MyTheme}>
@@ -150,7 +147,7 @@ function RootNavigator(props: any) {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Conversations"
+          name="Chat"
           component={ConversationsScreen}
           options={{ headerTitle: i18n.t("Chat"), headerBackTitle: i18n.t("Back") }}
         /> 
@@ -239,8 +236,8 @@ const AccountStack = () => (
 );
 
 const ChatStackNavigator = createNativeStackNavigator<ChatTabParamList>();
-const ChatStack = () => (
-  <ChatStackNavigator.Navigator initialRouteName="Chat">
+const ChatStack = () => ( //todo??
+  <ChatStackNavigator.Navigator initialRouteName="Conversations">
     <ChatStackNavigator.Screen
       name="Conversations"
       component={ConversationsScreen}

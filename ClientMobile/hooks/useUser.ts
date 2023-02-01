@@ -72,7 +72,7 @@ export const useUser = () => {
       updatedUser.pushToken = token;
 
       setAndStoreUser(updatedUser);
-
+      console.log('tokens', token, user.accessToken);
       try {
         await alterPushToken(user.id, "add", token, user.accessToken);
       } catch (error) {

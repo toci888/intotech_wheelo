@@ -8,6 +8,7 @@ import { Row } from "./Row";
 import React, { useState } from "react";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import { Location } from "../types/locationIQ";
+import { os } from "../constants/constants";
 
 export const HeaderInput = ({ type, location, setLocation, time, setTime }: 
   { 
@@ -35,6 +36,7 @@ export const HeaderInput = ({ type, location, setLocation, time, setTime }:
           <Text style={styles.inputTime}>{time}</Text>
         </Row>
         
+        { Platform.OS === os.ios ? 
         <DateTimePicker
           locale="pl_PL"
           isDarkModeEnabled={DefaultTheme.dark}
@@ -51,8 +53,29 @@ export const HeaderInput = ({ type, location, setLocation, time, setTime }:
             }
           }}
           onCancel={() => { setShowDate(false); }}
-          onChange={(selectedTime) => {setTime(selectedTime.toLocaleString().split(', ')[1].substring(0,5))}}
-        />
+          onChange={(selectedTime) => {console.log("zmieniam", selectedTime.toLocaleString().split(', ')[1].substring(0,5));setTime(selectedTime.toLocaleString().split(', ')[1].substring(0,5))}}
+          // onChange={() => {console.log("zmieniam");}}
+        /> : 
+        <DateTimePicker
+          locale="pl_PL"
+          isDarkModeEnabled={DefaultTheme.dark}
+          // textColor={DefaultTheme.dark ? "white" : "black"} //razem, bialy sam nie dziala
+          date={new Date(`July 1, 1999, ${time}`)}
+
+          display="clock" 
+          isVisible={showDate}
+          mode="time"
+          onConfirm={(selectedDate: Date) => {
+            if (selectedDate) {
+              setShowDate(false);
+              setTime(selectedDate.toTimeString().split(' ')[0].substring(0,5))
+            }
+          }}
+          onCancel={() => { setShowDate(false); }}
+          onChange={(selectedTime) => {console.log("zmieniam", selectedTime.toLocaleString().split(', ')[1].substring(0,5));setTime(selectedTime.toLocaleString().split(', ')[1].substring(0,5))}}
+          // onChange={() => {console.log("zmieniam");}}
+        />}
+
       </TouchableOpacity>
     </View>
   );
