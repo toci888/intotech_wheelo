@@ -44,7 +44,7 @@ export default function App() {
         setUser(userObj);
         
         socket.on(
-          "getMessage",
+          "getmessage",
           (message: { chatMessage: {
             id: number;
             senderID: number;
@@ -58,21 +58,6 @@ export default function App() {
             queryClient.invalidateQueries(queryKeys.conversations);
             queryClient.invalidateQueries(queryKeys.selectedConversation);
             
-            Notifications.scheduleNotificationAsync({
-              content: {
-                title: data.authorFirstName,
-                body: data.text,
-                
-                data: {
-                //   // will need to change url in prod build (use process.ENV && eas.json)
-                  // url: `exp://localhost:19000/messages/${data.id}/${data.authorFirstName}`,
-                  // url: `https://expo.dev/@kacper1337/intotechwheelo?serviceType=classic&distribution=expo-go/messages`,
-                  url: `exp://localhost:19000/messages/1/adi`,
-                },
-              },
-              
-              trigger: null //opoznienie{ seconds: 4 },
-            });
           }
         );
         socket.on("session", (sessionData: {data: {userId: number, userName: string, userSurname: string, sessionId: number}}) => {
@@ -98,10 +83,10 @@ export default function App() {
         });
 
         await socket.start();
-        await socket.invoke("ConnectUser", userObj.email);
+        await socket.invoke("ConnectUser", userObj.id);
 
         await socket.invoke("CreateRoom", userObj.email, ['warriorr@poczta.fm', 'bzapart@gmail.com']);
-
+        await socket.invoke("JoinRoom", 1);
         console.log("USER ID", JSON.stringify(userObj))
       }
     }
@@ -109,7 +94,7 @@ export default function App() {
     getUser();
 
     return () => {
-      socket.off("getMesssage");
+      socket.off("getmesssage");
       socket.off("session");
       socket.off("connect_error");
     };
