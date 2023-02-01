@@ -42,19 +42,26 @@ export default function App() {
         //   SecureStore.setItemAsync("user", JSON.stringify(userObj));
         // } TODO!
         setUser(userObj);
-        
+
+
+
+        //public string ImageUrl { get; set; }
+
         socket.on(
-          "getMessage",
+          "getmessage",
           (message: { chatMessage: {
             id: number;
-            senderID: number;
+            SenderEmail: string;
+            IdAccount: number;
             text: string;
             createdAt: Date;
             authorFirstName: string;
             authorLastName: string;
+            RoomID: number;
           }}) => {
+            console.log("ODEBRALEM gMess", message)
             let data = message.chatMessage;
-            console.log("ODEBRALEM", data)
+            
             queryClient.invalidateQueries(queryKeys.conversations);
             queryClient.invalidateQueries(queryKeys.selectedConversation);
             
@@ -98,9 +105,10 @@ export default function App() {
         });
 
         await socket.start();
-        await socket.invoke("ConnectUser", userObj.email);
+        await socket.invoke("ConnectUser", userObj.id);
 
         await socket.invoke("CreateRoom", userObj.email, ['warriorr@poczta.fm', 'bzapart@gmail.com']);
+        await socket.invoke("JoinRoom", 1);
 
         console.log("USER ID", JSON.stringify(userObj))
       }
