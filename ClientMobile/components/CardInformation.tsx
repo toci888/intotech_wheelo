@@ -18,11 +18,11 @@ import { TransformedConversation } from "../types/conversation";
 export const CardInformation = ({
   collocation,
   myCollocation,
-  conversationID
+  roomId
 }: {
   collocation: CollocateAccount;
   myCollocation?: boolean;
-  conversationID?: number;
+  roomId?: number;
 }) => {
   const navigation = useNavigation();
   const { user, setSavedProperties } = useUser();
@@ -49,7 +49,7 @@ export const CardInformation = ({
     // }) 
     // ?
     //   navigation.navigate("Messages", {
-    //     conversationID: 0,
+    //     roomId: 0,
     //     recipientName: collocation?.name,
     //   }) : 
 

@@ -67,7 +67,7 @@ export const useCreateConversationMutation = () => {
         queryClient.invalidateQueries(queryKeys.conversations);
         socket.invoke("sendMessage", {
           senderID: tenantID,
-          conversationID: data.id,
+          roomId: data.id,
           receiverID: ownerID,
           text,
           senderName,
@@ -79,7 +79,7 @@ export const useCreateConversationMutation = () => {
             screen: "Messages",
             initial: false,
             params: {
-              conversationID: data.id,
+              roomId: data.id,
               recipientName: propertyName,
             },
           },

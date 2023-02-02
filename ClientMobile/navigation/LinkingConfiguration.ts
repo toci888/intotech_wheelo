@@ -21,7 +21,7 @@ const linking: LinkingOptions<RootStackParamList> = {
             initialRouteName: "chat" as any,
             screens: {
               Conversations: "conversations",
-              Messages: { path: "messages/:conversationID/:recipientName" },
+              Messages: { path: "messages/:roomId/:recipientName" },
             }
           },
           AccountRoot: {

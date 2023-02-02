@@ -27,13 +27,13 @@ export const ConversationsScreen = () => {
     return <Text>{i18n.t('YouHaveNoMessages')}</Text>;
   }
 
-  const handleMessagePress = async (conversationID: number, recipientName: string ) => {
-    await socket.invoke("JoinRoom", conversationID);
-    console.log("Message Pressed", conversationID, recipientName)
+  const handleMessagePress = async (roomId: number, recipientName: string ) => {
+    await socket.invoke("JoinRoom", roomId);
+    console.log("Message Pressed", roomId, recipientName)
     navigate("Chat", {
       screen: "Messages",
       params: {
-          conversationID,
+          roomId,
           recipientName,
       },
     });

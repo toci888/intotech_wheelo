@@ -20,7 +20,7 @@ import { themes } from "../constants/constants";
 export const MessagesScreen = ({
   route,
 }: {
-  route: { params: { conversationID: number; recipientName: string } };
+  route: { params: { roomId: number; recipientName: string } };
 }) => {
   const { showActionSheetWithOptions } = useActionSheet()
 
@@ -36,7 +36,7 @@ export const MessagesScreen = ({
   const { user } = useUser();
   console.log("ConversationID", route.params)
   const colorScheme = useColorScheme();
-  const conversation = useSelectedConversationQuery(route.params.conversationID);
+  const conversation = useSelectedConversationQuery(route.params.roomId);
   const createMessage = useCreateMessageMutation();
   // const [messages, setMessages] = useState({} as any)
 
@@ -51,7 +51,7 @@ export const MessagesScreen = ({
       createMessage.mutate({
         idAccount: user!.id,
         author: conversation.data.author,
-        conversationID: conversation.data.id,
+        roomId: conversation.data.id,
         receiverID: conversation.data.id,
         senderEmail: user!.email,
         text: message.text,

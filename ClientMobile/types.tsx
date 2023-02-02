@@ -46,7 +46,7 @@ export type AccountTabParamList = {
 
 export type ChatTabParamList = {
   Conversations: undefined;
-  Messages: { conversationID: number; recipientName: string };
+  Messages: { roomId: number; recipientName: string };
 };
 
 export type AuthParamList = {
