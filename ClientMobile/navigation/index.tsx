@@ -61,8 +61,6 @@ export default function Navigation({
 
   const MyTheme = DefaultTheme.dark ? DarkTheme : DefaultTheme;
 
-  //MyTheme.colors = DefaultTheme.dark ? Object.assign({secondary: 'red'}, MyTheme.colors) : Object.assign({secondary: 'orange'}, MyTheme.colors);
-
   return (
     <NavigationContainer linking={LinkingConfiguration} theme={MyTheme}>
       <RootNavigator />
