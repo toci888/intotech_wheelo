@@ -50,17 +50,19 @@ export default function Navigation({
     primary: wheeloColor, 
     background: wheeloColor,
     border: wheeloColor, //same as a card
-    card: wheeloColor //statusBar (down)
-  };
+    card: wheeloColor, //statusBar (down)
+    secondary: 'yellow'
+  } as any;
 
   DarkTheme.colors = {...DarkTheme.colors, 
     notification: '#db322c', 
     text: '#A542D8',
-    // primary: '#efefef',
+    primary: wheeloColor,
+    secondary: 'green'
     // background: '#8523c6',
     // border: wheeloColor,
     // card: wheeloColor 
-  };
+  } as any;
 
   const MyTheme = DefaultTheme.dark ? DarkTheme : DefaultTheme;
 
