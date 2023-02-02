@@ -31,20 +31,21 @@ export const HeaderInput = ({ type, location, setLocation, time, setTime }:
     borderColor: theme["color-gray"],
     borderRadius: 20,
     padding: 8,
+    
   }
 
   return (
     <View style={{flexDirection: 'row'}}>
       <TouchableOpacity style={[styles.container, inputStyles]} onPress={() => { navigation.navigate("FindLocations", {type, location, setLocation} as any) }}>
         <Row style={{alignItems: 'center'}}>
-          <Text style={[styles.input]}>{typeof(location) === 'string' ? location : location.display_name}</Text>
+          <Text style={[styles.input, {color: colors.gray}]}>{typeof(location) === 'string' ? location : location.display_name}</Text>
           <MaterialIcons name="gps-fixed" size={24} color={colors.primary} style={styles.icon}/>
         </Row>
       </TouchableOpacity>
 
       <TouchableOpacity style={[styles.dateContainer, inputStyles]} onPress={() => setShowDate(true)}>
         <Row style={{alignItems: 'center'}}>
-          <Text style={styles.inputTime}>{time}</Text>
+          <Text style={[styles.inputTime, {color: colors.gray}]}>{time}</Text>
         </Row>
         
         { Platform.OS === os.ios ? 

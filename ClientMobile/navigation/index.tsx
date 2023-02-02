@@ -51,14 +51,18 @@ export default function Navigation({
     background: wheeloColor,
     border: wheeloColor, //same as a card
     card: wheeloColor, //statusBar (down)
-    secondary: 'yellow'
+    secondary: 'yellow',
+    gray: '#e5eaef',
+    lightGray: '#e5eaef'
   } as any;
 
   DarkTheme.colors = {...DarkTheme.colors, 
     notification: '#db322c', 
     text: '#A542D8',
     primary: wheeloColor,
-    secondary: 'green'
+    secondary: 'green',
+    gray: '#484848',
+    lightGray: '#484848'
     // background: '#8523c6',
     // border: wheeloColor,
     // card: wheeloColor 

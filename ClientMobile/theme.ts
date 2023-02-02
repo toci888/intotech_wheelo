@@ -16,7 +16,7 @@ const customColors = {
 
 const importedTheme = {
   ...customColors,
-  ...light, //todel
+  ...light,
   "color-primary-100": "#F8C6E9",
   "color-primary-200": "#F291DD",
   "color-primary-300": "#D856C7",
@@ -68,7 +68,7 @@ const importedTheme = {
 export const updateTheme = () => {
   const colorScheme = useColorScheme();
   
-  theme = colorScheme === themes.dark ? {...dark, ...importedTheme} : { ...light, ...importedTheme};
+  theme = colorScheme === themes.dark ? {...light, ...importedTheme} : { ...light, ...importedTheme};
 }
 
 export let theme: any = importedTheme;
