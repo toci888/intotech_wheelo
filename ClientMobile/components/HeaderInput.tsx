@@ -24,7 +24,7 @@ export const HeaderInput = ({ type, location, setLocation, time, setTime }:
   const [showDate, setShowDate] = useState(false);
   
   const inputStyles = {
-    backgroundColor: 'gray',
+    // backgroundColor: 'gray',
     marginTop: 8,
     marginBottom: Platform.OS === "ios" ? 5 : 15,
     borderWidth: 1,
@@ -38,7 +38,7 @@ export const HeaderInput = ({ type, location, setLocation, time, setTime }:
       <TouchableOpacity style={[styles.container, inputStyles]} onPress={() => { navigation.navigate("FindLocations", {type, location, setLocation} as any) }}>
         <Row style={{alignItems: 'center'}}>
           <Text style={[styles.input]}>{typeof(location) === 'string' ? location : location.display_name}</Text>
-          <MaterialIcons name="gps-fixed" size={24} color={colors.secondary} style={styles.icon}/>
+          <MaterialIcons name="gps-fixed" size={24} color={colors.primary} style={styles.icon}/>
         </Row>
       </TouchableOpacity>
 
