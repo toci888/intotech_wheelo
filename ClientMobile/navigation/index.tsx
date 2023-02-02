@@ -86,10 +86,7 @@ function RootNavigator(props: any) {
       }),
     });
 
-    const responseListener =
-      Notifications.addNotificationResponseReceivedListener(
-        handleNotificationResponse
-      );
+    const responseListener = Notifications.addNotificationResponseReceivedListener(handleNotificationResponse);
 
     return () => {
       if (responseListener)
