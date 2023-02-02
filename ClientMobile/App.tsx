@@ -7,7 +7,6 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { useState, useEffect } from "react";
 import * as SecureStore from "expo-secure-store";
 import { LogBox } from "react-native";
-import * as Notifications from "expo-notifications";
 
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
@@ -43,10 +42,6 @@ export default function App() {
         // } TODO!
         setUser(userObj);
 
-
-
-        //public string ImageUrl { get; set; }
-
         socket.on(
           "getmessage",
           (message: { chatMessage: {
@@ -59,9 +54,10 @@ export default function App() {
             authorLastName: string;
             RoomID: number;
           }}) => {
-            console.log("ODEBRALEM gMess", message)
             let data = message.chatMessage;
             
+            console.log("ODEBRALEM getmessage", data)
+
             queryClient.invalidateQueries(queryKeys.conversations);
             queryClient.invalidateQueries(queryKeys.selectedConversation);
             
@@ -86,13 +82,11 @@ export default function App() {
         socket.on("roomestablished", (roomData:{ room: {idRoom: number, ownerEmail: string, roomId: string, roomName: string, roomMembers: any}}) => {
           let data = roomData.room;
 
-          // console.log('roomestablished', data);
+          console.log('roomestablished', data);
         });
 
         await socket.start();
         await socket.invoke("ConnectUser", userObj.id);
-
-        //await socket.invoke("CreateRoom", userObj.email, ['warriorr@poczta.fm', 'bzapart@gmail.com']);
 
         console.log("USER ID", JSON.stringify(userObj))
       }
@@ -104,6 +98,7 @@ export default function App() {
       socket.off("getmesssage");
       socket.off("session");
       socket.off("connect_error");
+      socket.off("roomestablished");
     };
   }, []);
 

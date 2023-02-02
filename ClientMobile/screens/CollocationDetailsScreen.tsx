@@ -1,13 +1,10 @@
-import { StyleSheet, FlatList, View, Dimensions } from "react-native";
 import React from "react";
-import { ImageCarousel } from "../components/ImageCarousel";
+import { StyleSheet, FlatList, View, Dimensions } from "react-native";
 import { Divider, Text } from "@ui-kitten/components";
-import { useQuery } from "react-query";
-import axios from "axios";
 
+import { ImageCarousel } from "../components/ImageCarousel";
 import { CollocationHeaderSection } from "../components/propertyDetailsSections/PropertyHeaderSection";
 import { Screen } from "../components/Screen";
-import { properties } from "../data/properties";
 import { theme } from "../theme";
 import { PricingAndFloorPlanSection } from "../components/propertyDetailsSections/PricingAndFloorPlanSection";
 import { AboutSection } from "../components/propertyDetailsSections/AboutSection";
@@ -16,7 +13,6 @@ import { AmentitiesSection } from "../components/propertyDetailsSections/Ameniti
 import { LeaseAndFeesSection } from "../components/propertyDetailsSections/LeaseAndFeesSection";
 import { LocationSection } from "../components/propertyDetailsSections/LocationSection";
 import { ReviewSection } from "../components/propertyDetailsSections/ReviewSection";
-import { endpoints, queryKeys } from "../constants/constants";
 import { useSelectedCollocationQuery } from "../hooks/queries/useSelectedPropertyQuery";
 import { i18n } from "../i18n/i18n";
 
