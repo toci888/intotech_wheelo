@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme, DarkTheme, useTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName } from "react-native";
@@ -42,21 +42,24 @@ export default function Navigation({
 }) {
 
   DefaultTheme.dark = colorScheme === themes.dark ? true : false;
-
+  const wheeloColor = '#6f2da8'
   DefaultTheme.colors = {
-    primary: 'white', 
-    notification: 'red', 
-    background: '#2395c6',
-    text: 'black',
-    border: '#6adbc7',
-    card: '#6adbc7'
+    ...DefaultTheme.colors,
+    text: 'white',
+    notification: '#db322c', //powiadomienie na statusbarze liczba
+    primary: wheeloColor, 
+    background: wheeloColor,
+    border: wheeloColor, //same as a card
+    card: wheeloColor //statusBar (down)
   };
 
   DarkTheme.colors = {...DarkTheme.colors, 
-    primary: '#efefef',
-    notification: 'red', 
-    background: '#8523c6',
-    text: 'white'
+    notification: '#db322c', 
+    text: '#A542D8',
+    // primary: '#efefef',
+    // background: '#8523c6',
+    // border: wheeloColor,
+    // card: wheeloColor 
   };
 
   const MyTheme = DefaultTheme.dark ? DarkTheme : DefaultTheme;
@@ -155,11 +158,13 @@ function RootNavigator(props: any) {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
+  const {colors} = useTheme();
+  
   return (
     <BottomTab.Navigator
       initialRouteName="Search"
       screenOptions={{
-        tabBarActiveTintColor: theme["color-primary-500"],
+        tabBarActiveTintColor: colors.text,
       }}
     >
       <BottomTab.Screen

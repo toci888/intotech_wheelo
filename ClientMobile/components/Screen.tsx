@@ -17,7 +17,7 @@ export const Screen = ({
   const colorScheme = useColorScheme();
   return (
     <SafeAreaView style={[styles.container, style]}>
-      <StatusBar barStyle={colorScheme === "dark" ? "light-content" : "dark-content"} />
+      <StatusBar barStyle={"light-content"} />
       {loading ? <Loading /> : children}
     </SafeAreaView>
   );
