@@ -9,9 +9,11 @@ import { ButtonList } from "../components/ButtonList";
 import { useUser } from "../hooks/useUser";
 import React from "react";
 import { i18n } from "../i18n/i18n";
+import useTheme from "../hooks/useTheme";
 
 export const AccountScreen = () => {
   const { user, logout } = useUser();
+  const { colors } = useTheme();
   const navigation = useNavigation();
 
   const firstSignedOutButtons = [
@@ -107,24 +109,10 @@ export const AccountScreen = () => {
     <Screen>
       <ScrollView style={styles.container}>
         <View style={styles.defaultMarginHorizontal}>
-          {user ? (
-            <>
-              <Text style={styles.userName} category={"h4"}>
-                {user.firstName ? `Witaj, ${user.firstName}` : ""}
-              </Text>
-              <Text style={styles.email} category={"h6"}>
-                {user.email}
-              </Text>
-            </>
-          ) : (
-            <>
-              <Text style={styles.header} category={"h5"}>
-                {i18n.t('Welcome')}!
-              </Text>
-
-              <SignUpAndSignInButtons />
-            </>
-          )}
+          <Text style={[styles.header, {color: colors.text}]} category={"h5"}>
+            {i18n.t('Welcome')}!
+          </Text>
+          <SignUpAndSignInButtons />
         </View>
         {user ? (
           <>
@@ -144,7 +132,7 @@ export const AccountScreen = () => {
           </>
         ) : (
           <>
-            <Text appearance={"hint"} style={[styles.brandText, styles.specialMarginVertical]}>
+            <Text appearance={"hint"} style={[styles.brandText, styles.specialMarginVertical, {color: colors.primary}]}>
               {i18n.t('AppName').toUpperCase()}
             </Text>
           </>
@@ -176,7 +164,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 70,
     fontWeight: "600",
     fontSize: 44,
-    color: theme["color-violet"],
   },
   middleContainer: {
     justifyContent: "center",
@@ -192,7 +179,6 @@ const styles = StyleSheet.create({
   specialMarginVertical: { marginTop: 30, marginBottom: 20 },
   brandText: {
     textAlign: "center",
-    color: theme["color-violet"],
     fontSize: 24,
     fontWeight: "700",
   },

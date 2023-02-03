@@ -47,7 +47,7 @@ export default function Navigation({
     ...DefaultTheme.colors,
     text: 'white',
     notification: '#db322c', //powiadomienie na statusbarze liczba
-    primary: wheeloColor, 
+    primary: 'white', 
     background: wheeloColor,
     border: wheeloColor, //same as a card
     card: wheeloColor, //statusBar (down)
@@ -58,11 +58,11 @@ export default function Navigation({
 
   DarkTheme.colors = {...DarkTheme.colors, 
     notification: '#db322c', 
-    text: '#A542D8',
+    text: wheeloColor,
     primary: wheeloColor,
     secondary: 'green',
     gray: '#484848',
-    lightGray: '#484848'
+    lightGray: '#cccccc'
     // background: '#8523c6',
     // border: wheeloColor,
     // card: wheeloColor 

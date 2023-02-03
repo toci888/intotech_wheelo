@@ -1,8 +1,3 @@
-import { light, dark } from "@eva-design/eva";
-
-import useColorScheme from "./hooks/useColorScheme";
-import { themes } from "./constants/constants";
-
 const customColors = {
   "color-violet": "#6e53a6",
   "color-white": "#ffffff",
@@ -14,9 +9,8 @@ const customColors = {
   "color-light-gray": "#e5eaef",
 }
 
-const importedTheme = {
+export const theme = {
   ...customColors,
-  ...light,
   "color-primary-100": "#F8C6E9",
   "color-primary-200": "#F291DD",
   "color-primary-300": "#D856C7",
@@ -63,15 +57,6 @@ const importedTheme = {
   "color-danger-800": "#5B0732",
   "color-danger-900": "#4B042F"
 }
-
-
-export const updateTheme = () => {
-  const colorScheme = useColorScheme();
-  
-  theme = colorScheme === themes.dark ? {...light, ...importedTheme} : { ...light, ...importedTheme};
-}
-
-export let theme: any = importedTheme;
 
 export const mapDarkStyle = [
   {
