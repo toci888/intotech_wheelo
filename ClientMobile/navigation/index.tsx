@@ -45,20 +45,20 @@ export default function Navigation({
   const wheeloColor = '#6f2da8'
   DefaultTheme.colors = {
     ...DefaultTheme.colors,
-    text: 'white',
+    text: 'black',
     notification: '#db322c', //powiadomienie na statusbarze liczba
-    primary: 'white', 
-    background: wheeloColor,
+    primary: wheeloColor, 
+    // background: 'white',
     border: wheeloColor, //same as a card
     card: wheeloColor, //statusBar (down)
     secondary: 'yellow',
     gray: '#e5eaef',
-    lightGray: '#e5eaef'
+    lightGray: '#cccccc'
   } as any;
 
   DarkTheme.colors = {...DarkTheme.colors, 
     notification: '#db322c', 
-    text: wheeloColor,
+    text: 'white',
     primary: wheeloColor,
     secondary: 'green',
     gray: '#484848',
@@ -68,10 +68,8 @@ export default function Navigation({
     // card: wheeloColor 
   } as any;
 
-  const MyTheme = DefaultTheme.dark ? DarkTheme : DefaultTheme;
-
   return (
-    <NavigationContainer linking={LinkingConfiguration} theme={MyTheme}>
+    <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme.dark ? DarkTheme : DefaultTheme}>
       <RootNavigator />
     </NavigationContainer>
   );

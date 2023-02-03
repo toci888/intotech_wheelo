@@ -18,11 +18,13 @@ export const SignUpAndSignInButtons = ({ style }: { style?: ViewStyle }) => {
   const { colors } = useTheme();
   return (
     <View style={style}>
-      <Text style={[styles.bodyText, {color: colors.lightGray}]}>Zaloguj się, aby rozpocząć</Text>
-      <Button onPress={() => navigation.navigate("SignIn")} style={{backgroundColor: colors.primary, borderColor: colors.primary, width: '70%',marginLeft:'auto', marginRight: 'auto', shadowColor:'red', shadowOpacity: 10,shadowOffset: {width:10, height:10}} }>Zaloguj</Button>
-      <Text style={[styles.bodyText, {color: colors.lightGray}]}>
+      <Text style={[styles.bodyText, { color: colors.text }]}>Zaloguj się, aby rozpocząć</Text>
+      <Button onPress={() => navigation.navigate("SignIn")} style={{ 
+        backgroundColor: colors.primary, borderColor: colors.primary, 
+        width: '70%', marginLeft: 'auto', marginRight: 'auto' }}>Zaloguj</Button>
+      <Text style={[styles.bodyText, { color: colors.text }]}>
         {i18n.t('YouDontHaveAnAccountYet')}{" "}
-        <Text style={[styles.link, {color: colors.primary}]} onPress={() => navigation.navigate("SignUp")}>
+        <Text style={[styles.link, { color: colors.primary }]} onPress={() => navigation.navigate("SignUp")}>
           {i18n.t("SignUp")}
         </Text>
       </Text>

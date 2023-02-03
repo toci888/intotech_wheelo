@@ -109,10 +109,24 @@ export const AccountScreen = () => {
     <Screen>
       <ScrollView style={styles.container}>
         <View style={styles.defaultMarginHorizontal}>
-          <Text style={[styles.header, {color: colors.text}]} category={"h5"}>
-            {i18n.t('Welcome')}!
-          </Text>
-          <SignUpAndSignInButtons />
+          {user ? (
+            <>
+              <Text style={[styles.userName, {color: colors.primary}]} category={"h4"}>
+                {user.firstName ? `${i18n.t('Welcome')}, ${user.firstName}` : ""}
+              </Text>
+              <Text style={styles.email} category={"h6"}>
+                {user.email}
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text style={[styles.header, {color: colors.primary}]} category={"h5"}>
+                {i18n.t('Welcome')}!
+              </Text>
+
+              <SignUpAndSignInButtons />
+            </>
+          )}
         </View>
         {user ? (
           <>
@@ -132,7 +146,7 @@ export const AccountScreen = () => {
           </>
         ) : (
           <>
-            <Text appearance={"hint"} style={[styles.brandText, styles.specialMarginVertical, {color: colors.primary}]}>
+            <Text appearance={"hint"} style={[styles.brandText, styles.specialMarginVertical]}>
               {i18n.t('AppName').toUpperCase()}
             </Text>
           </>
@@ -164,6 +178,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 70,
     fontWeight: "600",
     fontSize: 44,
+    color: theme["color-violet"],
   },
   middleContainer: {
     justifyContent: "center",
@@ -179,6 +194,7 @@ const styles = StyleSheet.create({
   specialMarginVertical: { marginTop: 30, marginBottom: 20 },
   brandText: {
     textAlign: "center",
+    color: theme["color-violet"],
     fontSize: 24,
     fontWeight: "700",
   },
