@@ -25,7 +25,7 @@ export const SignUpAndSignInButtons = ({ style }: { style?: ViewStyle }) => {
       <Text style={[styles.bodyText, { color: colors.text }]}>
         {i18n.t('YouDontHaveAnAccountYet')}{" "}
         <Text style={[styles.link, { color: colors.primary }]} onPress={() => navigation.navigate("SignUp")}>
-          {/* {i18n.t("SignUp")} */}
+          {i18n.t("SignUp")}
         </Text>
       </Text>
     </View>

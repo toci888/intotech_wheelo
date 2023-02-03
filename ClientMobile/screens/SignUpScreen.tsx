@@ -45,7 +45,7 @@ export const SignUpScreen = () => {
         <ModalHeader text="Wheelo" xShown />
         <View style={styles.container}>
           <Text category={"h5"} style={styles.header}>
-             {i18n.t('SignUp')}
+             {/* {i18n.t('SignUp')} */}
           </Text>
           <Formik
             initialValues={{
