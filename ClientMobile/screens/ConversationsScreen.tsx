@@ -1,5 +1,12 @@
-import React from "react";
-import { FlatList, Pressable, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import {
+  ActivityIndicator,
+  FlatList,
+  Pressable,
+  RefreshControl,
+  StyleSheet,
+  View,
+} from "react-native";
 import { Text } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
 
@@ -18,51 +25,69 @@ export const ConversationsScreen = () => {
   const conversations = useConversationsQuery();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
+  const [refreshing, setRefreshing] = useState(false);
+  console.log("conversations: ", conversations);
 
   if (!user) return <SignUpOrSignInScreen />;
 
   if (conversations.isLoading) return <Loading />;
 
   if (!conversations?.data || conversations.data.length === 0) {
-    return <Text>{i18n.t('YouHaveNoMessages')}</Text>;
+    return <Text>{i18n.t("YouHaveNoMessages")}</Text>;
   }
 
-  const handleMessagePress = async (roomId: number, recipientName: string ) => {
+  const handleMessagePress = async (roomId: number, recipientName: string) => {
     await socket.invoke("JoinRoom", roomId);
-    console.log("Message Pressed", roomId, recipientName)
+    console.log("Message Pressed", roomId, recipientName);
     navigate("Chat", {
       screen: "Messages",
       params: {
-          roomId,
-          recipientName,
+        roomId,
+        recipientName,
       },
     });
-  }
+  };
 
   return (
-    <FlatList
-      showsVerticalScrollIndicator={true}
-      data={conversations.data}
-      keyExtractor={(item) => item.id.toString()}
-      renderItem={({ item }) => (
-        <Pressable
-          style={styles.message}
-          onPress={() => handleMessagePress(item.id, item.recipientName)}
-        >
-          <Row style={styles.row}>
-            <Text style={[styles.messageTitle, {color: colors.text}]} numberOfLines={1}>
-              {item.recipientName} RoomId:{item.id}
+    <View>
+      {refreshing ? <ActivityIndicator /> : null}
+      <FlatList
+        showsVerticalScrollIndicator={true}
+        data={conversations.data}
+        keyExtractor={(item) => item.id.toString()}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => console.log("pull-to-refresh")}
+          />
+        }
+        renderItem={({ item }) => (
+          <Pressable
+            style={styles.message}
+            onPress={() => handleMessagePress(item.id, item.recipientName)}
+          >
+            <Row style={styles.row}>
+              <Text
+                style={[styles.messageTitle, { color: colors.text }]}
+                numberOfLines={1}
+              >
+                {item.recipientName} RoomId:{item.id}
+              </Text>
+              <Text appearance="hint">
+                {new Date(item.messages[0].createdAt).toLocaleDateString()}
+              </Text>
+            </Row>
+            <Text
+              numberOfLines={2}
+              appearance="hint"
+              style={styles.messageText}
+            >
+              {item.messages[0].text}
             </Text>
-            <Text appearance="hint">
-              {new Date(item.messages[0].createdAt).toLocaleDateString()}
-            </Text>
-          </Row>
-          <Text numberOfLines={2} appearance="hint" style={styles.messageText}>
-            {item.messages[0].text}
-          </Text>
-        </Pressable>
-      )}
-    />
+          </Pressable>
+        )}
+      />
+    </View>
   );
 };
 
