@@ -23,7 +23,7 @@ const source = {
 
 const animationsColor = [...new Array(CELL_COUNT)].map(() => new Value(0));
 const animationsScale = [...new Array(CELL_COUNT)].map(() => new Value(1));
-//TODO: typing any
+
 const animateCell = ({ hasValue, index, isFocused }: any) => {
   Animated.parallel([
     Animated.timing(animationsColor[index], {

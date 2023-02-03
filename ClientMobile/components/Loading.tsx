@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 export const Loading = () => {
   const animation = useRef<LottieView | null>(null);
-  // Autoplay is not working so we use a ref to start animation
+
   setTimeout(() => {
     animation.current?.play();
   }, 100);
@@ -23,14 +23,14 @@ export const Loading = () => {
 
 const styles = StyleSheet.create({
   container: {
-    // height: Dimensions.get("window").height,//Dimensions.get("screen").height,
-    // width: Dimensions.get("window").width,//Dimensions.get("screen").width,
     justifyContent: "center",
     alignItems: "center",
+    right: Dimensions.get("screen").width/7
+
   },
   lottie: {
-    marginTop: Dimensions.get("screen").height/11,
-    height: 250,
-    width: 250,
+    marginTop: Dimensions.get("screen").height/15,
+    height: 300,
+    width: '100%',
   },
 });

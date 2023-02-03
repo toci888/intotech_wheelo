@@ -43,7 +43,7 @@ export const Card = ({
   
   return (
     <Pressable
-      onPress={onPress}
+      onPress={onPress} //TODO
       style={[styles.container, styles.boxShadow, style, {backgroundColor: colors.backgroundColor}]}
     >
       <ImageCarousel
