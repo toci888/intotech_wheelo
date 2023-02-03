@@ -21,26 +21,13 @@ export const SignUpAndSignInButtons = ({ style }: { style?: ViewStyle }) => {
       <Text style={[styles.bodyText, { color: colors.text }]}>Zaloguj się, aby rozpocząć</Text>
       <Button onPress={() => navigation.navigate("SignIn")} style={{ 
         backgroundColor: colors.primary, borderColor: colors.primary, 
-        width: '70%', marginLeft: 'auto', marginRight: 'auto' }}>Zaloguj</Button>
+        width: '100%', marginLeft: 'auto', marginRight: 'auto' }}>Zaloguj</Button>
       <Text style={[styles.bodyText, { color: colors.text }]}>
         {i18n.t('YouDontHaveAnAccountYet')}{" "}
         <Text style={[styles.link, { color: colors.primary }]} onPress={() => navigation.navigate("SignUp")}>
-          {i18n.t("SignUp")}
+          {/* {i18n.t("SignUp")} */}
         </Text>
       </Text>
-      <OrDivider style={styles.orContainer} />
-
-      <GoogleButton
-        text={i18n.t('ContinueWithGoogle')}
-        style={styles.button}
-        onPress={async () => await googleAuth()}
-      />
-      <FacebookButton
-        text={i18n.t('ContinueWithFacebook')}
-        style={styles.button}
-        onPress={async () => await facebookAuth()}
-      />
-      <AppleButton type="sign-in" onPress={async () => await appleAuth()} />
     </View>
   );
 };

@@ -5,6 +5,7 @@ import { Text } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
 
 import { Row } from "./Row";
+import useTheme from "../hooks/useTheme";
 
 export const ModalHeader = ({
   xShown,
@@ -17,6 +18,7 @@ export const ModalHeader = ({
   onPress?: () => void;
   style?: ViewStyle | ViewStyle[];
 }) => {
+  const {colors} = useTheme();
   const navigation = useNavigation();
 
   if (text) {
@@ -26,12 +28,12 @@ export const ModalHeader = ({
           <MaterialCommunityIcons
             onPress={onPress ? onPress : navigation.goBack}
             style={styles.x}
-            name="close"
-            color={"black"}
+            name="arrow-left"
+            color={colors.text}
             size={24}
           />
         ) : null}
-        <Text category={"h5"}>{text}</Text>
+        <Text category={"h5"} style={{color: colors.text}}>{text}</Text>
       </Row>
     );
   }
@@ -44,7 +46,7 @@ export const ModalHeader = ({
 };
 
 const styles = StyleSheet.create({
-  x: { position: "absolute", left: 10, alignSelf: "center" },
+  x: { position: "absolute", left: 20, alignSelf: "center" },
   container: {
     alignItems: "center",
     justifyContent: "center",

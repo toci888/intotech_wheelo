@@ -11,6 +11,7 @@ import { CardInformation } from "./CardInformation";
 import { LISTMARGIN, queryKeys } from "../constants/constants";
 import { theme } from "../theme";
 import { useDeleteCollocationMutation } from "../hooks/mutations/useDeleteCollocationMutation";
+import useTheme from "../hooks/useTheme";
 
 export const Card = ({
   collocation,
@@ -23,6 +24,7 @@ export const Card = ({
   myCollocation?: boolean;
   style?: ViewStyle;
 }) => {
+  const {colors} = useTheme();
   const navigation = useNavigation();
   const [showModal, setShowModal] = useState(false);
   const openModal = () => setShowModal(true);
@@ -38,11 +40,11 @@ export const Card = ({
     deleteCollocation.mutate({ collocationID: collocation.idAccount });
     closeModal();
   };
-
+  
   return (
     <Pressable
       onPress={onPress}
-      style={[styles.container, styles.boxShadow, style]}
+      style={[styles.container, styles.boxShadow, style, {backgroundColor: colors.backgroundColor}]}
     >
       <ImageCarousel
         onImagePress={onPress}

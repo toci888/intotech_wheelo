@@ -1,4 +1,4 @@
-import { ScrollView, View, StyleSheet, Linking } from "react-native";
+import { ScrollView, View, StyleSheet, Linking, Dimensions, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Text, Button } from "@ui-kitten/components";
 
@@ -108,6 +108,7 @@ export const AccountScreen = () => {
   return (
     <Screen>
       <ScrollView style={styles.container}>
+      {!user && <Image style={styles.logo} source={require('../assets/images/wheelo.jpg')}/>}
         <View style={styles.defaultMarginHorizontal}>
           {user ? (
             <>
@@ -128,7 +129,7 @@ export const AccountScreen = () => {
             </>
           )}
         </View>
-        {user ? (
+        {user && (
           <>
             <ButtonList data={rentingButtons} header={"Renting Made Easy"} />
             <ButtonList data={accountButtons} header={"My Account"} />
@@ -144,12 +145,6 @@ export const AccountScreen = () => {
               </Button>
             </View>
           </>
-        ) : (
-          <>
-            <Text appearance={"hint"} style={[styles.brandText, styles.specialMarginVertical]}>
-              {i18n.t('AppName').toUpperCase()}
-            </Text>
-          </>
         )}
       </ScrollView>
     </Screen>
@@ -157,6 +152,12 @@ export const AccountScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  lottie: {
+    marginBottom: 50,
+    height: 250,
+    width: 250,
+    alignSelf: "center",
+  },
   container: {
     flex: 1,
   },
@@ -188,14 +189,17 @@ const styles = StyleSheet.create({
     borderTopColor: theme["color-gray"],
     borderTopWidth: 2,
   },
+  logo: {
+    width: '100%', 
+    height: 250, 
+    marginTop: 50, 
+    marginLeft: 'auto', 
+    resizeMode: 'contain', 
+    marginRight: 'auto', 
+    marginBottom: 120
+  },
   subheader: { textAlign: "center", paddingHorizontal: 20 },
   bodyText: { marginTop: 10, textAlign: "center", marginHorizontal: 15 },
   button: { marginBottom: 15, borderColor: theme["color-primary-500"] },
   specialMarginVertical: { marginTop: 30, marginBottom: 20 },
-  brandText: {
-    textAlign: "center",
-    color: theme["color-violet"],
-    fontSize: 24,
-    fontWeight: "700",
-  },
 });
