@@ -155,7 +155,6 @@ function RootNavigator(props: any) {
 }
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
-
 function BottomTabNavigator() {
   const {colors} = useTheme();
   

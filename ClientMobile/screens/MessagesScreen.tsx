@@ -16,6 +16,7 @@ import { useCreateMessageMutation } from "../hooks/mutations/useCreateMessageMut
 import { i18n } from "../i18n/i18n";
 import useColorScheme from "../hooks/useColorScheme";
 import { themes } from "../constants/constants";
+// import { ModalHeader } from "../components/ModalHeader";
 
 export const MessagesScreen = ({
   route,
@@ -30,9 +31,8 @@ export const MessagesScreen = ({
       ? route.params.recipientName.replaceAll("%", " ")
       : route.params.recipientName;
   const navigation = useNavigation();
-  navigation.setOptions({
-    title: title
-  });
+  // navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
+  // navigation.setOptions({ tabBarStyle: { display: "none" } });
   const { user } = useUser();
   console.log("ConversationID", route.params)
   const colorScheme = useColorScheme();
@@ -157,6 +157,8 @@ export const MessagesScreen = ({
   }
 
   return (
+    <>
+    {/* <ModalHeader text="a" xShown onPress={() => {navigation.getParent()?.setOptions({ tabBarStyle: { display: "display" } }); navigation.goBack()}}/> */}
     <Chat
       messages={conversation.data.messages}
       onSendPress={handleSendPress}
@@ -168,7 +170,7 @@ export const MessagesScreen = ({
       enableAnimation
       showUserNames
       showUserAvatars
-      l10nOverride={{ inputPlaceholder: i18n.t('Search') }}
+      l10nOverride={{ inputPlaceholder: i18n.t('TypeAMessage') }}
       // locale='en'
       inputProps={{}}
       textInputProps={{
@@ -191,6 +193,7 @@ export const MessagesScreen = ({
       }
       }
     />
+    </>
   );
 };
 

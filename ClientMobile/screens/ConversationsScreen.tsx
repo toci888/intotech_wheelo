@@ -25,9 +25,10 @@ export const ConversationsScreen = () => {
   const conversations = useConversationsQuery();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
+  const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
   console.log("conversations: ", conversations);
-
+  // navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
   if (!user) return <SignUpOrSignInScreen />;
 
   if (conversations.isLoading) return <Loading />;
@@ -39,6 +40,7 @@ export const ConversationsScreen = () => {
   const handleMessagePress = async (roomId: number, recipientName: string) => {
     await socket.invoke("JoinRoom", roomId);
     console.log("Message Pressed", roomId, recipientName);
+    // navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
     navigate("Chat", {
       screen: "Messages",
       params: {
@@ -98,7 +100,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderBottomColor: theme["color-light-gray"],
     borderBottomWidth: 1,
-    // backgroundColor: "white",
   },
   messageTitle: { fontWeight: "bold", width: "80%" },
   row: { justifyContent: "space-between" },
