@@ -14,6 +14,7 @@ import { i18n } from "../i18n/i18n";
 import { useSaveCollocationMutation } from "../hooks/mutations/useSaveCollocationMutation";
 import { useConversationsQuery } from "../hooks/queries/useConversationsQuery";
 import { TransformedConversation } from "../types/conversation";
+import useTheme from "../hooks/useTheme";
 
 export const CardInformation = ({
   collocation,
@@ -28,6 +29,7 @@ export const CardInformation = ({
   const { user, setSavedProperties } = useUser();
   const saveCollocation = useSaveCollocationMutation();
   const conversations = useConversationsQuery();
+  const {colors} = useTheme();
 
   const alterUsersSavedProperties = (
     collocationID: number,
@@ -198,7 +200,7 @@ export const CardInformation = ({
   );
 
   return (
-    <View style={styles.informationContainer}>
+    <View style={[{backgroundColor: colors.background}, styles.informationContainer]}>
       {myCollocation ? <MyPropertyInfo /> : <DefaultInfo />}
     </View>
   );
