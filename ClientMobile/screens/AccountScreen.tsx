@@ -10,10 +10,13 @@ import { useUser } from "../hooks/useUser";
 import React from "react";
 import { i18n } from "../i18n/i18n";
 import useTheme from "../hooks/useTheme";
+import useColorScheme from "../hooks/useColorScheme";
+import { themes } from "../constants/constants";
 
 export const AccountScreen = () => {
   const { user, logout } = useUser();
   const { colors } = useTheme();
+  const colorScheme = useColorScheme();
   const navigation = useNavigation();
 
   const firstSignedOutButtons = [
@@ -75,17 +78,7 @@ export const AccountScreen = () => {
     {
       label: "Banks and Cards",
       onPress: () => console.log("navigate to Banks and Cards"),
-    },
-    {
-      label: "Messages",
-      onPress: () =>
-        navigation.navigate("Root", {
-          screen: "AccountRoot",
-          params: {
-            screen: "Conversations",
-          },
-        }),
-    },
+    }
   ];
 
   const rentalManagementButtons = [
@@ -103,16 +96,15 @@ export const AccountScreen = () => {
     },
   ];
 
-
-
   return (
     <Screen>
       <ScrollView style={styles.container}>
-      {!user && <Image style={styles.logo} source={require('../assets/images/wheelo.jpg')}/>}
+      {!user && colorScheme === themes.light ? <Image style={styles.logo} source={require('../assets/images/wheelo.png')}/>
+      : <Image style={styles.logo} source={require('../assets/images/wheelo-darkTheme.png')}/>}
         <View style={styles.defaultMarginHorizontal}>
           {user ? (
             <>
-              <Text style={[styles.userName, {color: colors.primary}]} category={"h4"}>
+              <Text style={[styles.userName, {color: colors.text}]} category={"h4"}>
                 {user.firstName ? `${i18n.t('Welcome')}, ${user.firstName}` : ""}
               </Text>
               <Text style={styles.email} category={"h6"}>
@@ -121,10 +113,9 @@ export const AccountScreen = () => {
             </>
           ) : (
             <>
-              <Text style={[styles.header, {color: colors.primary}]} category={"h5"}>
+              <Text style={[styles.header, {color: colors.text}]} category={"h4"}>
                 {i18n.t('Welcome')}!
               </Text>
-
               <SignUpAndSignInButtons />
             </>
           )}

@@ -14,20 +14,19 @@ import { i18n } from "../i18n/i18n";
 
 export const SignUpAndSignInButtons = ({ style }: { style?: ViewStyle }) => {
   const navigation = useNavigation();
-  const { nativeLogin, facebookAuth, googleAuth, appleAuth } = useAuth();
   const { colors } = useTheme();
+  
   return (
     <View style={style}>
-      <Text style={[styles.bodyText, { color: colors.text }]}>Zaloguj się, aby rozpocząć</Text>
+      <Text style={[styles.bodyText, { color: colors.lightGray }]}>{i18n.t("SignInToStart")}</Text>
       <Button onPress={() => navigation.navigate("SignIn")} style={{ 
         backgroundColor: colors.primary, borderColor: colors.primary, 
-        width: '100%', marginLeft: 'auto', marginRight: 'auto' }}>Zaloguj</Button>
-      <Text style={[styles.bodyText, { color: colors.text }]}>
-        {i18n.t('YouDontHaveAnAccountYet')}{" "}
-        <Text style={[styles.link, { color: colors.primary }]} onPress={() => navigation.navigate("SignUp")}>
-          {i18n.t("SignUp")}
-        </Text>
-      </Text>
+        width: '100%', marginLeft: 'auto', marginRight: 'auto' }}>{i18n.t("SignIn")}</Button>
+      <Text style={[styles.bodyText, { color: colors.lightGray }]}>{i18n.t('YouDontHaveAnAccountYet')}</Text>
+      <Button appearance="outline" onPress={() => navigation.navigate("SignUp")} style={{ 
+        borderColor: colors.primary, width: '100%', marginLeft: 'auto', marginRight: 'auto' }}>
+          <Text>{i18n.t("SignUp")}</Text>
+      </Button>
     </View>
   );
 };

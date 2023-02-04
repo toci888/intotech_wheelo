@@ -42,7 +42,7 @@ export const SignUpScreen = () => {
   return (
     <KeyboardAwareScrollView bounces={false}>
       <Screen>
-        <ModalHeader text="Wheelo" xShown />
+        <ModalHeader text={i18n.t("SignUp")} xShown />
         <View style={styles.container}>
           <Text category={"h5"} style={styles.header}>
              {/* {i18n.t('SignUp')} */}
