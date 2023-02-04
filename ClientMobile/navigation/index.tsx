@@ -45,33 +45,26 @@ export default function Navigation({
   const wheeloColor = '#6f2da8'
   DefaultTheme.colors = {
     ...DefaultTheme.colors,
-    text: 'white',
+    text: 'black',
     notification: '#db322c', //powiadomienie na statusbarze liczba
-    primary: 'white', 
-    background: wheeloColor,
-    border: wheeloColor, //same as a card
-    card: wheeloColor, //statusBar (down)
+    primary: wheeloColor, 
     secondary: 'yellow',
     gray: '#e5eaef',
-    lightGray: '#e5eaef'
+    lightGray: '#cccccc'
   } as any;
 
-  DarkTheme.colors = {...DarkTheme.colors, 
+  DarkTheme.colors = {
+    ...DarkTheme.colors, 
     notification: '#db322c', 
-    text: wheeloColor,
+    text: 'white',
     primary: wheeloColor,
     secondary: 'green',
     gray: '#484848',
     lightGray: '#cccccc'
-    // background: '#8523c6',
-    // border: wheeloColor,
-    // card: wheeloColor 
   } as any;
 
-  const MyTheme = DefaultTheme.dark ? DarkTheme : DefaultTheme;
-
   return (
-    <NavigationContainer linking={LinkingConfiguration} theme={MyTheme}>
+    <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme.dark ? DarkTheme : DefaultTheme}>
       <RootNavigator />
     </NavigationContainer>
   );
@@ -170,7 +163,7 @@ function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="Search"
       screenOptions={{
-        tabBarActiveTintColor: colors.text,
+        tabBarActiveTintColor: colors.primary,
       }}
     >
       <BottomTab.Screen
@@ -242,7 +235,7 @@ const AccountStack = () => (
 );
 
 const ChatStackNavigator = createNativeStackNavigator<ChatTabParamList>();
-const ChatStack = () => ( //todo??
+const ChatStack = () => (
   <ChatStackNavigator.Navigator initialRouteName="Conversations">
     <ChatStackNavigator.Screen
       name="Conversations"

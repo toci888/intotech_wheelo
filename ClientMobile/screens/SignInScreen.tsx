@@ -14,18 +14,25 @@ import { ReturnedResponse } from "../types";
 import { User } from "../types/user";
 import { i18n } from "../i18n/i18n";
 import { commonAlert } from "../utils/handleError";
+import { OrDivider } from "../components/OrDivider";
+import { AppleButton } from "../components/AppleButton";
+import { FacebookButton } from "../components/FacebookButton";
+import { GoogleButton } from "../components/GoogleButton";
+import { Row } from "../components/Row";
+import useTheme from "../hooks/useTheme";
 
 export const SignInScreen = () => {
   const navigation = useNavigation();
-  const { nativeLogin } = useAuth();
+  const {colors} = useTheme();
+  const { nativeLogin, facebookAuth, googleAuth, appleAuth } = useAuth();
 
   return (
     <KeyboardAwareScrollView bounces={false}>
       <Screen>
-        <ModalHeader text={i18n.t('AppName')} xShown />
+        <ModalHeader text={i18n.t('SignIn')} xShown />
         <View style={styles.container}>
           <Text category={"h5"} style={styles.header}>
-            {i18n.t('SignIn')}
+            {/* {i18n.t('SignIn')} */}
           </Text>
           <Formik
             initialValues={{
@@ -42,8 +49,8 @@ export const SignInScreen = () => {
               const response: ReturnedResponse<User> | undefined = await nativeLogin(values);
               if (response && response.isSuccess === false) {
                 console.log("Logged user response:", response)
-                if(response.errorCode === 256) {
-                  navigation.navigate(`CodeVerification`, {user: values as User, type: "email"});
+                if (response.errorCode === 256) {
+                  navigation.navigate(`CodeVerification`, { user: values as User, type: "email" });
                 } else {
                   commonAlert(response.errorMessage)
                 }
@@ -113,6 +120,25 @@ export const SignInScreen = () => {
               );
             }}
           </Formik>
+
+          <OrDivider style={styles.orContainer} />
+          <Row style={{justifyContent: "space-evenly"}}>
+            <GoogleButton
+              text={i18n.t('ContinueWithGoogle')}
+              style={{borderColor: colors.text}}
+              onPress={async () => await googleAuth()}
+            />
+            <FacebookButton
+              text={i18n.t('ContinueWithFacebook')}
+              style={{borderColor: colors.text}}
+              onPress={async () => await facebookAuth()}
+            />
+            <AppleButton 
+              type="sign-in" 
+              onPress={async () => await appleAuth()} 
+              style={{borderColor: colors.text}}
+            />
+          </Row>
         </View>
       </Screen>
     </KeyboardAwareScrollView>
@@ -130,5 +156,5 @@ const styles = StyleSheet.create({
   orContainer: {
     marginVertical: 30,
   },
-  button: { marginBottom: 10 },
+  button: {  },
 });
