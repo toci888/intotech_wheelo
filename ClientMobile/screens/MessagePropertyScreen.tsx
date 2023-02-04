@@ -39,7 +39,7 @@ export const MessagePropertyScreen = ({
   if (conversations.isLoading) return <Loading />;
 
   const navigateToMessageScreen = (
-    conversationID: number,
+    roomId: number,
     recipientName: string
   ) => {
     navigation.navigate("Root", {
@@ -48,7 +48,7 @@ export const MessagePropertyScreen = ({
         screen: "Messages",
         initial: false, // won't render back button w/out set to false
         params: {
-          conversationID,
+          roomId,
           recipientName,
         },
       },

@@ -3,13 +3,16 @@ import { StyleSheet, ViewStyle } from "react-native";
 
 import { Row } from "./Row";
 import { theme } from "../theme";
+import { i18n } from "../i18n/i18n";
+import useTheme from "../hooks/useTheme";
 
 export const OrDivider = ({ style }: { style?: ViewStyle }) => {
+  const {colors} = useTheme();
   return (
     <Row style={[styles.container, style as ViewStyle]}>
       <Divider style={styles.divider} />
-      <Text style={styles.orText} appearance={"hint"}>
-        albo
+      <Text style={[styles.orText, {color: colors.text}]} appearance={"hint"}>
+        {i18n.t('or')}
       </Text>
       <Divider style={styles.divider} />
     </Row>

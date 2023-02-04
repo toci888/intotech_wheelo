@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { useState, useEffect } from "react";
 import * as SecureStore from "expo-secure-store";
 import { LogBox } from "react-native";
+import jwtDecoder from 'jwt-decode';
 import * as Notifications from "expo-notifications";
 
 import useCachedResources from "./hooks/useCachedResources";
@@ -18,6 +19,7 @@ import { User } from "./types/user";
 import { createSocket, socket } from "./constants/socket";
 import { queryKeys } from "./constants/constants";
 import { refreshTokens } from "./services/tokens";
+import { alterPushToken } from "./services/user";
 
 const queryClient = new QueryClient();
 LogBox.ignoreAllLogs();
@@ -27,52 +29,63 @@ export default function App() {
   const colorScheme = useColorScheme();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  // const { logout } = useUser();
 
   useEffect(() => {
     async function getUser() {
       const user = await SecureStore.getItemAsync("user");
+      console.log("JUSER", user)
       if (user) {
         const userObj: User = JSON.parse(user);
 
         createSocket(userObj.accessToken);
-        // const newTokens = await refreshTokens(userObj.accessToken, userObj.refreshtoken);
-        // if (newTokens) {
-        //   userObj.accessToken = newTokens.accessToken;
-        //   userObj.refreshtoken = newTokens.refreshToken;
-        //   SecureStore.setItemAsync("user", JSON.stringify(userObj));
-        // } TODO!
-        setUser(userObj);
+        const decoded: any = jwtDecoder(userObj.accessToken);
+        const expirationDate = new Date(decoded['exp']*1000);
+
+        const today = new Date();
+        if(today > expirationDate) {
+          const newTokens = await refreshTokens(userObj.accessToken, userObj.refreshtoken);
+          console.log("NEWWW", newTokens)
+          if (newTokens) {
+            userObj.accessToken = newTokens.accessToken;
+            userObj.refreshtoken = newTokens.refreshToken;
+            SecureStore.setItemAsync("user", JSON.stringify(userObj));
+          } else {
+              setUser(null);
+              SecureStore.deleteItemAsync("user");
+              socket.stop();
+              queryClient.clear();
+              try {
+                const token = (await Notifications.getExpoPushTokenAsync()).data;
+                if (token)
+                  await alterPushToken(userObj?.id, "remove", token, userObj.accessToken);
+              } catch (error) {
+                
+              }
+          }
+        }
         
+        setUser(userObj);
+
         socket.on(
-          "getMessage",
+          "getmessage",
           (message: { chatMessage: {
             id: number;
-            senderID: number;
+            SenderEmail: string;
+            IdAccount: number;
             text: string;
             createdAt: Date;
             authorFirstName: string;
             authorLastName: string;
+            RoomID: number;
           }}) => {
             let data = message.chatMessage;
-            console.log("ODEBRALEM", data)
+            
+            console.log("ODEBRALEM getmessage", data)
+
             queryClient.invalidateQueries(queryKeys.conversations);
             queryClient.invalidateQueries(queryKeys.selectedConversation);
             
-            Notifications.scheduleNotificationAsync({
-              content: {
-                title: data.authorFirstName,
-                body: data.text,
-                
-                data: {
-                //   // will need to change url in prod build (use process.ENV && eas.json)
-                  // url: `exp://localhost:19000/messages/${data.id}/${data.authorFirstName}`,
-                  // url: `https://expo.dev/@kacper1337/intotechwheelo?serviceType=classic&distribution=expo-go/messages`,
-                  url: `exp://localhost:19000/messages/1/adi`,
-                },
-              },
-              
-              trigger: null //opoznienie{ seconds: 4 },
-            });
           }
         );
         socket.on("session", (sessionData: {data: {userId: number, userName: string, userSurname: string, sessionId: number}}) => {
@@ -94,13 +107,11 @@ export default function App() {
         socket.on("roomestablished", (roomData:{ room: {idRoom: number, ownerEmail: string, roomId: string, roomName: string, roomMembers: any}}) => {
           let data = roomData.room;
 
-          // console.log('roomestablished', data);
+          console.log('roomestablished', data);
         });
 
         await socket.start();
-        await socket.invoke("ConnectUser", userObj.email);
-
-        await socket.invoke("CreateRoom", userObj.email, ['warriorr@poczta.fm', 'bzapart@gmail.com']);
+        await socket.invoke("ConnectUser", userObj.id);
 
         console.log("USER ID", JSON.stringify(userObj))
       }
@@ -109,9 +120,10 @@ export default function App() {
     getUser();
 
     return () => {
-      socket.off("getMesssage");
+      socket.off("getmesssage");
       socket.off("session");
       socket.off("connect_error");
+      socket.off("roomestablished");
     };
   }, []);
 

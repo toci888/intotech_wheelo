@@ -26,7 +26,10 @@ export const ForgotPasswordScreen = () => {
       const response = await forgotPassword(values.email);
       if (response?.isSuccess) {
         setEmailSent(true);
-        navigation.navigate("CodeVerification", {user: values, type: "forgotPassword"});
+        navigation.navigate("CodeVerification", {
+          user: values,
+          type: "forgotPassword",
+        });
       }
     } catch (error) {
       console.log("Error placing email");
@@ -39,30 +42,37 @@ export const ForgotPasswordScreen = () => {
   return (
     <KeyboardAwareScrollView bounces={false}>
       <Screen style={styles.container}>
-        <ModalHeader text={i18n.t('AppName')} xShown />
+        <ModalHeader text={i18n.t("AppName")} xShown />
         {emailSent ? (
           <>
             <Text category={"h5"} style={styles.header}>
-              {i18n.t('EmailSent')}
+              {i18n.t("EmailSent")}
             </Text>
             <Text>
-              {i18n.t('AnemailcontaininginstructionsabouthowtochangeyourpasswordhasbeensenttoyouPleasecheckyourjunkmailorspamsectionifyoudonotseeanemail')}
+              {i18n.t(
+                "AnemailcontaininginstructionsabouthowtochangeyourpasswordhasbeensenttoyouPleasecheckyourjunkmailorspamsectionifyoudonotseeanemail"
+              )}
             </Text>
           </>
         ) : (
           <>
             <Text category={"h5"} style={styles.header}>
-              {i18n.t('ForgotYourPassword')}
+              {i18n.t("ForgotYourPassword")}
             </Text>
             <Text>
-              {i18n.t('Pleaseenteryouremailandwewillsendyoualinktochangeyourpassword')}
+              {i18n.t(
+                "Pleaseenteryouremailandwewillsendyoualinktochangeyourpassword"
+              )}
             </Text>
             <Formik
               initialValues={{
                 email: "bartek@gg.pl",
               }}
               validationSchema={yup.object().shape({
-                email: yup.string().email().required(i18n.t('Youremailisrequired')),
+                email: yup
+                  .string()
+                  .email()
+                  .required(i18n.t("Youremailisrequired")),
               })}
               onSubmit={handleSubmit}
             >
@@ -82,7 +92,7 @@ export const ForgotPasswordScreen = () => {
                       style={styles.input}
                       value={values.email}
                       onChangeText={handleChange("email")}
-                      placeholder={i18n.t('YourEmailAddress')}
+                      placeholder={i18n.t("YourEmailAddress")}
                       keyboardType="email-address"
                       autoCapitalize="none"
                       autoComplete="email"
@@ -100,7 +110,7 @@ export const ForgotPasswordScreen = () => {
                       style={styles.button}
                       onPress={() => handleSubmit()}
                     >
-                      {i18n.t('Continue')}
+                      {i18n.t("Continue")}
                     </Button>
                   </>
                 );

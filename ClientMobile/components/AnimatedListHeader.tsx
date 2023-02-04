@@ -5,31 +5,21 @@ import { Text } from "@ui-kitten/components";
 import { LISTMARGIN } from "../constants/constants";
 import { HeaderInput } from "./HeaderInput";
 import { Location } from "../types/locationIQ";
-import { theme } from "../theme";
-import useColorScheme from "../hooks/useColorScheme";
 import { HeaderFilterButtons } from "./HeaderFilterButtons";
 import { i18n } from "../i18n/i18n";
 import useTheme from "../hooks/useTheme";
 
-export const AnimatedListHeader = ({
-  startLocation,
-  endLocation,
-  setStartLocation,
-  setEndLocation
-}: {
-  startLocation: Location;
-  endLocation: Location;
-  setStartLocation: (startLocation: Location) => void;
-  setEndLocation: (endLocation: Location) => void;
-}) => {
-  const colorScheme = useColorScheme();
+export const AnimatedListHeader = () => {
   const {colors} = useTheme();
+
+  const [startLocation, setStartLocation] = useState<Location>({display_name: i18n.t('Search')} as Location);
+  const [endLocation, setEndLocation] = useState<Location>({display_name: i18n.t('Search')} as Location);
 
   const [startTime, setStartTime] = useState<string>("08:00");
   const [endTime, setEndTime] = useState<string>("16:00");
   
   return (
-    <Animated.View style={[styles.container, {backgroundColor: colors.secondary}]}>
+    <Animated.View style={styles.container}>
       <View style={[styles.defaultMarginHorizontal, {"marginTop": 10}]} />
       <View style={styles.defaultMarginHorizontal}>
         <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
@@ -44,7 +34,7 @@ export const AnimatedListHeader = ({
           <Text category="h6" style={{ marginLeft: "auto", color: colors.text}}>{i18n.t('WhatTimeAreYouComingBack')}</Text>
         </View>
         <HeaderInput type="end" location={endLocation} setLocation={setEndLocation} time={endTime} setTime={setEndTime} />
-        {startLocation.lat && endLocation.lat && 
+        { startLocation.lat && endLocation.lat && 
           <HeaderFilterButtons startLocation={startLocation} endLocation={endLocation} startTime={startTime} endTime={endTime} />
         }
       </View>

@@ -18,11 +18,11 @@ import { TransformedConversation } from "../types/conversation";
 export const CardInformation = ({
   collocation,
   myCollocation,
-  conversationID
+  roomId
 }: {
   collocation: CollocateAccount;
   myCollocation?: boolean;
-  conversationID?: number;
+  roomId?: number;
 }) => {
   const navigation = useNavigation();
   const { user, setSavedProperties } = useUser();
@@ -49,17 +49,17 @@ export const CardInformation = ({
     // }) 
     // ?
     //   navigation.navigate("Messages", {
-    //     conversationID: 0,
+    //     roomId: 0,
     //     recipientName: collocation?.name,
     //   }) : 
 
     if (conversations.data) {
       for (let i=0; i<conversations.data.length; i++) {
         if(collocation.name === conversations.data[i].recipientName) {
-          console.log("znalazlem: ", conversations.data[i], collocation)
+          console.log("znalazlem: ", conversations.data[i].recipientName, conversations.data[i].id, collocation.idAccount, collocation.name)
           break;
         } else {
-          console.log("Nie pasuje: ", conversations.data, collocation);
+          console.log("Nie pasuje: ", conversations.data[i].recipientName, conversations.data[i].id, collocation.idAccount, collocation.name)
         }
       }
     }

@@ -1,4 +1,4 @@
-import { ScrollView, View, StyleSheet, Linking } from "react-native";
+import { ScrollView, View, StyleSheet, Linking, Dimensions, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Text, Button } from "@ui-kitten/components";
 
@@ -9,9 +9,14 @@ import { ButtonList } from "../components/ButtonList";
 import { useUser } from "../hooks/useUser";
 import React from "react";
 import { i18n } from "../i18n/i18n";
+import useTheme from "../hooks/useTheme";
+import useColorScheme from "../hooks/useColorScheme";
+import { themes } from "../constants/constants";
 
 export const AccountScreen = () => {
   const { user, logout } = useUser();
+  const { colors } = useTheme();
+  const colorScheme = useColorScheme();
   const navigation = useNavigation();
 
   const firstSignedOutButtons = [
@@ -73,17 +78,7 @@ export const AccountScreen = () => {
     {
       label: "Banks and Cards",
       onPress: () => console.log("navigate to Banks and Cards"),
-    },
-    {
-      label: "Messages",
-      onPress: () =>
-        navigation.navigate("Root", {
-          screen: "AccountRoot",
-          params: {
-            screen: "Conversations",
-          },
-        }),
-    },
+    }
   ];
 
   const rentalManagementButtons = [
@@ -101,64 +96,51 @@ export const AccountScreen = () => {
     },
   ];
 
-
-
   return (
     <Screen>
-      <ScrollView style={styles.container}>
+      {!user ? (
         <View style={styles.defaultMarginHorizontal}>
-          {user ? (
-            <>
-              <Text style={styles.userName} category={"h4"}>
-                {user.firstName ? `Witaj, ${user.firstName}` : ""}
-              </Text>
-              <Text style={styles.email} category={"h6"}>
-                {user.email}
-              </Text>
-            </>
-          ) : (
-            <>
-              <Text style={styles.header} category={"h5"}>
-                {i18n.t('Welcome')}!
-              </Text>
-
-              <SignUpAndSignInButtons />
-            </>
-          )}
+          {colorScheme === themes.light ?
+            <Image style={styles.logo} source={require('../assets/images/wheelo.png')} />
+            : <Image style={styles.logo} source={require('../assets/images/wheelo-darkTheme.png')} />}
+          <Text style={[styles.header, { color: colors.text }]} category={"h4"}>
+            {i18n.t('Welcome')}!
+          </Text>
+          <SignUpAndSignInButtons />
         </View>
-        {user ? (
-          <>
-            <ButtonList data={rentingButtons} header={"Renting Made Easy"} />
-            <ButtonList data={accountButtons} header={"My Account"} />
-            <ButtonList
-              data={rentalManagementButtons}
-              header={"Rental Manager Tools"}
-            />
-            <ButtonList data={firstSignedOutButtons} header="Properties" borderTop />
-            <ButtonList data={supportButtons} header="Support" marginTop borderTop />
-            <View style={[styles.specialMarginVertical, styles.defaultMarginHorizontal,]}>
-              <Button appearance={"ghost"} style={styles.button} onPress={logout}>
-                {i18n.t('SignOut')}
-              </Button>
-            </View>
-          </>
-        ) : (
-          <>
-            <Text appearance={"hint"} style={[styles.brandText, styles.specialMarginVertical]}>
-              {i18n.t('AppName').toUpperCase()}
-            </Text>
-          </>
-        )}
-      </ScrollView>
+      ) : (
+        <ScrollView style={styles.container}>
+          <Text style={[styles.userName, { color: colors.text }]} category={"h4"}>
+            {user.firstName ? `${i18n.t('Welcome')}, ${user.firstName}` : ""}
+          </Text>
+          <Text style={styles.email} category={"h6"}>
+            {user.email}
+          </Text>
+          <ButtonList data={rentingButtons} header={"Renting Made Easy"} />
+          <ButtonList data={accountButtons} header={"My Account"} />
+          <ButtonList data={rentalManagementButtons} header={"Rental Manager Tools"} />
+          <ButtonList data={firstSignedOutButtons} header="Properties" borderTop />
+          <ButtonList data={supportButtons} header="Support" marginTop borderTop />
+          <View style={[styles.specialMarginVertical, styles.defaultMarginHorizontal,]}>
+            <Button appearance={"ghost"} style={styles.button} onPress={logout}>{i18n.t('SignOut')}</Button>
+          </View>
+        </ScrollView>
+      )}
     </Screen>
   );
 };
 
 const styles = StyleSheet.create({
+  lottie: {
+    marginBottom: 50,
+    height: 250,
+    width: 250,
+    alignSelf: "center",
+  },
   container: {
     flex: 1,
   },
-  defaultMarginHorizontal: { marginHorizontal: 10},
+  defaultMarginHorizontal: { marginHorizontal: 10 },
   userName: {
     textAlign: "center",
     fontWeight: "600",
@@ -186,14 +168,17 @@ const styles = StyleSheet.create({
     borderTopColor: theme["color-gray"],
     borderTopWidth: 2,
   },
+  logo: {
+    width: '100%',
+    height: 250,
+    marginTop: 50,
+    marginLeft: 'auto',
+    resizeMode: 'contain',
+    marginRight: 'auto',
+    marginBottom: 120
+  },
   subheader: { textAlign: "center", paddingHorizontal: 20 },
   bodyText: { marginTop: 10, textAlign: "center", marginHorizontal: 15 },
   button: { marginBottom: 15, borderColor: theme["color-primary-500"] },
   specialMarginVertical: { marginTop: 30, marginBottom: 20 },
-  brandText: {
-    textAlign: "center",
-    color: theme["color-violet"],
-    fontSize: 24,
-    fontWeight: "700",
-  },
 });

@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme, DarkTheme, useTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName } from "react-native";
@@ -42,29 +42,29 @@ export default function Navigation({
 }) {
 
   DefaultTheme.dark = colorScheme === themes.dark ? true : false;
-
+  const wheeloColor = '#6f2da8'
   DefaultTheme.colors = {
-    primary: 'white', 
-    notification: 'red', 
-    background: '#2395c6',
+    ...DefaultTheme.colors,
     text: 'black',
-    border: '#6adbc7',
-    card: '#6adbc7'
-  };
+    notification: '#db322c', //powiadomienie na statusbarze liczba
+    primary: wheeloColor, 
+    secondary: 'yellow',
+    gray: '#e5eaef',
+    lightGray: '#cccccc'
+  } as any;
 
-  DarkTheme.colors = {...DarkTheme.colors, 
-    primary: '#efefef',
-    notification: 'red', 
-    background: '#8523c6',
-    text: 'white'
-  };
-
-  const MyTheme = DefaultTheme.dark ? DarkTheme : DefaultTheme;
-
-  //MyTheme.colors = DefaultTheme.dark ? Object.assign({secondary: 'red'}, MyTheme.colors) : Object.assign({secondary: 'orange'}, MyTheme.colors);
+  DarkTheme.colors = {
+    ...DarkTheme.colors, 
+    notification: '#db322c', 
+    text: 'white',
+    primary: wheeloColor,
+    secondary: 'green',
+    gray: '#484848',
+    lightGray: '#cccccc'
+  } as any;
 
   return (
-    <NavigationContainer linking={LinkingConfiguration} theme={MyTheme}>
+    <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme.dark ? DarkTheme : DefaultTheme}>
       <RootNavigator />
     </NavigationContainer>
   );
@@ -86,10 +86,7 @@ function RootNavigator(props: any) {
       }),
     });
 
-    const responseListener =
-      Notifications.addNotificationResponseReceivedListener(
-        handleNotificationResponse
-      );
+    const responseListener = Notifications.addNotificationResponseReceivedListener(handleNotificationResponse);
 
     return () => {
       if (responseListener)
@@ -158,13 +155,14 @@ function RootNavigator(props: any) {
 }
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
-
 function BottomTabNavigator() {
+  const {colors} = useTheme();
+  
   return (
     <BottomTab.Navigator
       initialRouteName="Search"
       screenOptions={{
-        tabBarActiveTintColor: theme["color-primary-500"],
+        tabBarActiveTintColor: colors.primary,
       }}
     >
       <BottomTab.Screen
@@ -236,7 +234,7 @@ const AccountStack = () => (
 );
 
 const ChatStackNavigator = createNativeStackNavigator<ChatTabParamList>();
-const ChatStack = () => ( //todo??
+const ChatStack = () => (
   <ChatStackNavigator.Navigator initialRouteName="Conversations">
     <ChatStackNavigator.Screen
       name="Conversations"

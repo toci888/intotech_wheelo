@@ -19,6 +19,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ReturnedResponse, RootStackParamList } from "../types";
 import { User } from "../types/user";
 import { commonAlert } from "../utils/handleError";
+import { Row } from "../components/Row";
 
 interface IUser {
   firstName: string;
@@ -41,10 +42,10 @@ export const SignUpScreen = () => {
   return (
     <KeyboardAwareScrollView bounces={false}>
       <Screen>
-        <ModalHeader text="Wheelo" xShown />
+        <ModalHeader text={i18n.t("SignUp")} xShown />
         <View style={styles.container}>
           <Text category={"h5"} style={styles.header}>
-             {i18n.t('SignUp')}
+             {/* {i18n.t('SignUp')} */}
           </Text>
           <Formik
             initialValues={{
@@ -170,21 +171,22 @@ export const SignUpScreen = () => {
                   </Button>
 
                   <OrDivider style={styles.orContainer} />
-
-                  <GoogleButton
-                    text="Sign up with Google"
-                    style={styles.button}
-                    onPress={async () => await googleAuth()}
-                  />
-                  <FacebookButton
-                    text="Sign up with Facebook"
-                    style={styles.button}
-                    onPress={async () => await facebookAuth()}
-                  />
-                  <AppleButton
-                    type="sign-up"
-                    onPress={async () => await appleAuth()}
-                  />
+                  <Row style={{justifyContent: "space-evenly"}}>
+                    <GoogleButton
+                      text="Sign up with Google"
+                      style={styles.button}
+                      onPress={async () => await googleAuth()}
+                    />
+                    <FacebookButton
+                      text="Sign up with Facebook"
+                      style={styles.button}
+                      onPress={async () => await facebookAuth()}
+                    />
+                    <AppleButton
+                      type="sign-up"
+                      onPress={async () => await appleAuth()}
+                    />
+                  </Row>
                 </>
               );
             }}

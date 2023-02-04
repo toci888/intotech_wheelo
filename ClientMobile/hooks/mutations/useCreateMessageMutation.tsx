@@ -8,7 +8,7 @@ import { MessageType, User } from "@flyerhq/react-native-chat-ui/lib/types";
 import { useUser } from "../useUser";
 
 const createMessage = (
-  conversationID: number,
+  roomId: number,
   idAccount: number,
   senderEmail: string,
   authorFirstName: string,
@@ -19,11 +19,11 @@ const createMessage = (
     idAccount,
     text,
     senderEmail,
-    ID: conversationID, //to delete
+    ID: roomId, //to delete
     CreatedAt: new Date(),
     authorFirstName,
     authorLastName,
-    RoomID: conversationID
+    RoomID: roomId
    });
 }
 
@@ -33,7 +33,7 @@ export const useCreateMessageMutation = () => {
 
   return useMutation(
     ({
-      conversationID,
+      roomId,
       author,
       idAccount,
       senderEmail,
@@ -43,7 +43,7 @@ export const useCreateMessageMutation = () => {
       text,
       imageUrl
     }: {
-      conversationID: number;
+      roomId: number;
       author: User;
       idAccount: number;
       senderEmail: string,
@@ -54,7 +54,7 @@ export const useCreateMessageMutation = () => {
       imageUrl: string;
     }) =>
       createMessage(
-        conversationID,
+        roomId,
         idAccount,
         authorFirstName,
         authorLastName,
@@ -65,7 +65,7 @@ export const useCreateMessageMutation = () => {
       onMutate: async ({
         author,
         text,
-        conversationID,
+        roomId,
         idAccount,
         authorFirstName,
         authorLastName,
@@ -100,12 +100,12 @@ export const useCreateMessageMutation = () => {
         if (prevConversations) {
           const newConversations = [...prevConversations];
           const index = newConversations.findIndex(
-            (i) => i.id === conversationID
+            (i) => i.id === roomId
           );
             console.log("MESSAGGGGEE", {
               createdAt: new Date().toString(),
               id: Date.now(),
-              roomID: conversationID,
+              roomID: roomId,
               senderEmail: user?.email as string,
               text,
               authorFirstName,
@@ -116,7 +116,7 @@ export const useCreateMessageMutation = () => {
           newConversations[index].messages.unshift({
             createdAt: Date.now(),
             id: Date.now(),
-            roomID: conversationID,
+            roomID: roomId,
             senderEmail: user?.email as string,
             text,
             authorFirstName,
@@ -145,11 +145,11 @@ export const useCreateMessageMutation = () => {
       },
       onSuccess: (
         _,
-        { author, senderEmail, conversationID, idAccount, text, authorFirstName, authorLastName }
+        { author, senderEmail, roomId, idAccount, text, authorFirstName, authorLastName }
       ) => {
 
         // createMessage(
-        //   conversationID,
+        //   roomId,
         //   idAccount,
         //   senderEmail,
         //   authorFirstName,

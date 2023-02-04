@@ -45,5 +45,12 @@
     "WhereDoYouLive":"Gdzie mieszkasz?",
     "WhatTimeAreYouGo":"O której wyjeżdżasz?",
     "WhereAreYouWorking":"Gdzie pracujesz?",
-    "WhatTimeAreYouComingBack":"O której wracasz?"
+    "WhatTimeAreYouComingBack":"O której wracasz?",
+    "or": "lub",
+    "YouDontHaveAnAccountYet": "Nie masz jeszcze konta?",
+    "ContinueWithGoogle": "Kontynuuj z Google",
+    "ContinueWithFacebook": "Kontynuuj z Facebook",
+    "ContinueWithApple": "Kontynuuj z Apple",
+    "SignInToStart": "Zaloguj się, aby rozpocząć",
+    "TypeAMessage": "Napisz wiadomość.."
 }
