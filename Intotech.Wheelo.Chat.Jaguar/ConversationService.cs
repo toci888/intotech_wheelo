@@ -96,7 +96,7 @@ public class ConversationService : IConversationService
 
         result.Conversations = new List<ConversationDto>();
 
-        List<int> roomsIds = RoomsAccountLogic.Select(m => m.Memberemail == email).Select(m => m.Idroom).Take(3).ToList();
+        List<int> roomsIds = RoomsAccountLogic.Select(m => m.Memberemail == email).Select(m => m.Idroom).ToList();
 
         foreach (int roomId in roomsIds)
         {
