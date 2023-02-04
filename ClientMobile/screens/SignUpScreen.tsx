@@ -37,7 +37,6 @@ export const SignUpScreen = () => {
   });
   const navigation = useNavigation();
   const { appleAuth, facebookAuth, googleAuth, nativeRegister } = useAuth();
-  const passwordValidationRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$"
 
   return (
     <KeyboardAwareScrollView bounces={false}>
