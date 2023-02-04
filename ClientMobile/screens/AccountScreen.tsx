@@ -98,46 +98,34 @@ export const AccountScreen = () => {
 
   return (
     <Screen>
-      <ScrollView style={styles.container}>
-      {!user && colorScheme === themes.light ? <Image style={styles.logo} source={require('../assets/images/wheelo.png')}/>
-      : <Image style={styles.logo} source={require('../assets/images/wheelo-darkTheme.png')}/>}
+      {!user ? (
         <View style={styles.defaultMarginHorizontal}>
-          {user ? (
-            <>
-              <Text style={[styles.userName, {color: colors.text}]} category={"h4"}>
-                {user.firstName ? `${i18n.t('Welcome')}, ${user.firstName}` : ""}
-              </Text>
-              <Text style={styles.email} category={"h6"}>
-                {user.email}
-              </Text>
-            </>
-          ) : (
-            <>
-              <Text style={[styles.header, {color: colors.text}]} category={"h4"}>
-                {i18n.t('Welcome')}!
-              </Text>
-              <SignUpAndSignInButtons />
-            </>
-          )}
+          {colorScheme === themes.light ?
+            <Image style={styles.logo} source={require('../assets/images/wheelo.png')} />
+            : <Image style={styles.logo} source={require('../assets/images/wheelo-darkTheme.png')} />}
+          <Text style={[styles.header, { color: colors.text }]} category={"h4"}>
+            {i18n.t('Welcome')}!
+          </Text>
+          <SignUpAndSignInButtons />
         </View>
-        {user && (
-          <>
-            <ButtonList data={rentingButtons} header={"Renting Made Easy"} />
-            <ButtonList data={accountButtons} header={"My Account"} />
-            <ButtonList
-              data={rentalManagementButtons}
-              header={"Rental Manager Tools"}
-            />
-            <ButtonList data={firstSignedOutButtons} header="Properties" borderTop />
-            <ButtonList data={supportButtons} header="Support" marginTop borderTop />
-            <View style={[styles.specialMarginVertical, styles.defaultMarginHorizontal,]}>
-              <Button appearance={"ghost"} style={styles.button} onPress={logout}>
-                {i18n.t('SignOut')}
-              </Button>
-            </View>
-          </>
-        )}
-      </ScrollView>
+      ) : (
+        <ScrollView style={styles.container}>
+          <Text style={[styles.userName, { color: colors.text }]} category={"h4"}>
+            {user.firstName ? `${i18n.t('Welcome')}, ${user.firstName}` : ""}
+          </Text>
+          <Text style={styles.email} category={"h6"}>
+            {user.email}
+          </Text>
+          <ButtonList data={rentingButtons} header={"Renting Made Easy"} />
+          <ButtonList data={accountButtons} header={"My Account"} />
+          <ButtonList data={rentalManagementButtons} header={"Rental Manager Tools"} />
+          <ButtonList data={firstSignedOutButtons} header="Properties" borderTop />
+          <ButtonList data={supportButtons} header="Support" marginTop borderTop />
+          <View style={[styles.specialMarginVertical, styles.defaultMarginHorizontal,]}>
+            <Button appearance={"ghost"} style={styles.button} onPress={logout}>{i18n.t('SignOut')}</Button>
+          </View>
+        </ScrollView>
+      )}
     </Screen>
   );
 };
@@ -152,7 +140,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  defaultMarginHorizontal: { marginHorizontal: 10},
+  defaultMarginHorizontal: { marginHorizontal: 10 },
   userName: {
     textAlign: "center",
     fontWeight: "600",
@@ -181,12 +169,12 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
   },
   logo: {
-    width: '100%', 
-    height: 250, 
-    marginTop: 50, 
-    marginLeft: 'auto', 
-    resizeMode: 'contain', 
-    marginRight: 'auto', 
+    width: '100%',
+    height: 250,
+    marginTop: 50,
+    marginLeft: 'auto',
+    resizeMode: 'contain',
+    marginRight: 'auto',
     marginBottom: 120
   },
   subheader: { textAlign: "center", paddingHorizontal: 20 },
