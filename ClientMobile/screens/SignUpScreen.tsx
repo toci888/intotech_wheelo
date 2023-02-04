@@ -26,7 +26,7 @@ interface IUser {
   email: string;
   password: string;
 }
-type SignUpProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>
+type SignUpProps = NativeStackScreenProps<RootStackParamList, "SignUp">;
 
 export const SignUpScreen = () => {
   const [user, setUser] = useState<IUser>({
@@ -37,6 +37,7 @@ export const SignUpScreen = () => {
   });
   const navigation = useNavigation();
   const { appleAuth, facebookAuth, googleAuth, nativeRegister } = useAuth();
+  const passwordValidationRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$"
 
   return (
     <KeyboardAwareScrollView bounces={false}>
@@ -44,7 +45,7 @@ export const SignUpScreen = () => {
         <ModalHeader text="Wheelo" xShown />
         <View style={styles.container}>
           <Text category={"h5"} style={styles.header}>
-             {i18n.t('SignUp')}
+            {i18n.t("SignUp")}
           </Text>
           <Formik
             initialValues={{
@@ -61,22 +62,28 @@ export const SignUpScreen = () => {
                 .string()
                 .required("A password is required.")
                 .matches(
-                  /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&-+=()!? "]).{8,128}$/,
+                  // all special chars except ] because of regex string construction
+                  /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&-+=()!?.,[;:<>~{_} "]).{8,128}$/,
                   "Your password must have 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 special character."
                 ),
             })}
             onSubmit={async (values) => {
-              const response: ReturnedResponse<User> | undefined = await nativeRegister(values);
-              if(response) {
-                console.log("valuess", values)
-                console.log("response", response)
-                if ((response.isSuccess === true && response.errorCode === 1)
-                || (response.isSuccess === false && response.errorCode === 16384)) {
-                  navigation.navigate("CodeVerification", {user: values, type: "email"});
-                }
-                else if(response.isSuccess === false) {
-                  console.log("response.isSuccess", response)
-                  commonAlert(response.errorMessage)
+              const response: ReturnedResponse<User> | undefined =
+                await nativeRegister(values);
+              if (response) {
+                console.log("valuess", values);
+                console.log("response", response);
+                if (
+                  (response.isSuccess === true && response.errorCode === 1) ||
+                  (response.isSuccess === false && response.errorCode === 16384)
+                ) {
+                  navigation.navigate("CodeVerification", {
+                    user: values,
+                    type: "email",
+                  });
+                } else if (response.isSuccess === false) {
+                  console.log("response.isSuccess", response);
+                  commonAlert(response.errorMessage);
                 }
               }
             }}
