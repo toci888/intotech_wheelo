@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import { Location } from "../types/locationIQ";
 import { os } from "../constants/constants";
+import useTheme from "../hooks/useTheme";
 
 export const HeaderInput = ({ type, location, setLocation, time, setTime }: 
   { 
@@ -19,21 +20,32 @@ export const HeaderInput = ({ type, location, setLocation, time, setTime }:
     setTime: (time: string) => void
   }) => {
   const navigation = useNavigation();
-
+  const { colors } = useTheme();
   const [showDate, setShowDate] = useState(false);
   
+  const inputStyles = {
+    // backgroundColor: 'gray',
+    marginTop: 8,
+    marginBottom: Platform.OS === "ios" ? 5 : 15,
+    borderWidth: 1,
+    borderColor: theme["color-gray"],
+    borderRadius: 20,
+    padding: 8,
+    
+  }
+
   return (
     <View style={{flexDirection: 'row'}}>
-      <TouchableOpacity style={styles.container} onPress={() => { navigation.navigate("FindLocations", {type, location, setLocation} as any) }}>
+      <TouchableOpacity style={[styles.container, inputStyles]} onPress={() => { navigation.navigate("FindLocations", {type, location, setLocation} as any) }}>
         <Row style={{alignItems: 'center'}}>
-          <Text style={[styles.input]}>{typeof(location) === 'string' ? location : location.display_name}</Text>
-          <MaterialIcons name="gps-fixed" size={24} color={theme["color-primary-500"]} style={styles.icon}/>
+          <Text style={[styles.input, {color: colors.gray}]}>{typeof(location) === 'string' ? location : location.display_name}</Text>
+          <MaterialIcons name="gps-fixed" size={24} color={colors.primary} style={styles.icon}/>
         </Row>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.dateContainer} onPress={() => setShowDate(true)}>
+      <TouchableOpacity style={[styles.dateContainer, inputStyles]} onPress={() => setShowDate(true)}>
         <Row style={{alignItems: 'center'}}>
-          <Text style={styles.inputTime}>{time}</Text>
+          <Text style={[styles.inputTime, {color: colors.gray}]}>{time}</Text>
         </Row>
         
         { Platform.OS === os.ios ? 
@@ -83,26 +95,12 @@ export const HeaderInput = ({ type, location, setLocation, time, setTime }:
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 8,
-    marginBottom: Platform.OS === "ios" ? 5 : 15,
-    backgroundColor: theme["color-white"],
-    borderWidth: 1,
-    borderColor: theme["color-gray"],
-    borderRadius: 20,
-    padding: 8,
-    width: 250
+    width: '70%'
   },
   dateContainer: {
-    marginTop: 8,
     marginLeft: 'auto',
-    marginBottom: Platform.OS === "ios" ? 5 : 15,
-    backgroundColor: theme["color-white"],
-    borderWidth: 1,
-    borderColor: theme["color-gray"],
-    borderRadius: 20,
-    padding: 8,
-    width: 100,
-    textAlign: 'center'
+    width: '25%',
+    textAlign: 'center',
   },
   input: {
     flex: 1,

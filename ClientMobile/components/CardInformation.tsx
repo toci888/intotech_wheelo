@@ -14,20 +14,22 @@ import { i18n } from "../i18n/i18n";
 import { useSaveCollocationMutation } from "../hooks/mutations/useSaveCollocationMutation";
 import { useConversationsQuery } from "../hooks/queries/useConversationsQuery";
 import { TransformedConversation } from "../types/conversation";
+import useTheme from "../hooks/useTheme";
 
 export const CardInformation = ({
   collocation,
   myCollocation,
-  conversationID
+  roomId
 }: {
   collocation: CollocateAccount;
   myCollocation?: boolean;
-  conversationID?: number;
+  roomId?: number;
 }) => {
   const navigation = useNavigation();
   const { user, setSavedProperties } = useUser();
   const saveCollocation = useSaveCollocationMutation();
   const conversations = useConversationsQuery();
+  const {colors} = useTheme();
 
   const alterUsersSavedProperties = (
     collocationID: number,
@@ -49,17 +51,17 @@ export const CardInformation = ({
     // }) 
     // ?
     //   navigation.navigate("Messages", {
-    //     conversationID: 0,
+    //     roomId: 0,
     //     recipientName: collocation?.name,
     //   }) : 
 
     if (conversations.data) {
       for (let i=0; i<conversations.data.length; i++) {
         if(collocation.name === conversations.data[i].recipientName) {
-          console.log("znalazlem: ", conversations.data[i], collocation)
+          console.log("znalazlem: ", conversations.data[i].recipientName, conversations.data[i].id, collocation.idAccount, collocation.name)
           break;
         } else {
-          console.log("Nie pasuje: ", conversations.data, collocation);
+          console.log("Nie pasuje: ", conversations.data[i].recipientName, conversations.data[i].id, collocation.idAccount, collocation.name)
         }
       }
     }
@@ -198,7 +200,7 @@ export const CardInformation = ({
   );
 
   return (
-    <View style={styles.informationContainer}>
+    <View style={[{backgroundColor: colors.background}, styles.informationContainer]}>
       {myCollocation ? <MyPropertyInfo /> : <DefaultInfo />}
     </View>
   );

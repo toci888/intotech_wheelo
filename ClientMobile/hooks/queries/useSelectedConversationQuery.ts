@@ -8,12 +8,12 @@ import { useUser } from "../useUser";
 import { Author, SelectedConversation } from "../../types/conversation";
 
 const fetchConversation = async (
-  conversationID: number,
+  roomId: number,
   userID?: number,
   token?: string
 ): Promise<SelectedConversation> => {
-  console.log("CzatKlik", `${endpoints.getConversationByID}?roomId=${conversationID}`, token)
-  const response = await axios.get(`${endpoints.getConversationByID}?roomId=${conversationID}`,
+  console.log("CzatKlik", `${endpoints.getConversationByID}?roomId=${roomId}`, token)
+  const response = await axios.get(`${endpoints.getConversationByID}?roomId=${roomId}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -58,11 +58,11 @@ const fetchConversation = async (
   return conversation;
 };
 
-export const useSelectedConversationQuery = (conversationID: number) => {
+export const useSelectedConversationQuery = (roomId: number) => {
   const { user } = useUser();
 
   return useQuery(queryKeys.selectedConversation, () =>
-    fetchConversation(conversationID, user?.id, user?.accessToken)
+    fetchConversation(roomId, user?.id, user?.accessToken)
   );
 };
 

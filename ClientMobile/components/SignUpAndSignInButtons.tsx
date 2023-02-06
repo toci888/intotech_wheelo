@@ -10,34 +10,23 @@ import { AppleButton } from "./AppleButton";
 import { OrDivider } from "./OrDivider";
 import { useAuth } from "../hooks/useAuth";
 import useTheme from "../hooks/useTheme";
+import { i18n } from "../i18n/i18n";
 
 export const SignUpAndSignInButtons = ({ style }: { style?: ViewStyle }) => {
   const navigation = useNavigation();
-  const { nativeLogin, facebookAuth, googleAuth, appleAuth } = useAuth();
   const { colors } = useTheme();
+  
   return (
     <View style={style}>
-      <Text style={styles.bodyText}>Zaloguj się, aby rozpocząć</Text>
-      <Button onPress={() => navigation.navigate("SignIn")} style={{backgroundColor: colors.primary}}>Zaloguj</Button>
-      <Text style={styles.bodyText}>
-        Nie masz jeszcze konta?{" "}
-        <Text style={styles.link} onPress={() => navigation.navigate("SignUp")}>
-          Zarejestruj się
-        </Text>
-      </Text>
-      <OrDivider style={styles.orContainer} />
-
-      <GoogleButton
-        text="Continue with Google"
-        style={styles.button}
-        onPress={async () => await googleAuth()}
-      />
-      <FacebookButton
-        text="Continue with Facebook"
-        style={styles.button}
-        onPress={async () => await facebookAuth()}
-      />
-      <AppleButton type="sign-in" onPress={async () => await appleAuth()} />
+      <Text style={[styles.bodyText, { color: colors.lightGray }]}>{i18n.t("SignInToStart")}</Text>
+      <Button onPress={() => navigation.navigate("SignIn")} style={{ 
+        backgroundColor: colors.primary, borderColor: colors.primary, 
+        width: '100%', marginLeft: 'auto', marginRight: 'auto' }}>{i18n.t("SignIn")}</Button>
+      <Text style={[styles.bodyText, { color: colors.lightGray }]}>{i18n.t('YouDontHaveAnAccountYet')}</Text>
+      <Button appearance="outline" onPress={() => navigation.navigate("SignUp")} style={{ 
+        borderColor: colors.primary, width: '100%', marginLeft: 'auto', marginRight: 'auto' }}>
+          <Text>{i18n.t("SignUp")}</Text>
+      </Button>
     </View>
   );
 };
@@ -83,11 +72,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginHorizontal: 15,
     marginBottom: 15,
-    color: theme["color-violet"],
   },
-  button: { marginBottom: 15, borderColor: theme["color-primary-500"] },
+  button: { marginBottom: 15 },
   specialMarginVertical: { marginTop: 30, marginBottom: 20 },
-  link: { fontWeight: "600", color: theme["color-violet"] },
+  link: { fontWeight: "600" },
   orContainer: {
     marginVertical: 30,
   },

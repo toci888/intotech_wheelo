@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text, Platform } from "react-native";
-import { Chat, MessageType, defaultTheme, User } from "@flyerhq/react-native-chat-ui";
-import { useNavigation } from "@react-navigation/native";
+import { Chat, MessageType, defaultTheme, User, darkTheme } from "@flyerhq/react-native-chat-ui";
+import { DarkTheme, DefaultTheme, useNavigation } from "@react-navigation/native";
 import { useActionSheet } from '@expo/react-native-action-sheet'
 import DocumentPicker from 'react-native-document-picker'
 import { launchImageLibrary } from 'react-native-image-picker'
@@ -9,32 +9,34 @@ import FileViewer from 'react-native-file-viewer'
 import { PreviewData } from '@flyerhq/react-native-link-preview'
 
 import { useUser } from "../hooks/useUser";
-import { SignUpOrSignInScreen } from "./SignUpOrSignInScreen";
-import { theme } from "../theme";
+import { mapStandardStyle, theme } from "../theme";
 import { useSelectedConversationQuery } from "../hooks/queries/useSelectedConversationQuery";
 import { Loading } from "../components/Loading";
 import { useCreateMessageMutation } from "../hooks/mutations/useCreateMessageMutation";
 import { i18n } from "../i18n/i18n";
+import useColorScheme from "../hooks/useColorScheme";
+import { themes } from "../constants/constants";
+// import { ModalHeader } from "../components/ModalHeader";
 
 export const MessagesScreen = ({
   route,
 }: {
-  route: { params: { conversationID: number; recipientName: string } };
+  route: { params: { roomId: number; recipientName: string } };
 }) => {
   const { showActionSheetWithOptions } = useActionSheet()
-  
+
   const title = route.params.recipientName.includes("%20")
     ? route.params.recipientName.replaceAll("%20", " ")
     : route.params.recipientName.includes("%")
-    ? route.params.recipientName.replaceAll("%", " ")
-    : route.params.recipientName;
+      ? route.params.recipientName.replaceAll("%", " ")
+      : route.params.recipientName;
   const navigation = useNavigation();
-  navigation.setOptions({
-    title: title
-  });
+  // navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
+  // navigation.setOptions({ tabBarStyle: { display: "none" } });
   const { user } = useUser();
   console.log("ConversationID", route.params)
-  const conversation = useSelectedConversationQuery(route.params.conversationID);
+  const colorScheme = useColorScheme();
+  const conversation = useSelectedConversationQuery(route.params.roomId);
   const createMessage = useCreateMessageMutation();
   // const [messages, setMessages] = useState({} as any)
 
@@ -42,14 +44,14 @@ export const MessagesScreen = ({
   if (conversation.isLoading) return <Loading />;
 
   if (!conversation.data) return <><Text>{i18n.t('UnableToGetChat')}</Text></>;
-  
+
   const handleSendPress = (message: MessageType.PartialText) => {
     console.log("MESSAGExx", message)
     if (conversation)
       createMessage.mutate({
         idAccount: user!.id,
         author: conversation.data.author,
-        conversationID: conversation.data.id,
+        roomId: conversation.data.id,
         receiverID: conversation.data.id,
         senderEmail: user!.email,
         text: message.text,
@@ -75,7 +77,7 @@ export const MessagesScreen = ({
         uri: response.uri,
       }
       addMessage(fileMessage)
-    } catch {}
+    } catch { }
   }
 
   const addMessage = (message: MessageType.Any) => {
@@ -155,6 +157,8 @@ export const MessagesScreen = ({
   }
 
   return (
+    <>
+    {/* <ModalHeader text="a" xShown onPress={() => {navigation.getParent()?.setOptions({ tabBarStyle: { display: "display" } }); navigation.goBack()}}/> */}
     <Chat
       messages={conversation.data.messages}
       onSendPress={handleSendPress}
@@ -166,22 +170,30 @@ export const MessagesScreen = ({
       enableAnimation
       showUserNames
       showUserAvatars
-      // l10nOverride={{ inputPlaceholder: 'Here' }}
+      l10nOverride={{ inputPlaceholder: i18n.t('TypeAMessage') }}
       // locale='en'
+      inputProps={{}}
       textInputProps={{
         style: styles.textInputProps,
       }}
-      theme={{
+      theme={colorScheme === themes.dark ? {
+        ...darkTheme,
+        colors: {
+          ...darkTheme.colors,
+        }
+      } : {
         ...defaultTheme,
         colors: {
           ...defaultTheme.colors,
           primary: theme["color-primary-500"],
           secondary: theme["color-light-gray"],
           inputText: "black",
-          inputBackground: "white",
-        },
-      }}
+          inputBackground: "white" //TODO
+        }
+      }
+      }
     />
+    </>
   );
 };
 
