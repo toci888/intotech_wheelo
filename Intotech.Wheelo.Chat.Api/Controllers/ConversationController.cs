@@ -26,6 +26,12 @@ namespace Intotech.Wheelo.Chat.Api.Controllers
             return Service.GetConversationById(roomId);
         }
 
+        [HttpGet("get-conversation-by-room-id")]
+        public ConversationDto GetConversationById(string roomId)
+        {
+            return Service.GetConversationById(roomId);
+        }
+
         [HttpPost("get-conversations-by-user-email")]
         public FullConversationsDto GetConversationsByAccountId(EmailDto email)
         {

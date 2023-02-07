@@ -35,6 +35,8 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.User
 
         ReturnedResponse<PushTokenDto> SetPushToken(int idAccount, PushTokenDto pushToken);
 
+        ReturnedResponse<bool> ResendEmailVerificationCode(string email);
+
         List<Account> GetAllUsers(); // temporary, development purpose, TODO REMOVE
     }
 }

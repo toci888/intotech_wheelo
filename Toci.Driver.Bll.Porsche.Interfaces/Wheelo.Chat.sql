@@ -21,7 +21,7 @@ create table AccountChat
 create table Rooms
 (
 	id serial primary key,
-	--roomId text not null unique,
+	roomId text not null unique,
 	ownerId text not null,
 	roomName text,
 	createdat timestamp default now()

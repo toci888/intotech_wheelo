@@ -134,12 +134,15 @@ public partial class IntotechWheeloChatContext : DbContext
 
             entity.ToTable("rooms");
 
+            entity.HasIndex(e => e.Roomid, "rooms_roomid_key").IsUnique();
+
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Createdat)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
             entity.Property(e => e.Ownerid).HasColumnName("ownerid");
+            entity.Property(e => e.Roomid).HasColumnName("roomid");
             entity.Property(e => e.Roomname).HasColumnName("roomname");
         });
 

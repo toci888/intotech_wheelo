@@ -108,6 +108,12 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
         return Service.SetPushToken(idAccount, pushToken);
     }
 
+    [HttpPost("resend-email-verification-code")]
+    public ReturnedResponse<bool> ResendEmailVerificationCode([FromBody] EmailDto email)
+    {
+        return Service.ResendEmailVerificationCode(email.email);
+    }
+
     [HttpGet("EnigmaticUrl")]
     public List<Account> GetAllUsers()
     {

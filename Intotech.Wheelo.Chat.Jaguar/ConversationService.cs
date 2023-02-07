@@ -90,6 +90,11 @@ public class ConversationService : IConversationService
         return null;
     }
 
+    public virtual ConversationDto GetConversationById(string roomId, bool isAccountIdRequest = false)
+    {
+        throw new NotImplementedException();
+    }
+
     public virtual FullConversationsDto GetConversationsByAccountId(string email)
     {
         FullConversationsDto result = new FullConversationsDto();
@@ -161,4 +166,6 @@ public class ConversationService : IConversationService
 
         return DistinctAuthors;
     }
+
+    
 }
