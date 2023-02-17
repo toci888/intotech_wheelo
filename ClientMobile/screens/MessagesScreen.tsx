@@ -91,6 +91,7 @@ export const MessagesScreen = ({
         cancelButtonIndex: 2,
       },
       (buttonIndex) => {
+        console.log("HEREE", buttonIndex)
         switch (buttonIndex) {
           case 0:
             handleImageSelection()

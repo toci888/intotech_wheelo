@@ -109,6 +109,7 @@ export const queryKeys = {
   selectedConversation: "selectedConversation",
 };
 
+//"ios" | "android" | "windows" | "macos" | "web"
 export const os = {
   android: "android",
   ios: "ios"

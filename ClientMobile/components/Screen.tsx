@@ -10,7 +10,7 @@ export const Screen = ({
   children,
   style,
 }: {
-  children: any;
+  children: React.FC<any> | any;
   style?: ViewStyle;
 }) => {
   const { loading } = useLoading();
@@ -27,5 +27,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: Platform.OS === os.android ? StatusBar.currentHeight : 0,
+    // paddingTop: StatusBar.currentHeight
   },
 });

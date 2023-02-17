@@ -1,4 +1,4 @@
-import { ScrollView, View, StyleSheet, Linking, Dimensions, Image } from "react-native";
+import { ScrollView, View, StyleSheet, Linking, Dimensions, Image, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Text, Button } from "@ui-kitten/components";
 
@@ -99,7 +99,7 @@ export const AccountScreen = () => {
   return (
     <Screen>
       {!user ? (
-        <View style={styles.defaultMarginHorizontal}>
+        <View style={[styles.defaultMarginHorizontal, styles.container]}>
           {colorScheme === themes.light ?
             <Image style={styles.logo} source={require('../assets/images/wheelo.png')} />
             : <Image style={styles.logo} source={require('../assets/images/wheelo-darkTheme.png')} />}
@@ -175,7 +175,8 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     resizeMode: 'contain',
     marginRight: 'auto',
-    marginBottom: 120
+    marginBottom: Platform.OS === "ios" ? 120 : 40
+    //Dimensions.get("screen").height / (Platform.OS === "ios" ? 30 : 10)
   },
   subheader: { textAlign: "center", paddingHorizontal: 20 },
   bodyText: { marginTop: 10, textAlign: "center", marginHorizontal: 15 },

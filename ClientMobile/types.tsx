@@ -109,6 +109,7 @@ export type registerDto = {
   email: string;
   password: string;
   method?: string;
+  device?: string;
 }
 
 export type loginDto = {

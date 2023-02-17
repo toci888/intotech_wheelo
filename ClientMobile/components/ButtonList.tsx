@@ -28,9 +28,7 @@ export const ButtonList = ({
   };
 
   return (
-    <View
-      style={[styles.container, style, { borderTopWidth: borderTop ? 1 : 0 }]}
-    >
+    <View style={[styles.container, style, { borderTopWidth: borderTop ? 1 : 0 }]}>
       {getListHeaderComponent()}
       {data.map((item, index) => (
         <Pressable
@@ -40,7 +38,7 @@ export const ButtonList = ({
             let arr: any[] = [
               styles.option,
               {
-                backgroundColor: pressed ? theme["color-gray"] : "",
+                backgroundColor: pressed ? theme["color-gray"] : theme["color-black"],
               },
             ];
 

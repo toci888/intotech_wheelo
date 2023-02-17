@@ -1,4 +1,4 @@
-import { View, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Alert, Platform } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Text, Input, Button } from "@ui-kitten/components";
 import * as yup from "yup";
@@ -36,7 +36,7 @@ export const SignInScreen = () => {
           </Text>
           <Formik
             initialValues={{
-              email: "bartek@gg.pl",
+              email: Platform.OS === "ios" ? "bartek@gg.pl" : "warriorr@poczta.fm",
               password: "Beatka123(",
             }}
             validationSchema={yup.object().shape({

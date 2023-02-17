@@ -6,12 +6,15 @@ import { commonAlert, handleError } from "../utils/handleError";
 import * as Crypto from 'expo-crypto';
 import { loginDto, registerDto, ThemeMode as boolean } from "../types";
 import { ReturnedResponse } from "../types";
+import { Platform } from "react-native";
 
 export const registerUser = async (values: registerDto) => {
   try {
     values.password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, values.password);
     values.method = 'wheelo';
+    values.device = Platform.OS;
 
+    console.log("REGLECI", endpoints.register, values)
     const { data } = await axios.post(endpoints.register, values);
     return data as ReturnedResponse<User>;
   } catch (error) {

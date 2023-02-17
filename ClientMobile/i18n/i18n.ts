@@ -11,3 +11,5 @@ export const i18n = new I18n({
 
 i18n.locale = Localization.locale; // todo
 i18n.enableFallback = true;
+
+export type TranslationKeys = keyof typeof import('./pl.json');
