@@ -77,7 +77,7 @@ export default function App() {
             createdAt: Date;
             authorFirstName: string;
             authorLastName: string;
-            RoomID: number;
+            RoomID: string;
           }}) => {
             let data = message.chatMessage;
             

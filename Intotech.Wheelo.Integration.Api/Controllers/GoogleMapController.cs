@@ -34,8 +34,8 @@ namespace Intotech.Wheelo.Integration.Api.Controllers
         [HttpGet("address-autocomplete")]
         public virtual GeographicLocation[] GetAutocompleteHints(string query)
         {
-            
-            return Service.GetLocationsByQueryText(query);
+            var x = Service.GetLocationsByQueryText(query);
+            return x;
         }
 
         [HttpGet("current-button-location")]

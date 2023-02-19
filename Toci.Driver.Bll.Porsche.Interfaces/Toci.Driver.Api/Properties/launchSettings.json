@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Toci.Driver.Api": {
+    "Intotech.Driver.Api": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
@@ -8,7 +8,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://20.203.135.11:5105"
+      "applicationUrl": "http://40.82.192.15:5105"
     },
     "IIS Express": {
       "commandName": "IISExpress",

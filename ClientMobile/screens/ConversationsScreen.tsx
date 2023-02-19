@@ -37,7 +37,7 @@ export const ConversationsScreen = () => {
     return <Text>{i18n.t("YouHaveNoMessages")}</Text>;
   }
 
-  const handleMessagePress = async (roomId: number, recipientName: string) => {
+  const handleMessagePress = async (roomId: string, recipientName: string) => {
     await socket.invoke("JoinRoom", roomId);
     console.log("Message Pressed", roomId, recipientName);
     // navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
@@ -56,7 +56,7 @@ export const ConversationsScreen = () => {
       <FlatList
         showsVerticalScrollIndicator={true}
         data={conversations.data}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.idRoom.toString()}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
@@ -66,14 +66,14 @@ export const ConversationsScreen = () => {
         renderItem={({ item }) => (
           <Pressable
             style={styles.message}
-            onPress={() => handleMessagePress(item.id, item.recipientName)}
+            onPress={() => handleMessagePress(item.roomId, item.recipientName)}
           >
             <Row style={styles.row}>
               <Text
                 style={[styles.messageTitle, { color: colors.text }]}
                 numberOfLines={1}
               >
-                {item.recipientName} RoomId:{item.id}
+                {item.recipientName} RoomId:{item.idRoom}
               </Text>
               <Text appearance="hint">
                 {new Date(item.messages[0].createdAt).toLocaleDateString()}

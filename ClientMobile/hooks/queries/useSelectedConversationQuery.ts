@@ -8,7 +8,7 @@ import { useUser } from "../useUser";
 import { Author, SelectedConversation } from "../../types/conversation";
 
 const fetchConversation = async (
-  roomId: number,
+  roomId: string,
   userID?: number,
   token?: string
 ): Promise<SelectedConversation> => {
@@ -49,7 +49,8 @@ const fetchConversation = async (
 
   console.log("DOTARŁEM", convAuthor)
   const conversation: SelectedConversation = {
-    id: data.id,
+    idRoom: data.idRoom,
+    roomId: data.roomId,
     receiverID: convAuthor.id,
     messages,
     author: convAuthor
@@ -58,7 +59,7 @@ const fetchConversation = async (
   return conversation;
 };
 
-export const useSelectedConversationQuery = (roomId: number) => {
+export const useSelectedConversationQuery = (roomId: string) => {
   const { user } = useUser();
 
   return useQuery(queryKeys.selectedConversation, () =>
@@ -67,7 +68,8 @@ export const useSelectedConversationQuery = (roomId: number) => {
 };
 
 type ConversationRes = {
-  id: number;
+  idRoom: number;
+  roomId: string;
   idAccount: number;
   CreatedAt: string;
   ownerID: number;

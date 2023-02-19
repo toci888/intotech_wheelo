@@ -72,9 +72,19 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             {
                 StoreHistoryDataWorkTrip(workTrips);
             }
-            
-            workTripGenRecord = WorktripGenLogic.Insert(workTripGenRecord);
-            
+
+            //WorktripGenLogic.Delete(workTripGenRecord);
+            //workTripGenRecord = WorktripGenLogic.Insert(workTripGenRecord);
+
+            if (workTripGenRecord.Id < 1)
+            {
+                workTripGenRecord = WorktripGenLogic.Insert(workTripGenRecord);
+            }
+            else
+            {
+                workTripGenRecord = WorktripGenLogic.Update(workTripGenRecord);
+            }
+
             Collocate(workTripGenRecord);
 
             return GetTripCollocation(workTripGenRecord.Idaccount, workTripGenRecord.Searchid);
@@ -256,9 +266,9 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             {
                 Worktrip worktripHistoryRecord = DtoModelMapper.Map<Worktrip, Worktripgen>(worktripgenRecord);
 
-                WorkTripHistoryLogic.Insert(worktripHistoryRecord);
+                worktripHistoryRecord.Id = 0;
 
-                WorktripGenLogic.Delete(worktripgenRecord);
+                WorkTripHistoryLogic.Insert(worktripHistoryRecord);
 
                 int count = AccountscollocationLogic.Delete("Accountcollocations","idaccount = " + worktripgenRecord.Idaccount + " or idcollocated = " + worktripgenRecord.Idaccount);
             }

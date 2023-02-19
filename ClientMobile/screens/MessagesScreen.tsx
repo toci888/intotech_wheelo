@@ -21,7 +21,7 @@ import { themes } from "../constants/constants";
 export const MessagesScreen = ({
   route,
 }: {
-  route: { params: { roomId: number; recipientName: string } };
+  route: { params: { roomId: string; recipientName: string } };
 }) => {
   const { showActionSheetWithOptions } = useActionSheet()
 
@@ -51,8 +51,9 @@ export const MessagesScreen = ({
       createMessage.mutate({
         idAccount: user!.id,
         author: conversation.data.author,
-        roomId: conversation.data.id,
-        receiverID: conversation.data.id,
+        roomId: conversation.data.roomId,
+        idRoom: conversation.data.idRoom,
+        receiverID: 1, //TODO
         senderEmail: user!.email,
         text: message.text,
         authorFirstName: conversation.data.messages[0].author.firstName ? conversation.data.messages[0].author.firstName : "",
@@ -69,7 +70,7 @@ export const MessagesScreen = ({
       const fileMessage: MessageType.File = {
         author: conversation.data.author,
         createdAt: Date.now(),
-        id: conversation.data.id.toString(),
+        id: conversation.data.roomId.toString(),
         mimeType: response.type ?? undefined,
         name: response.name as string,
         size: response.size ?? 0,
@@ -121,7 +122,7 @@ export const MessagesScreen = ({
             author: conversation.data.author,
             createdAt: Date.now(),
             height: response.height,
-            id: conversation.data.id.toString(),
+            id: conversation.data.roomId.toString(),
             name: response.fileName ?? response.uri?.split('/').pop() ?? '🖼',
             size: response.fileSize ?? 0,
             type: 'image',

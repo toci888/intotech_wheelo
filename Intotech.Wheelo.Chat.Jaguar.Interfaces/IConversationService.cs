@@ -6,5 +6,9 @@ public interface IConversationService
 {
     ConversationDto GetConversationById(int roomId, bool isAccountIdRequest = false);
 
-    FullConversationsDto GetConversationsByAccountId(string email);
+    ConversationDto GetConversationById(string roomId, bool isAccountIdRequest = false);
+
+    FullConversationsDto GetConversationsByEmail(string email);
+
+    ConversationDto GetPersonalConversation(int IdAccount, int idFriendAccount);
 }

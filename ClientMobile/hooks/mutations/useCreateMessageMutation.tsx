@@ -8,22 +8,31 @@ import { MessageType, User } from "@flyerhq/react-native-chat-ui/lib/types";
 import { useUser } from "../useUser";
 
 const createMessage = (
-  roomId: number,
+  idRoom: number,
+  roomId: string,
   idAccount: number,
   senderEmail: string,
   authorFirstName: string,
   authorLastName: string,
   text: string,
 ) => {
+  console.log('responsxd', {
+    idAccount,
+    text,
+    senderEmail,
+    roomId,
+    CreatedAt: new Date(),
+    authorFirstName,
+    authorLastName,
+   })
   return socket.invoke('sendMessage',  {
     idAccount,
     text,
     senderEmail,
-    ID: roomId, //to delete
+    roomId,
     CreatedAt: new Date(),
     authorFirstName,
     authorLastName,
-    RoomID: roomId
    });
 }
 
@@ -33,6 +42,7 @@ export const useCreateMessageMutation = () => {
 
   return useMutation(
     ({
+      idRoom,
       roomId,
       author,
       idAccount,
@@ -43,7 +53,8 @@ export const useCreateMessageMutation = () => {
       text,
       imageUrl
     }: {
-      roomId: number;
+      idRoom: number,
+      roomId: string;
       author: User;
       idAccount: number;
       senderEmail: string,
@@ -54,17 +65,19 @@ export const useCreateMessageMutation = () => {
       imageUrl: string;
     }) =>
       createMessage(
+        idRoom,
         roomId,
         idAccount,
         authorFirstName,
         authorLastName,
         imageUrl,
-        text
+        text,
       ),
     {
       onMutate: async ({
         author,
         text,
+        idRoom,
         roomId,
         idAccount,
         authorFirstName,
@@ -100,7 +113,7 @@ export const useCreateMessageMutation = () => {
         if (prevConversations) {
           const newConversations = [...prevConversations];
           const index = newConversations.findIndex(
-            (i) => i.id === roomId
+            (i) => i.idRoom === idRoom
           );
             console.log("MESSAGGGGEE", {
               createdAt: new Date().toString(),

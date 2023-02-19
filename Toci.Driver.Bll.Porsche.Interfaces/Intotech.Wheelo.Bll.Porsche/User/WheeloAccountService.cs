@@ -551,6 +551,18 @@ namespace Intotech.Wheelo.Bll.Porsche.User
           //  }
         }
 
+        public virtual ReturnedResponse<bool> ResendEmailVerificationCode(string email)
+        {
+            Account accToRefreshCode = AccLogic.Select(m => m.Email == email).FirstOrDefault();
+
+            if (accToRefreshCode != null)
+            {
+                return new ReturnedResponse<bool>(ResendEmailVerificationCode(accToRefreshCode.Id), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            }
+
+            return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated); ;
+        }
+
         protected virtual bool ResendEmailVerificationCode(int accountId)
         {
             Account accToRefreshCode = AccLogic.Select(m => m.Id == accountId).First();

@@ -9,6 +9,8 @@ public partial class Useractivity
 
     public string Email { get; set; } = null!;
 
+    public int Idaccount { get; set; }
+
     public DateTime? Connectedfrom { get; set; }
 
     public DateTime? Connectedto { get; set; }

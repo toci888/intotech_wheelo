@@ -39,7 +39,7 @@ export const MessagePropertyScreen = ({
   if (conversations.isLoading) return <Loading />;
 
   const navigateToMessageScreen = (
-    roomId: number,
+    roomId: string,
     recipientName: string
   ) => {
     navigation.navigate("Root", {
@@ -51,17 +51,17 @@ export const MessagePropertyScreen = ({
           roomId,
           recipientName,
         },
-      },
+      } as any,
     });
   };
 
   if (conversations?.data && conversations.data.length > 0) {
     const index = conversations.data.findIndex(
-      (i) => i.id === route.params.collocationID
+      (i) => i.idRoom === route.params.collocationID
     );
     if (index >= 0) {
       navigateToMessageScreen(
-        conversations.data[index].id,
+        conversations.data[index].roomId,
         conversations.data[index].recipientName
       );
     }

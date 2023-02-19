@@ -25,7 +25,7 @@ androidHeight += androidNotch;
 
 export const HEADERHEIGHT = Platform.OS === "ios" ? iosHeight : androidHeight;
 
-export const server = "http://20.203.135.11";
+export const server = "http://40.82.192.15";
 
 const serverUrl = server + ":5105/api";
 const integrationApiUrl = server + ":5108/api";
@@ -89,7 +89,7 @@ export const endpoints = {
   alterPushToken: pushTokenEndpoint,
   allowsNotifications: allowsNotificationsEndpoint,
   themeMode: themeModeEndpoint,
-  createConversation: conversationWheeloChatEndpoint, //?
+  createConversation: conversationWheeloChatEndpoint,
   getConversationByID: conversationEndpoint + "/get-conversation-by-id",
   getConversationsByUserEmail: conversationEndpoint + "/get-conversations-by-user-email",
   createMessage: messagesEndpoint,
