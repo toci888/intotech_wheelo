@@ -1,10 +1,13 @@
-﻿using Intotech.Wheelo.Chat.Bll.Persistence;
+﻿using Intotech.Common;
+using Intotech.Wheelo.Chat.Bll.Persistence;
 using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Database.Persistence.Models;
 using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
+using Intotech.Wheelo.Chat.Jaguar.Utils;
 using Intotech.Wheelo.Chat.Models;
 using Intotech.Wheelo.Chat.Models.Caching;
+using Intotech.Wheelo.Common;
 using Intotech.Wheelo.Common.ImageService;
 using Toci.Driver.Database.Persistence.Models;
 
@@ -27,6 +30,19 @@ public class ConversationService : IConversationService
         RoomsAccountLogic = roomsAccountLogic;
     }
 
+    public virtual ConversationDto GetPersonalConversation(int IdAccount, int idFriendAccount)
+    {
+        string roomId = ChatUtils.GetRoomId(IdAccount, idFriendAccount);
+        Room room = RoomLogic.Select(m => m.Roomid == roomId).FirstOrDefault();
+
+        if (room == null)
+        {
+            return null;
+        }
+
+        return GetConversationById(room.Id);
+    }
+
     public virtual ConversationDto GetConversationById(int roomId, bool isAccountIdRequest = false)
     {
         List<Message> messages = MessageLogic.Select(m => m.Idroom == roomId).OrderByDescending(m => m.Createdat).ToList();
@@ -42,7 +58,7 @@ public class ConversationService : IConversationService
             return null;
         }
 
-        UserCacheDto acc = AccountService.GetAccount(room.Ownerid);
+        UserCacheDto acc = AccountService.GetAccount(room.Owneremail);
 
         if (acc != null)
         {
@@ -50,7 +66,7 @@ public class ConversationService : IConversationService
 
             resElement.ID = room.Id;
             resElement.RoomName = room.Roomname;
-            resElement.OwnerEmail = room.Ownerid;
+            resElement.OwnerEmail = room.Owneremail;
             resElement.IdAccount = acc.IdAccount;
             resElement.CreatedAt = room.Createdat.Value;
             resElement.OwnerFirstName = acc.UserName;
@@ -95,7 +111,7 @@ public class ConversationService : IConversationService
         throw new NotImplementedException();
     }
 
-    public virtual FullConversationsDto GetConversationsByAccountId(string email)
+    public virtual FullConversationsDto GetConversationsByEmail(string email)
     {
         FullConversationsDto result = new FullConversationsDto();
 
@@ -166,6 +182,4 @@ public class ConversationService : IConversationService
 
         return DistinctAuthors;
     }
-
-    
 }

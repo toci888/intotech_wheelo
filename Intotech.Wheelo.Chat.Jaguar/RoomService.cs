@@ -4,6 +4,7 @@ using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Database.Persistence.Models;
 using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
+using Intotech.Wheelo.Chat.Jaguar.Utils;
 using Intotech.Wheelo.Chat.Models;
 using Intotech.Wheelo.Chat.Models.Caching;
 using System.Security.Principal;
@@ -24,29 +25,38 @@ public class RoomService : IRoomService
         RoomsAccountLogic = roomsAccountLogic;
     }
 
-    public virtual bool ApproveRoom(int roomId, string email, bool decision)
+    public virtual bool ApproveRoom(string roomId, string email, bool decision)
     {
-        Roomsaccount roomAccount = RoomsAccountLogic.Select(m => m.Memberemail == email && m.Idroom == roomId).FirstOrDefault();
+        Room room = RoomLogic.Select(m => m.Roomid == roomId).FirstOrDefault();
 
-        if (roomAccount != null)
+        if (room != null) 
         {
-            roomAccount.Isapproved = decision;
+            Roomsaccount roomAccount = RoomsAccountLogic.Select(m => m.Memberemail == email && m.Idroom == room.Id).FirstOrDefault();
 
-            RoomsAccountLogic.Update(roomAccount);
+            if (roomAccount != null)
+            {
+                roomAccount.Isapproved = decision;
 
-            return true;
+                RoomsAccountLogic.Update(roomAccount);
+
+                return true;
+            }
         }
 
         return false;
     }
 
-    public RoomsDto CreateRoom(string hostEmail, List<string> members)
+    public RoomsDto CreateRoom(int idAccount, List<int> idMembersAccounts)
     {
+        string roomId = ChatUtils.GetRoomId(idAccount, idMembersAccounts);
+
+        Room existingRoom = RoomLogic.Select(m => m.Roomid == roomId).FirstOrDefault();
+
         RoomsDto result = new RoomsDto();
         
         List<UserCacheDto> chatMembers = new List<UserCacheDto>();
 
-        UserCacheDto author = AccountService.GetAccount(hostEmail);
+        UserCacheDto author = AccountService.GetAccount(idAccount);
 
         if (author == null)
         {
@@ -57,9 +67,9 @@ public class RoomService : IRoomService
         
         result.RoomMembers = new List<RoomMembersDto>();
 
-        foreach (string memberEmail in members)
+        foreach (int memberId in idMembersAccounts)
         {
-            UserCacheDto member = AccountService.GetAccount(memberEmail);
+            UserCacheDto member = AccountService.GetAccount(memberId);
 
             if (member != null)
             {
@@ -73,18 +83,30 @@ public class RoomService : IRoomService
 
         //Kacper, Julia, Bartek
         result.RoomName = string.Join(", ", chatMembers.Select(m => m.UserName));
-  
-        Room room = RoomLogic.Insert(new Room() { Ownerid = hostEmail, Roomname = result.RoomName });
+        result.RoomId = ChatUtils.GetRoomId(idAccount, idMembersAccounts);
+
+        Room room = null;
+
+        if (existingRoom != null)
+        {
+            room = existingRoom;
+        }
+        else
+        {
+            room = RoomLogic.Insert(new Room() { Owneremail = author.SenderEmail, Roomname = result.RoomName, Roomid = result.RoomId });
+        }
 
         result.IdRoom = room.Id;
-        result.OwnerEmail = hostEmail;
+        result.OwnerEmail = author.SenderEmail;
 
-
-        foreach (UserCacheDto chatMember in chatMembers)
+        if (existingRoom == null)
         {
-            RoomsAccountLogic.Insert(new Roomsaccount() { Idroom = result.IdRoom, Memberemail = chatMember.SenderEmail });
+            foreach (UserCacheDto chatMember in chatMembers)
+            {
+                RoomsAccountLogic.Insert(new Roomsaccount() { Idroom = result.IdRoom, Memberemail = chatMember.SenderEmail });
+            }
         }
-        
+
         return result;
     }
 
@@ -106,7 +128,8 @@ public class RoomService : IRoomService
 
         result.IdRoom = room.Id;
         result.RoomName = room.Roomname;
-        result.OwnerEmail = room.Ownerid;
+        result.OwnerEmail = room.Owneremail;
+        result.RoomId = room.Roomid;
         //TODO isapproved
         List<string> membersEmails = RoomsAccountLogic.Select(m => m.Idroom == room.Id).Select(m => m.Memberemail).ToList();
 

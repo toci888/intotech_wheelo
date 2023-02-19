@@ -11,9 +11,9 @@ public class SeedRooms : SeedChatLogic<Room>
 
         for (int i = 0; i < 10; i++)
         {
-            rooms.Add(new Room() { Roomname = "Bartek", Ownerid = "bzapart@gmail.com", Roomid = "dqa123" + i });
-            rooms.Add(new Room() { Roomname = "Kacper", Ownerid = "bartek@gg.pl", Roomid = "dqa12123" + i });
-            rooms.Add(new Room() { Roomname = "Warrior", Ownerid = "warriorr@poczta.fm", Roomid = "dqa123asd" + i });
+            rooms.Add(new Room() { Roomname = "Bartek", Owneremail = "bzapart@gmail.com", Roomid = "dqa123" + i });
+            rooms.Add(new Room() { Roomname = "Kacper", Owneremail = "bartek@gg.pl", Roomid = "dqa12123" + i });
+            rooms.Add(new Room() { Roomname = "Warrior", Owneremail = "warriorr@poczta.fm", Roomid = "dqa123asd" + i });
         }
 
         InsertCollection(rooms);

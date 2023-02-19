@@ -34,7 +34,7 @@ new ChatSeedManager().SeedAllDb();
 
 //new WheeloMainSeedManager().SeedAllDb();
 
-new SocialSeedManager().SeedAllDb();
+//new SocialSeedManager().SeedAllDb();
 
 //Service serv = new Service();
 //serv.Listen();

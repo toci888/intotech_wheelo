@@ -11,6 +11,10 @@ public partial class Conversationinvitation
 
     public string Emailinvited { get; set; } = null!;
 
+    public int Idacount { get; set; }
+
+    public int Idaccountinvited { get; set; }
+
     public int Idroom { get; set; }
 
     public DateTime? Createdat { get; set; }
