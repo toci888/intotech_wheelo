@@ -20,13 +20,13 @@ namespace Intotech.Wheelo.Chat.Api.Controllers
         {
         }
 
-        [HttpGet("get-conversation-by-id")]
+        [HttpGet("get-conversation-by-id-room")]
         public ConversationDto GetConversationById(int roomId)
         {
             return Service.GetConversationById(roomId);
         }
 
-        [HttpGet("get-conversation-by-room-id")]
+        [HttpGet("get-conversation-by-id")]
         public ConversationDto GetConversationById(string roomId)
         {
             return Service.GetConversationById(roomId);

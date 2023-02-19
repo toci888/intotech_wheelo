@@ -64,6 +64,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
             _connectedUsers.TryAdd(Context.ConnectionId, Context.UserIdentifier);
 
+            // TODO User Room Names
             List<int> userRoomIds = RoomService.GetAllRooms(Context.UserIdentifier);
 
             foreach (int userRoomId in userRoomIds)
@@ -106,7 +107,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
                 await Clients.OthersInGroup(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
                 //await Clients.Group(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
                 //await Clients.User(Context.UserIdentifier).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
-                ChatNotificationsService.SendChatNotifications(chatMessage.ID, chatMessage.SenderEmail, chatMessage, _connectedUsers);
+                ChatNotificationsService.SendChatNotifications(chatMessage.RoomId, chatMessage.SenderEmail, chatMessage, _connectedUsers);
             }                                                            //roomid
 
         }

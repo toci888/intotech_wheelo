@@ -115,6 +115,18 @@ public class RoomService : IRoomService
         return RoomsAccountLogic.Select(m => m.Memberemail == email).Select(m => m.Idroom).ToList();
     }
 
+    public virtual RoomsDto GetRoom(string roomId)
+    {
+        Room room = RoomLogic.Select(m => m.Roomid == roomId).FirstOrDefault();
+
+        if (room == null)
+        {
+            return null;
+        }
+
+        return GetRoom(room.Id);
+    }
+
     public virtual RoomsDto GetRoom(int roomId)
     {
         Room room = RoomLogic.Select(m => m.Id == roomId).FirstOrDefault();

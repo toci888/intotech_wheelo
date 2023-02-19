@@ -12,7 +12,8 @@ namespace Intotech.Wheelo.Chat.Models
         public string AuthorFirstName { get; set; }
         public string AuthorLastName { get; set; }
         public string ImageUrl { get; set; }
-        public int RoomID { get; set; }
+        public int IdRoom { get; set; }
+        public string RoomId { get; set; }
     }
     
 }

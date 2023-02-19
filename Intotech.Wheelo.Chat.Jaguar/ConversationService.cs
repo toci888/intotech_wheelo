@@ -64,7 +64,8 @@ public class ConversationService : IConversationService
         {
             ConversationDto resElement = new ConversationDto();
 
-            resElement.ID = room.Id;
+            resElement.IdRoom = room.Id;
+            resElement.RoomId = room.Roomid;
             resElement.RoomName = room.Roomname;
             resElement.OwnerEmail = room.Owneremail;
             resElement.IdAccount = acc.IdAccount;
@@ -82,7 +83,8 @@ public class ConversationService : IConversationService
                     Text = message.Message1,
                     ID = message.Id,
                     IdAccount = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].Id : 0,
-                    RoomID = roomId,
+                    IdRoom = room.Id,
+                    RoomId = room.Roomid,
                     AuthorFirstName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].FirstName : string.Empty,
                     AuthorLastName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].LastName : string.Empty,
                     ImageUrl = DistinctAuthors.ContainsKey(message.Authoremail) ? ImageServiceUtils.GetImageUrl(DistinctAuthors[message.Authoremail].Id) : string.Empty
@@ -108,7 +110,9 @@ public class ConversationService : IConversationService
 
     public virtual ConversationDto GetConversationById(string roomId, bool isAccountIdRequest = false)
     {
-        throw new NotImplementedException();
+        Room room = RoomLogic.Select(m => m.Roomid == roomId).FirstOrDefault();
+
+        return room != null ? GetConversationById(room.Id) : null;
     }
 
     public virtual FullConversationsDto GetConversationsByEmail(string email)
