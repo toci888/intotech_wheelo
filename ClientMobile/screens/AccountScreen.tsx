@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     resizeMode: 'contain',
     marginRight: 'auto',
-    marginBottom: 120
+    marginBottom: Dimensions.get("screen").height / 10 //TODO
   },
   subheader: { textAlign: "center", paddingHorizontal: 20 },
   bodyText: { marginTop: 10, textAlign: "center", marginHorizontal: 15 },

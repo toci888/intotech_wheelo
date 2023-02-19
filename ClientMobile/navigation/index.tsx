@@ -46,6 +46,7 @@ export default function Navigation({
   DefaultTheme.colors = {
     ...DefaultTheme.colors,
     text: 'black',
+    border: 'white',
     notification: '#db322c', //powiadomienie na statusbarze liczba
     primary: wheeloColor, 
     secondary: 'yellow',
@@ -56,6 +57,7 @@ export default function Navigation({
   DarkTheme.colors = {
     ...DarkTheme.colors, 
     notification: '#db322c', 
+    border: 'black',
     text: 'white',
     primary: wheeloColor,
     secondary: 'green',

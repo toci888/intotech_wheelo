@@ -25,12 +25,13 @@ const fetchConversations = async (
     }
   );
   const conversations: ConversationsRes[] = response.data.conversations;
-  
+
   const data: TransformedConversation[] = [];
   for (let c of conversations) {
     if (c && c.messages[0]) {
       data.push({
-        id: c.id,
+        idRoom: c.idRoom,
+        roomId: c.roomId,
         recipientName: c.roomName,
         messages: c.messages,
       });
@@ -53,7 +54,8 @@ export const useConversationsQuery = () => {
 };
 
 type ConversationsRes = {
-  id: number;
+  idRoom: number;
+  roomId: string;
   idAccount: number;
   roomName: string;
   CreatedAt: string;

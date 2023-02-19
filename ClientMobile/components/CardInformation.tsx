@@ -58,10 +58,12 @@ export const CardInformation = ({
     if (conversations.data) {
       for (let i=0; i<conversations.data.length; i++) {
         if(collocation.name === conversations.data[i].recipientName) {
-          console.log("znalazlem: ", conversations.data[i].recipientName, conversations.data[i].id, collocation.idAccount, collocation.name)
+          console.log("znalazlem: ", conversations.data[i].recipientName, conversations.data[i].idRoom, collocation.idAccount, collocation.name)
           break;
         } else {
-          console.log("Nie pasuje: ", conversations.data[i].recipientName, conversations.data[i].id, collocation.idAccount, collocation.name)
+          console.log("JAaa",collocation)
+          console.log("ONIii", conversations.data[i])
+          console.log("Nie pasuje: ", conversations.data[i].recipientName, conversations.data[i].idRoom, collocation.idAccount, collocation.name)
         }
       }
     }

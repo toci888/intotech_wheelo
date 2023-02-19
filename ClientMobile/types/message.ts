@@ -3,7 +3,7 @@ export type Message = {
   idAccount: number;
   createdAt: number;
   senderEmail: string;
-  roomID: number;
+  roomID: string;
   text: string;
   imageUrl: string;
   authorFirstName: string;

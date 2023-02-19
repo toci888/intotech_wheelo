@@ -11,14 +11,16 @@ export type Conversation = {
 };
 
 export type SelectedConversation = {
-  id: number;
+  idRoom: number;
+  roomId: string;
   receiverID: string;
   messages: MessageType.Any[];
   author: User;
 };
 
 export type TransformedConversation = {
-  id: number;
+  idRoom: number;
+  roomId: string;
   // collocationID: number;
   recipientName: string;
   messages: Message[];
