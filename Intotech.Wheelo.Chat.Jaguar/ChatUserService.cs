@@ -25,12 +25,14 @@ namespace Intotech.Wheelo.Chat.Jaguar
         protected IRoomsaccountLogic RoomsAccountLogic;
         protected IConversationinvitationLogic ConversationInvitationLogic;
         protected IMessageLogic MessageLogic;
+        protected IRoomLogic RoomLogic;
         protected ICachingService CachingService;
 
         public ChatUserService(IAccountService accountService, IConnecteduserLogic connecteduserLogic, 
             IUseractivityLogic userActivityLogic, IRoomsaccountLogic roomsAccountLogic,
             IConversationinvitationLogic conversationInvitationLogic,
-            IMessageLogic messageLogic, ICachingService cachingService)
+            IMessageLogic messageLogic, ICachingService cachingService,
+            IRoomLogic roomLogic)
         {
             AccountService = accountService;
             ConnecteduserLogic = connecteduserLogic;
@@ -39,6 +41,7 @@ namespace Intotech.Wheelo.Chat.Jaguar
             ConversationInvitationLogic = conversationInvitationLogic;
             MessageLogic = messageLogic;
             CachingService = cachingService;
+            RoomLogic = roomLogic;
         }
 
         public virtual ChatUserDto Connect(int idAccount)
@@ -62,7 +65,9 @@ namespace Intotech.Wheelo.Chat.Jaguar
         {
             UserCacheDto userCached = GetUser(chatMessage.IdAccount);
 
-            Message mess = MessageLogic.Insert(new Message() { Authoremail = chatMessage.SenderEmail, Message1 = chatMessage.Text, Idroom = chatMessage.ID });
+            Room room = RoomLogic.Select(m => m.Roomid == chatMessage.RoomId).FirstOrDefault();
+
+            Message mess = MessageLogic.Insert(new Message() { Authoremail = chatMessage.SenderEmail, Message1 = chatMessage.Text, Idroom = room.Id });
 
             chatMessage.CreatedAt = mess.Createdat.Value;
             chatMessage.AuthorFirstName = userCached.UserName;

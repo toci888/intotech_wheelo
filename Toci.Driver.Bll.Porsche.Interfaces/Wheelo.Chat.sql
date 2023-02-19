@@ -22,7 +22,8 @@ create table Rooms
 (
 	id serial primary key,
 	roomId text not null unique,
-	ownerId text not null,
+	ownerEmail text not null,
+	ownerIdAccount int not null,
 	roomName text,
 	createdat timestamp default now()
 );
@@ -39,6 +40,7 @@ create table RoomsAccounts
 (
 	id serial primary key,
 	memberEmail text not null,
+	memberIdAccount int not null,
 	idRoom int references Rooms(id) not null,
 	isApproved bool default false,
 	createdat timestamp default now()
@@ -48,6 +50,7 @@ create table Messages
 (
 	id serial primary key,
 	AuthorEmail text not null,
+	idAccount int not null,
 	idRoom int references Rooms(id) not null,
 	message text not null,
 	createdat timestamp default now()
@@ -58,6 +61,8 @@ create table ConversationInvitations
 	id serial primary key,
 	email text not null,
 	emailInvited text not null,
+	idAcount int not null,
+	idAccountInvited int not null,
 	idRoom int references Rooms(id) not null,
 	createdat timestamp default now()
 );
@@ -73,6 +78,7 @@ create table UserActivity
 (
 	id serial primary key,
 	email text not null,
+	idAccount int not null,
 	connectedFrom timestamp,
 	connectedTo timestamp,
 	createdat timestamp default now()

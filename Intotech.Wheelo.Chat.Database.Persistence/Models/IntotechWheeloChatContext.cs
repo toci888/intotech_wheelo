@@ -99,6 +99,8 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasColumnName("createdat");
             entity.Property(e => e.Email).HasColumnName("email");
             entity.Property(e => e.Emailinvited).HasColumnName("emailinvited");
+            entity.Property(e => e.Idaccountinvited).HasColumnName("idaccountinvited");
+            entity.Property(e => e.Idacount).HasColumnName("idacount");
             entity.Property(e => e.Idroom).HasColumnName("idroom");
 
             entity.HasOne(d => d.IdroomNavigation).WithMany(p => p.Conversationinvitations)
@@ -119,6 +121,7 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
+            entity.Property(e => e.Idaccount).HasColumnName("idaccount");
             entity.Property(e => e.Idroom).HasColumnName("idroom");
             entity.Property(e => e.Message1).HasColumnName("message");
 
@@ -141,7 +144,8 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
-            entity.Property(e => e.Ownerid).HasColumnName("ownerid");
+            entity.Property(e => e.Owneremail).HasColumnName("owneremail");
+            entity.Property(e => e.Owneridaccount).HasColumnName("owneridaccount");
             entity.Property(e => e.Roomid).HasColumnName("roomid");
             entity.Property(e => e.Roomname).HasColumnName("roomname");
         });
@@ -162,6 +166,7 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasDefaultValueSql("false")
                 .HasColumnName("isapproved");
             entity.Property(e => e.Memberemail).HasColumnName("memberemail");
+            entity.Property(e => e.Memberidaccount).HasColumnName("memberidaccount");
 
             entity.HasOne(d => d.IdroomNavigation).WithMany(p => p.Roomsaccounts)
                 .HasForeignKey(d => d.Idroom)
@@ -187,6 +192,7 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
             entity.Property(e => e.Email).HasColumnName("email");
+            entity.Property(e => e.Idaccount).HasColumnName("idaccount");
         });
 
         OnModelCreatingPartial(modelBuilder);

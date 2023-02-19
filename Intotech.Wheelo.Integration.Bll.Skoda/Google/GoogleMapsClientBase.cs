@@ -9,7 +9,7 @@ namespace Intotech.Wheelo.Integration.Bll.Skoda.Google
 {
     public abstract class GoogleMapsClientBase : IGoogleMapsClientBase
     {
-        protected const string ApiKey = "AIzaSyDxVQqaiKE1L6N9Etv9SUgKsEHfPr9Et40";
+        protected const string ApiKey = "AIzaSyBG5S1teD2Ao2xzvqcxL4JYYfdGn4CykE0";
         protected const string Url = "https://maps.googleapis.com/";
 
         protected HttpClient HttpClient;

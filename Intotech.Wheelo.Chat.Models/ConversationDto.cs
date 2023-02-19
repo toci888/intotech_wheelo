@@ -4,7 +4,8 @@ namespace Intotech.Wheelo.Chat.Models;
 
 public class ConversationDto 
 {
-    public int ID { get; set; }
+    public int IdRoom { get; set; }
+    public string RoomId { get; set; }
     public string RoomName { get; set; }
     public int IdAccount { get; set; }
     public string OwnerEmail { get; set; }

@@ -39,14 +39,14 @@ namespace Toci.Driver.Api.Controllers
             wt.Tohour = new TimeOnly(wt.IToHour, wt.IToMinute);
 
             return Service.AddWorkTrip(wt);
-        }
+        }*/
 
         [HttpGet]
         [Route("associated-users")]
-        public ReturnedResponse<TripCollocationDto> GetAssociatedUsers(int accountId, string searchId)
+        public ReturnedResponse<TripGenCollocationDto> GetAssociatedUsers(int accountId)
         {
-            return Service.GetUserAssociations(accountId, searchId);
+            return Service.GetTripCollocation(accountId, string.Empty);
         }
-        */
+        
     }
 }

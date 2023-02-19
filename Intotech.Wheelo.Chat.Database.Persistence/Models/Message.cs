@@ -9,6 +9,8 @@ public partial class Message
 
     public string Authoremail { get; set; } = null!;
 
+    public int Idaccount { get; set; }
+
     public int Idroom { get; set; }
 
     public string Message1 { get; set; } = null!;

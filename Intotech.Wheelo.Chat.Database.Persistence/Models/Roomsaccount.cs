@@ -9,6 +9,8 @@ public partial class Roomsaccount
 
     public string Memberemail { get; set; } = null!;
 
+    public int Memberidaccount { get; set; }
+
     public int Idroom { get; set; }
 
     public bool? Isapproved { get; set; }

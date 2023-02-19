@@ -18,7 +18,7 @@ public class ChatNotificationsService : IChatNotificationsService
         NotificationManager = notificationManager;
     }
 
-    public virtual NotificationResponseDto SendChatNotifications(int roomId, string senderEmail, ChatMessageDto chatMessage, ConcurrentDictionary<string, string> connectedUsers)
+    public virtual NotificationResponseDto SendChatNotifications(string roomId, string senderEmail, ChatMessageDto chatMessage, ConcurrentDictionary<string, string> connectedUsers)
     {
         RoomsDto roomDto = RoomService.GetRoom(roomId);
 
