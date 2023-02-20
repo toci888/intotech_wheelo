@@ -4,7 +4,6 @@ import { useQuery } from "react-query";
 import { endpoints, queryKeys } from "../../constants/constants";
 import { TransformedConversation } from "../../types/conversation";
 import { Message } from "../../types/message";
-import { getStateAbbreviation } from "../../utils/getStateAbbreviation";
 import { useUser } from "../useUser";
 
 const fetchConversations = async (

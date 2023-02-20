@@ -1,3 +1,4 @@
+import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Text, Input, Divider } from "@ui-kitten/components";
 import { PickerItem } from "react-native-woodpicker";
@@ -6,7 +7,7 @@ import { AmenitiesList } from "../AmenitiesList";
 import { Select } from "../Select";
 import { propertyUtilities } from "../../constants/propertyUtiliities";
 import { propertyAmenities } from "../../constants/propertyAmenities";
-import { petValues } from "../../constants/petValues";
+import { driverValues } from "../../constants/driverValues";
 import { laundryValues } from "../../constants/laundryValues";
 import { theme } from "../../theme";
 
@@ -57,7 +58,7 @@ export const UtilitiesAndAmenities = ({
       <Select
         label="Pets Allowed"
         item={petsAllowed}
-        items={petValues}
+        items={driverValues}
         onItemChange={(item) => setFieldValue("petsAllowed", item)}
         style={styles.input}
         isNullable={false}

@@ -57,28 +57,27 @@ export const CardInformation = ({
 
     if (conversations.data) {
       for (let i=0; i<conversations.data.length; i++) {
-        if(collocation.name === conversations.data[i].recipientName) {
-          console.log("znalazlem: ", conversations.data[i].recipientName, conversations.data[i].idRoom, collocation.idAccount, collocation.name)
+        if(collocation.roomId === conversations.data[i].roomId) {
+          console.log("znalazlem: ", conversations.data[i].roomId, collocation.roomId, collocation.name)
+          // navigation.navigate("Messages", {
+          //   roomId: collocation.roomId,
+          //   recipientName: collocation.name,
+          // })
+          navigation.navigate("Chat", {
+            screen: "Messages",
+            params: {
+              roomId: collocation.roomId,
+              recipientName: collocation.name
+            }
+          })
+          
           break;
         } else {
-          console.log("JAaa",collocation)
-          console.log("ONIii", conversations.data[i])
-          console.log("Nie pasuje: ", conversations.data[i].recipientName, conversations.data[i].idRoom, collocation.idAccount, collocation.name)
+          console.log("Nie pasuje: ", conversations.data[i].roomId, collocation.roomId, collocation.name)
+          // navigation.navigate("Chat", {screen:"Conversations"})
         }
       }
     }
-    // console.log('klik')
-    // conversations.data?.map((x: TransformedConversation) => {
-    //   console.log("tutaj: ", x.id, x.recipientName)
-    //   if(collocation.name === x.recipientName) {
-    //     console.log("znalazlem: ", x.id, x.recipientName)
-    //   } else {
-    //     console.log("Nie pasuje: ", x.id, x.recipientName);
-    //     return;
-    //   }
-    // })
-    // console.log("Kuniec")
-    // navigation.navigate("Chat", {screen:"Conversations"})
   }
 
   const handleStarPress = () => {

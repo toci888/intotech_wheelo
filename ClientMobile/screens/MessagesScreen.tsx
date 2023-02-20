@@ -9,7 +9,7 @@ import FileViewer from 'react-native-file-viewer'
 import { PreviewData } from '@flyerhq/react-native-link-preview'
 
 import { useUser } from "../hooks/useUser";
-import { mapStandardStyle, theme } from "../theme";
+import { theme } from "../theme";
 import { useSelectedConversationQuery } from "../hooks/queries/useSelectedConversationQuery";
 import { Loading } from "../components/Loading";
 import { useCreateMessageMutation } from "../hooks/mutations/useCreateMessageMutation";
@@ -47,18 +47,13 @@ export const MessagesScreen = ({
 
   const handleSendPress = (message: MessageType.PartialText) => {
     console.log("MESSAGExx", message)
+    console.log("AUTORR", conversation.data.author)
     if (conversation)
       createMessage.mutate({
-        idAccount: user!.id,
         author: conversation.data.author,
-        roomId: conversation.data.roomId,
         idRoom: conversation.data.idRoom,
-        receiverID: 1, //TODO
-        senderEmail: user!.email,
+        roomId: conversation.data.roomId,
         text: message.text,
-        authorFirstName: conversation.data.messages[0].author.firstName ? conversation.data.messages[0].author.firstName : "",
-        authorLastName: conversation.data.messages[0].author.lastName ? conversation.data.messages[0].author.lastName : "",
-        imageUrl: conversation.data.messages[0].author.imageUrl ? conversation.data.messages[0].author.imageUrl : ""
       });
   };
 
@@ -158,13 +153,17 @@ export const MessagesScreen = ({
     }
   }
 
+  console.log('nieee', conversation.data.messages[0])
+  console.log('wiemm', conversation.data.author)
+
   return (
     <>
     {/* <ModalHeader text="a" xShown onPress={() => {navigation.getParent()?.setOptions({ tabBarStyle: { display: "display" } }); navigation.goBack()}}/> */}
     <Chat
       messages={conversation.data.messages}
+      user={conversation.data.author}
+
       onSendPress={handleSendPress}
-      user={conversation.data.author as User}
       onAttachmentPress={handleAttachmentPress}
       onMessagePress={handleMessagePress}
       onPreviewDataFetched={handlePreviewDataFetched}

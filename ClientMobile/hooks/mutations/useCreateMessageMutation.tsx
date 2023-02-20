@@ -1,39 +1,26 @@
 import { useQueryClient, useMutation } from "react-query";
-import axios from "axios";
 
-import { endpoints, queryKeys } from "../../constants/constants";
+import { queryKeys } from "../../constants/constants";
 import { socket } from "../../constants/socket";
-import { SelectedConversation, TransformedConversation, Author, } from "../../types/conversation";
+import { Author, SelectedConversation, TransformedConversation } from "../../types/conversation";
 import { MessageType, User } from "@flyerhq/react-native-chat-ui/lib/types";
 import { useUser } from "../useUser";
 
 const createMessage = (
-  idRoom: number,
+  author: User,
   roomId: string,
-  idAccount: number,
-  senderEmail: string,
-  authorFirstName: string,
-  authorLastName: string,
   text: string,
 ) => {
-  console.log('responsxd', {
-    idAccount,
-    text,
-    senderEmail,
+  console.log('dataaxd', 'sendMessage',  {
+    author,
     roomId,
-    CreatedAt: new Date(),
-    authorFirstName,
-    authorLastName,
-   })
+    text,
+  })
   return socket.invoke('sendMessage',  {
-    idAccount,
-    text,
-    senderEmail,
+    author,
     roomId,
-    CreatedAt: new Date(),
-    authorFirstName,
-    authorLastName,
-   });
+    text,
+  });
 }
 
 export const useCreateMessageMutation = () => {
@@ -45,32 +32,16 @@ export const useCreateMessageMutation = () => {
       idRoom,
       roomId,
       author,
-      idAccount,
-      senderEmail,
-      receiverID,
-      authorFirstName,
-      authorLastName,
       text,
-      imageUrl
     }: {
       idRoom: number,
       roomId: string;
-      author: User;
-      idAccount: number;
-      senderEmail: string,
-      receiverID: number;
-      authorFirstName: string,
-      authorLastName: string,
+      author: Author;
       text: string;
-      imageUrl: string;
     }) =>
       createMessage(
-        idRoom,
+        author,
         roomId,
-        idAccount,
-        authorFirstName,
-        authorLastName,
-        imageUrl,
         text,
       ),
     {
@@ -79,10 +50,6 @@ export const useCreateMessageMutation = () => {
         text,
         idRoom,
         roomId,
-        idAccount,
-        authorFirstName,
-        authorLastName,
-        imageUrl
       }) => {
         await queryClient.cancelQueries(queryKeys.conversations);
         await queryClient.cancelQueries(queryKeys.selectedConversation);
@@ -93,7 +60,7 @@ export const useCreateMessageMutation = () => {
           queryClient.getQueryData(queryKeys.selectedConversation);
 
         const textMessage: MessageType.Text = {
-          author: author,
+          author,
           createdAt: Date.now(),
           id: Date.now().toString(),
           text: text,
@@ -115,29 +82,12 @@ export const useCreateMessageMutation = () => {
           const index = newConversations.findIndex(
             (i) => i.idRoom === idRoom
           );
-            console.log("MESSAGGGGEE", {
-              createdAt: new Date().toString(),
-              id: Date.now(),
-              roomID: roomId,
-              senderEmail: user?.email as string,
-              text,
-              authorFirstName,
-              authorLastName,
-              imageUrl,
-              idAccount: idAccount
-            })
           newConversations[index].messages.unshift({
-            createdAt: Date.now(),
+            author,
             id: Date.now(),
-            roomID: roomId,
-            senderEmail: user?.email as string,
-            text,
-            authorFirstName,
-            authorLastName,
-            imageUrl,
-            idAccount: idAccount
+            text
           });
-          console.log("MESSAGGGGEExd");
+          
           queryClient.setQueryData(queryKeys.conversations, newConversations);
         }
 
@@ -158,17 +108,9 @@ export const useCreateMessageMutation = () => {
       },
       onSuccess: (
         _,
-        { author, senderEmail, roomId, idAccount, text, authorFirstName, authorLastName }
+        { author, roomId, text }
       ) => {
-
-        // createMessage(
-        //   roomId,
-        //   idAccount,
-        //   senderEmail,
-        //   authorFirstName,
-        //   authorLastName,
-        //   text
-        // );
+        console.log("Wiadomość wysłana poprawnie");
       },
       onSettled: () => {
         queryClient.invalidateQueries(queryKeys.conversations);

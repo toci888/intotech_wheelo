@@ -7,7 +7,7 @@ import { CollocateAccount, Collocation } from "../../types/collocation";
 import { Row } from "../Row";
 import { PetCard } from "../PetCard";
 import { GeneralTextCard } from "../GeneralTextCard";
-import { CatsAndDogs, CatsOnly, DogsOnly } from "../../constants/petValues";
+import { CatsAndDogs, CatsOnly, DogsOnly } from "../../constants/driverValues";
 import { Driver } from "../../types";
 
 export const LeaseAndFeesSection = ({ collocation }: { collocation: CollocateAccount }) => {

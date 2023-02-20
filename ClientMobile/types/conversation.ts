@@ -13,15 +13,13 @@ export type Conversation = {
 export type SelectedConversation = {
   idRoom: number;
   roomId: string;
-  receiverID: string;
   messages: MessageType.Any[];
-  author: User;
+  author: Author;
 };
 
 export type TransformedConversation = {
   idRoom: number;
   roomId: string;
-  // collocationID: number;
   recipientName: string;
   messages: Message[];
 };
@@ -35,12 +33,8 @@ export type CreateConversation = {
   text: string;
 };
 
-export type Author = {
-  id: string; //?
-  createdAt: number;
-  firstName: string;
-  lastName: string;
-  lastSeen: string; //?
+export type Author = User & {
   senderEmail: string;
-  imageUrl: string;
+  idAccount: number;
+  id: number;
 };

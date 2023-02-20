@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import { MessageType, User } from "@flyerhq/react-native-chat-ui";
+import { MessageType } from "@flyerhq/react-native-chat-ui";
 
 import { endpoints, queryKeys } from "../../constants/constants";
 import { Message } from "../../types/message";
@@ -12,14 +12,14 @@ const fetchConversation = async (
   userID?: number,
   token?: string
 ): Promise<SelectedConversation> => {
-  console.log("CzatKlik", `${endpoints.getConversationByID}?roomId=${roomId}`, token)
+  console.log("Wybranie czatu", `${endpoints.getConversationByID}?roomId=${roomId}`)
   const response = await axios.get(`${endpoints.getConversationByID}?roomId=${roomId}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }
-  ); 
+  );
   const data: ConversationRes = response.data;
 
   const messages: MessageType.Any[] = [];
@@ -28,32 +28,27 @@ const fetchConversation = async (
       id: m.id.toString(),
       type: "text",
       text: m.text,
-      createdAt: new Date(m.createdAt).getTime(),
+      createdAt: m.author.createdAt,
       author: {
-        id: m.senderEmail.toString(),
-        firstName: m.authorFirstName, 
-        lastName: m.authorLastName,
-        imageUrl: m.imageUrl
-      } as User
+        id: m.author.idAccount,
+        firstName: m.author.firstName, 
+        lastName: m.author.lastName,
+        imageUrl: m.author.imageUrl,
+        senderEmail: m.author.senderEmail
+      } as Author
     }
     messages.push(message);
   };
-  
-  let message = data.messages.find(( auth: Message ) => auth.idAccount === userID)
-  const convAuthor = {
-    id: message!.senderEmail,
-    firstName: message!.authorFirstName, 
-    lastName: message!.authorLastName,
-    imageUrl: message!.imageUrl
-  } as User;
 
-  console.log("DOTARŁEM", convAuthor)
+  let message = data.messages.find((auth: Message) => Number(auth.author.idAccount) === userID)
+  
+  const conversationAuthor = message!.author;
+  
   const conversation: SelectedConversation = {
     idRoom: data.idRoom,
     roomId: data.roomId,
-    receiverID: convAuthor.id,
     messages,
-    author: convAuthor
+    author: {...conversationAuthor, ...{ id: conversationAuthor.idAccount}} as Author
   };
 
   return conversation;

@@ -6,7 +6,8 @@ import { useNavigation } from "@react-navigation/native";
 import { Location } from "../types/locationIQ";
 import { theme } from "../theme";
 import { i18n } from "../i18n/i18n";
-import { Driver, SearchScreenParams } from "../types";
+import { SearchScreenParams } from "../types";
+import { Driver } from "../constants/driverValues";
 
 export const HeaderFilterButtons = ({ 
     startLocation, 

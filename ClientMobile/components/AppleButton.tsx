@@ -23,7 +23,6 @@ export const AppleButton = ({
       }
       buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
       cornerRadius={5}
-      borderRadius={5}
       style={styles.button}
       onPress={onPress}
     />

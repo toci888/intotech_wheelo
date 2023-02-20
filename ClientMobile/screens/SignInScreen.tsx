@@ -36,7 +36,7 @@ export const SignInScreen = () => {
           </Text>
           <Formik
             initialValues={{
-              email: Platform.OS === "ios" ? "bartek@gg.pl" : "warriorr@poczta.fm",
+              email: Platform.OS === "ios" ? "bartek@gg.pl" : "bzapart@gmail.com",
               password: "Beatka123(",
             }}
             validationSchema={yup.object().shape({

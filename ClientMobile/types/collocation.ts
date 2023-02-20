@@ -13,6 +13,7 @@ export type Collocation = {
 
 export type CollocateAccount = {
   idAccount: number,
+  roomId: string,
   image: string,
   name: string,
   surname: string,

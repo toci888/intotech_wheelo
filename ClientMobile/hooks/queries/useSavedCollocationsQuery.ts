@@ -21,7 +21,7 @@ const fetchFriends = async (
     }
   );
   const data: CollocateAccount[] = response.data.methodResult;
-  
+
   for (let i of data) i.relationshipStatus = true;
   
   return data;

@@ -73,25 +73,6 @@ export type SearchScreenParams = {
   acceptableDistance?: number;
 };
 
-export enum ThemeMode {
-  'light' = 0,
-  'dark' = 1,
-  'blue' = 2
-}
-
-export enum Driver {
-  'passenger' = 1,
-  'driver' = 2,
-  'both' = 3
-}
-
-export enum Relationship {
-  'notFriends' = 1,
-  'invited' = 2,
-  'suggested' = 3,
-  'friend' = 4
-}
-
 type Response = {
   errorMessage: string;
   isSuccess: boolean;

@@ -35,7 +35,7 @@ import { UnitDescription } from "../components/UnitDescription";
 import { UnitsInput } from "../components/editPropertySections/UnitsInput";
 import { GeneralPropertyInfo } from "../components/editPropertySections/GeneralPropertyInfo";
 import { UtilitiesAndAmenities } from "../components/editPropertySections/UtilitiesAndAmenities";
-import { petValues } from "../constants/petValues";
+import { driverValues } from "../constants/driverValues";
 import { laundryValues } from "../constants/laundryValues";
 import { ContactInfo } from "../components/editPropertySections/ContactInfo";
 import { useUser } from "../hooks/useUser";
@@ -115,10 +115,10 @@ export const EditPropertyScreen = ({
               images: propertyData?.images ?? [],
               includedUtilities: propertyData?.includedUtilities ?? [],
               petsAllowed: propertyData?.petsAllowed
-                ? petValues.filter(
+                ? driverValues.filter(
                     (i) => i.value === propertyData.petsAllowed
                   )[0]
-                : petValues[0],
+                : driverValues[0],
               laundryType: propertyData?.laundryType
                 ? laundryValues.filter(
                     (i) => i.value === propertyData.laundryType
