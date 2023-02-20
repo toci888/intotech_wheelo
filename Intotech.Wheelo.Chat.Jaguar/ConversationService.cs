@@ -4,11 +4,11 @@ using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Database.Persistence.Models;
 using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
-using Intotech.Wheelo.Chat.Jaguar.Utils;
 using Intotech.Wheelo.Chat.Models;
 using Intotech.Wheelo.Chat.Models.Caching;
 using Intotech.Wheelo.Common;
 using Intotech.Wheelo.Common.ImageService;
+using Intotech.Wheelo.Common.Utils;
 using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Chat.Jaguar;
@@ -76,18 +76,24 @@ public class ConversationService : IConversationService
             
             foreach (Message message in messages)
             {
-                resElement.Messages.Add(new ChatMessageDto()
+                AuthorDto author = new AuthorDto()
                 {
                     CreatedAt = message.Createdat.Value,
                     SenderEmail = message.Authoremail,
-                    Text = message.Message1,
-                    ID = message.Id,
                     IdAccount = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].Id : 0,
                     IdRoom = room.Id,
                     RoomId = room.Roomid,
-                    AuthorFirstName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].FirstName : string.Empty,
-                    AuthorLastName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].LastName : string.Empty,
+                    FirstName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].FirstName : string.Empty,
+                    LastName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].LastName : string.Empty,
                     ImageUrl = DistinctAuthors.ContainsKey(message.Authoremail) ? ImageServiceUtils.GetImageUrl(DistinctAuthors[message.Authoremail].Id) : string.Empty
+                };
+
+                resElement.Messages.Add(new ChatMessageDto()
+                {
+                    
+                    Text = message.Message1,
+                    ID = message.Id,
+                    Author = author
                 });
 
                 if (isAccountIdRequest)

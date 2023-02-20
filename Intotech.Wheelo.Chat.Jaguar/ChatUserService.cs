@@ -63,18 +63,19 @@ namespace Intotech.Wheelo.Chat.Jaguar
 
         public virtual ChatMessageDto SendMessage(ChatMessageDto chatMessage)
         {
-            UserCacheDto userCached = GetUser(chatMessage.IdAccount);
+            UserCacheDto userCached = GetUser(chatMessage.Author.IdAccount);
 
-            Room room = RoomLogic.Select(m => m.Roomid == chatMessage.RoomId).FirstOrDefault();
+            Room room = RoomLogic.Select(m => m.Roomid == chatMessage.Author.RoomId).FirstOrDefault();
 
-            Message mess = MessageLogic.Insert(new Message() { Authoremail = chatMessage.SenderEmail, Message1 = chatMessage.Text, Idroom = room.Id });
+            Message mess = MessageLogic.Insert(new Message() { Idaccount = chatMessage.Author.IdAccount, Authoremail = chatMessage.Author.SenderEmail, Message1 = chatMessage.Text, Idroom = room.Id });
 
-            chatMessage.CreatedAt = mess.Createdat.Value;
-            chatMessage.AuthorFirstName = userCached.UserName;
-            chatMessage.AuthorLastName = userCached.UserSurname;
-            chatMessage.SenderEmail = userCached.SenderEmail;
-            chatMessage.IdAccount = userCached.IdAccount;
-            chatMessage.ImageUrl = ImageServiceUtils.GetImageUrl(userCached.IdAccount);
+            chatMessage.Author.CreatedAt = mess.Createdat.Value;
+            chatMessage.Author.SenderEmail = userCached.UserName;
+            chatMessage.Author.SenderEmail = userCached.UserSurname;
+            chatMessage.Author.SenderEmail = userCached.SenderEmail;
+            chatMessage.Author.IdAccount = userCached.IdAccount;
+            chatMessage.Author.ImageUrl = ImageServiceUtils.GetImageUrl(userCached.IdAccount);
+            chatMessage.ID = mess.Id;
 
             return chatMessage;
         }

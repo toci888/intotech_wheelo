@@ -35,7 +35,7 @@ public class ChatNotificationsService : IChatNotificationsService
 
         NotificationModelBase<ChatMessageDto> notificationData = new NotificationModelBase<ChatMessageDto>(
             NotificationsKinds.ChatMessage, pushTokens, chatMessage, chatMessage.Text, 
-            chatMessage.AuthorFirstName, chatMessage.AuthorLastName);
+            chatMessage.Author.FirstName, chatMessage.Author.LastName);
 
         return NotificationManager.SendNotifications(notificationData);
     }

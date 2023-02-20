@@ -482,7 +482,7 @@ join WorkTripGen wt on acc.IdAccount = wt.IdAccount
 join Accounts a on a.id = wt.IdAccount;
 
 create or replace view VFriends as
-select U1.Name, U1.Surname, U2.Name as FriendName, U2.Surname as FriendSurname, U1.Id as idAccount, 
+select distinct on(U1.Id) U1.Id as idAccount, U1.Name, U1.Surname, U2.Name as FriendName, U2.Surname as FriendSurname,  
 U2.Id as FriendIdAccount, fr1.method, wt.LatitudeFrom, wt.LongitudeFrom,
 wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchid, wt.DriverPassenger 
 from Friends fr1
