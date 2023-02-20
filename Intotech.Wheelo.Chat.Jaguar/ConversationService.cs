@@ -45,18 +45,18 @@ public class ConversationService : IConversationService
 
     public virtual ConversationDto GetConversationById(int roomId, bool isAccountIdRequest = false)
     {
-        List<Message> messages = MessageLogic.Select(m => m.Idroom == roomId).OrderByDescending(m => m.Createdat).ToList();
-
-        List<Message> distinctAuthors = messages.DistinctBy(m => m.Authoremail).ToList();
-
-        GetDistinctNames(distinctAuthors);
-
         Room room = RoomLogic.Select(m => m.Id == roomId).FirstOrDefault();
 
         if (room == null)
         {
             return null;
         }
+
+        List<Message> messages = MessageLogic.Select(m => m.Idroom == roomId).OrderByDescending(m => m.Createdat).ToList();
+
+        List<Message> distinctAuthors = messages.DistinctBy(m => m.Authoremail).ToList();
+
+        GetDistinctNames(distinctAuthors);
 
         UserCacheDto acc = AccountService.GetAccount(room.Owneremail);
 

@@ -103,16 +103,16 @@ public class RoomService : IRoomService
         {
             foreach (UserCacheDto chatMember in chatMembers)
             {
-                RoomsAccountLogic.Insert(new Roomsaccount() { Idroom = result.IdRoom, Memberemail = chatMember.SenderEmail });
+                RoomsAccountLogic.Insert(new Roomsaccount() { Roomid = result.RoomId, Idroom = result.IdRoom, Memberemail = chatMember.SenderEmail });
             }
         }
 
         return result;
     }
 
-    public virtual List<int> GetAllRooms(string email)
+    public virtual List<string> GetAllRooms(string email)
     {
-        return RoomsAccountLogic.Select(m => m.Memberemail == email).Select(m => m.Idroom).ToList();
+        return RoomsAccountLogic.Select(m => m.Memberemail == email).Select(m => m.Roomid).ToList();
     }
 
     public virtual RoomsDto GetRoom(string roomId)

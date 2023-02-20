@@ -13,6 +13,8 @@ public partial class Roomsaccount
 
     public int Idroom { get; set; }
 
+    public string Roomid { get; set; } = null!;
+
     public bool? Isapproved { get; set; }
 
     public DateTime? Createdat { get; set; }

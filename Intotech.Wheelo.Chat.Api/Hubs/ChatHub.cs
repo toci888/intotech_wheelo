@@ -64,10 +64,9 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
             _connectedUsers.TryAdd(Context.ConnectionId, Context.UserIdentifier);
 
-            // TODO User Room Names
-            List<int> userRoomIds = RoomService.GetAllRooms(Context.UserIdentifier);
+            List<string> userRoomIds = RoomService.GetAllRooms(Context.UserIdentifier);
 
-            foreach (int userRoomId in userRoomIds)
+            foreach (string userRoomId in userRoomIds)
             {
                 await Groups.AddToGroupAsync(Context.ConnectionId, userRoomId.ToString());
             }
@@ -76,10 +75,10 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         }
 
         [Authorize(Roles = "User")]
-        public async Task CreateRoom(int idAccount, List<int> remainiingAccountIds) // TODO KACPER DOC
+        public async Task CreateRoom(int idAccount, List<int> remainingAccountIds) // TODO KACPER DOC
         {
 
-            RoomsDto room = RoomService.CreateRoom(idAccount, remainiingAccountIds);
+            RoomsDto room = RoomService.CreateRoom(idAccount, remainingAccountIds);
 
             foreach (RoomMembersDto member in room.RoomMembers)
             {

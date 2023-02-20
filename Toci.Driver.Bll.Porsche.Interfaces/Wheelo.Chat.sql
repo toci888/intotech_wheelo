@@ -42,6 +42,7 @@ create table RoomsAccounts
 	memberEmail text not null,
 	memberIdAccount int not null,
 	idRoom int references Rooms(id) not null,
+	roomId text not null,
 	isApproved bool default false,
 	createdat timestamp default now()
 );
