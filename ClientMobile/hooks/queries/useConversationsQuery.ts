@@ -37,7 +37,7 @@ const fetchConversations = async (
     }
   }
 
-  data = data.sort((a, b) => Date.parse(b.messages[0].author.createdAt?.toString() as string) - Date.parse(a.messages[0].author.createdAt?.toString() as string))
+  data = data.sort((a, b) => Date.parse(b.messages[0].author.createdAt!.toString()) - Date.parse(a.messages[0].author.createdAt!.toString()))
 
   return data;
 };

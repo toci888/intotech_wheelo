@@ -42,7 +42,7 @@ const fetchConversation = async (
     idRoom: data.idRoom,
     roomId: data.roomId,
     messages,
-    author: {...conversationAuthor, ...{ id: conversationAuthor.id}} as Author
+    author: conversationAuthor
   };
 
   return conversation;
