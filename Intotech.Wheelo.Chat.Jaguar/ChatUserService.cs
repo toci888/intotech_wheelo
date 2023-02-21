@@ -61,7 +61,7 @@ namespace Intotech.Wheelo.Chat.Jaguar
             };
         }
 
-        public virtual ChatMessageDto SendMessage(ChatMessageDto chatMessage)
+        public virtual LiveChatMessageDto SendMessage(LiveChatMessageDto chatMessage)
         {
             UserCacheDto userCached = GetUser(chatMessage.IdAccount);
 

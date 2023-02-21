@@ -11,8 +11,9 @@ namespace Intotech.Wheelo.Chat.Models
         public string RoomId { get; set; }
 
         public int IdAccount { get; set; }
+        public DateTime CreatedAt { get; set; }
 
-        public AuthorDto Author { get; set; }
+        
 
     }
     

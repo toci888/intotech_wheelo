@@ -97,7 +97,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         }
 
         [Authorize(Roles = "User")]
-        public async Task<ChatMessageDto> SendMessage(ChatMessageDto chatMessage)
+        public async Task<ChatMessageDto> SendMessage(LiveChatMessageDto chatMessage)
         {
             chatMessage.SenderEmail = Context.UserIdentifier;
             chatMessage = ChatUserService.SendMessage(chatMessage);

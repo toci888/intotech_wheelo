@@ -10,6 +10,6 @@ namespace Intotech.Wheelo.Chat.Jaguar.Interfaces
     public interface IChatUserService
     {
         ChatUserDto Connect(int idAccount);
-        ChatMessageDto SendMessage(ChatMessageDto chatMessage);
+        LiveChatMessageDto SendMessage(LiveChatMessageDto chatMessage);
     }
 }

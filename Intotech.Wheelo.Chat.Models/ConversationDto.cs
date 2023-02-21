@@ -4,6 +4,7 @@ namespace Intotech.Wheelo.Chat.Models;
 
 public class ConversationDto 
 {
+    public List<AuthorDto> RoomParticipants { get; set; }
     public int IdRoom { get; set; }
     public string RoomId { get; set; }
     public string RoomName { get; set; }
@@ -13,7 +14,7 @@ public class ConversationDto
     public string OwnerLastName { get; set; }
     public DateTime CreatedAt { get; set; }
     public List<ChatMessageDto> Messages { get; set; }
-    public List<AuthorDto> RoomParticipants { get; set; }
+    
     
 }
 

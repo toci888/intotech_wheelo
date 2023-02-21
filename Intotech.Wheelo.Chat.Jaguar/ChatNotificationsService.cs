@@ -18,7 +18,7 @@ public class ChatNotificationsService : IChatNotificationsService
         NotificationManager = notificationManager;
     }
 
-    public virtual NotificationResponseDto SendChatNotifications(string roomId, string senderEmail, ChatMessageDto chatMessage, ConcurrentDictionary<string, string> connectedUsers)
+    public virtual NotificationResponseDto SendChatNotifications(string roomId, string senderEmail, LiveChatMessageDto chatMessage, ConcurrentDictionary<string, string> connectedUsers)
     {
         RoomsDto roomDto = RoomService.GetRoom(roomId);
 
@@ -33,7 +33,7 @@ public class ChatNotificationsService : IChatNotificationsService
 
 
 
-        NotificationModelBase<ChatMessageDto> notificationData = new NotificationModelBase<ChatMessageDto>(
+        NotificationModelBase<LiveChatMessageDto> notificationData = new NotificationModelBase<LiveChatMessageDto>(
             NotificationsKinds.ChatMessage, pushTokens, chatMessage, chatMessage.Text, 
             chatMessage.Author.FirstName, chatMessage.Author.LastName);
 

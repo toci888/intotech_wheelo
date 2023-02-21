@@ -93,7 +93,9 @@ public class ConversationService : IConversationService
                     
                     Text = message.Message1,
                     Id = message.Id,
-                    IdAccount = message.Idaccount
+                    IdAccount = message.Idaccount,
+                    CreatedAt = message.Createdat.Value,
+                    SenderEmail = message.Authoremail
                     //Author = author
                 });
 
