@@ -27,7 +27,7 @@ export const ConversationsScreen = () => {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
-  console.log("conversations: ", conversations);
+
   // navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
   if (!user) return <SignUpOrSignInScreen />;
 
@@ -60,7 +60,7 @@ export const ConversationsScreen = () => {
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
-            onRefresh={() => console.log("pull-to-refresh")}
+            onRefresh={() => {conversations.refetch();}}
           />
         }
         renderItem={({ item }) => (
@@ -76,7 +76,7 @@ export const ConversationsScreen = () => {
                 {item.recipientName} RoomId:{item.idRoom}
               </Text>
               <Text appearance="hint">
-                {new Date(item.messages[0].createdAt).toLocaleDateString()}
+                {item.messages[0].author.createdAt?.toString().split("T")[0]}
               </Text>
             </Row>
             <Text

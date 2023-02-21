@@ -25,7 +25,7 @@ const fetchConversations = async (
   );
   const conversations: ConversationsRes[] = response.data.conversations;
 
-  const data: TransformedConversation[] = [];
+  let data: TransformedConversation[] = [];
   for (let c of conversations) {
     if (c && c.messages[0]) {
       data.push({
@@ -36,6 +36,8 @@ const fetchConversations = async (
       });
     }
   }
+
+  data = data.sort((a, b) => Date.parse(b.messages[0].author.createdAt?.toString() as string) - Date.parse(a.messages[0].author.createdAt?.toString() as string))
 
   return data;
 };
