@@ -16,7 +16,7 @@ import Navigation from "./navigation";
 import { theme } from "./theme";
 import { AuthContext, LoadingContext } from "./context";
 import { User } from "./types/user";
-import { createSocket, socket } from "./constants/socket";
+import { connectUser, createSocket, socket } from "./constants/socket";
 import { queryKeys } from "./constants/constants";
 import { refreshTokens } from "./services/tokens";
 import { alterPushToken } from "./services/user";
@@ -29,7 +29,6 @@ export default function App() {
   const colorScheme = useColorScheme();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  // const { logout } = useUser();
 
   useEffect(() => {
     async function getUser() {
@@ -111,9 +110,7 @@ export default function App() {
         });
 
         await socket.start();
-        await socket.invoke("ConnectUser", userObj.id);
-
-        console.log("USER ID", JSON.stringify(userObj))
+        await connectUser(userObj.id);
       }
     }
 

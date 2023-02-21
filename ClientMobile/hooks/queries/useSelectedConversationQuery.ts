@@ -5,7 +5,7 @@ import { MessageType } from "@flyerhq/react-native-chat-ui";
 import { endpoints, queryKeys } from "../../constants/constants";
 import { Message } from "../../types/message";
 import { useUser } from "../useUser";
-import { Author, SelectedConversation } from "../../types/conversation";
+import { SelectedConversation } from "../../types/conversation";
 
 const fetchConversation = async (
   roomId: string,

@@ -1,26 +1,17 @@
 import { useQueryClient, useMutation } from "react-query";
 
 import { queryKeys } from "../../constants/constants";
-import { socket } from "../../constants/socket";
+import { sendMessage } from "../../constants/socket";
 import { Author, SelectedConversation, TransformedConversation } from "../../types/conversation";
-import { MessageType, User } from "@flyerhq/react-native-chat-ui/lib/types";
+import { MessageType } from "@flyerhq/react-native-chat-ui/lib/types";
 import { useUser } from "../useUser";
 
 const createMessage = (
-  author: User,
+  author: Author,
   roomId: string,
   text: string,
 ) => {
-  console.log('dataaxd', 'sendMessage',  {
-    author,
-    roomId,
-    text,
-  })
-  return socket.invoke('sendMessage',  {
-    author,
-    roomId,
-    text,
-  });
+  return sendMessage(author, roomId, text);
 }
 
 export const useCreateMessageMutation = () => {

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
 
 import { endpoints, queryKeys } from "../../constants/constants";
-import { socket } from "../../constants/socket";
+import { sendMessage } from "../../constants/socket";
 import { Conversation, CreateConversation } from "../../types/conversation";
 import { useUser } from "../useUser";
 
@@ -65,14 +65,10 @@ export const useCreateConversationMutation = () => {
       ) => {
         queryClient.invalidateQueries(queryKeys.contactedProperties);
         queryClient.invalidateQueries(queryKeys.conversations);
-        socket.invoke("sendMessage", {
-          senderID: tenantID,
-          roomId: data.id,
-          receiverID: ownerID,
-          text,
-          senderName,
-        });
-
+        
+        sendMessage(tenantID, data.id, ownerID, text, senderName)
+        
+        //TODO / TODEL
         navigate("Root", {
           screen: "AccountRoot",
           params: {

@@ -13,8 +13,8 @@ import { commonAlert } from "../utils/handleError";
 import { i18n } from "../i18n/i18n";
 import { useSaveCollocationMutation } from "../hooks/mutations/useSaveCollocationMutation";
 import { useConversationsQuery } from "../hooks/queries/useConversationsQuery";
-import { TransformedConversation } from "../types/conversation";
 import useTheme from "../hooks/useTheme";
+import { createRoom } from "../constants/socket";
 
 export const CardInformation = ({
   collocation,
@@ -63,6 +63,7 @@ export const CardInformation = ({
       }
 
       console.log("Nie znalazłem konwersacji :(")
+      createRoom(user!.id, [collocation.idAccount]);
     }
   }
 

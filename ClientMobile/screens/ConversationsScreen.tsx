@@ -18,7 +18,7 @@ import { theme } from "../theme";
 import { Row } from "../components/Row";
 import { i18n } from "../i18n/i18n";
 import useTheme from "../hooks/useTheme";
-import { socket } from "../constants/socket";
+import { joinRoom } from "../constants/socket";
 
 export const ConversationsScreen = () => {
   const { user } = useUser();
@@ -38,7 +38,7 @@ export const ConversationsScreen = () => {
   }
 
   const handleMessagePress = async (roomId: string, recipientName: string) => {
-    await socket.invoke("JoinRoom", roomId);
+    await joinRoom(roomId);
     console.log("Message Pressed", roomId, recipientName);
     // navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
     navigate("Chat", {
