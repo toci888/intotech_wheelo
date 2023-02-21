@@ -52,5 +52,6 @@
     "ContinueWithFacebook": "Kontynuuj z Facebook",
     "ContinueWithApple": "Kontynuuj z Apple",
     "SignInToStart": "Zaloguj się, aby rozpocząć",
-    "TypeAMessage": "Napisz wiadomość.."
+    "TypeAMessage": "Napisz wiadomość..",
+    "NoMessages": "Brak wiadomości"
 }

@@ -18,12 +18,12 @@ export const connectUser = async (id: number) => {
 }
 
 export const sendMessage = async (
-    author: Author,
+    idAccount: number,
     roomId: string,
     text: string,
   ) => {
     return await socket.invoke("sendMessage", {
-        author,
+        idAccount,
         roomId,
         text,
     });

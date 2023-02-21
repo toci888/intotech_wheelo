@@ -15,6 +15,7 @@ export type SelectedConversation = {
   roomId: string;
   messages: MessageType.Any[];
   author: Author;
+  roomParticipants: Author[];
 };
 
 export type TransformedConversation = {
@@ -35,7 +36,8 @@ export type CreateConversation = {
 
 export type Author = User & {
   senderEmail: string;
-  id: number;
+  // id: number;
+  idAccount: number;
 };
 
 export type RoomsDto = {

@@ -2,6 +2,9 @@ import { Author } from "./conversation";
 
 export type Message = {
   id: number;
+  idAccount: number;
   text: string;
-  author: Author;
+  createdAt: string;
+  roomId: string, // ??
+  senderEmail: string,
 };

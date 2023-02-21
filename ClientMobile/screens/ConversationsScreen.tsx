@@ -76,7 +76,7 @@ export const ConversationsScreen = () => {
                 {item.recipientName} RoomId:{item.idRoom}
               </Text>
               <Text appearance="hint">
-                {item.messages[0].author.createdAt?.toString().split("T")[0]}
+                {item.messages[0].createdAt?.toString().split("T")[0]}
               </Text>
             </Row>
             <Text

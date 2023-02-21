@@ -33,8 +33,6 @@ export const MessagesScreen = ({
   const navigation = useNavigation();
   // navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
   // navigation.setOptions({ tabBarStyle: { display: "none" } });
-  const { user } = useUser();
-  console.log("ConversationID", route.params)
   const colorScheme = useColorScheme();
   const conversation = useSelectedConversationQuery(route.params.roomId);
   const createMessage = useCreateMessageMutation();
@@ -169,7 +167,10 @@ export const MessagesScreen = ({
       enableAnimation
       showUserNames
       showUserAvatars
-      l10nOverride={{ inputPlaceholder: i18n.t('TypeAMessage') }}
+      l10nOverride={{ 
+        inputPlaceholder: i18n.t('TypeAMessage'),
+        emptyChatPlaceholder: i18n.t('NoMessages'),
+      }}
       // locale='en'
       inputProps={{}}
       textInputProps={{

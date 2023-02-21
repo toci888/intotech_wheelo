@@ -2,7 +2,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 
 import { endpoints, queryKeys } from "../../constants/constants";
-import { TransformedConversation } from "../../types/conversation";
+import { Author, TransformedConversation } from "../../types/conversation";
 import { Message } from "../../types/message";
 import { useUser } from "../useUser";
 
@@ -37,8 +37,8 @@ const fetchConversations = async (
     }
   }
 
-  data = data.sort((a, b) => Date.parse(b.messages[0].author.createdAt!.toString()) - Date.parse(a.messages[0].author.createdAt!.toString()))
-
+  data = data.sort((a, b) => Date.parse(b.messages[0].createdAt!.toString()) - Date.parse(a.messages[0].createdAt!.toString()))
+  
   return data;
 };
 
@@ -57,13 +57,12 @@ export const useConversationsQuery = () => {
 type ConversationsRes = {
   idRoom: number;
   roomId: string;
-  idAccount: number;
   roomName: string;
-  CreatedAt: string;
-  tenantID: number;
-  ownerID: number;
+  idAccount: number;
   ownerFirstName: string;
   ownerLastName: string;
   ownerEmail: string;
+  CreatedAt: string;
   messages: Message[];
+  RoomParticipants?: Author[];
 };
