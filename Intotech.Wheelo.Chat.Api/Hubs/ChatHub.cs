@@ -75,7 +75,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         }
 
         [Authorize(Roles = "User")]
-        public async Task CreateRoom(int idAccount, List<int> remainingAccountIds) // TODO KACPER DOC
+        public async Task<RoomsDto> CreateRoom(int idAccount, List<int> remainingAccountIds) // TODO KACPER DOC
         {
 
             RoomsDto room = RoomService.CreateRoom(idAccount, remainingAccountIds);
@@ -84,6 +84,8 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             {
                 Clients.User(member.Email).SendAsync(RoomEstablished, new { room });
             }
+
+            return room;
         }
 
         [Authorize(Roles = "User")]
