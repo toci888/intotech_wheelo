@@ -59,12 +59,13 @@ export const CardInformation = ({
       for (let i=0; i<conversations.data.length; i++) {
         if(collocation.roomId === conversations.data[i].roomId) {
           console.log("znalazlem: ", conversations.data[i].roomId, collocation.roomId, collocation.name)
-          // navigation.navigate("Messages", {
-          //   roomId: collocation.roomId,
-          //   recipientName: collocation.name,
-          // })
+          // navigation.navigate("Chat", {
+          //   screen: "Conversations",
+          // });
+
           navigation.navigate("Chat", {
             screen: "Messages",
+            initial: false,
             params: {
               roomId: collocation.roomId,
               recipientName: collocation.name
