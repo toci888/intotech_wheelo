@@ -153,9 +153,6 @@ export const MessagesScreen = ({
     }
   }
 
-  console.log('nieee', conversation.data.messages[0])
-  console.log('wiemm', conversation.data.author)
-
   return (
     <>
     {/* <ModalHeader text="a" xShown onPress={() => {navigation.getParent()?.setOptions({ tabBarStyle: { display: "display" } }); navigation.goBack()}}/> */}

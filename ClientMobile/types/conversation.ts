@@ -35,6 +35,5 @@ export type CreateConversation = {
 
 export type Author = User & {
   senderEmail: string;
-  idAccount: number;
   id: number;
 };

@@ -46,38 +46,23 @@ export const CardInformation = ({
   };
 
   const handleChatButtonPress = () => {
-    //   saveCollocation.data?.data.map((x: CollocateAccount) => {
-    //   console.log("dana", x)
-    // }) 
-    // ?
-    //   navigation.navigate("Messages", {
-    //     roomId: 0,
-    //     recipientName: collocation?.name,
-    //   }) : 
-
     if (conversations.data) {
       for (let i=0; i<conversations.data.length; i++) {
         if(collocation.roomId === conversations.data[i].roomId) {
-          console.log("znalazlem: ", conversations.data[i].roomId, collocation.roomId, collocation.name)
-          // navigation.navigate("Chat", {
-          //   screen: "Conversations",
-          // });
-
+          console.log(collocation.roomId)
           navigation.navigate("Chat", {
             screen: "Messages",
-            initial: false,
             params: {
               roomId: collocation.roomId,
               recipientName: collocation.name
-            }
+            },
+            initial: false
           })
-          
-          break;
-        } else {
-          console.log("Nie pasuje: ", conversations.data[i].roomId, collocation.roomId, collocation.name)
-          // navigation.navigate("Chat", {screen:"Conversations"})
+          return;
         }
       }
+
+      console.log("Nie znalazłem konwersacji :(")
     }
   }
 

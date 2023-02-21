@@ -29,18 +29,12 @@ const fetchConversation = async (
       type: "text",
       text: m.text,
       createdAt: m.author.createdAt,
-      author: {
-        id: m.author.idAccount,
-        firstName: m.author.firstName, 
-        lastName: m.author.lastName,
-        imageUrl: m.author.imageUrl,
-        senderEmail: m.author.senderEmail
-      } as Author
+      author: m.author
     }
     messages.push(message);
   };
 
-  let message = data.messages.find((auth: Message) => Number(auth.author.idAccount) === userID)
+  let message = data.messages.find((auth: Message) => Number(auth.author.id) === userID)
   
   const conversationAuthor = message!.author;
   
@@ -48,7 +42,7 @@ const fetchConversation = async (
     idRoom: data.idRoom,
     roomId: data.roomId,
     messages,
-    author: {...conversationAuthor, ...{ id: conversationAuthor.idAccount}} as Author
+    author: {...conversationAuthor, ...{ id: conversationAuthor.id}} as Author
   };
 
   return conversation;
