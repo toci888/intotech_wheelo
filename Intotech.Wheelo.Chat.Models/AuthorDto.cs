@@ -10,7 +10,7 @@ namespace Intotech.Wheelo.Chat.Models
     {
         public DateTime CreatedAt { get; set; }
         public string SenderEmail { get; set; }
-        public int IdAccount { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ImageUrl { get; set; }

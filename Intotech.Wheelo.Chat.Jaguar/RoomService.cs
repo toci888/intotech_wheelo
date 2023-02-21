@@ -63,7 +63,7 @@ public class RoomService : IRoomService
             return null;
         }
 
-        chatMembers.Add(author);
+        //chatMembers.Add(author);
         
         result.RoomMembers = new List<RoomMembersDto>();
 
@@ -79,11 +79,11 @@ public class RoomService : IRoomService
             }
         }
 
-        result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = author.AccountCreatedAt, IdAccount = author.IdAccount, Email = author.SenderEmail, FirstName = author.UserName, LastName = author.UserSurname, PushTokens = author.PushTokens });
+       // result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = author.AccountCreatedAt, IdAccount = author.IdAccount, Email = author.SenderEmail, FirstName = author.UserName, LastName = author.UserSurname, PushTokens = author.PushTokens });
 
         //Kacper, Julia, Bartek
         result.RoomName = string.Join(", ", chatMembers.Select(m => m.UserName));
-        result.RoomId = ChatUtils.GetRoomId(idAccount, idMembersAccounts);
+        result.RoomId = roomId; // ChatUtils.GetRoomId(idAccount, idMembersAccounts);
 
         Room room = null;
 

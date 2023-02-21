@@ -80,7 +80,7 @@ public class ConversationService : IConversationService
                 {
                     CreatedAt = message.Createdat.Value,
                     SenderEmail = message.Authoremail,
-                    IdAccount = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].Id : 0,
+                    Id = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].Id : 0,
                     IdRoom = room.Id,
                     RoomId = room.Roomid,
                     FirstName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].FirstName : string.Empty,
