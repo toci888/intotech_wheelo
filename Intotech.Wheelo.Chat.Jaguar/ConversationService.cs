@@ -20,7 +20,7 @@ public class ConversationService : IConversationService
     protected IAccountService AccountService;
     protected IRoomsaccountLogic RoomsAccountLogic;
 
-    protected Dictionary<string, MessageAuthorDto> DistinctAuthors = new Dictionary<string, MessageAuthorDto>();
+    protected Dictionary<string, AuthorDto> DistinctAuthors = new Dictionary<string, AuthorDto>();
 
     public ConversationService(IMessageLogic messageLogic, IAccountService accountService, IRoomLogic roomLogic, IRoomsaccountLogic roomsAccountLogic)
     {
@@ -140,9 +140,9 @@ public class ConversationService : IConversationService
         return result;
     }
 
-    protected virtual Dictionary<string, MessageAuthorDto> GetRoomParticipants(int roomId)
+    protected virtual Dictionary<string, AuthorDto> GetRoomParticipants(int roomId)
     {
-        Dictionary<string, MessageAuthorDto> result = new Dictionary<string, MessageAuthorDto>();   
+        Dictionary<string, AuthorDto> result = new Dictionary<string, AuthorDto>();   
 
         List<Roomsaccount> roomsAccounts = RoomsAccountLogic.Select(m => m.Idroom == roomId).ToList();
 
@@ -150,7 +150,7 @@ public class ConversationService : IConversationService
         {
             UserCacheDto acc = AccountService.GetAccount(item.Memberemail);
 
-            MessageAuthorDto resElement = new MessageAuthorDto();
+            AuthorDto resElement = new AuthorDto();
 
             resElement.FirstName = acc.UserName;
             resElement.LastName = acc.UserSurname;
@@ -166,7 +166,7 @@ public class ConversationService : IConversationService
         return result;
     }
 
-    protected virtual Dictionary<string, MessageAuthorDto> GetDistinctNames(List<Message> distinctAuthors)
+    protected virtual Dictionary<string, AuthorDto> GetDistinctNames(List<Message> distinctAuthors)
     {
         foreach (Message message in distinctAuthors)
         {
@@ -175,7 +175,7 @@ public class ConversationService : IConversationService
                 continue;
             }
 
-            MessageAuthorDto resElement = new MessageAuthorDto();
+            AuthorDto resElement = new AuthorDto();
 
             UserCacheDto acc = AccountService.GetAccount(message.Authoremail);
 

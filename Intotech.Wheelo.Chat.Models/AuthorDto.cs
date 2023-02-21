@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Org.BouncyCastle.Asn1.Cmp;
 
-namespace Intotech.Wheelo.Chat.Models
+namespace Intotech.Wheelo.Chat.Models;
+
+public class AuthorDto
 {
-    public class AuthorDto
-    {
-        public DateTime CreatedAt { get; set; }
-        public string SenderEmail { get; set; }
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string ImageUrl { get; set; }
-        public int IdRoom { get; set; }
-        public string RoomId { get; set; }
-    }
+    public string SenderEmail { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public int Id { get; set; }
+    public string ImageUrl { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime LastSeen { get; set; }
+    public DateTime UpdatedAt { get; set; }
+    public string Role { get; set; }
+    public int IdRoom { get; set; }
+    public string RoomId { get; set; }
+
 }
