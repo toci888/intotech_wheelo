@@ -13,4 +13,7 @@ public class MessageAuthorDto
     public DateTime LastSeen { get; set; }
     public DateTime UpdatedAt { get; set; }
     public string Role { get; set; }
+    public int IdRoom { get; set; }
+    public string RoomId { get; set; }
+
 }

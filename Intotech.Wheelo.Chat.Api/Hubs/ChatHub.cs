@@ -99,16 +99,16 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         [Authorize(Roles = "User")]
         public async Task<ChatMessageDto> SendMessage(ChatMessageDto chatMessage)
         {
-            chatMessage.Author.SenderEmail = Context.UserIdentifier;
+            chatMessage.SenderEmail = Context.UserIdentifier;
             chatMessage = ChatUserService.SendMessage(chatMessage);
 
             if (chatMessage != null)
             {
                 //await Groups.AddToGroupAsync(Context.ConnectionId, chatMessage.ID.ToString());
                 //await Clients.OthersInGroup(chatMessage.RoomId).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
-                await Clients.Group(chatMessage.Author.RoomId).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
+                await Clients.Group(chatMessage.RoomId).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
                 //await Clients.User(Context.UserIdentifier).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
-                ChatNotificationsService.SendChatNotifications(chatMessage.Author.RoomId, chatMessage.Author.SenderEmail, chatMessage, _connectedUsers);
+                ChatNotificationsService.SendChatNotifications(chatMessage.RoomId, chatMessage.SenderEmail, chatMessage, _connectedUsers);
             }                                                            //roomid
 
             return chatMessage;

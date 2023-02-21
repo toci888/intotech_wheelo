@@ -76,7 +76,7 @@ public class ConversationService : IConversationService
             
             foreach (Message message in messages)
             {
-                AuthorDto author = new AuthorDto()
+               /* AuthorDto author = new AuthorDto()
                 {
                     CreatedAt = message.Createdat.Value,
                     SenderEmail = message.Authoremail,
@@ -87,13 +87,14 @@ public class ConversationService : IConversationService
                     LastName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].LastName : string.Empty,
                     ImageUrl = DistinctAuthors.ContainsKey(message.Authoremail) ? ImageServiceUtils.GetImageUrl(DistinctAuthors[message.Authoremail].Id) : string.Empty
                 };
-
+               */
                 resElement.Messages.Add(new ChatMessageDto()
                 {
                     
                     Text = message.Message1,
-                    ID = message.Id,
-                    Author = author
+                    Id = message.Id,
+                    IdAccount = message.Idaccount
+                    //Author = author
                 });
 
                 if (isAccountIdRequest)
@@ -156,6 +157,8 @@ public class ConversationService : IConversationService
             resElement.Id = acc.IdAccount;
             resElement.ImageUrl = ImageServiceUtils.GetImageUrl(acc.IdAccount);
             resElement.SenderEmail = acc.SenderEmail;
+            resElement.RoomId = item.Roomid;
+            resElement.IdRoom = item.Idroom;
 
             result.Add(item.Memberemail, resElement);
         }
