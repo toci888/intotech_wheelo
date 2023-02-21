@@ -21,7 +21,7 @@ const fetchConversation = async (
     }
   );
   const data: ConversationRes = response.data;
-
+    console.log('herrre', data)
   const messages: MessageType.Any[] = [];
   for (let m of data.messages) {
     const message: MessageType.Any = {

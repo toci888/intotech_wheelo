@@ -68,21 +68,22 @@ export const MessagePropertyScreen = ({
   }
 
   const sendMessage = (text: string) => {
-    createConversation.mutate({
-      ownerID: collocation.idAccount, //property.userID,
-      propertyID: collocation.idAccount,
-      tenantID: user.id,
-      propertyName: collocation.name
-        ? collocation.name : 'brak 74 linia',
-        // : `${property.street}, ${property.city}, ${getStateAbbreviation(
-        //     property.state
-        //   )}`,
-      senderName:
-        user.firstName && user.lastName
-          ? `${user.firstName} ${user.lastName}`
-          : `${user.email}`,
-      text,
-    });
+    // createConversation.mutate({
+    //   ownerID: collocation.idAccount, //property.userID,
+    //   propertyID: collocation.idAccount,
+    //   tenantID: user.id,
+    //   propertyName: collocation.name
+    //     ? collocation.name : 'brak 74 linia',
+    //     // : `${property.street}, ${property.city}, ${getStateAbbreviation(
+    //     //     property.state
+    //     //   )}`,
+    //   senderName:
+    //     user.firstName && user.lastName
+    //       ? `${user.firstName} ${user.lastName}`
+    //       : `${user.email}`,
+    //   text,
+    // });
+    console.log("MESSAGE PROP SCREEN SEND MESSAGE")
   };
 
   return (

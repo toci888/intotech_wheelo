@@ -158,6 +158,7 @@ export const MessagesScreen = ({
     {/* <ModalHeader text="a" xShown onPress={() => {navigation.getParent()?.setOptions({ tabBarStyle: { display: "display" } }); navigation.goBack()}}/> */}
     <Chat
       messages={conversation.data.messages}
+      // messages={{} as any}
       user={conversation.data.author}
 
       onSendPress={handleSendPress}

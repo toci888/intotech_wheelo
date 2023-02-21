@@ -14,7 +14,7 @@ export const createSocket = (token: string) => {
 export let socket: HubConnection;
 
 export const connectUser = async (id: number) => {
-    await socket.invoke("connectUser", id);
+    return await socket.invoke("connectUser", id);
 }
 
 export const sendMessage = async (
@@ -22,7 +22,7 @@ export const sendMessage = async (
     roomId: string,
     text: string,
   ) => {
-    await socket.invoke("sendMessage", {
+    return await socket.invoke("sendMessage", {
         author,
         roomId,
         text,
@@ -30,9 +30,9 @@ export const sendMessage = async (
 }
 
 export const joinRoom = async (roomId: string) => {
-    await socket.invoke("joinRoom", roomId);
+    return await socket.invoke("joinRoom", roomId);
 }
 
 export const createRoom = async (userId: number, accountIds: number[]) => {
-    await socket.invoke("createRoom", userId, accountIds);
+    return await socket.invoke("createRoom", userId, accountIds);
 }

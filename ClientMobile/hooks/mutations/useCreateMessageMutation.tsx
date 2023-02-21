@@ -4,7 +4,6 @@ import { queryKeys } from "../../constants/constants";
 import { sendMessage } from "../../constants/socket";
 import { Author, SelectedConversation, TransformedConversation } from "../../types/conversation";
 import { MessageType } from "@flyerhq/react-native-chat-ui/lib/types";
-import { useUser } from "../useUser";
 
 const createMessage = (
   author: Author,
@@ -16,7 +15,6 @@ const createMessage = (
 
 export const useCreateMessageMutation = () => {
   const queryClient = useQueryClient();
-  const { user } = useUser();
 
   return useMutation(
     ({

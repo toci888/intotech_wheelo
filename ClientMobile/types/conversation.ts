@@ -37,3 +37,20 @@ export type Author = User & {
   senderEmail: string;
   id: number;
 };
+
+export type RoomsDto = {
+  ownerEmail: string;
+  idRoom: number;
+  roomId: string;
+  roomName: string;
+  roomMembers: RoomMembersDto[];
+}
+
+export type RoomMembersDto = {
+  idAccount: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  createdAt: Date;
+  pushTokens: string;
+}

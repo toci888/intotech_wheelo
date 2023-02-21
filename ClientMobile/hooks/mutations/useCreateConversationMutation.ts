@@ -1,86 +1,49 @@
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
 
-import { endpoints, queryKeys } from "../../constants/constants";
-import { sendMessage } from "../../constants/socket";
-import { Conversation, CreateConversation } from "../../types/conversation";
-import { useUser } from "../useUser";
+import { queryKeys } from "../../constants/constants";
+import { createRoom, sendMessage } from "../../constants/socket";
+import { RoomsDto } from "../../types/conversation";
 
-const createConversation = (values: CreateConversation, token?: string) =>
-  axios.post<Conversation>(
-    `${endpoints.createConversation}`,
-    {
-      tenantID: values.tenantID,
-      ownerID: values.ownerID,
-      propertyID: values.propertyID,
-      senderID: values.senderID,
-      receiverID: values.receiverID,
-      text: values.text,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+const createConversation = (
+  userId: number, 
+  accountIds: number[]
+) => {
+  return createRoom(userId, accountIds);
+};
 
-// This will only be called when a potential tenant wants to talk to an owner
 export const useCreateConversationMutation = () => {
   const queryClient = useQueryClient();
   const { navigate } = useNavigation();
-  const { user } = useUser();
 
   return useMutation(
     ({
-      ownerID,
-      tenantID,
-      propertyID,
-      propertyName,
-      senderName,
-      text,
+      userId,
+      accountIds,
     }: {
-      ownerID: number;
-      tenantID: number;
-      propertyID: number;
-      propertyName: string;
-      senderName: string;
-      text: string;
+      userId: number; 
+      accountIds: number[];
     }) =>
-      createConversation(
-        {
-          ownerID,
-          tenantID,
-          propertyID,
-          receiverID: ownerID,
-          senderID: tenantID,
-          text,
-        },
-        user?.accessToken
-      ),
-    {
-      onSuccess: (
-        { data },
-        { propertyName, ownerID, text, tenantID, senderName }
-      ) => {
-        queryClient.invalidateQueries(queryKeys.contactedProperties);
-        queryClient.invalidateQueries(queryKeys.conversations);
-        
-        sendMessage(tenantID, data.id, ownerID, text, senderName)
-        
-        //TODO / TODEL
-        navigate("Root", {
-          screen: "AccountRoot",
-          params: {
+      createConversation(userId, accountIds),
+      {
+        onSuccess: (
+          data: RoomsDto
+        ) => {
+
+          queryClient.invalidateQueries(queryKeys.contactedProperties);
+          queryClient.invalidateQueries(queryKeys.conversations);
+          
+          // sendMessage(user)
+
+          navigate("Chat", {
             screen: "Messages",
-            initial: false,
             params: {
-              roomId: data.id,
-              recipientName: propertyName,
+                roomId: data.roomId,
+                recipientName: data.roomName
             },
-          },
-        });
-      },
-    }
+            initial: false,
+          });
+        },
+      }
   );
 };

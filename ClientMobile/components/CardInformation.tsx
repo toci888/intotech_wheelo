@@ -15,6 +15,7 @@ import { useSaveCollocationMutation } from "../hooks/mutations/useSaveCollocatio
 import { useConversationsQuery } from "../hooks/queries/useConversationsQuery";
 import useTheme from "../hooks/useTheme";
 import { createRoom } from "../constants/socket";
+import { useCreateConversationMutation } from "../hooks/mutations/useCreateConversationMutation";
 
 export const CardInformation = ({
   collocation,
@@ -29,6 +30,7 @@ export const CardInformation = ({
   const { user, setSavedProperties } = useUser();
   const saveCollocation = useSaveCollocationMutation();
   const conversations = useConversationsQuery();
+  const createConversation = useCreateConversationMutation();
   const {colors} = useTheme();
 
   const alterUsersSavedProperties = (
@@ -63,7 +65,24 @@ export const CardInformation = ({
       }
 
       console.log("Nie znalazłem konwersacji :(")
-      createRoom(user!.id, [collocation.idAccount]);
+      
+      createConversation.mutate({userId: user!.id, accountIds: [collocation.idAccount]}
+      //   {
+      //   ownerID: collocation.idAccount, //property.userID,
+      //   propertyID: collocation.idAccount,
+      //   tenantID: user.id,
+      //   propertyName: collocation.name
+      //     ? collocation.name : 'brak 74 linia',
+      //     // : `${property.street}, ${property.city}, ${getStateAbbreviation(
+      //     //     property.state
+      //     //   )}`,
+      //   senderName:
+      //     user.firstName && user.lastName
+      //       ? `${user.firstName} ${user.lastName}`
+      //       : `${user.email}`,
+      //   text,
+      // }
+      );
     }
   }
 
