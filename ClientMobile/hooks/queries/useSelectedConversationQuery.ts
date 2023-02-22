@@ -31,7 +31,10 @@ const fetchConversation = async (
       createdAt: new Date(m.createdAt).getDate(),
       author: data.roomParticipants.find(x => Number(x.id) === m.idAccount) as Author
     }
-    messages.push(message);
+
+    if(message.author != null) {
+      messages.push(message);
+    }
   };
 
   let authorsMessage = data.roomParticipants.find((author: Author) => Number(author.id) === userID)
@@ -43,7 +46,7 @@ const fetchConversation = async (
     messages,
     author: authorsMessage as Author
   };
-
+  
   return conversation;
 };
 

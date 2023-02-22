@@ -10,7 +10,7 @@ const createMessage = (
   roomId: string,
   text: string,
 ) => {
-  return sendMessage(author.idAccount, roomId, text);
+  return sendMessage(author.id, roomId, text);
 }
 
 export const useCreateMessageMutation = () => {
@@ -73,7 +73,7 @@ export const useCreateMessageMutation = () => {
           );
           newConversations[index].messages.unshift({
             createdAt: new Date().toDateString(), // todo?
-            idAccount: author.idAccount,
+            idAccount: author.id,
             roomId: roomId,
             senderEmail: author.senderEmail,
             id: Date.now(),

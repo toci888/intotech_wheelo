@@ -36,8 +36,7 @@ export type CreateConversation = {
 
 export type Author = User & {
   senderEmail: string;
-  // id: number;
-  idAccount: number;
+  id: number;
 };
 
 export type RoomsDto = {
