@@ -68,19 +68,28 @@ export const useCreateMessageMutation = () => {
 
         if (prevConversations) {
           const newConversations = [...prevConversations];
-          const index = newConversations.findIndex(
-            (i) => i.idRoom === idRoom
-          );
-          newConversations[index].messages.unshift({
-            createdAt: new Date().toDateString(), // todo?
+          const index = newConversations.findIndex((i) => i.idRoom === idRoom);
+          console.log('index roomu:', index)
+          if (index >= 0) {
+            console.log('stary room wiadomosc: ', text)
+            newConversations[index].messages.unshift({
+              createdAt: new Date().toDateString(), // todo?
+              idAccount: author.id,
+              roomId: roomId,
+              senderEmail: author.senderEmail,
+              id: Date.now(), //TODO!
+              text
+            });
+            
+            queryClient.setQueryData(queryKeys.conversations, newConversations);
+          }
+        } else {
+          console.log("NOWY ROOM. Dane wiadomossci", {
             idAccount: author.id,
             roomId: roomId,
             senderEmail: author.senderEmail,
-            id: Date.now(),
             text
-          });
-          
-          queryClient.setQueryData(queryKeys.conversations, newConversations);
+          })
         }
 
         return {
