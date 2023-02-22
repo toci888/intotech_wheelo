@@ -11,6 +11,7 @@ using Intotech.Wheelo.Common.Interfaces.CachingService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
@@ -63,7 +64,16 @@ namespace Intotech.Wheelo.Chat.Jaguar
 
         public virtual LiveChatMessageDto SendMessage(LiveChatMessageDto chatMessage)
         {
-            UserCacheDto userCached = GetUser(chatMessage.IdAccount);
+            UserCacheDto userCached = null;
+
+            if (chatMessage.IdAccount == 0)
+            {
+                 userCached = GetUser(chatMessage.SenderEmail);
+            }
+            else
+            {
+                 userCached = GetUser(chatMessage.IdAccount);
+            }
 
             Room room = RoomLogic.Select(m => m.Roomid == chatMessage.RoomId).FirstOrDefault();
             //if room is null? TODO
@@ -76,6 +86,15 @@ namespace Intotech.Wheelo.Chat.Jaguar
                 RoomId = chatMessage.RoomId, IdRoom = room.Id };
 
             return chatMessage;
+        }
+
+        protected virtual UserCacheDto GetUser(string email)
+        {
+            UserCacheDto userData = AccountService.GetAccount(email);
+
+            CachingService.Set(userData.IdAccount.ToString(), userData);
+
+            return userData;
         }
 
         protected virtual UserCacheDto GetUser(int idAccount)

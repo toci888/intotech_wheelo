@@ -15,14 +15,14 @@ public class SeedRoomsAccounts : SeedChatLogic<Roomsaccount>
         int thirdAccountId = 1000000003;
 
 
-        for (int i = 1; i < 11; i++)
+        for (int i = 1; i < 4; i++)
         { 
-            Roomsaccount ra = new Roomsaccount() { Idroom = i, Memberemail = "bzapart@gmail.com", Roomid = ChatUtils.GetRoomId(accountId, SeedCrossData.GetAccountsIdsWithSkip(accountId))  };
+            Roomsaccount ra = new Roomsaccount() { Idroom = i, Memberemail = "bzapart@gmail.com", Memberidaccount = accountId,  Roomid = ChatUtils.GetRoomId(accountId, SeedCrossData.GetAccountsIdsWithSkip(accountId))  };
 
             list.Add(ra);
 
-            list.Add(new Roomsaccount() { Memberemail = "warriorr@poczta.fm", Idroom = i, Roomid = ChatUtils.GetRoomId(accountId, SeedCrossData.GetAccountsIdsWithSkip(peerAccountId)) });
-            list.Add(new Roomsaccount() { Memberemail = "bartek@gg.pl", Idroom = i, Roomid = ChatUtils.GetRoomId(accountId, SeedCrossData.GetAccountsIdsWithSkip(thirdAccountId)) });
+            list.Add(new Roomsaccount() { Memberemail = "warriorr@poczta.fm", Idroom = i, Memberidaccount = peerAccountId, Roomid = ChatUtils.GetRoomId(peerAccountId, SeedCrossData.GetAccountsIdsWithSkip(peerAccountId)) });
+            list.Add(new Roomsaccount() { Memberemail = "bartek@gg.pl", Idroom = i, Memberidaccount = thirdAccountId, Roomid = ChatUtils.GetRoomId(thirdAccountId, SeedCrossData.GetAccountsIdsWithSkip(thirdAccountId)) });
         }
         InsertCollection(list);
     }

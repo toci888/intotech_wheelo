@@ -14,13 +14,13 @@ public class SeedRooms : SeedChatLogic<Room>
         int peerAccountId = 1000000002;
         int thirdAccountId = 1000000003;
 
-        for (int i = 0; i < 10; i++)
+        //for (int i = 0; i < 10; i++)
         {
-            rooms.Add(new Room() { Roomname = "bzapart", Owneremail = "bzapart@gmail.com", Roomid = ChatUtils.GetRoomId(accountId, SeedCrossData.GetAccountsIdsWithSkip(accountId)) });
+            rooms.Add(new Room() { Roomname = "bzapart", Owneremail = "bzapart@gmail.com", Owneridaccount = accountId, Roomid = ChatUtils.GetRoomId(accountId, SeedCrossData.GetAccountsIdsWithSkip(accountId)) });
             
-            rooms.Add(new Room() { Roomname = "bartek", Owneremail = "bartek@gg.pl", Roomid = ChatUtils.GetRoomId(thirdAccountId, SeedCrossData.GetAccountsIdsWithSkip(thirdAccountId)) });
+            rooms.Add(new Room() { Roomname = "bartek", Owneremail = "bartek@gg.pl", Owneridaccount = peerAccountId, Roomid = ChatUtils.GetRoomId(thirdAccountId, SeedCrossData.GetAccountsIdsWithSkip(thirdAccountId)) });
 
-            rooms.Add(new Room() { Roomname = "warriorr", Owneremail = "warriorr@poczta.fm", Roomid = ChatUtils.GetRoomId(peerAccountId, SeedCrossData.GetAccountsIdsWithSkip(peerAccountId)) });
+            rooms.Add(new Room() { Roomname = "warriorr", Owneremail = "warriorr@poczta.fm", Owneridaccount = thirdAccountId, Roomid = ChatUtils.GetRoomId(peerAccountId, SeedCrossData.GetAccountsIdsWithSkip(peerAccountId)) });
             
         }
 

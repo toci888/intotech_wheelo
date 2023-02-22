@@ -15,7 +15,7 @@ public class SeedMessages : SeedChatLogic<Message>
 
         Random rnd = new Random();
 
-        for (int j = 1; j < 11; j++)
+        for (int j = 1; j < 4; j++)
         for (int i = 0; i < 50; i++)
         {                                                                    
             // cadewi yhiklo
