@@ -106,9 +106,16 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             {
                 //await Groups.AddToGroupAsync(Context.ConnectionId, chatMessage.ID.ToString());
                 //await Clients.OthersInGroup(chatMessage.RoomId).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
-                await Clients.Group(chatMessage.RoomId).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
-                //await Clients.User(Context.UserIdentifier).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
-                ChatNotificationsService.SendChatNotifications(chatMessage.RoomId, chatMessage.SenderEmail, chatMessage, _connectedUsers);
+                try
+                {
+                    await Clients.Group(chatMessage.RoomId).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
+                    //await Clients.User(Context.UserIdentifier).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
+                    ChatNotificationsService.SendChatNotifications(chatMessage.RoomId, chatMessage.SenderEmail, chatMessage, _connectedUsers);
+                }
+                catch (Exception ex)
+                {
+                    
+                }
             }                                                            //roomid
 
             return chatMessage;

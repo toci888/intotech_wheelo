@@ -93,7 +93,7 @@ public class RoomService : IRoomService
         }
         else
         {
-            room = RoomLogic.Insert(new Room() { Owneremail = author.SenderEmail, Roomname = result.RoomName, Roomid = result.RoomId });
+            room = RoomLogic.Insert(new Room() { Owneremail = author.SenderEmail, Roomname = result.RoomName, Owneridaccount = idAccount, Roomid = result.RoomId });
         }
 
         result.IdRoom = room.Id;
@@ -103,7 +103,7 @@ public class RoomService : IRoomService
         {
             foreach (UserCacheDto chatMember in chatMembers)
             {
-                RoomsAccountLogic.Insert(new Roomsaccount() { Roomid = result.RoomId, Idroom = result.IdRoom, Memberemail = chatMember.SenderEmail });
+                RoomsAccountLogic.Insert(new Roomsaccount() { Roomid = result.RoomId, Memberidaccount = chatMember.IdAccount, Idroom = result.IdRoom, Memberemail = chatMember.SenderEmail });
             }
         }
 

@@ -7,5 +7,5 @@ namespace Intotech.Wheelo.Chat.Jaguar.Interfaces;
 
 public interface IChatNotificationsService
 {
-    NotificationResponseDto SendChatNotifications(string roomId, string senderEmail, LiveChatMessageDto chatMessage, ConcurrentDictionary<string, string> connectedUsers);
+    void SendChatNotifications(string roomId, string senderEmail, LiveChatMessageDto chatMessage, ConcurrentDictionary<string, string> connectedUsers);
 }

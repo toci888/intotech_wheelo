@@ -18,7 +18,7 @@ public class ChatNotificationsService : IChatNotificationsService
         NotificationManager = notificationManager;
     }
 
-    public virtual NotificationResponseDto SendChatNotifications(string roomId, string senderEmail, LiveChatMessageDto chatMessage, ConcurrentDictionary<string, string> connectedUsers)
+    public virtual void SendChatNotifications(string roomId, string senderEmail, LiveChatMessageDto chatMessage, ConcurrentDictionary<string, string> connectedUsers)
     {
         RoomsDto roomDto = RoomService.GetRoom(roomId);
 
@@ -28,15 +28,22 @@ public class ChatNotificationsService : IChatNotificationsService
 
         foreach (RoomMembersDto roomMember in roomMembers)
         {
-            pushTokens.AddRange(roomMember.PushTokens);
+            List<string> pushTokensMid = roomMember.PushTokens.Where(m => m.StartsWith("ExponentPushToken")).ToList();
+
+            if (pushTokensMid.Count() > 0)
+            {
+                pushTokens.AddRange(pushTokensMid);
+            }
         }
 
 
+        if (pushTokens.Count > 0)
+        {
+            NotificationModelBase<LiveChatMessageDto> notificationData = new NotificationModelBase<LiveChatMessageDto>(
+                NotificationsKinds.ChatMessage, pushTokens, chatMessage, chatMessage.Text,
+                chatMessage.Author.FirstName, chatMessage.Author.LastName);
 
-        NotificationModelBase<LiveChatMessageDto> notificationData = new NotificationModelBase<LiveChatMessageDto>(
-            NotificationsKinds.ChatMessage, pushTokens, chatMessage, chatMessage.Text, 
-            chatMessage.Author.FirstName, chatMessage.Author.LastName);
-
-        return NotificationManager.SendNotifications(notificationData);
+            NotificationManager.SendNotifications(notificationData);
+        }
     }
 }
