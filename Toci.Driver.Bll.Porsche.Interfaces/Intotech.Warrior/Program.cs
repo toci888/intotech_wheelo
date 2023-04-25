@@ -30,11 +30,11 @@ int a = 0;
 //UsersCollocationLogic uc = new UsersCollocationLogic();
 
 //uc.DeleteByColumnId("Idaccount", 1000000014);
-new ChatSeedManager().SeedAllDb();
+new SocialSeedManager().SeedAllDb();
 
 //new WheeloMainSeedManager().SeedAllDb();
 
-//new SocialSeedManager().SeedAllDb();
+//
 
 //Service serv = new Service();
 //serv.Listen();

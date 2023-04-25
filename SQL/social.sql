@@ -1,28 +1,14 @@
--- 9.12.2022 13:12
-drop table Expenses;
 
--- run once for migration
-drop table Comments;
---drop table UserComments;
---drop table MeetingSkippedAccounts;
-drop table OrganizeMeeting;
---drop table GroupsPosts;
-drop table CommentTypes;
-drop table GroupMembers;
-drop table Groups;
-
-----------
--- 9.12.2022 13:12
-drop table Expenses;
+drop table if exists Expenses;
 ---
-drop table UserComments;
-drop table MeetingSkippedAccounts;
-drop table OrganizeMeeting;
-drop table GroupsPostsComments;
-drop table CommentTypes;
-drop table GroupsPosts;
-drop table GroupMembers;
-drop table Groups;
+drop table if exists UserComments;
+drop table if exists MeetingSkippedAccounts;
+drop table if exists OrganizeMeeting;
+drop table if exists GroupsPostsComments;
+drop table if exists CommentTypes;
+drop table if exists GroupsPosts;
+drop table if exists GroupMembers;
+drop table if exists Groups;
 
 create table Groups
 (

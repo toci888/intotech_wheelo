@@ -23,14 +23,14 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
         // zad 2 - names
         protected void PopulateSurnames()
         {
-            string surnames = File.ReadAllText(@"../../../../Intotech.Wheelo.Tests/Persistence.Seed/RawData/surnames.txt");
+            string surnames = File.ReadAllText(@"../Intotech.Wheelo.Tests/Persistence.Seed/RawData/surnames.txt");
 
             Surnames = surnames.Split("\n").Select(m => m.Trim()).ToList();
         }
 
         protected void PopulateNames()
         {
-            string names = File.ReadAllText(@"../../../../Intotech.Wheelo.Tests/Persistence.Seed/RawData/names.txt");
+            string names = File.ReadAllText(@"../Intotech.Wheelo.Tests/Persistence.Seed/RawData/names.txt");
 
             Names = names.Split("\n").Select(m => m.Trim()).ToList();
         }

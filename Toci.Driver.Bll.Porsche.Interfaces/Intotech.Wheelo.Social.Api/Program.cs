@@ -1,3 +1,4 @@
+using Intotech.Common.Database.DbSetup;
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Social.Bll.Lamborgini;
@@ -6,10 +7,17 @@ using Intotech.Wheelo.Social.Bll.Persistence;
 using Intotech.Wheelo.Social.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Social.Bll.Pontiac;
 using Intotech.Wheelo.Social.Bll.Pontiac.Interfaces;
+//using Intotech.Wheelo.Social.Tests.Persistence.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5154);
+});
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -43,6 +51,18 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    DbSetupManager dbSm = new DbSetupManager("Host=localhost;Database=postgres;Username=postgres;Password=beatka",
+        "Host=localhost;Database=Intotech.Wheelo.Social;Username=postgres;Password=beatka", "Intotech.Wheelo.Social", "..\\..\\SQL\\social.sql");
+
+    dbSm.SetupDatabase();
+
+    DbScaffoldManager dbScaffoldManager = new DbScaffoldManager("Host=localhost;Database=Intotech.Wheelo.Social;Username=postgres;Password=beatka",
+        "Intotech.Wheelo.Social.Database.Persistence", "intotech_wheelo\\Toci.Driver.Bll.Porsche.Interfaces");
+
+    dbScaffoldManager.RunScaffold();
+
+    //new SocialSeedManager().SeedAllDb();
 }
 
 app.UseHttpsRedirection();

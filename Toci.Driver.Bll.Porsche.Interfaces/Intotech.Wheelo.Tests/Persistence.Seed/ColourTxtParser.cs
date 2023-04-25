@@ -19,7 +19,7 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
 
         public List<Colour> RunColourParsing()
         {
-            string file = File.ReadAllText("../../../../../SQL/colours.txt");
+            string file = File.ReadAllText("../../SQL/colours.txt");
 
             string[] coloursLines = file.Split("\n");
 

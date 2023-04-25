@@ -5,11 +5,11 @@ namespace Toci.Driver.Database.Persistence.Models
 {
     public partial class Vfriend
     {
+        public int? Idaccount { get; set; }
         public string? Name { get; set; }
         public string? Surname { get; set; }
         public string? Friendname { get; set; }
         public string? Friendsurname { get; set; }
-        public int? Idaccount { get; set; }
         public int? Friendidaccount { get; set; }
         public int? Method { get; set; }
         public double? Latitudefrom { get; set; }

@@ -34,6 +34,8 @@ using Toci.Driver.Database.Persistence.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Bll.Persistence;
+using Intotech.Common.Database.DbSetup;
+using Intotech.Wheelo.Tests.Persistence.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -147,11 +149,22 @@ builder.Services.AddControllers().AddJsonOptions(options => {
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (true) // app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    DbSetupManager dbSm = new DbSetupManager("Host=localhost;Database=postgres;Username=postgres;Password=beatka", 
+        "Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka", "Intotech.Wheelo", "..\\..\\SQL\\wheelo.sql");
+
+    dbSm.SetupDatabase();
+
+    DbScaffoldManager dbScaffoldManager = new DbScaffoldManager("Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka",
+        "Toci.Driver.Database.Persistence", "intotech_wheelo\\Toci.Driver.Bll.Porsche.Interfaces");
+
+    dbScaffoldManager.RunScaffold();
+
+    new WheeloMainSeedManager().SeedAllDb();
 }
 
 

@@ -23,7 +23,7 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
 
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(select));
 
-            select resultXmlEntity = xmlSerializer.Deserialize(new FileStream("../../../../../SQL/morecars.txt", FileMode.Open)) as select;
+            select resultXmlEntity = xmlSerializer.Deserialize(new FileStream("../../SQL/morecars.txt", FileMode.Open)) as select;
 
             foreach (selectOption carXml in resultXmlEntity.option)
             {

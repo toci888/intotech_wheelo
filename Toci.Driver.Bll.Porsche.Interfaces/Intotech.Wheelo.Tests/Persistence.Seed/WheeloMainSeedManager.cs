@@ -22,7 +22,7 @@ public class WheeloMainSeedManager
         new SeedRole().Insert();
         new SeedAccount().Insert();
         new SeedWorkTripGen().Insert();
-        new SeedCars().Insert();
+        //new SeedCars().Insert();
         new SeedFriendSuggestion().Insert();
         new SeedFriends().Insert();
         new SeedTrip().Insert();

@@ -17,6 +17,8 @@ using System.Text;
 using Intotech.Wheelo.Common.CachingService;
 using Intotech.Wheelo.Notifications;
 using Intotech.Wheelo.Notifications.Interfaces;
+using Intotech.Common.Database.DbSetup;
+using Intotech.Wheelo.Chat.Tests.Persistence.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -119,6 +121,18 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    DbSetupManager dbSm = new DbSetupManager("Host=localhost;Database=postgres;Username=postgres;Password=beatka",
+        "Host=localhost;Database=Intotech.Wheelo.Chat;Username=postgres;Password=beatka", "Intotech.Wheelo.Chat", "..\\Toci.Driver.Bll.Porsche.Interfaces\\Wheelo.Chat.sql");
+
+    dbSm.SetupDatabase();
+
+    DbScaffoldManager dbScaffoldManager = new DbScaffoldManager("Host=localhost;Database=Intotech.Wheelo.Chat;Username=postgres;Password=beatka",
+        "Intotech.Wheelo.Chat.Database.Persistence", "Dev\\intotech_wheelo");
+
+    dbScaffoldManager.RunScaffold();
+
+    new ChatSeedManager().SeedAllDb();
 }
 
 app.UseHttpsRedirection();
