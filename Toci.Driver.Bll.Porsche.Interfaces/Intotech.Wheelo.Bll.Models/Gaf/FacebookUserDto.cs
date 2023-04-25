@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Intotech.Wheelo.Bll.Models.Gaf
 {
    
-public class FacebookUserDto
+    public class FacebookUserDto
     {
         public string id { get; set; }
         public string name { get; set; }
