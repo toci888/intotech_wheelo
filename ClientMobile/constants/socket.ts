@@ -1,5 +1,4 @@
 import { HubConnection, HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
-import { Author } from "../types/conversation";
 
 import { endpoints } from "./constants";
 

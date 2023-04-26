@@ -48,42 +48,35 @@ export const CardInformation = ({
   };
 
   const handleChatButtonPress = () => {
-    if (conversations.data) {
-      for (let i=0; i<conversations.data.length; i++) {
-        if(collocation.roomId === conversations.data[i].roomId) {
-          console.log(collocation.roomId)
-          navigation.navigate("Chat", {
-            screen: "Messages",
-            params: {
-              roomId: collocation.roomId,
-              recipientName: collocation.name
-            },
-            initial: false
-          })
-          return;
-        }
-      }
+    navigation.navigate("Chat", {
+      screen: "Messages",
+      params: {
+        roomId: collocation.roomId,
+        recipientName: collocation.name
+      },
+      initial: false
+    })
 
-      console.log("Nie znalazłem konwersacji :(")
+    // if (conversations.data) {
+    //   for (let i=0; i<conversations.data.length; i++) {
+    //     if(collocation.roomId === conversations.data[i].roomId) {
+    //       console.log(collocation.roomId)
+    //       navigation.navigate("Chat", {
+    //         screen: "Messages",
+    //         params: {
+    //           roomId: collocation.roomId,
+    //           recipientName: collocation.name
+    //         },
+    //         initial: false
+    //       })
+    //       return;
+    //     }
+    //   }
+
+    //   console.log("Nie znalazłem konwersacji :(")
       
-      createConversation.mutate({userId: user!.id, accountIds: [collocation.idAccount]}
-      //   {
-      //   ownerID: collocation.idAccount, //property.userID,
-      //   propertyID: collocation.idAccount,
-      //   tenantID: user.id,
-      //   propertyName: collocation.name
-      //     ? collocation.name : 'brak 74 linia',
-      //     // : `${property.street}, ${property.city}, ${getStateAbbreviation(
-      //     //     property.state
-      //     //   )}`,
-      //   senderName:
-      //     user.firstName && user.lastName
-      //       ? `${user.firstName} ${user.lastName}`
-      //       : `${user.email}`,
-      //   text,
-      // }
-      );
-    }
+    //   createConversation.mutate({userId: user!.id, accountIds: [collocation.idAccount]});
+    // }
   }
 
   const handleStarPress = () => {

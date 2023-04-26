@@ -34,7 +34,7 @@ export const ConversationsScreen = () => {
   if (conversations.isLoading) return <Loading />;
 
   if (!conversations?.data || conversations.data.length === 0) {
-    return <Text>{i18n.t("YouHaveNoMessages")}</Text>;
+    return <Text>Brak wiadomosci stare TODO!</Text>;
   }
 
   const handleMessagePress = async (roomId: string, recipientName: string) => {
@@ -63,6 +63,7 @@ export const ConversationsScreen = () => {
             onRefresh={() => {conversations.refetch();}}
           />
         }
+        ListEmptyComponent={<Text>{i18n.t("YouHaveNoMessages")}</Text>}
         renderItem={({ item }) => (
           <Pressable
             style={styles.message}
