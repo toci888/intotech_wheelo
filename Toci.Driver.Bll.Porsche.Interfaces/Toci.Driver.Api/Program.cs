@@ -149,7 +149,7 @@ builder.Services.AddControllers().AddJsonOptions(options => {
 
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -160,14 +160,14 @@ if (!app.Environment.IsDevelopment())
         ConnectionString = "Host=localhost;Database=postgres;Username=postgres;Password=beatka",
         CustomDbConnectionString = "Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka",
         DatabaseName = "Intotech.Wheelo",
-        ParentProjectFolderPath = "intotech_wheelo\\Toci.Driver.Bll.Porsche.Interfaces",
+        ParentProjectFolderPath = "Toci.Driver.Bll.Porsche.Interfaces",
         ProjectName = "Toci.Driver.Database.Persistence",
         SqlFilePath = "..\\..\\SQL\\wheelo.sql"
     };
 
     DbSetupFacade dbSetup = new DbSetupFacade(dbSetupEntity);
 
-    dbSetup.RunAll();
+    dbSetup.RunAll(true);
 
     /*DbSetupManager dbSm = new DbSetupManager("Host=localhost;Database=postgres;Username=postgres;Password=beatka", 
         "Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka", "Intotech.Wheelo", "..\\..\\SQL\\wheelo.sql");

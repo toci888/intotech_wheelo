@@ -55,7 +55,7 @@ if (app.Environment.IsDevelopment())
     DbSetupManager dbSm = new DbSetupManager("Host=localhost;Database=postgres;Username=postgres;Password=beatka",
         "Host=localhost;Database=Intotech.Wheelo.Social;Username=postgres;Password=beatka", "Intotech.Wheelo.Social", "..\\..\\SQL\\social.sql");
 
-    dbSm.SetupDatabase();
+    dbSm.SetupDatabase(false);
 
     DbScaffoldManager dbScaffoldManager = new DbScaffoldManager("Host=localhost;Database=Intotech.Wheelo.Social;Username=postgres;Password=beatka",
         "Intotech.Wheelo.Social.Database.Persistence", "intotech_wheelo\\Toci.Driver.Bll.Porsche.Interfaces");
