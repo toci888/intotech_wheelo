@@ -29,6 +29,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    //new SeedCarsModelsParser().Insert();
+    ////new SeedCars().Insert();
+    //new CarsXmlParser().Insert();
+    //new ColourTxtParser().Insert();
+    //new ProfessionsTxtParser().Insert();
 }
 
 app.UseHttpsRedirection();

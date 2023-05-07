@@ -125,7 +125,6 @@ if (app.Environment.IsDevelopment())
     DbSetupEntity dbSetupEntity = new DbSetupEntity()
     {
         RootConnectionString = "Host=localhost;Database=postgres;Username=postgres;Password=beatka",
-        ConnectionString = "Host=localhost;Database=postgres;Username=postgres;Password=beatka",
         CustomDbConnectionString = "Host=localhost;Database=Intotech.Wheelo.Chat;Username=postgres;Password=beatka",
         DatabaseName = "Intotech.Wheelo.Chat",
         ParentProjectFolderPath = "intotech_wheelo",

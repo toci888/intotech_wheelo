@@ -55,7 +55,7 @@ if (app.Environment.IsDevelopment())
     DbSetupEntity dbSetupEntity = new DbSetupEntity()
     {
         RootConnectionString = "Host=localhost;Database=postgres;Username=postgres;Password=beatka",
-        ConnectionString = "Host=localhost;Database=postgres;Username=postgres;Password=beatka",
+        //ConnectionString = "Host=localhost;Database=postgres;Username=postgres;Password=beatka",
         CustomDbConnectionString = "Host=localhost;Database=Intotech.Wheelo.Social;Username=postgres;Password=beatka",
         DatabaseName = "Intotech.Wheelo.Social",
         ParentProjectFolderPath = "intotech_wheelo",
@@ -67,15 +67,15 @@ if (app.Environment.IsDevelopment())
 
     dbSetup.RunAll(true);
 
-    DbSetupManager dbSm = new DbSetupManager("Host=localhost;Database=postgres;Username=postgres;Password=beatka",
-        "Host=localhost;Database=Intotech.Wheelo.Social;Username=postgres;Password=beatka", "Intotech.Wheelo.Social", "..\\..\\SQL\\social.sql");
+    //DbSetupManager dbSm = new DbSetupManager("Host=localhost;Database=postgres;Username=postgres;Password=beatka",
+    //    "Host=localhost;Database=Intotech.Wheelo.Social;Username=postgres;Password=beatka", "Intotech.Wheelo.Social", "..\\..\\SQL\\social.sql");
 
-    dbSm.SetupDatabase(false);
+    //dbSm.SetupDatabase(false);
 
-    DbScaffoldManager dbScaffoldManager = new DbScaffoldManager("Host=localhost;Database=Intotech.Wheelo.Social;Username=postgres;Password=beatka",
-        "Intotech.Wheelo.Social.Database.Persistence", "intotech_wheelo\\Toci.Driver.Bll.Porsche.Interfaces");
+    //DbScaffoldManager dbScaffoldManager = new DbScaffoldManager("Host=localhost;Database=Intotech.Wheelo.Social;Username=postgres;Password=beatka",
+    //    "Intotech.Wheelo.Social.Database.Persistence", "intotech_wheelo\\Toci.Driver.Bll.Porsche.Interfaces");
 
-    dbScaffoldManager.RunScaffold();
+    //dbScaffoldManager.RunScaffold();
 
     //new SocialSeedManager().SeedAllDb();
 }
