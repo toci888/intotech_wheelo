@@ -154,12 +154,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    DbSetupEntity dbSetupEntity = new DbSetupEntity()
+    DbSetupEntity dbSetupEntity = new DbSetupEntity("localhost", "beatka", "Intotech.Wheelo")
     {
-        RootConnectionString = "Host=localhost;Database=postgres;Username=postgres;Password=beatka",
-        //ConnectionString = "Host=localhost;Database=postgres;Username=postgres;Password=beatka",
-        CustomDbConnectionString = "Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka",
-        DatabaseName = "Intotech.Wheelo",
         ParentProjectFolderPath = "Toci.Driver.Bll.Porsche.Interfaces",
         ProjectName = "Toci.Driver.Database.Persistence",
         SqlFilePath = "..\\..\\SQL\\wheelo.sql"
@@ -167,17 +163,7 @@ if (app.Environment.IsDevelopment())
 
     DbSetupFacade dbSetup = new DbSetupFacade(dbSetupEntity);
 
-    dbSetup.RunAll(true);
-
-    /*DbSetupManager dbSm = new DbSetupManager("Host=localhost;Database=postgres;Username=postgres;Password=beatka", 
-        "Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka", "Intotech.Wheelo", "..\\..\\SQL\\wheelo.sql");
-
-    dbSm.SetupDatabase();
-
-    DbScaffoldManager dbScaffoldManager = new DbScaffoldManager("Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka",
-        "Toci.Driver.Database.Persistence", "intotech_wheelo\\Toci.Driver.Bll.Porsche.Interfaces");
-
-    dbScaffoldManager.RunScaffold();*/
+    bool res = dbSetup.RunAll(true);
 
     new WheeloMainSeedManager().SeedAllDb();
 }

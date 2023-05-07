@@ -323,11 +323,6 @@ join WorkTrip wt on U2.id = wt.idaccount ;
 
 --select * from AccountsCarsLocations;
 -- drop table if exists TestCoordinates;
---create table TestCoordinates
---(
-	--FromLongitude decimal,
-	--FromLatitude decimal
---);
 
 --insert into TestCoordinates(FromLongitude, FromLatitude) values (50.05463180727613, 17.80014622135593);
 --select * from TestCoordinates;
@@ -355,15 +350,6 @@ create table Occupations
 	id serial primary key,
 	name text
 );
-
---create table Accounts
---(
---	Id serial primary key,
---	Name text not null,
---	Surname text not null,
---	Token text,
---	method text not null
---);
 
 create table AccountMetadata
 (

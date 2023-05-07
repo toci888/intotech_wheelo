@@ -122,11 +122,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    DbSetupEntity dbSetupEntity = new DbSetupEntity()
+    DbSetupEntity dbSetupEntity = new DbSetupEntity("localhost", "beatka", "Intotech.Wheelo.Chat")
     {
-        RootConnectionString = "Host=localhost;Database=postgres;Username=postgres;Password=beatka",
-        CustomDbConnectionString = "Host=localhost;Database=Intotech.Wheelo.Chat;Username=postgres;Password=beatka",
-        DatabaseName = "Intotech.Wheelo.Chat",
         ParentProjectFolderPath = "intotech_wheelo",
         ProjectName = "Intotech.Wheelo.Chat.Database.Persistence",
         SqlFilePath = "..\\Toci.Driver.Bll.Porsche.Interfaces\\Wheelo.Chat.sql"
