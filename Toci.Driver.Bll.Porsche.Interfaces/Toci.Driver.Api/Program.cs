@@ -35,7 +35,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Bll.Persistence;
 using Intotech.Common.Database.DbSetup;
-using Intotech.Wheelo.Tests.Persistence.Seed;
+using Intotech.Wheelo.Seed.Common.Wheelo.Main;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -151,6 +151,8 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+    new WheeloMainSeedManager().SeedAllDb();
+
     app.UseSwagger();
     app.UseSwaggerUI();
 
@@ -165,7 +167,7 @@ if (app.Environment.IsDevelopment())
 
     bool res = dbSetup.RunAll(true);
 
-    new WheeloMainSeedManager().SeedAllDb();
+    
 }
 
 
