@@ -151,8 +151,6 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    new WheeloMainSeedManager().SeedAllDb();
-
     app.UseSwagger();
     app.UseSwaggerUI();
 
@@ -167,7 +165,7 @@ if (app.Environment.IsDevelopment())
 
     bool res = dbSetup.RunAll(true);
 
-    
+    new WheeloMainSeedManager().SeedAllDb();
 }
 
 

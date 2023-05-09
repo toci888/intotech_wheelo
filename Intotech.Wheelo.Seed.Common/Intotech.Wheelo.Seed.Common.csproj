@@ -7,15 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Wheelo.Social\" />
-    <Folder Include="Wheelo.Chat\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Bll.Interfaces\Intotech.Common.Bll.Interfaces.csproj" />
-    <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Bll\Intotech.Common.Bll.csproj" />
-    <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Database.Interfaces\Intotech.Common.Database.Interfaces.csproj" />
-    <ProjectReference Include="..\..\Intotech.Common\Intotech.Common\Intotech.Common.csproj" />
     <ProjectReference Include="..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
     <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
   </ItemGroup>
