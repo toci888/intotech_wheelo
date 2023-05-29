@@ -54,7 +54,7 @@ if (app.Environment.IsDevelopment())
 
     DbSetupEntity dbSetupEntity = new DbSetupEntity("localhost", "beatka", "Intotech.Wheelo.Social")
     {
-        ParentProjectFolderPath = "intotech_wheelo",
+        //ParentProjectFolderPath = "intotech_wheelo",
         ProjectName = "Intotech.Wheelo.Chat.Database.Persistence",
         SqlFilePath = "..\\..\\SQL\\social.sql"
     };

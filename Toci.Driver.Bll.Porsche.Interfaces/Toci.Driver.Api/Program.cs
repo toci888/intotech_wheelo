@@ -151,14 +151,14 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    new WheeloMainSeedManager().SeedAllDb();
+    
 
     app.UseSwagger();
     app.UseSwaggerUI();
 
     DbSetupEntity dbSetupEntity = new DbSetupEntity("localhost", "beatka", "Intotech.Wheelo")
     {
-        ParentProjectFolderPath = "Toci.Driver.Bll.Porsche.Interfaces",
+        //ParentProjectFolderPath = "Toci.Driver.Bll.Porsche.Interfaces",
         ProjectName = "Toci.Driver.Database.Persistence",
         SqlFilePath = "..\\..\\SQL\\wheelo.sql"
     };
@@ -167,7 +167,7 @@ if (app.Environment.IsDevelopment())
 
     bool res = dbSetup.RunAll(true);
 
-    
+    new WheeloMainSeedManager().SeedAllDb();
 }
 
 

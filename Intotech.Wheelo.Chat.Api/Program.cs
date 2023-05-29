@@ -124,7 +124,7 @@ if (app.Environment.IsDevelopment())
 
     DbSetupEntity dbSetupEntity = new DbSetupEntity("localhost", "beatka", "Intotech.Wheelo.Chat")
     {
-        ParentProjectFolderPath = "intotech_wheelo",
+        //ParentProjectFolderPath = "intotech_wheelo",
         ProjectName = "Intotech.Wheelo.Chat.Database.Persistence",
         SqlFilePath = "..\\Toci.Driver.Bll.Porsche.Interfaces\\Wheelo.Chat.sql"
     };
