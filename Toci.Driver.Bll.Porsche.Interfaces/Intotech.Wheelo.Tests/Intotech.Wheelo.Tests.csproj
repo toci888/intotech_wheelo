@@ -58,6 +58,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Crap\MagicDtoFiller\Dto\" />
     <Folder Include="Images\" />
   </ItemGroup>
 
