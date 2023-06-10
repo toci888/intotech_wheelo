@@ -22,7 +22,7 @@ namespace Intotech.Wheelo.Seed.Common.Wheelo.Main
                 Latitudeto = 52.22478607141056, Longitudeto = 21.0114489021064, Fromhour = new TimeOnly(7, 50),
                 Tohour = new TimeOnly(16, 10), Acceptabledistance = distanceAcc},
 
-                new Worktrip() { Idaccount = 5 + AccountIdOffset\, Latitudefrom = 52.281761410186135, Longitudefrom = 21.063964534960436,
+                new Worktrip() { Idaccount = 5 + AccountIdOffset, Latitudefrom = 52.281761410186135, Longitudefrom = 21.063964534960436,
                 Latitudeto = 52.22478607141056, Longitudeto = 21.0114489021064, Fromhour = new TimeOnly(7, 50),
                 Tohour = new TimeOnly(16, 10), Acceptabledistance = distanceAcc},
 
