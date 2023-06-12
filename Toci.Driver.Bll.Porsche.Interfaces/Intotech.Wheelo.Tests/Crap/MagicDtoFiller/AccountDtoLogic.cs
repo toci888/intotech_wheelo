@@ -8,7 +8,9 @@ namespace Intotech.Wheelo.Tests.Crap.MagicDtoFiller;
 
 public class AccountDtoLogic : DtoLogicBase<Account, AccountLogic, AccountDto>
 {
-    public AccountDtoLogic(int accountId) : base(new AccountLogic(), m => m.Id == accountId)
+    public AccountDtoLogic(int accountId) : base(new AccountLogic(), 
+        m => m.Id == accountId, 
+        null,null)
     {
     }
 
