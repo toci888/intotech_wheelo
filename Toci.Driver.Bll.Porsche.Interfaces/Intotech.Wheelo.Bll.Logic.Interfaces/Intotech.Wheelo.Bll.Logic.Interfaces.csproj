@@ -7,22 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll.Interfaces\Intotech.Common.Bll.Interfaces.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll\Intotech.Common.Bll.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Database.Interfaces\Intotech.Common.Database.Interfaces.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common\Intotech.Common.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
     <ProjectReference Include="..\..\Intotech.Wheelo.Common.Interfaces\Intotech.Wheelo.Common.Interfaces.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Bll.Models\Intotech.Wheelo.Bll.Models.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Bll.Persistence.Interfaces\Intotech.Wheelo.Bll.Persistence.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Common\Intotech.Wheelo.Common.csproj" />
-    <ProjectReference Include="..\Intotech.Wheelo.Social.Database.Persistence\Intotech.Wheelo.Social.Database.Persistence.csproj" />
     <ProjectReference Include="..\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ModelDtos\Intotech.Wheelo.Dtos\" />
-    <Folder Include="ModelMappers\ModelToDtoMaps\" />
-    <Folder Include="Dtos\" />
   </ItemGroup>
 
 </Project>

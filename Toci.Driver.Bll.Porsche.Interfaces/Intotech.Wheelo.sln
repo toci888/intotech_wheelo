@@ -283,7 +283,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.ImageServic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.HttpClient.Proxies.Test", "..\Intotech.Wheelo.HttpClient.Proxies.Test\Intotech.Wheelo.HttpClient.Proxies.Test.csproj", "{87F0CBD0-9D61-4300-A7CB-799FA5486C71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Seed.Common", "..\Intotech.Wheelo.Seed.Common\Intotech.Wheelo.Seed.Common.csproj", "{BB9FF0ED-C245-4392-A85F-C9142DD677F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Seed.Common", "..\Intotech.Wheelo.Seed.Common\Intotech.Wheelo.Seed.Common.csproj", "{BB9FF0ED-C245-4392-A85F-C9142DD677F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Bll.Logic.Interfaces", "Intotech.Wheelo.Bll.Logic.Interfaces\Intotech.Wheelo.Bll.Logic.Interfaces.csproj", "{0F0F5A54-60A9-4FDB-855E-110A6EA3B981}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Bll.Logic", "Intotech.Wheelo.Bll.Logic\Intotech.Wheelo.Bll.Logic.csproj", "{C1388397-2E17-4A93-A894-DA1EE41BB485}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -741,6 +745,22 @@ Global
 		{BB9FF0ED-C245-4392-A85F-C9142DD677F4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BB9FF0ED-C245-4392-A85F-C9142DD677F4}.Release|x64.ActiveCfg = Release|Any CPU
 		{BB9FF0ED-C245-4392-A85F-C9142DD677F4}.Release|x64.Build.0 = Release|Any CPU
+		{0F0F5A54-60A9-4FDB-855E-110A6EA3B981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F0F5A54-60A9-4FDB-855E-110A6EA3B981}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F0F5A54-60A9-4FDB-855E-110A6EA3B981}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0F0F5A54-60A9-4FDB-855E-110A6EA3B981}.Debug|x64.Build.0 = Debug|Any CPU
+		{0F0F5A54-60A9-4FDB-855E-110A6EA3B981}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F0F5A54-60A9-4FDB-855E-110A6EA3B981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F0F5A54-60A9-4FDB-855E-110A6EA3B981}.Release|x64.ActiveCfg = Release|Any CPU
+		{0F0F5A54-60A9-4FDB-855E-110A6EA3B981}.Release|x64.Build.0 = Release|Any CPU
+		{C1388397-2E17-4A93-A894-DA1EE41BB485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1388397-2E17-4A93-A894-DA1EE41BB485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1388397-2E17-4A93-A894-DA1EE41BB485}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C1388397-2E17-4A93-A894-DA1EE41BB485}.Debug|x64.Build.0 = Debug|Any CPU
+		{C1388397-2E17-4A93-A894-DA1EE41BB485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1388397-2E17-4A93-A894-DA1EE41BB485}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1388397-2E17-4A93-A894-DA1EE41BB485}.Release|x64.ActiveCfg = Release|Any CPU
+		{C1388397-2E17-4A93-A894-DA1EE41BB485}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
