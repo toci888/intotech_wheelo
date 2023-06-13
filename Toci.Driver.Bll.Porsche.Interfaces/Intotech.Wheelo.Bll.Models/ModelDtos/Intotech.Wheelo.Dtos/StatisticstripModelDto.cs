@@ -1,8 +1,13 @@
-public class StatisticstripModelDto
+﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Toci.Driver.Database.Persistence.Models;
+
+namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+
+public class StatisticstripModelDto : DtoBase<Statisticstrip>
 {
-    public Int32 Id { get; set; }
+    public int Id { get; set; }
     public DateOnly Tripdate { get; set; }
-    public Int32 Tripcars { get; set; }
-    public Int32 Trippeople { get; set; }
-    public Int32 Idgeographicregion { get; set; }
+    public int Tripcars { get; set; }
+    public int Trippeople { get; set; }
+    public int Idgeographicregion { get; set; }
 }

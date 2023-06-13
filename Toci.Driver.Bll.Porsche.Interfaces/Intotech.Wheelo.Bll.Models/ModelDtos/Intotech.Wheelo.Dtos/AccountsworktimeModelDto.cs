@@ -1,7 +1,12 @@
-public class AccountsworktimeModelDto
+﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Toci.Driver.Database.Persistence.Models;
+
+namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+
+public class AccountsworktimeModelDto : DtoBase<Accountsworktime>
 {
-    public Int32 Id { get; set; }
-    public Int32 Idaccounts { get; set; }
+    public int Id { get; set; }
+    public int Idaccounts { get; set; }
     public TimeOnly Workstarthour { get; set; }
     public TimeOnly Workendhour { get; set; }
 }

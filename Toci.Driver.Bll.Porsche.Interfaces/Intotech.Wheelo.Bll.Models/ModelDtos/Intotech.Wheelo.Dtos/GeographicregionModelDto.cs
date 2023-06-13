@@ -1,8 +1,13 @@
-public class GeographicregionModelDto
+﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Toci.Driver.Database.Persistence.Models;
+
+namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+
+public class GeographicregionModelDto : DtoBase<Geographicregion>
 {
-    public Int32 Id { get; set; }
-    public Int32 Idparent { get; set; }
-    public Int32 Idshit { get; set; }
-    public String Name { get; set; }
-    public Int32 Nestlevel { get; set; }
+    public int Id { get; set; }
+    public int Idparent { get; set; }
+    public int Idshit { get; set; }
+    public string Name { get; set; }
+    public int Nestlevel { get; set; }
 }

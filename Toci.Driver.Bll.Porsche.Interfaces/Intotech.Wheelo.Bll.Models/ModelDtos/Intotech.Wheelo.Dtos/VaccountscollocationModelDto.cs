@@ -1,11 +1,16 @@
-public class VaccountscollocationModelDto
+﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Toci.Driver.Database.Persistence.Models;
+
+namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+
+public class VaccountscollocationModelDto : DtoBase<Vaccountscollocation>
 {
-    public String Name { get; set; }
-    public String Surname { get; set; }
-    public String Suggestedname { get; set; }
-    public String Suggestedsurname { get; set; }
-    public Int32 Accountid { get; set; }
-    public Int32 Suggestedaccountid { get; set; }
+    public string Name { get; set; }
+    public string Surname { get; set; }
+    public string Suggestedname { get; set; }
+    public string Suggestedsurname { get; set; }
+    public int Accountid { get; set; }
+    public int Suggestedaccountid { get; set; }
     public Decimal Distancefrom { get; set; }
     public Decimal Distanceto { get; set; }
 }

@@ -1,11 +1,16 @@
-public class VcarownerModelDto
+﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Toci.Driver.Database.Persistence.Models;
+
+namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+
+public class VcarownerModelDto : DtoBase<Vcarowner>
 {
-    public String Name { get; set; }
-    public String Surname { get; set; }
-    public String Registrationplate { get; set; }
-    public String Brand { get; set; }
-    public String Model { get; set; }
-    public Int32 Availableseats { get; set; }
-    public String Colour { get; set; }
-    public String Rgb { get; set; }
+    public string Name { get; set; }
+    public string Surname { get; set; }
+    public string Registrationplate { get; set; }
+    public string Brand { get; set; }
+    public string Model { get; set; }
+    public int Availableseats { get; set; }
+    public string Colour { get; set; }
+    public string Rgb { get; set; }
 }

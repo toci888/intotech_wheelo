@@ -1,18 +1,23 @@
-public class VfriendModelDto
+﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Toci.Driver.Database.Persistence.Models;
+
+namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+
+public class VfriendModelDto : DtoBase<Vfriend>
 {
-    public Int32 Idaccount { get; set; }
-    public String Name { get; set; }
-    public String Surname { get; set; }
-    public String Friendname { get; set; }
-    public String Friendsurname { get; set; }
-    public Int32 Friendidaccount { get; set; }
-    public Int32 Method { get; set; }
+    public int Idaccount { get; set; }
+    public string Name { get; set; }
+    public string Surname { get; set; }
+    public string Friendname { get; set; }
+    public string Friendsurname { get; set; }
+    public int Friendidaccount { get; set; }
+    public int Method { get; set; }
     public Double Latitudefrom { get; set; }
     public Double Longitudefrom { get; set; }
     public Double Latitudeto { get; set; }
     public Double Longitudeto { get; set; }
     public TimeOnly Fromhour { get; set; }
     public TimeOnly Tohour { get; set; }
-    public String Searchid { get; set; }
-    public Int32 Driverpassenger { get; set; }
+    public string Searchid { get; set; }
+    public int Driverpassenger { get; set; }
 }

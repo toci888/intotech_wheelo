@@ -1,17 +1,22 @@
-public class VtripsparticipantModelDto
+﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Toci.Driver.Database.Persistence.Models;
+
+namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+
+public class VtripsparticipantModelDto : DtoBase<Vtripsparticipant>
 {
-    public String Name { get; set; }
-    public String Surname { get; set; }
-    public String Suggestedname { get; set; }
-    public String Suggestedsurname { get; set; }
-    public Int32 Accountid { get; set; }
-    public Int32 Suggestedaccountid { get; set; }
+    public string Name { get; set; }
+    public string Surname { get; set; }
+    public string Suggestedname { get; set; }
+    public string Suggestedsurname { get; set; }
+    public int Accountid { get; set; }
+    public int Suggestedaccountid { get; set; }
     public DateOnly Tripdate { get; set; }
-    public String Summary { get; set; }
-    public Int32 Tripid { get; set; }
+    public string Summary { get; set; }
+    public int Tripid { get; set; }
     public Boolean Iscurrent { get; set; }
     public TimeOnly Fromhour { get; set; }
     public TimeOnly Tohour { get; set; }
-    public Int32 Leftseats { get; set; }
+    public int Leftseats { get; set; }
     public Boolean Isoccasion { get; set; }
 }

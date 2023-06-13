@@ -1,13 +1,18 @@
-public class AccountroleModelDto
+﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Toci.Driver.Database.Persistence.Models;
+
+namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+
+public class AccountroleModelDto : DtoBase<Accountrole>
 {
-    public Int32 Id { get; set; }
-    public String Name { get; set; }
-    public String Surname { get; set; }
-    public String Email { get; set; }
-    public String Password { get; set; }
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Surname { get; set; }
+    public string Email { get; set; }
+    public string Password { get; set; }
     public Boolean Emailconfirmed { get; set; }
-    public String Refreshtoken { get; set; }
-    public String Rolename { get; set; }
+    public string Refreshtoken { get; set; }
+    public string Rolename { get; set; }
     public DateTime Refreshtokenvalid { get; set; }
     public Boolean Allowsnotifications { get; set; }
 }

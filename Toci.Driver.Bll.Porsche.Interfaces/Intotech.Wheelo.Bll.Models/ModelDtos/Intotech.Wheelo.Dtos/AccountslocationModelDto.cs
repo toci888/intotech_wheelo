@@ -1,14 +1,19 @@
-public class AccountslocationModelDto
+﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Toci.Driver.Database.Persistence.Models;
+
+namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+
+public class AccountslocationModelDto : DtoBase<Accountslocation>
 {
-    public Int32 Id { get; set; }
-    public Int32 Idaccounts { get; set; }
+    public int Id { get; set; }
+    public int Idaccounts { get; set; }
     public Decimal Latitudefrom { get; set; }
     public Decimal Longitudefrom { get; set; }
     public Decimal Latitudeto { get; set; }
     public Decimal Longitudeto { get; set; }
-    public String Streetfrom { get; set; }
-    public String Streetto { get; set; }
-    public String Cityfrom { get; set; }
-    public String Cityto { get; set; }
+    public string Streetfrom { get; set; }
+    public string Streetto { get; set; }
+    public string Cityfrom { get; set; }
+    public string Cityto { get; set; }
     public DateTime Createdat { get; set; }
 }

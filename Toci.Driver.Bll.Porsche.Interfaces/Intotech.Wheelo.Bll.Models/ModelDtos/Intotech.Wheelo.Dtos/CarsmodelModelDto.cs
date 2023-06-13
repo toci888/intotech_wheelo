@@ -1,6 +1,11 @@
-public class CarsmodelModelDto
+﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Toci.Driver.Database.Persistence.Models;
+
+namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+
+public class CarsmodelModelDto : DtoBase<Carsmodel>
 {
-    public Int32 Id { get; set; }
-    public Int32 Idcarsbrands { get; set; }
-    public String Model { get; set; }
+    public int Id { get; set; }
+    public int Idcarsbrands { get; set; }
+    public string Model { get; set; }
 }

@@ -1,9 +1,14 @@
-public class SimpleaccountModelDto
+﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Toci.Driver.Database.Persistence.Models;
+
+namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+
+public class SimpleaccountModelDto : DtoBase<Simpleaccount>
 {
-    public Int32 Id { get; set; }
-    public String Email { get; set; }
-    public String Firstname { get; set; }
-    public String Lastname { get; set; }
-    public String Password { get; set; }
-    public Int32 Verificationcode { get; set; }
+    public int Id { get; set; }
+    public string Email { get; set; }
+    public string Firstname { get; set; }
+    public string Lastname { get; set; }
+    public string Password { get; set; }
+    public int Verificationcode { get; set; }
 }

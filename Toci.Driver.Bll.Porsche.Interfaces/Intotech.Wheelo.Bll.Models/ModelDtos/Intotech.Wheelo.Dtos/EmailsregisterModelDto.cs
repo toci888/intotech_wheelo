@@ -1,7 +1,12 @@
-public class EmailsregisterModelDto
+﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Toci.Driver.Database.Persistence.Models;
+
+namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+
+public class EmailsregisterModelDto : DtoBase<Emailsregister>
 {
-    public Int32 Id { get; set; }
-    public String Email { get; set; }
-    public Int32 Verificationcode { get; set; }
+    public int Id { get; set; }
+    public string Email { get; set; }
+    public int Verificationcode { get; set; }
     public Boolean Isverified { get; set; }
 }

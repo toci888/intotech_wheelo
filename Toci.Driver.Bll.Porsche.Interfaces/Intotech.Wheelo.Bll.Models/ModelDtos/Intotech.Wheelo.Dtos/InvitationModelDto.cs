@@ -1,8 +1,13 @@
-public class InvitationModelDto
+﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Toci.Driver.Database.Persistence.Models;
+
+namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+
+public class InvitationModelDto : DtoBase<Invitation>
 {
-    public Int32 Id { get; set; }
-    public Int32 Idaccount { get; set; }
-    public Int32 Idinvited { get; set; }
-    public Int32 Origin { get; set; }
+    public int Id { get; set; }
+    public int Idaccount { get; set; }
+    public int Idinvited { get; set; }
+    public int Origin { get; set; }
     public DateTime Createdat { get; set; }
 }

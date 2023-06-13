@@ -1,23 +1,28 @@
-public class WorktripgenModelDto
+﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Toci.Driver.Database.Persistence.Models;
+
+namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+
+public class WorktripgenModelDto : DtoBase<Worktripgen>
 {
-    public Int32 Id { get; set; }
-    public Int32 Idaccount { get; set; }
-    public String Searchid { get; set; }
+    public int Id { get; set; }
+    public int Idaccount { get; set; }
+    public string Searchid { get; set; }
     public Double Latitudefrom { get; set; }
     public Double Longitudefrom { get; set; }
     public Double Latitudeto { get; set; }
     public Double Longitudeto { get; set; }
-    public Int32 Idgeographiclocationfrom { get; set; }
-    public Int32 Idgeographiclocationto { get; set; }
-    public String Streetfrom { get; set; }
-    public String Streetto { get; set; }
-    public String Cityfrom { get; set; }
-    public String Cityto { get; set; }
-    public String Postcodefrom { get; set; }
-    public String Postcodeto { get; set; }
+    public int Idgeographiclocationfrom { get; set; }
+    public int Idgeographiclocationto { get; set; }
+    public string Streetfrom { get; set; }
+    public string Streetto { get; set; }
+    public string Cityfrom { get; set; }
+    public string Cityto { get; set; }
+    public string Postcodefrom { get; set; }
+    public string Postcodeto { get; set; }
     public TimeOnly Fromhour { get; set; }
     public TimeOnly Tohour { get; set; }
     public Double Acceptabledistance { get; set; }
-    public Int32 Driverpassenger { get; set; }
+    public int Driverpassenger { get; set; }
     public DateTime Createdat { get; set; }
 }

@@ -1,8 +1,13 @@
-public class FriendsuggestionModelDto
+﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Toci.Driver.Database.Persistence.Models;
+
+namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+
+public class FriendsuggestionModelDto : DtoBase<Friendsuggestion>
 {
-    public Int32 Id { get; set; }
-    public Int32 Idaccount { get; set; }
-    public Int32 Idsuggested { get; set; }
-    public Int32 Idsuggestedfriend { get; set; }
+    public int Id { get; set; }
+    public int Idaccount { get; set; }
+    public int Idsuggested { get; set; }
+    public int Idsuggestedfriend { get; set; }
     public DateTime Createdat { get; set; }
 }

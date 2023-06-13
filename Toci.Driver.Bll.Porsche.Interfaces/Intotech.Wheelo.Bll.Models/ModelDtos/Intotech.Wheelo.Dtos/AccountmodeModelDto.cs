@@ -1,5 +1,10 @@
-public class AccountmodeModelDto
+﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Toci.Driver.Database.Persistence.Models;
+
+namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+
+public class AccountmodeModelDto : DtoBase<Accountmode>
 {
-    public Int32 Idaccount { get; set; }
-    public Int32 Mode { get; set; }
+    public int Idaccount { get; set; }
+    public int Mode { get; set; }
 }
