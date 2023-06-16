@@ -7,6 +7,4 @@ public class AccountDto
     public AccountModelDto Account { get; set; }
 
     public AccountmetadatumModelDto Accountmetadatum { get; set; }
-
-    public AccountroleModelDto Accountrole { get; set; }
 }

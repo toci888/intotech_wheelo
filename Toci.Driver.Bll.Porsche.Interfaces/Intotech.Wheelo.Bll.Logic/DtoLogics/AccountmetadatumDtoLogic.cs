@@ -22,12 +22,12 @@ public class AccountmetadatumDtoLogic : DtoLogicBase<AccountmetadatumModelDto, A
     {
     }
 
-    protected override DtoBase<Accountmetadatum> GetDtoModelField(AccountDto dto)
+    protected override DtoBase<Accountmetadatum, AccountmetadatumModelDto> GetDtoModelField(AccountDto dto)
     {
         return dto.Accountmetadatum;
     }
 
-    protected override AccountDto FillEntity(AccountDto dto, DtoBase<Accountmetadatum> field)
+    protected override AccountDto FillEntity(AccountDto dto, DtoBase<Accountmetadatum, AccountmetadatumModelDto> field)
     {
         dto.Accountmetadatum = (AccountmetadatumModelDto)field;
 
