@@ -28,7 +28,7 @@ public class AccountmetadatumDtoLogic : DtoLogicBase<AccountmetadatumModelDto, A
         return dto.Accountmetadatum;
     }
 
-    protected override AccountDto FillEntity(AccountDto dto, DtoBase<Accountmetadatum, AccountmetadatumModelDto> field)
+    protected override AccountDto FillEntity(AccountDto dto, AccountmetadatumModelDto field)
     {
         dto.Accountmetadatum = (AccountmetadatumModelDto)field;
 

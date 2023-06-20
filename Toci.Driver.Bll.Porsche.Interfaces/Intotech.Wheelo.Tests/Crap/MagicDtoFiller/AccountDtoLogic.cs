@@ -20,7 +20,7 @@ public class AccountDtoLogic : DtoLogicBase<AccountModelDto, Account, AccountLog
         return dto.Account;
     }
 
-    protected override AccountDto FillEntity(AccountDto dto, DtoBase<Account, AccountModelDto> field)
+    protected override AccountDto FillEntity(AccountDto dto, AccountModelDto field)
     {
         dto.Account = field.MapDtoToDto();
 
