@@ -12,7 +12,7 @@ namespace Intotech.Wheelo.Bll.Logic.DtoLogics;
 public class AccountDtoLogic : DtoLogicBase< AccountModelDto , Account , AccountLogic , AccountDto >
 {
     public AccountDtoLogic(int id) 
-        : base(new AccountLogic(), m => m.Id == id, 
+        : base(new AccountLogic(),  
             (aDto, aModelDto) => { 
                 aDto.Account = aModelDto;
                 return aDto;
@@ -20,14 +20,14 @@ public class AccountDtoLogic : DtoLogicBase< AccountModelDto , Account , Account
     {
     }
 
-    protected override DtoBase<Account> GetDtoModelField(AccountDto dto)
+    protected override DtoBase<Account, AccountModelDto> GetDtoModelField(AccountDto dto)
     {
        return dto.Account;
     }
 
-    protected override AccountDto FillEntity(AccountDto dto, DtoBase<Account> field)
+    protected override AccountDto FillEntity(AccountDto dto, AccountModelDto field)
     {
-        dto.Account = (AccountModelDto)field;
+        dto.Account = field.MapDtoToDto();
 
         return dto;
     }

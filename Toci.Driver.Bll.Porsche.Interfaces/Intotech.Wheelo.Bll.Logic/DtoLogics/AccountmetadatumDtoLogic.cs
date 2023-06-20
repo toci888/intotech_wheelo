@@ -11,21 +11,24 @@ namespace Intotech.Wheelo.Bll.Logic.DtoLogics;
 
 public class AccountmetadatumDtoLogic : DtoLogicBase< AccountmetadatumModelDto , Accountmetadatum , AccountmetadatumLogic , AccountmetadatumDto >
 {
-    public AccountmetadatumDtoLogic(int id) 
-        : base(new AccountmetadatumLogic(), m => m.Id == id, 
-            (aDto, aModelDto) => { 
-                aDto.Accountmetadatum = aModelDto;
+    public AccountmetadatumDtoLogic(int accountId)
+        : base(new AccountMetadataLogic(), m => m.Idaccount == accountId,
+            (aDto, aMmDto) =>
+            {
+                aDto.Accountmetadatum = aMmDto;
+
                 return aDto;
             })
     {
+
     }
 
-    protected override DtoBase<Accountmetadatum> GetDtoModelField(AccountmetadatumDto dto)
+    protected override DtoBase<Accountmetadatum> GetDtoModelField(AccountDto dto)
     {
        return dto.Accountmetadatum;
     }
 
-    protected override AccountmetadatumDto FillEntity(AccountmetadatumDto dto, DtoBase<Accountmetadatum> field)
+    protected override AccountDto FillEntity(AccountDto dto, DtoBase<Accountmetadatum> field)
     {
         dto.Accountmetadatum = (AccountmetadatumModelDto)field;
 

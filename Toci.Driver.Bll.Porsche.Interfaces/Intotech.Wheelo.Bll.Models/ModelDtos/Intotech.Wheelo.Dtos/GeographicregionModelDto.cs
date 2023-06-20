@@ -3,7 +3,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class GeographicregionModelDto : DtoBase<Geographicregion>
+public class GeographicregionModelDto : DtoBase<Geographicregion, GeographicregionModelDto>
 {
     public int Id { get; set; }
     public int Idparent { get; set; }

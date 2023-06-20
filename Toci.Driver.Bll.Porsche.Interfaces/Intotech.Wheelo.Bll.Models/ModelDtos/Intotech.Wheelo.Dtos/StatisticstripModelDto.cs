@@ -3,7 +3,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class StatisticstripModelDto : DtoBase<Statisticstrip>
+public class StatisticstripModelDto : DtoBase<Statisticstrip, StatisticstripModelDto>
 {
     public int Id { get; set; }
     public DateOnly Tripdate { get; set; }

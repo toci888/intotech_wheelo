@@ -3,7 +3,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class VinvitationModelDto : DtoBase<Vinvitation>
+public class VinvitationModelDto : DtoBase<Vinvitation, VinvitationModelDto>
 {
     public string Firstname { get; set; }
     public string Lastname { get; set; }

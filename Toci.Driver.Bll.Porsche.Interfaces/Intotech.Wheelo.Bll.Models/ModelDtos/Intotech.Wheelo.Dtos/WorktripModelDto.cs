@@ -3,7 +3,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class WorktripModelDto : DtoBase<Worktrip>
+public class WorktripModelDto : DtoBase<Worktrip, WorktripModelDto>
 {
     public int Id { get; set; }
     public int Idaccount { get; set; }

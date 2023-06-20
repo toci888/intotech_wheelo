@@ -3,7 +3,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class UserextradatumModelDto : DtoBase<Userextradatum>
+public class UserextradatumModelDto : DtoBase<Userextradatum, UserextradatumModelDto>
 {
     public int Id { get; set; }
     public int Idaccount { get; set; }

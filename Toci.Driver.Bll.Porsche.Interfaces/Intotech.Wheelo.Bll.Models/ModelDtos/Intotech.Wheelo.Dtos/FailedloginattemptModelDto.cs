@@ -3,7 +3,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class FailedloginattemptModelDto : DtoBase<Failedloginattempt>
+public class FailedloginattemptModelDto : DtoBase<Failedloginattempt, FailedloginattemptModelDto>
 {
     public int Id { get; set; }
     public int Idaccount { get; set; }

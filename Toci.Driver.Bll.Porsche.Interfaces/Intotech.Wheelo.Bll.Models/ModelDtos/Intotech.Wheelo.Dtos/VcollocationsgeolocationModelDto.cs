@@ -3,7 +3,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class VcollocationsgeolocationModelDto : DtoBase<Vcollocationsgeolocation>
+public class VcollocationsgeolocationModelDto : DtoBase<Vcollocationsgeolocation, VcollocationsgeolocationModelDto>
 {
     public int Idaccount { get; set; }
     public string Name { get; set; }

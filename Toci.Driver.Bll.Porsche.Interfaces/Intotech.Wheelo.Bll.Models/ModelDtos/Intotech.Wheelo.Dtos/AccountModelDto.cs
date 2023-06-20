@@ -3,7 +3,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class AccountModelDto : DtoBase<Toci.Driver.Database.Persistence.Models.Account>
+public class AccountModelDto : DtoBase<Account, AccountModelDto>
 {
     public int Id { get; set; }
     public string Email { get; set; }

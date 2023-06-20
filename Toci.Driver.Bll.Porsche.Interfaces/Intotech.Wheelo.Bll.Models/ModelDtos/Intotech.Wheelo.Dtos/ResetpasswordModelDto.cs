@@ -3,7 +3,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class ResetpasswordModelDto : DtoBase<Resetpassword>
+public class ResetpasswordModelDto : DtoBase<Resetpassword, ResetpasswordModelDto>
 {
     public int Id { get; set; }
     public DateTime Createdat { get; set; }
