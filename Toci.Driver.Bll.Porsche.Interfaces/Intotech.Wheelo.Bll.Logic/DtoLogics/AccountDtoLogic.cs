@@ -12,7 +12,7 @@ namespace Intotech.Wheelo.Bll.Logic.DtoLogics;
 public class AccountDtoLogic : DtoLogicBase<AccountModelDto, Account, AccountLogic, AccountDto>
 {
     public AccountDtoLogic(int id) 
-        : base(new AccountLogic(), m => m.Id == id, 
+        : base(new AccountLogic(),  
             (aDto, aModelDto) => { 
                 aDto.Account = aModelDto;
                 return aDto;

@@ -11,7 +11,6 @@ namespace Intotech.Wheelo.Tests.Crap.MagicDtoFiller;
 public class AccountDtoLogic : DtoLogicBase<AccountModelDto, Account, AccountLogic, AccountDto>
 {
     public AccountDtoLogic(int accountId) : base(new AccountLogic(), 
-        m => m.Id == accountId, 
         null)
     {
     }
