@@ -6,9 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
 
-namespace Intotech.Wheelo.Bll.Persistence
+namespace Intotech.Wheelo.Bll.Persistence;
+
+public class FailedloginattemptLogic : Logic<Failedloginattempt>, IFailedloginattemptLogic
 {
-    public class FailedloginattemptLogic : Logic<Failedloginattempt>, IFailedloginattemptLogic
-    {
-    }
 }

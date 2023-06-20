@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="DtoLogics\" />
+    <Folder Include="test\" />
   </ItemGroup>
 
 </Project>

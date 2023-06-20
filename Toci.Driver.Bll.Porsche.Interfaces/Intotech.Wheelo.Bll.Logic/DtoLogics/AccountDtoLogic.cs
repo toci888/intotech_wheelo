@@ -9,7 +9,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Logic.DtoLogics;
 
-public class AccountDtoLogic : DtoLogicBase<AccountModelDto, Account, AccountLogic, AccountDto>
+public class AccountDtoLogic : DtoLogicBase< AccountModelDto , Account , AccountLogic , AccountDto >
 {
     public AccountDtoLogic(int id) 
         : base(new AccountLogic(), m => m.Id == id, 
@@ -22,7 +22,7 @@ public class AccountDtoLogic : DtoLogicBase<AccountModelDto, Account, AccountLog
 
     protected override DtoBase<Account> GetDtoModelField(AccountDto dto)
     {
-        return dto.Account;
+       return dto.Account;
     }
 
     protected override AccountDto FillEntity(AccountDto dto, DtoBase<Account> field)
