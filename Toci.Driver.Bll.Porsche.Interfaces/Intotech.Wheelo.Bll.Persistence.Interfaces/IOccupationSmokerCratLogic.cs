@@ -6,9 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
 
-namespace Intotech.Wheelo.Bll.Persistence.Interfaces
+namespace Intotech.Wheelo.Bll.Persistence;
+
+public interface IOccupationsmokercratLogic : ILogicBase<Occupationsmokercrat>
 {
-    public interface IOccupationSmokerCratLogic : ILogicBase<Occupationsmokercrat>
-    {
-    }
 }

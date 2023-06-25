@@ -1,5 +1,4 @@
 ﻿using Intotech.Common.Bll.Interfaces;
-using Intotech.Common.Database.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
 
-namespace Intotech.Wheelo.Bll.Persistence.Interfaces
+namespace Intotech.Wheelo.Bll.Persistence;
+
+public interface IWorktripgenLogic : ILogicBase<Worktripgen>
 {
-    public interface IWorktripgenLogic : ILogicBase<Worktripgen>, IDrToTModelMapper<Worktripgen>
-    {
-    }
 }
