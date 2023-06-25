@@ -1,4 +1,5 @@
-﻿using Intotech.Common.Tests;
+﻿using Intotech.Common.Bll.Seed;
+using Intotech.Common.Tests;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

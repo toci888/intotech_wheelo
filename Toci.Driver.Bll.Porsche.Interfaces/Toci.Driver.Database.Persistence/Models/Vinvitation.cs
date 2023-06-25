@@ -1,9 +1,10 @@
-﻿using System;
+using Intotech.Common.Bll.Interfaces; 
+using System;
 using System.Collections.Generic;
 
 namespace Toci.Driver.Database.Persistence.Models
 {
-    public partial class Vinvitation
+    public partial class Vinvitation : ModelBase
     {
         public string? Firstname { get; set; }
         public string? Lastname { get; set; }

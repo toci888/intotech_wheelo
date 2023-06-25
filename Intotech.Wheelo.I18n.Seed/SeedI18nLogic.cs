@@ -1,4 +1,5 @@
-﻿using Intotech.Common.Tests;
+﻿using Intotech.Common.Bll.Seed;
+using Intotech.Common.Tests;
 using Intotech.Wheelo.I18n.Database.Persistence.Models;
 using Intotech.Wheelo.Social.Database.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
