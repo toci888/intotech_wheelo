@@ -38,7 +38,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
         protected IAssociationCalculations AssociationCalculation;
         protected IVacollocationsgeolocationToAccountCollocationDto ToAccountCollocationDto;
         protected IFriendLogic FriendLogic;
-        protected IWorkTripLogic WorkTripHistoryLogic;
+        protected IWorktripLogic WorkTripHistoryLogic;
         protected INotificationManager NotificationManager;
 
         public WorkTripGenAssociationService(IWorktripgenLogic worktripgenLogic, 
@@ -48,7 +48,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             IAssociationCalculations associationCalculations,
             IVacollocationsgeolocationToAccountCollocationDto toAccountCollocationDto,
             IFriendLogic friendLogic,
-            IWorkTripLogic workTripHistoryLogic,
+            IWorktripLogic workTripHistoryLogic,
             INotificationManager notificationManager)
         {
             WorktripGenLogic = worktripgenLogic;
@@ -254,7 +254,6 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             result.Latitudeto = double.Parse(workTripGen.endLocation.lat, CultureInfo.InvariantCulture); //.Replace(".", ","));
             result.Longitudefrom = double.Parse(workTripGen.startLocation.lon, CultureInfo.InvariantCulture); //.Replace(".", ","));
             result.Longitudeto = double.Parse(workTripGen.endLocation.lon, CultureInfo.InvariantCulture); //.Replace(".", ","));
-            result.Searchid = WorktripgenLogic.GetWorktripSearchId(result);
             result.Driverpassenger = workTripGen.DriverPassenger; //1 passenger, 2 driver, 3 both
 
             return result;

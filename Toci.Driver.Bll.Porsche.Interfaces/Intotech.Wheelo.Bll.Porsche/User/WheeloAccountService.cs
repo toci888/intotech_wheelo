@@ -30,7 +30,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
     {
         private readonly AuthenticationSettings _authenticationSettings;
         protected IAccountLogic AccLogic;
-        protected IAccountRoleLogic AccRoleLogic;
+        protected IAccountroleLogic AccRoleLogic;
         protected IAccountmodeLogic AccountmodeLogic;
         protected IFailedloginattemptLogic FailedloginattemptLogic;
         protected IResetpasswordLogic ResetpasswordLogic;
@@ -51,8 +51,8 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         public const int LoginEmailNotVerifiedPasswdDontMatch = 5;
 
         public WheeloAccountService(AuthenticationSettings authenticationSettings, 
-            IAccountLogic accLogic, 
-            IAccountRoleLogic accRoleLogic,
+            IAccountLogic accLogic,
+            IAccountroleLogic accRoleLogic,
             IAccountmodeLogic accountmodeLogic, 
             IAccountChatLogic chatLogic,
             IFailedloginattemptLogic failedloginattemptLogic, 

@@ -6,15 +6,16 @@ using Intotech.Wheelo.Common.Interfaces;
 using Intotech.Wheelo.Common;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Models.Trip;
+using Intotech.Wheelo.Bll.Persistence;
 
 namespace Intotech.Wheelo.Bll.Porsche.Driver;
 
 public class DriverCarService : IDriverCarService
 {
-    protected IAccountsCarsLocationLogic VAccountsCarsLocationLogic;
+    protected IAccountscarslocationLogic VAccountsCarsLocationLogic;
     protected ICarLogic CarLogic;
 
-    public DriverCarService(IAccountsCarsLocationLogic vaccountsCarsLocationLogic, ICarLogic carLogic)
+    public DriverCarService(IAccountscarslocationLogic vaccountsCarsLocationLogic, ICarLogic carLogic)
     {
         VAccountsCarsLocationLogic = vaccountsCarsLocationLogic;
         CarLogic = carLogic;

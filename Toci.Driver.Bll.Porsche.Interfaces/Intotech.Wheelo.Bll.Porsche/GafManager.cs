@@ -1,6 +1,7 @@
 ﻿using Intotech.Wheelo.Bll.Models;
 using Intotech.Wheelo.Bll.Models.Account;
 using Intotech.Wheelo.Bll.Models.Gaf;
+using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.User;
@@ -15,12 +16,12 @@ namespace Intotech.Wheelo.Bll.Porsche
 {
     public class GafManager : IGafManager
     {
-        protected IUserExtraDataLogic LUserExtraDataLogic;
-        protected IAccountRoleLogic AccLogic;
+        protected IUserextradatumLogic LUserExtraDataLogic;
+        protected IAccountroleLogic AccLogic;
         protected GafServiceBase<FacebookUserDto> FbGafService;
         protected GafServiceBase<GoogleUserDto> GoogleGafService;
 
-        public GafManager(IUserExtraDataLogic lUserExtraDataLogic, IAccountRoleLogic accLogic, GafServiceBase<FacebookUserDto> fbGafService,
+        public GafManager(IUserextradatumLogic lUserExtraDataLogic, IAccountroleLogic accLogic, GafServiceBase<FacebookUserDto> fbGafService,
             GafServiceBase<GoogleUserDto> googleGafService)
         {
             LUserExtraDataLogic = lUserExtraDataLogic;

@@ -12,14 +12,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Wheelo.Bll.Persistence;
 
 namespace Intotech.Wheelo.Bll.Porsche.User
 {
     public class UserMetaService : IUserMetaService
     {
-        protected IOccupationSmokerCratLogic OccSmoCrLogic;
+        protected IOccupationsmokercratLogic OccSmoCrLogic;
 
-        public UserMetaService(IOccupationSmokerCratLogic occSmoCrLogic)
+        public UserMetaService(IOccupationsmokercratLogic occSmoCrLogic)
         {
             OccSmoCrLogic = occSmoCrLogic;
         }

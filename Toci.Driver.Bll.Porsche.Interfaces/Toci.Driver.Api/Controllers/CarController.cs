@@ -1,4 +1,5 @@
 ﻿using Intotech.Common.Microservices;
+using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Toci.Driver.Database.Persistence.Models;

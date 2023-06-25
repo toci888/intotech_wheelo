@@ -1,4 +1,5 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
 using Intotech.Wheelo.Common;

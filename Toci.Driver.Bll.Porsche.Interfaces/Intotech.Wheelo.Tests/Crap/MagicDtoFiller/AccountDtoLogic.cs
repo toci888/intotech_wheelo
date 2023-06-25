@@ -8,7 +8,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Tests.Crap.MagicDtoFiller;
 
-public class AccountDtoLogic : DtoLogicBase<AccountModelDto, Account, AccountLogic, AccountDto>
+public class AccountDtoLogic : DtoLogicBase<AccountModelDto, Account, AccountLogic, AccountDto, List<Account>, List<AccountModelDto>>
 {
     public AccountDtoLogic(int accountId) : base(new AccountLogic(), 
         null)
@@ -25,5 +25,10 @@ public class AccountDtoLogic : DtoLogicBase<AccountModelDto, Account, AccountLog
         dto.Account = field.MapDtoToDto();
 
         return dto;
+    }
+
+    protected override AccountDto FillEntity(AccountDto dto, List<AccountModelDto> field)
+    {
+        throw new NotImplementedException();
     }
 }

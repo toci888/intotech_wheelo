@@ -1,4 +1,5 @@
-﻿using Intotech.Wheelo.Bll.Persistence.Interfaces;
+﻿using Intotech.Wheelo.Bll.Persistence;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Models.Caching;
 using System;

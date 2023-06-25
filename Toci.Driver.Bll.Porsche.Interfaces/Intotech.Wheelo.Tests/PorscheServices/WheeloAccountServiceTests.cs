@@ -28,7 +28,7 @@ namespace Intotech.Wheelo.Tests.PorscheServices
 
             services.AddTransient<AuthenticationSettings, AuthenticationSettings>();
             services.AddTransient<IAccountLogic, AccountLogic>();
-            services.AddTransient<IAccountRoleLogic, AccountRoleLogic>();
+            services.AddTransient<IAccountroleLogic, AccountroleLogic>();
             services.AddTransient<IFailedloginattemptLogic, FailedloginattemptLogic>();
             services.AddTransient<IResetpasswordLogic, ResetpasswordLogic>();
             services.AddTransient<IPushtokenLogic, PushtokenLogic>();

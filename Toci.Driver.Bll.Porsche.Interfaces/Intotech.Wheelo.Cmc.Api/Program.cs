@@ -13,8 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IColourLogic, ColourLogic>();
-builder.Services.AddScoped<ICarsBrandLogic, CarsBrandLogic>();
-builder.Services.AddScoped<ICarsModelLogic, CarsModelLogic>();
+builder.Services.AddScoped<ICarsbrandLogic, CarsbrandLogic>();
+builder.Services.AddScoped<ICarsmodelLogic, CarsmodelLogic>();
 builder.Services.AddScoped<IOccupationLogic, OccupationLogic>();
 
 

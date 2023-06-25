@@ -1,6 +1,7 @@
 ﻿using Intotech.Common;
 using Intotech.Common.ImageManagement;
 using Intotech.Wheelo.Bll.Models.Gaf;
+using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Common.Interfaces;
 using System;
@@ -17,10 +18,10 @@ namespace Intotech.Wheelo.Bll.Porsche.User
     public class GoogleUserService : GafServiceBase<GoogleUserDto>
     {
         protected IAccountLogic AccountLogic;
-        protected IUserExtraDataLogic UserExtraDataLogic;
+        protected IUserextradatumLogic UserExtraDataLogic;
         protected ImageManager ImageManager;
 
-        public GoogleUserService(IAccountLogic accountLogic, IUserExtraDataLogic userExtraDataLogic) : base("https://www.googleapis.com/")
+        public GoogleUserService(IAccountLogic accountLogic, IUserextradatumLogic userExtraDataLogic) : base("https://www.googleapis.com/")
         {
             AccountLogic = accountLogic;
             UserExtraDataLogic = userExtraDataLogic;

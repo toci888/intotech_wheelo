@@ -16,7 +16,7 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
     [TestClass]
     public class SeedCarsModelsParser : SeedLogic<Carsmodel>
     {
-        protected ICarsBrandLogic CarsLogic = new CarsBrandLogic();
+        protected ICarsbrandLogic CarsLogic = new CarsbrandLogic();
 
         [TestMethod]
         public override void Insert()

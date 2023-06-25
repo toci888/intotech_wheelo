@@ -19,12 +19,12 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
     {
         protected ITripLogic TripLogic;
         protected ITripparticipantLogic TripparticipantLogic;
-        protected IVTripsParticipantsLogic VTripparticipantLogic;
-        protected IAccountsCarsLocationLogic VAccountsCarsLocationLogic;
+        protected IVtripsparticipantLogic VTripparticipantLogic;
+        protected IAccountscarslocationLogic VAccountsCarsLocationLogic;
         protected IAccountLogic AccountLogic;
 
-        public TripService(ITripLogic tripLogic, ITripparticipantLogic tripparticipantLogic, 
-            IVTripsParticipantsLogic vTripparticipantLogic, IAccountsCarsLocationLogic vAccountsCarsLocationLogic, IAccountLogic accountLogic)
+        public TripService(ITripLogic tripLogic, ITripparticipantLogic tripparticipantLogic,
+            IVtripsparticipantLogic vTripparticipantLogic, IAccountscarslocationLogic vAccountsCarsLocationLogic, IAccountLogic accountLogic)
         {
             TripLogic = tripLogic;
             TripparticipantLogic = tripparticipantLogic;

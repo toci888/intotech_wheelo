@@ -1,4 +1,5 @@
 ﻿using Intotech.Wheelo.Bll.Bentley.Interfaces;
+using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using System;
 using System.Collections.Generic;

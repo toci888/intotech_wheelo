@@ -3,7 +3,7 @@ using Intotech.Wheelo.Bll.Models.Dtos;
 
 namespace Intotech.Wheelo.Bll.Logic.Interfaces.Managers;
 
-public interface IAccountDtoLogicManager : IDtoLogicManager<AccountDto>
+public interface IAccountDtoLogicManager : IDtoLogicManager<AccountDto, List<AccountDto>>
 {
     
 }
