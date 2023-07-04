@@ -7,289 +7,291 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{61CCF2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Api", "Toci.Driver.Api\Intotech.Wheelo.Api.csproj", "{CC8F734F-78EC-48CF-8EF5-710FFCE78DEC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toci.Driver.Database.Persistence", "Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj", "{F3FF1397-B4D7-4130-97BE-31DF7DD190EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toci.Driver.Database.Persistence", "Toci.Driver.Bll.Porsche.Interfaces\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj", "{F3FF1397-B4D7-4130-97BE-31DF7DD190EA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{A662B894-F584-4249-902F-47612C3E8E94}"
 	ProjectSection(SolutionItems) = preProject
-		..\SQL\cars.txt = ..\SQL\cars.txt
-		..\SQL\colours.txt = ..\SQL\colours.txt
-		..\SQL\geog_azg.sql = ..\SQL\geog_azg.sql
-		..\SQL\geog_azg.txt = ..\SQL\geog_azg.txt
-		..\SQL\i18n.sql = ..\SQL\i18n.sql
-		..\SQL\morecars.txt = ..\SQL\morecars.txt
-		..\SQL\professions.txt = ..\SQL\professions.txt
-		..\SQL\rescue.sql = ..\SQL\rescue.sql
-		..\SQL\social.sql = ..\SQL\social.sql
-		..\SQL\wheelo.sql = ..\SQL\wheelo.sql
+		SQL\cars.txt = SQL\cars.txt
+		SQL\colours.txt = SQL\colours.txt
+		SQL\geog_azg.sql = SQL\geog_azg.sql
+		SQL\geog_azg.txt = SQL\geog_azg.txt
+		SQL\i18n.sql = SQL\i18n.sql
+		SQL\morecars.txt = SQL\morecars.txt
+		SQL\professions.txt = SQL\professions.txt
+		SQL\rescue.sql = SQL\rescue.sql
+		SQL\social.sql = SQL\social.sql
+		SQL\wheelo.sql = SQL\wheelo.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech", "Intotech", "{66179D80-4651-4A88-BD8D-83766DC4B059}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Persistence.Interfaces", "Intotech.Wheelo.Bll.Persistence.Interfaces\Intotech.Wheelo.Bll.Persistence.Interfaces.csproj", "{937804BB-FFA7-4427-AFEC-5E19B667C5E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Persistence.Interfaces", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Persistence.Interfaces\Intotech.Wheelo.Bll.Persistence.Interfaces.csproj", "{937804BB-FFA7-4427-AFEC-5E19B667C5E5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Persistence", "Intotech.Wheelo.Bll.Persistence\Intotech.Wheelo.Bll.Persistence.csproj", "{2632C2CE-C949-422B-B536-3616BA262C46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Persistence", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Persistence\Intotech.Wheelo.Bll.Persistence.csproj", "{2632C2CE-C949-422B-B536-3616BA262C46}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Porsche.Interfaces", "Intotech.Wheelo.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Porsche.Interfaces.csproj", "{008B2636-6855-467B-BF08-4713CB59BD72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Porsche.Interfaces", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Porsche.Interfaces.csproj", "{008B2636-6855-467B-BF08-4713CB59BD72}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Porsche", "Intotech.Wheelo.Bll.Porsche\Intotech.Wheelo.Bll.Porsche.csproj", "{B80A75D4-929F-45F5-874A-4F757EDBB30A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Porsche", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Porsche\Intotech.Wheelo.Bll.Porsche.csproj", "{B80A75D4-929F-45F5-874A-4F757EDBB30A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Models", "Intotech.Wheelo.Bll.Models\Intotech.Wheelo.Bll.Models.csproj", "{075AE1B3-F8E9-4E2F-9672-A4601738069E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Models", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Models\Intotech.Wheelo.Bll.Models.csproj", "{075AE1B3-F8E9-4E2F-9672-A4601738069E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common", "..\..\Intotech.Common\Intotech.Common\Intotech.Common.csproj", "{4798E537-3DE2-4C83-9EA4-CA138BF87A60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common", "..\Intotech.Common\Intotech.Common\Intotech.Common.csproj", "{4798E537-3DE2-4C83-9EA4-CA138BF87A60}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Bll", "..\..\Intotech.Common\Intotech.Common.Bll\Intotech.Common.Bll.csproj", "{B31CE6D8-2F5F-4D78-B030-DDEAE30C17DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Bll", "..\Intotech.Common\Intotech.Common.Bll\Intotech.Common.Bll.csproj", "{B31CE6D8-2F5F-4D78-B030-DDEAE30C17DF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Bll.Interfaces", "..\..\Intotech.Common\Intotech.Common.Bll.Interfaces\Intotech.Common.Bll.Interfaces.csproj", "{78339B5E-7F40-4363-A79E-75137BB743F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Bll.Interfaces", "..\Intotech.Common\Intotech.Common.Bll.Interfaces\Intotech.Common.Bll.Interfaces.csproj", "{78339B5E-7F40-4363-A79E-75137BB743F3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Database.Interfaces", "..\..\Intotech.Common\Intotech.Common.Database.Interfaces\Intotech.Common.Database.Interfaces.csproj", "{5CF14AFC-1CFF-4273-B32B-AA54DA37B0C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Database.Interfaces", "..\Intotech.Common\Intotech.Common.Database.Interfaces\Intotech.Common.Database.Interfaces.csproj", "{5CF14AFC-1CFF-4273-B32B-AA54DA37B0C4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Database", "..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj", "{125DA61A-1522-45A4-AF8C-C5882247142A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Database", "..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj", "{125DA61A-1522-45A4-AF8C-C5882247142A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Microservices", "..\..\Intotech.Common\Intotech.Common.Microservices\Intotech.Common.Microservices.csproj", "{B9FA8444-29B3-4CF0-A188-3804000218C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Microservices", "..\Intotech.Common\Intotech.Common.Microservices\Intotech.Common.Microservices.csproj", "{B9FA8444-29B3-4CF0-A188-3804000218C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.ExcelLibrary.Extensions", "..\..\Intotech.Common\Intotech.ExcelLibrary.Extensions\Intotech.ExcelLibrary.Extensions.csproj", "{4234C2E5-8C5F-47BA-9DDF-C3E96D73A94B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.ExcelLibrary.Extensions", "..\Intotech.Common\Intotech.ExcelLibrary.Extensions\Intotech.ExcelLibrary.Extensions.csproj", "{4234C2E5-8C5F-47BA-9DDF-C3E96D73A94B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Microservices.Interfaces", "..\..\Intotech.Common\Intotech.Common.Microservices.Interfaces\Intotech.Common.Microservices.Interfaces.csproj", "{D5B0B8CE-4CB2-42C1-898D-C63DB309B61A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Microservices.Interfaces", "..\Intotech.Common\Intotech.Common.Microservices.Interfaces\Intotech.Common.Microservices.Interfaces.csproj", "{D5B0B8CE-4CB2-42C1-898D-C63DB309B61A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Tests", "Intotech.Wheelo.Tests\Intotech.Wheelo.Tests.csproj", "{1E14C2C2-EDAE-4732-9267-B1F6889DB0D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Tests", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Tests\Intotech.Wheelo.Tests.csproj", "{1E14C2C2-EDAE-4732-9267-B1F6889DB0D7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Tests", "..\..\Intotech.Common\Intotech.Common.Tests\Intotech.Common.Tests.csproj", "{436BB7D5-5E9A-4CE5-AD0C-EFDD106DACC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Tests", "..\Intotech.Common\Intotech.Common.Tests\Intotech.Common.Tests.csproj", "{436BB7D5-5E9A-4CE5-AD0C-EFDD106DACC3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.Chat", "Intotech.Wheelo.Chat", "{07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{4B31F6CD-BAE5-4416-9A7E-7CD74459E6A7}"
 	ProjectSection(SolutionItems) = preProject
-		Wheelo.Chat.sql = Wheelo.Chat.sql
+		Toci.Driver.Bll.Porsche.Interfaces\Wheelo.Chat.sql = Toci.Driver.Bll.Porsche.Interfaces\Wheelo.Chat.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CarsModelsXmls", "CarsModelsXmls", "{51BED2FE-11DB-4E9C-B6E6-F4611B6A4EAE}"
 	ProjectSection(SolutionItems) = preProject
-		..\SQL\CarsModelsXmls\Abarth.txt = ..\SQL\CarsModelsXmls\Abarth.txt
-		..\SQL\CarsModelsXmls\Acura.txt = ..\SQL\CarsModelsXmls\Acura.txt
-		..\SQL\CarsModelsXmls\Alfa romeo.txt = ..\SQL\CarsModelsXmls\Alfa romeo.txt
-		..\SQL\CarsModelsXmls\Aston Martin.txt = ..\SQL\CarsModelsXmls\Aston Martin.txt
-		..\SQL\CarsModelsXmls\Audi.txt = ..\SQL\CarsModelsXmls\Audi.txt
-		..\SQL\CarsModelsXmls\Bentley.txt = ..\SQL\CarsModelsXmls\Bentley.txt
-		..\SQL\CarsModelsXmls\BMW.txt = ..\SQL\CarsModelsXmls\BMW.txt
-		..\SQL\CarsModelsXmls\Bugati.txt = ..\SQL\CarsModelsXmls\Bugati.txt
-		..\SQL\CarsModelsXmls\Cadilac.txt = ..\SQL\CarsModelsXmls\Cadilac.txt
-		..\SQL\CarsModelsXmls\Chevrolet.txt = ..\SQL\CarsModelsXmls\Chevrolet.txt
-		..\SQL\CarsModelsXmls\Chrysler.txt = ..\SQL\CarsModelsXmls\Chrysler.txt
-		..\SQL\CarsModelsXmls\Citroen.txt = ..\SQL\CarsModelsXmls\Citroen.txt
-		..\SQL\CarsModelsXmls\Dacia.txt = ..\SQL\CarsModelsXmls\Dacia.txt
-		..\SQL\CarsModelsXmls\Daewoo.txt = ..\SQL\CarsModelsXmls\Daewoo.txt
-		..\SQL\CarsModelsXmls\Dodge.txt = ..\SQL\CarsModelsXmls\Dodge.txt
-		Ferrari.txt = Ferrari.txt
-		..\SQL\CarsModelsXmls\Ferrari.txt = ..\SQL\CarsModelsXmls\Ferrari.txt
-		Fiat.txt = Fiat.txt
-		..\SQL\CarsModelsXmls\Fiat.txt = ..\SQL\CarsModelsXmls\Fiat.txt
-		Ford.txt = Ford.txt
-		..\SQL\CarsModelsXmls\Ford.txt = ..\SQL\CarsModelsXmls\Ford.txt
-		FSO.txt = FSO.txt
-		..\SQL\CarsModelsXmls\FSO.txt = ..\SQL\CarsModelsXmls\FSO.txt
-		GAZ.txt = GAZ.txt
-		..\SQL\CarsModelsXmls\GAZ.txt = ..\SQL\CarsModelsXmls\GAZ.txt
-		GMC.txt = GMC.txt
-		..\SQL\CarsModelsXmls\GMC.txt = ..\SQL\CarsModelsXmls\GMC.txt
-		Honda.txt = Honda.txt
-		..\SQL\CarsModelsXmls\Honda.txt = ..\SQL\CarsModelsXmls\Honda.txt
-		Hummer.txt = Hummer.txt
-		..\SQL\CarsModelsXmls\Hummer.txt = ..\SQL\CarsModelsXmls\Hummer.txt
-		Hyundai.txt = Hyundai.txt
-		..\SQL\CarsModelsXmls\Hyundai.txt = ..\SQL\CarsModelsXmls\Hyundai.txt
-		Infiniti.txt = Infiniti.txt
-		..\SQL\CarsModelsXmls\Infiniti.txt = ..\SQL\CarsModelsXmls\Infiniti.txt
-		Isuzu.txt = Isuzu.txt
-		..\SQL\CarsModelsXmls\Isuzu.txt = ..\SQL\CarsModelsXmls\Isuzu.txt
-		IVECO.txt = IVECO.txt
-		..\SQL\CarsModelsXmls\IVECO.txt = ..\SQL\CarsModelsXmls\IVECO.txt
-		Jaguar.txt = Jaguar.txt
-		..\SQL\CarsModelsXmls\Jaguar.txt = ..\SQL\CarsModelsXmls\Jaguar.txt
-		Jeep.txt = Jeep.txt
-		..\SQL\CarsModelsXmls\Jeep.txt = ..\SQL\CarsModelsXmls\Jeep.txt
-		Kia.txt = Kia.txt
-		..\SQL\CarsModelsXmls\Kia.txt = ..\SQL\CarsModelsXmls\Kia.txt
-		Lamborghini.txt = Lamborghini.txt
-		..\SQL\CarsModelsXmls\Lamborghini.txt = ..\SQL\CarsModelsXmls\Lamborghini.txt
-		Lancia.txt = Lancia.txt
-		..\SQL\CarsModelsXmls\Lancia.txt = ..\SQL\CarsModelsXmls\Lancia.txt
-		Land Rover.txt = Land Rover.txt
-		..\SQL\CarsModelsXmls\Land Rover.txt = ..\SQL\CarsModelsXmls\Land Rover.txt
-		Lexus.txt = Lexus.txt
-		..\SQL\CarsModelsXmls\Lexus.txt = ..\SQL\CarsModelsXmls\Lexus.txt
-		..\SQL\CarsModelsXmls\Lincoln.txt = ..\SQL\CarsModelsXmls\Lincoln.txt
-		..\SQL\CarsModelsXmls\LiXiang.txt = ..\SQL\CarsModelsXmls\LiXiang.txt
-		..\SQL\CarsModelsXmls\Lotus.txt = ..\SQL\CarsModelsXmls\Lotus.txt
-		..\SQL\CarsModelsXmls\LuAZ.txt = ..\SQL\CarsModelsXmls\LuAZ.txt
-		..\SQL\CarsModelsXmls\Luxgen.txt = ..\SQL\CarsModelsXmls\Luxgen.txt
-		..\SQL\CarsModelsXmls\Mahindra.txt = ..\SQL\CarsModelsXmls\Mahindra.txt
-		..\SQL\CarsModelsXmls\Marcos.txt = ..\SQL\CarsModelsXmls\Marcos.txt
-		..\SQL\CarsModelsXmls\Martin.txt = ..\SQL\CarsModelsXmls\Martin.txt
-		..\SQL\CarsModelsXmls\Maruti.txt = ..\SQL\CarsModelsXmls\Maruti.txt
-		..\SQL\CarsModelsXmls\Maserati.txt = ..\SQL\CarsModelsXmls\Maserati.txt
-		..\SQL\CarsModelsXmls\Maybach.txt = ..\SQL\CarsModelsXmls\Maybach.txt
-		..\SQL\CarsModelsXmls\Mazda.txt = ..\SQL\CarsModelsXmls\Mazda.txt
-		..\SQL\CarsModelsXmls\McLaren.txt = ..\SQL\CarsModelsXmls\McLaren.txt
-		..\SQL\CarsModelsXmls\Mega.txt = ..\SQL\CarsModelsXmls\Mega.txt
-		..\SQL\CarsModelsXmls\Mercedes-Benz.txt = ..\SQL\CarsModelsXmls\Mercedes-Benz.txt
-		..\SQL\CarsModelsXmls\Mercury.txt = ..\SQL\CarsModelsXmls\Mercury.txt
-		..\SQL\CarsModelsXmls\MG.txt = ..\SQL\CarsModelsXmls\MG.txt
-		..\SQL\CarsModelsXmls\Microcar.txt = ..\SQL\CarsModelsXmls\Microcar.txt
-		..\SQL\CarsModelsXmls\Mini.txt = ..\SQL\CarsModelsXmls\Mini.txt
-		..\SQL\CarsModelsXmls\Mitsubishi.txt = ..\SQL\CarsModelsXmls\Mitsubishi.txt
-		..\SQL\CarsModelsXmls\Mitsuoka.txt = ..\SQL\CarsModelsXmls\Mitsuoka.txt
-		..\SQL\CarsModelsXmls\Morgan.txt = ..\SQL\CarsModelsXmls\Morgan.txt
-		..\SQL\CarsModelsXmls\Moskal.txt = ..\SQL\CarsModelsXmls\Moskal.txt
-		..\SQL\CarsModelsXmls\Nio.txt = ..\SQL\CarsModelsXmls\Nio.txt
-		..\SQL\CarsModelsXmls\Nissan.txt = ..\SQL\CarsModelsXmls\Nissan.txt
-		..\SQL\CarsModelsXmls\Noble.txt = ..\SQL\CarsModelsXmls\Noble.txt
-		..\SQL\CarsModelsXmls\Oldsmobile.txt = ..\SQL\CarsModelsXmls\Oldsmobile.txt
-		..\SQL\CarsModelsXmls\Opel.txt = ..\SQL\CarsModelsXmls\Opel.txt
-		..\SQL\CarsModelsXmls\Packard.txt = ..\SQL\CarsModelsXmls\Packard.txt
-		..\SQL\CarsModelsXmls\Pagani.txt = ..\SQL\CarsModelsXmls\Pagani.txt
-		..\SQL\CarsModelsXmls\Perodua.txt = ..\SQL\CarsModelsXmls\Perodua.txt
-		..\SQL\CarsModelsXmls\Peugeot.txt = ..\SQL\CarsModelsXmls\Peugeot.txt
-		..\SQL\CarsModelsXmls\Piaggio.txt = ..\SQL\CarsModelsXmls\Piaggio.txt
-		..\SQL\CarsModelsXmls\Plymouth.txt = ..\SQL\CarsModelsXmls\Plymouth.txt
-		..\SQL\CarsModelsXmls\Pontiac.txt = ..\SQL\CarsModelsXmls\Pontiac.txt
-		..\SQL\CarsModelsXmls\Porsche.txt = ..\SQL\CarsModelsXmls\Porsche.txt
-		Renault.txt = Renault.txt
-		..\SQL\CarsModelsXmls\Renault.txt = ..\SQL\CarsModelsXmls\Renault.txt
-		Rolls-Royce.txt = Rolls-Royce.txt
-		..\SQL\CarsModelsXmls\Rolls-Royce.txt = ..\SQL\CarsModelsXmls\Rolls-Royce.txt
-		Rover.txt = Rover.txt
-		..\SQL\CarsModelsXmls\Rover.txt = ..\SQL\CarsModelsXmls\Rover.txt
-		Saab.txt = Saab.txt
-		..\SQL\CarsModelsXmls\Saab.txt = ..\SQL\CarsModelsXmls\Saab.txt
-		SEAT.txt = SEAT.txt
-		..\SQL\CarsModelsXmls\SEAT.txt = ..\SQL\CarsModelsXmls\SEAT.txt
-		Skoda.txt = Skoda.txt
-		..\SQL\CarsModelsXmls\Skoda.txt = ..\SQL\CarsModelsXmls\Skoda.txt
-		Smart.txt = Smart.txt
-		..\SQL\CarsModelsXmls\Smart.txt = ..\SQL\CarsModelsXmls\Smart.txt
-		SsangYong.txt = SsangYong.txt
-		..\SQL\CarsModelsXmls\SsangYong.txt = ..\SQL\CarsModelsXmls\SsangYong.txt
-		Subaru.txt = Subaru.txt
-		..\SQL\CarsModelsXmls\Subaru.txt = ..\SQL\CarsModelsXmls\Subaru.txt
-		Suzuki.txt = Suzuki.txt
-		..\SQL\CarsModelsXmls\Suzuki.txt = ..\SQL\CarsModelsXmls\Suzuki.txt
-		Tata.txt = Tata.txt
-		..\SQL\CarsModelsXmls\Tata.txt = ..\SQL\CarsModelsXmls\Tata.txt
-		..\SQL\CarsModelsXmls\Tatra.txt = ..\SQL\CarsModelsXmls\Tatra.txt
-		..\SQL\CarsModelsXmls\Tesla.txt = ..\SQL\CarsModelsXmls\Tesla.txt
-		..\SQL\CarsModelsXmls\Toyota.txt = ..\SQL\CarsModelsXmls\Toyota.txt
-		..\SQL\CarsModelsXmls\Trabant.txt = ..\SQL\CarsModelsXmls\Trabant.txt
-		..\SQL\CarsModelsXmls\Volkswagen.txt = ..\SQL\CarsModelsXmls\Volkswagen.txt
-		..\SQL\CarsModelsXmls\Volvo.txt = ..\SQL\CarsModelsXmls\Volvo.txt
-		..\SQL\CarsModelsXmls\Wartburg.txt = ..\SQL\CarsModelsXmls\Wartburg.txt
-		..\SQL\CarsModelsXmls\Zastava.txt = ..\SQL\CarsModelsXmls\Zastava.txt
-		..\SQL\CarsModelsXmls\ZIŁ.txt = ..\SQL\CarsModelsXmls\ZIŁ.txt
+		SQL\CarsModelsXmls\Abarth.txt = SQL\CarsModelsXmls\Abarth.txt
+		SQL\CarsModelsXmls\Acura.txt = SQL\CarsModelsXmls\Acura.txt
+		SQL\CarsModelsXmls\Alfa romeo.txt = SQL\CarsModelsXmls\Alfa romeo.txt
+		SQL\CarsModelsXmls\Aston Martin.txt = SQL\CarsModelsXmls\Aston Martin.txt
+		SQL\CarsModelsXmls\Audi.txt = SQL\CarsModelsXmls\Audi.txt
+		SQL\CarsModelsXmls\Bentley.txt = SQL\CarsModelsXmls\Bentley.txt
+		SQL\CarsModelsXmls\BMW.txt = SQL\CarsModelsXmls\BMW.txt
+		SQL\CarsModelsXmls\Bugati.txt = SQL\CarsModelsXmls\Bugati.txt
+		SQL\CarsModelsXmls\Cadilac.txt = SQL\CarsModelsXmls\Cadilac.txt
+		SQL\CarsModelsXmls\Chevrolet.txt = SQL\CarsModelsXmls\Chevrolet.txt
+		SQL\CarsModelsXmls\Chrysler.txt = SQL\CarsModelsXmls\Chrysler.txt
+		SQL\CarsModelsXmls\Citroen.txt = SQL\CarsModelsXmls\Citroen.txt
+		SQL\CarsModelsXmls\Dacia.txt = SQL\CarsModelsXmls\Dacia.txt
+		SQL\CarsModelsXmls\Daewoo.txt = SQL\CarsModelsXmls\Daewoo.txt
+		SQL\CarsModelsXmls\Dodge.txt = SQL\CarsModelsXmls\Dodge.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Ferrari.txt = Toci.Driver.Bll.Porsche.Interfaces\Ferrari.txt
+		SQL\CarsModelsXmls\Ferrari.txt = SQL\CarsModelsXmls\Ferrari.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Fiat.txt = Toci.Driver.Bll.Porsche.Interfaces\Fiat.txt
+		SQL\CarsModelsXmls\Fiat.txt = SQL\CarsModelsXmls\Fiat.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Ford.txt = Toci.Driver.Bll.Porsche.Interfaces\Ford.txt
+		SQL\CarsModelsXmls\Ford.txt = SQL\CarsModelsXmls\Ford.txt
+		Toci.Driver.Bll.Porsche.Interfaces\FSO.txt = Toci.Driver.Bll.Porsche.Interfaces\FSO.txt
+		SQL\CarsModelsXmls\FSO.txt = SQL\CarsModelsXmls\FSO.txt
+		Toci.Driver.Bll.Porsche.Interfaces\GAZ.txt = Toci.Driver.Bll.Porsche.Interfaces\GAZ.txt
+		SQL\CarsModelsXmls\GAZ.txt = SQL\CarsModelsXmls\GAZ.txt
+		Toci.Driver.Bll.Porsche.Interfaces\GMC.txt = Toci.Driver.Bll.Porsche.Interfaces\GMC.txt
+		SQL\CarsModelsXmls\GMC.txt = SQL\CarsModelsXmls\GMC.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Honda.txt = Toci.Driver.Bll.Porsche.Interfaces\Honda.txt
+		SQL\CarsModelsXmls\Honda.txt = SQL\CarsModelsXmls\Honda.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Hummer.txt = Toci.Driver.Bll.Porsche.Interfaces\Hummer.txt
+		SQL\CarsModelsXmls\Hummer.txt = SQL\CarsModelsXmls\Hummer.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Hyundai.txt = Toci.Driver.Bll.Porsche.Interfaces\Hyundai.txt
+		SQL\CarsModelsXmls\Hyundai.txt = SQL\CarsModelsXmls\Hyundai.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Infiniti.txt = Toci.Driver.Bll.Porsche.Interfaces\Infiniti.txt
+		SQL\CarsModelsXmls\Infiniti.txt = SQL\CarsModelsXmls\Infiniti.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Isuzu.txt = Toci.Driver.Bll.Porsche.Interfaces\Isuzu.txt
+		SQL\CarsModelsXmls\Isuzu.txt = SQL\CarsModelsXmls\Isuzu.txt
+		Toci.Driver.Bll.Porsche.Interfaces\IVECO.txt = Toci.Driver.Bll.Porsche.Interfaces\IVECO.txt
+		SQL\CarsModelsXmls\IVECO.txt = SQL\CarsModelsXmls\IVECO.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Jaguar.txt = Toci.Driver.Bll.Porsche.Interfaces\Jaguar.txt
+		SQL\CarsModelsXmls\Jaguar.txt = SQL\CarsModelsXmls\Jaguar.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Jeep.txt = Toci.Driver.Bll.Porsche.Interfaces\Jeep.txt
+		SQL\CarsModelsXmls\Jeep.txt = SQL\CarsModelsXmls\Jeep.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Kia.txt = Toci.Driver.Bll.Porsche.Interfaces\Kia.txt
+		SQL\CarsModelsXmls\Kia.txt = SQL\CarsModelsXmls\Kia.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Lamborghini.txt = Toci.Driver.Bll.Porsche.Interfaces\Lamborghini.txt
+		SQL\CarsModelsXmls\Lamborghini.txt = SQL\CarsModelsXmls\Lamborghini.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Lancia.txt = Toci.Driver.Bll.Porsche.Interfaces\Lancia.txt
+		SQL\CarsModelsXmls\Lancia.txt = SQL\CarsModelsXmls\Lancia.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Land Rover.txt = Toci.Driver.Bll.Porsche.Interfaces\Land Rover.txt
+		SQL\CarsModelsXmls\Land Rover.txt = SQL\CarsModelsXmls\Land Rover.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Lexus.txt = Toci.Driver.Bll.Porsche.Interfaces\Lexus.txt
+		SQL\CarsModelsXmls\Lexus.txt = SQL\CarsModelsXmls\Lexus.txt
+		SQL\CarsModelsXmls\Lincoln.txt = SQL\CarsModelsXmls\Lincoln.txt
+		SQL\CarsModelsXmls\LiXiang.txt = SQL\CarsModelsXmls\LiXiang.txt
+		SQL\CarsModelsXmls\Lotus.txt = SQL\CarsModelsXmls\Lotus.txt
+		SQL\CarsModelsXmls\LuAZ.txt = SQL\CarsModelsXmls\LuAZ.txt
+		SQL\CarsModelsXmls\Luxgen.txt = SQL\CarsModelsXmls\Luxgen.txt
+		SQL\CarsModelsXmls\Mahindra.txt = SQL\CarsModelsXmls\Mahindra.txt
+		SQL\CarsModelsXmls\Marcos.txt = SQL\CarsModelsXmls\Marcos.txt
+		SQL\CarsModelsXmls\Martin.txt = SQL\CarsModelsXmls\Martin.txt
+		SQL\CarsModelsXmls\Maruti.txt = SQL\CarsModelsXmls\Maruti.txt
+		SQL\CarsModelsXmls\Maserati.txt = SQL\CarsModelsXmls\Maserati.txt
+		SQL\CarsModelsXmls\Maybach.txt = SQL\CarsModelsXmls\Maybach.txt
+		SQL\CarsModelsXmls\Mazda.txt = SQL\CarsModelsXmls\Mazda.txt
+		SQL\CarsModelsXmls\McLaren.txt = SQL\CarsModelsXmls\McLaren.txt
+		SQL\CarsModelsXmls\Mega.txt = SQL\CarsModelsXmls\Mega.txt
+		SQL\CarsModelsXmls\Mercedes-Benz.txt = SQL\CarsModelsXmls\Mercedes-Benz.txt
+		SQL\CarsModelsXmls\Mercury.txt = SQL\CarsModelsXmls\Mercury.txt
+		SQL\CarsModelsXmls\MG.txt = SQL\CarsModelsXmls\MG.txt
+		SQL\CarsModelsXmls\Microcar.txt = SQL\CarsModelsXmls\Microcar.txt
+		SQL\CarsModelsXmls\Mini.txt = SQL\CarsModelsXmls\Mini.txt
+		SQL\CarsModelsXmls\Mitsubishi.txt = SQL\CarsModelsXmls\Mitsubishi.txt
+		SQL\CarsModelsXmls\Mitsuoka.txt = SQL\CarsModelsXmls\Mitsuoka.txt
+		SQL\CarsModelsXmls\Morgan.txt = SQL\CarsModelsXmls\Morgan.txt
+		SQL\CarsModelsXmls\Moskal.txt = SQL\CarsModelsXmls\Moskal.txt
+		SQL\CarsModelsXmls\Nio.txt = SQL\CarsModelsXmls\Nio.txt
+		SQL\CarsModelsXmls\Nissan.txt = SQL\CarsModelsXmls\Nissan.txt
+		SQL\CarsModelsXmls\Noble.txt = SQL\CarsModelsXmls\Noble.txt
+		SQL\CarsModelsXmls\Oldsmobile.txt = SQL\CarsModelsXmls\Oldsmobile.txt
+		SQL\CarsModelsXmls\Opel.txt = SQL\CarsModelsXmls\Opel.txt
+		SQL\CarsModelsXmls\Packard.txt = SQL\CarsModelsXmls\Packard.txt
+		SQL\CarsModelsXmls\Pagani.txt = SQL\CarsModelsXmls\Pagani.txt
+		SQL\CarsModelsXmls\Perodua.txt = SQL\CarsModelsXmls\Perodua.txt
+		SQL\CarsModelsXmls\Peugeot.txt = SQL\CarsModelsXmls\Peugeot.txt
+		SQL\CarsModelsXmls\Piaggio.txt = SQL\CarsModelsXmls\Piaggio.txt
+		SQL\CarsModelsXmls\Plymouth.txt = SQL\CarsModelsXmls\Plymouth.txt
+		SQL\CarsModelsXmls\Pontiac.txt = SQL\CarsModelsXmls\Pontiac.txt
+		SQL\CarsModelsXmls\Porsche.txt = SQL\CarsModelsXmls\Porsche.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Renault.txt = Toci.Driver.Bll.Porsche.Interfaces\Renault.txt
+		SQL\CarsModelsXmls\Renault.txt = SQL\CarsModelsXmls\Renault.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Rolls-Royce.txt = Toci.Driver.Bll.Porsche.Interfaces\Rolls-Royce.txt
+		SQL\CarsModelsXmls\Rolls-Royce.txt = SQL\CarsModelsXmls\Rolls-Royce.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Rover.txt = Toci.Driver.Bll.Porsche.Interfaces\Rover.txt
+		SQL\CarsModelsXmls\Rover.txt = SQL\CarsModelsXmls\Rover.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Saab.txt = Toci.Driver.Bll.Porsche.Interfaces\Saab.txt
+		SQL\CarsModelsXmls\Saab.txt = SQL\CarsModelsXmls\Saab.txt
+		Toci.Driver.Bll.Porsche.Interfaces\SEAT.txt = Toci.Driver.Bll.Porsche.Interfaces\SEAT.txt
+		SQL\CarsModelsXmls\SEAT.txt = SQL\CarsModelsXmls\SEAT.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Skoda.txt = Toci.Driver.Bll.Porsche.Interfaces\Skoda.txt
+		SQL\CarsModelsXmls\Skoda.txt = SQL\CarsModelsXmls\Skoda.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Smart.txt = Toci.Driver.Bll.Porsche.Interfaces\Smart.txt
+		SQL\CarsModelsXmls\Smart.txt = SQL\CarsModelsXmls\Smart.txt
+		Toci.Driver.Bll.Porsche.Interfaces\SsangYong.txt = Toci.Driver.Bll.Porsche.Interfaces\SsangYong.txt
+		SQL\CarsModelsXmls\SsangYong.txt = SQL\CarsModelsXmls\SsangYong.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Subaru.txt = Toci.Driver.Bll.Porsche.Interfaces\Subaru.txt
+		SQL\CarsModelsXmls\Subaru.txt = SQL\CarsModelsXmls\Subaru.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Suzuki.txt = Toci.Driver.Bll.Porsche.Interfaces\Suzuki.txt
+		SQL\CarsModelsXmls\Suzuki.txt = SQL\CarsModelsXmls\Suzuki.txt
+		Toci.Driver.Bll.Porsche.Interfaces\Tata.txt = Toci.Driver.Bll.Porsche.Interfaces\Tata.txt
+		SQL\CarsModelsXmls\Tata.txt = SQL\CarsModelsXmls\Tata.txt
+		SQL\CarsModelsXmls\Tatra.txt = SQL\CarsModelsXmls\Tatra.txt
+		SQL\CarsModelsXmls\Tesla.txt = SQL\CarsModelsXmls\Tesla.txt
+		SQL\CarsModelsXmls\Toyota.txt = SQL\CarsModelsXmls\Toyota.txt
+		SQL\CarsModelsXmls\Trabant.txt = SQL\CarsModelsXmls\Trabant.txt
+		SQL\CarsModelsXmls\Volkswagen.txt = SQL\CarsModelsXmls\Volkswagen.txt
+		SQL\CarsModelsXmls\Volvo.txt = SQL\CarsModelsXmls\Volvo.txt
+		SQL\CarsModelsXmls\Wartburg.txt = SQL\CarsModelsXmls\Wartburg.txt
+		SQL\CarsModelsXmls\Zastava.txt = SQL\CarsModelsXmls\Zastava.txt
+		SQL\CarsModelsXmls\ZIŁ.txt = SQL\CarsModelsXmls\ZIŁ.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.Cmc", "Intotech.Wheelo.Cmc", "{D34BE5B1-9625-4499-AD6D-618951CA5060}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Bentley.Interfaces", "Intotech.Wheelo.Bll.Bentley.Interfaces\Intotech.Wheelo.Bll.Bentley.Interfaces.csproj", "{35622B2F-3723-47E0-9134-8F1A482B64C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Bentley.Interfaces", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Bentley.Interfaces\Intotech.Wheelo.Bll.Bentley.Interfaces.csproj", "{35622B2F-3723-47E0-9134-8F1A482B64C3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Bentley", "Intotech.Wheelo.Bll.Bentley\Intotech.Wheelo.Bll.Bentley.csproj", "{E7690F8C-9644-432A-8399-C0E7672EC300}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Bentley", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Bentley\Intotech.Wheelo.Bll.Bentley.csproj", "{E7690F8C-9644-432A-8399-C0E7672EC300}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Cmc.Api", "Intotech.Wheelo.Cmc.Api\Intotech.Wheelo.Cmc.Api.csproj", "{E5148A6E-293C-4E65-B323-743247B96A3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Cmc.Api", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Cmc.Api\Intotech.Wheelo.Cmc.Api.csproj", "{E5148A6E-293C-4E65-B323-743247B96A3B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.Social", "Intotech.Wheelo.Social", "{36E8836E-455B-44CA-ADD6-5E0C90D5D38B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Database.Persistence", "Intotech.Wheelo.Social.Database.Persistence\Intotech.Wheelo.Social.Database.Persistence.csproj", "{EDEBF1A0-509D-4C1C-AE47-AD996CFC4111}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Database.Persistence", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Social.Database.Persistence\Intotech.Wheelo.Social.Database.Persistence.csproj", "{EDEBF1A0-509D-4C1C-AE47-AD996CFC4111}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Bll.Persistence.Interfaces", "Intotech.Wheelo.Social.Bll.Persistence.Interfaces\Intotech.Wheelo.Social.Bll.Persistence.Interfaces.csproj", "{F2D25DF2-8A33-4194-A9FE-992AB9685B05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Bll.Persistence.Interfaces", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Social.Bll.Persistence.Interfaces\Intotech.Wheelo.Social.Bll.Persistence.Interfaces.csproj", "{F2D25DF2-8A33-4194-A9FE-992AB9685B05}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Bll.Persistence", "Intotech.Wheelo.Social.Bll.Persistence\Intotech.Wheelo.Social.Bll.Persistence.csproj", "{3E82B28D-537E-4D32-82B7-289880EAFD2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Bll.Persistence", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Social.Bll.Persistence\Intotech.Wheelo.Social.Bll.Persistence.csproj", "{3E82B28D-537E-4D32-82B7-289880EAFD2A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces", "Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces\Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces.csproj", "{54BF52BB-3E2B-4FB0-BE1A-D50B660EB583}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces\Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces.csproj", "{54BF52BB-3E2B-4FB0-BE1A-D50B660EB583}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Bll.Lamborgini", "Intotech.Wheelo.Social.Bll.Lamborgini\Intotech.Wheelo.Social.Bll.Lamborgini.csproj", "{A26CCDD6-941F-41FD-A666-9C3F544B180C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Bll.Lamborgini", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Social.Bll.Lamborgini\Intotech.Wheelo.Social.Bll.Lamborgini.csproj", "{A26CCDD6-941F-41FD-A666-9C3F544B180C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Api", "Intotech.Wheelo.Social.Api\Intotech.Wheelo.Social.Api.csproj", "{AB8D5663-9982-4E73-8290-E064EC5CE669}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Api", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Social.Api\Intotech.Wheelo.Social.Api.csproj", "{AB8D5663-9982-4E73-8290-E064EC5CE669}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Bll.Pontiac.Interfaces", "Intotech.Wheelo.Social.Bll.Pontiac.Interfaces\Intotech.Wheelo.Social.Bll.Pontiac.Interfaces.csproj", "{22748790-5D9A-4D9E-A882-96090E79AB53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Bll.Pontiac.Interfaces", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Social.Bll.Pontiac.Interfaces\Intotech.Wheelo.Social.Bll.Pontiac.Interfaces.csproj", "{22748790-5D9A-4D9E-A882-96090E79AB53}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Bll.Pontiac", "Intotech.Wheelo.Social.Bll.Pontiac\Intotech.Wheelo.Social.Bll.Pontiac.csproj", "{3AB35E73-DAF6-424C-864A-8D576A4DDC4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Bll.Pontiac", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Social.Bll.Pontiac\Intotech.Wheelo.Social.Bll.Pontiac.csproj", "{3AB35E73-DAF6-424C-864A-8D576A4DDC4E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Tests", "Intotech.Wheelo.Social.Tests\Intotech.Wheelo.Social.Tests.csproj", "{46CCFFFA-0C9C-41C5-ABAB-01092C1AB39E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Social.Tests", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Social.Tests\Intotech.Wheelo.Social.Tests.csproj", "{46CCFFFA-0C9C-41C5-ABAB-01092C1AB39E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Warrior", "Intotech.Warrior\Intotech.Warrior.csproj", "{FC6FC797-3ADC-41A4-AA65-6DB2A65E959A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Warrior", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Warrior\Intotech.Warrior.csproj", "{FC6FC797-3ADC-41A4-AA65-6DB2A65E959A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.ReflectiveTools", "..\..\Intotech.Common\Intotech.ReflectiveTools\Intotech.ReflectiveTools.csproj", "{4547042D-DE1F-43EF-A3BC-F4DC8B43CD91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.ReflectiveTools", "..\Intotech.Common\Intotech.ReflectiveTools\Intotech.ReflectiveTools.csproj", "{4547042D-DE1F-43EF-A3BC-F4DC8B43CD91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Runner", "..\..\Intotech.Common\Intotech.Runner\Intotech.Runner.csproj", "{842D52B0-EFF2-4E15-AD2D-3E516C851115}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Runner", "..\Intotech.Common\Intotech.Runner\Intotech.Runner.csproj", "{842D52B0-EFF2-4E15-AD2D-3E516C851115}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Common", "Intotech.Wheelo.Common\Intotech.Wheelo.Common.csproj", "{E279A191-D6C9-4F8C-BA0E-6850DE301629}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Common", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Common\Intotech.Wheelo.Common.csproj", "{E279A191-D6C9-4F8C-BA0E-6850DE301629}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.I18n", "Intotech.Wheelo.I18n", "{15070A0F-D28D-473A-8C8D-2D6BD2E8C382}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.I18n.Database.Persistence", "..\Intotech.Wheelo.I18n.Database.Persistence\Intotech.Wheelo.I18n.Database.Persistence.csproj", "{BA2807DF-80BF-43EE-8ED0-19038DCB4092}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.I18n.Database.Persistence", "Intotech.Wheelo.I18n.Database.Persistence\Intotech.Wheelo.I18n.Database.Persistence.csproj", "{BA2807DF-80BF-43EE-8ED0-19038DCB4092}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.I18n.Seed", "..\Intotech.Wheelo.I18n.Seed\Intotech.Wheelo.I18n.Seed.csproj", "{2F055650-8063-4710-A12D-C835EF0AE634}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.I18n.Seed", "Intotech.Wheelo.I18n.Seed\Intotech.Wheelo.I18n.Seed.csproj", "{2F055650-8063-4710-A12D-C835EF0AE634}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Common.Interfaces", "..\Intotech.Wheelo.Common.Interfaces\Intotech.Wheelo.Common.Interfaces.csproj", "{6C918C5E-3C20-4EB2-9F14-B82A83DA4BDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Common.Interfaces", "Intotech.Wheelo.Common.Interfaces\Intotech.Wheelo.Common.Interfaces.csproj", "{6C918C5E-3C20-4EB2-9F14-B82A83DA4BDE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.Integration", "Intotech.Wheelo.Integration", "{14C2EDD9-09A5-48DD-99FA-AC51331C789F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Integration.Api", "..\Intotech.Wheelo.Integration.Api\Intotech.Wheelo.Integration.Api.csproj", "{5D26FDBE-5AB3-42DC-8B99-908748E82453}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Integration.Api", "Intotech.Wheelo.Integration.Api\Intotech.Wheelo.Integration.Api.csproj", "{5D26FDBE-5AB3-42DC-8B99-908748E82453}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Jaguar", "..\Intotech.Wheelo.Chat.Jaguar\Intotech.Wheelo.Chat.Jaguar.csproj", "{129567D9-ADCE-40D9-B67F-7DCBE9A56349}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Jaguar", "Intotech.Wheelo.Chat.Jaguar\Intotech.Wheelo.Chat.Jaguar.csproj", "{129567D9-ADCE-40D9-B67F-7DCBE9A56349}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Database.Persistence", "..\Intotech.Wheelo.Chat.Database.Persistence\Intotech.Wheelo.Chat.Database.Persistence.csproj", "{4090890E-AA4C-4FFB-8DB1-8509C9D90041}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Database.Persistence", "Intotech.Wheelo.Chat.Database.Persistence\Intotech.Wheelo.Chat.Database.Persistence.csproj", "{4090890E-AA4C-4FFB-8DB1-8509C9D90041}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Bll.Persistence.Interfaces", "..\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces.csproj", "{8A9FFFF4-1867-468A-9E8E-ADD380155B86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Bll.Persistence.Interfaces", "Intotech.Wheelo.Chat.Bll.Persistence.Interfaces\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces.csproj", "{8A9FFFF4-1867-468A-9E8E-ADD380155B86}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Bll.Persistence", "..\Intotech.Wheelo.Chat.Bll.Persistence\Intotech.Wheelo.Chat.Bll.Persistence.csproj", "{EC487C6F-4B49-4533-A81F-F3C880D7B49A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Bll.Persistence", "Intotech.Wheelo.Chat.Bll.Persistence\Intotech.Wheelo.Chat.Bll.Persistence.csproj", "{EC487C6F-4B49-4533-A81F-F3C880D7B49A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Jaguar.Interfaces", "..\Intotech.Wheelo.Chat.Jaguar.Interfaces\Intotech.Wheelo.Chat.Jaguar.Interfaces.csproj", "{F36D8A64-EFA2-466B-AFE5-0085C62EB213}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Jaguar.Interfaces", "Intotech.Wheelo.Chat.Jaguar.Interfaces\Intotech.Wheelo.Chat.Jaguar.Interfaces.csproj", "{F36D8A64-EFA2-466B-AFE5-0085C62EB213}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Dodge", "..\Intotech.Wheelo.Chat.Dodge\Intotech.Wheelo.Chat.Dodge.csproj", "{F0157EE5-EF73-48E9-9E21-43E450A125F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Dodge", "Intotech.Wheelo.Chat.Dodge\Intotech.Wheelo.Chat.Dodge.csproj", "{F0157EE5-EF73-48E9-9E21-43E450A125F2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Dodge.Interfaces", "Intotech.Wheelo.Chat.Dodge.Interfaces\Intotech.Wheelo.Chat.Dodge.Interfaces.csproj", "{46E90AB2-D578-4EA4-A17B-451217417A9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Dodge.Interfaces", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Chat.Dodge.Interfaces\Intotech.Wheelo.Chat.Dodge.Interfaces.csproj", "{46E90AB2-D578-4EA4-A17B-451217417A9B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Api", "..\Intotech.Wheelo.Chat.Api\Intotech.Wheelo.Chat.Api.csproj", "{236FACBF-F7BC-42D4-97BB-B9564C1AF832}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Api", "Intotech.Wheelo.Chat.Api\Intotech.Wheelo.Chat.Api.csproj", "{236FACBF-F7BC-42D4-97BB-B9564C1AF832}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Models", "..\Intotech.Wheelo.Chat.Models\Intotech.Wheelo.Chat.Models.csproj", "{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Models", "Intotech.Wheelo.Chat.Models\Intotech.Wheelo.Chat.Models.csproj", "{08E95D68-FDF2-47C7-A717-DEF1DD7CBE29}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Integration.Bll.Skoda.Interfaces", "..\Intotech.Wheelo.Integration.Bll.Skoda.Interfaces\Intotech.Wheelo.Integration.Bll.Skoda.Interfaces.csproj", "{9473EB68-FADB-4259-9199-74986F2A1E4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Integration.Bll.Skoda.Interfaces", "Intotech.Wheelo.Integration.Bll.Skoda.Interfaces\Intotech.Wheelo.Integration.Bll.Skoda.Interfaces.csproj", "{9473EB68-FADB-4259-9199-74986F2A1E4E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Integration.Bll.Skoda", "..\Intotech.Wheelo.Integration.Bll.Skoda\Intotech.Wheelo.Integration.Bll.Skoda.csproj", "{1AEF4726-146E-4970-8155-BA3796EDB6F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Integration.Bll.Skoda", "Intotech.Wheelo.Integration.Bll.Skoda\Intotech.Wheelo.Integration.Bll.Skoda.csproj", "{1AEF4726-146E-4970-8155-BA3796EDB6F8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WheeloSqlMigrations", "WheeloSqlMigrations", "{94626A6A-464F-4FC8-9ACE-F96A0F3EC8A3}"
 	ProjectSection(SolutionItems) = preProject
-		12-01-2023 wheelo.sql = 12-01-2023 wheelo.sql
-		16-12-2022 wheelo.sql = 16-12-2022 wheelo.sql
-		17-12-2022 wheelo.sql = 17-12-2022 wheelo.sql
-		18-12-2022 wheelo.sql = 18-12-2022 wheelo.sql
-		19-01-2023 wheelo.sql = 19-01-2023 wheelo.sql
-		19-12-2022 wheelo.sql = 19-12-2022 wheelo.sql
-		20-02-2023 wheelo.sql = 20-02-2023 wheelo.sql
+		Toci.Driver.Bll.Porsche.Interfaces\12-01-2023 wheelo.sql = Toci.Driver.Bll.Porsche.Interfaces\12-01-2023 wheelo.sql
+		Toci.Driver.Bll.Porsche.Interfaces\16-12-2022 wheelo.sql = Toci.Driver.Bll.Porsche.Interfaces\16-12-2022 wheelo.sql
+		Toci.Driver.Bll.Porsche.Interfaces\17-12-2022 wheelo.sql = Toci.Driver.Bll.Porsche.Interfaces\17-12-2022 wheelo.sql
+		Toci.Driver.Bll.Porsche.Interfaces\18-12-2022 wheelo.sql = Toci.Driver.Bll.Porsche.Interfaces\18-12-2022 wheelo.sql
+		Toci.Driver.Bll.Porsche.Interfaces\19-01-2023 wheelo.sql = Toci.Driver.Bll.Porsche.Interfaces\19-01-2023 wheelo.sql
+		Toci.Driver.Bll.Porsche.Interfaces\19-12-2022 wheelo.sql = Toci.Driver.Bll.Porsche.Interfaces\19-12-2022 wheelo.sql
+		Toci.Driver.Bll.Porsche.Interfaces\20-02-2023 wheelo.sql = Toci.Driver.Bll.Porsche.Interfaces\20-02-2023 wheelo.sql
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Notifications.Interfaces", "Intotech.Wheelo.Notifications.Interfaces\Intotech.Wheelo.Notifications.Interfaces.csproj", "{5558666A-67FD-4684-997A-89FB6035B34A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Notifications.Interfaces", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Notifications.Interfaces\Intotech.Wheelo.Notifications.Interfaces.csproj", "{5558666A-67FD-4684-997A-89FB6035B34A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Notifications", "Intotech.Wheelo.Notifications\Intotech.Wheelo.Notifications.csproj", "{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Notifications", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Notifications\Intotech.Wheelo.Notifications.csproj", "{B07C1B32-D8BE-44AE-98B3-2E7E82B68972}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Tests", "..\Intotech.Wheelo.Chat.Tests\Intotech.Wheelo.Chat.Tests.csproj", "{ED37397B-F1A6-4347-A6BF-E2B6797EECAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Tests", "Intotech.Wheelo.Chat.Tests\Intotech.Wheelo.Chat.Tests.csproj", "{ED37397B-F1A6-4347-A6BF-E2B6797EECAB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HttpClient.Proxies", "HttpClient.Proxies", "{DE2E2051-FE7D-434F-8B4A-26EADBD180CD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Proxies", "..\Intotech.Wheelo.Proxies\Intotech.Wheelo.Proxies.csproj", "{9E10F3E3-0366-4AEE-94C8-17566A7CC8FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Proxies", "Intotech.Wheelo.Proxies\Intotech.Wheelo.Proxies.csproj", "{9E10F3E3-0366-4AEE-94C8-17566A7CC8FB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.ImageService", "..\Intotech.ImageService\Intotech.Wheelo.ImageService.csproj", "{7CCB0ABB-DBA4-47F2-B33F-CAE755AE198C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.ImageService", "Intotech.ImageService\Intotech.Wheelo.ImageService.csproj", "{7CCB0ABB-DBA4-47F2-B33F-CAE755AE198C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.ImageService.Bll", "..\Intotech.ImageService.Bll\Intotech.Wheelo.ImageService.Bll.csproj", "{597343F5-43AB-4289-86A7-11C522AF9DB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.ImageService.Bll", "Intotech.ImageService.Bll\Intotech.Wheelo.ImageService.Bll.csproj", "{597343F5-43AB-4289-86A7-11C522AF9DB3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.HttpClient.Proxies.Test", "..\Intotech.Wheelo.HttpClient.Proxies.Test\Intotech.Wheelo.HttpClient.Proxies.Test.csproj", "{87F0CBD0-9D61-4300-A7CB-799FA5486C71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.HttpClient.Proxies.Test", "Intotech.Wheelo.HttpClient.Proxies.Test\Intotech.Wheelo.HttpClient.Proxies.Test.csproj", "{87F0CBD0-9D61-4300-A7CB-799FA5486C71}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Seed.Common", "..\Intotech.Wheelo.Seed.Common\Intotech.Wheelo.Seed.Common.csproj", "{BB9FF0ED-C245-4392-A85F-C9142DD677F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Seed.Common", "Intotech.Wheelo.Seed.Common\Intotech.Wheelo.Seed.Common.csproj", "{BB9FF0ED-C245-4392-A85F-C9142DD677F4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Logic.Interfaces", "Intotech.Wheelo.Bll.Logic.Interfaces\Intotech.Wheelo.Bll.Logic.Interfaces.csproj", "{0F0F5A54-60A9-4FDB-855E-110A6EA3B981}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Logic.Interfaces", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Logic.Interfaces\Intotech.Wheelo.Bll.Logic.Interfaces.csproj", "{0F0F5A54-60A9-4FDB-855E-110A6EA3B981}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Logic", "Intotech.Wheelo.Bll.Logic\Intotech.Wheelo.Bll.Logic.csproj", "{C1388397-2E17-4A93-A894-DA1EE41BB485}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Logic", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Logic\Intotech.Wheelo.Bll.Logic.csproj", "{C1388397-2E17-4A93-A894-DA1EE41BB485}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.GhostRider", "..\..\Intotech.Common\Intotech.GhostRider\Intotech.GhostRider\Intotech.GhostRider.csproj", "{5696FF5C-9B2E-4E1A-BAC9-B11222550BB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.GhostRider", "..\Intotech.Common\Intotech.GhostRider\Intotech.GhostRider\Intotech.GhostRider.csproj", "{5696FF5C-9B2E-4E1A-BAC9-B11222550BB5}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A441D997-364C-4D0C-896D-33CDBFD3CA6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -771,6 +773,14 @@ Global
 		{5696FF5C-9B2E-4E1A-BAC9-B11222550BB5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5696FF5C-9B2E-4E1A-BAC9-B11222550BB5}.Release|x64.ActiveCfg = Release|Any CPU
 		{5696FF5C-9B2E-4E1A-BAC9-B11222550BB5}.Release|x64.Build.0 = Release|Any CPU
+		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Debug|x64.Build.0 = Debug|Any CPU
+		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Release|x64.ActiveCfg = Release|Any CPU
+		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

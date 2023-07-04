@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  intotech.wheelo.api:
+    image: ${DOCKER_REGISTRY-}intotechwheeloapi
+    build:
+      context: .
+      dockerfile: Toci.Driver.Bll.Porsche.Interfaces/Toci.Driver.Api/Dockerfile
