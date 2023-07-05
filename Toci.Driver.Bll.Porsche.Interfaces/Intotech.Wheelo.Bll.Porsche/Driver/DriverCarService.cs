@@ -5,8 +5,8 @@ using Intotech.Wheelo.Bll.Porsche.Interfaces.Driver;
 using Intotech.Wheelo.Common.Interfaces;
 using Intotech.Wheelo.Common;
 using Toci.Driver.Database.Persistence.Models;
-using Intotech.Wheelo.Bll.Models.Trip;
 using Intotech.Wheelo.Bll.Persistence;
+using Intotech.Wheelo.Bll.Models.TripEx;
 
 namespace Intotech.Wheelo.Bll.Porsche.Driver;
 
