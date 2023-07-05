@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
