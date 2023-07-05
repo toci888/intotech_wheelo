@@ -1,11 +1,16 @@
-﻿usignsad
+﻿using Intotech.Common.Bll.ChorDtoBll;
+using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Wheelo.Bll.Models.Dtos;
+using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Toci.Driver.Database.Persistence.Models;
 
-asdasdasd
+namespace Intotech.Wheelo.Bll.Logic;
 
 public class UserextradatumDtoLogic : DtoLogicBase<UserextradatumModelDto, Userextradatum, IUserextradatumLogic, UserextradatumDto, List<Userextradatum>, List<UserextradatumModelDto>>
 {
     public UserextradatumDtoLogic(IUserextradatumLogic userextradatumlogic) 
-        : base(userextradatumlogic, m => m.Id == id, 
+        : base(userextradatumlogic, 
             (aDto, aModelDto) => { 
                 aDto.Userextradatum = aModelDto;
                 return aDto;
@@ -13,15 +18,18 @@ public class UserextradatumDtoLogic : DtoLogicBase<UserextradatumModelDto, Usere
     {
     }
 
-    protected override DtoBase<Userextradatum,UserextradatumDto> GetDtoModelField(UserextradatumDto dto)
+    protected override DtoBase<Userextradatum,UserextradatumModelDto> GetDtoModelField(UserextradatumDto dto)
     {
        return dto.Userextradatum;
     }
 
-    protected override UserextradatumDto FillEntity(UserextradatumDto dto, DtoBase<Userextradatum> field)
+    protected override UserextradatumDto FillEntity(UserextradatumDto dto, UserextradatumModelDto  field)
     {
-        dto.Userextradatum = (UserextradatumModelDto)field;
+        dto.Userextradatum = field;
 
         return dto;
+    }    protected override UserextradatumDto FillEntity(UserextradatumDto dto, List<UserextradatumModelDto> field)
+    {
+        throw new NotImplementedException();
     }
 }

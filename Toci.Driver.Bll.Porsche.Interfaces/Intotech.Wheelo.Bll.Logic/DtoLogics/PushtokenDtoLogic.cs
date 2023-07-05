@@ -1,11 +1,16 @@
-﻿usignsad
+﻿using Intotech.Common.Bll.ChorDtoBll;
+using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Wheelo.Bll.Models.Dtos;
+using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Toci.Driver.Database.Persistence.Models;
 
-asdasdasd
+namespace Intotech.Wheelo.Bll.Logic;
 
 public class PushtokenDtoLogic : DtoLogicBase<PushtokenModelDto, Pushtoken, IPushtokenLogic, PushtokenDto, List<Pushtoken>, List<PushtokenModelDto>>
 {
     public PushtokenDtoLogic(IPushtokenLogic pushtokenlogic) 
-        : base(pushtokenlogic, m => m.Id == id, 
+        : base(pushtokenlogic, 
             (aDto, aModelDto) => { 
                 aDto.Pushtoken = aModelDto;
                 return aDto;
@@ -13,15 +18,18 @@ public class PushtokenDtoLogic : DtoLogicBase<PushtokenModelDto, Pushtoken, IPus
     {
     }
 
-    protected override DtoBase<Pushtoken,PushtokenDto> GetDtoModelField(PushtokenDto dto)
+    protected override DtoBase<Pushtoken,PushtokenModelDto> GetDtoModelField(PushtokenDto dto)
     {
        return dto.Pushtoken;
     }
 
-    protected override PushtokenDto FillEntity(PushtokenDto dto, DtoBase<Pushtoken> field)
+    protected override PushtokenDto FillEntity(PushtokenDto dto, PushtokenModelDto  field)
     {
-        dto.Pushtoken = (PushtokenModelDto)field;
+        dto.Pushtoken = field;
 
         return dto;
+    }    protected override PushtokenDto FillEntity(PushtokenDto dto, List<PushtokenModelDto> field)
+    {
+        throw new NotImplementedException();
     }
 }

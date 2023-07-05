@@ -1,11 +1,16 @@
-﻿usignsad
+﻿using Intotech.Common.Bll.ChorDtoBll;
+using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Wheelo.Bll.Models.Dtos;
+using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Toci.Driver.Database.Persistence.Models;
 
-asdasdasd
+namespace Intotech.Wheelo.Bll.Logic;
 
 public class PasswordsstrenghtDtoLogic : DtoLogicBase<PasswordsstrenghtModelDto, Passwordsstrenght, IPasswordsstrenghtLogic, PasswordsstrenghtDto, List<Passwordsstrenght>, List<PasswordsstrenghtModelDto>>
 {
     public PasswordsstrenghtDtoLogic(IPasswordsstrenghtLogic passwordsstrenghtlogic) 
-        : base(passwordsstrenghtlogic, m => m.Id == id, 
+        : base(passwordsstrenghtlogic, 
             (aDto, aModelDto) => { 
                 aDto.Passwordsstrenght = aModelDto;
                 return aDto;
@@ -13,15 +18,18 @@ public class PasswordsstrenghtDtoLogic : DtoLogicBase<PasswordsstrenghtModelDto,
     {
     }
 
-    protected override DtoBase<Passwordsstrenght,PasswordsstrenghtDto> GetDtoModelField(PasswordsstrenghtDto dto)
+    protected override DtoBase<Passwordsstrenght,PasswordsstrenghtModelDto> GetDtoModelField(PasswordsstrenghtDto dto)
     {
        return dto.Passwordsstrenght;
     }
 
-    protected override PasswordsstrenghtDto FillEntity(PasswordsstrenghtDto dto, DtoBase<Passwordsstrenght> field)
+    protected override PasswordsstrenghtDto FillEntity(PasswordsstrenghtDto dto, PasswordsstrenghtModelDto  field)
     {
-        dto.Passwordsstrenght = (PasswordsstrenghtModelDto)field;
+        dto.Passwordsstrenght = field;
 
         return dto;
+    }    protected override PasswordsstrenghtDto FillEntity(PasswordsstrenghtDto dto, List<PasswordsstrenghtModelDto> field)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -1,11 +1,16 @@
-﻿usignsad
+﻿using Intotech.Common.Bll.ChorDtoBll;
+using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Wheelo.Bll.Models.Dtos;
+using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Toci.Driver.Database.Persistence.Models;
 
-asdasdasd
+namespace Intotech.Wheelo.Bll.Logic;
 
 public class ResetpasswordDtoLogic : DtoLogicBase<ResetpasswordModelDto, Resetpassword, IResetpasswordLogic, ResetpasswordDto, List<Resetpassword>, List<ResetpasswordModelDto>>
 {
     public ResetpasswordDtoLogic(IResetpasswordLogic resetpasswordlogic) 
-        : base(resetpasswordlogic, m => m.Id == id, 
+        : base(resetpasswordlogic, 
             (aDto, aModelDto) => { 
                 aDto.Resetpassword = aModelDto;
                 return aDto;
@@ -13,15 +18,18 @@ public class ResetpasswordDtoLogic : DtoLogicBase<ResetpasswordModelDto, Resetpa
     {
     }
 
-    protected override DtoBase<Resetpassword,ResetpasswordDto> GetDtoModelField(ResetpasswordDto dto)
+    protected override DtoBase<Resetpassword,ResetpasswordModelDto> GetDtoModelField(ResetpasswordDto dto)
     {
        return dto.Resetpassword;
     }
 
-    protected override ResetpasswordDto FillEntity(ResetpasswordDto dto, DtoBase<Resetpassword> field)
+    protected override ResetpasswordDto FillEntity(ResetpasswordDto dto, ResetpasswordModelDto  field)
     {
-        dto.Resetpassword = (ResetpasswordModelDto)field;
+        dto.Resetpassword = field;
 
         return dto;
+    }    protected override ResetpasswordDto FillEntity(ResetpasswordDto dto, List<ResetpasswordModelDto> field)
+    {
+        throw new NotImplementedException();
     }
 }

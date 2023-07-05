@@ -1,9 +1,10 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
 using Toci.Driver.Database.Persistence.Models;
 
+
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class VfriendModelDto : DtoBase<Vfriend, VfriendModelDto>
+public class VfriendModelDto : DtoCollectionBase<Vfriend, VfriendModelDto, List<Vfriend>, List<VfriendModelDto>>
 {
     public int Idaccount { get; set; }
     public string Name { get; set; }
@@ -20,4 +21,5 @@ public class VfriendModelDto : DtoBase<Vfriend, VfriendModelDto>
     public TimeOnly Tohour { get; set; }
     public string Searchid { get; set; }
     public int Driverpassenger { get; set; }
+    public int Id { get; set; }
 }

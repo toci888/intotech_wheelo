@@ -1,9 +1,10 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
 using Toci.Driver.Database.Persistence.Models;
 
+
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class VtripsparticipantModelDto : DtoBase<Vtripsparticipant, VtripsparticipantModelDto>
+public class VtripsparticipantModelDto : DtoCollectionBase<Vtripsparticipant, VtripsparticipantModelDto, List<Vtripsparticipant>, List<VtripsparticipantModelDto>>
 {
     public string Name { get; set; }
     public string Surname { get; set; }
@@ -19,4 +20,5 @@ public class VtripsparticipantModelDto : DtoBase<Vtripsparticipant, Vtripspartic
     public TimeOnly Tohour { get; set; }
     public int Leftseats { get; set; }
     public Boolean Isoccasion { get; set; }
+    public int Id { get; set; }
 }

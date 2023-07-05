@@ -1,9 +1,10 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
 using Toci.Driver.Database.Persistence.Models;
 
+
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class AccountscarslocationModelDto : DtoBase<Accountscarslocation, AccountscarslocationModelDto>
+public class AccountscarslocationModelDto : DtoCollectionBase<Accountscarslocation, AccountscarslocationModelDto, List<Accountscarslocation>, List<AccountscarslocationModelDto>>
 {
     public int Idaccount { get; set; }
     public string Name { get; set; }
@@ -19,4 +20,5 @@ public class AccountscarslocationModelDto : DtoBase<Accountscarslocation, Accoun
     public string Model { get; set; }
     public string Colour { get; set; }
     public string Rgb { get; set; }
+    public int Id { get; set; }
 }

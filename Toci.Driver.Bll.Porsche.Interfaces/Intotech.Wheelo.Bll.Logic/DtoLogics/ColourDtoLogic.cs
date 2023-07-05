@@ -1,11 +1,16 @@
-﻿usignsad
+﻿using Intotech.Common.Bll.ChorDtoBll;
+using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Wheelo.Bll.Models.Dtos;
+using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Toci.Driver.Database.Persistence.Models;
 
-asdasdasd
+namespace Intotech.Wheelo.Bll.Logic;
 
 public class ColourDtoLogic : DtoLogicBase<ColourModelDto, Colour, IColourLogic, ColourDto, List<Colour>, List<ColourModelDto>>
 {
     public ColourDtoLogic(IColourLogic colourlogic) 
-        : base(colourlogic, m => m.Id == id, 
+        : base(colourlogic, 
             (aDto, aModelDto) => { 
                 aDto.Colour = aModelDto;
                 return aDto;
@@ -13,15 +18,18 @@ public class ColourDtoLogic : DtoLogicBase<ColourModelDto, Colour, IColourLogic,
     {
     }
 
-    protected override DtoBase<Colour,ColourDto> GetDtoModelField(ColourDto dto)
+    protected override DtoBase<Colour,ColourModelDto> GetDtoModelField(ColourDto dto)
     {
        return dto.Colour;
     }
 
-    protected override ColourDto FillEntity(ColourDto dto, DtoBase<Colour> field)
+    protected override ColourDto FillEntity(ColourDto dto, ColourModelDto  field)
     {
-        dto.Colour = (ColourModelDto)field;
+        dto.Colour = field;
 
         return dto;
+    }    protected override ColourDto FillEntity(ColourDto dto, List<ColourModelDto> field)
+    {
+        throw new NotImplementedException();
     }
 }

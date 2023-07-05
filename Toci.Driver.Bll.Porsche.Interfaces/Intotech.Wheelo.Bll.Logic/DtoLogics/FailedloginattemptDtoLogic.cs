@@ -1,11 +1,16 @@
-﻿usignsad
+﻿using Intotech.Common.Bll.ChorDtoBll;
+using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Wheelo.Bll.Models.Dtos;
+using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Toci.Driver.Database.Persistence.Models;
 
-asdasdasd
+namespace Intotech.Wheelo.Bll.Logic;
 
 public class FailedloginattemptDtoLogic : DtoLogicBase<FailedloginattemptModelDto, Failedloginattempt, IFailedloginattemptLogic, FailedloginattemptDto, List<Failedloginattempt>, List<FailedloginattemptModelDto>>
 {
     public FailedloginattemptDtoLogic(IFailedloginattemptLogic failedloginattemptlogic) 
-        : base(failedloginattemptlogic, m => m.Id == id, 
+        : base(failedloginattemptlogic, 
             (aDto, aModelDto) => { 
                 aDto.Failedloginattempt = aModelDto;
                 return aDto;
@@ -13,15 +18,18 @@ public class FailedloginattemptDtoLogic : DtoLogicBase<FailedloginattemptModelDt
     {
     }
 
-    protected override DtoBase<Failedloginattempt,FailedloginattemptDto> GetDtoModelField(FailedloginattemptDto dto)
+    protected override DtoBase<Failedloginattempt,FailedloginattemptModelDto> GetDtoModelField(FailedloginattemptDto dto)
     {
        return dto.Failedloginattempt;
     }
 
-    protected override FailedloginattemptDto FillEntity(FailedloginattemptDto dto, DtoBase<Failedloginattempt> field)
+    protected override FailedloginattemptDto FillEntity(FailedloginattemptDto dto, FailedloginattemptModelDto  field)
     {
-        dto.Failedloginattempt = (FailedloginattemptModelDto)field;
+        dto.Failedloginattempt = field;
 
         return dto;
+    }    protected override FailedloginattemptDto FillEntity(FailedloginattemptDto dto, List<FailedloginattemptModelDto> field)
+    {
+        throw new NotImplementedException();
     }
 }

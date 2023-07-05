@@ -1,11 +1,16 @@
-﻿usignsad
+﻿using Intotech.Common.Bll.ChorDtoBll;
+using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Wheelo.Bll.Models.Dtos;
+using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Toci.Driver.Database.Persistence.Models;
 
-asdasdasd
+namespace Intotech.Wheelo.Bll.Logic;
 
 public class TripparticipantDtoLogic : DtoLogicBase<TripparticipantModelDto, Tripparticipant, ITripparticipantLogic, TripparticipantDto, List<Tripparticipant>, List<TripparticipantModelDto>>
 {
     public TripparticipantDtoLogic(ITripparticipantLogic tripparticipantlogic) 
-        : base(tripparticipantlogic, m => m.Id == id, 
+        : base(tripparticipantlogic, 
             (aDto, aModelDto) => { 
                 aDto.Tripparticipant = aModelDto;
                 return aDto;
@@ -13,15 +18,18 @@ public class TripparticipantDtoLogic : DtoLogicBase<TripparticipantModelDto, Tri
     {
     }
 
-    protected override DtoBase<Tripparticipant,TripparticipantDto> GetDtoModelField(TripparticipantDto dto)
+    protected override DtoBase<Tripparticipant,TripparticipantModelDto> GetDtoModelField(TripparticipantDto dto)
     {
        return dto.Tripparticipant;
     }
 
-    protected override TripparticipantDto FillEntity(TripparticipantDto dto, DtoBase<Tripparticipant> field)
+    protected override TripparticipantDto FillEntity(TripparticipantDto dto, TripparticipantModelDto  field)
     {
-        dto.Tripparticipant = (TripparticipantModelDto)field;
+        dto.Tripparticipant = field;
 
         return dto;
+    }    protected override TripparticipantDto FillEntity(TripparticipantDto dto, List<TripparticipantModelDto> field)
+    {
+        throw new NotImplementedException();
     }
 }

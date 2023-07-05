@@ -1,11 +1,16 @@
-﻿usignsad
+﻿using Intotech.Common.Bll.ChorDtoBll;
+using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Wheelo.Bll.Models.Dtos;
+using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Toci.Driver.Database.Persistence.Models;
 
-asdasdasd
+namespace Intotech.Wheelo.Bll.Logic;
 
 public class GeographicregionDtoLogic : DtoLogicBase<GeographicregionModelDto, Geographicregion, IGeographicregionLogic, GeographicregionDto, List<Geographicregion>, List<GeographicregionModelDto>>
 {
     public GeographicregionDtoLogic(IGeographicregionLogic geographicregionlogic) 
-        : base(geographicregionlogic, m => m.Id == id, 
+        : base(geographicregionlogic, 
             (aDto, aModelDto) => { 
                 aDto.Geographicregion = aModelDto;
                 return aDto;
@@ -13,15 +18,18 @@ public class GeographicregionDtoLogic : DtoLogicBase<GeographicregionModelDto, G
     {
     }
 
-    protected override DtoBase<Geographicregion,GeographicregionDto> GetDtoModelField(GeographicregionDto dto)
+    protected override DtoBase<Geographicregion,GeographicregionModelDto> GetDtoModelField(GeographicregionDto dto)
     {
        return dto.Geographicregion;
     }
 
-    protected override GeographicregionDto FillEntity(GeographicregionDto dto, DtoBase<Geographicregion> field)
+    protected override GeographicregionDto FillEntity(GeographicregionDto dto, GeographicregionModelDto  field)
     {
-        dto.Geographicregion = (GeographicregionModelDto)field;
+        dto.Geographicregion = field;
 
         return dto;
+    }    protected override GeographicregionDto FillEntity(GeographicregionDto dto, List<GeographicregionModelDto> field)
+    {
+        throw new NotImplementedException();
     }
 }

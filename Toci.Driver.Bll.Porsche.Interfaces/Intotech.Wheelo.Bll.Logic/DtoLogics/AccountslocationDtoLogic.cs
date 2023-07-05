@@ -1,11 +1,16 @@
-﻿usignsad
+﻿using Intotech.Common.Bll.ChorDtoBll;
+using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Wheelo.Bll.Models.Dtos;
+using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Toci.Driver.Database.Persistence.Models;
 
-asdasdasd
+namespace Intotech.Wheelo.Bll.Logic;
 
 public class AccountslocationDtoLogic : DtoLogicBase<AccountslocationModelDto, Accountslocation, IAccountslocationLogic, AccountslocationDto, List<Accountslocation>, List<AccountslocationModelDto>>
 {
     public AccountslocationDtoLogic(IAccountslocationLogic accountslocationlogic) 
-        : base(accountslocationlogic, m => m.Id == id, 
+        : base(accountslocationlogic, 
             (aDto, aModelDto) => { 
                 aDto.Accountslocation = aModelDto;
                 return aDto;
@@ -13,15 +18,18 @@ public class AccountslocationDtoLogic : DtoLogicBase<AccountslocationModelDto, A
     {
     }
 
-    protected override DtoBase<Accountslocation,AccountslocationDto> GetDtoModelField(AccountslocationDto dto)
+    protected override DtoBase<Accountslocation,AccountslocationModelDto> GetDtoModelField(AccountslocationDto dto)
     {
        return dto.Accountslocation;
     }
 
-    protected override AccountslocationDto FillEntity(AccountslocationDto dto, DtoBase<Accountslocation> field)
+    protected override AccountslocationDto FillEntity(AccountslocationDto dto, AccountslocationModelDto  field)
     {
-        dto.Accountslocation = (AccountslocationModelDto)field;
+        dto.Accountslocation = field;
 
         return dto;
+    }    protected override AccountslocationDto FillEntity(AccountslocationDto dto, List<AccountslocationModelDto> field)
+    {
+        throw new NotImplementedException();
     }
 }

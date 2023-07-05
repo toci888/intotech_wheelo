@@ -1,11 +1,16 @@
-﻿usignsad
+﻿using Intotech.Common.Bll.ChorDtoBll;
+using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Wheelo.Bll.Models.Dtos;
+using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Toci.Driver.Database.Persistence.Models;
 
-asdasdasd
+namespace Intotech.Wheelo.Bll.Logic;
 
 public class VacollocationsgeolocationDtoLogic : DtoLogicBase<VacollocationsgeolocationModelDto, Vacollocationsgeolocation, IVacollocationsgeolocationLogic, VacollocationsgeolocationDto, List<Vacollocationsgeolocation>, List<VacollocationsgeolocationModelDto>>
 {
     public VacollocationsgeolocationDtoLogic(IVacollocationsgeolocationLogic vacollocationsgeolocationlogic) 
-        : base(vacollocationsgeolocationlogic, m => m.Id == id, 
+        : base(vacollocationsgeolocationlogic, 
             (aDto, aModelDto) => { 
                 aDto.Vacollocationsgeolocation = aModelDto;
                 return aDto;
@@ -13,15 +18,18 @@ public class VacollocationsgeolocationDtoLogic : DtoLogicBase<Vacollocationsgeol
     {
     }
 
-    protected override DtoBase<Vacollocationsgeolocation,VacollocationsgeolocationDto> GetDtoModelField(VacollocationsgeolocationDto dto)
+    protected override DtoBase<Vacollocationsgeolocation,VacollocationsgeolocationModelDto> GetDtoModelField(VacollocationsgeolocationDto dto)
     {
        return dto.Vacollocationsgeolocation;
     }
 
-    protected override VacollocationsgeolocationDto FillEntity(VacollocationsgeolocationDto dto, DtoBase<Vacollocationsgeolocation> field)
+    protected override VacollocationsgeolocationDto FillEntity(VacollocationsgeolocationDto dto, VacollocationsgeolocationModelDto  field)
     {
-        dto.Vacollocationsgeolocation = (VacollocationsgeolocationModelDto)field;
+        dto.Vacollocationsgeolocation = field;
 
         return dto;
+    }    protected override VacollocationsgeolocationDto FillEntity(VacollocationsgeolocationDto dto, List<VacollocationsgeolocationModelDto> field)
+    {
+        throw new NotImplementedException();
     }
 }

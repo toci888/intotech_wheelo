@@ -1,11 +1,16 @@
-﻿usignsad
+﻿using Intotech.Common.Bll.ChorDtoBll;
+using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Wheelo.Bll.Models.Dtos;
+using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Toci.Driver.Database.Persistence.Models;
 
-asdasdasd
+namespace Intotech.Wheelo.Bll.Logic;
 
 public class SimpleaccountDtoLogic : DtoLogicBase<SimpleaccountModelDto, Simpleaccount, ISimpleaccountLogic, SimpleaccountDto, List<Simpleaccount>, List<SimpleaccountModelDto>>
 {
     public SimpleaccountDtoLogic(ISimpleaccountLogic simpleaccountlogic) 
-        : base(simpleaccountlogic, m => m.Id == id, 
+        : base(simpleaccountlogic, 
             (aDto, aModelDto) => { 
                 aDto.Simpleaccount = aModelDto;
                 return aDto;
@@ -13,15 +18,18 @@ public class SimpleaccountDtoLogic : DtoLogicBase<SimpleaccountModelDto, Simplea
     {
     }
 
-    protected override DtoBase<Simpleaccount,SimpleaccountDto> GetDtoModelField(SimpleaccountDto dto)
+    protected override DtoBase<Simpleaccount,SimpleaccountModelDto> GetDtoModelField(SimpleaccountDto dto)
     {
        return dto.Simpleaccount;
     }
 
-    protected override SimpleaccountDto FillEntity(SimpleaccountDto dto, DtoBase<Simpleaccount> field)
+    protected override SimpleaccountDto FillEntity(SimpleaccountDto dto, SimpleaccountModelDto  field)
     {
-        dto.Simpleaccount = (SimpleaccountModelDto)field;
+        dto.Simpleaccount = field;
 
         return dto;
+    }    protected override SimpleaccountDto FillEntity(SimpleaccountDto dto, List<SimpleaccountModelDto> field)
+    {
+        throw new NotImplementedException();
     }
 }

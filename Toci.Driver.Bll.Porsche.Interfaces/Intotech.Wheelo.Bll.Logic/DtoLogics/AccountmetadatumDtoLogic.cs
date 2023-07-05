@@ -1,11 +1,16 @@
-﻿usignsad
+﻿using Intotech.Common.Bll.ChorDtoBll;
+using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Wheelo.Bll.Models.Dtos;
+using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Toci.Driver.Database.Persistence.Models;
 
-asdasdasd
+namespace Intotech.Wheelo.Bll.Logic;
 
 public class AccountmetadatumDtoLogic : DtoLogicBase<AccountmetadatumModelDto, Accountmetadatum, IAccountmetadatumLogic, AccountmetadatumDto, List<Accountmetadatum>, List<AccountmetadatumModelDto>>
 {
     public AccountmetadatumDtoLogic(IAccountmetadatumLogic accountmetadatumlogic) 
-        : base(accountmetadatumlogic, m => m.Id == id, 
+        : base(accountmetadatumlogic, 
             (aDto, aModelDto) => { 
                 aDto.Accountmetadatum = aModelDto;
                 return aDto;
@@ -13,15 +18,18 @@ public class AccountmetadatumDtoLogic : DtoLogicBase<AccountmetadatumModelDto, A
     {
     }
 
-    protected override DtoBase<Accountmetadatum,AccountmetadatumDto> GetDtoModelField(AccountmetadatumDto dto)
+    protected override DtoBase<Accountmetadatum,AccountmetadatumModelDto> GetDtoModelField(AccountmetadatumDto dto)
     {
        return dto.Accountmetadatum;
     }
 
-    protected override AccountmetadatumDto FillEntity(AccountmetadatumDto dto, DtoBase<Accountmetadatum> field)
+    protected override AccountmetadatumDto FillEntity(AccountmetadatumDto dto, AccountmetadatumModelDto  field)
     {
-        dto.Accountmetadatum = (AccountmetadatumModelDto)field;
+        dto.Accountmetadatum = field;
 
         return dto;
+    }    protected override AccountmetadatumDto FillEntity(AccountmetadatumDto dto, List<AccountmetadatumModelDto> field)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -1,11 +1,16 @@
-﻿usignsad
+﻿using Intotech.Common.Bll.ChorDtoBll;
+using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Wheelo.Bll.Models.Dtos;
+using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Toci.Driver.Database.Persistence.Models;
 
-asdasdasd
+namespace Intotech.Wheelo.Bll.Logic;
 
 public class VaccountscollocationDtoLogic : DtoLogicBase<VaccountscollocationModelDto, Vaccountscollocation, IVaccountscollocationLogic, VaccountscollocationDto, List<Vaccountscollocation>, List<VaccountscollocationModelDto>>
 {
     public VaccountscollocationDtoLogic(IVaccountscollocationLogic vaccountscollocationlogic) 
-        : base(vaccountscollocationlogic, m => m.Id == id, 
+        : base(vaccountscollocationlogic, 
             (aDto, aModelDto) => { 
                 aDto.Vaccountscollocation = aModelDto;
                 return aDto;
@@ -13,15 +18,18 @@ public class VaccountscollocationDtoLogic : DtoLogicBase<VaccountscollocationMod
     {
     }
 
-    protected override DtoBase<Vaccountscollocation,VaccountscollocationDto> GetDtoModelField(VaccountscollocationDto dto)
+    protected override DtoBase<Vaccountscollocation,VaccountscollocationModelDto> GetDtoModelField(VaccountscollocationDto dto)
     {
        return dto.Vaccountscollocation;
     }
 
-    protected override VaccountscollocationDto FillEntity(VaccountscollocationDto dto, DtoBase<Vaccountscollocation> field)
+    protected override VaccountscollocationDto FillEntity(VaccountscollocationDto dto, VaccountscollocationModelDto  field)
     {
-        dto.Vaccountscollocation = (VaccountscollocationModelDto)field;
+        dto.Vaccountscollocation = field;
 
         return dto;
+    }    protected override VaccountscollocationDto FillEntity(VaccountscollocationDto dto, List<VaccountscollocationModelDto> field)
+    {
+        throw new NotImplementedException();
     }
 }
