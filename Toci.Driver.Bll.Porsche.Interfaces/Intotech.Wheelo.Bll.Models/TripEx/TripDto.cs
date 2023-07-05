@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
 
-namespace Intotech.Wheelo.Bll.Models.Trip
+namespace Intotech.Wheelo.Bll.Models.TripEx
 {
     public class TripDto
     {

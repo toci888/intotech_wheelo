@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
 
-namespace Intotech.Wheelo.Bll.Models.Account
+namespace Intotech.Wheelo.Bll.Models.OldModels
 {
     public class AccountRoleDto : Accountrole
     {

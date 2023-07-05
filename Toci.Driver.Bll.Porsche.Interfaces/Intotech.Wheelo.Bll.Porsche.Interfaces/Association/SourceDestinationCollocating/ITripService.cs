@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
-using Intotech.Wheelo.Bll.Models.Trip;
+using Intotech.Wheelo.Bll.Models.TripEx;
 
 namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating
 {

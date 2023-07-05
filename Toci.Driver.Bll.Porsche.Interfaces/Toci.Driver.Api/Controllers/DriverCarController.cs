@@ -1,6 +1,6 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Common.Microservices;
-using Intotech.Wheelo.Bll.Models.Trip;
+using Intotech.Wheelo.Bll.Models.TripEx;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Driver;
 using Microsoft.AspNetCore.Mvc;
 using Toci.Driver.Database.Persistence.Models;

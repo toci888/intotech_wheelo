@@ -1,4 +1,4 @@
-﻿namespace Intotech.Wheelo.Bll.Models.Trip;
+﻿namespace Intotech.Wheelo.Bll.Models.TripEx;
 
 public class TripInitiatorDto
 {

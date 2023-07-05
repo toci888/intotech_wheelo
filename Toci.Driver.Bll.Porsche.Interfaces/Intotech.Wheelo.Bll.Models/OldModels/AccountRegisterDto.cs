@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Intotech.Wheelo.Bll.Models.Account
+namespace Intotech.Wheelo.Bll.Models.OldModels
 {
     public class AccountRegisterDto
     {
