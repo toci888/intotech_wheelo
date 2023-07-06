@@ -4,10 +4,11 @@ using Intotech.Wheelo.Bll.Models.Dtos;
 using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
 namespace Intotech.Wheelo.Bll.Logic;
 
-public class AccountDtoLogic : DtoLogicBase<AccountModelDto, Account, IAccountLogic, AccountDto, List<Account>, List<AccountModelDto>>
+public class AccountDtoLogic : DtoLogicBase<AccountModelDto, Account, IAccountLogic, AccountDto, List<Account>, List<AccountModelDto>>, IAccountDtoLogic
 {
     public AccountDtoLogic(IAccountLogic accountlogic) 
         : base(accountlogic, 

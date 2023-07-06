@@ -4,10 +4,11 @@ using Intotech.Wheelo.Bll.Models.Dtos;
 using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
 namespace Intotech.Wheelo.Bll.Logic;
 
-public class VfriendDtoLogic : DtoLogicBase<VfriendModelDto, Vfriend, IVfriendLogic, VfriendDto, List<Vfriend>, List<VfriendModelDto>>
+public class VfriendDtoLogic : DtoLogicBase<VfriendModelDto, Vfriend, IVfriendLogic, VfriendDto, List<Vfriend>, List<VfriendModelDto>>, IVfriendDtoLogic
 {
     public VfriendDtoLogic(IVfriendLogic vfriendlogic) 
         : base(vfriendlogic, 

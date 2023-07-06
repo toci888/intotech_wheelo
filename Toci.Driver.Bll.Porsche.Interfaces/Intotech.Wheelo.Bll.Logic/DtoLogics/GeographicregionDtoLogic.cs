@@ -4,10 +4,11 @@ using Intotech.Wheelo.Bll.Models.Dtos;
 using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
 namespace Intotech.Wheelo.Bll.Logic;
 
-public class GeographicregionDtoLogic : DtoLogicBase<GeographicregionModelDto, Geographicregion, IGeographicregionLogic, GeographicregionDto, List<Geographicregion>, List<GeographicregionModelDto>>
+public class GeographicregionDtoLogic : DtoLogicBase<GeographicregionModelDto, Geographicregion, IGeographicregionLogic, GeographicregionDto, List<Geographicregion>, List<GeographicregionModelDto>>, IGeographicregionDtoLogic
 {
     public GeographicregionDtoLogic(IGeographicregionLogic geographicregionlogic) 
         : base(geographicregionlogic, 
