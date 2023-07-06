@@ -1,9 +1,10 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
 using Toci.Driver.Database.Persistence.Models;
 
+
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class AccountmetadatumModelDto : DtoBase<Accountmetadatum, AccountmetadatumModelDto>
+public class AccountmetadatumModelDto : DtoCollectionBase<Accountmetadatum, AccountmetadatumModelDto, List<Accountmetadatum>, List<AccountmetadatumModelDto>>
 {
     public int Id { get; set; }
     public int Idaccount { get; set; }

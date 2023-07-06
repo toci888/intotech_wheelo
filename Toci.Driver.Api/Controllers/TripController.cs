@@ -3,7 +3,7 @@ using Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationColloc
 using Intotech.Common.Bll.ComplexResponses;
 using Microsoft.AspNetCore.Mvc;
 using Toci.Driver.Database.Persistence.Models;
-using Intotech.Wheelo.Bll.Models.Trip;
+using Intotech.Wheelo.Bll.Models.TripEx;
 
 namespace Toci.Driver.Api.Controllers
 {

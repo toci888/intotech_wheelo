@@ -1,9 +1,10 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
 using Toci.Driver.Database.Persistence.Models;
 
+
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class VaccountscollocationsworktripModelDto : DtoBase<Vaccountscollocationsworktrip, VaccountscollocationsworktripModelDto>
+public class VaccountscollocationsworktripModelDto : DtoCollectionBase<Vaccountscollocationsworktrip, VaccountscollocationsworktripModelDto, List<Vaccountscollocationsworktrip>, List<VaccountscollocationsworktripModelDto>>
 {
     public string Name { get; set; }
     public string Surname { get; set; }
@@ -19,4 +20,5 @@ public class VaccountscollocationsworktripModelDto : DtoBase<Vaccountscollocatio
     public Double Longitudeto { get; set; }
     public TimeOnly Fromhour { get; set; }
     public TimeOnly Tohour { get; set; }
+    public int Id { get; set; }
 }

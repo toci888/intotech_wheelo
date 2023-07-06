@@ -1,9 +1,10 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
 using Toci.Driver.Database.Persistence.Models;
 
+
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class VfriendsuggestionModelDto : DtoBase<Vfriendsuggestion, VfriendsuggestionModelDto>
+public class VfriendsuggestionModelDto : DtoCollectionBase<Vfriendsuggestion, VfriendsuggestionModelDto, List<Vfriendsuggestion>, List<VfriendsuggestionModelDto>>
 {
     public string Name { get; set; }
     public string Surname { get; set; }
@@ -14,4 +15,5 @@ public class VfriendsuggestionModelDto : DtoBase<Vfriendsuggestion, Vfriendsugge
     public string Suggestedfriendname { get; set; }
     public string Suggestedfriendsurname { get; set; }
     public int Suggestedfriendid { get; set; }
+    public int Id { get; set; }
 }

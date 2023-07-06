@@ -1,9 +1,10 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
 using Toci.Driver.Database.Persistence.Models;
 
+
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class VacollocationsgeolocationModelDto : DtoBase<Vacollocationsgeolocation, VacollocationsgeolocationModelDto>
+public class VacollocationsgeolocationModelDto : DtoCollectionBase<Vacollocationsgeolocation, VacollocationsgeolocationModelDto, List<Vacollocationsgeolocation>, List<VacollocationsgeolocationModelDto>>
 {
     public int Idaccount { get; set; }
     public int Accountidcollocated { get; set; }
@@ -20,4 +21,5 @@ public class VacollocationsgeolocationModelDto : DtoBase<Vacollocationsgeolocati
     public string Searchid { get; set; }
     public int Isdriver { get; set; }
     public string Image { get; set; }
+    public int Id { get; set; }
 }

@@ -1,9 +1,10 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
 using Toci.Driver.Database.Persistence.Models;
 
+
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class PushtokenModelDto : DtoBase<Pushtoken, PushtokenModelDto>
+public class PushtokenModelDto : DtoCollectionBase<Pushtoken, PushtokenModelDto, List<Pushtoken>, List<PushtokenModelDto>>
 {
     public int Id { get; set; }
     public int Idaccount { get; set; }

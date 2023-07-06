@@ -1,6 +1,7 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
 using Toci.Driver.Database.Persistence.Models;
 
+
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
 public class AccountModelDto : DtoCollectionBase<Toci.Driver.Database.Persistence.Models.Account, AccountModelDto, List<Toci.Driver.Database.Persistence.Models.Account>, List<AccountModelDto>>

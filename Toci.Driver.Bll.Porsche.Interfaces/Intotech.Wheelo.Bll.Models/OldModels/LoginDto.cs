@@ -1,4 +1,4 @@
-﻿namespace Intotech.Wheelo.Bll.Models.Account;
+﻿namespace Intotech.Wheelo.Bll.Models.OldModels;
 
 public class LoginDto
 {

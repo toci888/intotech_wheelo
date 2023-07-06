@@ -10,8 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Common;
-using Intotech.Wheelo.Bll.Models.Trip;
 using Intotech.Wheelo.Bll.Persistence;
+using Intotech.Wheelo.Bll.Models.TripEx;
 
 namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 {

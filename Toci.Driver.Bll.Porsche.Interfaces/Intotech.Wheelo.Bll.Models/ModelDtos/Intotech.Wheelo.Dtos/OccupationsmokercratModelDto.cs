@@ -1,9 +1,10 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
 using Toci.Driver.Database.Persistence.Models;
 
+
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class OccupationsmokercratModelDto : DtoBase<Occupationsmokercrat, OccupationsmokercratModelDto>
+public class OccupationsmokercratModelDto : DtoCollectionBase<Occupationsmokercrat, OccupationsmokercratModelDto, List<Occupationsmokercrat>, List<OccupationsmokercratModelDto>>
 {
     public int Id { get; set; }
     public int Idaccount { get; set; }

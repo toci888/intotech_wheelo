@@ -1,9 +1,10 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
 using Toci.Driver.Database.Persistence.Models;
 
+
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class VworktripgengeolocationModelDto : DtoBase<Vworktripgengeolocation, VworktripgengeolocationModelDto>
+public class VworktripgengeolocationModelDto : DtoCollectionBase<Vworktripgengeolocation, VworktripgengeolocationModelDto, List<Vworktripgengeolocation>, List<VworktripgengeolocationModelDto>>
 {
     public int Idaccount { get; set; }
     public int Accountidcollocated { get; set; }
@@ -16,4 +17,5 @@ public class VworktripgengeolocationModelDto : DtoBase<Vworktripgengeolocation, 
     public TimeOnly Fromhour { get; set; }
     public TimeOnly Tohour { get; set; }
     public string Searchid { get; set; }
+    public int Id { get; set; }
 }

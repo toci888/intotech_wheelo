@@ -1,9 +1,10 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
 using Toci.Driver.Database.Persistence.Models;
 
+
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class TripparticipantModelDto : DtoBase<Tripparticipant, TripparticipantModelDto>
+public class TripparticipantModelDto : DtoCollectionBase<Tripparticipant, TripparticipantModelDto, List<Tripparticipant>, List<TripparticipantModelDto>>
 {
     public int Id { get; set; }
     public int Idtrip { get; set; }
