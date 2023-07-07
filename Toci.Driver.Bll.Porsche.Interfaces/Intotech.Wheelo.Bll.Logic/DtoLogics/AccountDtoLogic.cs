@@ -29,7 +29,9 @@ public class AccountDtoLogic : DtoLogicBase<AccountModelDto, Account, IAccountLo
         dto.Account = field;
 
         return dto;
-    }    protected override AccountDto FillEntity(AccountDto dto, List<AccountModelDto> field)
+    }    
+    
+    protected override AccountDto FillEntity(AccountDto dto, List<AccountModelDto> field)
     {
         throw new NotImplementedException();
     }
