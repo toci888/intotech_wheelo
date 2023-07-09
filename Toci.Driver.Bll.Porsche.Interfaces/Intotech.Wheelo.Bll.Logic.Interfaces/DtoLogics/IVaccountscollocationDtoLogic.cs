@@ -1,10 +1,13 @@
 ﻿using Intotech.Common.Bll.Interfaces.ChorDtoBll;
 using Intotech.Wheelo.Bll.Models.Dtos;
 using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+using Intotech.Common.Bll.ChorDtoBll;
+using Toci.Driver.Database.Persistence.Models;
+
 
 namespace Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
-   public interface IVaccountscollocationDtoLogic : IDtoEntityHandler<VaccountscollocationDto, List<VaccountscollocationModelDto>>
+   public interface IVaccountscollocationDtoLogic : IDtoLogicBase<VaccountscollocationModelDto, Vaccountscollocation, VaccountscollocationDto, List<Vaccountscollocation>, List<VaccountscollocationModelDto>>
     {
 
     }

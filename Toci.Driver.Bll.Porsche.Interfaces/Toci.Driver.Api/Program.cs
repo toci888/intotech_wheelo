@@ -36,6 +36,8 @@ using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Bll.Persistence;
 using Intotech.Common.Database.DbSetup;
 using Intotech.Wheelo.Seed.Common.Wheelo.Main;
+using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
+using Intotech.Wheelo.Bll.Logic;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -124,6 +126,54 @@ builder.Services.AddScoped<INotificationClient, NotificationClient>();
 //builder.Services.AddScoped<IEmailManager, EmailManager>();
 
 builder.Services.AddSingleton(authenticationSettings);
+
+builder.Services.AddScoped<IAccountDtoLogic, AccountDtoLogic>();
+builder.Services.AddScoped<IAccountmetadatumDtoLogic, AccountmetadatumDtoLogic>();
+builder.Services.AddScoped<IAccountmodeDtoLogic, AccountmodeDtoLogic>();
+builder.Services.AddScoped<IAccountroleDtoLogic, AccountroleDtoLogic>();
+builder.Services.AddScoped<IAccountscarslocationDtoLogic, AccountscarslocationDtoLogic>();
+builder.Services.AddScoped<IAccountscollocationDtoLogic, AccountscollocationDtoLogic>();
+builder.Services.AddScoped<IAccountslocationDtoLogic, AccountslocationDtoLogic>();
+builder.Services.AddScoped<IAccountsworktimeDtoLogic, AccountsworktimeDtoLogic>();
+builder.Services.AddScoped<ICarDtoLogic, CarDtoLogic>();
+builder.Services.AddScoped<ICarsbrandDtoLogic, CarsbrandDtoLogic>();
+builder.Services.AddScoped<ICarsmodelDtoLogic, CarsmodelDtoLogic>();
+builder.Services.AddScoped<IColourDtoLogic, ColourDtoLogic>();
+builder.Services.AddScoped<IEmailsregisterDtoLogic, EmailsregisterDtoLogic>();
+builder.Services.AddScoped<IFailedloginattemptDtoLogic, FailedloginattemptDtoLogic>();
+builder.Services.AddScoped<IFriendDtoLogic, FriendDtoLogic>();
+builder.Services.AddScoped<IFriendsuggestionDtoLogic, FriendsuggestionDtoLogic>();
+builder.Services.AddScoped<IGeographicregionDtoLogic, GeographicregionDtoLogic>();
+builder.Services.AddScoped<IInvitationDtoLogic, InvitationDtoLogic>();
+builder.Services.AddScoped<INotuserDtoLogic, NotuserDtoLogic>();
+builder.Services.AddScoped<IOauthpartyDtoLogic, OauthpartyDtoLogic>();
+builder.Services.AddScoped<IOccupationDtoLogic, OccupationDtoLogic>();
+builder.Services.AddScoped<IOccupationsmokercratDtoLogic, OccupationsmokercratDtoLogic>();
+builder.Services.AddScoped<IPasswordsstrenghtDtoLogic, PasswordsstrenghtDtoLogic>();
+builder.Services.AddScoped<IPasswordstrengthDtoLogic, PasswordstrengthDtoLogic>();
+builder.Services.AddScoped<IPushtokenDtoLogic, PushtokenDtoLogic>();
+builder.Services.AddScoped<IResetpasswordDtoLogic, ResetpasswordDtoLogic>();
+builder.Services.AddScoped<IRoleDtoLogic, RoleDtoLogic>();
+builder.Services.AddScoped<ISimpleaccountDtoLogic, SimpleaccountDtoLogic>();
+builder.Services.AddScoped<IStatisticstripDtoLogic, StatisticstripDtoLogic>();
+builder.Services.AddScoped<IStatsproviderDtoLogic, StatsproviderDtoLogic>();
+builder.Services.AddScoped<ITripDtoLogic, TripDtoLogic>();
+builder.Services.AddScoped<ITripparticipantDtoLogic, TripparticipantDtoLogic>();
+builder.Services.AddScoped<IUserextradatumDtoLogic, UserextradatumDtoLogic>();
+builder.Services.AddScoped<IVaccountscollocationDtoLogic, VaccountscollocationDtoLogic>();
+builder.Services.AddScoped<IVaccountscollocationsworktripDtoLogic, VaccountscollocationsworktripDtoLogic>();
+builder.Services.AddScoped<IVacollocationsgeolocationDtoLogic, VacollocationsgeolocationDtoLogic>();
+builder.Services.AddScoped<IVaworktripgengeolocationDtoLogic, VaworktripgengeolocationDtoLogic>();
+builder.Services.AddScoped<IVcarownerDtoLogic, VcarownerDtoLogic>();
+builder.Services.AddScoped<IVcollocationsgeolocationDtoLogic, VcollocationsgeolocationDtoLogic>();
+builder.Services.AddScoped<IVfriendDtoLogic, VfriendDtoLogic>();
+builder.Services.AddScoped<IVfriendsuggestionDtoLogic, VfriendsuggestionDtoLogic>();
+builder.Services.AddScoped<IVinvitationDtoLogic, VinvitationDtoLogic>();
+builder.Services.AddScoped<IVtripsparticipantDtoLogic, VtripsparticipantDtoLogic>();
+builder.Services.AddScoped<IVworktripgengeolocationDtoLogic, VworktripgengeolocationDtoLogic>();
+builder.Services.AddScoped<IWorktripDtoLogic, WorktripDtoLogic>();
+builder.Services.AddScoped<IWorktripgenDtoLogic, WorktripgenDtoLogic>();
+
 
 builder.Services.AddAuthentication(option =>
 {

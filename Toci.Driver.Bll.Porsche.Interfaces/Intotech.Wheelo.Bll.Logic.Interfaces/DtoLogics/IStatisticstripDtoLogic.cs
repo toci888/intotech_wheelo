@@ -1,10 +1,13 @@
 ﻿using Intotech.Common.Bll.Interfaces.ChorDtoBll;
 using Intotech.Wheelo.Bll.Models.Dtos;
 using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+using Intotech.Common.Bll.ChorDtoBll;
+using Toci.Driver.Database.Persistence.Models;
+
 
 namespace Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
-   public interface IStatisticstripDtoLogic : IDtoEntityHandler<StatisticstripDto, List<StatisticstripModelDto>>
+   public interface IStatisticstripDtoLogic : IDtoLogicBase<StatisticstripModelDto, Statisticstrip, StatisticstripDto, List<Statisticstrip>, List<StatisticstripModelDto>>
     {
 
     }
