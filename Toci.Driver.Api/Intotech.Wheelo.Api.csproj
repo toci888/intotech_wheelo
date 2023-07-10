@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>39270b8c-4052-4f71-a0d2-337dc2bd2a2d</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Kubernetes.Tools.Targets" Version="1.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.Drawing.Common" Version="4.5.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+   
+    <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Bll.Interfaces\Intotech.Common.Bll.Interfaces.csproj" />
+   
+    <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Bll\Intotech.Common.Bll.csproj" />
+   
+    <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Database.Interfaces\Intotech.Common.Database.Interfaces.csproj" />
+   
+    <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Microservices.Interfaces\Intotech.Common.Microservices.Interfaces.csproj" />
+   
+    <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Microservices\Intotech.Common.Microservices.csproj" />
+   
+    <ProjectReference Include="..\..\Intotech.Common\Intotech.Common\Intotech.Common.csproj" />
+   
+    <ProjectReference Include="..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
+   
+    <ProjectReference Include="..\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces.csproj" />
+   
+    <ProjectReference Include="..\Intotech.Wheelo.Chat.Bll.Persistence\Intotech.Wheelo.Chat.Bll.Persistence.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Seed.Common\Intotech.Wheelo.Seed.Common.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Persistence.Interfaces\Intotech.Wheelo.Bll.Persistence.Interfaces.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Persistence\Intotech.Wheelo.Bll.Persistence.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Porsche.Interfaces.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Porsche\Intotech.Wheelo.Bll.Porsche.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
