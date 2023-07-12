@@ -37,13 +37,19 @@
     <ProjectReference Include="..\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces.csproj" />
    
     <ProjectReference Include="..\Intotech.Wheelo.Chat.Bll.Persistence\Intotech.Wheelo.Chat.Bll.Persistence.csproj" />
+   
+    <ProjectReference Include="..\Intotech.Wheelo.Common.Interfaces\Intotech.Wheelo.Common.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Seed.Common\Intotech.Wheelo.Seed.Common.csproj" />
     <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Logic.Interfaces\Intotech.Wheelo.Bll.Logic.Interfaces.csproj" />
     <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Logic\Intotech.Wheelo.Bll.Logic.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Models\Intotech.Wheelo.Bll.Models.csproj" />
     <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Persistence.Interfaces\Intotech.Wheelo.Bll.Persistence.Interfaces.csproj" />
     <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Persistence\Intotech.Wheelo.Bll.Persistence.csproj" />
     <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Porsche.Interfaces.csproj" />
     <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Porsche\Intotech.Wheelo.Bll.Porsche.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Common\Intotech.Wheelo.Common.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Notifications.Interfaces\Intotech.Wheelo.Notifications.Interfaces.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Notifications\Intotech.Wheelo.Notifications.csproj" />
     <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
   </ItemGroup>
 
