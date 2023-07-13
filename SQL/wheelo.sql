@@ -100,7 +100,7 @@ create table Roles
 create table Accounts
 (
 	Id serial primary key not null,
-	email text not null unique,
+	email text not null, -- unique,
 	name text,
 	surname text,
 	password text,
