@@ -19,6 +19,8 @@ using Toci.Driver.Database.Persistence.Models;
 
 Console.WriteLine("Warrior is seeding your dbs....");
 
+// ? 
+
 /*AccountProxy ap = new AccountProxy();
  
 AccountRegisterResponseDto registerResult = ap.Register(new AccountRegisterDto() { email = "glockajulia@gmail.com", firstName = "Julia", lastName = "Głocka", password = "Beatka123()" });
@@ -30,7 +32,7 @@ int a = 0;
 //UsersCollocationLogic uc = new UsersCollocationLogic();
 
 //uc.DeleteByColumnId("Idaccount", 1000000014);
-new SocialSeedManager().SeedAllDb();
+//new SocialSeedManager().SeedAllDb();
 
 //new WheeloMainSeedManager().SeedAllDb();
 
