@@ -15,6 +15,7 @@ using Intotech.Wheelo.Bll.Porsche.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
 using Intotech.Wheelo.Bll.Porsche.User;
 using System.Text.Json;
+using Intotech.Common;
 using Intotech.Wheelo.Common.Interfaces.Emails;
 using Intotech.Wheelo.Common.Emails;
 using Intotech.Wheelo.Bll.Persistence.Interfaces.SubServices;
@@ -35,9 +36,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Bll.Persistence;
 using Intotech.Common.Database.DbSetup;
-using Intotech.Wheelo.Seed.Common.Wheelo.Main;
+//using Intotech.Wheelo.Seed.Common.Wheelo.Main;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 using Intotech.Wheelo.Bll.Logic;
+using Intotech.Wheelo.Tests.Persistence.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -204,11 +206,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    DbSetupEntity dbSetupEntity = new DbSetupEntity("localhost", "beatka", "Intotech.Wheelo")
+    string solutionDirectory = EnvironmentUtils.GetSolutionDirectory();
+
+    DbSetupEntity dbSetupEntity = new DbSetupEntity("beatka", "Intotech.Wheelo")
     {
         //ParentProjectFolderPath = "Toci.Driver.Bll.Porsche.Interfaces",
         ProjectName = "Toci.Driver.Database.Persistence",
-        SqlFilePath = "..\\..\\SQL\\wheelo.sql"
+        SqlFilePath = Path.Combine(solutionDirectory, "intotech_wheelo\\SQL\\wheelo.sql")
     };
 
     DbSetupFacade dbSetup = new DbSetupFacade(dbSetupEntity);
