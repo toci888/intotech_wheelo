@@ -127,7 +127,7 @@ builder.Services.AddScoped<INotificationClient, NotificationClient>();
 
 builder.Services.AddSingleton(authenticationSettings);
 
-builder.Services.AddScoped<IAccountDtoLogic, AccountDtoLogic>();
+/*builder.Services.AddScoped<IAccountDtoLogic, AccountDtoLogic>();
 builder.Services.AddScoped<IAccountmetadatumDtoLogic, AccountmetadatumDtoLogic>();
 builder.Services.AddScoped<IAccountmodeDtoLogic, AccountmodeDtoLogic>();
 builder.Services.AddScoped<IAccountroleDtoLogic, AccountroleDtoLogic>();
@@ -173,7 +173,7 @@ builder.Services.AddScoped<IVtripsparticipantDtoLogic, VtripsparticipantDtoLogic
 builder.Services.AddScoped<IVworktripgengeolocationDtoLogic, VworktripgengeolocationDtoLogic>();
 builder.Services.AddScoped<IWorktripDtoLogic, WorktripDtoLogic>();
 builder.Services.AddScoped<IWorktripgenDtoLogic, WorktripgenDtoLogic>();
-
+*/
 
 builder.Services.AddAuthentication(option =>
 {
