@@ -9,7 +9,7 @@ namespace Intotech.Wheelo.Common.Logging
 {
     public static class ErrorHandler
     {
-        private static IErrorLogger ErrorDebugLogger = new ErrorLogger();
+        private static IErrorLogger ErrorDebugLogger = new WheeloErrorLogger();
 
         public static void LogError(Exception ex)
         {
