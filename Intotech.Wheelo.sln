@@ -293,6 +293,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.GhostRider", "..\I
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A441D997-364C-4D0C-896D-33CDBFD3CA6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Common.Interfaces", "..\Intotech.Common\Intotech.Common.Interfaces\Intotech.Common.Interfaces.csproj", "{C1DD59F5-F38C-434E-8850-41CE0F94D529}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -781,6 +783,14 @@ Global
 		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Release|x64.ActiveCfg = Release|Any CPU
 		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Release|x64.Build.0 = Release|Any CPU
+		{C1DD59F5-F38C-434E-8850-41CE0F94D529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1DD59F5-F38C-434E-8850-41CE0F94D529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1DD59F5-F38C-434E-8850-41CE0F94D529}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C1DD59F5-F38C-434E-8850-41CE0F94D529}.Debug|x64.Build.0 = Debug|Any CPU
+		{C1DD59F5-F38C-434E-8850-41CE0F94D529}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1DD59F5-F38C-434E-8850-41CE0F94D529}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1DD59F5-F38C-434E-8850-41CE0F94D529}.Release|x64.ActiveCfg = Release|Any CPU
+		{C1DD59F5-F38C-434E-8850-41CE0F94D529}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -830,6 +840,7 @@ Global
 		{9E10F3E3-0366-4AEE-94C8-17566A7CC8FB} = {DE2E2051-FE7D-434F-8B4A-26EADBD180CD}
 		{87F0CBD0-9D61-4300-A7CB-799FA5486C71} = {DE2E2051-FE7D-434F-8B4A-26EADBD180CD}
 		{5696FF5C-9B2E-4E1A-BAC9-B11222550BB5} = {61CCF297-620A-40F2-9052-7A5396FA48E4}
+		{C1DD59F5-F38C-434E-8850-41CE0F94D529} = {61CCF297-620A-40F2-9052-7A5396FA48E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {958786F8-D2E4-4AAC-949D-3CD908D8AE36}
