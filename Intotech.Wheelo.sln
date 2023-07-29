@@ -186,13 +186,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CarsModelsXmls", "CarsModel
 		SQL\CarsModelsXmls\ZIŁ.txt = SQL\CarsModelsXmls\ZIŁ.txt
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.Cmc", "Intotech.Wheelo.Cmc", "{D34BE5B1-9625-4499-AD6D-618951CA5060}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.Dictionaries", "Intotech.Wheelo.Dictionaries", "{D34BE5B1-9625-4499-AD6D-618951CA5060}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Bentley.Interfaces", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Bentley.Interfaces\Intotech.Wheelo.Bll.Bentley.Interfaces.csproj", "{35622B2F-3723-47E0-9134-8F1A482B64C3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Bentley", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Bentley\Intotech.Wheelo.Bll.Bentley.csproj", "{E7690F8C-9644-432A-8399-C0E7672EC300}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Cmc.Api", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Cmc.Api\Intotech.Wheelo.Cmc.Api.csproj", "{E5148A6E-293C-4E65-B323-743247B96A3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Dictionaries.Api", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Cmc.Api\Intotech.Wheelo.Dictionaries.Api.csproj", "{E5148A6E-293C-4E65-B323-743247B96A3B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.Social", "Intotech.Wheelo.Social", "{36E8836E-455B-44CA-ADD6-5E0C90D5D38B}"
 EndProject
@@ -293,7 +293,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.GhostRider", "..\I
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A441D997-364C-4D0C-896D-33CDBFD3CA6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Common.Interfaces", "..\Intotech.Common\Intotech.Common.Interfaces\Intotech.Common.Interfaces.csproj", "{C1DD59F5-F38C-434E-8850-41CE0F94D529}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Interfaces", "..\Intotech.Common\Intotech.Common.Interfaces\Intotech.Common.Interfaces.csproj", "{C1DD59F5-F38C-434E-8850-41CE0F94D529}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

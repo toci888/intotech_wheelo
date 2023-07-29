@@ -39,7 +39,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
             return new ReturnedResponse<OrganizemeetingDto>(GetMeetingDto(accountId, result), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual OrganizemeetingDto OrganizeMeeting(CreateMeetingDto meeting)
+        public virtual ReturnedResponse<OrganizemeetingDto> OrganizeMeeting(CreateMeetingDto meeting)
         {
             Organizemeeting organizedMeeting = OrganizemeetingLogic.Insert(meeting);
 
@@ -52,7 +52,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
                 });
             }
 
-            return GetMeetingDto(organizedMeeting.Idaccount, DtoModelMapper.Map<OrganizemeetingDto, Organizemeeting>(organizedMeeting));
+            return new ReturnedResponse<OrganizemeetingDto>(GetMeetingDto(organizedMeeting.Idaccount, DtoModelMapper.Map<OrganizemeetingDto, Organizemeeting>(organizedMeeting)), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         protected virtual OrganizemeetingDto GetMeetingDto(int accountId, OrganizemeetingDto result)

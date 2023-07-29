@@ -13,6 +13,8 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac.Interfaces
     {
         ReturnedResponse<OrganizemeetingDto> GetMeetingForUser(int accountId);
 
-        OrganizemeetingDto OrganizeMeeting(CreateMeetingDto meeting);
+        ReturnedResponse<OrganizemeetingDto> OrganizeMeeting(CreateMeetingDto meeting);
+
+
     }
 }

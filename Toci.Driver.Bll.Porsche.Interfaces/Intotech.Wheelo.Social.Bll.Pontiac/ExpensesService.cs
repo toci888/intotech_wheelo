@@ -1,4 +1,7 @@
-﻿using Intotech.Wheelo.Social.Bll.Persistence.Interfaces;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Wheelo.Common.Interfaces;
+using Intotech.Wheelo.Common;
+using Intotech.Wheelo.Social.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Social.Bll.Pontiac.Interfaces;
 using Intotech.Wheelo.Social.Database.Persistence.Models;
 using System;
@@ -18,7 +21,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
             ExpenseLogic = expenseLogic;
         }
 
-        public virtual Expense AddExpense(Expense expense)
+        public virtual ReturnedResponse<Expense> AddExpense(Expense expense)
         {
             Expense expExists = ExpenseLogic.Select(m => m.Idaccount == expense.Idaccount && m.Kind == expense.Kind).FirstOrDefault();
 
@@ -26,10 +29,10 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
             {
                 ExpenseLogic.Update(expense);
 
-                return expense;
+                return new ReturnedResponse<Expense>(expense, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
             }
 
-            return ExpenseLogic.Insert(expense);
+            return new ReturnedResponse<Expense>(ExpenseLogic.Insert(expense), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }

@@ -39,7 +39,10 @@ using Intotech.Common.Database.DbSetup;
 //using Intotech.Wheelo.Seed.Common.Wheelo.Main;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 using Intotech.Wheelo.Bll.Logic;
+using Intotech.Wheelo.Bll.Logic.DtoLogics;
+using Intotech.Wheelo.Bll.Porsche.Services;
 using Intotech.Wheelo.Tests.Persistence.Seed;
+using Toci.Driver.Bll.Porsche.Interfaces.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -129,6 +132,10 @@ builder.Services.AddScoped<INotificationClient, NotificationClient>();
 
 builder.Services.AddSingleton(authenticationSettings);
 
+builder.Services.AddScoped<ICarDtoLogic, CarDtoLogic>();
+
+builder.Services.AddScoped<ICarService, CarService>();
+
 /*builder.Services.AddScoped<IAccountDtoLogic, AccountDtoLogic>();
 builder.Services.AddScoped<IAccountmetadatumDtoLogic, AccountmetadatumDtoLogic>();
 builder.Services.AddScoped<IAccountmodeDtoLogic, AccountmodeDtoLogic>();
@@ -137,7 +144,7 @@ builder.Services.AddScoped<IAccountscarslocationDtoLogic, AccountscarslocationDt
 builder.Services.AddScoped<IAccountscollocationDtoLogic, AccountscollocationDtoLogic>();
 builder.Services.AddScoped<IAccountslocationDtoLogic, AccountslocationDtoLogic>();
 builder.Services.AddScoped<IAccountsworktimeDtoLogic, AccountsworktimeDtoLogic>();
-builder.Services.AddScoped<ICarDtoLogic, CarDtoLogic>();
+
 builder.Services.AddScoped<ICarsbrandDtoLogic, CarsbrandDtoLogic>();
 builder.Services.AddScoped<ICarsmodelDtoLogic, CarsmodelDtoLogic>();
 builder.Services.AddScoped<IColourDtoLogic, ColourDtoLogic>();

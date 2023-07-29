@@ -37,7 +37,7 @@
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Persistence\Intotech.Wheelo.Bll.Persistence.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Porsche.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Porsche\Intotech.Wheelo.Bll.Porsche.csproj" />
-    <ProjectReference Include="..\Intotech.Wheelo.Cmc.Api\Intotech.Wheelo.Cmc.Api.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Cmc.Api\Intotech.Wheelo.Dictionaries.Api.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Social.Api\Intotech.Wheelo.Social.Api.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces\Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Social.Bll.Lamborgini\Intotech.Wheelo.Social.Bll.Lamborgini.csproj" />
