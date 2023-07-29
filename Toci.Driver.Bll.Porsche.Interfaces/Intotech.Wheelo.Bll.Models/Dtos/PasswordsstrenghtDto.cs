@@ -3,7 +3,7 @@ using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
 namespace Intotech.Wheelo.Bll.Models.Dtos;
 
-public class PasswordsstrenghtDto : DtoBase
+public class PasswordsstrenghtDto : DtoEntityBase
 {
     public PasswordsstrenghtModelDto Passwordsstrenght { get; set; }
 }

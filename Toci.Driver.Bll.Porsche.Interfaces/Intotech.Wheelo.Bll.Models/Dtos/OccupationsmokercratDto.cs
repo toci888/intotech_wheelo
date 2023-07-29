@@ -3,7 +3,7 @@ using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
 namespace Intotech.Wheelo.Bll.Models.Dtos;
 
-public class OccupationsmokercratDto : DtoBase
+public class OccupationsmokercratDto : DtoEntityBase
 {
     public OccupationsmokercratModelDto Occupationsmokercrat { get; set; }
 }

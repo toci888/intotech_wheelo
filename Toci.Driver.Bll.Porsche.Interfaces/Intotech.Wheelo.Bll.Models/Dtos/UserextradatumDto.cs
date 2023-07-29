@@ -3,7 +3,7 @@ using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
 namespace Intotech.Wheelo.Bll.Models.Dtos;
 
-public class UserextradatumDto : DtoBase
+public class UserextradatumDto : DtoEntityBase
 {
     public UserextradatumModelDto Userextradatum { get; set; }
 }

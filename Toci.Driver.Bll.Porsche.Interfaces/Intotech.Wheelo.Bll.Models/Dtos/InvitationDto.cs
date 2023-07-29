@@ -3,7 +3,7 @@ using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
 namespace Intotech.Wheelo.Bll.Models.Dtos;
 
-public class InvitationDto : DtoBase
+public class InvitationDto : DtoEntityBase
 {
     public InvitationModelDto Invitation { get; set; }
 }

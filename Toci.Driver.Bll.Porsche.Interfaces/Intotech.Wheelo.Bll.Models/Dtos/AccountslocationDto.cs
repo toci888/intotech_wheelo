@@ -3,7 +3,7 @@ using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
 namespace Intotech.Wheelo.Bll.Models.Dtos;
 
-public class AccountslocationDto : DtoBase
+public class AccountslocationDto : DtoEntityBase
 {
     public AccountslocationModelDto Accountslocation { get; set; }
 }

@@ -3,7 +3,7 @@ using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
 namespace Intotech.Wheelo.Bll.Models.Dtos;
 
-public class WorktripgenDto : DtoBase
+public class WorktripgenDto : DtoEntityBase
 {
     public WorktripgenModelDto Worktripgen { get; set; }
 }

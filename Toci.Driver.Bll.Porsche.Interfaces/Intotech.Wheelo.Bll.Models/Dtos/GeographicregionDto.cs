@@ -3,7 +3,7 @@ using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
 namespace Intotech.Wheelo.Bll.Models.Dtos;
 
-public class GeographicregionDto : DtoBase
+public class GeographicregionDto : DtoEntityBase
 {
     public GeographicregionModelDto Geographicregion { get; set; }
 }

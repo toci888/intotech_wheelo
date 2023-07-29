@@ -3,7 +3,7 @@ using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
 namespace Intotech.Wheelo.Bll.Models.Dtos;
 
-public class NotuserDto : DtoBase
+public class NotuserDto : DtoEntityBase
 {
     public NotuserModelDto Notuser { get; set; }
 }

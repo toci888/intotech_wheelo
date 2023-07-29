@@ -3,7 +3,7 @@ using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
 namespace Intotech.Wheelo.Bll.Models.Dtos;
 
-public class VtripsparticipantDto : DtoBase
+public class VtripsparticipantDto : DtoEntityBase
 {
     public VtripsparticipantModelDto Vtripsparticipant { get; set; }
 }

@@ -43,5 +43,20 @@ namespace Intotech.Wheelo.Common.Logging
             SwrDebug.Write(message + Environment.NewLine);
             SwrDebug.Flush();
         }
+
+        public void Log(Exception ex, LogLevels logLevel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Log(string message, LogLevels logLevel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Log(string message, LogLevels logLevel, params object[] details)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

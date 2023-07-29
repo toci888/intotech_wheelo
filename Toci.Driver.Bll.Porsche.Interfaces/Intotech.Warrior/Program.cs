@@ -15,9 +15,21 @@ using System.Reflection;
 using Intotech.Wheelo.Proxies.IntotechWheeloApi;
 using Intotech.Wheelo.Proxies.IntotechWheeloApi.Models;
 using Toci.Driver.Database.Persistence.Models;
-
+using Intotech.Common;
 
 Console.WriteLine("Warrior is seeding your dbs....");
+
+Accountmode accountmode = new Accountmode() { Idaccount = 2, Mode = 1 };
+
+Role? role = new Role() { Name = "vasia", Id = 7};
+
+Account account = new() { Id = 0, Name = "Vasyl", Email = "Grzesiek221@gmail.com", Accountmode = accountmode, IdroleNavigation = role };
+
+object[] details = new object[] { account };
+
+ErrorLoggerDefault logger = new ErrorLoggerDefault();
+    logger.Log("Message", LogLevels.Debug, details);
+
 
 /*AccountProxy ap = new AccountProxy();
  
@@ -30,7 +42,7 @@ int a = 0;
 //UsersCollocationLogic uc = new UsersCollocationLogic();
 
 //uc.DeleteByColumnId("Idaccount", 1000000014);
-new SocialSeedManager().SeedAllDb();
+//new SocialSeedManager().SeedAllDb();
 
 //new WheeloMainSeedManager().SeedAllDb();
 

@@ -3,7 +3,7 @@ using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
 namespace Intotech.Wheelo.Bll.Models.Dtos;
 
-public class FriendsuggestionDto : DtoBase
+public class FriendsuggestionDto : DtoEntityBase
 {
     public FriendsuggestionModelDto Friendsuggestion { get; set; }
 }
