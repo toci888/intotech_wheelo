@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{A662B894-F58
 	ProjectSection(SolutionItems) = preProject
 		SQL\cars.txt = SQL\cars.txt
 		SQL\colours.txt = SQL\colours.txt
+		dictionaries.sql = dictionaries.sql
 		SQL\geog_azg.sql = SQL\geog_azg.sql
 		SQL\geog_azg.txt = SQL\geog_azg.txt
 		SQL\i18n.sql = SQL\i18n.sql
@@ -186,7 +187,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CarsModelsXmls", "CarsModel
 		SQL\CarsModelsXmls\ZIŁ.txt = SQL\CarsModelsXmls\ZIŁ.txt
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.Dictionaries", "Intotech.Wheelo.Dictionaries", "{D34BE5B1-9625-4499-AD6D-618951CA5060}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intotech.Wheelo.Dict", "Intotech.Wheelo.Dict", "{D34BE5B1-9625-4499-AD6D-618951CA5060}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Bentley.Interfaces", "Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Bentley.Interfaces\Intotech.Wheelo.Bll.Bentley.Interfaces.csproj", "{35622B2F-3723-47E0-9134-8F1A482B64C3}"
 EndProject
@@ -291,9 +292,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Logic",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.GhostRider", "..\Intotech.Common\Intotech.GhostRider\Intotech.GhostRider\Intotech.GhostRider.csproj", "{5696FF5C-9B2E-4E1A-BAC9-B11222550BB5}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A441D997-364C-4D0C-896D-33CDBFD3CA6D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Common.Interfaces", "..\Intotech.Common\Intotech.Common.Interfaces\Intotech.Common.Interfaces.csproj", "{C1DD59F5-F38C-434E-8850-41CE0F94D529}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Dictionaries.Database.Persistence", "Intotech.Wheelo.Dictionaries.Database.Persistence\Intotech.Wheelo.Dictionaries.Database.Persistence.csproj", "{5E3BBAC1-556B-4A21-8F4D-F84E9BD4F0EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Dictionaries.Bll.Persistence.Interfaces", "Dictionaries\Intotech.Wheelo.Dictionaries.Bll.Persistence.Interfaces\Intotech.Wheelo.Dictionaries.Bll.Persistence.Interfaces.csproj", "{D768D9FD-7B0C-439D-A048-FBB3134347AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Dictionaries.Bll.Persistence", "Dictionaries\Intotech.Wheelo.Dictionaries.Bll.Persistence\Intotech.Wheelo.Dictionaries.Bll.Persistence.csproj", "{62185E16-0CB8-4C58-BEB1-E13AF9EFA828}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -775,14 +780,6 @@ Global
 		{5696FF5C-9B2E-4E1A-BAC9-B11222550BB5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5696FF5C-9B2E-4E1A-BAC9-B11222550BB5}.Release|x64.ActiveCfg = Release|Any CPU
 		{5696FF5C-9B2E-4E1A-BAC9-B11222550BB5}.Release|x64.Build.0 = Release|Any CPU
-		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Debug|x64.Build.0 = Debug|Any CPU
-		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Release|x64.ActiveCfg = Release|Any CPU
-		{A441D997-364C-4D0C-896D-33CDBFD3CA6D}.Release|x64.Build.0 = Release|Any CPU
 		{C1DD59F5-F38C-434E-8850-41CE0F94D529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C1DD59F5-F38C-434E-8850-41CE0F94D529}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1DD59F5-F38C-434E-8850-41CE0F94D529}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -791,6 +788,30 @@ Global
 		{C1DD59F5-F38C-434E-8850-41CE0F94D529}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C1DD59F5-F38C-434E-8850-41CE0F94D529}.Release|x64.ActiveCfg = Release|Any CPU
 		{C1DD59F5-F38C-434E-8850-41CE0F94D529}.Release|x64.Build.0 = Release|Any CPU
+		{5E3BBAC1-556B-4A21-8F4D-F84E9BD4F0EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E3BBAC1-556B-4A21-8F4D-F84E9BD4F0EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E3BBAC1-556B-4A21-8F4D-F84E9BD4F0EC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5E3BBAC1-556B-4A21-8F4D-F84E9BD4F0EC}.Debug|x64.Build.0 = Debug|Any CPU
+		{5E3BBAC1-556B-4A21-8F4D-F84E9BD4F0EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E3BBAC1-556B-4A21-8F4D-F84E9BD4F0EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E3BBAC1-556B-4A21-8F4D-F84E9BD4F0EC}.Release|x64.ActiveCfg = Release|Any CPU
+		{5E3BBAC1-556B-4A21-8F4D-F84E9BD4F0EC}.Release|x64.Build.0 = Release|Any CPU
+		{D768D9FD-7B0C-439D-A048-FBB3134347AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D768D9FD-7B0C-439D-A048-FBB3134347AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D768D9FD-7B0C-439D-A048-FBB3134347AA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D768D9FD-7B0C-439D-A048-FBB3134347AA}.Debug|x64.Build.0 = Debug|Any CPU
+		{D768D9FD-7B0C-439D-A048-FBB3134347AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D768D9FD-7B0C-439D-A048-FBB3134347AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D768D9FD-7B0C-439D-A048-FBB3134347AA}.Release|x64.ActiveCfg = Release|Any CPU
+		{D768D9FD-7B0C-439D-A048-FBB3134347AA}.Release|x64.Build.0 = Release|Any CPU
+		{62185E16-0CB8-4C58-BEB1-E13AF9EFA828}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62185E16-0CB8-4C58-BEB1-E13AF9EFA828}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62185E16-0CB8-4C58-BEB1-E13AF9EFA828}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{62185E16-0CB8-4C58-BEB1-E13AF9EFA828}.Debug|x64.Build.0 = Debug|Any CPU
+		{62185E16-0CB8-4C58-BEB1-E13AF9EFA828}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62185E16-0CB8-4C58-BEB1-E13AF9EFA828}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62185E16-0CB8-4C58-BEB1-E13AF9EFA828}.Release|x64.ActiveCfg = Release|Any CPU
+		{62185E16-0CB8-4C58-BEB1-E13AF9EFA828}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -841,6 +862,9 @@ Global
 		{87F0CBD0-9D61-4300-A7CB-799FA5486C71} = {DE2E2051-FE7D-434F-8B4A-26EADBD180CD}
 		{5696FF5C-9B2E-4E1A-BAC9-B11222550BB5} = {61CCF297-620A-40F2-9052-7A5396FA48E4}
 		{C1DD59F5-F38C-434E-8850-41CE0F94D529} = {61CCF297-620A-40F2-9052-7A5396FA48E4}
+		{5E3BBAC1-556B-4A21-8F4D-F84E9BD4F0EC} = {D34BE5B1-9625-4499-AD6D-618951CA5060}
+		{D768D9FD-7B0C-439D-A048-FBB3134347AA} = {D34BE5B1-9625-4499-AD6D-618951CA5060}
+		{62185E16-0CB8-4C58-BEB1-E13AF9EFA828} = {D34BE5B1-9625-4499-AD6D-618951CA5060}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {958786F8-D2E4-4AAC-949D-3CD908D8AE36}

@@ -161,7 +161,8 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             string rawSelect = "select * from Worktripgen where idaccount != " + workTripGenRecord.Idaccount + " and Fromhour between '" +
                                workTripGenRecord.Fromhour.Value.AddMinutes(-MinutesInterval) + "' and '" + workTripGenRecord.Fromhour.Value.AddMinutes(MinutesInterval) +
                                "' and Tohour between '" + workTripGenRecord.Tohour.Value.AddMinutes(-MinutesInterval) + "' and '" + 
-                               workTripGenRecord.Tohour.Value.AddMinutes(MinutesInterval) + "' and Driverpassenger >= " + IsDriverPassenger + " and Latitudefrom >= " +
+                               workTripGenRecord.Tohour.Value.AddMinutes(MinutesInterval) + "' and Driverpassenger >= " + IsDriverPassenger +
+                               " and Latitudefrom >= " +
                                StringUtils.ReplaceCommaWithDot(workTripGenRecord.Latitudefrom - distance) + " and Latitudefrom <= " + 
                                StringUtils.ReplaceCommaWithDot(workTripGenRecord.Latitudefrom + distance) + " and Longitudefrom <= " +
                                StringUtils.ReplaceCommaWithDot(workTripGenRecord.Longitudefrom + distance) + " and Longitudefrom >= " + 

@@ -44,7 +44,7 @@ using Intotech.Wheelo.Bll.Porsche.Services;
 using Intotech.Wheelo.Tests.Persistence.Seed;
 using Toci.Driver.Bll.Porsche.Interfaces.Services;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.ConfigureKestrel(options =>
 {
