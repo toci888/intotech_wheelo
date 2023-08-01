@@ -48,9 +48,7 @@ drop view if exists VAccountsCollocationsWorkTrip;
 drop table if exists WorkTrip;
 drop view if exists VCarOwner;
 drop table if exists Cars;
-drop table if exists Colours;
-drop table if exists CarsModels;
-drop table if exists CarsBrands;
+
 drop table if exists AccountsCollocations;
 drop table if exists AccountsWorkTime;
 drop table if exists FriendSuggestions;
@@ -222,25 +220,7 @@ create table AccountsCollocations
 --update worktrip set acceptabledistance = 500;
 
 
-create table CarsBrands
-(
-    Id serial primary key,
-    Brand text
-);
 
-create table CarsModels
-(
-    Id serial primary key,
-	IdCarsBrands int references CarsBrands(Id) not null,
-    Model text
-);
-
-create table Colours
-(
-	id serial primary key,
-	Name text,
-	Rgb text
-);
 --select * from carsbrands;
 --select * from carsmodels where idcarsbrands = 6;
 --select * from colours;
@@ -249,9 +229,9 @@ create table Cars
 (
     Id serial primary key,
 	IdAccounts int references Accounts(Id) not null,
-	IdCarsBrands int references CarsBrands(Id) not null,
-	IdCarsModels int references CarsModels(Id) not null,
-	IdColours int references Colours(id) not null,
+	IdCarsBrands int not null,
+	IdCarsModels int not null,
+	IdColours int not null,
 	RegistrationPlate text,
     AvailableSeats int not null,
 	CreatedAt timestamp default now()
