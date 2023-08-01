@@ -9,19 +9,19 @@ namespace Intotech.Wheelo.Common
 {
     public abstract class I18nManager
     {
-        protected string Language; // = "pl";
+        public string Language; // = "pl";
 
-        protected Dictionary<string, I18nModel> TranslationsMap;
+        public Dictionary<string, I18nModel> TranslationsMap;
 
         protected I18nManager(string language) 
         {
             Language = language;
 
-//            TranslationsMap = new Dictionary<string, I18nModel>()
-//            {
- //               { GetKey(Language, I18nTags.English), new I18nModel() { Language = Language, Tag = I18nTags.English, Content = "Angielski" } },
- //               { GetKey(Language, I18nTags.Polish), new I18nModel() { Language = Language, Tag = I18nTags.Polish, Content = "Polski" } },
-  //          };
+            //            TranslationsMap = new Dictionary<string, I18nModel>()
+            //            {
+            //               { GetKey(Language, I18nTags.English), new I18nModel() { Language = Language, Tag = I18nTags.English, Content = "Angielski" } },
+            //               { GetKey(Language, I18nTags.Polish), new I18nModel() { Language = Language, Tag = I18nTags.Polish, Content = "Polski" } },
+            //          };
         }
 
         protected string GetKey(string lang, string tag)

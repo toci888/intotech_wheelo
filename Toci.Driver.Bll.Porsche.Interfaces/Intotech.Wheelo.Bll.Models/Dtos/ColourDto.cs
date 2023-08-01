@@ -1,8 +1,9 @@
-﻿using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+﻿using Intotech.Common.Bll;
+using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
 namespace Intotech.Wheelo.Bll.Models.Dtos;
 
-public class ColourDto
+public class ColourDto : DtoEntityBase
 {
     public ColourModelDto Colour { get; set; }
 }

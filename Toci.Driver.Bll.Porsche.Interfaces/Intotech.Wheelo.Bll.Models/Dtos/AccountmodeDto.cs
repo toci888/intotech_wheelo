@@ -1,8 +1,9 @@
-﻿using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
+﻿using Intotech.Common.Bll;
+using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
 namespace Intotech.Wheelo.Bll.Models.Dtos;
 
-public class AccountmodeDto
+public class AccountmodeDto : DtoEntityBase
 {
     public AccountmodeModelDto Accountmode { get; set; }
 }

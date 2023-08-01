@@ -15,9 +15,30 @@ using System.Reflection;
 using Intotech.Wheelo.Proxies.IntotechWheeloApi;
 using Intotech.Wheelo.Proxies.IntotechWheeloApi.Models;
 using Toci.Driver.Database.Persistence.Models;
-
+using Intotech.Common;
+using Intotech.Wheelo.Common.Translations.Translation;
 
 Console.WriteLine("Warrior is seeding your dbs....");
+
+
+TranslationRendererRunner runner = new TranslationRendererRunner();
+
+runner.Run("C:\\Users\\stasx\\Documents\\GitHub\\intotech_wheelo\\Toci.Driver.Bll.Porsche.Interfaces\\Intotech.Wheelo.Common\\Translations\\");
+
+
+//Accountmode accountmode = new Accountmode() { Idaccount = 2, Mode = 1 };
+
+//Role? role = new Role() { Name = "vasia", Id = 7};
+
+//Account account = new() { Id = 0, Name = "Vasyl", Email = "Grzesiek221@gmail.com", Accountmode = accountmode, IdroleNavigation = role };
+
+//Accountmetadatum accountmetadatum = new() { Id = 1, Idaccount = 2, Pesel = "0013102301203", Phone = "+48531933123", IdaccountNavigation = account };
+
+//object[] details = new object[] { account, accountmetadatum };
+
+//ErrorLoggerDefault logger = new ErrorLoggerDefault();
+//    logger.Log("", LogLevels.Debug, details);
+
 
 // ? 
 
