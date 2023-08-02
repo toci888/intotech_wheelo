@@ -1,451 +1,116 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Intotech.Common;
 
 namespace Intotech.Wheelo.Common.Translations
 {
-    internal class WheeloTranslationEngineI18n
+    public class WheeloTranslationEngineI18n : TranslationEngineI18n
     {
-        protected Dictionary<string, Dictionary<string, string>> ApplicationTranslationData;      
-        public WheeloTranslationEngineI18n(Dictionary<string, Dictionary<string, string>> applicationTranslationData)
+        public WheeloTranslationEngineI18n()
         {
-            ApplicationTranslationData = applicationTranslationData;
-            
             ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
             {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_english", "English"}, 
-                    } 
-                }
+                { "en", new Dictionary<string, string>()
+                        {
+                            {"_english", "English"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_polish", "Polish"}, 
-                    } 
-                }
+                            {"_polish", "Polish"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_success", "Success"}, 
-                    } 
-                }
+                            {"_success", "Success"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_failVerifyingAccount", "Failed to verify an account."}, 
-                    } 
-                }
+                            {"_failVerifyingAccount", "Failed to verify an account."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_accountExists", "Account already exists."}, 
-                    } 
-                }
+                            {"_accountExists", "Account already exists."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_ukrainian", "Ukrainian"}, 
-                    } 
-                }
+                            {"_ukrainian", "Ukrainian"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_italian", "Italian"}, 
-                    } 
-                }
+                            {"_italian", "Italian"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_german", "German"}, 
-                    } 
-                }
+                            {"_german", "German"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_emailIsNotConfirmed", "E-mail is not confirmed."}, 
-                    } 
-                }
+                            {"_emailIsNotConfirmed", "E-mail is not confirmed."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_accountNotFound", "Account is not found."}, 
-                    } 
-                }
+                            {"_accountNotFound", "Account is not found."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_dutch", "Dutch"}, 
-                    } 
-                }
+                            {"_dutch", "Dutch"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_portugese", "Portugese"}, 
-                    } 
-                }
+                            {"_portugese", "Portugese"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_french", "French"}, 
-                    } 
-                }
+                            {"_french", "French"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_failedToAddInformation", "Failed to add information."}, 
-                    } 
-                }
+                            {"_failedToAddInformation", "Failed to add information."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_spanish", "Spanish"}, 
-                    } 
-                }
+                            {"_spanish", "Spanish"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_swedish", "Swedish"}, 
-                    } 
-                }
+                            {"_swedish", "Swedish"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"en", new Dictionary<string, string> 
-                    {
-                        {"_error", "Error"}, 
-                    } 
-                }
+                            {"_error", "Error"},
+                        }
+                }, 
+                { "pl", new Dictionary<string, string>()
+                        {
+                            {"_english", "Angielski"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_english", "Angielski"}, 
-                    } 
-                }
+                            {"_polish", "Polski"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_polish", "Polski"}, 
-                    } 
-                }
+                            {"_accountExists", "Konto istnieje."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_accountExists", "Konto istnieje."}, 
-                    } 
-                }
+                            {"_success", "Sukces."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_success", "Sukces."}, 
-                    } 
-                }
+                            {"_failVerifyingAccount", "Niepowodzenie weryfikacji konta."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_failVerifyingAccount", "Niepowodzenie weryfikacji konta."}, 
-                    } 
-                }
+                            {"_portugese", "Portugalski"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_portugese", "Portugalski"}, 
-                    } 
-                }
+                            {"_ukrainian", "Ukraiński"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_ukrainian", "Ukraiński"}, 
-                    } 
-                }
+                            {"_italian", "Włoski"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_italian", "Włoski"}, 
-                    } 
-                }
+                            {"_german", "Niemiecki"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_german", "Niemiecki"}, 
-                    } 
-                }
+                            {"_emailIsNotConfirmed", "E-mail jest niepotwierdzony."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_emailIsNotConfirmed", "E-mail jest niepotwierdzony."}, 
-                    } 
-                }
+                            {"_accountNotFound", "Konta nie znaleziono."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_accountNotFound", "Konta nie znaleziono."}, 
-                    } 
-                }
+                            {"_dutch", "Duński"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_dutch", "Duński"}, 
-                    } 
-                }
+                            {"_error", "Błąd"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_error", "Błąd"}, 
-                    } 
-                }
+                            {"_french", "Francuski"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_french", "Francuski"}, 
-                    } 
-                }
+                            {"_failedToAddInformation", "Nie udało się dodać informacji."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_failedToAddInformation", "Nie udało się dodać informacji."}, 
-                    } 
-                }
+                            {"_swedish", "Szwedzki"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_swedish", "Szwedzki"}, 
-                    } 
-                }
+                            {"_spanish", "Hiszpański"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_spanish", "Hiszpański"}, 
-                    } 
-                }
+                            {"_dataAlreadyExistInDatabase", "Dane już istnieją w bazie danych."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_dataAlreadyExistInDatabase", "Dane już istnieją w bazie danych."}, 
-                    } 
-                }
+                            {"_defaultModeCreated", "Domyślny tryb stworzony."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_defaultModeCreated", "Domyślny tryb stworzony."}, 
-                    } 
-                }
+                            {"_errorPleaseLogInToApp", "Błąd. Zaloguj się proszę do aplikacji."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_errorPleaseLogInToApp", "Błąd. Zaloguj się proszę do aplikacji."}, 
-                    } 
-                }
+                            {"_emailDoesNotExist", "Adres e-mail nie istnieje."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_emailDoesNotExist", "Adres e-mail nie istnieje."}, 
-                    } 
-                }
+                            {"_friendshipNotFound", "Znajomość nie odnaleziona."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_friendshipNotFound", "Znajomość nie odnaleziona."}, 
-                    } 
-                }
+                            {"_noData", "Brak danych."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_noData", "Brak danych."}, 
-                    } 
-                }
+                            {"_noWorkTripData", "Brak danych podróży."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_noWorkTripData", "Brak danych podróży."}, 
-                    } 
-                }
+                            {"_passwordChangedSuccessfully", "Udało się zmienić hasło."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_passwordChangedSuccessfully", "Udało się zmienić hasło."}, 
-                    } 
-                }
+                            {"_pleaseConfirmYourWheeloAccountRegistration", "Potwierdź proszę rejestrację swojego konta Wheelo."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_pleaseConfirmYourWheeloAccountRegistration", "Potwierdź proszę rejestrację swojego konta Wheelo."}, 
-                    } 
-                }
+                            {"_pleaseLogIn", "Proszę, zaloguj się."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_pleaseLogIn", "Proszę, zaloguj się."}, 
-                    } 
-                }
+                            {"_refreshTokenExpiredPleaseLogIn", "Bieżący token wygasł. Proszę, zaloguj się."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_refreshTokenExpiredPleaseLogIn", "Bieżący token wygasł. Proszę, zaloguj się."}, 
-                    } 
-                }
+                            {"_youSeemRobot", "Jesteś atakowany"},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_youSeemRobot", "Jesteś atakowany"}, 
-                    } 
-                }
+                            {"_wrongData", "Błędne dane."},
 
-            };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_wrongData", "Błędne dane."}, 
-                    } 
+                            {"_wrongOperations", "Błędne działanie."},
+                        }
                 }
-
             };
-            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
-            {
-                {"pl", new Dictionary<string, string> 
-                    {
-                        {"_wrongOperations", "Błędne działanie."}, 
-                    } 
-                }
-
-            };
-            
         }
     }
 }

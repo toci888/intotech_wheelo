@@ -20,10 +20,9 @@ using Intotech.Wheelo.Common.Translations.Translation;
 
 Console.WriteLine("Warrior is seeding your dbs....");
 
+//TranslationRendererRunner runner = new TranslationRendererRunner();
 
-TranslationRendererRunner runner = new TranslationRendererRunner();
-
-runner.Run("C:\\Users\\stasx\\Documents\\GitHub\\intotech_wheelo\\Toci.Driver.Bll.Porsche.Interfaces\\Intotech.Wheelo.Common\\Translations\\");
+//runner.Run("C:\\Users\\bzapa\\source\\repos\\toci888\\intotech_wheelo\\Toci.Driver.Bll.Porsche.Interfaces\\Intotech.Wheelo.Common\\Translations\\");
 
 
 //Accountmode accountmode = new Accountmode() { Idaccount = 2, Mode = 1 };

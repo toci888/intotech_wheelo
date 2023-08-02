@@ -24,7 +24,7 @@ namespace Intotech.Wheelo.Common.Translations.Translation
 
                 writer.WriteLine("namespace Intotech.Wheelo.Common.Translations\r\n{");
 
-                writer.WriteLine("    internal class WheeloTranslationEngineI18n");
+                writer.WriteLine("    public class WheeloTranslationEngineI18n");
 
                 writer.WriteLine("    {\r\n        protected Dictionary<string, Dictionary<string, string>> ApplicationTranslationData;      ");
 
@@ -35,10 +35,10 @@ namespace Intotech.Wheelo.Common.Translations.Translation
                 {
                     foreach (var item in nManager.TranslationsMap)
                     {
-                        writer.WriteLine("            ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()\r\n            " +
-                            $"{{\r\n                {{\"{nManager.Language}\", new Dictionary<string, string> \r\n                    " +
-                            $"{{\r\n                        {{\"{item.Value.Tag}\", \"{item.Value.Content}\"}}, \r\n                    }} \r\n                }}\r\n\r\n            " +
-                            "};");
+                        writer.WriteLine(
+                            
+                            
+                            $"\r\n                        {{\"{item.Value.Tag}\", \"{item.Value.Content}\"}},");
                     }
                 }
 
