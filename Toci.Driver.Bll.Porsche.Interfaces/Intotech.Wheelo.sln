@@ -287,9 +287,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Seed.Common
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Logic.Interfaces", "Intotech.Wheelo.Bll.Logic.Interfaces\Intotech.Wheelo.Bll.Logic.Interfaces.csproj", "{0F0F5A54-60A9-4FDB-855E-110A6EA3B981}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Dictionaries.Bll.Persistence.Interfaces", "Dictionaries\Intotech.Wheelo.Dictionaries.Bll.Persistence.Interfaces\Intotech.Wheelo.Dictionaries.Bll.Persistence.Interfaces.csproj", "{D768D9FD-7B0C-439D-A048-FBB3134347AA}"
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Bll.Logic", "Intotech.Wheelo.Bll.Logic\Intotech.Wheelo.Bll.Logic.csproj", "{C1388397-2E17-4A93-A894-DA1EE41BB485}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.GhostRider", "..\..\Intotech.Common\Intotech.GhostRider\Intotech.GhostRider\Intotech.GhostRider.csproj", "{5696FF5C-9B2E-4E1A-BAC9-B11222550BB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Dictionaries.Bll.Persistence", "Dictionaries\Intotech.Wheelo.Dictionaries.Bll.Persistence\Intotech.Wheelo.Dictionaries.Bll.Persistence.csproj", "{62185E16-0CB8-4C58-BEB1-E13AF9EFA828}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Dictionaries.Bll.Logic", "Intotech.Wheelo.Dictionaries.Bll.Logic\Intotech.Wheelo.Dictionaries.Bll.Logic.csproj", "{45CE5D6C-E42A-4858-AE63-888C798C436B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Dictionaries.Bll.Logic.Interfaces", "Intotech.Wheelo.Dictionaries.Bll.Logic.Interfaces\Intotech.Wheelo.Dictionaries.Bll.Logic.Interfaces.csproj", "{0C4A1A73-8386-46E4-A6A0-EF9009D8E22F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
