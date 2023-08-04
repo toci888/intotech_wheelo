@@ -1,10 +1,11 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Common.Bll.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
-
 
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class VaworktripgengeolocationModelDto : DtoCollectionBase<Vaworktripgengeolocation, VaworktripgengeolocationModelDto, List<Vaworktripgengeolocation>, List<VaworktripgengeolocationModelDto>>
+
+public class VaworktripgengeolocationModelDto : DtoModelBase
 {
     public int Accountid { get; set; }
     public string Name { get; set; }

@@ -39,7 +39,7 @@ using Intotech.Common.Database.DbSetup;
 //using Intotech.Wheelo.Seed.Common.Wheelo.Main;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 using Intotech.Wheelo.Bll.Logic;
-using Intotech.Wheelo.Bll.Logic.DtoLogics;
+//using Intotech.Wheelo.Bll.Logic.DtoLogics;
 using Intotech.Wheelo.Bll.Porsche.Services;
 using Intotech.Wheelo.Tests.Persistence.Seed;
 using Toci.Driver.Bll.Porsche.Interfaces.Services;

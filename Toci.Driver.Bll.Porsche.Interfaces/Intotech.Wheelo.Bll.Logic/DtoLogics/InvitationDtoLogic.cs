@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class InvitationDtoLogic : DtoLogicBase<InvitationModelDto, Invitation, IInvitationLogic, InvitationDto, List<Invitation>, List<InvitationModelDto>>, IInvitationDtoLogic
 {
@@ -19,7 +21,7 @@ public class InvitationDtoLogic : DtoLogicBase<InvitationModelDto, Invitation, I
     {
     }
 
-    protected override DtoBase<Invitation,InvitationModelDto> GetDtoModelField(InvitationDto dto)
+    protected override InvitationModelDto GetDtoModelField(InvitationDto dto)
     {
        return dto.Invitation;
     }

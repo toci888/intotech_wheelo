@@ -1,10 +1,11 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Common.Bll.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
-
 
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class CarModelDto : DtoCollectionBase<Car, CarModelDto, List<Car>, List<CarModelDto>>
+
+public class CarModelDto : DtoModelBase
 {
     public int Id { get; set; }
     public int Idaccounts { get; set; }

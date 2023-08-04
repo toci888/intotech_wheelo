@@ -1,10 +1,11 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Common.Bll.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
-
 
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class VinvitationModelDto : DtoCollectionBase<Vinvitation, VinvitationModelDto, List<Vinvitation>, List<VinvitationModelDto>>
+
+public class VinvitationModelDto : DtoModelBase
 {
     public string Firstname { get; set; }
     public string Lastname { get; set; }

@@ -1,12 +1,14 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll;
 using Intotech.Common.Bll.ChorDtoBll.Dto;
-using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 using Intotech.Wheelo.Bll.Models.Dtos;
 using Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
-namespace Intotech.Wheelo.Bll.Logic.DtoLogics;
+
+namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class CarDtoLogic : DtoLogicBase<CarModelDto, Car, ICarLogic, CarDto, List<Car>, List<CarModelDto>>, ICarDtoLogic
 {
@@ -19,7 +21,7 @@ public class CarDtoLogic : DtoLogicBase<CarModelDto, Car, ICarLogic, CarDto, Lis
     {
     }
 
-    protected override DtoBase<Car,CarModelDto> GetDtoModelField(CarDto dto)
+    protected override CarModelDto GetDtoModelField(CarDto dto)
     {
        return dto.Car;
     }

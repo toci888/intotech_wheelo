@@ -19,7 +19,7 @@ public class CarsmodelDtoLogic : DtoLogicBase<CarsmodelModelDto, Carsmodel, ICar
     {
     }
 
-    protected override DtoBase<Carsmodel,CarsmodelModelDto> GetDtoModelField(CarsmodelDto dto)
+    protected override CarsmodelModelDto GetDtoModelField(CarsmodelDto dto)
     {
        return dto.Carsmodel;
     }

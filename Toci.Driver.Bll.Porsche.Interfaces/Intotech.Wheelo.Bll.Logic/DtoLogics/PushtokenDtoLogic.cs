@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class PushtokenDtoLogic : DtoLogicBase<PushtokenModelDto, Pushtoken, IPushtokenLogic, PushtokenDto, List<Pushtoken>, List<PushtokenModelDto>>, IPushtokenDtoLogic
 {
@@ -19,7 +21,7 @@ public class PushtokenDtoLogic : DtoLogicBase<PushtokenModelDto, Pushtoken, IPus
     {
     }
 
-    protected override DtoBase<Pushtoken,PushtokenModelDto> GetDtoModelField(PushtokenDto dto)
+    protected override PushtokenModelDto GetDtoModelField(PushtokenDto dto)
     {
        return dto.Pushtoken;
     }

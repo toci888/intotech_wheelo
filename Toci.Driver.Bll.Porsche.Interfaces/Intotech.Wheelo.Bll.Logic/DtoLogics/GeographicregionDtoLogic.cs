@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class GeographicregionDtoLogic : DtoLogicBase<GeographicregionModelDto, Geographicregion, IGeographicregionLogic, GeographicregionDto, List<Geographicregion>, List<GeographicregionModelDto>>, IGeographicregionDtoLogic
 {
@@ -19,7 +21,7 @@ public class GeographicregionDtoLogic : DtoLogicBase<GeographicregionModelDto, G
     {
     }
 
-    protected override DtoBase<Geographicregion,GeographicregionModelDto> GetDtoModelField(GeographicregionDto dto)
+    protected override GeographicregionModelDto GetDtoModelField(GeographicregionDto dto)
     {
        return dto.Geographicregion;
     }

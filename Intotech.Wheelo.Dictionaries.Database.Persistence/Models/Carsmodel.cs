@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Intotech.Common.Bll.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace Intotech.Wheelo.Dictionaries.Database.Persistence.Models;
 
-public partial class Carsmodel
+public partial class Carsmodel : ModelBase
 {
     public int Id { get; set; }
 

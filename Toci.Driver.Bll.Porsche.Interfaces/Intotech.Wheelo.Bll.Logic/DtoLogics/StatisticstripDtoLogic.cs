@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class StatisticstripDtoLogic : DtoLogicBase<StatisticstripModelDto, Statisticstrip, IStatisticstripLogic, StatisticstripDto, List<Statisticstrip>, List<StatisticstripModelDto>>, IStatisticstripDtoLogic
 {
@@ -19,7 +21,7 @@ public class StatisticstripDtoLogic : DtoLogicBase<StatisticstripModelDto, Stati
     {
     }
 
-    protected override DtoBase<Statisticstrip,StatisticstripModelDto> GetDtoModelField(StatisticstripDto dto)
+    protected override StatisticstripModelDto GetDtoModelField(StatisticstripDto dto)
     {
        return dto.Statisticstrip;
     }

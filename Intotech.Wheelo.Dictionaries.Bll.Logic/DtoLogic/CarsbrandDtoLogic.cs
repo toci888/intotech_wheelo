@@ -5,6 +5,7 @@ using Intotech.Wheelo.Dictionaries.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Dictionaries.Database.Persistence.Models;
 using Intotech.Wheelo.Dictionaries.Bll.Logic.Interfaces.IDtoLogic;
 using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Common.Bll.Interfaces;
 
 namespace Intotech.Wheelo.Dictionaries.Bll.Logic.DtoLogic;
 
@@ -19,7 +20,7 @@ public class CarsbrandDtoLogic : DtoLogicBase<CarsbrandModelDto, Carsbrand, ICar
     {
     }
 
-    protected override DtoBase<Carsbrand,CarsbrandModelDto> GetDtoModelField(CarsbrandDto dto)
+    protected override CarsbrandModelDto GetDtoModelField(CarsbrandDto dto)
     {
        return dto.Carsbrand;
     }
@@ -29,7 +30,9 @@ public class CarsbrandDtoLogic : DtoLogicBase<CarsbrandModelDto, Carsbrand, ICar
         dto.Carsbrand = field;
 
         return dto;
-    }    protected override CarsbrandDto FillEntity(CarsbrandDto dto, List<CarsbrandModelDto> field)
+    }    
+    
+    protected override CarsbrandDto FillEntity(CarsbrandDto dto, List<CarsbrandModelDto> field)
     {
         throw new NotImplementedException();
     }

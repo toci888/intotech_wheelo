@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class TripDtoLogic : DtoLogicBase<TripModelDto, Trip, ITripLogic, TripDto, List<Trip>, List<TripModelDto>>, ITripDtoLogic
 {
@@ -19,7 +21,7 @@ public class TripDtoLogic : DtoLogicBase<TripModelDto, Trip, ITripLogic, TripDto
     {
     }
 
-    protected override DtoBase<Trip,TripModelDto> GetDtoModelField(TripDto dto)
+    protected override TripModelDto GetDtoModelField(TripDto dto)
     {
        return dto.Trip;
     }

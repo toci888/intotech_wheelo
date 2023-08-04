@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class AccountmetadatumDtoLogic : DtoLogicBase<AccountmetadatumModelDto, Accountmetadatum, IAccountmetadatumLogic, AccountmetadatumDto, List<Accountmetadatum>, List<AccountmetadatumModelDto>>, IAccountmetadatumDtoLogic
 {
@@ -19,7 +21,7 @@ public class AccountmetadatumDtoLogic : DtoLogicBase<AccountmetadatumModelDto, A
     {
     }
 
-    protected override DtoBase<Accountmetadatum,AccountmetadatumModelDto> GetDtoModelField(AccountmetadatumDto dto)
+    protected override AccountmetadatumModelDto GetDtoModelField(AccountmetadatumDto dto)
     {
        return dto.Accountmetadatum;
     }

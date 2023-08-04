@@ -19,7 +19,7 @@ public class ColourDtoLogic : DtoLogicBase<ColourModelDto, Colour, IColourLogic,
     {
     }
 
-    protected override DtoBase<Colour,ColourModelDto> GetDtoModelField(ColourDto dto)
+    protected override ColourModelDto GetDtoModelField(ColourDto dto)
     {
        return dto.Colour;
     }

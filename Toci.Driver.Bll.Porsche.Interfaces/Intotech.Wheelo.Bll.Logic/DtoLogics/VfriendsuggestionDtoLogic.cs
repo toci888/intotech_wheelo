@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class VfriendsuggestionDtoLogic : DtoLogicBase<VfriendsuggestionModelDto, Vfriendsuggestion, IVfriendsuggestionLogic, VfriendsuggestionDto, List<Vfriendsuggestion>, List<VfriendsuggestionModelDto>>, IVfriendsuggestionDtoLogic
 {
@@ -19,7 +21,7 @@ public class VfriendsuggestionDtoLogic : DtoLogicBase<VfriendsuggestionModelDto,
     {
     }
 
-    protected override DtoBase<Vfriendsuggestion,VfriendsuggestionModelDto> GetDtoModelField(VfriendsuggestionDto dto)
+    protected override VfriendsuggestionModelDto GetDtoModelField(VfriendsuggestionDto dto)
     {
        return dto.Vfriendsuggestion;
     }

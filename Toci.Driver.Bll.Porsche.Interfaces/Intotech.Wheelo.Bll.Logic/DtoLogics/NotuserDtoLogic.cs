@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class NotuserDtoLogic : DtoLogicBase<NotuserModelDto, Notuser, INotuserLogic, NotuserDto, List<Notuser>, List<NotuserModelDto>>, INotuserDtoLogic
 {
@@ -19,7 +21,7 @@ public class NotuserDtoLogic : DtoLogicBase<NotuserModelDto, Notuser, INotuserLo
     {
     }
 
-    protected override DtoBase<Notuser,NotuserModelDto> GetDtoModelField(NotuserDto dto)
+    protected override NotuserModelDto GetDtoModelField(NotuserDto dto)
     {
        return dto.Notuser;
     }

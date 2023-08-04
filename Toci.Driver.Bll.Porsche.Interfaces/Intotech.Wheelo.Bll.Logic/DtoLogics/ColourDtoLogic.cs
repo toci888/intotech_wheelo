@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class ColourDtoLogic : DtoLogicBase<ColourModelDto, Colour, IColourLogic, ColourDto, List<Colour>, List<ColourModelDto>>, IColourDtoLogic
 {
@@ -19,7 +21,7 @@ public class ColourDtoLogic : DtoLogicBase<ColourModelDto, Colour, IColourLogic,
     {
     }
 
-    protected override DtoBase<Colour,ColourModelDto> GetDtoModelField(ColourDto dto)
+    protected override ColourModelDto GetDtoModelField(ColourDto dto)
     {
        return dto.Colour;
     }

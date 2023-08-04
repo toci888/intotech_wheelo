@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class SimpleaccountDtoLogic : DtoLogicBase<SimpleaccountModelDto, Simpleaccount, ISimpleaccountLogic, SimpleaccountDto, List<Simpleaccount>, List<SimpleaccountModelDto>>, ISimpleaccountDtoLogic
 {
@@ -19,7 +21,7 @@ public class SimpleaccountDtoLogic : DtoLogicBase<SimpleaccountModelDto, Simplea
     {
     }
 
-    protected override DtoBase<Simpleaccount,SimpleaccountModelDto> GetDtoModelField(SimpleaccountDto dto)
+    protected override SimpleaccountModelDto GetDtoModelField(SimpleaccountDto dto)
     {
        return dto.Simpleaccount;
     }
