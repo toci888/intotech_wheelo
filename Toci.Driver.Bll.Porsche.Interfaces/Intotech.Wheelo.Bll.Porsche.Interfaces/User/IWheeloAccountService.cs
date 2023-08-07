@@ -1,6 +1,7 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Common.Bll.Interfaces;
 using Intotech.Wheelo.Bll.Models.OldModels;
+using Intotech.Wheelo.Bll.Models.Tiny;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.User
 
         ReturnedResponse<PushTokenDto> SetPushToken(int idAccount, PushTokenDto pushToken);
 
-        ReturnedResponse<bool> ResendEmailVerificationCode(string email);
+        ReturnedResponse<bool> ResendEmailVerificationCode(EmailDto email);
 
         List<Account> GetAllUsers(); // temporary, development purpose, TODO REMOVE
     }

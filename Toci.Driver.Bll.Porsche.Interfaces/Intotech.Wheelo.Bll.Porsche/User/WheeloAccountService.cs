@@ -26,6 +26,7 @@ using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
 using Intotech.Common.Bll;
 using Intotech.Common.Interfaces;
 using Intotech.Wheelo.Common.Emails;
+using Intotech.Wheelo.Bll.Models.Tiny;
 
 namespace Intotech.Wheelo.Bll.Porsche.User
 {
@@ -122,7 +123,6 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                 return new ReturnedResponse<AccountRoleDto>(null, I18nTranslationDep.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmedPassMatch);
             }
 
-
             string refreshToken = simpleaccount.Refreshtoken;
 
             if (simpleaccount.Refreshtokenvalid == null || simpleaccount.Refreshtokenvalid < DateTime.Now)
@@ -199,9 +199,9 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             return new ReturnedResponse<AccountRoleDto>(null, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual ReturnedResponse<AccountRoleDto> ConfirmEmail(EmailConfirmDto EcDto)
+        public virtual ReturnedResponse<AccountRoleDto> ConfirmEmail(EmailConfirmDto entityDto)
         {
-            Account account = AccLogic.Select(m => m.Email == EcDto.Email).FirstOrDefault();
+            Account account = AccLogic.Select(m => m.Email == entityDto.Email).FirstOrDefault();
 
             if (account == null)
             {
@@ -209,13 +209,12 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             }
             else
             {
-                if (account.Verificationcode != EcDto.Code)
+                if (account.Verificationcode != entityDto.Code)
                 {
                     return IsHack<AccountRoleDto>(account.Id, RegistrationBadVerificationCodeKind);
                 }
                 else
                 {
-                    
                     account.Emailconfirmed = true;
                     string refreshToken = account.Refreshtoken =
                         StringUtils.GetRandomString(AccountLogicConstants.RefreshTokenMaxLength);
@@ -227,7 +226,6 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                         { Email = account.Email, Password = account.Password });
 
                     accountRoleDto.Refreshtoken = refreshToken;
-
 
                     return new ReturnedResponse<AccountRoleDto>(accountRoleDto,
                         I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
@@ -410,7 +408,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             return new ReturnedResponse<TokensModel>(tokensModel, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public ReturnedResponse<bool> SetAllowsNotifications(int accountId, bool allowsNotifications)
+        public ReturnedResponse<bool> SetAllowsNotifications(int accountId, bool allowsNotifications) //#TODO REQUIREDTO
         {
             Account account = AccLogic.Select(m => m.Id == accountId).FirstOrDefault();
 
@@ -560,16 +558,16 @@ namespace Intotech.Wheelo.Bll.Porsche.User
           //  }
         }
 
-        public virtual ReturnedResponse<bool> ResendEmailVerificationCode(string email)
+        public virtual ReturnedResponse<bool> ResendEmailVerificationCode(EmailDto entityDto) //#TODO REQUIREDTO
         {
-            Account accToRefreshCode = AccLogic.Select(m => m.Email == email).FirstOrDefault();
+            Account accToRefreshCode = AccLogic.Select(m => m.Email == entityDto.email).FirstOrDefault();
 
             if (accToRefreshCode != null)
             {
-                return new ReturnedResponse<bool>(ResendEmailVerificationCode(accToRefreshCode.Id), I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                return new ReturnedResponse<bool>(ResendEmailVerificationCode(accToRefreshCode.Id), I18nTranslation.Translate(entityDto.Language, I18nTags.Success), true, ErrorCodes.Success);
             }
 
-            return new ReturnedResponse<bool>(false, I18nTranslationDep.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated); ;
+            return new ReturnedResponse<bool>(false, I18nTranslation.Translate(entityDto.Language, I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated); 
         }
 
         protected virtual bool ResendEmailVerificationCode(int accountId)

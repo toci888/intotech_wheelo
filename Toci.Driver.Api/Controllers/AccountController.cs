@@ -111,7 +111,7 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
     [HttpPost("resend-email-verification-code")]
     public ReturnedResponse<bool> ResendEmailVerificationCode([FromBody] EmailDto email)
     {
-        return Service.ResendEmailVerificationCode(email.email);
+        return Service.ResendEmailVerificationCode(email);
     }
 
     [HttpGet("EnigmaticUrl")]
