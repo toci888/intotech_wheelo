@@ -20,7 +20,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         {
             Failedloginattempt result = FailedloginattemptLogic.Insert(failedloginattempt);
 
-            return new ReturnedResponse<Failedloginattempt>(result, I18nTranslation.Translation(I18nTags.Success),
+            return new ReturnedResponse<Failedloginattempt>(result, I18nTranslationDep.Translation(I18nTags.Success),
                 true, ErrorCodes.Success);
         }
     }

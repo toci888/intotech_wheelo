@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Common
 {
-    public static class I18nTranslation
+    public static class I18nTranslationDep
     {
         private static string Language = I18nTags.LanguageCodePl;
         //private static I18nManager i18NManager = new I18nManager(Language);
@@ -18,7 +18,7 @@ namespace Intotech.Wheelo.Common
             { I18nTags.LanguageCodePl, new PlI18nManager() },
         };
 
-        static I18nTranslation()
+        static I18nTranslationDep()
         {
         }
 

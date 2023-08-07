@@ -23,11 +23,13 @@ using Intotech.Wheelo.Common.Logging;
 using System.Security.Principal;
 using Newtonsoft.Json.Linq;
 using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
-
+using Intotech.Common.Bll;
+using Intotech.Common.Interfaces;
+using Intotech.Wheelo.Common.Emails;
 
 namespace Intotech.Wheelo.Bll.Porsche.User
 {
-    public class WheeloAccountService : IWheeloAccountService
+    public class WheeloAccountService : ServiceBaseEx, IWheeloAccountService
     {
         private readonly AuthenticationSettings _authenticationSettings;
         protected IAccountLogic AccLogic;
@@ -36,7 +38,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         protected IFailedloginattemptLogic FailedloginattemptLogic;
         protected IResetpasswordLogic ResetpasswordLogic;
         protected IPushtokenLogic PushtokenLogic;
-        protected IEmailManager EmailManager = new EmailManager("pl");
+        protected IEmailManager EmailManager = new Intotech.Wheelo.Common.Emails.EmailManager("pl");
         protected IAccountChatLogic AccountChatLogic;
 
         public const int MinutesVerificationCodeValid = 15;
@@ -58,8 +60,9 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             IAccountChatLogic chatLogic,
             IFailedloginattemptLogic failedloginattemptLogic, 
             IResetpasswordLogic resetpasswordLogic, 
-            IPushtokenLogic pushtokenLogic
-            /*, IEmailManager emailManager*/)
+            IPushtokenLogic pushtokenLogic,
+            ITranslationEngineI18n translationEngineI18n
+            /*, IEmailManager emailManager*/) : base(translationEngineI18n)
         {
             _authenticationSettings = authenticationSettings;
             AccLogic = accLogic;
@@ -76,16 +79,16 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         {
             AccountRoleDto result = GenerateJwt(accountrole);
 
-            return new ReturnedResponse<AccountRoleDto>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<AccountRoleDto>(result, I18nTranslation.Translate(DefaultLang, I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public ReturnedResponse<AccountRoleDto> Login(LoginDto loginDto)
+        public ReturnedResponse<AccountRoleDto> Login(LoginDto entityDto)
         {
-            Accountrole simpleaccount = AccRoleLogic.Select(m => m.Email == loginDto.Email && m.Password == loginDto.Password).FirstOrDefault();
+            Accountrole simpleaccount = AccRoleLogic.Select(m => m.Email == entityDto.Email && m.Password == entityDto.Password).FirstOrDefault();
 
             if (simpleaccount == null)
             {
-                Accountrole emailAccount = AccRoleLogic.Select(m => m.Email == loginDto.Email).FirstOrDefault();
+                Accountrole emailAccount = AccRoleLogic.Select(m => m.Email == entityDto.Email).FirstOrDefault();
 
                 if (emailAccount != null)
                 {
@@ -97,10 +100,10 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                     }
                 }
 
-                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslationDep.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
             }
 
-            if (!simpleaccount.Emailconfirmed.Value && simpleaccount.Password == loginDto.Password)
+            if (!simpleaccount.Emailconfirmed.Value && simpleaccount.Password == entityDto.Password)
             {
                 ReturnedResponse<AccountRoleDto> isHackResult = IsHack<AccountRoleDto>(simpleaccount.Id.Value, LoginEmailNotVerifiedPasswdMatch);
 
@@ -111,12 +114,12 @@ namespace Intotech.Wheelo.Bll.Porsche.User
                     return isHackResult;
                 }
 
-                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmed);
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslationDep.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmed);
             }
 
             if (!simpleaccount.Emailconfirmed.Value)
             {
-                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmedPassMatch);
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslationDep.Translation(I18nTags.EmailIsNotConfirmed), false, ErrorCodes.EmailIsNotConfirmedPassMatch);
             }
 
 
@@ -136,31 +139,31 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             resultAccRole.Refreshtoken = refreshToken;
 
-            return new ReturnedResponse<AccountRoleDto>(resultAccRole, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<AccountRoleDto>(resultAccRole, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual ReturnedResponse<AccountRoleDto> Register(AccountRegisterDto sAccount)
+        public virtual ReturnedResponse<AccountRoleDto> Register(AccountRegisterDto entityDto)
         {
-            if (!StringUtils.IsEmailAddress(sAccount.Email))
+            if (!StringUtils.IsEmailAddress(entityDto.Email))
             {
-                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslationDep.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
             }
 
-            Account simpleaccount = AccLogic.Select(m => m.Email == sAccount.Email).FirstOrDefault();
+            Account simpleaccount = AccLogic.Select(m => m.Email == entityDto.Email).FirstOrDefault();
 
             if (simpleaccount != null)
             {
-                if (!simpleaccount.Emailconfirmed.Value && simpleaccount.Password == sAccount.Password)
+                if (!simpleaccount.Emailconfirmed.Value && simpleaccount.Password == entityDto.Password)
                 {
                     ResendEmailVerificationCode(simpleaccount.Id);
 
-                    return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.PleaseConfirmYourWheeloAccountRegistration), false, ErrorCodes.PleaseConfirmEmail);
+                    return new ReturnedResponse<AccountRoleDto>(null, I18nTranslationDep.Translation(I18nTags.PleaseConfirmYourWheeloAccountRegistration), false, ErrorCodes.PleaseConfirmEmail);
                 }
 
-                if (simpleaccount.Emailconfirmed.Value && simpleaccount.Password == sAccount.Password)
+                if (simpleaccount.Emailconfirmed.Value && simpleaccount.Password == entityDto.Password)
                 {
                     //login from registration - all data ok
-                    return new ReturnedResponse<AccountRoleDto>(Login(new LoginDto() { Email = sAccount.Email, Password = sAccount.Password }).MethodResult, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.LoggedInViaRegistration);
+                    return new ReturnedResponse<AccountRoleDto>(Login(new LoginDto() { Email = entityDto.Email, Password = entityDto.Password }).MethodResult, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.LoggedInViaRegistration);
                 }
 
                 if (!simpleaccount.Emailconfirmed.Value)
@@ -175,14 +178,14 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
                     ResendEmailVerificationCode(simpleaccount.Id);
 
-                    return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.PleaseConfirmYourWheeloAccountRegistration), false, ErrorCodes.PleaseConfirmEmail);
+                    return new ReturnedResponse<AccountRoleDto>(null, I18nTranslationDep.Translation(I18nTags.PleaseConfirmYourWheeloAccountRegistration), false, ErrorCodes.PleaseConfirmEmail);
                 }
 
-                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.AccountExists), false, ErrorCodes.AccountExists);
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslationDep.Translation(I18nTags.AccountExists), false, ErrorCodes.AccountExists);
             }
 
-            Account account = new Account() { Name = sAccount.FirstName,
-                Surname = sAccount.LastName, Password = sAccount.Password, Email = sAccount.Email };
+            Account account = new Account() { Name = entityDto.FirstName,
+                Surname = entityDto.LastName, Password = entityDto.Password, Email = entityDto.Email };
 
             account.Verificationcode = IntUtils.GetRandomCode(1000, 9999);
             account.Verificationcodevalid = DateTime.Now.AddMinutes(MinutesVerificationCodeValid);
@@ -193,7 +196,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             simpleaccount.Verificationcode = 0;
 
-            return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<AccountRoleDto>(null, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<AccountRoleDto> ConfirmEmail(EmailConfirmDto EcDto)
@@ -202,7 +205,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (account == null)
             {
-                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslationDep.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
             }
             else
             {
@@ -227,7 +230,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
 
                     return new ReturnedResponse<AccountRoleDto>(accountRoleDto,
-                        I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                        I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
                 }
             }
         }
@@ -241,10 +244,10 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             {
                 AccountmodeLogic.Insert(new Accountmode() { Idaccount = accountId, Mode = WhiteMode });
 
-                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.DefaultModeCreated), true, ErrorCodes.Success);
+                return new ReturnedResponse<bool>(false, I18nTranslationDep.Translation(I18nTags.DefaultModeCreated), true, ErrorCodes.Success);
             }
 
-            return new ReturnedResponse<bool>(mode.Mode == WhiteMode ? false : true, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<bool>(mode.Mode == WhiteMode ? false : true, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<bool> SetMode(int accountId, bool mode)
@@ -255,37 +258,37 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             {
                 AccountmodeLogic.Insert(new Accountmode() { Idaccount = accountId, Mode = mode ? WhiteMode : DarkMode });
 
-                return new ReturnedResponse<bool>(mode, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                return new ReturnedResponse<bool>(mode, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
             }
 
             accMode.Mode = mode ? WhiteMode : DarkMode;
 
             AccountmodeLogic.Update(accMode);
 
-            return new ReturnedResponse<bool>(mode, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<bool>(mode, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual ReturnedResponse<AccountRoleDto> AcceptResetPassword(ResetPasswordConfirmDto resetPasswordConfirmDto) // email, kod
+        public virtual ReturnedResponse<AccountRoleDto> AcceptResetPassword(ResetPasswordConfirmDto entityDto) // email, kod
         {
-            Resetpassword resPwd = ResetpasswordLogic.Select(m => m.Email == resetPasswordConfirmDto.Email && m.Verificationcode == resetPasswordConfirmDto.Code).FirstOrDefault();
+            Resetpassword resPwd = ResetpasswordLogic.Select(m => m.Email == entityDto.Email && m.Verificationcode == entityDto.Code).FirstOrDefault();
 
             if (resPwd == null)
             {
-                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslationDep.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
             }
 
-            Account account = AccLogic.Select(m => m.Email == resetPasswordConfirmDto.Email).FirstOrDefault();
+            Account account = AccLogic.Select(m => m.Email == entityDto.Email).FirstOrDefault();
 
             if (account == null)
             {
-                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslationDep.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
             }
 
-            account.Password = resetPasswordConfirmDto.Password;
+            account.Password = entityDto.Password;
 
             AccLogic.Update(account);
 
-            return Login(new LoginDto() { Email = resetPasswordConfirmDto.Email, Password = resetPasswordConfirmDto.Password });
+            return Login(new LoginDto() { Email = entityDto.Email, Password = entityDto.Password });
         }
 
         public virtual ReturnedResponse<int?> ForgotPassword(string email)
@@ -296,7 +299,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (acc == null)
             {
-                return new ReturnedResponse<int?>(null, I18nTranslation.Translation(I18nTags.EmailDoesNotExist), false, ErrorCodes.EmailDoesNotExistResetPassword);
+                return new ReturnedResponse<int?>(null, I18nTranslationDep.Translation(I18nTags.EmailDoesNotExist), false, ErrorCodes.EmailDoesNotExistResetPassword);
             }
 
             Resetpassword resetpassword = ResetpasswordLogic.Select(m => m.Email == email).FirstOrDefault();
@@ -309,7 +312,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
                 EmailManager.SendPasswordResetVerificationCode(email, acc.Name, resetpassword.Verificationcode.ToString());
 
-                return new ReturnedResponse<int?>(null, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                return new ReturnedResponse<int?>(null, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
             }
 
             int verificationCode = IntUtils.GetRandomCode(1000, 9999);
@@ -322,7 +325,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             //send Email 
             EmailManager.SendPasswordResetVerificationCode(email, acc.Name, verificationCode.ToString());
 
-            return new ReturnedResponse<int?>(null, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<int?>(null, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public ReturnedResponse<int?> ResetPasswordCheckCode(string email, string verificationCode)
@@ -332,17 +335,17 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (acc == null)
             {
-                return new ReturnedResponse<int?>(null, I18nTranslation.Translation(I18nTags.EmailDoesNotExist), false, ErrorCodes.EmailDoesNotExistResetPassword);
+                return new ReturnedResponse<int?>(null, I18nTranslationDep.Translation(I18nTags.EmailDoesNotExist), false, ErrorCodes.EmailDoesNotExistResetPassword);
             }
 
             Resetpassword resetpassword = ResetpasswordLogic.Select(m => m.Email == email && m.Verificationcode.ToString() == verificationCode).FirstOrDefault();
 
             if (resetpassword == null)
             {
-                return new ReturnedResponse<int?>(null, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
+                return new ReturnedResponse<int?>(null, I18nTranslationDep.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
             }
 
-            return new ReturnedResponse<int?>(null, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<int?>(null, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public ReturnedResponse<int?> ResetPassword(string email, string password, string token)
@@ -352,21 +355,21 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (acc == null)
             {
-                return new ReturnedResponse<int?>(null, I18nTranslation.Translation(I18nTags.EmailDoesNotExist), false, ErrorCodes.EmailDoesNotExistResetPassword);
+                return new ReturnedResponse<int?>(null, I18nTranslationDep.Translation(I18nTags.EmailDoesNotExist), false, ErrorCodes.EmailDoesNotExistResetPassword);
             }
 
             Resetpassword resetpassword = ResetpasswordLogic.Select(m => m.Email == email && m.Verificationcode.ToString() == token).FirstOrDefault();
 
             if (resetpassword == null)
             {
-                return new ReturnedResponse<int?>(null, I18nTranslation.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
+                return new ReturnedResponse<int?>(null, I18nTranslationDep.Translation(I18nTags.FailVerifyingAccount), false, ErrorCodes.FailVerifyingAccount);
             }
 
             acc.Password = password;
 
             AccLogic.Update(acc);
 
-            return new ReturnedResponse<int?>(null, I18nTranslation.Translation(I18nTags.PasswordChangeSuccess), true, ErrorCodes.Success);
+            return new ReturnedResponse<int?>(null, I18nTranslationDep.Translation(I18nTags.PasswordChangeSuccess), true, ErrorCodes.Success);
         }
 
         public ReturnedResponse<TokensModel> CreateNewAccessToken(string accessToken, string refreshToken)
@@ -381,19 +384,19 @@ namespace Intotech.Wheelo.Bll.Porsche.User
             {
                 ErrorHandler.LogDebug("Access token: " + accessToken + " and refresh token " + refreshToken + " CreateNewAccessToken call failed with account not found for the email " + email);
 
-                return new ReturnedResponse<TokensModel>(null, I18nTranslation.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
+                return new ReturnedResponse<TokensModel>(null, I18nTranslationDep.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
             }
 
             if (account.Refreshtoken != refreshToken)
             {
                 ErrorHandler.LogDebug("Access token: " + accessToken + " and refresh token " + refreshToken + " CreateNewAccessToken call failed with invalid refresh token for the email " + email);
 
-                return new ReturnedResponse<TokensModel>(null, I18nTranslation.Translation(I18nTags.ErrorPleaseLogInToApp), false, ErrorCodes.ErrorPleaseLogInToApp);
+                return new ReturnedResponse<TokensModel>(null, I18nTranslationDep.Translation(I18nTags.ErrorPleaseLogInToApp), false, ErrorCodes.ErrorPleaseLogInToApp);
             }
 
             if (account.Refreshtokenvalid < DateTime.Now)
             {
-                return new ReturnedResponse<TokensModel>(null, I18nTranslation.Translation(I18nTags.RefreshTokenExpiredPleaseLogIn), false, ErrorCodes.RefreshTokenExpiredPleaseLogIn);
+                return new ReturnedResponse<TokensModel>(null, I18nTranslationDep.Translation(I18nTags.RefreshTokenExpiredPleaseLogIn), false, ErrorCodes.RefreshTokenExpiredPleaseLogIn);
             }
 
             TokensModel tokensModel = new TokensModel();
@@ -404,7 +407,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             AccLogic.Update(account);
 
-            return new ReturnedResponse<TokensModel>(tokensModel, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<TokensModel>(tokensModel, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public ReturnedResponse<bool> SetAllowsNotifications(int accountId, bool allowsNotifications)
@@ -413,14 +416,14 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (account == null)
             {
-                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
+                return new ReturnedResponse<bool>(false, I18nTranslationDep.Translation(I18nTags.AccountNotFound), false, ErrorCodes.AccountNotFound);
             }
 
             account.Allowsnotifications = allowsNotifications;
 
             AccLogic.Update(account);
 
-            return new ReturnedResponse<bool>(allowsNotifications, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<bool>(allowsNotifications, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public List<Account> GetAllUsers() // TODO REMOVE
@@ -509,7 +512,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
                     PushtokenLogic.Update(pushtoken);
 
-                    return new ReturnedResponse<PushTokenDto>(pushToken, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                    return new ReturnedResponse<PushTokenDto>(pushToken, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
                 }
 
                 pushtoken = DtoModelMapper.Map<Pushtoken, PushTokenDto>(pushToken);
@@ -518,7 +521,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
                 pushtoken = PushtokenLogic.Insert(pushtoken);
 
-                return new ReturnedResponse<PushTokenDto>(pushToken, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                return new ReturnedResponse<PushTokenDto>(pushToken, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
             }
 
             if (pushToken.Op == "remove")
@@ -531,11 +534,11 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
                     pushToken.Token = string.Empty;
 
-                    return new ReturnedResponse<PushTokenDto>(pushToken, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                    return new ReturnedResponse<PushTokenDto>(pushToken, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
                 }
             }
 
-            return new ReturnedResponse<PushTokenDto>(pushToken, I18nTranslation.Translation(I18nTags.WrongOperations), false, ErrorCodes.WrongPushTokenOperations);
+            return new ReturnedResponse<PushTokenDto>(pushToken, I18nTranslationDep.Translation(I18nTags.WrongOperations), false, ErrorCodes.WrongPushTokenOperations);
         }
 
         protected virtual ReturnedResponse<TResponse> IsHack<TResponse>(int accountId, int kind)
@@ -550,10 +553,10 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (isHack)
             {
-                return new ReturnedResponse<TResponse>(default(TResponse), I18nTranslation.Translation(I18nTags.UnderAttack), false, ErrorCodes.UnderAttack);
+                return new ReturnedResponse<TResponse>(default(TResponse), I18nTranslationDep.Translation(I18nTags.UnderAttack), false, ErrorCodes.UnderAttack);
             }
 
-            return new ReturnedResponse<TResponse>(default(TResponse), I18nTranslation.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
+            return new ReturnedResponse<TResponse>(default(TResponse), I18nTranslationDep.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
           //  }
         }
 
@@ -563,10 +566,10 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (accToRefreshCode != null)
             {
-                return new ReturnedResponse<bool>(ResendEmailVerificationCode(accToRefreshCode.Id), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                return new ReturnedResponse<bool>(ResendEmailVerificationCode(accToRefreshCode.Id), I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
             }
 
-            return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated); ;
+            return new ReturnedResponse<bool>(false, I18nTranslationDep.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated); ;
         }
 
         protected virtual bool ResendEmailVerificationCode(int accountId)

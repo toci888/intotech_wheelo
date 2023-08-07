@@ -33,7 +33,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (modelCheck != null)
             {
-                return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslation.Translation(I18nTags.DataAlreadyExistInDatabase), false, ErrorCodes.DataAlreadyExistInDatabase);
+                return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslationDep.Translation(I18nTags.DataAlreadyExistInDatabase), false, ErrorCodes.DataAlreadyExistInDatabase);
             }
 
             Accountmetadatum model = GetAccountmetadatum(accountMetaDto);
@@ -42,10 +42,10 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             if (model.Id < 1)
             {
-                return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslation.Translation(I18nTags.FailedToAddInformation), false, ErrorCodes.FailedToAddInformation);
+                return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslationDep.Translation(I18nTags.FailedToAddInformation), false, ErrorCodes.FailedToAddInformation);
             }
 
-            return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<AccountMetadataDto> Update(AccountMetadataDto accountMetaDto)
@@ -61,14 +61,14 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
                 model = AccountMetaLogic.Update(model);
 
-                return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
             }
 
             Accountmetadatum modelIns = GetAccountmetadatum(accountMetaDto);
 
             modelIns = AccountMetaLogic.Insert(modelIns);
 
-            return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<AccountMetadataDto>(accountMetaDto, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         protected virtual Accountmetadatum GetAccountmetadatum(AccountMetadataDto accountMetaDto)

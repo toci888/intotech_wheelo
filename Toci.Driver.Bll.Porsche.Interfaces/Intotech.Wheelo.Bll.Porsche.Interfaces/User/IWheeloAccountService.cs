@@ -1,4 +1,5 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Bll.Interfaces;
 using Intotech.Wheelo.Bll.Models.OldModels;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Porsche.Interfaces.User
 {
-    public interface IWheeloAccountService
+    public interface IWheeloAccountService : IService
     {
         ReturnedResponse<AccountRoleDto> Register(AccountRegisterDto sAccount);
 

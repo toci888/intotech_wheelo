@@ -27,7 +27,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 
         public virtual ReturnedResponse<List<Vfriendsuggestion>> GetSuggestions(int accountId)
         {
-            return new ReturnedResponse<List<Vfriendsuggestion>>(VfriendSuggestionLogic.Select(m => m.Accountid == accountId).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<List<Vfriendsuggestion>>(VfriendSuggestionLogic.Select(m => m.Accountid == accountId).ToList(), I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<List<Vfriendsuggestion>> MakeSuggestion(MakeFriendSuggestionDto friendSuggestionDto)
@@ -46,13 +46,13 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
             }
 
 
-            return new ReturnedResponse<List<Vfriendsuggestion>>(VfriendSuggestionLogic.Select(m => m.Accountid == friendSuggestionDto.SuggestingAccountId).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<List<Vfriendsuggestion>>(VfriendSuggestionLogic.Select(m => m.Accountid == friendSuggestionDto.SuggestingAccountId).ToList(), I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<List<Vfriendsuggestion>> SuggestedFriends(int accountId)
         {
             return new ReturnedResponse<List<Vfriendsuggestion>>(VfriendSuggestionLogic.Select(m => m.Suggestedfriendid == accountId || m.Suggestedaccountid == accountId).ToList(), 
-                I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }

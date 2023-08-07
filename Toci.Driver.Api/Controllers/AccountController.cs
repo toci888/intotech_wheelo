@@ -48,7 +48,7 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
 
             if (result == null)
             {
-                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslationDep.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
             }
 
             return Service.GafLogin(result);

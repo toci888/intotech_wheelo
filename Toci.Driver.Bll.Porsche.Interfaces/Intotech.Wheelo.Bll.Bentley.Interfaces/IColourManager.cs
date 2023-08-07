@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intotech.Common.Bll.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Bentley.Interfaces
 {
-    public interface IColourManager
+    public interface IColourManager : IManager
     {
         // 
         List<Colour> GetColoursForWildcard(string beginning);

@@ -1,4 +1,5 @@
-﻿using Intotech.Common.Bll.ComplexResponses;
+﻿using Intotech.Common.Bll;
+using Intotech.Common.Bll.ComplexResponses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Bll.Models.OldModels
 {
-    public class AccountRegisterDto
+    public class AccountRegisterDto : DtoEntityBase
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

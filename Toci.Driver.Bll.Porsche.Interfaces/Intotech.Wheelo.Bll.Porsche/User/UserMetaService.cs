@@ -37,12 +37,12 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
                 OccSmoCrLogic.Update(model);
 
-                return new ReturnedResponse<SmokerOccupationDto>(smokerOccupationDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                return new ReturnedResponse<SmokerOccupationDto>(smokerOccupationDto, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
             }
 
             OccSmoCrLogic.Insert(model);
 
-            return new ReturnedResponse<SmokerOccupationDto>(smokerOccupationDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<SmokerOccupationDto>(smokerOccupationDto, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }

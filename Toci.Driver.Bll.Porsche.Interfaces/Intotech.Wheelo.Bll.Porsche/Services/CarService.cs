@@ -1,5 +1,6 @@
 ﻿using Intotech.Common.Bll;
 using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Interfaces;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 using Intotech.Wheelo.Bll.Models.Dtos;
 using Intotech.Wheelo.Common;
@@ -12,7 +13,7 @@ public class CarService : ServiceBaseEx, ICarService
 {
     protected ICarDtoLogic CarDtoLogic;
     
-    public CarService(ICarDtoLogic carDtoLogic)
+    public CarService(ICarDtoLogic carDtoLogic, ITranslationEngineI18n translationEngineI18n) : base(translationEngineI18n)
     {
         CarDtoLogic = carDtoLogic;
     }
@@ -22,7 +23,7 @@ public class CarService : ServiceBaseEx, ICarService
         CarDto result = CarDtoLogic.SetEntity(carDto);
         
         return new ReturnedResponse<CarDto>(result,
-            I18nTranslation.Translation(I18nTags.Success), 
+            I18nTranslationDep.Translation(I18nTags.Success), 
             true,
             ErrorCodes.Success);
     }

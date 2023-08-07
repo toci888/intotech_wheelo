@@ -27,10 +27,10 @@ public class DriverCarService : IDriverCarService
 
         if (result == null)
         {
-            return new ReturnedResponse<Accountscarslocation>(null, I18nTranslation.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
+            return new ReturnedResponse<Accountscarslocation>(null, I18nTranslationDep.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
         }
 
-        return new ReturnedResponse<Accountscarslocation>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        return new ReturnedResponse<Accountscarslocation>(result, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
     }
 
     public virtual ReturnedResponse<bool> SetDriverCar(CarDto carData)
@@ -39,6 +39,6 @@ public class DriverCarService : IDriverCarService
 
         int result = CarLogic.Insert(car).Id;
 
-        return new ReturnedResponse<bool>(true, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        return new ReturnedResponse<bool>(true, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
     }
 }

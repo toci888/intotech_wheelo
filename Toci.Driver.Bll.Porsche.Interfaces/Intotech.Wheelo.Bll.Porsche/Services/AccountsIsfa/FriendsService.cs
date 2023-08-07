@@ -37,7 +37,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
             
             List<FriendsDto> frDto = AccountsMapper.Map(friends, accountId);
 
-            return new ReturnedResponse<List<FriendsDto>>(frDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<List<FriendsDto>>(frDto, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<List<FriendsDto>> SearchVfriends(int accountId, string query)
@@ -46,7 +46,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
                                                              (m.Friendname.Contains(query) || m.Friendsurname.Contains(query))).ToList();
             List<FriendsDto> frDto = AccountsMapper.Map(friends, accountId);
 
-            return new ReturnedResponse<List<FriendsDto>>(frDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<List<FriendsDto>>(frDto, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<bool> Unfriend(int accountId, int idFriendToRemove)
@@ -62,10 +62,10 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 
             if (fr == null)
             {
-                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.FriendshipNotFound), false, ErrorCodes.FriendshipNotFound);
+                return new ReturnedResponse<bool>(false, I18nTranslationDep.Translation(I18nTags.FriendshipNotFound), false, ErrorCodes.FriendshipNotFound);
             }
 
-            return new ReturnedResponse<bool>(FriendLogic.Delete(fr) > 0, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<bool>(FriendLogic.Delete(fr) > 0, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<Vfriend> AddFriend(NewFriendAddDto friend)
@@ -92,7 +92,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
             }
 
             return new ReturnedResponse<Vfriend>(VfriendLogic.Select(m => m.Idaccount == friend.Idaccount && m.Friendidaccount == friend.Idfriend).First(),
-                I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
 
         }
     }

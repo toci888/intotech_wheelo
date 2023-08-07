@@ -101,7 +101,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 
             if (collocationSource == null)
             {
-                return new ReturnedResponse<TripGenCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
+                return new ReturnedResponse<TripGenCollocationDto>(resultDto, I18nTranslationDep.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
             }
 
             resultDto.SourceAccount = ToAccountCollocationDto.Map(collocationSource);
@@ -119,7 +119,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                 resultDto.AccountsCollocated.Add(element);
             }
 
-            return new ReturnedResponse<TripGenCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<TripGenCollocationDto>(resultDto, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<AccountCollocationDto> GetAccountDataForMarker(int sourceAccountId,
@@ -133,7 +133,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 
             if (data == null)
             {
-                return new ReturnedResponse<AccountCollocationDto>(null, I18nTranslation.Translation(I18nTags.NoData),
+                return new ReturnedResponse<AccountCollocationDto>(null, I18nTranslationDep.Translation(I18nTags.NoData),
                     false, ErrorCodes.NoData);
             }
 
@@ -141,7 +141,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 
             resultDto.AreFriends = FriendLogic.AreFriends(sourceAccountId, associatedAccountId);
 
-            return new ReturnedResponse<AccountCollocationDto>(resultDto, I18nTranslation.Translation(I18nTags.Success),
+            return new ReturnedResponse<AccountCollocationDto>(resultDto, I18nTranslationDep.Translation(I18nTags.Success),
                 true, ErrorCodes.Success);
         }
 

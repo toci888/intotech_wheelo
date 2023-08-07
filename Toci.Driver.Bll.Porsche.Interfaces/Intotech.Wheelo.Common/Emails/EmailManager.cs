@@ -38,14 +38,14 @@ namespace Intotech.Wheelo.Common.Emails
         {
             string message = MessagesLanguageMap[LanguageCode][I18nEmailMessagesTags.EmailVerificationCode](new List<string>() { userName, verificationCode });
 
-            return EmailMsgSender.SendEmail(new EmailContent() { Body = message, EmailTo = emailTo, From = EmailFrom, Subject = I18nTranslation.Translation(I18nTags.PleaseConfirmYourWheeloAccountRegistration) });
+            return EmailMsgSender.SendEmail(new EmailContent() { Body = message, EmailTo = emailTo, From = EmailFrom, Subject = I18nTranslationDep.Translation(I18nTags.PleaseConfirmYourWheeloAccountRegistration) });
         }
 
         public virtual bool SendPasswordResetVerificationCode(string emailTo, string userName, string verificationCode)
         {
             string message = MessagesLanguageMap[LanguageCode][I18nEmailMessagesTags.PasswordResetEmailVerificationCode](new List<string>() { userName, verificationCode });
 
-            return EmailMsgSender.SendEmail(new EmailContent() { Body = message, EmailTo = emailTo, From = EmailFrom, Subject = I18nTranslation.Translation(I18nTags.PleaseConfirmYourWheeloAccountRegistration) });
+            return EmailMsgSender.SendEmail(new EmailContent() { Body = message, EmailTo = emailTo, From = EmailFrom, Subject = I18nTranslationDep.Translation(I18nTags.PleaseConfirmYourWheeloAccountRegistration) });
         }
     }
 }

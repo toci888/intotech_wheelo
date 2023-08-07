@@ -29,10 +29,10 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
             {
                 ExpenseLogic.Update(expense);
 
-                return new ReturnedResponse<Expense>(expense, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                return new ReturnedResponse<Expense>(expense, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
             }
 
-            return new ReturnedResponse<Expense>(ExpenseLogic.Insert(expense), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<Expense>(ExpenseLogic.Insert(expense), I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }
