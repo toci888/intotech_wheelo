@@ -27,13 +27,13 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.User
 
         ReturnedResponse<bool> SetAllowsNotifications(int accountId, bool allowsNotifications);
 
-        ReturnedResponse<int?> ResetPasswordCheckCode(string email, string verificationCode);
+        ReturnedResponse<int?> ResetPasswordCheckCode(EmailTokenDto emailToken);
 
-        ReturnedResponse<int?> ResetPassword(string email, string password, string token);
+        ReturnedResponse<int?> ResetPassword(ResetPasswordDto dto);
 
-        ReturnedResponse<TokensModel> CreateNewAccessToken(string accessToken, string refreshToken);
+        ReturnedResponse<TokensModel> CreateNewAccessToken(TokensModel tokensModel);
 
-        ReturnedResponse<int?> ForgotPassword(string email);
+        ReturnedResponse<int?> ForgotPassword(EmailDto email);
 
         ReturnedResponse<PushTokenDto> SetPushToken(int idAccount, PushTokenDto pushToken);
 
