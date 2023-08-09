@@ -45,5 +45,13 @@
     "WhereDoYouLive":"Where do you live?",
     "WhatTimeAreYouGo":"What time do you leave?",
     "WhereAreYouWorking":"Where do you work?",
-    "WhatTimeAreYouComingBack":"What time are you coming back?"
+    "WhatTimeAreYouComingBack":"What time are you coming back?",
+    "or": "or",
+    "YouDontHaveAnAccountYet": "You don't have an account yet?",
+    "ContinueWithGoogle": "Continue with Google",
+    "ContinueWithFacebook": "Continue with Facebook",
+    "ContinueWithApple": "Continue with Apple",
+    "SignInToStart": "Log in to start",
+    "TypeAMessage": "Type a message..",
+    "NoMessages": "No messages"
 }
