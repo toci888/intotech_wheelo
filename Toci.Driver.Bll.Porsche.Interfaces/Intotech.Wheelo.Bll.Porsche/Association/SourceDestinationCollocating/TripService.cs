@@ -12,10 +12,12 @@ using Toci.Driver.Database.Persistence.Models;
 using Intotech.Common;
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Models.TripEx;
+using Intotech.Common.Bll;
+using Intotech.Common.Interfaces;
 
 namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 {
-    public class TripService : ITripService
+    public class TripService : ServiceBaseEx, ITripService
     {
         protected ITripLogic TripLogic;
         protected ITripparticipantLogic TripparticipantLogic;
@@ -23,8 +25,13 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
         protected IAccountscarslocationLogic VAccountsCarsLocationLogic;
         protected IAccountLogic AccountLogic;
 
-        public TripService(ITripLogic tripLogic, ITripparticipantLogic tripparticipantLogic,
-            IVtripsparticipantLogic vTripparticipantLogic, IAccountscarslocationLogic vAccountsCarsLocationLogic, IAccountLogic accountLogic)
+        public TripService(
+            ITripLogic tripLogic,
+            ITripparticipantLogic tripparticipantLogic,
+            IVtripsparticipantLogic vTripparticipantLogic,
+            IAccountscarslocationLogic vAccountsCarsLocationLogic,
+            IAccountLogic accountLogic, 
+            ITranslationEngineI18n i18nTranslation) : base(i18nTranslation)
         {
             TripLogic = tripLogic;
             TripparticipantLogic = tripparticipantLogic;
@@ -38,9 +45,9 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             return new ReturnedResponse<int>(TripparticipantLogic.Insert(new Tripparticipant() { Idtrip = tripId, Idaccount = accountId }).Id, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual ReturnedResponse<bool> ConfirmTripParticipation(TripParticipationConfirmationDto tripAccountConfirm)
+        public virtual ReturnedResponse<bool> ConfirmTripParticipation(TripParticipationConfirmationDto entityDto)
         {
-            Trip trip = TripLogic.Select(m => m.Idinitiatoraccount == tripAccountConfirm.InitiatorAccountId && m.Iscurrent == true).FirstOrDefault();
+            Trip trip = TripLogic.Select(m => m.Idinitiatoraccount == entityDto.InitiatorAccountId && m.Iscurrent == true).FirstOrDefault();
 
             if (trip == null)
             {
@@ -48,12 +55,12 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
             }
 
             Tripparticipant tripParticipant = TripparticipantLogic
-                .Select(m => m.Idtrip == trip.Id && m.Idaccount == tripAccountConfirm.PassengerAccountId)
+                .Select(m => m.Idtrip == trip.Id && m.Idaccount == entityDto.PassengerAccountId)
                 .FirstOrDefault();
 
             if (tripParticipant == null)
             {
-                return new ReturnedResponse<bool>(false, I18nTranslationDep.Translation(I18nTags.NoData), false, ErrorCodes.DataIntegrityViolated);
+                return new ReturnedResponse<bool>(false, I18nTranslation.Translate(entityDto.Language, I18nTags.NoData), false, ErrorCodes.DataIntegrityViolated);
             }
 
             tripParticipant.Isconfirmed = true;
