@@ -62,7 +62,7 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
     [HttpPost("refresh-token")]
     public ReturnedResponse<TokensModel> CreateNewAccessToken([FromBody]TokensModel tokensModel)
     {
-        return Service.CreateNewAccessToken(tokensModel.AccessToken, tokensModel.RefreshToken);
+        return null;// Service.CreateNewAccessToken(tokensModel.AccessToken, tokensModel.RefreshToken);
     }
 
     [AllowAnonymous]

@@ -586,5 +586,10 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             return true;
         }
+
+        public ReturnedResponse<TokensModel> CreateNewAccessToken(TokensModel tokensModel)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
