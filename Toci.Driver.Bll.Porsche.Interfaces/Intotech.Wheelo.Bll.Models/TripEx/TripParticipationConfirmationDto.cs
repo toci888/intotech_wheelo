@@ -1,6 +1,8 @@
-﻿namespace Intotech.Wheelo.Bll.Models.TripEx;
+﻿using Intotech.Common.Bll;
 
-public class TripParticipationConfirmationDto
+namespace Intotech.Wheelo.Bll.Models.TripEx;
+
+public class TripParticipationConfirmationDto : DtoEntityBase
 {
     public int InitiatorAccountId { get; set; }
     public int PassengerAccountId { get; set; }

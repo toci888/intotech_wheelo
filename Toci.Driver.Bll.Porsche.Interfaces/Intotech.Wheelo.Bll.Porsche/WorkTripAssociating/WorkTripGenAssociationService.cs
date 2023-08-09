@@ -22,10 +22,12 @@ using Intotech.Wheelo.Notifications.Interfaces;
 using Intotech.Wheelo.Notifications.Interfaces.Models.DataNotification;
 using Intotech.Wheelo.Notifications.Interfaces.Models;
 using Npgsql;
+using Intotech.Common.Bll;
+using Intotech.Common.Interfaces;
 
 namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 {
-    public class WorkTripGenAssociationService : IWorkTripGenAssociationService
+    public class WorkTripGenAssociationService : ServiceBaseEx, IWorkTripGenAssociationService
     {
         private const double DistanceDivisor = 100000; // todo make sure about this
         private const int MinutesInterval = 15;
@@ -49,7 +51,8 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             IVacollocationsgeolocationToAccountCollocationDto toAccountCollocationDto,
             IFriendLogic friendLogic,
             IWorktripLogic workTripHistoryLogic,
-            INotificationManager notificationManager)
+            INotificationManager notificationManager,
+            ITranslationEngineI18n i18nTranslation) : base(i18nTranslation)
         {
             WorktripGenLogic = worktripgenLogic;
             VaworktripgengeolocationLogic = vaworktripgengeolocationLogic;
@@ -62,11 +65,11 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             NotificationManager = notificationManager;
         }
 
-        public virtual ReturnedResponse<TripGenCollocationDto> SetWorkTripGetCollocations(WorkTripGenDto workTripGen)
+        public virtual ReturnedResponse<TripGenCollocationDto> SetWorkTripGetCollocations(WorkTripGenDto entityDto)
         {
-            Worktripgen workTripGenRecord = MapWorkTrip(workTripGen);
+            Worktripgen workTripGenRecord = MapWorkTrip(entityDto);
 
-            List<Worktripgen> workTrips  = WorktripGenLogic.Select(m => m.Idaccount == workTripGen.Idaccount).ToList();
+            List<Worktripgen> workTrips  = WorktripGenLogic.Select(m => m.Idaccount == entityDto.Idaccount).ToList();
 
             if (workTrips.Count() > 0)
             {

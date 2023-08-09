@@ -1,4 +1,6 @@
-﻿using Intotech.Common.Bll.ComplexResponses;
+﻿using Intotech.Common.Bll;
+using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Interfaces;
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
@@ -8,10 +10,10 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Porsche.User
 {
-    public class PassStrLoginAttFailService : IPassStrLoginAttFailService
+    public class PassStrLoginAttFailService : ServiceBaseEx, IPassStrLoginAttFailService
     {
         protected IFailedloginattemptLogic FailedloginattemptLogic;
-        public PassStrLoginAttFailService(IFailedloginattemptLogic failedloginattemptLogic)
+        public PassStrLoginAttFailService(IFailedloginattemptLogic failedloginattemptLogic, ITranslationEngineI18n i18nTranslation) : base(i18nTranslation)
         {
             FailedloginattemptLogic = failedloginattemptLogic;
         }
