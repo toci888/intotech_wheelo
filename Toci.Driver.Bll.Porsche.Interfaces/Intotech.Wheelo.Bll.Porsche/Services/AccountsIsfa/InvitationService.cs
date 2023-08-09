@@ -13,10 +13,12 @@ using System.Threading.Tasks;
 using Intotech.Common;
 using Intotech.Wheelo.Common.ImageService;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Common.Bll;
+using Intotech.Common.Interfaces;
 
 namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 {
-    public class InvitationService : IInvitationService
+    public class InvitationService : ServiceBaseEx, IInvitationService
     {
         public const int InvitationOriginCollocations = 1;
         public const int InvitationOriginSuggestions = 2;
@@ -25,7 +27,10 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
         protected IInvitationLogic InvitationLogic;
 
 
-        public InvitationService(IVinvitationLogic vinvitationLogic, IInvitationLogic invitationLogic)
+        public InvitationService(
+            IVinvitationLogic vinvitationLogic,
+            IInvitationLogic invitationLogic,
+            ITranslationEngineI18n i18nTranslation) : base(i18nTranslation)
         {
             VinvitationLogic = vinvitationLogic;      
             InvitationLogic = invitationLogic;

@@ -51,7 +51,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
             if (trip == null)
             {
-                return new ReturnedResponse<bool>(false, I18nTranslationDep.Translation(I18nTags.NoData), false, ErrorCodes.DataIntegrityViolated);
+                return new ReturnedResponse<bool>(false, I18nTranslation.Translate(entityDto.Language,I18nTags.NoData), false, ErrorCodes.DataIntegrityViolated);
             }
 
             Tripparticipant tripParticipant = TripparticipantLogic
@@ -67,35 +67,35 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
             TripparticipantLogic.Update(tripParticipant);
 
-            return new ReturnedResponse<bool>(true, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<bool>(true, I18nTranslation.Translate(entityDto.Language, I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual ReturnedResponse<TripWithParticipantsDto> CreateTrip(TripDto trip)
+        public virtual ReturnedResponse<TripWithParticipantsDto> CreateTrip(TripDto entityDto)
         {
-            trip.Iscurrent = true;
+            entityDto.Iscurrent = true;
 
-            Accountscarslocation accountscarslocation = VAccountsCarsLocationLogic.Select(m => m.Idaccount == trip.Idinitiatoraccount).FirstOrDefault();
+            Accountscarslocation accountscarslocation = VAccountsCarsLocationLogic.Select(m => m.Idaccount == entityDto.Idinitiatoraccount).FirstOrDefault();
 
             if (accountscarslocation == null)
             {
-                return new ReturnedResponse<TripWithParticipantsDto>(null, I18nTranslationDep.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
+                return new ReturnedResponse<TripWithParticipantsDto>(null, I18nTranslation.Translate(entityDto.Language, I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
             }
 
             //trip.Summary
-            trip.Leftseats = accountscarslocation.Availableseats - trip.AccountIds.Count();
+            entityDto.Leftseats = accountscarslocation.Availableseats - entityDto.AccountIds.Count();
 
-            Trip dbTrip = DtoModelMapper.Map<Trip, TripDto>(trip);
+            Trip dbTrip = DtoModelMapper.Map<Trip, TripDto>(entityDto);
 
             Trip newTrip = TripLogic.Insert(dbTrip);
 
-            foreach (int accountId in trip.AccountIds)
+            foreach (int accountId in entityDto.AccountIds)
             {
                 TripparticipantLogic.Insert(new Tripparticipant() { Idaccount = accountId, Idtrip = newTrip.Id, Isoccasion = false, Isconfirmed = false });
             }
 
             TripWithParticipantsDto result = GetTripsWithInitiator(new List<Trip>() { newTrip }).First();
 
-            return new ReturnedResponse<TripWithParticipantsDto>(result, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<TripWithParticipantsDto>(result, I18nTranslation.Translate(entityDto.Language, I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<List<TripWithParticipantsDto>> GetAllTrips(int accountId) //#TODO: REQUIREDTO

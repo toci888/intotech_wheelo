@@ -13,17 +13,24 @@ using Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces;
 using Intotech.Wheelo.Common.Interfaces.Models;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Persistence;
+using Intotech.Common.Bll;
+using Intotech.Common.Interfaces;
 
 namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 {
-    public class FriendsService : IFriendsService
+    public class FriendsService : ServiceBaseEx, IFriendsService
     {
         protected IVfriendLogic VfriendLogic;
         protected IFriendLogic FriendLogic;
         protected IAccountLogic AccountLogic;
         protected IAccountIsfaToDto<Vfriend, FriendsDto> AccountsMapper;
 
-        public FriendsService(IVfriendLogic vfriendLogic, IFriendLogic friendLogic, IAccountIsfaToDto<Vfriend, FriendsDto> accountsMapper, IAccountLogic accountLogic)
+        public FriendsService(
+            IVfriendLogic vfriendLogic,
+            IFriendLogic friendLogic,
+            IAccountIsfaToDto<Vfriend, FriendsDto> accountsMapper,
+            IAccountLogic accountLogic,
+            ITranslationEngineI18n i18nTranslation) : base(i18nTranslation)
         {
             VfriendLogic = vfriendLogic;
             FriendLogic = friendLogic;
@@ -68,31 +75,31 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
             return new ReturnedResponse<bool>(FriendLogic.Delete(fr) > 0, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual ReturnedResponse<Vfriend> AddFriend(NewFriendAddDto friend)
+        public virtual ReturnedResponse<Vfriend> AddFriend(NewFriendAddDto entityDto)
         {
-            friend = friend.RefreshSwapDto();
+            entityDto = entityDto.RefreshSwapDto();
 
-            Account acc1 = AccountLogic.Select(m => m.Id == friend.Idaccount).FirstOrDefault();
+            Account acc1 = AccountLogic.Select(m => m.Id == entityDto.Idaccount).FirstOrDefault();
 
             if (acc1 != null)
             {
-                Account acc2 = AccountLogic.Select(m => m.Id == friend.Idfriend).FirstOrDefault();
+                Account acc2 = AccountLogic.Select(m => m.Id == entityDto.Idfriend).FirstOrDefault();
 
                 if (acc2 != null)
                 {
                     Friend testFr = FriendLogic
-                        .Select(m => m.Idaccount == friend.Idaccount && m.Idfriend == friend.Idfriend).FirstOrDefault();
+                        .Select(m => m.Idaccount == entityDto.Idaccount && m.Idfriend == entityDto.Idfriend).FirstOrDefault();
 
                     if (testFr == null)
                     {
                         FriendLogic.Insert(new Friend()
-                            { Idaccount = friend.Idaccount, Idfriend = friend.Idfriend, Method = friend.Method });
+                            { Idaccount = entityDto.Idaccount, Idfriend = entityDto.Idfriend, Method = entityDto.Method });
                     }
                 }
             }
 
-            return new ReturnedResponse<Vfriend>(VfriendLogic.Select(m => m.Idaccount == friend.Idaccount && m.Friendidaccount == friend.Idfriend).First(),
-                I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<Vfriend>(VfriendLogic.Select(m => m.Idaccount == entityDto.Idaccount && m.Friendidaccount == entityDto.Idfriend).First(),
+                I18nTranslation.Translate(DefaultLang, I18nTags.Success), true, ErrorCodes.Success);
 
         }
     }

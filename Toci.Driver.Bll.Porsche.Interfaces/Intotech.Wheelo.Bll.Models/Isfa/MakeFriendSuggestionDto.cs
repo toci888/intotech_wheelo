@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intotech.Common.Bll;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Bll.Models.Isfa
 {
-    public class MakeFriendSuggestionDto
+    public class MakeFriendSuggestionDto : DtoEntityBase
     {
         public int SuggestingAccountId { get; set; }
 
