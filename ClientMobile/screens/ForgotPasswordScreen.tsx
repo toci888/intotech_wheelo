@@ -66,7 +66,7 @@ export const ForgotPasswordScreen = () => {
             </Text>
             <Formik
               initialValues={{
-                email: "bartek@gg.pl",
+                email: "bzapart@gmail.com",
               }}
               validationSchema={yup.object().shape({
                 email: yup

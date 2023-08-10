@@ -45,5 +45,6 @@
     "WhereDoYouLive":"Where do you live?",
     "WhatTimeAreYouGo":"What time do you leave?",
     "WhereAreYouWorking":"Where do you work?",
-    "WhatTimeAreYouComingBack":"What time are you coming back?"
+    "WhatTimeAreYouComingBack":"What time are you coming back?",
+    "ResetPassword":"Reset password"
 }
