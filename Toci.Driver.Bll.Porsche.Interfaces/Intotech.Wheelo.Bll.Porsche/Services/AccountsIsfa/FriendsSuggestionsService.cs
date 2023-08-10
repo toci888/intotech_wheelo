@@ -1,5 +1,6 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Models.Isfa;
+using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.Services.AccountsIsfa;
 using Intotech.Wheelo.Common;
@@ -15,10 +16,10 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 {
     public class FriendsSuggestionsService : IFriendsSuggestionsService
     {
-        protected IVfriendSuggestionLogic VfriendSuggestionLogic;
-        protected IFriendSuggestionLogic FriendSuggestionLogic;
+        protected IVfriendsuggestionLogic VfriendSuggestionLogic;
+        protected IFriendsuggestionLogic FriendSuggestionLogic;
 
-        public FriendsSuggestionsService(IVfriendSuggestionLogic vfriendSuggestionLogic, IFriendSuggestionLogic friendSuggestionLogic)
+        public FriendsSuggestionsService(IVfriendsuggestionLogic vfriendSuggestionLogic, IFriendsuggestionLogic friendSuggestionLogic)
         {
             VfriendSuggestionLogic = vfriendSuggestionLogic;
             FriendSuggestionLogic = friendSuggestionLogic;

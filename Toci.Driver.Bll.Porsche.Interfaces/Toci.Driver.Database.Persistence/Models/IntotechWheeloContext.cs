@@ -42,6 +42,7 @@ namespace Toci.Driver.Database.Persistence.Models
         public virtual DbSet<Resetpassword> Resetpasswords { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Statisticstrip> Statisticstrips { get; set; } = null!;
+        public virtual DbSet<Statsprovider> Statsproviders { get; set; } = null!;
         public virtual DbSet<Trip> Trips { get; set; } = null!;
         public virtual DbSet<Tripparticipant> Tripparticipants { get; set; } = null!;
         public virtual DbSet<Userextradatum> Userextradata { get; set; } = null!;
@@ -717,6 +718,19 @@ namespace Toci.Driver.Database.Persistence.Models
                     .WithMany(p => p.Statisticstrips)
                     .HasForeignKey(d => d.Idgeographicregion)
                     .HasConstraintName("statisticstrips_idgeographicregion_fkey");
+            });
+
+            modelBuilder.Entity<Statsprovider>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("statsprovider");
+
+                entity.Property(e => e.Countcars).HasColumnName("countcars");
+
+                entity.Property(e => e.Countpeople).HasColumnName("countpeople");
+
+                entity.Property(e => e.Tripdate).HasColumnName("tripdate");
             });
 
             modelBuilder.Entity<Trip>(entity =>

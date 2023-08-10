@@ -64,10 +64,9 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
 
             _connectedUsers.TryAdd(Context.ConnectionId, Context.UserIdentifier);
 
-            // TODO User Room Names
-            List<int> userRoomIds = RoomService.GetAllRooms(Context.UserIdentifier);
+            List<string> userRoomIds = RoomService.GetAllRooms(Context.UserIdentifier);
 
-            foreach (int userRoomId in userRoomIds)
+            foreach (string userRoomId in userRoomIds)
             {
                 await Groups.AddToGroupAsync(Context.ConnectionId, userRoomId.ToString());
             }
@@ -76,15 +75,17 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         }
 
         [Authorize(Roles = "User")]
-        public async Task CreateRoom(int idAccount, List<int> remainiingAccountIds) // TODO KACPER DOC
+        public async Task<RoomsDto> CreateRoom(int idAccount, List<int> remainingAccountIds) // TODO KACPER DOC
         {
 
-            RoomsDto room = RoomService.CreateRoom(idAccount, remainiingAccountIds);
+            RoomsDto room = RoomService.CreateRoom(idAccount, remainingAccountIds);
 
             foreach (RoomMembersDto member in room.RoomMembers)
             {
                 Clients.User(member.Email).SendAsync(RoomEstablished, new { room });
             }
+
+            return room;
         }
 
         [Authorize(Roles = "User")]
@@ -96,7 +97,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
         }
 
         [Authorize(Roles = "User")]
-        public async Task SendMessage(ChatMessageDto chatMessage)
+        public async Task<ChatMessageDto> SendMessage(LiveChatMessageDto chatMessage)
         {
             chatMessage.SenderEmail = Context.UserIdentifier;
             chatMessage = ChatUserService.SendMessage(chatMessage);
@@ -104,12 +105,20 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             if (chatMessage != null)
             {
                 //await Groups.AddToGroupAsync(Context.ConnectionId, chatMessage.ID.ToString());
-                await Clients.OthersInGroup(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
-                //await Clients.Group(chatMessage.ID.ToString()).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
-                //await Clients.User(Context.UserIdentifier).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
-                ChatNotificationsService.SendChatNotifications(chatMessage.RoomId, chatMessage.SenderEmail, chatMessage, _connectedUsers);
+                //await Clients.OthersInGroup(chatMessage.RoomId).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
+                try
+                {
+                    await Clients.Group(chatMessage.RoomId).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
+                    //await Clients.User(Context.UserIdentifier).SendAsync(ClientReceiveMessageCallback, new { chatMessage });
+                    ChatNotificationsService.SendChatNotifications(chatMessage.RoomId, chatMessage.SenderEmail, chatMessage, _connectedUsers);
+                }
+                catch (Exception ex)
+                {
+                    
+                }
             }                                                            //roomid
 
+            return chatMessage;
         }
         
     }

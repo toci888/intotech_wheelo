@@ -167,6 +167,7 @@ public partial class IntotechWheeloChatContext : DbContext
                 .HasColumnName("isapproved");
             entity.Property(e => e.Memberemail).HasColumnName("memberemail");
             entity.Property(e => e.Memberidaccount).HasColumnName("memberidaccount");
+            entity.Property(e => e.Roomid).HasColumnName("roomid");
 
             entity.HasOne(d => d.IdroomNavigation).WithMany(p => p.Roomsaccounts)
                 .HasForeignKey(d => d.Idroom)

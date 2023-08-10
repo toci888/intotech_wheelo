@@ -1,4 +1,5 @@
 ﻿using Intotech.Common;
+using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 

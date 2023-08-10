@@ -4,9 +4,9 @@ using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Database.Persistence.Models;
 using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
-using Intotech.Wheelo.Chat.Jaguar.Utils;
 using Intotech.Wheelo.Chat.Models;
 using Intotech.Wheelo.Chat.Models.Caching;
+using Intotech.Wheelo.Common.Utils;
 using System.Security.Principal;
 using Toci.Driver.Database.Persistence.Models;
 
@@ -63,7 +63,7 @@ public class RoomService : IRoomService
             return null;
         }
 
-        chatMembers.Add(author);
+        //chatMembers.Add(author);
         
         result.RoomMembers = new List<RoomMembersDto>();
 
@@ -79,11 +79,11 @@ public class RoomService : IRoomService
             }
         }
 
-        result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = author.AccountCreatedAt, IdAccount = author.IdAccount, Email = author.SenderEmail, FirstName = author.UserName, LastName = author.UserSurname, PushTokens = author.PushTokens });
+       // result.RoomMembers.Add(new RoomMembersDto() { CreatedAt = author.AccountCreatedAt, IdAccount = author.IdAccount, Email = author.SenderEmail, FirstName = author.UserName, LastName = author.UserSurname, PushTokens = author.PushTokens });
 
         //Kacper, Julia, Bartek
         result.RoomName = string.Join(", ", chatMembers.Select(m => m.UserName));
-        result.RoomId = ChatUtils.GetRoomId(idAccount, idMembersAccounts);
+        result.RoomId = roomId; // ChatUtils.GetRoomId(idAccount, idMembersAccounts);
 
         Room room = null;
 
@@ -93,7 +93,7 @@ public class RoomService : IRoomService
         }
         else
         {
-            room = RoomLogic.Insert(new Room() { Owneremail = author.SenderEmail, Roomname = result.RoomName, Roomid = result.RoomId });
+            room = RoomLogic.Insert(new Room() { Owneremail = author.SenderEmail, Roomname = result.RoomName, Owneridaccount = idAccount, Roomid = result.RoomId });
         }
 
         result.IdRoom = room.Id;
@@ -103,16 +103,16 @@ public class RoomService : IRoomService
         {
             foreach (UserCacheDto chatMember in chatMembers)
             {
-                RoomsAccountLogic.Insert(new Roomsaccount() { Idroom = result.IdRoom, Memberemail = chatMember.SenderEmail });
+                RoomsAccountLogic.Insert(new Roomsaccount() { Roomid = result.RoomId, Memberidaccount = chatMember.IdAccount, Idroom = result.IdRoom, Memberemail = chatMember.SenderEmail });
             }
         }
 
         return result;
     }
 
-    public virtual List<int> GetAllRooms(string email)
+    public virtual List<string> GetAllRooms(string email)
     {
-        return RoomsAccountLogic.Select(m => m.Memberemail == email).Select(m => m.Idroom).ToList();
+        return RoomsAccountLogic.Select(m => m.Memberemail == email).Select(m => m.Roomid).ToList();
     }
 
     public virtual RoomsDto GetRoom(string roomId)

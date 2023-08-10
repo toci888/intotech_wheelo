@@ -1,9 +1,10 @@
-﻿using System;
+using Intotech.Common.Bll.Interfaces; 
+using System;
 using System.Collections.Generic;
 
 namespace Toci.Driver.Database.Persistence.Models
 {
-    public partial class Userextradatum
+    public partial class Userextradatum : ModelBase
     {
         public int Id { get; set; }
         public int? Idaccount { get; set; }

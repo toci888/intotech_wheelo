@@ -14,11 +14,29 @@
 
   <ItemGroup>
    
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll.Interfaces\Intotech.Common.Bll.Interfaces.csproj" />
+   
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll\Intotech.Common.Bll.csproj" />
+   
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Database.Interfaces\Intotech.Common.Database.Interfaces.csproj" />
+   
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Microservices.Interfaces\Intotech.Common.Microservices.Interfaces.csproj" />
+   
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Microservices\Intotech.Common.Microservices.csproj" />
+   
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common\Intotech.Common.csproj" />
+   
+    <ProjectReference Include="..\..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
    
     <ProjectReference Include="..\..\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces.csproj" />
    
     <ProjectReference Include="..\..\Intotech.Wheelo.Chat.Bll.Persistence\Intotech.Wheelo.Chat.Bll.Persistence.csproj" />
+   
+    <ProjectReference Include="..\..\Intotech.Wheelo.Seed.Common\Intotech.Wheelo.Seed.Common.csproj" />
+   
+    <ProjectReference Include="..\Intotech.Wheelo.Bll.Logic.Interfaces\Intotech.Wheelo.Bll.Logic.Interfaces.csproj" />
+   
+    <ProjectReference Include="..\Intotech.Wheelo.Bll.Logic\Intotech.Wheelo.Bll.Logic.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Persistence.Interfaces\Intotech.Wheelo.Bll.Persistence.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Persistence\Intotech.Wheelo.Bll.Persistence.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Porsche.Interfaces.csproj" />

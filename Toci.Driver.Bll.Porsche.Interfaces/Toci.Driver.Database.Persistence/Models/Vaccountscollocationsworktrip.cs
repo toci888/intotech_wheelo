@@ -1,9 +1,10 @@
-﻿using System;
+using Intotech.Common.Bll.Interfaces; 
+using System;
 using System.Collections.Generic;
 
 namespace Toci.Driver.Database.Persistence.Models
 {
-    public partial class Vaccountscollocationsworktrip
+    public partial class Vaccountscollocationsworktrip : ModelBase
     {
         public string? Name { get; set; }
         public string? Surname { get; set; }

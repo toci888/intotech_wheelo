@@ -20,7 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ModelDtos\Intotech.Wheelo.Dtos\" />
     <Folder Include="ModelMappers\ModelToDtoMaps\" />
+    <Folder Include="Dtos\" />
+    <Folder Include="DictionariesModelDto\" />
+    <Folder Include="DictionariesDto\" />
   </ItemGroup>
 
 </Project>

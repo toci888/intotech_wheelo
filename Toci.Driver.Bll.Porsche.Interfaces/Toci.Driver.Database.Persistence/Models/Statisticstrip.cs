@@ -1,9 +1,10 @@
-﻿using System;
+using Intotech.Common.Bll.Interfaces; 
+using System;
 using System.Collections.Generic;
 
 namespace Toci.Driver.Database.Persistence.Models
 {
-    public partial class Statisticstrip
+    public partial class Statisticstrip : ModelBase
     {
         public int Id { get; set; }
         public DateOnly? Tripdate { get; set; }

@@ -6,9 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
 
-namespace Intotech.Wheelo.Bll.Persistence
+namespace Intotech.Wheelo.Bll.Persistence;
+
+public class GeographicregionLogic : Logic<Geographicregion>, IGeographicregionLogic
 {
-    public class GeographicRegionLogic : Logic<Geographicregion>, IGeographicRegionLogic
-    {
-    }
 }

@@ -11,6 +11,7 @@ using Intotech.Wheelo.Common.Interfaces.CachingService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
@@ -61,22 +62,39 @@ namespace Intotech.Wheelo.Chat.Jaguar
             };
         }
 
-        public virtual ChatMessageDto SendMessage(ChatMessageDto chatMessage)
+        public virtual LiveChatMessageDto SendMessage(LiveChatMessageDto chatMessage)
         {
-            UserCacheDto userCached = GetUser(chatMessage.IdAccount);
+            UserCacheDto userCached = null;
+
+            if (chatMessage.IdAccount == 0)
+            {
+                 userCached = GetUser(chatMessage.SenderEmail);
+            }
+            else
+            {
+                 userCached = GetUser(chatMessage.IdAccount);
+            }
 
             Room room = RoomLogic.Select(m => m.Roomid == chatMessage.RoomId).FirstOrDefault();
+            //if room is null? TODO
+            Message mess = MessageLogic.Insert(new Message() { Idaccount = chatMessage.IdAccount, Authoremail = userCached.SenderEmail, Message1 = chatMessage.Text, Idroom = room.Id });
 
-            Message mess = MessageLogic.Insert(new Message() { Authoremail = chatMessage.SenderEmail, Message1 = chatMessage.Text, Idroom = room.Id });
+            chatMessage.Id = mess.Id;
 
-            chatMessage.CreatedAt = mess.Createdat.Value;
-            chatMessage.AuthorFirstName = userCached.UserName;
-            chatMessage.AuthorLastName = userCached.UserSurname;
-            chatMessage.SenderEmail = userCached.SenderEmail;
-            chatMessage.IdAccount = userCached.IdAccount;
-            chatMessage.ImageUrl = ImageServiceUtils.GetImageUrl(userCached.IdAccount);
+            chatMessage.Author = new AuthorDto() { FirstName = userCached.UserName, 
+                LastName = userCached.UserSurname, ImageUrl = userCached.ImageUrl, SenderEmail = userCached.SenderEmail, 
+                RoomId = chatMessage.RoomId, IdRoom = room.Id };
 
             return chatMessage;
+        }
+
+        protected virtual UserCacheDto GetUser(string email)
+        {
+            UserCacheDto userData = AccountService.GetAccount(email);
+
+            CachingService.Set(userData.IdAccount.ToString(), userData);
+
+            return userData;
         }
 
         protected virtual UserCacheDto GetUser(int idAccount)

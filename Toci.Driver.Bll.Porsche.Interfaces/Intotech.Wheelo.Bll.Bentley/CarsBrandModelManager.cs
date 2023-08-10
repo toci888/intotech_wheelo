@@ -1,5 +1,6 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Bll.Bentley.Interfaces;
+using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Common;
 using Intotech.Wheelo.Common.Interfaces;
@@ -15,10 +16,10 @@ namespace Intotech.Wheelo.Bll.Bentley
 {
     public class CarsBrandModelManager : ICarsBrandsModelManager
     {
-        protected ICarsBrandLogic CarsBrandLogic;
-        protected ICarsModelLogic CarsModelLogic;
+        protected ICarsbrandLogic CarsBrandLogic;
+        protected ICarsmodelLogic CarsModelLogic;
 
-        public CarsBrandModelManager(ICarsBrandLogic carsBrandLogic, ICarsModelLogic carsModelLogic)
+        public CarsBrandModelManager(ICarsbrandLogic carsBrandLogic, ICarsmodelLogic carsModelLogic)
         {
             CarsBrandLogic = carsBrandLogic;
             CarsModelLogic = carsModelLogic;

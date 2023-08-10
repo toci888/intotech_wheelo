@@ -1,6 +1,5 @@
 ﻿using Intotech.Common;
 using Intotech.Wheelo.Bll.Models;
-using Intotech.Wheelo.Bll.Models.Account;
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
@@ -13,6 +12,7 @@ using System.Threading.Tasks;
 using Intotech.Wheelo.Bll.Porsche.User;
 using Intotech.Common.Bll.ComplexResponses;
 using Intotech.Wheelo.Common.Interfaces;
+using Intotech.Wheelo.Bll.Models.OldModels;
 
 namespace Intotech.Wheelo.Tests.PorscheServices
 {
@@ -28,7 +28,7 @@ namespace Intotech.Wheelo.Tests.PorscheServices
 
             services.AddTransient<AuthenticationSettings, AuthenticationSettings>();
             services.AddTransient<IAccountLogic, AccountLogic>();
-            services.AddTransient<IAccountRoleLogic, AccountRoleLogic>();
+            services.AddTransient<IAccountroleLogic, AccountroleLogic>();
             services.AddTransient<IFailedloginattemptLogic, FailedloginattemptLogic>();
             services.AddTransient<IResetpasswordLogic, ResetpasswordLogic>();
             services.AddTransient<IPushtokenLogic, PushtokenLogic>();

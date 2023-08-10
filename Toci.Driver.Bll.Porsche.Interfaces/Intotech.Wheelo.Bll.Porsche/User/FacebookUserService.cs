@@ -10,16 +10,17 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Intotech.Common.ImageManagement;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Wheelo.Bll.Persistence;
 
 namespace Intotech.Wheelo.Bll.Porsche.User
 {
     public class FacebookUserService : GafServiceBase<FacebookUserDto>
     {
         protected IAccountLogic AccountLogic;
-        protected IUserExtraDataLogic UserExtraDataLogic;
+        protected IUserextradatumLogic UserExtraDataLogic;
         protected ImageManager ImageManager;
 
-        public FacebookUserService(IAccountLogic accountLogic, IUserExtraDataLogic userExtraDataLogic) : base("https://graph.facebook.com/")
+        public FacebookUserService(IAccountLogic accountLogic, IUserextradatumLogic userExtraDataLogic) : base("https://graph.facebook.com/")
         {
             AccountLogic = accountLogic;
             UserExtraDataLogic = userExtraDataLogic;

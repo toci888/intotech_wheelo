@@ -3,5 +3,5 @@
 public class FullConversationsDto
 {
     public List<ConversationDto> Conversations { get; set; }
-    public List<MessageAuthorDto> UsersData { get; set; }
+    public List<AuthorDto> UsersData { get; set; }
 }

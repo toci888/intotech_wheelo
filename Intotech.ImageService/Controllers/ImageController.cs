@@ -11,6 +11,7 @@ using System.Drawing;
 
 namespace Intotech.ImageService.Controllers;
 
+//http://68.219.119.137:5072/image?dataId=1000000001&queryValid=E2A90E06932F0761354C538AF32B86F7
 [Controller]
 //[Route("/")]
 public class ImageController : Controller

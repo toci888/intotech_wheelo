@@ -10,8 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Common;
-using Intotech.Wheelo.Bll.Models.Trip;
 using Intotech.Wheelo.Bll.Persistence;
+using Intotech.Wheelo.Bll.Models.TripEx;
 
 namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 {
@@ -19,12 +19,12 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
     {
         protected ITripLogic TripLogic;
         protected ITripparticipantLogic TripparticipantLogic;
-        protected IVTripsParticipantsLogic VTripparticipantLogic;
-        protected IAccountsCarsLocationLogic VAccountsCarsLocationLogic;
+        protected IVtripsparticipantLogic VTripparticipantLogic;
+        protected IAccountscarslocationLogic VAccountsCarsLocationLogic;
         protected IAccountLogic AccountLogic;
 
-        public TripService(ITripLogic tripLogic, ITripparticipantLogic tripparticipantLogic, 
-            IVTripsParticipantsLogic vTripparticipantLogic, IAccountsCarsLocationLogic vAccountsCarsLocationLogic, IAccountLogic accountLogic)
+        public TripService(ITripLogic tripLogic, ITripparticipantLogic tripparticipantLogic,
+            IVtripsparticipantLogic vTripparticipantLogic, IAccountscarslocationLogic vAccountsCarsLocationLogic, IAccountLogic accountLogic)
         {
             TripLogic = tripLogic;
             TripparticipantLogic = tripparticipantLogic;

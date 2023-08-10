@@ -1,9 +1,10 @@
-﻿using System;
+using Intotech.Common.Bll.Interfaces; 
+using System;
 using System.Collections.Generic;
 
 namespace Toci.Driver.Database.Persistence.Models
 {
-    public partial class Car
+    public partial class Car : ModelBase
     {
         public int Id { get; set; }
         public int Idaccounts { get; set; }

@@ -4,11 +4,11 @@ using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Chat.Database.Persistence.Models;
 using Intotech.Wheelo.Chat.Dodge.Interfaces;
 using Intotech.Wheelo.Chat.Jaguar.Interfaces;
-using Intotech.Wheelo.Chat.Jaguar.Utils;
 using Intotech.Wheelo.Chat.Models;
 using Intotech.Wheelo.Chat.Models.Caching;
 using Intotech.Wheelo.Common;
 using Intotech.Wheelo.Common.ImageService;
+using Intotech.Wheelo.Common.Utils;
 using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Chat.Jaguar;
@@ -20,7 +20,7 @@ public class ConversationService : IConversationService
     protected IAccountService AccountService;
     protected IRoomsaccountLogic RoomsAccountLogic;
 
-    protected Dictionary<string, MessageAuthorDto> DistinctAuthors = new Dictionary<string, MessageAuthorDto>();
+    protected Dictionary<string, AuthorDto> DistinctAuthors = new Dictionary<string, AuthorDto>();
 
     public ConversationService(IMessageLogic messageLogic, IAccountService accountService, IRoomLogic roomLogic, IRoomsaccountLogic roomsAccountLogic)
     {
@@ -45,18 +45,18 @@ public class ConversationService : IConversationService
 
     public virtual ConversationDto GetConversationById(int roomId, bool isAccountIdRequest = false)
     {
-        List<Message> messages = MessageLogic.Select(m => m.Idroom == roomId).OrderByDescending(m => m.Createdat).ToList();
-
-        List<Message> distinctAuthors = messages.DistinctBy(m => m.Authoremail).ToList();
-
-        GetDistinctNames(distinctAuthors);
-
         Room room = RoomLogic.Select(m => m.Id == roomId).FirstOrDefault();
 
         if (room == null)
         {
             return null;
         }
+
+        List<Message> messages = MessageLogic.Select(m => m.Idroom == roomId).OrderByDescending(m => m.Createdat).ToList();
+
+        List<Message> distinctAuthors = messages.DistinctBy(m => m.Authoremail).ToList();
+
+        GetDistinctNames(distinctAuthors);
 
         UserCacheDto acc = AccountService.GetAccount(room.Owneremail);
 
@@ -76,18 +76,27 @@ public class ConversationService : IConversationService
             
             foreach (Message message in messages)
             {
-                resElement.Messages.Add(new ChatMessageDto()
+               /* AuthorDto author = new AuthorDto()
                 {
                     CreatedAt = message.Createdat.Value,
                     SenderEmail = message.Authoremail,
-                    Text = message.Message1,
-                    ID = message.Id,
-                    IdAccount = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].Id : 0,
+                    Id = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].Id : 0,
                     IdRoom = room.Id,
                     RoomId = room.Roomid,
-                    AuthorFirstName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].FirstName : string.Empty,
-                    AuthorLastName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].LastName : string.Empty,
+                    FirstName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].FirstName : string.Empty,
+                    LastName = DistinctAuthors.ContainsKey(message.Authoremail) ? DistinctAuthors[message.Authoremail].LastName : string.Empty,
                     ImageUrl = DistinctAuthors.ContainsKey(message.Authoremail) ? ImageServiceUtils.GetImageUrl(DistinctAuthors[message.Authoremail].Id) : string.Empty
+                };
+               */
+                resElement.Messages.Add(new ChatMessageDto()
+                {
+                    
+                    Text = message.Message1,
+                    Id = message.Id,
+                    IdAccount = message.Idaccount,
+                    CreatedAt = message.Createdat.Value,
+                    SenderEmail = message.Authoremail
+                    //Author = author
                 });
 
                 if (isAccountIdRequest)
@@ -133,9 +142,9 @@ public class ConversationService : IConversationService
         return result;
     }
 
-    protected virtual Dictionary<string, MessageAuthorDto> GetRoomParticipants(int roomId)
+    protected virtual Dictionary<string, AuthorDto> GetRoomParticipants(int roomId)
     {
-        Dictionary<string, MessageAuthorDto> result = new Dictionary<string, MessageAuthorDto>();   
+        Dictionary<string, AuthorDto> result = new Dictionary<string, AuthorDto>();   
 
         List<Roomsaccount> roomsAccounts = RoomsAccountLogic.Select(m => m.Idroom == roomId).ToList();
 
@@ -143,13 +152,15 @@ public class ConversationService : IConversationService
         {
             UserCacheDto acc = AccountService.GetAccount(item.Memberemail);
 
-            MessageAuthorDto resElement = new MessageAuthorDto();
+            AuthorDto resElement = new AuthorDto();
 
             resElement.FirstName = acc.UserName;
             resElement.LastName = acc.UserSurname;
             resElement.Id = acc.IdAccount;
             resElement.ImageUrl = ImageServiceUtils.GetImageUrl(acc.IdAccount);
             resElement.SenderEmail = acc.SenderEmail;
+            resElement.RoomId = item.Roomid;
+            resElement.IdRoom = item.Idroom;
 
             result.Add(item.Memberemail, resElement);
         }
@@ -157,7 +168,7 @@ public class ConversationService : IConversationService
         return result;
     }
 
-    protected virtual Dictionary<string, MessageAuthorDto> GetDistinctNames(List<Message> distinctAuthors)
+    protected virtual Dictionary<string, AuthorDto> GetDistinctNames(List<Message> distinctAuthors)
     {
         foreach (Message message in distinctAuthors)
         {
@@ -166,7 +177,7 @@ public class ConversationService : IConversationService
                 continue;
             }
 
-            MessageAuthorDto resElement = new MessageAuthorDto();
+            AuthorDto resElement = new AuthorDto();
 
             UserCacheDto acc = AccountService.GetAccount(message.Authoremail);
 

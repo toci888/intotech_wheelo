@@ -1,6 +1,7 @@
 ﻿using Intotech.Wheelo.Common.ImageService;
 using Intotech.Wheelo.Common.Interfaces.ModelMapperInterfaces;
 using Intotech.Wheelo.Common.Interfaces.Models;
+using Intotech.Wheelo.Common.Utils;
 using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Models.ModelMappers;
@@ -32,7 +33,8 @@ public class VFriendsToFriendsDto : IAccountIsfaToDto<Vfriend, FriendsDto>
             Name = name,
             Surname = surname,
             Image = ImageServiceUtils.GetImageUrl(accId),
-            Driver = dbModel.Driverpassenger.Value
+            Driver = dbModel.Driverpassenger.Value,
+            RoomId = ChatUtils.GetRoomId(accountId, accId)
         };
 
         return result;

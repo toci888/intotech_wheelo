@@ -1,4 +1,5 @@
-﻿using Intotech.Common.Microservices;
+﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Microservices;
 using Intotech.Wheelo.Social.Bll.Pontiac.Interfaces;
 using Intotech.Wheelo.Social.Database.Persistence.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,7 @@ namespace Intotech.Wheelo.Social.Api.Controllers
         }
 
         [HttpPost("expense")]
-        public Expense AddExpense(Expense exp)
+        public ReturnedResponse<Expense> AddExpense(Expense exp)
         {
             return Service.AddExpense(exp);
         }

@@ -1,6 +1,6 @@
 ﻿using Intotech.Common;
 using Intotech.Common.Bll.ComplexResponses;
-using Intotech.Wheelo.Bll.Models.Account;
+using Intotech.Wheelo.Bll.Models.OldModels;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
 using Intotech.Wheelo.Common.Interfaces;
@@ -12,14 +12,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Wheelo.Bll.Persistence;
 
 namespace Intotech.Wheelo.Bll.Porsche.User
 {
     public class UserMetaService : IUserMetaService
     {
-        protected IOccupationSmokerCratLogic OccSmoCrLogic;
+        protected IOccupationsmokercratLogic OccSmoCrLogic;
 
-        public UserMetaService(IOccupationSmokerCratLogic occSmoCrLogic)
+        public UserMetaService(IOccupationsmokercratLogic occSmoCrLogic)
         {
             OccSmoCrLogic = occSmoCrLogic;
         }

@@ -1,5 +1,6 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
-using Intotech.Wheelo.Bll.Models.Account;
+using Intotech.Wheelo.Bll.Models.OldModels;
+using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
 using Intotech.Wheelo.Common;
@@ -15,11 +16,11 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 {
     public class AccountMetadataService : IAccountMetadataService
     {
-        protected IAccountMetadataLogic AccountMetaLogic;
+        protected IAccountmetadatumLogic AccountMetaLogic;
         protected IOccupationLogic OccupationLogic;
-        protected IGeographicRegionLogic GeographicRegionLogic;
+        protected IGeographicregionLogic GeographicRegionLogic;
 
-        public AccountMetadataService(IAccountMetadataLogic accountMetaLogic, IOccupationLogic occupationLogic, IGeographicRegionLogic geographicRegionLogic)
+        public AccountMetadataService(IAccountmetadatumLogic accountMetaLogic, IOccupationLogic occupationLogic, IGeographicregionLogic geographicRegionLogic)
         {
             AccountMetaLogic = accountMetaLogic;
             OccupationLogic = occupationLogic;

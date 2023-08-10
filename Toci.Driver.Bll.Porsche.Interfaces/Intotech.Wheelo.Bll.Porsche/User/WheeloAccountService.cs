@@ -1,6 +1,6 @@
 ﻿using Intotech.Common;
 using Intotech.Common.Bll.ComplexResponses;
-using Intotech.Wheelo.Bll.Models.Account;
+using Intotech.Wheelo.Bll.Models.OldModels;
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Intotech.Wheelo.Bll.Porsche.Interfaces.User;
@@ -24,13 +24,14 @@ using System.Security.Principal;
 using Newtonsoft.Json.Linq;
 using Intotech.Wheelo.Chat.Bll.Persistence.Interfaces;
 
+
 namespace Intotech.Wheelo.Bll.Porsche.User
 {
     public class WheeloAccountService : IWheeloAccountService
     {
         private readonly AuthenticationSettings _authenticationSettings;
         protected IAccountLogic AccLogic;
-        protected IAccountRoleLogic AccRoleLogic;
+        protected IAccountroleLogic AccRoleLogic;
         protected IAccountmodeLogic AccountmodeLogic;
         protected IFailedloginattemptLogic FailedloginattemptLogic;
         protected IResetpasswordLogic ResetpasswordLogic;
@@ -50,9 +51,14 @@ namespace Intotech.Wheelo.Bll.Porsche.User
         public const int LoginEmailNotVerifiedPasswdMatch = 4;
         public const int LoginEmailNotVerifiedPasswdDontMatch = 5;
 
-        public WheeloAccountService(AuthenticationSettings authenticationSettings, IAccountLogic accLogic, IAccountRoleLogic accRoleLogic,
-            IAccountmodeLogic accountmodeLogic, IAccountChatLogic chatLogic,
-            IFailedloginattemptLogic failedloginattemptLogic, IResetpasswordLogic resetpasswordLogic, IPushtokenLogic pushtokenLogic
+        public WheeloAccountService(AuthenticationSettings authenticationSettings, 
+            IAccountLogic accLogic,
+            IAccountroleLogic accRoleLogic,
+            IAccountmodeLogic accountmodeLogic, 
+            IAccountChatLogic chatLogic,
+            IFailedloginattemptLogic failedloginattemptLogic, 
+            IResetpasswordLogic resetpasswordLogic, 
+            IPushtokenLogic pushtokenLogic
             /*, IEmailManager emailManager*/)
         {
             _authenticationSettings = authenticationSettings;

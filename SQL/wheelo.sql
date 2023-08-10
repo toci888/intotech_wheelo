@@ -1,70 +1,68 @@
-﻿drop view StatsProvider;
+﻿drop view if exists StatsProvider;
 
-drop table OccupationSmokerCrat;
-drop table PushTokens;
+drop table if exists OccupationSmokerCrat;
+drop table if exists PushTokens;
 
-drop table ResetPassword;
+drop table if exists ResetPassword;
 
 
-drop table PasswordStrength;
-drop table FailedLoginAttempts;
+drop table if exists PasswordStrength;
+drop table if exists FailedLoginAttempts;
 
 --
 
-drop table AccountModes;
+drop table if exists AccountModes;
 
-drop view VFriends;
+drop view if exists VFriends;
 
-drop view VAWorkTripGenGeoLocations;
-drop view VWorkTripGenGeoLocations;
-drop view VACollocationsGeoLocations;
+drop view if exists VAWorkTripGenGeoLocations;
+drop view if exists VWorkTripGenGeoLocations;
+drop view if exists VACollocationsGeoLocations;
 
-drop view VCollocationsGeoLocations;
-drop view VTripsParticipants;
-drop view AccountsCarsLocations;
-drop table TripParticipants;
-drop table Trips;
+drop view if exists VCollocationsGeoLocations;
+drop view if exists VTripsParticipants;
+drop view if exists AccountsCarsLocations;
+drop table if exists TripParticipants;
+drop table if exists Trips;
 
-drop table WorkTripGen;
-drop table NotUser;
+drop table if exists WorkTripGen;
+drop table if exists NotUser;
 ----
-drop table AccountMetadata;
-drop table Occupations;
-drop table StatisticsTrips;
+drop table if exists AccountMetadata;
+drop table if exists Occupations;
+drop table if exists StatisticsTrips;
 
-drop view AccountRoles;
+drop view if exists AccountRoles;
 
-drop view VInvitations;
-drop view VAccountsCollocations;
-drop view VFriendSuggestions;
+drop view if exists VInvitations;
+drop view if exists VAccountsCollocations;
+drop view if exists VFriendSuggestions;
 --select * from  WorkTrip;
 --select * from  Accounts;
 --select * from AccountsCollocations;
---drop view AccountsCarsLocations;
+--drop view if exists AccountsCarsLocations;
 
---drop view VCollocationsGeoLocations;
+--drop view if exists VCollocationsGeoLocations;
 
-drop view VAccountsCollocationsWorkTrip;
-drop table WorkTrip;
-drop view VCarOwner;
-drop table Cars;
-drop table Colours;
-drop table CarsModels;
-drop table CarsBrands;
-drop table AccountsCollocations;
-drop table AccountsWorkTime;
-drop table FriendSuggestions;
-drop table Friends;
-drop table Invitations cascade;
-drop table AccountsLocations cascade;
-drop table UserExtraData;
-drop table Accounts cascade;
-drop table Roles cascade;
+drop view if exists VAccountsCollocationsWorkTrip;
+drop table if exists WorkTrip;
+drop view if exists VCarOwner;
+drop table if exists Cars;
 
---drop table Occupations;
-drop table GeographicRegion;
+drop table if exists AccountsCollocations;
+drop table if exists AccountsWorkTime;
+drop table if exists FriendSuggestions;
+drop table if exists Friends;
+drop table if exists Invitations cascade;
+drop table if exists AccountsLocations cascade;
+drop table if exists UserExtraData;
+drop table if exists Accounts cascade;
+drop table if exists Roles cascade;
 
-drop table EmailsRegister;
+--drop table if exists Occupations;
+drop table if exists GeographicRegion;
+
+drop table if exists EmailsRegister;
 --select * from Accounts;
 --select * from Cars;
 
@@ -100,7 +98,7 @@ create table Roles
 create table Accounts
 (
 	Id serial primary key not null,
-	email text not null unique,
+	email text not null, -- unique,
 	name text,
 	surname text,
 	password text,
@@ -222,25 +220,7 @@ create table AccountsCollocations
 --update worktrip set acceptabledistance = 500;
 
 
-create table CarsBrands
-(
-    Id serial primary key,
-    Brand text
-);
 
-create table CarsModels
-(
-    Id serial primary key,
-	IdCarsBrands int references CarsBrands(Id) not null,
-    Model text
-);
-
-create table Colours
-(
-	id serial primary key,
-	Name text,
-	Rgb text
-);
 --select * from carsbrands;
 --select * from carsmodels where idcarsbrands = 6;
 --select * from colours;
@@ -249,9 +229,9 @@ create table Cars
 (
     Id serial primary key,
 	IdAccounts int references Accounts(Id) not null,
-	IdCarsBrands int references CarsBrands(Id) not null,
-	IdCarsModels int references CarsModels(Id) not null,
-	IdColours int references Colours(id) not null,
+	IdCarsBrands int not null,
+	IdCarsModels int not null,
+	IdColours int not null,
 	RegistrationPlate text,
     AvailableSeats int not null,
 	CreatedAt timestamp default now()
@@ -322,12 +302,7 @@ join WorkTrip wt on U2.id = wt.idaccount ;
 
 
 --select * from AccountsCarsLocations;
--- drop table TestCoordinates;
---create table TestCoordinates
---(
-	--FromLongitude decimal,
-	--FromLatitude decimal
---);
+-- drop table if exists TestCoordinates;
 
 --insert into TestCoordinates(FromLongitude, FromLatitude) values (50.05463180727613, 17.80014622135593);
 --select * from TestCoordinates;
@@ -355,15 +330,6 @@ create table Occupations
 	id serial primary key,
 	name text
 );
-
---create table Accounts
---(
---	Id serial primary key,
---	Name text not null,
---	Surname text not null,
---	Token text,
---	method text not null
---);
 
 create table AccountMetadata
 (
@@ -482,7 +448,7 @@ join WorkTripGen wt on acc.IdAccount = wt.IdAccount
 join Accounts a on a.id = wt.IdAccount;
 
 create or replace view VFriends as
-select U1.Name, U1.Surname, U2.Name as FriendName, U2.Surname as FriendSurname, U1.Id as idAccount, 
+select distinct on(U1.Id) U1.Id as idAccount, U1.Name, U1.Surname, U2.Name as FriendName, U2.Surname as FriendSurname,  
 U2.Id as FriendIdAccount, fr1.method, wt.LatitudeFrom, wt.LongitudeFrom,
 wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchid, wt.DriverPassenger 
 from Friends fr1

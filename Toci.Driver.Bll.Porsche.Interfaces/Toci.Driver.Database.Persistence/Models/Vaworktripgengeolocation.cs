@@ -1,9 +1,10 @@
-﻿using System;
+using Intotech.Common.Bll.Interfaces; 
+using System;
 using System.Collections.Generic;
 
 namespace Toci.Driver.Database.Persistence.Models
 {
-    public partial class Vaworktripgengeolocation
+    public partial class Vaworktripgengeolocation : ModelBase
     {
         public int? Accountid { get; set; }
         public string? Name { get; set; }

@@ -13,7 +13,7 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
 
         public override void Insert()
         {
-            string file = File.ReadAllText("../../../../../SQL/professions.txt");
+            string file = File.ReadAllText("../../SQL/professions.txt");
 
             string[] occupationLines = file.Split("\n");
 

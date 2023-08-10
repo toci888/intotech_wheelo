@@ -1,11 +1,11 @@
-drop table UserActivity;
-drop table ConnectedUsers;
-drop table ConversationInvitations;
-drop table Messages;
-drop table RoomsAccounts;
-drop table AccountsIdentifiers;
-drop table Rooms;
-drop table AccountChat;
+drop table if exists UserActivity;
+drop table if exists ConnectedUsers;
+drop table if exists ConversationInvitations;
+drop table if exists Messages;
+drop table if exists RoomsAccounts;
+drop table if exists AccountsIdentifiers;
+drop table if exists Rooms;
+drop table if exists AccountChat;
 
 create table AccountChat
 (
@@ -42,6 +42,7 @@ create table RoomsAccounts
 	memberEmail text not null,
 	memberIdAccount int not null,
 	idRoom int references Rooms(id) not null,
+	roomId text not null,
 	isApproved bool default false,
 	createdat timestamp default now()
 );

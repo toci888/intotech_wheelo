@@ -1,4 +1,5 @@
 ﻿using Intotech.Common;
+using Org.BouncyCastle.Asn1.Pkcs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,14 +24,15 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
         // zad 2 - names
         protected void PopulateSurnames()
         {
-            string surnames = File.ReadAllText(@"../../../../Intotech.Wheelo.Tests/Persistence.Seed/RawData/surnames.txt");
-
+            string surnames = File.ReadAllText(@"../Toci.Driver.Bll.Porsche.Interfaces/Intotech.Wheelo.Tests/Persistence.Seed/RawData/surnames.txt");
+           // 'C:\Users\Administrator\source\repos\toci888\intotech_wheelo\Intotech.Wheelo.Tests\Persistence.Seed\RawData\surnames.txt
+             //   C: \Users\Administrator\source\repos\toci888\intotech_wheelo\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Tests\Persistence.Seed\RawData
             Surnames = surnames.Split("\n").Select(m => m.Trim()).ToList();
         }
 
         protected void PopulateNames()
         {
-            string names = File.ReadAllText(@"../../../../Intotech.Wheelo.Tests/Persistence.Seed/RawData/names.txt");
+            string names = File.ReadAllText(@"../Toci.Driver.Bll.Porsche.Interfaces/Intotech.Wheelo.Tests/Persistence.Seed/RawData/names.txt");
 
             Names = names.Split("\n").Select(m => m.Trim()).ToList();
         }
@@ -54,7 +56,7 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
 
             for (int i = 0; i < 150; i++)
             {
-                accounts.Add(new Account() { Name = Names[rnd.Next(0, Names.Count - 1)], Surname = Surnames[rnd.Next(0, Surnames.Count - 1)], Image = Base64EncodedImages[rnd.Next(0, 3)], Password = "fbd623cdcf27c1cf99595b52154e699d1ae95e7c48bd7c34ba73d0091a5b2af2", Email = StringUtils.GetRandomText(12), Refreshtoken = StringUtils.GetRandomText(18), Idrole = 1 });
+                accounts.Add(new Account() { Id = AccountIdOffset + 4 + i, Name = Names[rnd.Next(0, Names.Count - 1)], Surname = Surnames[rnd.Next(0, Surnames.Count - 1)], Image = Base64EncodedImages[rnd.Next(0, 3)], Password = "fbd623cdcf27c1cf99595b52154e699d1ae95e7c48bd7c34ba73d0091a5b2af2", Email = StringUtils.GetRandomText(12), Refreshtoken = StringUtils.GetRandomText(18), Idrole = 1 });
             }
 
             InsertCollection(accounts);

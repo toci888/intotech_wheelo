@@ -1,0 +1,47 @@
+{
+  "profiles": {
+    "Intotech.Driver.Api": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://89.40.12.1:5105"
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Debug": {
+      "commandName": "Project",
+      "applicationUrl": "http://20.68.18.151:5105"
+    },
+    "Warsztaty": {
+      "commandName": "Project",
+      "applicationUrl": "http://192.168.0.153:5105"
+    },
+    "bartek": {
+      "commandName": "Project",
+      "applicationUrl": "http://192.168.43.59:5105"
+    },
+    "Julia": {
+      "commandName": "Project",
+      "applicationUrl": "http://10.0.0.4:5105"
+    }
+  },
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:23740",
+      "sslPort": 44334
+    }
+  }
+}

@@ -1,5 +1,6 @@
 ﻿using Intotech.Common;
 using Intotech.Wheelo.Chat.Database.Persistence.Models;
+using Intotech.Wheelo.Common.Utils;
 
 namespace Intotech.Wheelo.Chat.Tests.Persistence.Seed;
 
@@ -9,11 +10,18 @@ public class SeedRooms : SeedChatLogic<Room>
     {
         List<Room> rooms = new List<Room>();
 
-        for (int i = 0; i < 10; i++)
+        int accountId = 1000000001;
+        int peerAccountId = 1000000002;
+        int thirdAccountId = 1000000003;
+
+        //for (int i = 0; i < 10; i++)
         {
-            rooms.Add(new Room() { Roomname = "Bartek", Owneremail = "bzapart@gmail.com", Roomid = "dqa123" + i });
-            rooms.Add(new Room() { Roomname = "Kacper", Owneremail = "bartek@gg.pl", Roomid = "dqa12123" + i });
-            rooms.Add(new Room() { Roomname = "Warrior", Owneremail = "warriorr@poczta.fm", Roomid = "dqa123asd" + i });
+            rooms.Add(new Room() { Roomname = "bzapart", Owneremail = "bzapart@gmail.com", Owneridaccount = accountId, Roomid = ChatUtils.GetRoomId(accountId, SeedCrossData.GetAccountsIdsWithSkip(accountId)) });
+            
+            rooms.Add(new Room() { Roomname = "bartek", Owneremail = "bartek@gg.pl", Owneridaccount = peerAccountId, Roomid = ChatUtils.GetRoomId(thirdAccountId, SeedCrossData.GetAccountsIdsWithSkip(thirdAccountId)) });
+
+            rooms.Add(new Room() { Roomname = "warriorr", Owneremail = "warriorr@poczta.fm", Owneridaccount = thirdAccountId, Roomid = ChatUtils.GetRoomId(peerAccountId, SeedCrossData.GetAccountsIdsWithSkip(peerAccountId)) });
+            
         }
 
         InsertCollection(rooms);

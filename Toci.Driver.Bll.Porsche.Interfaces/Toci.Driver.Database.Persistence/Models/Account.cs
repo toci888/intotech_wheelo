@@ -1,9 +1,10 @@
-﻿using System;
+using Intotech.Common.Bll.Interfaces; 
+using System;
 using System.Collections.Generic;
 
 namespace Toci.Driver.Database.Persistence.Models
 {
-    public partial class Account
+    public partial class Account : ModelBase
     {
         public Account()
         {
@@ -48,7 +49,7 @@ namespace Toci.Driver.Database.Persistence.Models
 
         public virtual Role? IdroleNavigation { get; set; }
         public virtual Accountmode? Accountmode { get; set; }
-        public virtual ICollection<Accountmetadatum> Accountmetadata { get; set; }
+        public virtual ICollection<Accountmetadatum>? Accountmetadata { get; set; }
         public virtual ICollection<Accountscollocation> AccountscollocationIdaccountNavigations { get; set; }
         public virtual ICollection<Accountscollocation> AccountscollocationIdcollocatedNavigations { get; set; }
         public virtual ICollection<Accountslocation> Accountslocations { get; set; }

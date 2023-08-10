@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -30,6 +30,7 @@
     <ProjectReference Include="..\Intotech.Wheelo.Chat.Dodge\Intotech.Wheelo.Chat.Dodge.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Chat.Jaguar.Interfaces\Intotech.Wheelo.Chat.Jaguar.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Chat.Models\Intotech.Wheelo.Chat.Models.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Chat.Tests\Intotech.Wheelo.Chat.Tests.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Common.Interfaces\Intotech.Wheelo.Common.Interfaces.csproj" />
     <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Chat.Dodge.Interfaces\Intotech.Wheelo.Chat.Dodge.Interfaces.csproj" />
 	  <ProjectReference Include="..\Intotech.Wheelo.Chat.Jaguar\Intotech.Wheelo.Chat.Jaguar.csproj" />
