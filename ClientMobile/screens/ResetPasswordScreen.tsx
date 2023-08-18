@@ -49,7 +49,7 @@ export const ResetPasswordScreen = ({
       <Screen style={styles.container}>
         <ModalHeader text="Wheelo" xShown />
         <Text category={"h5"} style={styles.header}>
-          Reset Password
+          {i18n.t('ResetPassword')}
         </Text>
         <Formik
           initialValues={{

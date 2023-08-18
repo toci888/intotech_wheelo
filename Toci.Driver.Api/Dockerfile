@@ -4,10 +4,10 @@ EXPOSE 5015
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Toci.Driver.Bll.Porsche.Interfaces/Toci.Driver.Api/Intotech.Wheelo.Api.csproj", "Toci.Driver.Bll.Porsche.Interfaces/Toci.Driver.Api/"]
-RUN dotnet restore "Toci.Driver.Bll.Porsche.Interfaces/Toci.Driver.Api/Intotech.Wheelo.Api.csproj"
+COPY ["Toci.Driver.Api/Intotech.Wheelo.Api.csproj", "Toci.Driver.Api/"]
+RUN dotnet restore "Toci.Driver.Api/Intotech.Wheelo.Api.csproj"
 COPY . .
-WORKDIR "/src/Toci.Driver.Bll.Porsche.Interfaces/Toci.Driver.Api"
+WORKDIR "/src/Toci.Driver.Api"
 RUN dotnet build "Intotech.Wheelo.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
