@@ -16,3 +16,9 @@ services:
     build:
         context: .
         dockerfile: Toci.Driver.Api/Dockerfile
+
+  intotech.wheelo.dictionaries.api:
+    image: ${DOCKER_REGISTRY-}intotechwheelodictionariesapi
+    build:
+      context: .
+      dockerfile: Toci.Driver.Bll.Porsche.Interfaces/Intotech.Wheelo.Cmc.Api/Dockerfile
