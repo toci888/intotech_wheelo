@@ -300,9 +300,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Dictionarie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Dictionaries.Bll.Persistence", "Dictionaries\Intotech.Wheelo.Dictionaries.Bll.Persistence\Intotech.Wheelo.Dictionaries.Bll.Persistence.csproj", "{62185E16-0CB8-4C58-BEB1-E13AF9EFA828}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Dictionaries.Bll.Logic.Interfaces", "Intotech.Wheelo.Dictionaries.Bll.Logic.Interfaces\Intotech.Wheelo.Dictionaries.Bll.Logic.Interfaces.csproj", "{776274D9-3BA2-42A0-9686-CCFDD5CF65EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Dictionaries.Bll.Logic.Interfaces", "Intotech.Wheelo.Dictionaries.Bll.Logic.Interfaces\Intotech.Wheelo.Dictionaries.Bll.Logic.Interfaces.csproj", "{776274D9-3BA2-42A0-9686-CCFDD5CF65EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Dictionaries.Bll.Logic", "Intotech.Wheelo.Dictionaries.Bll.Logic\Intotech.Wheelo.Dictionaries.Bll.Logic.csproj", "{21820CA3-3D64-46CB-8F53-AC200C878EF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Dictionaries.Bll.Logic", "Intotech.Wheelo.Dictionaries.Bll.Logic\Intotech.Wheelo.Dictionaries.Bll.Logic.csproj", "{21820CA3-3D64-46CB-8F53-AC200C878EF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
