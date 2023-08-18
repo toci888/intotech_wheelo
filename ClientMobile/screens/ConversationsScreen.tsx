@@ -29,7 +29,7 @@ export const ConversationsScreen = () => {
   const [refreshing, setRefreshing] = useState(false);
   console.log("conversations: ", conversations);
   // navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
-  if (!user) return <SignUpOrSignInScreen />;
+  // if (!user) return <SignUpOrSignInScreen />;
 
   if (conversations.isLoading) return <Loading />;
 

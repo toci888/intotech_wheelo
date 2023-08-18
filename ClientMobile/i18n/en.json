@@ -45,5 +45,18 @@
     "WhereDoYouLive":"Where do you live?",
     "WhatTimeAreYouGo":"What time do you leave?",
     "WhereAreYouWorking":"Where do you work?",
-    "WhatTimeAreYouComingBack":"What time are you coming back?"
+    "WhatTimeAreYouComingBack":"What time are you coming back?",
+    "or": "or",
+    "YouDontHaveAnAccountYet": "You dont have an account yet?",
+    "ContinueWithGoogle": "Continue with Google",
+    "ContinueWithFacebook": "Continue with Facebook",
+    "ContinueWithApple": "Continue with Apple",
+    "SignInToStart": "Sign in to start",
+    "TypeAMessage": "Type a message..",
+    "YouDoNotHaveAnyFriendsYet": "You do not have any friends",
+    "TapTheSearchIconToFindThem": "Tap the search icon to find them",
+    "YouHaveNotAssociatedAnyFriendsYet": "You have not associated any friends yet",
+    "YourAssociatedFriendsWillShowHere": "Your associated friends will show here",
+    "CheckTheStatusOfYourFriendRequestHere": "Check the status of your friend request here",
+    "AnyFriendsYouInvitedWillShowHere": "Any friends you invited will show here"
 }

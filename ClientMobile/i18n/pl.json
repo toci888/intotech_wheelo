@@ -52,5 +52,11 @@
     "ContinueWithFacebook": "Kontynuuj z Facebook",
     "ContinueWithApple": "Kontynuuj z Apple",
     "SignInToStart": "Zaloguj się, aby rozpocząć",
-    "TypeAMessage": "Napisz wiadomość.."
+    "TypeAMessage": "Napisz wiadomość..",
+    "YouDoNotHaveAnyFriendsYet": "Nie posiadasz jeszcze żadnych znajomych",
+    "TapTheSearchIconToFindThem": "Stuknij ikonę wyszukiwania, aby ich znaleźć",
+    "YouHaveNotAssociatedAnyFriendsYet": "Nie skojarzyłeś jeszcze żadnych znajomych",
+    "YourAssociatedFriendsWillShowHere": "Tutaj będą wyświetlani Twoi powiązani znajomi",
+    "CheckTheStatusOfYourFriendRequestHere": "Sprawdź status zaproszeń do grona znajomych",
+    "AnyFriendsYouInvitedWillShowHere": "Tutaj pojawią się wszyscy zaproszeni przez Ciebie znajomi"
 }

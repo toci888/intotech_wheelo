@@ -10,7 +10,7 @@ import { ModalHeader } from "../components/ModalHeader";
 import { PasswordInput } from "../components/PasswordInput";
 import { useAuth } from "../hooks/useAuth";
 import React from "react";
-import { ReturnedResponse } from "../types";
+import { ReturnedResponse, loginDto } from "../types";
 import { User } from "../types/user";
 import { i18n } from "../i18n/i18n";
 import { commonAlert } from "../utils/handleError";
@@ -36,7 +36,7 @@ export const SignInScreen = () => {
           </Text>
           <Formik
             initialValues={{
-              email: "bartek@gg.pl",
+              email: "bzapart@gmail.com",
               password: "Beatka123(",
             }}
             validationSchema={yup.object().shape({
@@ -46,11 +46,14 @@ export const SignInScreen = () => {
                 .required("Hasło jest wymagane..")
             })}
             onSubmit={async (values) => {
-              const response: ReturnedResponse<User> | undefined = await nativeLogin(values);
+              const loginData: loginDto = {language: i18n.locale, ...values};
+              const response: ReturnedResponse<User> | undefined = await nativeLogin(loginData);
               if (response && response.isSuccess === false) {
                 console.log("Logged user response:", response)
                 if (response.errorCode === 256) {
-                  navigation.navigate(`CodeVerification`, { user: values as User, type: "email" });
+                  const user = { ...response.methodResult, type: 'email' };
+                  navigation.navigate('CodeVerification', { params: user });
+                  
                 } else {
                   commonAlert(response.errorMessage)
                 }

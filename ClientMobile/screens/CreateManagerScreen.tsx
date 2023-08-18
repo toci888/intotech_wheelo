@@ -73,7 +73,7 @@ export const CreateManagerScreen = ({
   return (
     <KeyboardAwareScrollView bounces={false}>
       <Screen>
-        <ModalHeader text="JPApartments" xShown />
+        <ModalHeader text="Wheelo" xShown />
         <View style={styles.container}>
           <Text category={"h5"} style={styles.header}>
             Create Property Manager Account

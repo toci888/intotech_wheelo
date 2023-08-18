@@ -108,12 +108,14 @@ export type registerDto = {
   lastName: string;
   email: string;
   password: string;
+  language: string;
   method?: string;
 }
 
 export type loginDto = {
   email: string;
   password: string;
+  language: string;
   method?: string;
   token?: string;
 }
