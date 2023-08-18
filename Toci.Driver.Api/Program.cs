@@ -227,9 +227,9 @@ if (app.Environment.IsDevelopment())
 
     DbSetupFacade dbSetup = new DbSetupFacade(dbSetupEntity);
 
-    bool res = dbSetup.RunAll(true);
+    //bool res = dbSetup.RunAll(true);
 
-    new WheeloMainSeedManager().SeedAllDb();
+    //new WheeloMainSeedManager().SeedAllDb();
 }
 
 

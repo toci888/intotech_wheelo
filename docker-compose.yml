@@ -1,8 +1,18 @@
 version: '3.4'
 
 services:
+  db:
+    container_name: "wheelo_postgres"
+    image: postgres
+    restart: always
+    environment:
+        - POSTGRES_PASSWORD=beatka
+    ports:
+        - '5500:5432'
+
   intotech.wheelo.api:
+    container_name: "intotech_wheelo_api"
     image: ${DOCKER_REGISTRY-}intotechwheeloapi
     build:
-      context: .
-      dockerfile: Toci.Driver.Bll.Porsche.Interfaces/Toci.Driver.Api/Dockerfile
+        context: .
+        dockerfile: Toci.Driver.Api/Dockerfile

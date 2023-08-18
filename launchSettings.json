@@ -3,8 +3,12 @@
     "Docker Compose": {
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "intotech.wheelo.api",
+      "composeLaunchUrl": "{Scheme}://192.168.1.12:{ServicePort}/swagger",
       "serviceActions": {
-        "intotech.wheelo.api": "StartDebugging"
+        "intotech.wheelo.api": "StartDebugging",
+        "db": "StartWithoutDebugging"
       }
     }
   }
