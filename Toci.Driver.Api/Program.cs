@@ -50,7 +50,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.ConfigureKestrel(options =>
 {
-    options.ListenAnyIP(5105); // to listen for incoming http connection on port 5001
+    options.ListenAnyIP(5015); // to listen for incoming http connection on port 5001
     //http://20.100.196.118:5105
     //IPAddress.Parse(20.100.196.118"),
     //options.ListenAnyIP(7105, configure => configure.UseHttps()); // to listen for incoming https connection on port 7001
