@@ -13,23 +13,25 @@ using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Persistence;
+using Intotech.Common.Bll;
+using Intotech.Common.Interfaces;
 
 namespace Intotech.Wheelo.Bll.Porsche.User
 {
-    public class UserMetaService : IUserMetaService
+    public class UserMetaService : ServiceBaseEx, IUserMetaService
     {
         protected IOccupationsmokercratLogic OccSmoCrLogic;
 
-        public UserMetaService(IOccupationsmokercratLogic occSmoCrLogic)
+        public UserMetaService(IOccupationsmokercratLogic occSmoCrLogic, ITranslationEngineI18n i18nTranslation) : base(i18nTranslation)
         {
             OccSmoCrLogic = occSmoCrLogic;
         }
 
-        public ReturnedResponse<SmokerOccupationDto> SetSmokerOccupation(SmokerOccupationDto smokerOccupationDto)
+        public ReturnedResponse<SmokerOccupationDto> SetSmokerOccupation(SmokerOccupationDto entityDto)
         {
-            Occupationsmokercrat model = DtoModelMapper.Map<Occupationsmokercrat, SmokerOccupationDto>(smokerOccupationDto);
+            Occupationsmokercrat model = DtoModelMapper.Map<Occupationsmokercrat, SmokerOccupationDto>(entityDto);
 
-            Occupationsmokercrat exists = OccSmoCrLogic.Select(m => m.Idaccount == smokerOccupationDto.Idaccount).FirstOrDefault();
+            Occupationsmokercrat exists = OccSmoCrLogic.Select(m => m.Idaccount == entityDto.Idaccount).FirstOrDefault();
 
             if (exists != null)
             {
@@ -37,12 +39,12 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
                 OccSmoCrLogic.Update(model);
 
-                return new ReturnedResponse<SmokerOccupationDto>(smokerOccupationDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                return new ReturnedResponse<SmokerOccupationDto>(entityDto, I18nTranslation.Translate(entityDto.Language, I18nTags.Success), true, ErrorCodes.Success);
             }
 
             OccSmoCrLogic.Insert(model);
 
-            return new ReturnedResponse<SmokerOccupationDto>(smokerOccupationDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<SmokerOccupationDto>(entityDto, I18nTranslation.Translate(entityDto.Language, I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }

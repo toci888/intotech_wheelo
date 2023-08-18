@@ -1,3 +1,4 @@
+import React from "react";
 import { StyleSheet, FlatList, View } from "react-native";
 import { Text, Button } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
@@ -80,7 +81,7 @@ export const MyPropertiesScreen = () => {
         />
       ) : (
         <>
-          <ModalHeader xShown text="JPApartments" />
+          <ModalHeader xShown text="Wheelo" />
           <View style={styles.noPropertiesContainer}>
             <LottieView
               autoPlay

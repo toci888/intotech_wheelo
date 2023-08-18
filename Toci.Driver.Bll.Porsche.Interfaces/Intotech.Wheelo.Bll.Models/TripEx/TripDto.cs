@@ -1,4 +1,5 @@
-﻿using Intotech.Wheelo.Bll.Models.TimeModels;
+﻿using Intotech.Common.Bll;
+using Intotech.Wheelo.Bll.Models.TimeModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Models.TripEx
 {
-    public class TripDto
+    public class TripDto : DtoEntityBase
     {
         public List<int> AccountIds { get; set; }
         public int Id { get; set; }

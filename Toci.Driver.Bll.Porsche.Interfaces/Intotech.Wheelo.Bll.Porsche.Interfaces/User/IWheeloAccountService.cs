@@ -1,5 +1,7 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Bll.Interfaces;
 using Intotech.Wheelo.Bll.Models.OldModels;
+using Intotech.Wheelo.Bll.Models.Tiny;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Porsche.Interfaces.User
 {
-    public interface IWheeloAccountService
+    public interface IWheeloAccountService : IService
     {
         ReturnedResponse<AccountRoleDto> Register(AccountRegisterDto sAccount);
 
@@ -25,17 +27,17 @@ namespace Intotech.Wheelo.Bll.Porsche.Interfaces.User
 
         ReturnedResponse<bool> SetAllowsNotifications(int accountId, bool allowsNotifications);
 
-        ReturnedResponse<int?> ResetPasswordCheckCode(string email, string verificationCode);
+        ReturnedResponse<int?> ResetPasswordCheckCode(EmailTokenDto emailToken);
 
-        ReturnedResponse<int?> ResetPassword(string email, string password, string token);
+        ReturnedResponse<int?> ResetPassword(ResetPasswordDto dto);
 
-        ReturnedResponse<TokensModel> CreateNewAccessToken(string accessToken, string refreshToken);
+        ReturnedResponse<TokensModel> CreateNewAccessToken(TokensModel tokensModel);
 
-        ReturnedResponse<int?> ForgotPassword(string email);
+        ReturnedResponse<int?> ForgotPassword(EmailDto email);
 
         ReturnedResponse<PushTokenDto> SetPushToken(int idAccount, PushTokenDto pushToken);
 
-        ReturnedResponse<bool> ResendEmailVerificationCode(string email);
+        ReturnedResponse<bool> ResendEmailVerificationCode(EmailDto email);
 
         List<Account> GetAllUsers(); // temporary, development purpose, TODO REMOVE
     }

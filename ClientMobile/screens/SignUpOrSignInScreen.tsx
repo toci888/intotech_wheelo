@@ -10,25 +10,8 @@ import { SignUpAndSignInButtons } from "../components/SignUpAndSignInButtons";
 export const SignUpOrSignInScreen = () => {
   return (
     <Screen>
-      <ModalHeader text="JPApartments" xShown />
+      <ModalHeader text="Wheelo" xShown />
       <View style={styles.container}>
-        <Text category={"h5"} style={styles.header}>
-          Add Your Properties
-        </Text>
-
-        <LottieView
-          autoPlay
-          style={styles.lottie}
-          source={require("../assets/lotties/AddProperty.json")}
-        />
-
-        <Text category={"h6"} style={styles.text}>
-          Create an Account or Sign In
-        </Text>
-        <Text appearance={"hint"} style={[styles.text, styles.bottomText]}>
-          To add your properties, you must create an account or sign in.
-        </Text>
-
         <SignUpAndSignInButtons />
       </View>
     </Screen>

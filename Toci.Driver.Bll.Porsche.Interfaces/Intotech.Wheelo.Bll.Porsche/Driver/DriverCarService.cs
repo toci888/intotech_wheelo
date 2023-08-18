@@ -7,15 +7,20 @@ using Intotech.Wheelo.Common;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Models.TripEx;
+using Intotech.Common.Bll;
+using Intotech.Common.Interfaces;
 
 namespace Intotech.Wheelo.Bll.Porsche.Driver;
 
-public class DriverCarService : IDriverCarService
+public class DriverCarService : ServiceBaseEx, IDriverCarService
 {
     protected IAccountscarslocationLogic VAccountsCarsLocationLogic;
     protected ICarLogic CarLogic;
 
-    public DriverCarService(IAccountscarslocationLogic vaccountsCarsLocationLogic, ICarLogic carLogic)
+    public DriverCarService(
+        IAccountscarslocationLogic vaccountsCarsLocationLogic,
+        ICarLogic carLogic,
+        ITranslationEngineI18n i18nTranslation) : base(i18nTranslation)
     {
         VAccountsCarsLocationLogic = vaccountsCarsLocationLogic;
         CarLogic = carLogic;
@@ -27,18 +32,18 @@ public class DriverCarService : IDriverCarService
 
         if (result == null)
         {
-            return new ReturnedResponse<Accountscarslocation>(null, I18nTranslation.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
+            return new ReturnedResponse<Accountscarslocation>(null, I18nTranslationDep.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
         }
 
-        return new ReturnedResponse<Accountscarslocation>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        return new ReturnedResponse<Accountscarslocation>(result, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
     }
 
-    public virtual ReturnedResponse<bool> SetDriverCar(CarDto carData)
+    public virtual ReturnedResponse<bool> SetDriverCar(CarDto entityDto)
     {
-        Car car =  DtoModelMapper.Map<Car, CarDto>(carData);
+        Car car =  DtoModelMapper.Map<Car, CarDto>(entityDto);
 
         int result = CarLogic.Insert(car).Id;
 
-        return new ReturnedResponse<bool>(true, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+        return new ReturnedResponse<bool>(true, I18nTranslation.Translate(DefaultLang, I18nTags.Success), true, ErrorCodes.Success);
     }
 }

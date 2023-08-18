@@ -36,7 +36,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
 
             OrganizemeetingDto result = DtoModelMapper.Map<OrganizemeetingDto, Organizemeeting>(orgM);
 
-            return new ReturnedResponse<OrganizemeetingDto>(GetMeetingDto(accountId, result), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<OrganizemeetingDto>(GetMeetingDto(accountId, result), I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<OrganizemeetingDto> OrganizeMeeting(CreateMeetingDto meeting)
@@ -52,7 +52,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
                 });
             }
 
-            return new ReturnedResponse<OrganizemeetingDto>(GetMeetingDto(organizedMeeting.Idaccount, DtoModelMapper.Map<OrganizemeetingDto, Organizemeeting>(organizedMeeting)), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<OrganizemeetingDto>(GetMeetingDto(organizedMeeting.Idaccount, DtoModelMapper.Map<OrganizemeetingDto, Organizemeeting>(organizedMeeting)), I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         protected virtual OrganizemeetingDto GetMeetingDto(int accountId, OrganizemeetingDto result)

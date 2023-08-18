@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class EmailsregisterDtoLogic : DtoLogicBase<EmailsregisterModelDto, Emailsregister, IEmailsregisterLogic, EmailsregisterDto, List<Emailsregister>, List<EmailsregisterModelDto>>, IEmailsregisterDtoLogic
 {
@@ -19,7 +21,7 @@ public class EmailsregisterDtoLogic : DtoLogicBase<EmailsregisterModelDto, Email
     {
     }
 
-    protected override DtoBase<Emailsregister,EmailsregisterModelDto> GetDtoModelField(EmailsregisterDto dto)
+    protected override EmailsregisterModelDto GetDtoModelField(EmailsregisterDto dto)
     {
        return dto.Emailsregister;
     }

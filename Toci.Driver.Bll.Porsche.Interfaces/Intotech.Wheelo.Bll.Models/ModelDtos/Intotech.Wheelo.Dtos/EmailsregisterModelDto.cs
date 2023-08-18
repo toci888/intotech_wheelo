@@ -1,10 +1,11 @@
 ﻿using Intotech.Common.Bll.ChorDtoBll.Dto;
+using Intotech.Common.Bll.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
-
 
 namespace Intotech.Wheelo.Bll.Models.ModelDtos.Intotech.Wheelo.Dtos;
 
-public class EmailsregisterModelDto : DtoCollectionBase<Emailsregister, EmailsregisterModelDto, List<Emailsregister>, List<EmailsregisterModelDto>>
+
+public class EmailsregisterModelDto : DtoModelBase
 {
     public int Id { get; set; }
     public string Email { get; set; }

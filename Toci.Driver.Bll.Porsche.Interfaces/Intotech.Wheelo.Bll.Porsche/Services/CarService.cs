@@ -1,5 +1,6 @@
 ﻿using Intotech.Common.Bll;
 using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Interfaces;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 using Intotech.Wheelo.Bll.Models.Dtos;
 using Intotech.Wheelo.Common;
@@ -12,27 +13,29 @@ public class CarService : ServiceBaseEx, ICarService
 {
     protected ICarDtoLogic CarDtoLogic;
     
-    public CarService(ICarDtoLogic carDtoLogic)
+    public CarService(
+        ICarDtoLogic carDtoLogic,
+         ITranslationEngineI18n i18nTranslation) : base(i18nTranslation)
     {
         CarDtoLogic = carDtoLogic;
     }
     
-    public virtual ReturnedResponse<CarDto> AddCar(CarDto carDto)
+    public virtual ReturnedResponse<CarDto> AddCar(CarDto entityDto)
     {
-        CarDto result = CarDtoLogic.SetEntity(carDto);
+        CarDto result = CarDtoLogic.SetEntity(entityDto);
         
         return new ReturnedResponse<CarDto>(result,
-            I18nTranslation.Translation(I18nTags.Success), 
+            I18nTranslation.Translate(entityDto.Language, I18nTags.Success), 
             true,
             ErrorCodes.Success);
     }
 
-    public virtual ReturnedResponse<bool> DeleteCar(CarDto carDto)
+    public virtual ReturnedResponse<bool> DeleteCar(CarDto entityDto)
     {
         throw new NotImplementedException();
     }
 
-    public virtual ReturnedResponse<CarDto> UpdateCar(CarDto carDto)
+    public virtual ReturnedResponse<CarDto> UpdateCar(CarDto entityDto)
     {
         throw new NotImplementedException();
     }

@@ -39,10 +39,12 @@ using Intotech.Common.Database.DbSetup;
 //using Intotech.Wheelo.Seed.Common.Wheelo.Main;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 using Intotech.Wheelo.Bll.Logic;
-using Intotech.Wheelo.Bll.Logic.DtoLogics;
+//using Intotech.Wheelo.Bll.Logic.DtoLogics;
 using Intotech.Wheelo.Bll.Porsche.Services;
 using Intotech.Wheelo.Tests.Persistence.Seed;
 using Toci.Driver.Bll.Porsche.Interfaces.Services;
+using Intotech.Common.Interfaces;
+using Intotech.Wheelo.Common.Translations;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -64,6 +66,7 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddScoped<AuthenticationSettings, AuthenticationSettings>();
+builder.Services.AddScoped<ITranslationEngineI18n, WheeloTranslationEngineI18n>();
 builder.Services.AddScoped<ICarLogic, CarLogic>();
 builder.Services.AddScoped<ICarsbrandLogic, CarsbrandLogic>();
 builder.Services.AddScoped<ICarsmodelLogic, CarsmodelLogic>();
@@ -224,9 +227,9 @@ if (app.Environment.IsDevelopment())
 
     DbSetupFacade dbSetup = new DbSetupFacade(dbSetupEntity);
 
-    bool res = dbSetup.RunAll(true);
+    //bool res = dbSetup.RunAll(true);
 
-    new WheeloMainSeedManager().SeedAllDb();
+    //new WheeloMainSeedManager().SeedAllDb();
 }
 
 

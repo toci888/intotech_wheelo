@@ -7,6 +7,13 @@
 Git skip files with IP (include package-lock.json/environment.ts and launchSettings.json files in exactly folder - this can create problem with checkout bracnch):
 git update-index --assume-unchanged <file>
 
+expo login
+
 FIREBASE EXPO:
 expo push:android:upload --api-key <KEY>
+
 expo publish
+
+
+types/react 18.0.24
+types/react-dom  18.0.10

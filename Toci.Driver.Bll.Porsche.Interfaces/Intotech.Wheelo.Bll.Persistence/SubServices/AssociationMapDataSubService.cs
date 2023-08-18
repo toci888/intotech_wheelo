@@ -48,10 +48,10 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
                     result.Add(VacollocationsgeolocationToAccountCollocation.Map(item, accountId));
                 }
                 
-                return new ReturnedResponse<List<AccountCollocationDto>>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                return new ReturnedResponse<List<AccountCollocationDto>>(result, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
             }
 
-            return new ReturnedResponse<List<AccountCollocationDto>>(null, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
+            return new ReturnedResponse<List<AccountCollocationDto>>(null, I18nTranslationDep.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
         }
 
         public virtual ReturnedResponse<AccountCollocationDto> GetCollocationUser(int accountId)
@@ -62,10 +62,10 @@ namespace Intotech.Wheelo.Bll.Persistence.SubServices
             {
                 AccountCollocationDto result = VacollocationsgeolocationToAccountCollocation.Map(collocationSource, accountId);
 
-                return new ReturnedResponse<AccountCollocationDto>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+                return new ReturnedResponse<AccountCollocationDto>(result, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
             }
         
-            return new ReturnedResponse<AccountCollocationDto>(null, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
+            return new ReturnedResponse<AccountCollocationDto>(null, I18nTranslationDep.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
         }
 
 

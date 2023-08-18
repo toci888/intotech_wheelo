@@ -33,6 +33,17 @@
     "Julia": {
       "commandName": "Project",
       "applicationUrl": "http://10.0.0.4:5105"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "publishAllPorts": true,
+      "useSSL": false,
+      "httpPort": 5015,
+      "environmentVariables": {
+        "ASPNETCORE_URLS": "http://{ServiceHost}:5015"
+      }
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json",

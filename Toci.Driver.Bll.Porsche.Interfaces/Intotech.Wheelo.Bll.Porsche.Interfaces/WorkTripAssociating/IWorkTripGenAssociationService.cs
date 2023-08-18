@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Bll.Interfaces;
 
 namespace Intotech.Wheelo.Bll.Porsche.Interfaces.WorkTripAssociating
 {
-    public interface IWorkTripGenAssociationService
+    public interface IWorkTripGenAssociationService : IService
     {
         ReturnedResponse<TripGenCollocationDto> SetWorkTripGetCollocations(WorkTripGenDto workTripGen);
 

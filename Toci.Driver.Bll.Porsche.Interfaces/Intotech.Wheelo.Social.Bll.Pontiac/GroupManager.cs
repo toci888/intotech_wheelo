@@ -1,5 +1,6 @@
 ﻿using Intotech.Common;
 using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Interfaces;
 using Intotech.Wheelo.Bll.Models.Social;
 using Intotech.Wheelo.Common;
 using Intotech.Wheelo.Common.Interfaces;
@@ -21,12 +22,14 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
         protected IAccountBll AccountLogic;
         protected IGroupLogic GroupLogic;
         protected IGroupmemberLogic GroupMemberLogic;
+        protected ITranslationEngineI18n I18nTranslation; //= new TranslationEngineI18n();
 
-        public GroupManager(IAccountBll accountLogic, IGroupLogic groupLogic, IGroupmemberLogic groupMemberLogic)
+        public GroupManager(IAccountBll accountLogic, IGroupLogic groupLogic, IGroupmemberLogic groupMemberLogic, ITranslationEngineI18n i18nTranslation)
         {
             AccountLogic = accountLogic;
             GroupLogic = groupLogic;
             GroupMemberLogic = groupMemberLogic;
+            I18nTranslation = i18nTranslation;
         }
 
         public virtual ReturnedResponse<GroupMemberAddDto> AddMemberToGroup(Groupmember model)
@@ -42,7 +45,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
 
             groupMemberAddDto.GroupName = group.Name;
 
-            return new ReturnedResponse<GroupMemberAddDto>(groupMemberAddDto, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<GroupMemberAddDto>(groupMemberAddDto, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<GroupMembersDto> GetGroupWithMembers(int groupId)
@@ -59,7 +62,7 @@ namespace Intotech.Wheelo.Social.Bll.Pontiac
 
             result.GroupMembers = accountroles;
 
-            return new ReturnedResponse<GroupMembersDto>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<GroupMembersDto>(result, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }

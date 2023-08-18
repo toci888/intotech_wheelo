@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class VcollocationsgeolocationDtoLogic : DtoLogicBase<VcollocationsgeolocationModelDto, Vcollocationsgeolocation, IVcollocationsgeolocationLogic, VcollocationsgeolocationDto, List<Vcollocationsgeolocation>, List<VcollocationsgeolocationModelDto>>, IVcollocationsgeolocationDtoLogic
 {
@@ -19,7 +21,7 @@ public class VcollocationsgeolocationDtoLogic : DtoLogicBase<Vcollocationsgeoloc
     {
     }
 
-    protected override DtoBase<Vcollocationsgeolocation,VcollocationsgeolocationModelDto> GetDtoModelField(VcollocationsgeolocationDto dto)
+    protected override VcollocationsgeolocationModelDto GetDtoModelField(VcollocationsgeolocationDto dto)
     {
        return dto.Vcollocationsgeolocation;
     }

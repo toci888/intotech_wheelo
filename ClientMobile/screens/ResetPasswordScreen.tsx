@@ -47,9 +47,9 @@ export const ResetPasswordScreen = ({
   return (
     <KeyboardAwareScrollView bounces={false}>
       <Screen style={styles.container}>
-        <ModalHeader text="JPApartments" xShown />
+        <ModalHeader text="Wheelo" xShown />
         <Text category={"h5"} style={styles.header}>
-          Reset Password
+          {i18n.t('ResetPassword')}
         </Text>
         <Formik
           initialValues={{

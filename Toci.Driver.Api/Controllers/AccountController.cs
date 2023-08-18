@@ -48,7 +48,7 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
 
             if (result == null)
             {
-                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslation.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
+                return new ReturnedResponse<AccountRoleDto>(null, I18nTranslationDep.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
             }
 
             return Service.GafLogin(result);
@@ -62,20 +62,20 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
     [HttpPost("refresh-token")]
     public ReturnedResponse<TokensModel> CreateNewAccessToken([FromBody]TokensModel tokensModel)
     {
-        return Service.CreateNewAccessToken(tokensModel.AccessToken, tokensModel.RefreshToken);
+        return null;// Service.CreateNewAccessToken(tokensModel.AccessToken, tokensModel.RefreshToken);
     }
 
     [AllowAnonymous]
     [HttpPost("reset-password")]
     public ReturnedResponse<int?> ResetPassword(ResetPasswordDto dto)
     {
-        return Service.ResetPassword(dto.email, dto.password, dto.token);
+        return Service.ResetPassword(dto);
     }
 
     [HttpPost("forgot-password-check-code")]
     public ReturnedResponse<int?> ResetPasswordCheckCode(EmailTokenDto emailToken)
     {
-        return Service.ResetPasswordCheckCode(emailToken.email, emailToken.token);
+        return Service.ResetPasswordCheckCode(emailToken);
     }
 
     [HttpPatch("{accountId}/settings/theme-mode")]
@@ -99,7 +99,7 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
     [HttpPost("forgot-password")]
     public ReturnedResponse<int?> ForgotPassword([FromBody] EmailDto email)
     {
-        return Service.ForgotPassword(email.email);
+        return Service.ForgotPassword(email);
     }
 
     [HttpPatch("{idAccount}/pushtoken")]
@@ -111,7 +111,7 @@ public class AccountController : ApiSimpleControllerBase<IWheeloAccountService>
     [HttpPost("resend-email-verification-code")]
     public ReturnedResponse<bool> ResendEmailVerificationCode([FromBody] EmailDto email)
     {
-        return Service.ResendEmailVerificationCode(email.email);
+        return Service.ResendEmailVerificationCode(email);
     }
 
     [HttpGet("EnigmaticUrl")]

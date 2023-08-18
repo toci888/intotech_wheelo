@@ -1,8 +1,9 @@
-﻿using Intotech.Wheelo.Chat.Models;
+﻿using Intotech.Common.Bll.Interfaces;
+using Intotech.Wheelo.Chat.Models;
 
 namespace Intotech.Wheelo.Chat.Jaguar.Interfaces;
 
-public interface IConversationService
+public interface IConversationService : IService
 {
     ConversationDto GetConversationById(int roomId, bool isAccountIdRequest = false);
 

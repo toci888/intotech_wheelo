@@ -1,6 +1,8 @@
-﻿namespace Intotech.Wheelo.Bll.Models.OldModels;
+﻿using Intotech.Common.Bll;
 
-public class LoginDto
+namespace Intotech.Wheelo.Bll.Models.OldModels;
+
+public class LoginDto : DtoEntityBase
 {
     public string Email { get; set; }
     public string Password { get; set; }

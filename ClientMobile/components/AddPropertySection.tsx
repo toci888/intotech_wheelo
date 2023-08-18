@@ -97,7 +97,7 @@ export const AddPropertySection = () => {
       renderItem={() => {
         return (
           <Screen>
-            {!searchingLocation && <ModalHeader text="JPApartments" xShown />}
+            {!searchingLocation && <ModalHeader text="Wheelo" xShown />}
             <View style={styles.container}>
               {!searchingLocation && (
                 <Text category={"h5"} style={styles.header}>

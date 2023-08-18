@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class ResetpasswordDtoLogic : DtoLogicBase<ResetpasswordModelDto, Resetpassword, IResetpasswordLogic, ResetpasswordDto, List<Resetpassword>, List<ResetpasswordModelDto>>, IResetpasswordDtoLogic
 {
@@ -19,7 +21,7 @@ public class ResetpasswordDtoLogic : DtoLogicBase<ResetpasswordModelDto, Resetpa
     {
     }
 
-    protected override DtoBase<Resetpassword,ResetpasswordModelDto> GetDtoModelField(ResetpasswordDto dto)
+    protected override ResetpasswordModelDto GetDtoModelField(ResetpasswordDto dto)
     {
        return dto.Resetpassword;
     }

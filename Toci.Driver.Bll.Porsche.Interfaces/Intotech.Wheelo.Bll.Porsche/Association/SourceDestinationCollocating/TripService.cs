@@ -12,10 +12,12 @@ using Toci.Driver.Database.Persistence.Models;
 using Intotech.Common;
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Models.TripEx;
+using Intotech.Common.Bll;
+using Intotech.Common.Interfaces;
 
 namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 {
-    public class TripService : ITripService
+    public class TripService : ServiceBaseEx, ITripService
     {
         protected ITripLogic TripLogic;
         protected ITripparticipantLogic TripparticipantLogic;
@@ -23,8 +25,13 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
         protected IAccountscarslocationLogic VAccountsCarsLocationLogic;
         protected IAccountLogic AccountLogic;
 
-        public TripService(ITripLogic tripLogic, ITripparticipantLogic tripparticipantLogic,
-            IVtripsparticipantLogic vTripparticipantLogic, IAccountscarslocationLogic vAccountsCarsLocationLogic, IAccountLogic accountLogic)
+        public TripService(
+            ITripLogic tripLogic,
+            ITripparticipantLogic tripparticipantLogic,
+            IVtripsparticipantLogic vTripparticipantLogic,
+            IAccountscarslocationLogic vAccountsCarsLocationLogic,
+            IAccountLogic accountLogic, 
+            ITranslationEngineI18n i18nTranslation) : base(i18nTranslation)
         {
             TripLogic = tripLogic;
             TripparticipantLogic = tripparticipantLogic;
@@ -35,74 +42,74 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
         public ReturnedResponse<int> AddTripParticipant(int tripId, int accountId)
         {
-            return new ReturnedResponse<int>(TripparticipantLogic.Insert(new Tripparticipant() { Idtrip = tripId, Idaccount = accountId }).Id, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<int>(TripparticipantLogic.Insert(new Tripparticipant() { Idtrip = tripId, Idaccount = accountId }).Id, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual ReturnedResponse<bool> ConfirmTripParticipation(TripParticipationConfirmationDto tripAccountConfirm)
+        public virtual ReturnedResponse<bool> ConfirmTripParticipation(TripParticipationConfirmationDto entityDto)
         {
-            Trip trip = TripLogic.Select(m => m.Idinitiatoraccount == tripAccountConfirm.InitiatorAccountId && m.Iscurrent == true).FirstOrDefault();
+            Trip trip = TripLogic.Select(m => m.Idinitiatoraccount == entityDto.InitiatorAccountId && m.Iscurrent == true).FirstOrDefault();
 
             if (trip == null)
             {
-                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.DataIntegrityViolated);
+                return new ReturnedResponse<bool>(false, I18nTranslation.Translate(entityDto.Language,I18nTags.NoData), false, ErrorCodes.DataIntegrityViolated);
             }
 
             Tripparticipant tripParticipant = TripparticipantLogic
-                .Select(m => m.Idtrip == trip.Id && m.Idaccount == tripAccountConfirm.PassengerAccountId)
+                .Select(m => m.Idtrip == trip.Id && m.Idaccount == entityDto.PassengerAccountId)
                 .FirstOrDefault();
 
             if (tripParticipant == null)
             {
-                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.DataIntegrityViolated);
+                return new ReturnedResponse<bool>(false, I18nTranslation.Translate(entityDto.Language, I18nTags.NoData), false, ErrorCodes.DataIntegrityViolated);
             }
 
             tripParticipant.Isconfirmed = true;
 
             TripparticipantLogic.Update(tripParticipant);
 
-            return new ReturnedResponse<bool>(true, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<bool>(true, I18nTranslation.Translate(entityDto.Language, I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual ReturnedResponse<TripWithParticipantsDto> CreateTrip(TripDto trip)
+        public virtual ReturnedResponse<TripWithParticipantsDto> CreateTrip(TripDto entityDto)
         {
-            trip.Iscurrent = true;
+            entityDto.Iscurrent = true;
 
-            Accountscarslocation accountscarslocation = VAccountsCarsLocationLogic.Select(m => m.Idaccount == trip.Idinitiatoraccount).FirstOrDefault();
+            Accountscarslocation accountscarslocation = VAccountsCarsLocationLogic.Select(m => m.Idaccount == entityDto.Idinitiatoraccount).FirstOrDefault();
 
             if (accountscarslocation == null)
             {
-                return new ReturnedResponse<TripWithParticipantsDto>(null, I18nTranslation.Translation(I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
+                return new ReturnedResponse<TripWithParticipantsDto>(null, I18nTranslation.Translate(entityDto.Language, I18nTags.WrongData), false, ErrorCodes.DataIntegrityViolated);
             }
 
             //trip.Summary
-            trip.Leftseats = accountscarslocation.Availableseats - trip.AccountIds.Count();
+            entityDto.Leftseats = accountscarslocation.Availableseats - entityDto.AccountIds.Count();
 
-            Trip dbTrip = DtoModelMapper.Map<Trip, TripDto>(trip);
+            Trip dbTrip = DtoModelMapper.Map<Trip, TripDto>(entityDto);
 
             Trip newTrip = TripLogic.Insert(dbTrip);
 
-            foreach (int accountId in trip.AccountIds)
+            foreach (int accountId in entityDto.AccountIds)
             {
                 TripparticipantLogic.Insert(new Tripparticipant() { Idaccount = accountId, Idtrip = newTrip.Id, Isoccasion = false, Isconfirmed = false });
             }
 
             TripWithParticipantsDto result = GetTripsWithInitiator(new List<Trip>() { newTrip }).First();
 
-            return new ReturnedResponse<TripWithParticipantsDto>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<TripWithParticipantsDto>(result, I18nTranslation.Translate(entityDto.Language, I18nTags.Success), true, ErrorCodes.Success);
         }
 
-        public virtual ReturnedResponse<List<TripWithParticipantsDto>> GetAllTrips(int accountId)
+        public virtual ReturnedResponse<List<TripWithParticipantsDto>> GetAllTrips(int accountId) //#TODO: REQUIREDTO
         {
             List<int> tripsIds = TripparticipantLogic.Select(m => m.Idaccount == accountId).Select(m => m.Idtrip).ToList();
             
             List<Trip> trips = TripLogic.Select(m => tripsIds.Contains(m.Id)).ToList();
 
-            return new ReturnedResponse<List<TripWithParticipantsDto>>(GetTripsWithInitiator(trips), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<List<TripWithParticipantsDto>>(GetTripsWithInitiator(trips), I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<List<TripWithParticipantsDto>> GetInitiatorTrips(int inititatorAccountId)
         {
-            return new ReturnedResponse<List<TripWithParticipantsDto>>(GetTripsWithInitiator(TripLogic.Select(m => m.Idinitiatoraccount == inititatorAccountId).ToList()), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success); 
+            return new ReturnedResponse<List<TripWithParticipantsDto>>(GetTripsWithInitiator(TripLogic.Select(m => m.Idinitiatoraccount == inititatorAccountId).ToList()), I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success); 
         }
 
         public virtual ReturnedResponse<TripWithParticipantsDto> GetTrip(int tripId) //zmienione 1.12.22
@@ -111,17 +118,17 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
             if (trip == null)
             {
-                return new ReturnedResponse<TripWithParticipantsDto>(null, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.DataIntegrityViolated);
+                return new ReturnedResponse<TripWithParticipantsDto>(null, I18nTranslationDep.Translation(I18nTags.NoData), false, ErrorCodes.DataIntegrityViolated);
             }
             
-            return new ReturnedResponse<TripWithParticipantsDto>(GetTripsWithInitiator(new List<Trip>() { trip }).First(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<TripWithParticipantsDto>(GetTripsWithInitiator(new List<Trip>() { trip }).First(), I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<List<Vtripsparticipant>> GetTripParticipants(int accountId)
         {
             int tripId = VTripparticipantLogic.Select(m => m.Accountid.Value == accountId && m.Iscurrent.Value).First().Tripid.Value;
 
-            return new ReturnedResponse<List<Vtripsparticipant>>(VTripparticipantLogic.Select(m => m.Tripid == tripId).ToList(), I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<List<Vtripsparticipant>>(VTripparticipantLogic.Select(m => m.Tripid == tripId).ToList(), I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<bool> SetTripNotCurrent(int tripId, int inititatorAccountId) //zmienione 1.12.22
@@ -130,12 +137,12 @@ namespace Intotech.Wheelo.Bll.Porsche.Association.SourceDestinationCollocating
 
             if (trip == null)
             {
-                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
+                return new ReturnedResponse<bool>(false, I18nTranslationDep.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
             }
 
             trip.Iscurrent = false;
 
-            return new ReturnedResponse<bool>(TripLogic.Update(trip).Id > 0, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<bool>(TripLogic.Update(trip).Id > 0, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         protected virtual List<TripWithParticipantsDto> GetTripsWithInitiator(List<Trip> trips)

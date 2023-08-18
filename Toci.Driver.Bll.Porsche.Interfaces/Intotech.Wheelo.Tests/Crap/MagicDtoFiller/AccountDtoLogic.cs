@@ -15,14 +15,14 @@ public class AccountDtoLogic : DtoLogicBase<AccountModelDto, Account, AccountLog
     {
     }
 
-    protected override DtoBase<Account, AccountModelDto> GetDtoModelField(AccountDto dto)
+    protected override AccountModelDto GetDtoModelField(AccountDto dto)
     {
         return dto.Account;
     }
 
     protected override AccountDto FillEntity(AccountDto dto, AccountModelDto field)
     {
-        dto.Account = field.MapDtoToDto();
+        //dto.Account = field.MapDtoToDto();
 
         return dto;
     }

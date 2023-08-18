@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class AccountscarslocationDtoLogic : DtoLogicBase<AccountscarslocationModelDto, Accountscarslocation, IAccountscarslocationLogic, AccountscarslocationDto, List<Accountscarslocation>, List<AccountscarslocationModelDto>>, IAccountscarslocationDtoLogic
 {
@@ -19,7 +21,7 @@ public class AccountscarslocationDtoLogic : DtoLogicBase<AccountscarslocationMod
     {
     }
 
-    protected override DtoBase<Accountscarslocation,AccountscarslocationModelDto> GetDtoModelField(AccountscarslocationDto dto)
+    protected override AccountscarslocationModelDto GetDtoModelField(AccountscarslocationDto dto)
     {
        return dto.Accountscarslocation;
     }

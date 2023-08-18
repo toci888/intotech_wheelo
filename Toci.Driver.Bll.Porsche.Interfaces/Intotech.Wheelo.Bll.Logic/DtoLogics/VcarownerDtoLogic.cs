@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class VcarownerDtoLogic : DtoLogicBase<VcarownerModelDto, Vcarowner, IVcarownerLogic, VcarownerDto, List<Vcarowner>, List<VcarownerModelDto>>, IVcarownerDtoLogic
 {
@@ -19,7 +21,7 @@ public class VcarownerDtoLogic : DtoLogicBase<VcarownerModelDto, Vcarowner, IVca
     {
     }
 
-    protected override DtoBase<Vcarowner,VcarownerModelDto> GetDtoModelField(VcarownerDto dto)
+    protected override VcarownerModelDto GetDtoModelField(VcarownerDto dto)
     {
        return dto.Vcarowner;
     }

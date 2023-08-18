@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class FailedloginattemptDtoLogic : DtoLogicBase<FailedloginattemptModelDto, Failedloginattempt, IFailedloginattemptLogic, FailedloginattemptDto, List<Failedloginattempt>, List<FailedloginattemptModelDto>>, IFailedloginattemptDtoLogic
 {
@@ -19,7 +21,7 @@ public class FailedloginattemptDtoLogic : DtoLogicBase<FailedloginattemptModelDt
     {
     }
 
-    protected override DtoBase<Failedloginattempt,FailedloginattemptModelDto> GetDtoModelField(FailedloginattemptDto dto)
+    protected override FailedloginattemptModelDto GetDtoModelField(FailedloginattemptDto dto)
     {
        return dto.Failedloginattempt;
     }

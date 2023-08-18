@@ -1,4 +1,5 @@
 ﻿using Intotech.Common.Bll.ComplexResponses;
+using Intotech.Common.Bll.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Bentley.Interfaces
 {
-    public interface ICarsBrandsModelManager
+    public interface ICarsBrandsModelManager : IManager
     {
         ReturnedResponse<List<Carsbrand>> GetCarsBrandsForWildcard(string beginning);
 

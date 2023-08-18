@@ -157,13 +157,8 @@ export const SavedScreen = () => {
             source={require("../assets/lotties/Favorites.json")}
           />
           {getBodyText(
-            "You do not have any favorites saved",
-            "Tap the heart icon on rentals to add favorites"
-          )}
-          {!user && (
-            <SignUpAndSignInButtons
-              style={styles.signInAndSignUpButtonContainer}
-            />
+            i18n.t('YouDoNotHaveAnyFriendsYet'),
+            i18n.t('TapTheSearchIconToFindThem')
           )}
         </>
       );
@@ -180,8 +175,8 @@ export const SavedScreen = () => {
             source={require("../assets/lotties/Contacted.json")}
           />
           {getBodyText(
-            "You have not contacted any properties yet",
-            "Your contacted properties will show here"
+            i18n.t('YouHaveNotAssociatedAnyFriendsYet'),
+            i18n.t('YourAssociatedFriendsWillShowHere')
           )}
           {!user && (
             <SignUpAndSignInButtons
@@ -202,8 +197,8 @@ export const SavedScreen = () => {
           source={require("../assets/lotties/Applications.json")}
         />
         {getBodyText(
-          "Check the status of your rental applications here",
-          "Any properties that you have applied to will show here"
+          i18n.t('CheckTheStatusOfYourFriendRequestHere'),
+          i18n.t('AnyFriendsYouInvitedWillShowHere')
         )}
         {!user && (
           <SignUpAndSignInButtons

@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Models.TripEx;
+using Intotech.Common.Bll.Interfaces;
 
 namespace Intotech.Wheelo.Bll.Porsche.Interfaces.Association.SourceDestinationCollocating
 {
-    public interface ITripService
+    public interface ITripService : IService
     {
         ReturnedResponse<TripWithParticipantsDto> CreateTrip(TripDto trip);
         ReturnedResponse<bool> ConfirmTripParticipation(TripParticipationConfirmationDto tripAccountConfirm);

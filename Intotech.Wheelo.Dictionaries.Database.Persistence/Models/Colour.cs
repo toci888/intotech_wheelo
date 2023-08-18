@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Intotech.Common.Bll.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace Intotech.Wheelo.Dictionaries.Database.Persistence.Models;
 
-public partial class Colour
+public partial class Colour : ModelBase
 {
     public int Id { get; set; }
 

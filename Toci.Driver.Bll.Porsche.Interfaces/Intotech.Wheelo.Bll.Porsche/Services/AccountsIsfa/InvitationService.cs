@@ -13,10 +13,12 @@ using System.Threading.Tasks;
 using Intotech.Common;
 using Intotech.Wheelo.Common.ImageService;
 using Toci.Driver.Database.Persistence.Models;
+using Intotech.Common.Bll;
+using Intotech.Common.Interfaces;
 
 namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 {
-    public class InvitationService : IInvitationService
+    public class InvitationService : ServiceBaseEx, IInvitationService
     {
         public const int InvitationOriginCollocations = 1;
         public const int InvitationOriginSuggestions = 2;
@@ -25,7 +27,10 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
         protected IInvitationLogic InvitationLogic;
 
 
-        public InvitationService(IVinvitationLogic vinvitationLogic, IInvitationLogic invitationLogic)
+        public InvitationService(
+            IVinvitationLogic vinvitationLogic,
+            IInvitationLogic invitationLogic,
+            ITranslationEngineI18n i18nTranslation) : base(i18nTranslation)
         {
             VinvitationLogic = vinvitationLogic;      
             InvitationLogic = invitationLogic;
@@ -38,10 +43,10 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 
             if (fr == null)
             {
-                return new ReturnedResponse<bool>(false, I18nTranslation.Translation(I18nTags.FriendshipNotFound), false, ErrorCodes.FriendshipNotFound);
+                return new ReturnedResponse<bool>(false, I18nTranslationDep.Translation(I18nTags.FriendshipNotFound), false, ErrorCodes.FriendshipNotFound);
             }
 
-            return new ReturnedResponse<bool>(InvitationLogic.Delete(fr) > 0, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<bool>(InvitationLogic.Delete(fr) > 0, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<List<VInvitationDto>> GetInvitedAccounts(int accountId)
@@ -60,7 +65,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
                 invitedResult.Add(element);
             }
 
-            return new ReturnedResponse<List<VInvitationDto>>(invitedResult, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<List<VInvitationDto>>(invitedResult, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
 
         public virtual ReturnedResponse<Vinvitation> InviteToFriends(int invitingAccountId, int invitedAccountId)
@@ -75,7 +80,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 
             Vinvitation result =  VinvitationLogic.Select(m => m.Idaccount == invitingAccountId && m.Idaccountinvited == invitedAccountId).FirstOrDefault();
 
-            return new ReturnedResponse<Vinvitation>(result, I18nTranslation.Translation(I18nTags.Success), true, ErrorCodes.Success);
+            return new ReturnedResponse<Vinvitation>(result, I18nTranslationDep.Translation(I18nTags.Success), true, ErrorCodes.Success);
         }
     }
 }

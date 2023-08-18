@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DtoLogic\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Bll\Intotech.Common.Bll.csproj" />
+    <ProjectReference Include="..\Dictionaries\Intotech.Wheelo.Dictionaries.Bll.Persistence.Interfaces\Intotech.Wheelo.Dictionaries.Bll.Persistence.Interfaces.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Dictionaries.Bll.Logic.Interfaces\Intotech.Wheelo.Dictionaries.Bll.Logic.Interfaces.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Dictionaries.Database.Persistence\Intotech.Wheelo.Dictionaries.Database.Persistence.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Bll.Models\Intotech.Wheelo.Bll.Models.csproj" />
+  </ItemGroup>
+
+</Project>

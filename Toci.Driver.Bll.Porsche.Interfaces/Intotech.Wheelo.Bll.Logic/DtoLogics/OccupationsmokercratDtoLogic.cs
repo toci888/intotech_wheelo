@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class OccupationsmokercratDtoLogic : DtoLogicBase<OccupationsmokercratModelDto, Occupationsmokercrat, IOccupationsmokercratLogic, OccupationsmokercratDto, List<Occupationsmokercrat>, List<OccupationsmokercratModelDto>>, IOccupationsmokercratDtoLogic
 {
@@ -19,7 +21,7 @@ public class OccupationsmokercratDtoLogic : DtoLogicBase<OccupationsmokercratMod
     {
     }
 
-    protected override DtoBase<Occupationsmokercrat,OccupationsmokercratModelDto> GetDtoModelField(OccupationsmokercratDto dto)
+    protected override OccupationsmokercratModelDto GetDtoModelField(OccupationsmokercratDto dto)
     {
        return dto.Occupationsmokercrat;
     }

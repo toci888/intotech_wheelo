@@ -8,7 +8,7 @@ namespace Intotech.Wheelo.Common.Translations
         {
             ApplicationTranslationData = new Dictionary<string, Dictionary<string, string>>()
             {
-                { "en", new Dictionary<string, string>()
+                { "en-GB", new Dictionary<string, string>()
                         {
                             {"_english", "English"},
 
@@ -45,7 +45,7 @@ namespace Intotech.Wheelo.Common.Translations
                             {"_error", "Error"},
                         }
                 }, 
-                { "pl", new Dictionary<string, string>()
+                { "pl-PL", new Dictionary<string, string>()
                         {
                             {"_english", "Angielski"},
 

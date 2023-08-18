@@ -6,7 +6,9 @@ using Intotech.Wheelo.Bll.Persistence.Interfaces;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Bll.Logic.Interfaces.DtoLogics;
 
+
 namespace Intotech.Wheelo.Bll.Logic;
+
 
 public class PasswordstrengthDtoLogic : DtoLogicBase<PasswordstrengthModelDto, Passwordstrength, IPasswordstrengthLogic, PasswordstrengthDto, List<Passwordstrength>, List<PasswordstrengthModelDto>>, IPasswordstrengthDtoLogic
 {
@@ -19,7 +21,7 @@ public class PasswordstrengthDtoLogic : DtoLogicBase<PasswordstrengthModelDto, P
     {
     }
 
-    protected override DtoBase<Passwordstrength,PasswordstrengthModelDto> GetDtoModelField(PasswordstrengthDto dto)
+    protected override PasswordstrengthModelDto GetDtoModelField(PasswordstrengthDto dto)
     {
        return dto.Passwordstrength;
     }
