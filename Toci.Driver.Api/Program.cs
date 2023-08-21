@@ -222,14 +222,14 @@ if (app.Environment.IsDevelopment())
     {
         //ParentProjectFolderPath = "Toci.Driver.Bll.Porsche.Interfaces",
         ProjectName = "Toci.Driver.Database.Persistence",
-        SqlFilePath = Path.Combine(solutionDirectory, "intotech_wheelo\\SQL\\wheelo.sql")
+        SqlFilePath = Path.Combine(solutionDirectory, EnvironmentUtils.IsDockerEnv ? "SQL/wheelo.sql" : "intotech_wheelo\\SQL\\wheelo.sql")
     };
 
-    DbSetupFacade dbSetup = new DbSetupFacade(dbSetupEntity);
+    DbSetupFacade dbSetup = new DbSetupFacade(dbSetupEntity, "intotech_wheelo/Toci.Driver.Bll.Porsche.Interfaces");
 
-    //bool res = dbSetup.RunAll(true);
+    bool res = dbSetup.RunAll(true);
 
-    //new WheeloMainSeedManager().SeedAllDb();
+    new WheeloMainSeedManager().SeedAllDb();
 }
 
 

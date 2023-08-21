@@ -40,7 +40,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 
         public virtual ReturnedResponse<List<FriendsDto>> GetVfriends(int accountId)
         {
-            List<Vfriend> friends = VfriendLogic.Select(m => m.Idaccount == accountId || m.Friendidaccount == accountId).ToList();
+            List<Vfriend> friends = VfriendLogic.Select(m => m.Id == accountId || m.Friendidaccount == accountId).ToList();
             
             List<FriendsDto> frDto = AccountsMapper.Map(friends, accountId);
 
@@ -49,7 +49,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
 
         public virtual ReturnedResponse<List<FriendsDto>> SearchVfriends(int accountId, string query)
         {
-            List<Vfriend> friends = VfriendLogic.Select(m => (m.Idaccount == accountId || m.Friendidaccount == accountId) && 
+            List<Vfriend> friends = VfriendLogic.Select(m => (m.Id == accountId || m.Friendidaccount == accountId) && 
                                                              (m.Friendname.Contains(query) || m.Friendsurname.Contains(query))).ToList();
             List<FriendsDto> frDto = AccountsMapper.Map(friends, accountId);
 
@@ -98,7 +98,7 @@ namespace Intotech.Wheelo.Bll.Porsche.Services.AccountsIsfa
                 }
             }
 
-            return new ReturnedResponse<Vfriend>(VfriendLogic.Select(m => m.Idaccount == entityDto.Idaccount && m.Friendidaccount == entityDto.Idfriend).First(),
+            return new ReturnedResponse<Vfriend>(VfriendLogic.Select(m => m.Id == entityDto.Idaccount && m.Friendidaccount == entityDto.Idfriend).First(),
                 I18nTranslation.Translate(DefaultLang, I18nTags.Success), true, ErrorCodes.Success);
 
         }

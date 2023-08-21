@@ -10,11 +10,11 @@ public class VFriendsToFriendsDto : IAccountIsfaToDto<Vfriend, FriendsDto>
 {
     public virtual FriendsDto Map(Vfriend dbModel, int accountId)
     {
-        int accId = dbModel.Idaccount.Value;
+        int accId = dbModel.Id.Value;
         string name = dbModel.Name;
         string surname = dbModel.Surname;
 
-        if (dbModel.Idaccount.Value == accountId)
+        if (dbModel.Id.Value == accountId)
         {
             accId = dbModel.Friendidaccount.Value;
             name = dbModel.Friendname;

@@ -15,8 +15,8 @@ public class WheeloMainSeedManager
         new SeedRole().Insert();
         new SeedAccount().Insert();
         new SeedWorkTripGen().Insert();
-        new SeedFriendSuggestion().Insert();
-        new SeedFriends().Insert();
+        //new SeedFriendSuggestion().Insert(); // TO FIX
+        new SeedFriends().Insert(); // TO FIX
         new SeedTrip().Insert();
         new SeedTripParticipants().Insert();
         new SeedInvitation().Insert();

@@ -24,7 +24,7 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
         // zad 2 - names
         protected void PopulateSurnames()
         {
-            string surnames = File.ReadAllText(@"../Toci.Driver.Bll.Porsche.Interfaces/Intotech.Wheelo.Tests/Persistence.Seed/RawData/surnames.txt");
+            string surnames = File.ReadAllText(@"../src/Toci.Driver.Bll.Porsche.Interfaces/Intotech.Wheelo.Tests/Persistence.Seed/RawData/surnames.txt");
            // 'C:\Users\Administrator\source\repos\toci888\intotech_wheelo\Intotech.Wheelo.Tests\Persistence.Seed\RawData\surnames.txt
              //   C: \Users\Administrator\source\repos\toci888\intotech_wheelo\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Tests\Persistence.Seed\RawData
             Surnames = surnames.Split("\n").Select(m => m.Trim()).ToList();
@@ -32,7 +32,7 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
 
         protected void PopulateNames()
         {
-            string names = File.ReadAllText(@"../Toci.Driver.Bll.Porsche.Interfaces/Intotech.Wheelo.Tests/Persistence.Seed/RawData/names.txt");
+            string names = File.ReadAllText(@"../src/Toci.Driver.Bll.Porsche.Interfaces/Intotech.Wheelo.Tests/Persistence.Seed/RawData/names.txt");
 
             Names = names.Split("\n").Select(m => m.Trim()).ToList();
         }
