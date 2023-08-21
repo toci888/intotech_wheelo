@@ -20,19 +20,19 @@
     },
     "Debug": {
       "commandName": "Project",
-      "applicationUrl": "http://20.68.18.151:5105"
+      "applicationUrl": "http://20.68.18.151:5015"
     },
     "Warsztaty": {
       "commandName": "Project",
-      "applicationUrl": "http://192.168.0.153:5105"
+      "applicationUrl": "http://192.168.0.153:5015"
     },
     "bartek": {
       "commandName": "Project",
-      "applicationUrl": "http://192.168.43.59:5105"
+      "applicationUrl": "http://192.168.43.59:5015"
     },
     "Julia": {
       "commandName": "Project",
-      "applicationUrl": "http://10.0.0.4:5105"
+      "applicationUrl": "http://10.0.0.4:5015"
     },
     "Docker": {
       "commandName": "Docker",

@@ -16,10 +16,10 @@ public class WheeloMainSeedManager
         new SeedAccount().Insert();
         new SeedWorkTripGen().Insert();
         //new SeedFriendSuggestion().Insert(); // TO FIX
-        new SeedFriends().Insert(); // TO FIX
-        new SeedTrip().Insert();
-        new SeedTripParticipants().Insert();
-        new SeedInvitation().Insert();
+        //new SeedFriends().Insert(); // TO FIX
+        //new SeedTrip().Insert();
+        //new SeedTripParticipants().Insert();
+        //new SeedInvitation().Insert();
         // new Shit().CalcCollocations();
     }
 
