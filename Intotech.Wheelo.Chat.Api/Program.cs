@@ -19,6 +19,7 @@ using Intotech.Wheelo.Notifications;
 using Intotech.Wheelo.Notifications.Interfaces;
 using Intotech.Common.Database.DbSetup;
 using Intotech.Wheelo.Chat.Tests.Persistence.Seed;
+using Intotech.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -121,6 +122,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    string solutionDirectory = EnvironmentUtils.GetSolutionDirectory();
 
     DbSetupEntity dbSetupEntity = new DbSetupEntity("localhost", "beatka", "Intotech.Wheelo.Chat")
     {
