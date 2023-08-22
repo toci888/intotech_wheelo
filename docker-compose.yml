@@ -35,3 +35,8 @@ services:
       context: .
       dockerfile: Intotech.ImageService/Dockerfile
 
+  intotech.wheelo.integration.api:
+    image: ${DOCKER_REGISTRY-}intotechwheelointegrationapi
+    build:
+      context: .
+      dockerfile: Intotech.Wheelo.Integration.Api/Dockerfile
