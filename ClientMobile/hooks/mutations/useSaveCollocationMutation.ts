@@ -13,7 +13,7 @@ const saveOrUnsaveCollocation = (
   token?: string
 ) =>
   axios.post(
-    'http://40.82.192.15:5105/api/Invitations/invite-to-friends',
+    'http://40.82.192.15:5015/api/Invitations/invite-to-friends',
     // `${endpoints.alterSavedPropertiesByUserID(userID as number)}`, TODO!!
     {
       invitingAccountId: userID,

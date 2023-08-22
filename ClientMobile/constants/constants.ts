@@ -27,7 +27,7 @@ export const HEADERHEIGHT = Platform.OS === "ios" ? iosHeight : androidHeight;
 
 export const server = "http://89.40.12.1";
 
-const serverUrl = server + ":5105/api";
+const serverUrl = server + ":5015/api";
 const integrationApiUrl = server + ":5108/api";
 const chatUrl = server + ":5130/"; //check
 
