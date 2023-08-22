@@ -19,6 +19,7 @@ using Intotech.Wheelo.Notifications;
 using Intotech.Wheelo.Notifications.Interfaces;
 using Intotech.Common.Database.DbSetup;
 using Intotech.Wheelo.Chat.Tests.Persistence.Seed;
+using Intotech.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -122,11 +123,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    DbSetupEntity dbSetupEntity = new DbSetupEntity("localhost", "beatka", "Intotech.Wheelo.Chat")
+    string solutionDirectory = EnvironmentUtils.GetSolutionDirectory();
+
+    DbSetupEntity dbSetupEntity = new DbSetupEntity("beatka", "Intotech.Wheelo.Chat")
     {
         //ParentProjectFolderPath = "intotech_wheelo",
         ProjectName = "Intotech.Wheelo.Chat.Database.Persistence",
-        SqlFilePath = "..\\Toci.Driver.Bll.Porsche.Interfaces\\Wheelo.Chat.sql"
+        SqlFilePath = Path.Combine(solutionDirectory, EnvironmentUtils.IsDockerEnv ? "../src/Toci.Driver.Bll.Porsche.Interfaces/Wheelo.Chat.sql" : "..\\Toci.Driver.Bll.Porsche.Interfaces\\Wheelo.Chat.sql")
     };
 
     DbSetupFacade dbSetup = new DbSetupFacade(dbSetupEntity);

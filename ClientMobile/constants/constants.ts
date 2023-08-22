@@ -7,7 +7,7 @@ export const webClientId = "102834178930-2ttlkgvfa9g29umbtuqtv90vjasf4mop.apps.g
 export const facebookClientId = "1596113584178438";
 
 export const locationAPIKEY = 'pk.95fe8bb8ddbbc10ed656fe23d485c8f0&q';
-export const googleAPIKEY = 'AIzaSyDxVQqaiKE1L6N9Etv9SUgKsEHfPr9Et40';
+export const googleAPIKEY = 'AIzaSyD2z30RsSnCURRBDOt0b0S551jkuK3rikA';
 
 export const LISTMARGIN = 10;
 export const WIDTH = Dimensions.get("screen").width - LISTMARGIN * 2;
@@ -27,7 +27,7 @@ export const HEADERHEIGHT = Platform.OS === "ios" ? iosHeight : androidHeight;
 
 export const server = "http://89.40.12.1";
 
-const serverUrl = server + ":5105/api";
+const serverUrl = server + ":5015/api";
 const integrationApiUrl = server + ":5108/api";
 const chatUrl = server + ":5130/"; //check
 

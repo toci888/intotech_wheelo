@@ -1,3 +1,4 @@
+using Intotech.Common;
 using Intotech.Wheelo.Bll.Bentley;
 using Intotech.Wheelo.Bll.Bentley.Interfaces;
 using Intotech.Wheelo.Bll.Persistence;
@@ -29,6 +30,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    string solutionDirectory = EnvironmentUtils.GetSolutionDirectory();
 
     //new SeedCarsModelsParser().Insert();
     ////new SeedCars().Insert();

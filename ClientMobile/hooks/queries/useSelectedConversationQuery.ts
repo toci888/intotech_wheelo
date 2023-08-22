@@ -39,13 +39,24 @@ const fetchConversation = async (
     messages.push(message);
   };
   
-  let message = data.messages.find(( auth: Message ) => auth.idAccount === userID)
-  const convAuthor = {
-    id: message!.senderEmail,
-    firstName: message!.authorFirstName, 
-    lastName: message!.authorLastName,
-    imageUrl: message!.imageUrl
-  } as User;
+  let message = data.messages.find(( auth: Message ) => auth.idAccount === userID);
+
+  let convAuthor;
+  if (message) {
+    convAuthor = {
+      id: message!.senderEmail,
+      firstName: message!.authorFirstName, 
+      lastName: message!.authorLastName,
+      imageUrl: message!.imageUrl
+    } as User;
+  } else {
+    convAuthor = {
+      id: "",
+      firstName: "", 
+      lastName: "",
+      imageUrl: ""
+    } as User;
+  }
 
   console.log("DOTARŁEM", convAuthor)
   const conversation: SelectedConversation = {

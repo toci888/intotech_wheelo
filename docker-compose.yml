@@ -22,3 +22,21 @@ services:
     build:
       context: .
       dockerfile: Toci.Driver.Bll.Porsche.Interfaces/Intotech.Wheelo.Cmc.Api/Dockerfile
+  
+  intotech.wheelo.chat.api:
+    image: ${DOCKER_REGISTRY-}intotechwheelochatapi
+    build:
+      context: .
+      dockerfile: Intotech.Wheelo.Chat.Api/Dockerfile
+
+  intotech.wheelo.imageservice:
+    image: ${DOCKER_REGISTRY-}intotechwheeloimageservice
+    build:
+      context: .
+      dockerfile: Intotech.ImageService/Dockerfile
+
+  intotech.wheelo.integration.api:
+    image: ${DOCKER_REGISTRY-}intotechwheelointegrationapi
+    build:
+      context: .
+      dockerfile: Intotech.Wheelo.Integration.Api/Dockerfile
