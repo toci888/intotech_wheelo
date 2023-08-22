@@ -5,10 +5,13 @@
       "commandVersion": "1.0",
       "composeLaunchAction": "LaunchBrowser",
       "composeLaunchServiceName": "intotech.wheelo.api",
-      "composeLaunchUrl": "{Scheme}://192.168.137.1:{ServicePort}/swagger",
+      "composeLaunchUrl": "{Scheme}://192.168.1.12:{ServicePort}/swagger",
       "serviceActions": {
+        "db": "StartWithoutDebugging",
         "intotech.wheelo.api": "StartDebugging",
-        "db": "StartWithoutDebugging"
+        "intotech.wheelo.dictionaries.api": "StartDebugging",
+        "intotech.wheelo.chat.api": "StartDebugging",
+        "intotech.wheelo.imageservice": "StartDebugging"
       }
     }
   }

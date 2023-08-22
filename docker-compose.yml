@@ -29,3 +29,9 @@ services:
       context: .
       dockerfile: Intotech.Wheelo.Chat.Api/Dockerfile
 
+  intotech.wheelo.imageservice:
+    image: ${DOCKER_REGISTRY-}intotechwheeloimageservice
+    build:
+      context: .
+      dockerfile: Intotech.ImageService/Dockerfile
+
