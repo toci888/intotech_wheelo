@@ -24,8 +24,9 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
         // zad 2 - names
         protected void PopulateSurnames()
         {
-            string filePath = EnvironmentUtils.IsDockerEnv ? "../src" : "../" +
-                                                                        @"/Toci.Driver.Bll.Porsche.Interfaces/Intotech.Wheelo.Tests/Persistence.Seed/RawData/surnames.txt";
+            string env = EnvironmentUtils.IsDockerEnv ? "../src" : "../";
+            string filePath = env +
+                              @"/Toci.Driver.Bll.Porsche.Interfaces/Intotech.Wheelo.Tests/Persistence.Seed/RawData/surnames.txt";
             string surnames = File.ReadAllText(filePath);
            // 'C:\Users\Administrator\source\repos\toci888\intotech_wheelo\Intotech.Wheelo.Tests\Persistence.Seed\RawData\surnames.txt
              //   C: \Users\Administrator\source\repos\toci888\intotech_wheelo\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Tests\Persistence.Seed\RawData
@@ -34,7 +35,9 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
 
         protected void PopulateNames()
         {
-            string names = File.ReadAllText(EnvironmentUtils.IsDockerEnv ? "../src" : "../" + @"/Toci.Driver.Bll.Porsche.Interfaces/Intotech.Wheelo.Tests/Persistence.Seed/RawData/names.txt");
+            string env = EnvironmentUtils.IsDockerEnv ? "../src" : "../";
+
+            string names = File.ReadAllText(env + @"/Toci.Driver.Bll.Porsche.Interfaces/Intotech.Wheelo.Tests/Persistence.Seed/RawData/names.txt");
 
             Names = names.Split("\n").Select(m => m.Trim()).ToList();
         }

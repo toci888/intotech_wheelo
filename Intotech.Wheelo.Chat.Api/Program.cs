@@ -125,11 +125,11 @@ if (app.Environment.IsDevelopment())
 
     string solutionDirectory = EnvironmentUtils.GetSolutionDirectory();
 
-    DbSetupEntity dbSetupEntity = new DbSetupEntity("localhost", "beatka", "Intotech.Wheelo.Chat")
+    DbSetupEntity dbSetupEntity = new DbSetupEntity("beatka", "Intotech.Wheelo.Chat")
     {
         //ParentProjectFolderPath = "intotech_wheelo",
         ProjectName = "Intotech.Wheelo.Chat.Database.Persistence",
-        SqlFilePath = "..\\Toci.Driver.Bll.Porsche.Interfaces\\Wheelo.Chat.sql"
+        SqlFilePath = Path.Combine(solutionDirectory, EnvironmentUtils.IsDockerEnv ? "../src/Toci.Driver.Bll.Porsche.Interfaces/Wheelo.Chat.sql" : "..\\Toci.Driver.Bll.Porsche.Interfaces\\Wheelo.Chat.sql")
     };
 
     DbSetupFacade dbSetup = new DbSetupFacade(dbSetupEntity);
