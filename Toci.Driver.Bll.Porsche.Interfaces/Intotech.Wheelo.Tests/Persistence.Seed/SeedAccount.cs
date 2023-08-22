@@ -27,8 +27,8 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
             string filePath = EnvironmentUtils.IsDockerEnv ? "../src" : "../" +
                                                                         @"/Toci.Driver.Bll.Porsche.Interfaces/Intotech.Wheelo.Tests/Persistence.Seed/RawData/surnames.txt";
             string surnames = File.ReadAllText(filePath);
-           // 'C:\Users\Administrator\source\repos\toci888\intotech_wheelo\Intotech.Wheelo.Tests\Persistence.Seed\RawData\surnames.txt
-             //   C: \Users\Administrator\source\repos\toci888\intotech_wheelo\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Tests\Persistence.Seed\RawData
+            // 'C:\Users\Administrator\source\repos\toci888\intotech_wheelo\Intotech.Wheelo.Tests\Persistence.Seed\RawData\surnames.txt
+            //   C: \Users\Administrator\source\repos\toci888\intotech_wheelo\Toci.Driver.Bll.Porsche.Interfaces\Intotech.Wheelo.Tests\Persistence.Seed\RawData
             Surnames = surnames.Split("\n").Select(m => m.Trim()).ToList();
         }
 
@@ -53,12 +53,12 @@ namespace Intotech.Wheelo.Tests.Persistence.Seed
                 new Account() { Name = "Julia", Surname = "Wesoła", Image = Base64EncodedImages[2], Email = "bartek@gg.pl", Password = "fbd623cdcf27c1cf99595b52154e699d1ae95e7c48bd7c34ba73d0091a5b2af2", Emailconfirmed = true, Verificationcode = 8888, Refreshtoken = "ef2456t2tewtt24tgdsft34grewt4", Idrole = 1 }
 
             };
-            
-            
+
+
 
             for (int i = 0; i < 150; i++)
             {
-                accounts.Add(new Account() { Id = AccountIdOffset + 4 + i, Name = Names[rnd.Next(0, Names.Count - 1)], Surname = Surnames[rnd.Next(0, Surnames.Count - 1)], Image = Base64EncodedImages[rnd.Next(0, 3)], Password = "fbd623cdcf27c1cf99595b52154e699d1ae95e7c48bd7c34ba73d0091a5b2af2", Email = StringUtils.GetRandomText(12), Refreshtoken = StringUtils.GetRandomText(18), Idrole = 1 });
+                accounts.Add(new Account() { Id = AccountIdOffset + 4 + i, Name = Names[rnd.Next(0, Names.Count - 1)], Surname = Surnames[rnd.Next(0, Surnames.Count - 1)], Image = Base64EncodedImages[rnd.Next(0, 3)], Password = "fbd623cdcf27c1cf99595b52154e699d1ae95e7c48bd7c34ba73d0091a5b2af2", Email = StringUtils.GetRandomText(12) + "@fake.com", Refreshtoken = StringUtils.GetRandomText(18), Idrole = 1 });
             }
 
             InsertCollection(accounts);
