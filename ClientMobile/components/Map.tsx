@@ -163,7 +163,7 @@ export const Map = ({
         </>)
       }
 
-      {collocation && collocation.accountsCollocated.map((i: CollocateAccount, index: number) => (
+      {collocation.accountsCollocated && collocation.accountsCollocated.map((i: CollocateAccount, index: number) => (
         <MapMarker
           key={index} 
           lat={i.latitudefrom}
