@@ -100,12 +100,7 @@ export const AccountScreen = () => {
     <Screen>
       {!user ? (
         <View style={styles.defaultMarginHorizontal}>
-          {colorScheme === themes.light ?
-            <Image style={styles.logo} source={require('../assets/images/wheelo.png')} />
-            : <Image style={styles.logo} source={require('../assets/images/wheelo-darkTheme.png')} />}
-          <Text style={[styles.header, { color: colors.text }]} category={"h4"}>
-            {i18n.t('Welcome')}!
-          </Text>
+         
           <SignUpAndSignInButtons />
         </View>
       ) : (

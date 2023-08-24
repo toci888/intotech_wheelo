@@ -11,25 +11,37 @@ import { OrDivider } from "./OrDivider";
 import { useAuth } from "../hooks/useAuth";
 import useTheme from "../hooks/useTheme";
 import { i18n } from "../i18n/i18n";
+import { WheeloLogo } from "./logos/WheeloLogo";
+import { WheeloIcon } from "./logos/WheeloIcon";
 
 export const SignUpAndSignInButtons = ({ style }: { style?: ViewStyle }) => {
   const navigation = useNavigation();
   const { colors } = useTheme();
-  
+
   return (
-    <View style={style}>
-      <Text style={[styles.bodyText, { color: colors.lightGray }]}>{i18n.t("SignInToStart")}</Text>
-      <Button onPress={() => navigation.navigate("SignIn")} style={{ 
-        backgroundColor: colors.primary, borderColor: colors.primary, 
-        width: '100%', marginLeft: 'auto', marginRight: 'auto' }}>{i18n.t("SignIn")}</Button>
-      <Text style={[styles.bodyText, { color: colors.lightGray }]}>{i18n.t('YouDontHaveAnAccountYet')}</Text>
-      <Button appearance="outline" onPress={() => navigation.navigate("SignUp")} style={{ 
-        borderColor: colors.primary, width: '100%', marginLeft: 'auto', marginRight: 'auto' }}>
-          <Text>{i18n.t("SignUp")}</Text>
+    <View style={styles.container}>
+      <WheeloLogo />
+      <WheeloIcon />
+      <Text style={[styles.bodyText, { color: colors.lightGray }]}>{i18n.t("WheeloSloganTitle")}</Text>
+      <Text style={[styles.bodyText, { color: colors.lightGray }]}>{i18n.t("WheeloSloganSubtitle")}</Text>
+      
+      
+      <Button onPress={() => navigation.navigate("SignIn")} style={{
+        backgroundColor: colors.primary, borderColor: colors.primary,
+        width: '100%', marginLeft: 'auto', marginRight: 'auto'
+      }}>{i18n.t("SignIn")}</Button>
+      
+      <Button appearance="outline" onPress={() => navigation.navigate("SignUp")} style={{
+        borderColor: colors.primary, width: '100%', marginLeft: 'auto', marginRight: 'auto'
+      }}>
+        {i18n.t("SignUp")}
       </Button>
+      <Text style={[styles.bodyText, { color: colors.lightGray }]}>{i18n.t("OrSignInWith")}</Text>
     </View>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   signUpButton: {
@@ -38,6 +50,10 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    display: "flex",
+    justifyContent: "center", /* Centrowanie poziome */
+    alignItems: "center", /* Centrowanie w pionie */
+    marginTop: 150,
   },
   defaultMarginHorizontal: { marginHorizontal: 10 },
   userName: {
