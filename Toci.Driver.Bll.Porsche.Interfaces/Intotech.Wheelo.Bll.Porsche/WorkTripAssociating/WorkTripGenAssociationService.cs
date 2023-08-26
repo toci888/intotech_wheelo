@@ -119,7 +119,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 
             if (collocationSource == null)
             {
-                return new ReturnedResponse<TripGenCollocationDto>(resultDto, I18nTranslationDep.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
+                return new ReturnedResponse<TripGenCollocationDto>(null, I18nTranslationDep.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
             }
 
             resultDto.SourceAccount = ToAccountCollocationDto.Map(collocationSource);

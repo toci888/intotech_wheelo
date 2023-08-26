@@ -1,16 +1,18 @@
-using Intotech.Common.Bll.Interfaces; 
+﻿using Intotech.Common.Bll.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace Toci.Driver.Database.Persistence.Models
-{
-    public partial class Failedloginattempt : ModelBase
-    {
-        public int Id { get; set; }
-        public int Idaccount { get; set; }
-        public int Kind { get; set; }
-        public DateTime Createdat { get; set; }
+namespace Toci.Driver.Database.Persistence.Models;
 
-        public virtual Account IdaccountNavigation { get; set; } = null!;
-    }
+public partial class Failedloginattempt : ModelBase
+{
+    public int Id { get; set; }
+
+    public int Idaccount { get; set; }
+
+    public int Kind { get; set; }
+
+    public DateTime Createdat { get; set; }
+
+    public virtual Account IdaccountNavigation { get; set; } = null!;
 }

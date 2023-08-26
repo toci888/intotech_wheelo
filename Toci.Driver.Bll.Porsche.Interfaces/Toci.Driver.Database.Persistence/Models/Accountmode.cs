@@ -1,14 +1,14 @@
-using Intotech.Common.Bll.Interfaces; 
+﻿using Intotech.Common.Bll.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace Toci.Driver.Database.Persistence.Models
-{
-    public partial class Accountmode : ModelBase
-    {
-        public int Idaccount { get; set; }
-        public int Mode { get; set; }
+namespace Toci.Driver.Database.Persistence.Models;
 
-        public virtual Account IdaccountNavigation { get; set; } = null!;
-    }
+public partial class Accountmode : ModelBase
+{
+    public int Idaccount { get; set; }
+
+    public int Mode { get; set; }
+
+    public virtual Account IdaccountNavigation { get; set; } = null!;
 }
