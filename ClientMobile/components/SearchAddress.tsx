@@ -136,6 +136,13 @@ export const SearchAddress = ({
 const styles = StyleSheet.create({
   defaultMarginTop: {
     marginTop: 10,
+    borderRadius: 99,
+    borderWidth: 1,
+    borderColor: "#DBC2F5",
+    flexDirection: 'row',
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    width: "100%"
   },
   suggestionContainer: {
     alignItems: "center",
