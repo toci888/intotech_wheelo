@@ -11,7 +11,7 @@ import { MapMarker } from "./MapMarker";
 import { mapDarkStyle, mapStandardStyle, theme } from "../theme";
 import { Card } from "./Card";
 import { googleAPIKEY, themes } from "../constants/constants";
-import { SearchScreenParams } from "../types";
+import { ReturnedResponse, SearchScreenParams } from "../types";
 import { useSearchPropertiesQuery } from "../hooks/queries/useSearchPropertiesQuery";
 
 export const Map = ({
@@ -63,7 +63,7 @@ export const Map = ({
   // ]);
 
   const searchProperties = useSearchPropertiesQuery(location);
-  let collocation: Collocation = searchProperties.data?.isSuccess ? searchProperties.data as Collocation : {} as Collocation;
+  const collocation: Collocation = searchProperties.data?.isSuccess ? searchProperties.data.methodResult : {} as Collocation;
 
   const navigation = useNavigation();
 
@@ -94,23 +94,22 @@ export const Map = ({
   };
 
   const handleMarkerPress = (index: number) => {
-    // console.log("DANE: ", collocation.methodResult.accountsCollocated[index])
     setTimeout(() => {
       mapRef.current?.animateCamera({
         center: {
-          latitude: collocation.methodResult.accountsCollocated[index].latitudefrom,
-          longitude: collocation.methodResult.accountsCollocated[index].longitudefrom,
+          latitude: collocation.accountsCollocated[index].latitudefrom,
+          longitude: collocation.accountsCollocated[index].longitudefrom,
         },
       });
     }, 100);
     setTimeout(() => {
       const newRegion: Region = {
-        latitude: collocation.methodResult.accountsCollocated[index].latitudefrom,
+        latitude: collocation.accountsCollocated[index].latitudefrom,
         latitudeDelta:
           region?.latitudeDelta && region.latitudeDelta < 4
             ? region.latitudeDelta
             : 4,
-        longitude: collocation.methodResult.accountsCollocated[index].longitudefrom,
+        longitude: collocation.accountsCollocated[index].longitudefrom,
         longitudeDelta:
           region?.longitudeDelta && region.longitudeDelta < 4
             ? region.longitudeDelta
@@ -164,7 +163,7 @@ export const Map = ({
         </>)
       }
 
-      {collocation.methodResult && collocation.methodResult.accountsCollocated.map((i: CollocateAccount, index: number) => (
+      {collocation.accountsCollocated && collocation.accountsCollocated.map((i: CollocateAccount, index: number) => (
         <MapMarker
           key={index} 
           lat={i.latitudefrom}
@@ -187,11 +186,11 @@ export const Map = ({
             </TouchableOpacity>
           )}
           <Card
-            collocation={collocation.methodResult.accountsCollocated[activeIndex]}
+            collocation={collocation.accountsCollocated[activeIndex]}
             style={styles.card}
             onPress={() =>{
               navigation.navigate("PropertyDetails", {
-                collocationID: collocation.methodResult.accountsCollocated[activeIndex].idAccount,
+                collocationID: collocation.accountsCollocated[activeIndex].idAccount,
               })
             }
             }

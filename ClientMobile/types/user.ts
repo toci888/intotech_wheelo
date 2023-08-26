@@ -10,4 +10,5 @@ export type User = {
   sessionID?: string;
   accessToken: string;
   refreshtoken: string;
+  image?: string;
 };
