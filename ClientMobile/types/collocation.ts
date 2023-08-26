@@ -2,13 +2,8 @@ import { TempApartment } from "./tempApartment";
 import { Driver } from "../types";
 
 export type Collocation = {
-  methodResult: {
-    accountsCollocated: CollocateAccount[],
-    sourceAccount: CollocateAccount
-  },
-  errorMessage: string,
-  isSuccess: boolean,
-  errorCode: number
+  accountsCollocated: CollocateAccount[],
+  sourceAccount: CollocateAccount
 }
 
 export type CollocateAccount = {

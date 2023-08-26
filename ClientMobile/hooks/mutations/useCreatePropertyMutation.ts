@@ -27,7 +27,7 @@ export const useCreatePropertyMutation = () => {
       onSuccess(data: { data: Collocation }) {
         queryClient.invalidateQueries(queryKeys.myProperties);
         dispatch(
-          StackActions.replace("EditProperty", { propertyID: data.data.methodResult.sourceAccount.idAccount })
+          StackActions.replace("EditProperty", { propertyID: data.data.sourceAccount.idAccount })
         );
       },
     }

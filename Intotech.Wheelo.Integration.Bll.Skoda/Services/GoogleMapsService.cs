@@ -15,6 +15,7 @@ namespace Intotech.Wheelo.Integration.Bll.Skoda.Services
     public class GoogleMapsService : IGoogleMapsService
     {
         public const string InvalidRequest = "INVALID_REQUEST";
+        public const string RequestDenied = "REQUEST_DENIED";
 
         protected IGoogleMapsClient<string, GooglePlaceGeoModel> PlaceIdGoogleClient;
         protected IGoogleMapsClient<string, GooglePredictionsGeoModel> PredictionsGoogleClient;
@@ -66,7 +67,7 @@ namespace Intotech.Wheelo.Integration.Bll.Skoda.Services
         {
             GooglePredictionsGeoModel gPredModel = PredictionsGoogleClient.CallMapApi(query);
 
-            if (gPredModel.status == InvalidRequest)
+            if (gPredModel.status == InvalidRequest || gPredModel.status == RequestDenied)
             {
                 return null;
             }

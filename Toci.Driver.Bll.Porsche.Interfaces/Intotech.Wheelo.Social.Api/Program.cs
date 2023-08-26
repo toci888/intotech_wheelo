@@ -1,6 +1,9 @@
+using Intotech.Common;
 using Intotech.Common.Database.DbSetup;
+using Intotech.Common.Interfaces;
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Intotech.Wheelo.Common.Translations;
 using Intotech.Wheelo.Social.Bll.Lamborgini;
 using Intotech.Wheelo.Social.Bll.Lamborgini.Interfaces;
 using Intotech.Wheelo.Social.Bll.Persistence;
@@ -35,6 +38,7 @@ builder.Services.AddScoped<IMeetingskippedaccountLogic, MeetingskippedaccountLog
 builder.Services.AddScoped<IOrganizemeetingLogic, OrganizemeetingLogic>();
 builder.Services.AddScoped<IUsercommentLogic, UsercommentLogic>();
 builder.Services.AddScoped<IExpenseLogic, ExpenseLogic>();
+builder.Services.AddScoped<ITranslationEngineI18n, WheeloTranslationEngineI18n>();
 
 
 
@@ -52,16 +56,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    DbSetupEntity dbSetupEntity = new DbSetupEntity("localhost", "beatka", "Intotech.Wheelo.Social")
-    {
-        //ParentProjectFolderPath = "intotech_wheelo",
-        ProjectName = "Intotech.Wheelo.Chat.Database.Persistence",
-        SqlFilePath = "..\\..\\SQL\\social.sql"
-    };
+    //DbSetupEntity dbSetupEntity = new DbSetupEntity("localhost", "beatka", "Intotech.Wheelo.Social")
+    //{
+    //    //ParentProjectFolderPath = "intotech_wheelo",
+    //    ProjectName = "Intotech.Wheelo.Chat.Database.Persistence",
+    //    SqlFilePath = "..\\..\\SQL\\social.sql"
+    //};
 
-    DbSetupFacade dbSetup = new DbSetupFacade(dbSetupEntity);
+    //DbSetupFacade dbSetup = new DbSetupFacade(dbSetupEntity);
 
-    dbSetup.RunAll(true);
+    //dbSetup.RunAll(true);
 
     //DbSetupManager dbSm = new DbSetupManager("Host=localhost;Database=postgres;Username=postgres;Password=beatka",
     //    "Host=localhost;Database=Intotech.Wheelo.Social;Username=postgres;Password=beatka", "Intotech.Wheelo.Social", "..\\..\\SQL\\social.sql");
