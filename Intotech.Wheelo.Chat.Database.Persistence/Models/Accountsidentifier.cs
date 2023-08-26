@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Intotech.Common.Bll.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace Intotech.Wheelo.Chat.Database.Persistence.Models;
 
-public partial class Accountsidentifier
+public partial class Accountsidentifier : ModelBase
 {
     public int Id { get; set; }
 

@@ -24,6 +24,7 @@ using Intotech.Wheelo.Notifications.Interfaces.Models;
 using Npgsql;
 using Intotech.Common.Bll;
 using Intotech.Common.Interfaces;
+using Polly.Caching;
 
 namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 {
@@ -79,6 +80,11 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             WorktripGenLogic.Delete(workTripGenRecord);
             workTripGenRecord = WorktripGenLogic.Insert(workTripGenRecord);
 
+            if (workTripGenRecord == null)
+            {
+                return new ReturnedResponse<TripGenCollocationDto>(new TripGenCollocationDto(), I18nTranslationDep.Translation(I18nTags.Error), false, ErrorCodes.FailedToAddInformation);
+            }
+
             if (workTripGenRecord.Id < 1)
             {
                 workTripGenRecord = WorktripGenLogic.Insert(workTripGenRecord);
@@ -99,8 +105,17 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 
             resultDto.SearchId = searchId;
 
+            Vaworktripgengeolocation collocationSource = new Vaworktripgengeolocation();
+            try
+            {
+                collocationSource = VaworktripgengeolocationLogic.Select(m => m.Accountid == accountId).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+
+            }
             //this is implemented distinct in backend
-            Vaworktripgengeolocation collocationSource = VaworktripgengeolocationLogic.Select(m => m.Accountid == accountId).FirstOrDefault();
+            
 
             if (collocationSource == null)
             {
@@ -159,9 +174,6 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             }
 
             Stopwatch stw = new Stopwatch();
-            try
-            {
-
             
             stw.Start();
             string rawSelect = "select * from Worktripgen where idaccount != " + workTripGenRecord.Idaccount + " and Fromhour between '" +
@@ -234,11 +246,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                     //ScreenParams = new AssociationNotification() { IdAccountAssociated = 100000027 }
                 
             }
-            }
-            catch (Exception e)
-            {
 
-            }
         }
 
         protected virtual bool IsCollocationDuplicate(int accountId, int collocatedAccountId)

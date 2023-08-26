@@ -129,7 +129,7 @@ if (app.Environment.IsDevelopment())
     {
         //ParentProjectFolderPath = "intotech_wheelo",
         ProjectName = "Intotech.Wheelo.Chat.Database.Persistence",
-        SqlFilePath = Path.Combine(solutionDirectory, EnvironmentUtils.IsDockerEnv ? "../src/Toci.Driver.Bll.Porsche.Interfaces/Wheelo.Chat.sql" : "..\\Toci.Driver.Bll.Porsche.Interfaces\\Wheelo.Chat.sql")
+        SqlFilePath = Path.Combine(solutionDirectory, EnvironmentUtils.IsDockerEnv ? "../src/Toci.Driver.Bll.Porsche.Interfaces/Wheelo.Chat.sql" : "intotech_wheelo/Toci.Driver.Bll.Porsche.Interfaces\\Wheelo.Chat.sql")
     };
 
     DbSetupFacade dbSetup = new DbSetupFacade(dbSetupEntity);
