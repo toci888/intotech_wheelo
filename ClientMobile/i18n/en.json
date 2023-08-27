@@ -59,5 +59,9 @@
     "YourAssociatedFriendsWillShowHere": "Your associated friends will show here",
     "CheckTheStatusOfYourFriendRequestHere": "Check the status of your friend request here",
     "AnyFriendsYouInvitedWillShowHere": "Any friends you invited will show here",
-    "ResetPassword":"Reset password"
+    "ResetPassword":"Reset password",
+    "SecurityAndPrivacy": "Security and privacy",
+    "Notifications": "Notifications",
+    "SavedRoutes": "Saved routes",
+    "EditProfile": "Edytuj profil"
 }

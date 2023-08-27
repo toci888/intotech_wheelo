@@ -1,27 +1,27 @@
 import { ScrollView, View, StyleSheet, Linking, Dimensions, Image, TouchableOpacity, ImageSourcePropType, Switch } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Text, Button } from "@ui-kitten/components";
+import { Text } from "@ui-kitten/components";
 import { Screen } from "../components/Screen";
-import { SignUpAndSignInButtons } from "../components/SignUpAndSignInButtons";
 import { theme } from "../theme";
-import { ButtonList } from "../components/ButtonList";
 import { useUser } from "../hooks/useUser";
 import { i18n } from "../i18n/i18n";
 import useTheme from "../hooks/useTheme";
 import useColorScheme from "../hooks/useColorScheme";
-import { themes } from "../constants/constants";
-import { array } from "yup/lib/locale";
-import { Colors } from "react-native/Libraries/NewAppScreen";
-
-
+import { AccountNoLogo } from "../assets/images/account-no-logo-icon";
+import { ManIcon } from "../assets/images/man-icon";
+import { SaveRoadIcon } from "../assets/images/save-road-icon";
+import { SettingsIcon } from "../assets/images/settings-icon";
+import { MessagesIcon } from "../assets/images/messages-icon";
+import { SecurityAndPrivacyIcon } from "../assets/images/security-and-privacy-icon";
+import { LogoutIcon } from "../assets/images/logout-icon";
 
 type AccountItem = {
   type: "switch" | "button",
   label: string,
   onPress: () => void,
-  icon: ImageSourcePropType
-}
+  icon: JSX.Element | null
+};
 
 export const AccountScreen = () => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -30,50 +30,50 @@ export const AccountScreen = () => {
   const colorScheme = useColorScheme();
   const navigation = useNavigation();
 
-  const firstSignedOutButtons: AccountItem[] = [
+  const firstFieldButtons: AccountItem[] = [
     {
       type: "button",
-      label: "Edytuj 1profil",
-      onPress: () => navigation.navigate("AddProperty"),
-      icon: require('../assets/images/NoImage.jpeg')
+      label: i18n.t('EditProfile') ,
+      onPress: () => console.log("Pressed Edit Profile"),
+      icon: <ManIcon style={styles.buttonPhoto}/>
     },
     {
       type: "button",
-      label: "Zapisane trasy",
-      onPress: () => navigation.navigate("MyProperties"),
-      icon: require('../assets/images/NoImage.jpeg')
+      label: i18n.t('SavedRoutes') ,
+      onPress: () => console.log("Pressed Saved Routes"),
+      icon: <SaveRoadIcon style={styles.buttonPhoto}/>
     },
     {
       type: "button",
-      label: "Ustawienia",
-      onPress: () => navigation.navigate("MyProperties"),
-      icon: require('../assets/images/NoImage.jpeg')
+      label: i18n.t('OpenSettings') ,
+      onPress: () => console.log("Pressed Open Settings"),
+      icon: <SettingsIcon style={styles.buttonPhoto}/>
     },
     {
       type: "button",
-      label: "Wiadomości",
-      onPress: () => navigation.navigate("MyProperties"),
-      icon: require('../assets/images/NoImage.jpeg')
+      label: i18n.t('Messages'),
+      onPress: () => console.log("Pressed Messages"),
+      icon: <MessagesIcon style={styles.buttonPhoto}/>
     },
     {
       type: "button",
-      label: "Bezpieczeństwo i prywatność",
-      onPress: () => navigation.navigate("MyProperties"),
-      icon: require('../assets/images/NoImage.jpeg')
+      label: i18n.t('SecurityAndPrivacy'),
+      onPress: () => console.log("Pressed Security And Privacy"),
+      icon: <SecurityAndPrivacyIcon style={styles.buttonPhoto}/>
     },
     {
       type: "switch",
-      label: "Powiadomienia",
-      onPress: () => navigation.navigate("MyProperties"),
-      icon: require('../assets/images/NoImage.jpeg')
+      label: i18n.t('Notifications'),
+      onPress: () => toggleSwitch(),
+      icon: null
     },
   ];
 
   const AccManagementButtons = ({ item }: { item: AccountItem }) => {
     return (
       <TouchableOpacity style={styles.buttonContainer} onPress={item.onPress} key={item.label}>
-        <Image style={styles.buttonPhoto} source={item.icon} />
-        <Text style={[styles.buttonTextContainer,{color: colors.text}]}>{item.label}</Text>
+        { item.icon }
+        <Text style={[styles.buttonTextContainer,{color: theme["color-primary-100"] /*colors.text*/}]}>{item.label}</Text>
       </TouchableOpacity>
     );
   };
@@ -81,13 +81,17 @@ export const AccountScreen = () => {
   const AccManagementsSwitches = ({ item }: { item: AccountItem }) => {
     return (
       <TouchableOpacity style={[styles.buttonContainer, {flexDirection: "row"}]} onPress={item.onPress} key={item.label}>
-        <Text style={[styles.switchText,{color: colors.text}]}>{item.label}</Text>
-        <Switch style={styles.switch}
-          trackColor={{ false: '#767577', true: '#81b0ff' }}
-          thumbColor={isEnabled ? theme["color-primary-200"] : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={toggleSwitch}
-          value={isEnabled} />
+        <View style={{flex: 1}}>
+          <Text style={[styles.switchText,{color: theme["color-primary-100"] /*colors.text*/}]}>{item.label}</Text>
+        </View>
+        <View style={{flex: 1, marginRight: 20}}>
+          <Switch style={styles.switch}
+            trackColor={{ false: '#767577', true: '#ffffff' }}
+            thumbColor={isEnabled ? theme["color-primary-200"] : '#f4f3f4'}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={toggleSwitch}
+            value={isEnabled} />
+        </View>
       </TouchableOpacity>
     );
   };
@@ -100,21 +104,29 @@ export const AccountScreen = () => {
     <Screen>
       {user && (
         <ScrollView style={styles.mainContainer}>
-          <View style={[styles.container, {backgroundColor: theme["color-primary-500"] /*colors.background*/ }]}>          
-              <Image style={styles.accountPhoto} source={user.image ? { uri: user.image } : require('../assets/images/AccountNoImage.png')} />
-              <Text style={[styles.userName, {color: theme["color-primary-100"] /*colors.text*/}]}> {user.firstName ?? ""} </Text>           
-          </View>
+            <View style={[styles.container, {backgroundColor: theme["color-primary-500"] /*colors.background*/ }]}>  
+              <View style={{marginVertical: 16}}>
+                { user.image ?
+                  <Image style={styles.accountPhoto} source={{ uri: user.image }}/>
+                  : <AccountNoLogo style={styles.accountPhoto}/>
+                }
+                  <Text style={[styles.userName, {color: theme["color-primary-100"] /*colors.text*/}]}> {user.firstName ?? ""} {user.lastName ?? ""} </Text>           
+              </View>        
+            </View>
             <View style={[styles.container,{backgroundColor: theme["color-primary-500"]/*colors.background*/}]}>
               {
-                firstSignedOutButtons.map(item => (
+                firstFieldButtons.map(item => (
                   item.type === "button" ?
                     <AccManagementButtons item={item} />
                     : <AccManagementsSwitches item={item} />
                 ))
               }
             </View>
-            <View style={[styles.specialMarginVertical, styles.defaultMarginHorizontal,]}>
-              <Button appearance={"ghost"} style={styles.button} onPress={logout}>{i18n.t('SignOut')}</Button>
+            <View style={[styles.container,{backgroundColor: theme["color-primary-500"] /*colors.background*/ }]}>
+              <TouchableOpacity style={[styles.buttonContainer, {flexDirection: "row"}]} onPress={logout}>
+                    <LogoutIcon style={styles.buttonPhoto}/>
+                    <Text style={[styles.buttonTextContainer,{color: theme["color-primary-100"] /*colors.text*/}]}>{i18n.t('SignOut')}</Text>
+              </TouchableOpacity>
             </View>
           
         </ScrollView>
@@ -129,18 +141,8 @@ const styles = StyleSheet.create({
   },
   container: {
     borderRadius: 20,
-    marginTop: 20,
-    marginBottom: 20,
-    marginLeft: 16,
-    marginRight: 16,
-    paddingTop: 16,
-    paddingBottom: 16,
-  },
-  infoContainer: {
-    flex: 1
-  },
-  buttonsContainer: {
-    flex: 1,
+    marginVertical: 20,
+    marginHorizontal: 16,
   },
   accountPhoto: {
     width: 90,
@@ -148,6 +150,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   buttonContainer: {
+    marginVertical: 20,
     flexDirection: 'row',
   },
   buttonPhoto: {
@@ -155,63 +158,21 @@ const styles = StyleSheet.create({
     height: 24,
     marginLeft: 20
   },
-  buttonTextContainer: {
-    marginBottom: 40,  
+  buttonTextContainer: { 
     marginLeft: 20,
   },
   switch: {
-    backgroundColor: 'blue',
-    marginLeft: 300
+    borderRadius: 10,
+    borderColor: "blue"
   },
   switchText: {
     marginTop: 10,
     marginLeft: 20
   },
-  lottie: {
-    marginBottom: 50,
-    height: 250,
-    width: 250,
-    alignSelf: "center",
-  },
-  defaultMarginHorizontal: { marginHorizontal: 10 },
   userName: {
     marginTop: 13,
     fontSize: 16,
     alignSelf: "center",
     textAlign: "center"
   },
-  email: {
-    textAlign: "center",
-    fontWeight: "500",
-    marginBottom: 20,
-  },
-  header: {
-    textAlign: "center",
-    marginVertical: 25,
-    marginHorizontal: 70,
-    fontWeight: "600",
-    fontSize: 44,
-    color: theme["color-violet"],
-  },
-  middleContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: 30,
-    paddingBottom: 50,
-    borderTopColor: theme["color-gray"],
-    borderTopWidth: 2,
-  },
-  logo: {
-    width: '100%',
-    height: 250,
-    marginTop: 50,
-    marginLeft: 'auto',
-    resizeMode: 'contain',
-    marginRight: 'auto',
-    marginBottom: Dimensions.get("screen").height / 10 //TODO
-  },
-  subheader: { textAlign: "center", paddingHorizontal: 20 },
-  bodyText: { marginTop: 10, textAlign: "center", marginHorizontal: 15 },
-  button: { marginBottom: 15, borderColor: theme["color-primary-500"] },
-  specialMarginVertical: { marginTop: 30, marginBottom: 20 },
 });

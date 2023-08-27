@@ -9,10 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Intotech.Common.Bll.Seed;
+using Intotech.Common.Bll.Interfaces;
 
 namespace Intotech.Wheelo.I18n.Seed
 {
-    public abstract class SeedI18nLogic<TModel> : SeedBase<TModel> where TModel : class
+    public abstract class SeedI18nLogic<TModel> : SeedBase<TModel> where TModel : ModelBase
     {
         protected List<TModel> ModelsCollection = new List<TModel>();
 
