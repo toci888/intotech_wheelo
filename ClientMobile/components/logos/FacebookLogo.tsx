@@ -3,8 +3,8 @@ import Svg, { Path } from "react-native-svg";
 
 export const FacebookLogo = (props: any) => (
   <Svg
-    width={30}
-    height={30}
+    width={24}
+    height={24}
     fill="none"
     // style={{padding: 10}}
   >

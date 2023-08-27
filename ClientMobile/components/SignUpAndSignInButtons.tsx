@@ -13,7 +13,7 @@ import { i18n } from "../i18n/i18n";
 import { WheeloLogo } from "./logos/WheeloLogo";
 import { WheeloIcon } from "./logos/WheeloIcon";
 import { GoogleLogos } from "./logos/GoogleLogos";
-import { FacebookLogos } from "./logos/FacebookLogos";
+import { FacebookLogo } from "./logos/FacebookLogo";
 import { LinkedLogo } from "./logos/LinkedLogo";
 import { AppleLogo } from "./logos/AppleLogo";
 import * as Font from 'expo-font';
@@ -49,10 +49,18 @@ export const SignUpAndSignInButtons = () => {
               style={{borderColor: colors.text, marginRight: 30}}
               onPress={async () => await googleAuth()}
             />
+      <FacebookButton
+              text={i18n.t('ContinueWithFacebook')}
+              style={{borderColor: colors.text, marginRight: 30}}
+              onPress={async () => await facebookAuth()}
+            />
       
-      <FacebookLogos style={{ marginRight: 30 }} />
       <LinkedLogo style={{ marginRight: 30 }} />
-      <AppleLogo />
+      <AppleButton 
+              type="sign-in" 
+              onPress={async () => await appleAuth()} 
+              style={{borderColor: colors.text}}
+            />
       </View>
      
      
