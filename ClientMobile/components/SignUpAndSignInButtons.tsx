@@ -16,32 +16,43 @@ import { GoogleLogos } from "./logos/GoogleLogos";
 import { FacebookLogos } from "./logos/FacebookLogos";
 import { LinkedLogo } from "./logos/LinkedLogo";
 import { AppleLogo } from "./logos/AppleLogo";
+import * as Font from 'expo-font';
+
 
 export const SignUpAndSignInButtons = () => {
   const navigation = useNavigation();
   const { colors } = useTheme();
+  const { nativeLogin, facebookAuth, googleAuth, appleAuth } = useAuth();
   
   return (
     <View style={styles.container}>
-      <WheeloLogo />
-      <WheeloIcon />
+      <WheeloLogo style={{ marginTop:20, marginBottom: 70 }} /> 
+      <WheeloIcon style={{ marginBottom: 70 }} />
       <Text style={styles.sloganTitle}>{i18n.t("WheeloSloganTitle")}</Text>
       <Text style={styles.sloganSubtitle}>{i18n.t("WheeloSloganSubtitle")}</Text>
       
 
-      <Pressable onPress={() => navigation.navigate("SignIn")} style={styles.signInButton}>
-        <Text>{i18n.t("SignIn")}</Text>
-      </Pressable>
+      <Pressable onPress={() => navigation.navigate("SignIn")} style={styles.signInButtonContainer}>
+  <View style={styles.signInButton}>
+    <Text style={styles.SignInTxt}>{i18n.t("SignIn")}</Text>
+  </View>
+</Pressable>
         
       <Pressable onPress={() => navigation.navigate("SignUp")} style={styles.signUpButton}>
-        <Text>{i18n.t("SignUp")}</Text>
+        <Text style={styles.SignUpTxt}>{i18n.t("SignUp")}</Text>
       </Pressable>
       <Text style={styles.bodyText}>{i18n.t("OrSignInWith")}</Text>
       <View style={styles.socialButtonContainer}>
-        <GoogleLogos />
-        <FacebookLogos />
-        <LinkedLogo/>
-        <AppleLogo/>
+      {/* <GoogleLogos style={{ marginRight: 30 }} /> */}
+      <GoogleButton
+              text={i18n.t('ContinueWithGoogle')}
+              style={{borderColor: colors.text, marginRight: 30}}
+              onPress={async () => await googleAuth()}
+            />
+      
+      <FacebookLogos style={{ marginRight: 30 }} />
+      <LinkedLogo style={{ marginRight: 30 }} />
+      <AppleLogo />
       </View>
      
      
@@ -62,16 +73,15 @@ const styles = StyleSheet.create({
   },
   sloganTitle: {
     textAlign: "center",
-    fontFamily: "Open Sans",
     fontSize: 46,
     fontStyle: "normal",
     fontWeight: "700",
     lineHeight: 120,
+    marginBottom:-70,
   },
   
   sloganSubtitle: {
     textAlign: "center",
-    fontFamily: "Open Sans",
     fontSize: 46,
     fontStyle: "normal",
     fontWeight: "700",
@@ -83,20 +93,37 @@ const styles = StyleSheet.create({
       display: 'flex',
       paddingVertical: 14,
       paddingHorizontal: 40,
-      alignItems: 'center',
       alignSelf: 'stretch',
-      backgroundColor: 'blue', // Na chwile
+      backgroundColor: '#9C4DC7', 
       borderRadius: 99,
-    
+      width:310,
+      alignItems: 'center',
+      justifyContent: 'center',
+      
+
   },
+  signInButtonContainer: {
+     marginBottom:30,
+  },
+
   signUpButton: {
+    marginBottom:30,
+    color: '#DBC2F5'
+
+  },
+  SignInTxt : {
+    color:'#DBC2F5',
+  },
+  SignUpTxt: { 
+    color:'#DBC2F5',
 
   },
   bodyText: {
     marginTop: 10,
     textAlign: "center",
     marginHorizontal: 15,
-    marginBottom: 15,
+    marginBottom: 30,
     color: '#DBC2F5'
+
   }
 });
