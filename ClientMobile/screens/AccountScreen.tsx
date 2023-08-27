@@ -1,7 +1,7 @@
-import { ScrollView, View, StyleSheet, Linking, Dimensions, Image, TouchableOpacity, ImageSourcePropType, Switch } from "react-native";
+import { ScrollView, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Text } from "@ui-kitten/components";
+import { Text, Toggle } from "@ui-kitten/components";
 import { Screen } from "../components/Screen";
 import { theme } from "../theme";
 import { useUser } from "../hooks/useUser";
@@ -15,17 +15,19 @@ import { SettingsIcon } from "../assets/images/settings-icon";
 import { MessagesIcon } from "../assets/images/messages-icon";
 import { SecurityAndPrivacyIcon } from "../assets/images/security-and-privacy-icon";
 import { LogoutIcon } from "../assets/images/logout-icon";
+import { useNotifications } from "../hooks/useNotifications";
 
 type AccountItem = {
   type: "switch" | "button",
   label: string,
-  onPress: () => void,
+  onPress: () => void | null,
   icon: JSX.Element | null
 };
 
 export const AccountScreen = () => {
   const [isEnabled, setIsEnabled] = useState(false);
-  const { user, logout } = useUser();
+  const { user, logout, setAllowsNotifications } = useUser();
+  const { registerForPushNotificationsAsync } = useNotifications();
   const { colors } = useTheme();
   const colorScheme = useColorScheme();
   const navigation = useNavigation();
@@ -64,10 +66,21 @@ export const AccountScreen = () => {
     {
       type: "switch",
       label: i18n.t('Notifications'),
-      onPress: () => toggleSwitch(),
+      onPress: () => null,
       icon: null
     },
   ];
+
+  const notificationsChanged = async (checked: boolean) => {
+    try {
+      if (!checked) return setAllowsNotifications(checked);
+
+      setAllowsNotifications(checked);
+      await registerForPushNotificationsAsync(true);
+    } catch (error) {
+      setAllowsNotifications(!checked);
+    }
+  };
 
   const AccManagementButtons = ({ item }: { item: AccountItem }) => {
     return (
@@ -81,23 +94,19 @@ export const AccountScreen = () => {
   const AccManagementsSwitches = ({ item }: { item: AccountItem }) => {
     return (
       <TouchableOpacity style={[styles.buttonContainer, {flexDirection: "row"}]} onPress={item.onPress} key={item.label}>
-        <View style={{flex: 1}}>
-          <Text style={[styles.switchText,{color: theme["color-primary-100"] /*colors.text*/}]}>{item.label}</Text>
+        <View style={{flex: 2}}>
+          <Text style={[styles.toggleText,{color: theme["color-primary-100"] /*colors.text*/}]}>{item.label}</Text>
         </View>
-        <View style={{flex: 1, marginRight: 20}}>
-          <Switch style={styles.switch}
-            trackColor={{ false: '#767577', true: '#ffffff' }}
-            thumbColor={isEnabled ? theme["color-primary-200"] : '#f4f3f4'}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleSwitch}
-            value={isEnabled} />
+        <View style={{flex: 1}}>
+        <Toggle
+          checked={user?.allowsNotifications}
+          onChange={notificationsChanged}
+          style={user?.allowsNotifications ? {borderColor: "white"} : {borderColor: "blue"}}
+          status={user?.allowsNotifications ? 'success' : 'basic'}
+        />
         </View>
       </TouchableOpacity>
     );
-  };
-
-  const toggleSwitch = () => {
-    setIsEnabled((previousState) => !previousState);
   };
 
   return (
@@ -161,13 +170,14 @@ const styles = StyleSheet.create({
   buttonTextContainer: { 
     marginLeft: 20,
   },
-  switch: {
-    borderRadius: 10,
-    borderColor: "blue"
-  },
-  switchText: {
+  toggleText: {
     marginTop: 10,
     marginLeft: 20
+  },
+  toggleContainer: {
+    width: 60,
+    height: 36,
+    borderRadius: 18, 
   },
   userName: {
     marginTop: 13,
