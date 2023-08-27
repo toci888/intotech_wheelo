@@ -9,7 +9,12 @@ namespace Intotech.Wheelo.Seed.Common.Wheelo.Main
         {
             List<Car> list = new List<Car>()
             {
-                new Car() { Registrationplate = "WM 5797A" }
+                new Car() {Idaccounts = 1 + AccountIdOffset , Availableseats = 2, Registrationplate = "MBK 1320A", Createdat = DateTime.Now, Idcarsbrands = 0,
+                 Idcarsmodels = 0, Idcolours = 0},
+                new Car() { Idaccounts = 2 + AccountIdOffset, Availableseats = 2, Registrationplate = "RNI KA93", Createdat = DateTime.Now, Idcarsbrands = 1,
+                 Idcarsmodels = 1, Idcolours = 1},
+                new Car() {Idaccounts = 3 + AccountIdOffset, Availableseats = 2, Registrationplate = "WMZ MK20", Createdat = DateTime.Now, Idcarsbrands = 2,
+                 Idcarsmodels = 2, Idcolours = 2}
             };
 
             InsertCollection(list);
