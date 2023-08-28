@@ -11,6 +11,8 @@ import axios from "axios";
 import { endpoints } from "../constants/constants";
 import { commonAlert } from "../utils/handleError";
 import { i18n } from "../i18n/i18n";
+import Svg, { Path } from 'react-native-svg';
+import { MyLocationLogo } from "../components/logos/MyLocationLogo";
 
 export const CurrentLocationButton = ({ style, location, setLocation 
 }: { 
@@ -40,16 +42,17 @@ export const CurrentLocationButton = ({ style, location, setLocation
 
   return (
     <Row style={[styles.container, style as ViewStyle]}>
-      <FontAwesome
+      {/* <FontAwesome
         name="location-arrow"
         size={30}
         style={styles.icon}
         color={theme["color-primary-500"]}
-      />
-      <TouchableOpacity onPress={async () => await getLocation()}>
+      /> */}
+      <TouchableOpacity style={styles.buttonContainer} onPress={async () => await getLocation()}>
         <Text style={styles.text} status={"info"}>
           {i18n.t('UseMyCurrentLocation')}
         </Text>
+        <MyLocationLogo></MyLocationLogo>
       </TouchableOpacity>
     </Row>
   );
@@ -57,7 +60,7 @@ export const CurrentLocationButton = ({ style, location, setLocation
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
+
   },
   icon: {
     marginLeft: 5,
@@ -65,5 +68,11 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 10,
     fontWeight: "600",
+  },
+  buttonContainer: {
+    flex:1,
+    flexDirection:"row",
+    alignItems: 'center',
+    justifyContent: "space-between" 
   },
 });

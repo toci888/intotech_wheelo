@@ -1,18 +1,22 @@
-using Intotech.Common.Bll.Interfaces; 
+﻿using Intotech.Common.Bll.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace Toci.Driver.Database.Persistence.Models
-{
-    public partial class Invitation : ModelBase
-    {
-        public int Id { get; set; }
-        public int Idaccount { get; set; }
-        public int Idinvited { get; set; }
-        public int? Origin { get; set; }
-        public DateTime? Createdat { get; set; }
+namespace Toci.Driver.Database.Persistence.Models;
 
-        public virtual Account IdaccountNavigation { get; set; } = null!;
-        public virtual Account IdinvitedNavigation { get; set; } = null!;
-    }
+public partial class Invitation : ModelBase
+{
+    public int Id { get; set; }
+
+    public int Idaccount { get; set; }
+
+    public int Idinvited { get; set; }
+
+    public int? Origin { get; set; }
+
+    public DateTime? Createdat { get; set; }
+
+    public virtual Account IdaccountNavigation { get; set; } = null!;
+
+    public virtual Account IdinvitedNavigation { get; set; } = null!;
 }

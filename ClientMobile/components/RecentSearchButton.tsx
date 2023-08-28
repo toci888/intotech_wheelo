@@ -1,6 +1,7 @@
-import { StyleSheet, TouchableOpacity, ViewStyle } from "react-native";
+import { StyleSheet, TouchableOpacity, ViewStyle, Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Text } from "@ui-kitten/components";
+import { LozalizationLogo } from "./logos/LozalizationLogo";
 
 import { theme } from "../theme";
 
@@ -15,11 +16,12 @@ export const RecentSearchButton = ({
 }) => {
   return (
     <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
-      <MaterialCommunityIcons
+      {/* <MaterialCommunityIcons
         name="clock-time-three-outline"
         size={24}
         color={theme["color-primary-500"]}
-      />
+      /> */}
+      <LozalizationLogo></LozalizationLogo>
       <Text style={styles.text}>{name}</Text>
     </TouchableOpacity>
   );
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 5,
     borderColor: theme["color-gray"],
-    borderWidth: 1,
+    // borderWidth: 1,
     borderRadius: 10,
     flexDirection: "row",
     alignItems: "center",

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Intotech.Common.Bll.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace Intotech.Wheelo.Social.Database.Persistence.Models;
 
-public partial class Groupmember
+public partial class Groupmember : ModelBase
 {
     public int Id { get; set; }
 
