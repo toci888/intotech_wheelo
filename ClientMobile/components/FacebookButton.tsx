@@ -25,8 +25,8 @@ export const FacebookButton = ({
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 5,
+    /* borderRadius: 5,
     padding: 10,
-    borderWidth: 2,
+    borderWidth: 2, */
   },
 });

@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     lineHeight: 120,
     marginBottom:-70,
+   
   },
   
   sloganSubtitle: {
@@ -94,6 +95,8 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     fontWeight: "700",
     lineHeight: 120,
+ 
+  
 
   },
   signInButton: {
@@ -121,9 +124,11 @@ const styles = StyleSheet.create({
   },
   SignInTxt : {
     color:'#DBC2F5',
+    fontSize:20,
   },
   SignUpTxt: { 
     color:'#DBC2F5',
+    fontSize:20,
 
   },
   bodyText: {
