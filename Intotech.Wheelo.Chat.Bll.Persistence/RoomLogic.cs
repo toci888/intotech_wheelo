@@ -10,5 +10,8 @@ namespace Intotech.Wheelo.Chat.Bll.Persistence
 {
     public class RoomLogic : Logic<Room>, IRoomLogic
     {
+        public RoomLogic(bool cs) : base(cs)
+        {
+        }
     }
 }

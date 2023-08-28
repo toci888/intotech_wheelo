@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Intotech.Common.Bll.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace Intotech.Wheelo.I18n.Database.Persistence.Models;
 
-public partial class Tag
+public partial class Tag : ModelBase
 {
     public int Id { get; set; }
 
