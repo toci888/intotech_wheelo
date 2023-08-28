@@ -20,6 +20,11 @@ using Intotech.Wheelo.Notifications.Interfaces;
 using Intotech.Common.Database.DbSetup;
 using Intotech.Wheelo.Chat.Tests.Persistence.Seed;
 using Intotech.Common;
+using Intotech.Wheelo.Chat.Database.Persistence.Models;
+using Intotech.Common.Database.Interfaces;
+using Intotech.Common.Bll.Interfaces;
+using Intotech.Common.Database;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -64,6 +69,10 @@ builder.Services.AddScoped<ICachingService, CachingService>();
 builder.Services.AddScoped<IChatNotificationsService, ChatNotificationsService>();
 builder.Services.AddScoped<INotificationManager, NotificationManager>();
 builder.Services.AddScoped<INotificationClient, NotificationClient>();
+
+IDbHandleManager<ModelBase> dbHandleManager = new DbHandleManager<ModelBase>(() => new IntotechWheeloChatContext()));
+
+builder.Services.AddTransient((Type)dbHandleManager);
 
 
 builder.Services.AddScoped<IMessageLogic, MessageLogic>();
