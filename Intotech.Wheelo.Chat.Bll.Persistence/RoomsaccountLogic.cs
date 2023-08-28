@@ -10,7 +10,7 @@ namespace Intotech.Wheelo.Chat.Bll.Persistence
 {
     public class RoomsaccountLogic : Logic<Roomsaccount>, IRoomsaccountLogic
     {
-        public RoomsaccountLogic(bool cs) : base(cs)
+        public RoomsaccountLogic()
         {
         }
     }

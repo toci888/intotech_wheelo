@@ -10,7 +10,7 @@ namespace Intotech.Wheelo.Chat.Bll.Persistence
 {
     public class UseractivityLogic : Logic<Useractivity>, IUseractivityLogic
     {
-        public UseractivityLogic(bool cs) : base(cs)
+        public UseractivityLogic()
         {
         }
     }

@@ -10,7 +10,7 @@ namespace Intotech.Wheelo.Chat.Bll.Persistence
 {
     public class AccountsidentifierLogic : Logic<Accountsidentifier>, IAccountsindentifierLogic
     {
-        public AccountsidentifierLogic(bool cs) : base(cs)
+        public AccountsidentifierLogic()
         {
         }
     }

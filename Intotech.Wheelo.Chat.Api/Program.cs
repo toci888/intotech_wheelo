@@ -72,7 +72,7 @@ builder.Services.AddScoped<INotificationClient, NotificationClient>();
 
 IDbHandleManager<ModelBase> dbHandleManager = new DbHandleManager<ModelBase>(() => new IntotechWheeloChatContext());
 
-builder.Services.AddSingleton((Type)dbHandleManager);
+builder.Services.AddSingleton(dbHandleManager);
 
 
 builder.Services.AddScoped<IMessageLogic, MessageLogic>();
