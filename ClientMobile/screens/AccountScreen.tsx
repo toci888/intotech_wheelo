@@ -111,10 +111,10 @@ export const AccountScreen = () => {
       ) : (
         <ScrollView style={styles.container}>
           <Text style={[styles.userName, { color: colors.text }]} category={"h4"}>
-            {user.firstName ? `${i18n.t('Welcome')}, ${user.firstName}` : ""}
+            {/* {user.firstName ? `${i18n.t('Welcome')}, ${user.firstName}` : ""} */}
           </Text>
           <Text style={styles.email} category={"h6"}>
-            {user.email}
+            {/* {user.email} */}
           </Text>
           <ButtonList data={rentingButtons} header={"Renting Made Easy"} />
           <ButtonList data={accountButtons} header={"My Account"} />

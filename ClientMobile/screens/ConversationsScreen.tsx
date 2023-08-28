@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
   ActivityIndicator,
-  FlatList,
+  // FlatList,
   Pressable,
   RefreshControl,
   StyleSheet,
@@ -19,6 +19,8 @@ import { Row } from "../components/Row";
 import { i18n } from "../i18n/i18n";
 import useTheme from "../hooks/useTheme";
 import { socket } from "../constants/socket";
+import { FlatList } from "react-native-bidirectional-infinite-scroll";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export const ConversationsScreen = () => {
   const { user } = useUser();
@@ -26,7 +28,9 @@ export const ConversationsScreen = () => {
   const { navigate } = useNavigation();
   const { colors } = useTheme();
   const navigation = useNavigation();
-  const [refreshing, setRefreshing] = useState(false);
+  const [refreshingSwipeUp, setRefreshingSwipeUp] = useState(false);
+  const [refreshingSwipeDown, setRefreshingSwipeDown] = useState(false);
+
   console.log("conversations: ", conversations);
   // navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
   // if (!user) return <SignUpOrSignInScreen />;
@@ -36,6 +40,20 @@ export const ConversationsScreen = () => {
   if (!conversations?.data || conversations.data.length === 0) {
     return <Text>{i18n.t("YouHaveNoMessages")}</Text>;
   }
+  const swipeUp = async () => {
+    setRefreshingSwipeUp(true);
+    console.log("swipeUp");
+    setTimeout(() => {
+      setRefreshingSwipeUp(false);
+    }, 2000);
+  };
+  const swipeDown = async () => {
+    setRefreshingSwipeDown(true);
+    console.log("swipeDown");
+    setTimeout(() => {
+    setRefreshingSwipeDown(false);
+    }, 5000);
+  };
 
   const handleMessagePress = async (roomId: string, recipientName: string) => {
     await socket.invoke("JoinRoom", roomId);
@@ -51,18 +69,24 @@ export const ConversationsScreen = () => {
   };
 
   return (
-    <View>
-      {refreshing ? <ActivityIndicator /> : null}
+    <SafeAreaView>
+      {refreshingSwipeUp ? <ActivityIndicator /> : null}
       <FlatList
-        showsVerticalScrollIndicator={true}
+        // showsVerticalScrollIndicator={true}
         data={conversations.data}
         keyExtractor={(item) => item.idRoom.toString()}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={() => console.log("pull-to-refresh")}
-          />
-        }
+        showDefaultLoadingIndicators={true} // optional
+        // onStartReachedThreshold={10} // optional
+        // onEndReachedThreshold={10} // optional
+        // inverted
+        // refreshControl={
+        //   <RefreshControl
+        //     refreshing={refreshing}
+        //     onRefresh={() => console.log("pull-to-refresh")}
+        //   />
+        // }
+        onEndReached={swipeUp}
+        onStartReached={swipeDown}
         renderItem={({ item }) => (
           <Pressable
             style={styles.message}
@@ -89,7 +113,8 @@ export const ConversationsScreen = () => {
           </Pressable>
         )}
       />
-    </View>
+      {refreshingSwipeDown ? <ActivityIndicator /> : null}
+    </SafeAreaView>
   );
 };
 
