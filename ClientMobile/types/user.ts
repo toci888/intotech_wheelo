@@ -1,3 +1,5 @@
+import { StringLocale } from "yup/lib/locale";
+
 export type User = {
   id: number;
   firstName?: string;

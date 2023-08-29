@@ -9,7 +9,7 @@ namespace Intotech.Wheelo.Chat.Api.Controllers
 {
     [ApiController]
     [Route("/api/[controller]/")]
-   //[Authorize(Roles = "User")]
+    //[Authorize(Roles = "User")]
     public class ConversationController : ApiSimpleControllerBase<IConversationService>
     {
         public class EmailDto

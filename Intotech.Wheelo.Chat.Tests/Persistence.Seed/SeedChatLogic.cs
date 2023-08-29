@@ -12,7 +12,7 @@ public abstract class SeedChatLogic<TModel> : SeedBase<TModel> where TModel : Mo
     protected override DbContext GetEfHandle()
     {
 
-            return new IntotechWheeloChatContext();
+            return new IntotechWheeloChatContext(new DbContextOptions<IntotechWheeloChatContext>());
 
     }
 }
