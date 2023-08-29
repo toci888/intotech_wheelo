@@ -5,33 +5,39 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  ViewStyle,
+  TextInput,
 } from "react-native";
 import { Text, Input, Button } from "@ui-kitten/components";
 import { useState } from "react";
+import * as Locations from "expo-location";
 
 import { getFormattedLocationText } from "../utils/getFormattedLocationText";
 import { Row } from "./Row";
 import { theme } from "../theme";
 import { Location } from "../types/locationIQ";
 import { getLocationByPlaceId, getSuggestedLocations, searchLocations } from "../services/location";
+import { LozalizationLogo } from "./logos/LozalizationLogo";
+import { MyLocationLogo } from "./logos/MyLocationLogo";
+import { i18n } from "../i18n/i18n";
+import { commonAlert } from "../utils/handleError";
+import axios from "axios";
+import { endpoints } from "../constants/constants";
 
 export const SearchAddress = ({
   type,
   suggestions,
-  handleGoBack,
   setSuggestions,
   handleSuggestionPress,
   defaultLocation = "",
 }: {
   type: "autocomplete" | "search";
   suggestions: Location[];
-  handleGoBack: () => void;
   setSuggestions: (item: Location[]) => void;
   handleSuggestionPress: (item: Location) => void;
   defaultLocation?: string;
 }) => {
   const [value, setValue] = useState(defaultLocation);
-
   const handleChange = async (val: string) => {
     setValue(val);
     if (val.length > 2) await getSuggestions(val);
@@ -75,35 +81,34 @@ export const SearchAddress = ({
   const getInput = () => {
     if (Platform.OS === "ios" && type === "autocomplete")
       return (
-        <Input
-          keyboardType="default"
-          autoFocus
-          selectionColor={theme["color-primary-500"]}
-          placeholder="Enter Location"
-          size={"large"}
-          value={value}
-          onChangeText={handleChange}
-          onSubmitEditing={handleSubmitEditing}
-          style={styles.defaultMarginTop}
-        />
+          <Input
+            keyboardType="default"
+            autoFocus
+            selectionColor={theme["color-primary-500"]}
+            placeholder="Enter Location"
+            size={"large"}
+            value={value}
+            onChangeText={handleChange}
+            onSubmitEditing={handleSubmitEditing}
+            style={styles.defaultMarginTop}
+          />
       );
 
     return (
       <Row>
-        <Input
-          keyboardType="default"
-          autoFocus
-          selectionColor={theme["color-primary-500"]}
-          placeholder="Enter Location"
-          size={"large"}
-          value={value}
-          onChangeText={handleChange}
-          onSubmitEditing={handleSubmitEditing}
-          style={[styles.defaultMarginTop, { width: "80%" }]}
-        />
-        <Button appearance={"ghost"} status="info" onPress={handleGoBack}>
-          Cancel
-        </Button>
+        <View style={styles.defaultMarginTop}>
+          <TextInput
+            keyboardType="default"
+            autoFocus
+            placeholder="Enter Location"
+            value={value}
+            onChangeText={handleChange}
+            onSubmitEditing={handleSubmitEditing}
+          />
+          <TouchableOpacity>
+            <MyLocationLogo></MyLocationLogo>
+          </TouchableOpacity>
+        </View>
       </Row>
     );
   };
@@ -117,14 +122,20 @@ export const SearchAddress = ({
           data={suggestions as Location[]}
           keyExtractor={(item, index) => item.place_id + index}
           renderItem={({ item }) => (
-            <TouchableOpacity
+            <TouchableOpacity style={styles.lastLocalizationStyle}
               onPress={() => {
                 getLocationByPlaceId(item.place_id).then(m => {
                   handleSuggestionPress(m as Location)
                 });
               }}
             >
+              <Text style={{ marginRight: 15 }}>
+                <LozalizationLogo></LozalizationLogo>
+              </Text>
               <SuggestedText locationItem={item} />
+              <Text>
+                {item.address.road}
+              </Text>
             </TouchableOpacity>
           )}
         />
@@ -136,11 +147,38 @@ export const SearchAddress = ({
 const styles = StyleSheet.create({
   defaultMarginTop: {
     marginTop: 10,
+    borderRadius: 99,
+    borderWidth: 1,
+    borderColor: "#DBC2F5",
+    flexDirection: 'row',
+    justifyContent: "space-between",
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    width: "100%"
   },
   suggestionContainer: {
+  },
+  lastLocalizationStyle: {
     alignItems: "center",
+    flex: 1,
+    flexDirection: "row",
     padding: 15,
     borderBottomWidth: 1,
-    borderBottomColor: theme["color-gray"],
+  },
+  container: {
+
+  },
+  icon: {
+    marginLeft: 5,
+  },
+  text: {
+    marginLeft: 10,
+    fontWeight: "600",
+  },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: "space-between"
   },
 });

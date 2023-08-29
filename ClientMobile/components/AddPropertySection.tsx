@@ -161,7 +161,6 @@ export const AddPropertySection = () => {
                         setSuggestions={(item) =>
                           setSuggestions(item as Location[])
                         }
-                        handleGoBack={handleGoBack}
                         handleSuggestionPress={handleSuggestionPress}
                         defaultLocation={currentLocation}
                       />

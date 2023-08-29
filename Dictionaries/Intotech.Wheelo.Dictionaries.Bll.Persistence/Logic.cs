@@ -1,4 +1,5 @@
 ﻿using Intotech.Common.Bll;
+using Intotech.Common.Bll.Interfaces;
 using Intotech.Wheelo.Dictionaries.Database.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Dictionaries.Bll.Persistence
 {
-    public abstract class Logic<TModel> : LogicBase<TModel> where TModel : class, new()
+    public abstract class Logic<TModel> : LogicBase<TModel> where TModel : ModelBase, new()
     {
         protected override DbContext GetEfHandle()
         {

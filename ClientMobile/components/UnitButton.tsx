@@ -1,7 +1,7 @@
+import React from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Text } from "@ui-kitten/components";
-
 import { theme } from "../theme";
 
 export const UnitButton = ({

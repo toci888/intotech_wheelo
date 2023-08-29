@@ -73,6 +73,10 @@ export const RecentSearchList = ({
 };
 
 const styles = StyleSheet.create({
-  recentSearchButton: { marginVertical: 5 },
-  showButton: { alignSelf: "flex-start" },
+  recentSearchButton: { 
+    marginVertical: 5
+ },
+  showButton: { 
+    alignSelf: "flex-start",
+  },
 });

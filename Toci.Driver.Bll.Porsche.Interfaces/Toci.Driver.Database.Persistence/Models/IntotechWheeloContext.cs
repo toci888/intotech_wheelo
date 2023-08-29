@@ -673,6 +673,7 @@ public partial class IntotechWheeloContext : DbContext
             entity.Property(e => e.Accountid).HasColumnName("accountid");
             entity.Property(e => e.Distancefrom).HasColumnName("distancefrom");
             entity.Property(e => e.Distanceto).HasColumnName("distanceto");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name).HasColumnName("name");
             entity.Property(e => e.Suggestedaccountid).HasColumnName("suggestedaccountid");
             entity.Property(e => e.Suggestedname).HasColumnName("suggestedname");
@@ -710,6 +711,7 @@ public partial class IntotechWheeloContext : DbContext
 
             entity.Property(e => e.Accountidcollocated).HasColumnName("accountidcollocated");
             entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Idaccount).HasColumnName("idaccount");
             entity.Property(e => e.Image).HasColumnName("image");
             entity.Property(e => e.Isdriver).HasColumnName("isdriver");
@@ -733,6 +735,7 @@ public partial class IntotechWheeloContext : DbContext
 
             entity.Property(e => e.Accountid).HasColumnName("accountid");
             entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Image).HasColumnName("image");
             entity.Property(e => e.Isdriver).HasColumnName("isdriver");
             entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
@@ -753,6 +756,7 @@ public partial class IntotechWheeloContext : DbContext
 
             entity.Property(e => e.Driverpassenger).HasColumnName("driverpassenger");
             entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Idaccount).HasColumnName("idaccount");
             entity.Property(e => e.Image).HasColumnName("image");
             entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
@@ -795,6 +799,7 @@ public partial class IntotechWheeloContext : DbContext
                 .ToView("vfriendsuggestions");
 
             entity.Property(e => e.Accountid).HasColumnName("accountid");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name).HasColumnName("name");
             entity.Property(e => e.Suggestedaccountid).HasColumnName("suggestedaccountid");
             entity.Property(e => e.Suggestedfriendid).HasColumnName("suggestedfriendid");
@@ -815,6 +820,7 @@ public partial class IntotechWheeloContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
             entity.Property(e => e.Firstname).HasColumnName("firstname");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Idaccount).HasColumnName("idaccount");
             entity.Property(e => e.Idaccountinvited).HasColumnName("idaccountinvited");
             entity.Property(e => e.Invitedfirstname).HasColumnName("invitedfirstname");
@@ -830,6 +836,7 @@ public partial class IntotechWheeloContext : DbContext
 
             entity.Property(e => e.Accountid).HasColumnName("accountid");
             entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Iscurrent).HasColumnName("iscurrent");
             entity.Property(e => e.Isoccasion).HasColumnName("isoccasion");
             entity.Property(e => e.Leftseats).HasColumnName("leftseats");
@@ -852,6 +859,7 @@ public partial class IntotechWheeloContext : DbContext
 
             entity.Property(e => e.Accountidcollocated).HasColumnName("accountidcollocated");
             entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Idaccount).HasColumnName("idaccount");
             entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
             entity.Property(e => e.Latitudeto).HasColumnName("latitudeto");

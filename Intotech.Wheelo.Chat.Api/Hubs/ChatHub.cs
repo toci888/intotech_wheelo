@@ -38,7 +38,7 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             await base.OnDisconnectedAsync(exception);
         }
 
-        public ChatHub(IChatUserService chatUser, IRoomService roomService, ICachingService cachingService, 
+        public ChatHub(IChatUserService chatUser, IRoomService roomService, ICachingService cachingService,
             IChatNotificationsService chatNotificationsService)
         {
             ChatUserService = chatUser;
@@ -47,13 +47,13 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
             ChatNotificationsService = chatNotificationsService;
         }
 
-        
+
         [Authorize(Roles = "User")]
         public async Task ConnectUser(int idAccount) // accountId room for synchronizations
         {
             ChatUserDto data = ChatUserService.Connect(idAccount);
 
-            if (data == null) 
+            if (data == null)
             {
                 await Clients.Caller.SendAsync("connect_error", "Invalid userId");
 
@@ -114,12 +114,12 @@ namespace Intotech.Wheelo.Chat.Api.Hubs
                 }
                 catch (Exception ex)
                 {
-                    
+
                 }
             }                                                            //roomid
 
             return chatMessage;
         }
-        
+
     }
 }

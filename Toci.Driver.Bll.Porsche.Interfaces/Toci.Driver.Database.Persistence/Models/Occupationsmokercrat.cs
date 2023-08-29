@@ -1,18 +1,22 @@
-using Intotech.Common.Bll.Interfaces; 
+﻿using Intotech.Common.Bll.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace Toci.Driver.Database.Persistence.Models
-{
-    public partial class Occupationsmokercrat : ModelBase
-    {
-        public int Id { get; set; }
-        public int? Idaccount { get; set; }
-        public int? Idoccupation { get; set; }
-        public bool? Issmoker { get; set; }
-        public DateTime? Createdat { get; set; }
+namespace Toci.Driver.Database.Persistence.Models;
 
-        public virtual Account? IdaccountNavigation { get; set; }
-        public virtual Occupation? IdoccupationNavigation { get; set; }
-    }
+public partial class Occupationsmokercrat : ModelBase
+{
+    public int Id { get; set; }
+
+    public int? Idaccount { get; set; }
+
+    public int? Idoccupation { get; set; }
+
+    public bool? Issmoker { get; set; }
+
+    public DateTime? Createdat { get; set; }
+
+    public virtual Account? IdaccountNavigation { get; set; }
+
+    public virtual Occupation? IdoccupationNavigation { get; set; }
 }

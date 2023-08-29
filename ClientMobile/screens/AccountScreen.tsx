@@ -1,179 +1,195 @@
-import { ScrollView, View, StyleSheet, Linking, Dimensions, Image } from "react-native";
+import React, { useState } from "react";
+import { ScrollView, View, StyleSheet, Image, TouchableOpacity, Switch } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Text, Button } from "@ui-kitten/components";
-
+import { Text } from "@ui-kitten/components";
 import { Screen } from "../components/Screen";
-import { SignUpAndSignInButtons } from "../components/SignUpAndSignInButtons";
 import { theme } from "../theme";
-import { ButtonList } from "../components/ButtonList";
 import { useUser } from "../hooks/useUser";
-import React from "react";
 import { i18n } from "../i18n/i18n";
 import useTheme from "../hooks/useTheme";
 import useColorScheme from "../hooks/useColorScheme";
-import { themes } from "../constants/constants";
+import { AccountNoLogo } from "../assets/images/account-no-logo-icon";
+import { ManIcon } from "../assets/images/man-icon";
+import { SaveRoadIcon } from "../assets/images/save-road-icon";
+import { SettingsIcon } from "../assets/images/settings-icon";
+import { MessagesIcon } from "../assets/images/messages-icon";
+import { SecurityAndPrivacyIcon } from "../assets/images/security-and-privacy-icon";
+import { LogoutIcon } from "../assets/images/logout-icon";
+import { useNotifications } from "../hooks/useNotifications";
+import { SignUpAndSignInButtons } from "../components/SignUpAndSignInButtons";
+
+type AccountItem = {
+    type: "switch" | "button",
+    label: string,
+    onPress: () => void | null,
+    icon: JSX.Element | null
+};
 
 export const AccountScreen = () => {
-  const { user, logout } = useUser();
-  const { colors } = useTheme();
-  const colorScheme = useColorScheme();
-  const navigation = useNavigation();
+    const { user, logout, setAllowsNotifications } = useUser();
+    const [isEnabled, setIsEnabled] = useState(user?.allowsNotifications ?? false);
+    const { registerForPushNotificationsAsync } = useNotifications();
+    const { colors } = useTheme();
+    const colorScheme = useColorScheme();
+    const navigation = useNavigation();
 
-  const firstSignedOutButtons = [
-    {
-      label: "Add a Property",
-      onPress: () => navigation.navigate("AddProperty"),
-    },
-    {
-      label: "View My Properties",
-      onPress: () => navigation.navigate("MyProperties"),
-    },
-  ];
+    const firstFieldButtons: AccountItem[] = [
+        {
+            type: "button",
+            label: i18n.t('EditProfile'),
+            onPress: () => console.log("Pressed Edit Profile"),
+            icon: <ManIcon style={styles.buttonPhoto} />
+        },
+        {
+            type: "button",
+            label: i18n.t('SavedRoutes'),
+            onPress: () => console.log("Pressed Saved Routes"),
+            icon: <SaveRoadIcon style={styles.buttonPhoto} />
+        },
+        {
+            type: "button",
+            label: i18n.t('OpenSettings'),
+            onPress: () => console.log("Pressed Open Settings"),
+            icon: <SettingsIcon style={styles.buttonPhoto} />
+        },
+        {
+            type: "button",
+            label: i18n.t('Messages'),
+            onPress: () => console.log("Pressed Messages"),
+            icon: <MessagesIcon style={styles.buttonPhoto} />
+        },
+        {
+            type: "button",
+            label: i18n.t('SecurityAndPrivacy'),
+            onPress: () => console.log("Pressed Security And Privacy"),
+            icon: <SecurityAndPrivacyIcon style={styles.buttonPhoto} />
+        },
+        {
+            type: "switch",
+            label: i18n.t('Notifications'),
+            onPress: () => null,
+            icon: null
+        },
+    ];
 
-  const supportButtons = [
-    {
-      label: "Help Center",
-      onPress: () => console.log("navigate to Help Center"), //navigation.navigate("AddProperty")
-    },
-    {
-      label: "Terms and Conditions",
-      onPress: () => console.log("navigate to Terms and Conditions"),
-    },
-  ];
+    const notificationsChanged = async (checked: boolean) => {
+        try {
+            console.log("Switch check :" + checked)
+            setIsEnabled(!checked)
+            if (!checked) return setAllowsNotifications(checked);
 
-  const rentingButtons = [
-    {
-      label: "Favorite Properties",
-      onPress: () => navigation.navigate("Root", { screen: "Saved" }),
-    },
-    {
-      label: "Rental Applications",
-      onPress: () => console.log("navigate to Rental Applications"),
-    },
-    {
-      label: "My Residences",
-      onPress: () => navigation.navigate("MyProperties"),
-    },
-    {
-      label: "Rent Payments",
-      onPress: () => console.log("navigate to Rent Payments"),
-    },
-  ];
+            setAllowsNotifications(checked);
+            await registerForPushNotificationsAsync(true);
+        } catch (error) {
+            setAllowsNotifications(!checked);
+        }
+    };
 
-  const accountButtons = [
-    {
-      label: "Account Settings",
-      onPress: () =>
-        navigation.navigate("Root", {
-          screen: "AccountRoot",
-          params: {
-            screen: "Settings",
-          },
-        }),
-    },
-    {
-      label: "Billing History",
-      onPress: () => console.log("navigate to Billing History"),
-    },
-    {
-      label: "Banks and Cards",
-      onPress: () => console.log("navigate to Banks and Cards"),
-    }
-  ];
+    const AccManagementButtons = ({ item }: { item: AccountItem }) => {
+        return (
+            <TouchableOpacity style={styles.buttonContainer} onPress={item.onPress} key={item.label}>
+                {item.icon}
+                <Text style={[styles.buttonTextContainer, { color: theme["color-primary-100"] /*colors.text*/ }]}>{item.label}</Text>
+            </TouchableOpacity>
+        );
+    };
 
-  const rentalManagementButtons = [
-    {
-      label: "Add a Property",
-      onPress: () => navigation.navigate("AddProperty"),
-    },
-    {
-      label: "Add Apartment to Property",
-      onPress: () => console.log("navigate to MyProperties"),
-    },
-    {
-      label: "View My Properties",
-      onPress: () => navigation.navigate("MyProperties"),
-    },
-  ];
+    const AccManagementsSwitches = ({ item }: { item: AccountItem }) => {
+        return (
+            <TouchableOpacity style={[styles.buttonContainer, { flexDirection: "row" }]} onPress={item.onPress} key={item.label}>
+                <View style={{ flex: 2 }}>
+                    <Text style={[styles.toggleText, { color: theme["color-primary-100"] /*colors.text*/ }]}>{item.label}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <Switch
+                        trackColor={{ false: 'purple', true: 'gray' }}
+                        thumbColor={isEnabled ? 'white' : 'white'}
+                        ios_backgroundColor="#3e3e3e"
+                        onValueChange={() => notificationsChanged(isEnabled)}
+                        value={isEnabled}
+                    />
+                </View>
+            </TouchableOpacity>
+        );
+    };
 
-  return (
-    <Screen>
-      {!user ? (
-        <View style={styles.defaultMarginHorizontal}>
-         
-          <SignUpAndSignInButtons />
-        </View>
-      ) : (
-        <ScrollView style={styles.container}>
-          <Text style={[styles.userName, { color: colors.text }]} category={"h4"}>
-            {user.firstName ? `${i18n.t('Welcome')}, ${user.firstName}` : ""}
-          </Text>
-          <Text style={styles.email} category={"h6"}>
-            {user.email}
-          </Text>
-          <ButtonList data={rentingButtons} header={"Renting Made Easy"} />
-          <ButtonList data={accountButtons} header={"My Account"} />
-          <ButtonList data={rentalManagementButtons} header={"Rental Manager Tools"} />
-          <ButtonList data={firstSignedOutButtons} header="Properties" borderTop />
-          <ButtonList data={supportButtons} header="Support" marginTop borderTop />
-          <View style={[styles.specialMarginVertical, styles.defaultMarginHorizontal,]}>
-            <Button appearance={"ghost"} style={styles.button} onPress={logout}>{i18n.t('SignOut')}</Button>
-          </View>
-        </ScrollView>
-      )}
-    </Screen>
-  );
+    return (
+        <Screen>
+            {user ? (
+                <ScrollView style={styles.mainContainer}>
+                    <View style={[styles.container, { backgroundColor: theme["color-primary-500"] /*colors.background*/ }]}>
+                        <View style={{ marginVertical: 16 }}>
+                            {user.image ?
+                                <Image style={styles.accountPhoto} source={{ uri: user.image }} />
+                                : <AccountNoLogo style={styles.accountPhoto} />
+                            }
+                            <Text style={[styles.userName, { color: theme["color-primary-100"] /*colors.text*/ }]}> {user.firstName ?? ""} {user.lastName ?? ""} </Text>
+                        </View>
+                    </View>
+                    <View style={[styles.container, { backgroundColor: theme["color-primary-500"]/*colors.background*/ }]}>
+                        {
+                            firstFieldButtons.map(item => (
+                                item.type === "button" ?
+                                    <AccManagementButtons item={item} />
+                                    : <AccManagementsSwitches item={item} />
+                            ))
+                        }
+                    </View>
+                    <View style={[styles.container, { backgroundColor: theme["color-primary-500"] /*colors.background*/ }]}>
+                        <TouchableOpacity style={[styles.buttonContainer, { flexDirection: "row" }]} onPress={logout}>
+                            <LogoutIcon style={styles.buttonPhoto} />
+                            <Text style={[styles.buttonTextContainer, { color: theme["color-primary-100"] /*colors.text*/ }]}>{i18n.t('SignOut')}</Text>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
+            ) : (
+                <View>
+                    <SignUpAndSignInButtons />
+                </View>
+            )}
+        </Screen>
+    );
 };
 
 const styles = StyleSheet.create({
-  lottie: {
-    marginBottom: 50,
-    height: 250,
-    width: 250,
-    alignSelf: "center",
-  },
-  container: {
-    flex: 1,
-  },
-  defaultMarginHorizontal: { marginHorizontal: 10 },
-  userName: {
-    textAlign: "center",
-    fontWeight: "600",
-    marginBottom: 5,
-    textTransform: "capitalize",
-  },
-  email: {
-    textAlign: "center",
-    fontWeight: "500",
-    marginBottom: 20,
-  },
-  header: {
-    textAlign: "center",
-    marginVertical: 25,
-    marginHorizontal: 70,
-    fontWeight: "600",
-    fontSize: 44,
-    color: theme["color-violet"],
-  },
-  middleContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: 30,
-    paddingBottom: 50,
-    borderTopColor: theme["color-gray"],
-    borderTopWidth: 2,
-  },
-  logo: {
-    width: '100%',
-    height: 250,
-    marginTop: 50,
-    marginLeft: 'auto',
-    resizeMode: 'contain',
-    marginRight: 'auto',
-    marginBottom: Dimensions.get("screen").height / 10 //TODO
-  },
-  subheader: { textAlign: "center", paddingHorizontal: 20 },
-  bodyText: { marginTop: 10, textAlign: "center", marginHorizontal: 15 },
-  button: { marginBottom: 15, borderColor: theme["color-primary-500"] },
-  specialMarginVertical: { marginTop: 30, marginBottom: 20 },
+    mainContainer: {
+        flex: 1,
+    },
+    container: {
+        borderRadius: 20,
+        marginVertical: 20,
+        marginHorizontal: 16,
+    },
+    accountPhoto: {
+        width: 90,
+        height: 90,
+        alignSelf: "center",
+    },
+    buttonContainer: {
+        marginVertical: 20,
+        flexDirection: 'row',
+    },
+    buttonPhoto: {
+        width: 30,
+        height: 24,
+        marginLeft: 20
+    },
+    buttonTextContainer: {
+        marginLeft: 20,
+    },
+    toggleText: {
+        marginTop: 10,
+        marginLeft: 20
+    },
+    toggleContainer: {
+        width: 60,
+        height: 36,
+        borderRadius: 18,
+    },
+    userName: {
+        marginTop: 13,
+        fontSize: 16,
+        alignSelf: "center",
+        textAlign: "center"
+    },
 });

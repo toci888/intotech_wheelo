@@ -161,7 +161,7 @@ create table FriendSuggestions
 );
 
 create or replace view VFriendSuggestions as
-select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
+select FriendSuggestions.Id, U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
 U2.Id as SuggestedAccountId, U3.Name as SuggestedFriendName, U3.Surname as SuggestedFriendSurname, U3.Id as SuggestedFriendId
 from FriendSuggestions 
 join Accounts U1 on U1.Id = FriendSuggestions.IdAccount 
@@ -182,7 +182,7 @@ create table Invitations
 --select * from VInvitations;
 
 create or replace view VInvitations as
-select U1.Name as FirstName, U1.Surname as LastName, U2.Name as InvitedFirstName, U2.Surname as InvitedLastName, 
+select Invitations.Id, U1.Name as FirstName, U1.Surname as LastName, U2.Name as InvitedFirstName, U2.Surname as InvitedLastName, 
 U1.Id as IdAccount, U2.Id as IdAccountInvited, Invitations.CreatedAt
 from Invitations 
 join Accounts U1 on U1.Id = Invitations.IdAccount 
@@ -267,7 +267,7 @@ create table WorkTrip
 
 --select * from VAccountsCollocations;
 create or replace view VAccountsCollocations as
-select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
+select ac.Id, U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
 U2.Id as SuggestedAccountId, ac.DistanceFrom, ac.DistanceTo
 from AccountsCollocations ac
 join Accounts U1 on U1.Id = ac.IdAccount 
@@ -275,7 +275,7 @@ join Accounts U2 on U2.Id = ac.IdCollocated ;
 
 --select * from VAccountsCollocationsWorkTrip;
 create or replace view VAccountsCollocationsWorkTrip as
-select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
+select ac, U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
 U2.Id as SuggestedAccountId, ac.DistanceFrom, ac.DistanceTo, wt.LatitudeFrom, wt.LongitudeFrom, wt.LatitudeTo,
 wt.LongitudeTo, wt.FromHour, wt.ToHour 
 from AccountsCollocations ac
@@ -396,29 +396,30 @@ create table TripParticipants
 
 
 create or replace view VTripsParticipants as
-select U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
+select tr.Id, U1.Name, U1.Surname, U2.Name as SuggestedName, U2.Surname as SuggestedSurname, U1.Id as AccountId, 
 U2.Id as SuggestedAccountId, tr.TripDate, tr.Summary, tr.id as tripId, tr.IsCurrent, tr.FromHour, tr.ToHour,
 tr.LeftSeats, tp.IsOccasion
-from Trips tr join TripParticipants tp on tr.id = tp.IdTrip
+from Trips tr 
+join TripParticipants tp on tr.id = tp.IdTrip
 join Accounts U1 on U1.Id = tr.IdInitiatorAccount 
 join Accounts U2 on U2.Id = tp.IdAccount ;
 
 
 create or replace view VWorkTripGenGeoLocations as --select people, who belong to the group collocated
-select acc.idaccount, a.id as accountIdCollocated, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
+select acc.Id, acc.idaccount, a.id as accountIdCollocated, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
 wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchId
 from AccountsCollocations acc 
 join WorkTripGen wt on acc.idcollocated = wt.IdAccount
 join Accounts a on a.id = wt.IdAccount;
 
 create or replace view VAWorkTripGenGeoLocations as --select hosts of collocations
-select distinct wt.idaccount as accountId, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
+select distinct wt.Id, wt.idaccount as accountId, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
 wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchid, wt.DriverPassenger as IsDriver, a.image
 from WorkTripGen wt 
 join Accounts a on a.id = wt.IdAccount;
 
 create or replace view VACollocationsGeoLocations as --select people, who belong to the group collocated
-select acc.idaccount, a.id as accountIdCollocated, ac1.name, ac1.surname, a.name as nameCollocated, 
+select acc.Id, acc.idaccount, a.id as accountIdCollocated, ac1.name, ac1.surname, a.name as nameCollocated, 
 a.surname as surnameCollocated, wt.LatitudeFrom, wt.LongitudeFrom,
 wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchId, wt.DriverPassenger as IsDriver, a.image
 from AccountsCollocations acc 
@@ -427,7 +428,7 @@ join WorkTripGen wt on acc.idcollocated = wt.IdAccount
 join Accounts a on a.id = wt.IdAccount;
 
 create or replace view VCollocationsGeoLocations as --select hosts of collocations
-select distinct a.id as idAccount, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
+select distinct acc.Id, a.id as idAccount, a.name, a.surname, wt.LatitudeFrom, wt.LongitudeFrom,
 wt.LatitudeTo, wt.LongitudeTo, wt.FromHour, wt.ToHour, wt.searchid, wt.DriverPassenger, a.image  
 from AccountsCollocations acc 
 join WorkTripGen wt on acc.IdAccount = wt.IdAccount
