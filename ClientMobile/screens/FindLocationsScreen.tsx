@@ -8,6 +8,7 @@ import { Screen } from "../components/Screen";
 import { ModalHeader } from "../components/ModalHeader";
 import { theme } from "../theme";
 import { Location } from "../types/locationIQ";
+
 import { CurrentLocationButton } from "../components/CurrentLocationButton";
 import { RecentSearchList } from "../components/RecentSearchList";
 import { SearchAddress } from "../components/SearchAddress";
@@ -81,18 +82,19 @@ export const FindLocationsScreen = ({route}:{
           <Text style={styles.textStyle}>
               START
           </Text>
-          <ClearLogo></ClearLogo>
+          <TouchableOpacity onPress={navigation.goBack}>
+            <ClearLogo></ClearLogo>
+          </TouchableOpacity>
         </View>
         <SearchAddress
           type="autocomplete"
-          handleGoBack={navigation.goBack}
           suggestions={suggestions}
           setSuggestions={(item) => setSuggestions(item as Location[])}
           handleSuggestionPress={(item) => {handleNavigate(item as Location)}}
         />
         {suggestions.length === 0 ? (
           <ScrollView bounces={false}>
-            <CurrentLocationButton style={styles.currentLocationButton} location={route.params.location} setLocation={route.params.setLocation} />
+            {/* <CurrentLocationButton style={styles.currentLocationButton} location={route.params.location} setLocation={route.params.setLocation} /> */}
             <View style={styles.hourseLeavingContainer}>
               <Text style={styles.textHourseStyle}>
                 Godzina wyjazdu
@@ -104,7 +106,7 @@ export const FindLocationsScreen = ({route}:{
                 <AlarmLogo></AlarmLogo>
               </TouchableOpacity>
             </View>
-            <ScrollView horizontal={true}>
+            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
               {savedLocalization.map((lozalization)=>(
                   <SavedLocalizationButton
                   logo={lozalization.logo}
@@ -113,24 +115,6 @@ export const FindLocationsScreen = ({route}:{
                   style={styles.imageContainer}
               />
               ))}
-              {/* <View style={styles.imageContainer}>
-                <HouseLogo></HouseLogo>
-                <Text style={styles.tileText}>
-                  DOM
-                </Text>
-              </View>
-              <View style={styles.imageContainer}>
-                <WorkLogo></WorkLogo>
-                <Text style={styles.tileText}>
-                  PRACA
-                </Text>
-              </View> */}
-              {/* <View style={styles.imageContainer}>
-                <RestaurantLogo></RestaurantLogo>
-                <Text style={styles.tileText}>
-                  PUB
-                </Text>r
-              </View>  */}
             </ScrollView>
             <View style={styles.tileContainers}>
               {travelers.map((traveler) =>(
@@ -141,18 +125,6 @@ export const FindLocationsScreen = ({route}:{
                 style={styles.tileDriverContainers}
               />
               ))}
-                {/* <View style={styles.tileDriverContainers}>
-                  <DriverLogo></DriverLogo>
-                  <Text style={styles.driverText}>
-                    kierowca
-                  </Text>
-                </View>
-                <View style={styles.tileDriverContainers}>
-                  <PassengerLogo></PassengerLogo>
-                    <Text style={styles.driverText}>
-                      pasażer
-                    </Text>
-                </View> */}
             </View>
             <RecentSearchList
               style={styles.recentSearchContainer}
@@ -299,6 +271,7 @@ const styles = StyleSheet.create({
       flexDirection: "row",
       marginTop: 40
     },
-  recentSearchContainer: { marginTop: 30 },
-  
+  recentSearchContainer: { 
+      marginTop: 30,
+    }, 
 });

@@ -27,7 +27,7 @@ export const CurrentLocationButton = ({ style, location, setLocation
     if (status !== "granted") {
       commonAlert(i18n.t('Permissiontoaccesslocationwasdenied'))
       return;
-    }
+    };
 
     let currentLocation = await Location.getCurrentPositionAsync({});
 
