@@ -24,6 +24,7 @@ using Intotech.Wheelo.Notifications.Interfaces.Models;
 using Npgsql;
 using Intotech.Common.Bll;
 using Intotech.Common.Interfaces;
+using Polly.Caching;
 
 namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 {
@@ -76,8 +77,13 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                 StoreHistoryDataWorkTrip(workTrips);
             }
 
-            //WorktripGenLogic.Delete(workTripGenRecord);
-            //workTripGenRecord = WorktripGenLogic.Insert(workTripGenRecord);
+            WorktripGenLogic.Delete(workTripGenRecord);
+            workTripGenRecord = WorktripGenLogic.Insert(workTripGenRecord);
+
+            if (workTripGenRecord == null)
+            {
+                return new ReturnedResponse<TripGenCollocationDto>(new TripGenCollocationDto(), I18nTranslationDep.Translation(I18nTags.Error), false, ErrorCodes.FailedToAddInformation);
+            }
 
             if (workTripGenRecord.Id < 1)
             {
@@ -99,12 +105,21 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
 
             resultDto.SearchId = searchId;
 
+            Vaworktripgengeolocation collocationSource = new Vaworktripgengeolocation();
+            try
+            {
+                collocationSource = VaworktripgengeolocationLogic.Select(m => m.Accountid == accountId).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+
+            }
             //this is implemented distinct in backend
-            Vaworktripgengeolocation collocationSource = VaworktripgengeolocationLogic.Select(m => m.Accountid == accountId).FirstOrDefault();
+            
 
             if (collocationSource == null)
             {
-                return new ReturnedResponse<TripGenCollocationDto>(resultDto, I18nTranslationDep.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
+                return new ReturnedResponse<TripGenCollocationDto>(null, I18nTranslationDep.Translation(I18nTags.NoData), false, ErrorCodes.NoData);
             }
 
             resultDto.SourceAccount = ToAccountCollocationDto.Map(collocationSource);
@@ -159,7 +174,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
             }
 
             Stopwatch stw = new Stopwatch();
-
+            
             stw.Start();
             string rawSelect = "select * from Worktripgen where idaccount != " + workTripGenRecord.Idaccount + " and Fromhour between '" +
                                workTripGenRecord.Fromhour.Value.AddMinutes(-MinutesInterval) + "' and '" + workTripGenRecord.Fromhour.Value.AddMinutes(MinutesInterval) +
@@ -175,10 +190,12 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                                StringUtils.ReplaceCommaWithDot(workTripGenRecord.Longitudeto + distance) + " and Longitudeto >= " + 
                                StringUtils.ReplaceCommaWithDot(workTripGenRecord.Longitudeto - distance) + ";";
 
+            
             List<Worktripgen> collocations = WorktripGenLogic.RawSelect(rawSelect, WorktripGenLogic.MapFromReader).ToList();
-
+            
             long elapsedNpgsql = stw.ElapsedTicks;
             stw.Stop();
+            
             /*List<Worktripgen> collocations = WorktripGenLogic.Select(worktrip => worktrip.Idaccount != workTripGenRecord.Idaccount &&
                workTripGenRecord.Fromhour.Value.IsBetween(worktrip.Fromhour.Value.AddMinutes(-MinutesInterval), worktrip.Fromhour.Value.AddMinutes(MinutesInterval)) &&
                workTripGenRecord.Tohour.Value.IsBetween(worktrip.Tohour.Value.AddMinutes(-MinutesInterval), worktrip.Tohour.Value.AddMinutes(MinutesInterval)) &&
@@ -194,8 +211,8 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                 (workTripGenRecord.Longitudeto - distance) <= worktrip.Longitudeto
             ).ToList();*/
 
-           // long elapsedBoth = stw.ElapsedTicks;
-           // stw.Stop();
+            // long elapsedBoth = stw.ElapsedTicks;
+            // stw.Stop();
 
             foreach (Worktripgen worktrip in collocations)
             {
@@ -229,6 +246,7 @@ namespace Intotech.Wheelo.Bll.Porsche.WorkTripAssociating
                     //ScreenParams = new AssociationNotification() { IdAccountAssociated = 100000027 }
                 
             }
+
         }
 
         protected virtual bool IsCollocationDuplicate(int accountId, int collocatedAccountId)

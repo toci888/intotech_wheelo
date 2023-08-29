@@ -10,5 +10,8 @@ namespace Intotech.Wheelo.Chat.Bll.Persistence
 {
     public class ConversationinvitationLogic : Logic<Conversationinvitation>, IConversationinvitationLogic
     {
+        public ConversationinvitationLogic()
+        {
+        }
     }
 }

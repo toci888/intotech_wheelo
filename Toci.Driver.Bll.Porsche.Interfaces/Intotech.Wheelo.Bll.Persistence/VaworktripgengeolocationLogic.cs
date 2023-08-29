@@ -10,4 +10,5 @@ namespace Intotech.Wheelo.Bll.Persistence;
 
 public class VaworktripgengeolocationLogic : Logic<Vaworktripgengeolocation>, IVaworktripgengeolocationLogic
 {
+
 }

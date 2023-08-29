@@ -93,7 +93,7 @@ public partial class IntotechWheeloContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=host.docker.internal;Port=5500;Database=Intotech.Wheelo;Username=postgres;Password=beatka");
+        => optionsBuilder.UseNpgsql("Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -673,6 +673,7 @@ public partial class IntotechWheeloContext : DbContext
             entity.Property(e => e.Accountid).HasColumnName("accountid");
             entity.Property(e => e.Distancefrom).HasColumnName("distancefrom");
             entity.Property(e => e.Distanceto).HasColumnName("distanceto");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name).HasColumnName("name");
             entity.Property(e => e.Suggestedaccountid).HasColumnName("suggestedaccountid");
             entity.Property(e => e.Suggestedname).HasColumnName("suggestedname");
@@ -710,6 +711,7 @@ public partial class IntotechWheeloContext : DbContext
 
             entity.Property(e => e.Accountidcollocated).HasColumnName("accountidcollocated");
             entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Idaccount).HasColumnName("idaccount");
             entity.Property(e => e.Image).HasColumnName("image");
             entity.Property(e => e.Isdriver).HasColumnName("isdriver");
@@ -733,6 +735,7 @@ public partial class IntotechWheeloContext : DbContext
 
             entity.Property(e => e.Accountid).HasColumnName("accountid");
             entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Image).HasColumnName("image");
             entity.Property(e => e.Isdriver).HasColumnName("isdriver");
             entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
@@ -753,6 +756,7 @@ public partial class IntotechWheeloContext : DbContext
 
             entity.Property(e => e.Driverpassenger).HasColumnName("driverpassenger");
             entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Idaccount).HasColumnName("idaccount");
             entity.Property(e => e.Image).HasColumnName("image");
             entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
@@ -795,6 +799,7 @@ public partial class IntotechWheeloContext : DbContext
                 .ToView("vfriendsuggestions");
 
             entity.Property(e => e.Accountid).HasColumnName("accountid");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name).HasColumnName("name");
             entity.Property(e => e.Suggestedaccountid).HasColumnName("suggestedaccountid");
             entity.Property(e => e.Suggestedfriendid).HasColumnName("suggestedfriendid");
@@ -815,6 +820,7 @@ public partial class IntotechWheeloContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("createdat");
             entity.Property(e => e.Firstname).HasColumnName("firstname");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Idaccount).HasColumnName("idaccount");
             entity.Property(e => e.Idaccountinvited).HasColumnName("idaccountinvited");
             entity.Property(e => e.Invitedfirstname).HasColumnName("invitedfirstname");
@@ -830,6 +836,7 @@ public partial class IntotechWheeloContext : DbContext
 
             entity.Property(e => e.Accountid).HasColumnName("accountid");
             entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Iscurrent).HasColumnName("iscurrent");
             entity.Property(e => e.Isoccasion).HasColumnName("isoccasion");
             entity.Property(e => e.Leftseats).HasColumnName("leftseats");
@@ -852,6 +859,7 @@ public partial class IntotechWheeloContext : DbContext
 
             entity.Property(e => e.Accountidcollocated).HasColumnName("accountidcollocated");
             entity.Property(e => e.Fromhour).HasColumnName("fromhour");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Idaccount).HasColumnName("idaccount");
             entity.Property(e => e.Latitudefrom).HasColumnName("latitudefrom");
             entity.Property(e => e.Latitudeto).HasColumnName("latitudeto");

@@ -11,7 +11,8 @@
         "intotech.wheelo.api": "StartDebugging",
         "intotech.wheelo.dictionaries.api": "StartDebugging",
         "intotech.wheelo.chat.api": "StartDebugging",
-        "intotech.wheelo.imageservice": "StartDebugging"
+        "intotech.wheelo.imageservice": "StartDebugging",
+        "intotech.wheelo.integration.api": "StartDebugging"
       }
     }
   }

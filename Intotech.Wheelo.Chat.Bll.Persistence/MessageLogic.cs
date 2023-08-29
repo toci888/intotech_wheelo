@@ -10,5 +10,8 @@ namespace Intotech.Wheelo.Chat.Bll.Persistence
 {
     public class MessageLogic : Logic<Message>, IMessageLogic
     {
+        public MessageLogic()
+        {
+        }
     }
 }

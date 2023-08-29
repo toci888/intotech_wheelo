@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Dictionaries.Bll.Persistence
 {
-    public abstract class Logic<TModel> : LogicBase<TModel> where TModel : ModelBase
+    public abstract class Logic<TModel> : LogicBase<TModel> where TModel : ModelBase, new()
     {
         protected override DbContext GetEfHandle()
         {

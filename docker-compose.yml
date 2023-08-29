@@ -35,3 +35,15 @@ services:
       context: .
       dockerfile: Intotech.ImageService/Dockerfile
 
+  intotech.wheelo.integration.api:
+    image: ${DOCKER_REGISTRY-}intotechwheelointegrationapi
+    build:
+      context: .
+      dockerfile: Intotech.Wheelo.Integration.Api/Dockerfile
+
+  intotech.wheelo.social.api:
+    image: ${DOCKER_REGISTRY-}intotechwheelosocialapi
+    build:
+      context: .
+      dockerfile: Toci.Driver.Bll.Porsche.Interfaces/Intotech.Wheelo.Social.Api/Dockerfile
+

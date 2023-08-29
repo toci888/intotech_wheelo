@@ -10,4 +10,14 @@ namespace Intotech.Wheelo.Bll.Persistence;
 
 public class WorktripgenLogic : Logic<Worktripgen>, IWorktripgenLogic
 {
+    public override Worktripgen Insert(Worktripgen model)
+    {
+        Random r = new Random();
+        if (model.Searchid == null)
+        {
+            model.Searchid = "123zxc"+r.Next(0,10000);
+        }
+
+        return base.Insert(model);
+    }
 }

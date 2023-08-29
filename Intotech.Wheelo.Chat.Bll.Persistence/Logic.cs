@@ -7,9 +7,14 @@ namespace Intotech.Wheelo.Chat.Bll.Persistence
 {
     public class Logic<TModel> : LogicBase<TModel> where TModel : ModelBase
     {
+        public Logic() : base(true)
+        {
+            
+        }
+
         protected override DbContext GetEfHandle()
         {
-            return new IntotechWheeloChatContext();
+            return new IntotechWheeloChatContext(new DbContextOptions<IntotechWheeloChatContext>());
         }
     }
 }

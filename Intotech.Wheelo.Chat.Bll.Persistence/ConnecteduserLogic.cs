@@ -10,5 +10,9 @@ namespace Intotech.Wheelo.Chat.Bll.Persistence
 {
     public class ConnecteduserLogic : Logic<Connecteduser>, IConnecteduserLogic
     {
+        public ConnecteduserLogic()
+        {
+                
+        }
     }
 }

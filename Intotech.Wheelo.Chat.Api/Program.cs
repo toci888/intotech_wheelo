@@ -20,12 +20,20 @@ using Intotech.Wheelo.Notifications.Interfaces;
 using Intotech.Common.Database.DbSetup;
 using Intotech.Wheelo.Chat.Tests.Persistence.Seed;
 using Intotech.Common;
+using Intotech.Wheelo.Chat.Database.Persistence.Models;
+using Intotech.Common.Database.Interfaces;
+using Intotech.Common.Bll.Interfaces;
+using Intotech.Common.Database;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using System.Data.Entity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddSignalR(e => {
+builder.Services.AddSignalR(e =>
+{
     e.MaximumReceiveMessageSize = 10240000;
     e.HandshakeTimeout = TimeSpan.FromSeconds(30);
     e.ClientTimeoutInterval = TimeSpan.FromMinutes(10);
@@ -65,6 +73,13 @@ builder.Services.AddScoped<IChatNotificationsService, ChatNotificationsService>(
 builder.Services.AddScoped<INotificationManager, NotificationManager>();
 builder.Services.AddScoped<INotificationClient, NotificationClient>();
 
+IntotechWheeloChatContext dbHandleManager
+    = new IntotechWheeloChatContext(
+        () => new IntotechWheeloChatContext(new DbContextOptions<IntotechWheeloChatContext>()));
+
+IServiceCollection serviceCollection = builder.Services.AddDbContext<IntotechWheeloChatContext>((dbContext) 
+    => dbContext.ReplaceService<IntotechWheeloChatContext, IntotechWheeloChatContext>());
+
 
 builder.Services.AddScoped<IMessageLogic, MessageLogic>();
 builder.Services.AddScoped<IRoomLogic, RoomLogic>();
@@ -98,14 +113,15 @@ builder.Services.AddAuthentication(option =>
     };
     cfg.Events = new JwtBearerEvents
     {
-        OnMessageReceived = ctx => {
+        OnMessageReceived = ctx =>
+        {
             if (ctx.Request.Query.ContainsKey("access_token"))
             {
                 ctx.Token = ctx.Request.Query["access_token"]; // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImJhcnRla0BnZy5wbCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJXb2p0ZWsgUnVjaGHFgmEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTY3MzcyNDM4MywiaXNzIjoiaHR0cDovL2ludG90ZWNoLmNvbS5wbCIsImF1ZCI6Imh0dHA6Ly9pbnRvdGVjaC5jb20ucGwifQ.iBZx7ZfDiqs81MhKl4ioiAg4_kTMAOOja_UGTvX-xZo"; 
             }
 
             return Task.CompletedTask;
-    }
+        }
     };
 });
 /*
@@ -129,7 +145,7 @@ if (app.Environment.IsDevelopment())
     {
         //ParentProjectFolderPath = "intotech_wheelo",
         ProjectName = "Intotech.Wheelo.Chat.Database.Persistence",
-        SqlFilePath = Path.Combine(solutionDirectory, EnvironmentUtils.IsDockerEnv ? "../src/Toci.Driver.Bll.Porsche.Interfaces/Wheelo.Chat.sql" : "..\\Toci.Driver.Bll.Porsche.Interfaces\\Wheelo.Chat.sql")
+        SqlFilePath = Path.Combine(solutionDirectory, EnvironmentUtils.IsDockerEnv ? "../src/Toci.Driver.Bll.Porsche.Interfaces/Wheelo.Chat.sql" : "intotech_wheelo/Toci.Driver.Bll.Porsche.Interfaces\\Wheelo.Chat.sql")
     };
 
     DbSetupFacade dbSetup = new DbSetupFacade(dbSetupEntity);

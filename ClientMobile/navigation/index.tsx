@@ -6,6 +6,7 @@ import { ColorSchemeName } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useEffect } from "react";
 import * as Notifications from "expo-notifications";
+import { LinearGradient } from "expo-linear-gradient";
 
 import { AccountScreen } from "../screens/AccountScreen";
 import { SavedScreen } from "../screens/SavedScreen";
@@ -16,8 +17,10 @@ import { SignUpScreen } from "../screens/SignUpScreen";
 import { ForgotPasswordScreen } from "../screens/ForgotPasswordScreen";
 import { ResetPasswordScreen } from "../screens/ResetPasswordScreen";
 import { MessagePropertyScreen } from "../screens/MessagePropertyScreen";
-import { AccountTabParamList, AuthParamList, ChatTabParamList, 
-  RootStackParamList, RootTabParamList } from "../types";
+import {
+  AccountTabParamList, AuthParamList, ChatTabParamList,
+  RootStackParamList, RootTabParamList
+} from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { theme } from "../theme";
 import { CollocationDetailsScreen } from "../screens/CollocationDetailsScreen";
@@ -41,34 +44,51 @@ export default function Navigation({
   colorScheme: ColorSchemeName;
 }) {
 
-  DefaultTheme.dark = colorScheme === themes.dark ? true : false;
-  const wheeloColor = '#6f2da8'
-  DefaultTheme.colors = {
-    ...DefaultTheme.colors,
-    text: 'black',
-    border: 'white',
-    notification: '#db322c', //powiadomienie na statusbarze liczba
-    primary: wheeloColor, 
-    secondary: 'yellow',
-    gray: '#e5eaef',
-    lightGray: '#cccccc'
-  } as any;
+  const wheeloColor = '#6f2da8';
+  
+  let mainTheme;
+  let colors;
 
-  DarkTheme.colors = {
-    ...DarkTheme.colors, 
-    notification: '#db322c', 
-    border: 'black',
-    text: 'white',
-    primary: wheeloColor,
-    secondary: 'green',
-    gray: '#484848',
-    lightGray: '#cccccc'
-  } as any;
+  if(colorScheme === themes.dark) {
+    colors = ['#FF5733', '#000000']
+    mainTheme = {
+      ...DarkTheme,
+      colors: {
+        ...DarkTheme.colors,
+        background: 'transparent',
+        notification: '#db322c',
+        border: 'black',
+        text: 'white',
+        primary: wheeloColor,
+        secondary: 'green',
+        gray: '#484848',
+        lightGray: '#cccccc'
+      },
+    } as any;
+  } else {
+    colors = ['#FF5733', '#ffffff'];
+    mainTheme = {
+      ...DefaultTheme,
+      colors: {
+        ...DefaultTheme.colors,
+        background: 'transparent',
+        text: 'black',
+        border: 'white',
+        notification: '#db322c', //powiadomienie na statusbarze liczba
+        primary: wheeloColor,
+        secondary: 'yellow',
+        gray: '#e5eaef',
+        lightGray: '#cccccc'
+      },
+    } as any;
+  }
 
   return (
-    <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme.dark ? DarkTheme : DefaultTheme}>
-      <RootNavigator />
-    </NavigationContainer>
+    <LinearGradient colors={colors} style={{ flex: 1 }}>
+      <NavigationContainer linking={LinkingConfiguration} theme={mainTheme}>
+        <RootNavigator />
+      </NavigationContainer>
+    </LinearGradient>
   );
 }
 
@@ -149,7 +169,7 @@ function RootNavigator(props: any) {
           name="Chat"
           component={ConversationsScreen}
           options={{ headerTitle: i18n.t("Chat"), headerBackTitle: i18n.t("Back") }}
-        /> 
+        />
       </Stack.Group>
     </Stack.Navigator>)
     :
@@ -158,8 +178,8 @@ function RootNavigator(props: any) {
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 function BottomTabNavigator() {
-  const {colors} = useTheme();
-  
+  const { colors } = useTheme();
+
   return (
     <BottomTab.Navigator
       initialRouteName="Search"
@@ -242,7 +262,7 @@ const ChatStack = () => (
       name="Conversations"
       component={ConversationsScreen}
       options={{ headerTitle: i18n.t("Chat"), headerBackTitle: i18n.t("Back") }}
-    /> 
+    />
     <ChatStackNavigator.Screen
       name="Messages"
       component={MessagesScreen}
