@@ -1,8 +1,9 @@
+import React from "react";
 import { View, StyleSheet, ViewStyle } from "react-native";
 import { Text } from "@ui-kitten/components";
-
 import { Row } from "./Row";
 import { BlackDot } from "./BlackDot";
+
 
 export const BulletedList = ({
   data,
