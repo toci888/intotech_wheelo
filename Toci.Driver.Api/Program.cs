@@ -134,7 +134,7 @@ builder.Services.AddScoped<IAccountIsfaToDto<Vfriend, FriendsDto>, VFriendsToFri
 builder.Services.AddScoped<INotificationManager, NotificationManager>();
 builder.Services.AddScoped<INotificationClient, NotificationClient>();
 
-builder.Services.AddTransient<IDbHandleManager<ModelBase>, DbHandleManager<ModelBase>>();
+builder.Services.AddDbContext<IDbHandleManager<ModelBase>, DbHandleManager<ModelBase>>();
 
 //builder.Services.AddScoped<IEmailManager, EmailManager>();
 

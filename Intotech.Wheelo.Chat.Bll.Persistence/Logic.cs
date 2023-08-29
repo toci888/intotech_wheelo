@@ -14,7 +14,7 @@ namespace Intotech.Wheelo.Chat.Bll.Persistence
 
         protected override DbContext GetEfHandle()
         {
-            return new IntotechWheeloChatContext();
+            return new IntotechWheeloChatContext(new DbContextOptions<IntotechWheeloChatContext>());
         }
     }
 }

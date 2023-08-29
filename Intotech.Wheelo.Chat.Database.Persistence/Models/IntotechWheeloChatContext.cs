@@ -6,7 +6,7 @@ namespace Intotech.Wheelo.Chat.Database.Persistence.Models;
 
 public partial class IntotechWheeloChatContext : DbContext
 {
-    public IntotechWheeloChatContext()
+    public IntotechWheeloChatContext(Func<IntotechWheeloChatContext> value)
     {
     }
 
