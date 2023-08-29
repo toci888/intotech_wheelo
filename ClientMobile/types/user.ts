@@ -1,3 +1,5 @@
+import { StringLocale } from "yup/lib/locale";
+
 export type User = {
   id: number;
   firstName?: string;
@@ -10,4 +12,5 @@ export type User = {
   sessionID?: string;
   accessToken: string;
   refreshtoken: string;
+  image?: string;
 };
