@@ -48,6 +48,7 @@ using Intotech.Wheelo.Common.Translations;
 using Intotech.Common.Bll.Interfaces;
 using Intotech.Common.Database.Interfaces;
 using Intotech.Common.Database;
+using Microsoft.EntityFrameworkCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -134,7 +135,7 @@ builder.Services.AddScoped<IAccountIsfaToDto<Vfriend, FriendsDto>, VFriendsToFri
 builder.Services.AddScoped<INotificationManager, NotificationManager>();
 builder.Services.AddScoped<INotificationClient, NotificationClient>();
 
-builder.Services.AddDbContext<IDbHandleManager<ModelBase>, DbHandleManager<ModelBase>>();
+builder.Services.AddDbContext<DbContext, IntotechWheeloContext>();
 
 //builder.Services.AddScoped<IEmailManager, EmailManager>();
 
@@ -143,7 +144,7 @@ builder.Services.AddSingleton(authenticationSettings);
 builder.Services.AddScoped<ICarDtoLogic, CarDtoLogic>();
 
 builder.Services.AddScoped<ICarService, CarService>();
-
+/*
 builder.Services.AddScoped<IAccountDtoLogic, AccountDtoLogic>();
 builder.Services.AddScoped<IAccountmetadatumDtoLogic, AccountmetadatumDtoLogic>();
 builder.Services.AddScoped<IAccountmodeDtoLogic, AccountmodeDtoLogic>();
@@ -190,7 +191,7 @@ builder.Services.AddScoped<IVtripsparticipantDtoLogic, VtripsparticipantDtoLogic
 builder.Services.AddScoped<IVworktripgengeolocationDtoLogic, VworktripgengeolocationDtoLogic>();
 builder.Services.AddScoped<IWorktripDtoLogic, WorktripDtoLogic>();
 builder.Services.AddScoped<IWorktripgenDtoLogic, WorktripgenDtoLogic>();
-
+*/
 
 builder.Services.AddAuthentication(option =>
 {
