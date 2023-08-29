@@ -24,4 +24,4 @@ export const FacebookLogos = (props:any) => (
       </ClipPath>
     </Defs>
   </Svg>
-)
+);

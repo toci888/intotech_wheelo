@@ -33,5 +33,5 @@ export const GoogleLogo = (props: any) => (
       </ClipPath>
     </Defs>
   </Svg>
-)
+);
 
