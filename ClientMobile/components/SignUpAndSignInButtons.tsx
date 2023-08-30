@@ -1,85 +1,115 @@
 import React from "react";
-import { View, StyleSheet, ViewStyle, Text } from "react-native";
-import { Button } from "@ui-kitten/components";
+import { View, StyleSheet, Text, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { theme } from "../theme";
 import { GoogleButton } from "./GoogleButton";
 import { FacebookButton } from "./FacebookButton";
 import { AppleButton } from "./AppleButton";
-import { OrDivider } from "./OrDivider";
 import { useAuth } from "../hooks/useAuth";
 import useTheme from "../hooks/useTheme";
 import { i18n } from "../i18n/i18n";
+import { WheeloLogo } from "./logos/WheeloLogo";
+import { WheeloIcon } from "./logos/WheeloIcon";
+import { LinkedLogo } from "./logos/LinkedLogo";
 
-export const SignUpAndSignInButtons = ({ style }: { style?: ViewStyle }) => {
+export const SignUpAndSignInButtons = () => {
   const navigation = useNavigation();
   const { colors } = useTheme();
-  
+  const { facebookAuth, googleAuth, appleAuth } = useAuth();
+
   return (
-    <View style={style}>
-      <Text style={[styles.bodyText, { color: colors.lightGray }]}>{i18n.t("SignInToStart")}</Text>
-      <Button onPress={() => navigation.navigate("SignIn")} style={{ 
-        backgroundColor: colors.primary, borderColor: colors.primary, 
-        width: '100%', marginLeft: 'auto', marginRight: 'auto' }}>{i18n.t("SignIn")}</Button>
-      <Text style={[styles.bodyText, { color: colors.lightGray }]}>{i18n.t('YouDontHaveAnAccountYet')}</Text>
-      <Button appearance="outline" onPress={() => navigation.navigate("SignUp")} style={{ 
-        borderColor: colors.primary, width: '100%', marginLeft: 'auto', marginRight: 'auto' }}>
-          <Text>{i18n.t("SignUp")}</Text>
-      </Button>
+    <View style={styles.container}>
+      <WheeloLogo style={{ marginTop: 20, marginBottom: 70 }} />
+      <WheeloIcon style={{ marginBottom: 70 }} />
+      <Text style={styles.sloganTitle}>{i18n.t("WheeloSloganTitle")}</Text>
+      <Text style={styles.sloganSubtitle}>{i18n.t("WheeloSloganSubtitle")}</Text>
+      <Pressable onPress={() => navigation.navigate("SignIn")} style={styles.signInButtonContainer}>
+        <View style={styles.signInButton}>
+          <Text style={styles.SignInTxt}>{i18n.t("SignIn")}</Text>
+        </View>
+      </Pressable>
+      <Pressable onPress={() => navigation.navigate("SignUp")} style={styles.signUpButton}>
+        <Text style={styles.SignUpTxt}>{i18n.t("SignUp")}</Text>
+      </Pressable>
+      <Text style={styles.bodyText}>{i18n.t("OrSignInWith")}</Text>
+      <View style={styles.socialButtonContainer}>
+        <GoogleButton
+          text={i18n.t('ContinueWithGoogle')}
+          style={{ borderColor: colors.text, marginRight: 30 }}
+          onPress={async () => await googleAuth()}
+        />
+        <FacebookButton
+          text={i18n.t('ContinueWithFacebook')}
+          style={{ borderColor: colors.text, marginRight: 30 }}
+          onPress={async () => await facebookAuth()}
+        />
+        <LinkedLogo style={{ marginRight: 30 }} />
+        <AppleButton
+          type="sign-in"
+          onPress={async () => await appleAuth()}
+          style={{ borderColor: colors.text }}
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  signUpButton: {
-    marginVertical: 10,
-    borderColor: theme["color-primary-500"],
-  },
   container: {
-    flex: 1,
-  },
-  defaultMarginHorizontal: { marginHorizontal: 10 },
-  userName: {
-    textAlign: "center",
-    fontWeight: "600",
-    marginBottom: 5,
-    textTransform: "capitalize",
-  },
-  email: {
-    textAlign: "center",
-    fontWeight: "500",
-    marginBottom: 20,
-  },
-  header: {
-    textAlign: "center",
-    marginVertical: 25,
-    marginHorizontal: 70,
-    fontWeight: "600",
-    fontSize: "44px",
-  },
-  middleContainer: {
+    display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: 30,
-    paddingBottom: 50,
-    borderTopColor: theme["color-gray"],
-    borderTopWidth: 2,
   },
-  subheader: { textAlign: "center", paddingHorizontal: 20 },
+  socialButtonContainer:
+  {
+    flexDirection: 'row',
+  },
+  sloganTitle: {
+    textAlign: "center",
+    fontSize: 46,
+    fontStyle: "normal",
+    fontWeight: "700",
+    lineHeight: 120,
+    marginBottom: -70,
+  },
+  sloganSubtitle: {
+    textAlign: "center",
+    fontSize: 46,
+    fontStyle: "normal",
+    fontWeight: "700",
+    lineHeight: 120,
+  },
+  signInButton: {
+    display: 'flex',
+    paddingVertical: 14,
+    paddingHorizontal: 40,
+    alignSelf: 'stretch',
+    backgroundColor: '#9C4DC7',
+    borderRadius: 99,
+    width: 310,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  signInButtonContainer: {
+    marginBottom: 30,
+  },
+  signUpButton: {
+    marginBottom: 30,
+    color: '#DBC2F5'
+  },
+  SignInTxt: {
+    color: '#DBC2F5',
+    fontSize: 20,
+  },
+  SignUpTxt: {
+    color: '#DBC2F5',
+    fontSize: 20,
+  },
   bodyText: {
     marginTop: 10,
     textAlign: "center",
     marginHorizontal: 15,
-    marginBottom: 15,
-  },
-  button: { marginBottom: 15 },
-  specialMarginVertical: { marginTop: 30, marginBottom: 20 },
-  link: { fontWeight: "600" },
-  orContainer: {
-    marginVertical: 30,
-  },
-  brandText: {
-    textAlign: "center",
-  },
+    marginBottom: 30,
+    color: '#DBC2F5'
+  }
 });
