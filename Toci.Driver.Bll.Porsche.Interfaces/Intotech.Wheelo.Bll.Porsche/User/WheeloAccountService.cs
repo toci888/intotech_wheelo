@@ -464,6 +464,7 @@ namespace Intotech.Wheelo.Bll.Porsche.User
 
             userArd.AccessToken = tokenHandler.WriteToken(token);
 
+            //zjeba, ma byc http call
             AccountChatLogic.Insert(new Chat.Database.Persistence.Models.Accountchat()
             {
                 Firstname = userArd.FirstName,

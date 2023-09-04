@@ -28,6 +28,7 @@
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll.Interfaces\Intotech.Common.Bll.Interfaces.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll\Intotech.Common.Bll.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Database.Interfaces\Intotech.Common.Database.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Interfaces\Intotech.Common.Interfaces.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Microservices.Interfaces\Intotech.Common.Microservices.Interfaces.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Microservices\Intotech.Common.Microservices.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Tests\Intotech.Common.Tests.csproj" />
