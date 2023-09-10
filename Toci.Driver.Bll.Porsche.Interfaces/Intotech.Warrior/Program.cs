@@ -17,8 +17,13 @@ using Intotech.Wheelo.Proxies.IntotechWheeloApi.Models;
 using Toci.Driver.Database.Persistence.Models;
 using Intotech.Common;
 using Intotech.Wheelo.Common.Translations.Translation;
+using Intotech.Wheelo.Tests.Integration.Basic;
 
 Console.WriteLine("Warrior is seeding your dbs....");
+
+IntegrationTestsAccountProxy integrationTestsAccountProxy = new IntegrationTestsAccountProxy();
+
+integrationTestsAccountProxy.Login();
 
 //TranslationRendererRunner runner = new TranslationRendererRunner();
 
