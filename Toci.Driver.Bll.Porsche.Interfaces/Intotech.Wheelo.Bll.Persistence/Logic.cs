@@ -5,7 +5,7 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Bll.Persistence
 {
-    public class Logic<TModel> : LogicBase<TModel> where TModel : ModelBase
+    public class Logic<TModel> : LogicBaseCs<TModel> where TModel : ModelBase
     {
         public Logic() : base("Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka") { }
         protected override DbContext GetEfHandle()
