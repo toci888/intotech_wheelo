@@ -4,8 +4,36 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Toci.Driver.Database.Persistence.Models;
 
-public partial class IntotechWheeloContext : DbContext
+public partial class IntotechWheeloContext : DbContext, IDisposable
 {
+    private bool disposed = false;
+
+    public void Dispose()
+    {
+        if (!disposed)
+        {
+           // if (disposing)
+            {
+                // Release any managed resources (e.g., DbContext)
+               
+            }
+
+            // Release any unmanaged resources (e.g., NpgsqlConnection)
+            // You can access the NpgsqlConnection from the DbContext's Database property.
+            // Make sure to check if it's not null before attempting to dispose of it.
+            if (Database.GetDbConnection() is Npgsql.NpgsqlConnection npgsqlConnection)
+            {
+                npgsqlConnection.Dispose();
+            }
+
+            base.Dispose();
+
+            disposed = true;
+        }
+
+        base.Dispose();
+    }
+
     public IntotechWheeloContext()
     {
     }
