@@ -23,6 +23,7 @@ public partial class IntotechWheeloContext : DbContext, IDisposable
             // Make sure to check if it's not null before attempting to dispose of it.
             if (Database.GetDbConnection() is Npgsql.NpgsqlConnection npgsqlConnection)
             {
+                npgsqlConnection.Close();
                 npgsqlConnection.Dispose();
             }
 

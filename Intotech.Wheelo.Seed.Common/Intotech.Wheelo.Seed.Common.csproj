@@ -18,6 +18,7 @@
     <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Tests\Intotech.Common.Tests.csproj" />
     <ProjectReference Include="..\..\Intotech.Common\Intotech.Common\Intotech.Common.csproj" />
     <ProjectReference Include="..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Database\Intotech.Wheelo.Database.csproj" />
     <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
   </ItemGroup>
 

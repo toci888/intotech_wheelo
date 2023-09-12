@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll.Interfaces\Intotech.Common.Bll.Interfaces.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Bll\Intotech.Common.Bll.csproj" />
+    <ProjectReference Include="..\..\Intotech.Wheelo.Database\Intotech.Wheelo.Database.csproj" />
     <ProjectReference Include="..\..\Intotech.Wheelo.Dictionaries.Database.Persistence\Intotech.Wheelo.Dictionaries.Database.Persistence.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Dictionaries.Bll.Persistence.Interfaces\Intotech.Wheelo.Dictionaries.Bll.Persistence.Interfaces.csproj" />
   </ItemGroup>

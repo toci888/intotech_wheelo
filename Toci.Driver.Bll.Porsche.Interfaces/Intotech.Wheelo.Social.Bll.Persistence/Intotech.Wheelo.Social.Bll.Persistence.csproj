@@ -12,6 +12,7 @@
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Database.Interfaces\Intotech.Common.Database.Interfaces.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common\Intotech.Common.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
+    <ProjectReference Include="..\..\Intotech.Wheelo.Database\Intotech.Wheelo.Database.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Social.Bll.Persistence.Interfaces\Intotech.Wheelo.Social.Bll.Persistence.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Social.Database.Persistence\Intotech.Wheelo.Social.Database.Persistence.csproj" />
   </ItemGroup>

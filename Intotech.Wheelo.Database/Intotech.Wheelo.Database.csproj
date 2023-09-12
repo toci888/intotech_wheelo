@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
+    <ProjectReference Include="..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
+    <ProjectReference Include="..\intotech_wheelo\Toci.Driver.Bll.Porsche.Interfaces\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
+    <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

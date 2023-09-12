@@ -11,6 +11,7 @@
     <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Bll\Intotech.Common.Bll.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces\Intotech.Wheelo.Chat.Bll.Persistence.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Chat.Database.Persistence\Intotech.Wheelo.Chat.Database.Persistence.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Chat.Database\Intotech.Wheelo.Chat.Database.csproj" />
   </ItemGroup>
 
 </Project>
