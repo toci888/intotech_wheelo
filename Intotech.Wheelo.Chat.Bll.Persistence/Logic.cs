@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Intotech.Wheelo.Chat.Bll.Persistence
 {
-    public class Logic<TModel> : LogicBase<TModel> where TModel : ModelBase
+    public class Logic<TModel> : LogicBaseCs<TModel> where TModel : ModelBase
     {
         public Logic() : base(true)
         {

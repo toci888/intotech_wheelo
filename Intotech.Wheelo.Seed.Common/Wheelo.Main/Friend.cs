@@ -9,6 +9,11 @@ namespace Intotech.Wheelo.Seed.Common.Wheelo.Main
             List<Friend> list = new List<Friend>();
 
             //TODO Here !
+            list.Add(new Friend()
+            {
+                Idaccount = 1000000001,
+                Idfriend = 1000000002
+            });
 
             InsertCollection(list);
         }
