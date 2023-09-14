@@ -10,24 +10,33 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Tests.Integration.Basic
 {
-    public class IntegrationTestsAccountProxy : HttpClientProxy
+    public class IntegrationTestsAccountProxy : IntegrationTestsBaseProxy
     {
-        public IntegrationTestsAccountProxy()
-        {
-            BaseUrl = "http://89.40.12.1:5105/";
-        }
-
         public virtual AccountRoleDto Register()
         {
             AccountRegisterDto accountRegisterDto = new AccountRegisterDto();
 
             accountRegisterDto.Language = "pl-PL";
-            accountRegisterDto.FirstName = "Kamila";
-            accountRegisterDto.LastName = Guid.NewGuid().ToString();
-            accountRegisterDto.Email = "kamila.kwartnik@gmail.com";
+            accountRegisterDto.FirstName = "Bartek";
+            accountRegisterDto.LastName = "Fartek";
+            accountRegisterDto.Email = "warriorr@poczta.fm";
             accountRegisterDto.Password = "password";
 
             ReturnedResponse<AccountRoleDto> result = ApiPost<ReturnedResponse<AccountRoleDto>, AccountRegisterDto>("api/Account/register", accountRegisterDto, false);
+
+            return result.MethodResult;
+        }
+
+        public virtual AccountRoleDto ConfirmEmail(int code)
+        {
+            EmailConfirmDto emailConfirmDto = new EmailConfirmDto() 
+            {
+                Language = "pl-PL",
+                Email = "warriorr@poczta.fm",
+                Code = code
+            };
+
+            ReturnedResponse<AccountRoleDto> result = ApiPost<ReturnedResponse<AccountRoleDto>, EmailConfirmDto>("api/Account/confirm-email", emailConfirmDto, false);
 
             return result.MethodResult;
         }
@@ -37,12 +46,16 @@ namespace Intotech.Wheelo.Tests.Integration.Basic
             LoginDto element = new LoginDto();
 
             element.Language = "pl-PL";
-            element.Email = "kamila.kwartnik@gmail.com";
+            element.Email = "warriorr@poczta.fm";
             element.Password = "password";
+            element.Method = "method";
+            element.Token = "doopa123";
 
             ReturnedResponse<AccountRoleDto> result = ApiPost<ReturnedResponse<AccountRoleDto>, LoginDto>("api/Account/login", element, false);
 
             return result.MethodResult;
         }
+
+
     }
 }
