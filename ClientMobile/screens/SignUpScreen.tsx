@@ -45,7 +45,7 @@ export const SignUpScreen = () => {
         <ModalHeader text={i18n.t("SignUp")} xShown />
         <View style={styles.container}>
           <Text category={"h5"} style={styles.header}>
-             {/* {i18n.t('SignUp')} */}
+            {/* {i18n.t('SignUp')} */}
           </Text>
           <Formik
             initialValues={{
@@ -62,22 +62,27 @@ export const SignUpScreen = () => {
                 .string()
                 .required("A password is required.")
                 .matches(
-                  /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&-+=()!? "]).{8,128}$/,
+                  /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-._!"`'#%&,:;<>=@{}~\$\(\)\*\+\/\\\?\[\]\^\|]+).{8,128}$/,
                   "Your password must have 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 special character."
                 ),
             })}
             onSubmit={async (values) => {
-              const response: ReturnedResponse<User> | undefined = await nativeRegister(values);
-              if(response) {
-                console.log("valuess", values)
-                console.log("response", response)
-                if ((response.isSuccess === true && response.errorCode === 1)
-                || (response.isSuccess === false && response.errorCode === 16384)) {
-                  navigation.navigate("CodeVerification", {user: values, type: "email"});
-                }
-                else if(response.isSuccess === false) {
-                  console.log("response.isSuccess", response)
-                  commonAlert(response.errorMessage)
+              const response: ReturnedResponse<User> | undefined =
+                await nativeRegister(values);
+              if (response) {
+                console.log("valuess", values);
+                console.log("response", response);
+                if (
+                  (response.isSuccess === true && response.errorCode === 1) ||
+                  (response.isSuccess === false && response.errorCode === 16384)
+                ) {
+                  navigation.navigate("CodeVerification", {
+                    user: values,
+                    type: "email",
+                  });
+                } else if (response.isSuccess === false) {
+                  console.log("response.isSuccess", response);
+                  commonAlert(response.errorMessage);
                 }
               }
             }}
@@ -171,7 +176,7 @@ export const SignUpScreen = () => {
                   </Button>
 
                   <OrDivider style={styles.orContainer} />
-                  <Row style={{justifyContent: "space-evenly"}}>
+                  <Row style={{ justifyContent: "space-evenly" }}>
                     <GoogleButton
                       text="Sign up with Google"
                       style={styles.button}
