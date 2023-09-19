@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{A662B894-F58
 		SQL\cars.txt = SQL\cars.txt
 		SQL\colours.txt = SQL\colours.txt
 		dictionaries.sql = dictionaries.sql
+		SQL\dictionaries.sql = SQL\dictionaries.sql
 		SQL\geog_azg.sql = SQL\geog_azg.sql
 		SQL\geog_azg.txt = SQL\geog_azg.txt
 		SQL\i18n.sql = SQL\i18n.sql
@@ -306,9 +307,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Dictionarie
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C2B0B6FE-15F0-4627-823E-D24B798CB965}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intotech.Wheelo.Chat.Database", "Intotech.Wheelo.Chat.Database\Intotech.Wheelo.Chat.Database.csproj", "{E5DB0EA2-B3C7-44A4-AD22-2DF122FECD0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Chat.Database", "Intotech.Wheelo.Chat.Database\Intotech.Wheelo.Chat.Database.csproj", "{E5DB0EA2-B3C7-44A4-AD22-2DF122FECD0C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Database", "Intotech.Wheelo.Database\Intotech.Wheelo.Database.csproj", "{717F41D1-6933-438A-830D-840CDB793712}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intotech.Wheelo.Dictionaries.Database", "Dictionaries\Intotech.Wheelo.Dictionaries.Database\Intotech.Wheelo.Dictionaries.Database.csproj", "{EED388AB-8C03-45A0-B7C6-733C65F96ADE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -862,6 +865,14 @@ Global
 		{717F41D1-6933-438A-830D-840CDB793712}.Release|Any CPU.Build.0 = Release|Any CPU
 		{717F41D1-6933-438A-830D-840CDB793712}.Release|x64.ActiveCfg = Release|Any CPU
 		{717F41D1-6933-438A-830D-840CDB793712}.Release|x64.Build.0 = Release|Any CPU
+		{EED388AB-8C03-45A0-B7C6-733C65F96ADE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EED388AB-8C03-45A0-B7C6-733C65F96ADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EED388AB-8C03-45A0-B7C6-733C65F96ADE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EED388AB-8C03-45A0-B7C6-733C65F96ADE}.Debug|x64.Build.0 = Debug|Any CPU
+		{EED388AB-8C03-45A0-B7C6-733C65F96ADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EED388AB-8C03-45A0-B7C6-733C65F96ADE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EED388AB-8C03-45A0-B7C6-733C65F96ADE}.Release|x64.ActiveCfg = Release|Any CPU
+		{EED388AB-8C03-45A0-B7C6-733C65F96ADE}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -918,6 +929,7 @@ Global
 		{776274D9-3BA2-42A0-9686-CCFDD5CF65EA} = {D34BE5B1-9625-4499-AD6D-618951CA5060}
 		{21820CA3-3D64-46CB-8F53-AC200C878EF3} = {D34BE5B1-9625-4499-AD6D-618951CA5060}
 		{E5DB0EA2-B3C7-44A4-AD22-2DF122FECD0C} = {07317F59-E9F6-4DA2-B7ED-57CE95D5AE95}
+		{EED388AB-8C03-45A0-B7C6-733C65F96ADE} = {D34BE5B1-9625-4499-AD6D-618951CA5060}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {958786F8-D2E4-4AAC-949D-3CD908D8AE36}

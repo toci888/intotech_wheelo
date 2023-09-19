@@ -18,7 +18,10 @@
     <ProjectReference Include="..\..\Intotech.Common\Intotech.Common.Tests\Intotech.Common.Tests.csproj" />
     <ProjectReference Include="..\..\Intotech.Common\Intotech.Common\Intotech.Common.csproj" />
     <ProjectReference Include="..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
+    <ProjectReference Include="..\Dictionaries\Intotech.Wheelo.Dictionaries.Bll.Persistence.Interfaces\Intotech.Wheelo.Dictionaries.Bll.Persistence.Interfaces.csproj" />
+    <ProjectReference Include="..\Dictionaries\Intotech.Wheelo.Dictionaries.Bll.Persistence\Intotech.Wheelo.Dictionaries.Bll.Persistence.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Database\Intotech.Wheelo.Database.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Dictionaries.Database.Persistence\Intotech.Wheelo.Dictionaries.Database.Persistence.csproj" />
     <ProjectReference Include="..\Toci.Driver.Bll.Porsche.Interfaces\Toci.Driver.Database.Persistence\Toci.Driver.Database.Persistence.csproj" />
   </ItemGroup>
 
