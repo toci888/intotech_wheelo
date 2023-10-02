@@ -14,7 +14,7 @@ public abstract class SeedSocialLogic<TModel> : SeedBase<TModel> where TModel : 
 {
     public SeedSocialLogic()
     {
-        DbHandle = new DbHandleCriticalSectionIW<TModel>(() => null, "Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka");
+        DbHandle = new DbHandleCriticalSectionIW<TModel>(null, "Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka");
     }
 
     protected override DbContext GetEfHandle()

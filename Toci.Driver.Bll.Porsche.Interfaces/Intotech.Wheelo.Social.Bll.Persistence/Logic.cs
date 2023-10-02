@@ -10,7 +10,7 @@ namespace Intotech.Wheelo.Social.Bll.Persistence
     {
         public Logic() : base("Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka")
         {
-            DbHandle = new DbHandleCriticalSectionIW<TModel>(() => null, "Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka");
+            DbHandle = new DbHandleCriticalSectionIW<TModel>(null, "Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka");
         }
         protected override DbContext GetEfHandle()
         {

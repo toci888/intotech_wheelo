@@ -15,19 +15,22 @@ namespace Intotech.Wheelo.Database
 {
     public class DbHandleCriticalSectionIW<TModel> : DbHandleCriticalSection<TModel>, IDbHandle<TModel>, IDisposable where TModel : ModelBase
     {
-        public DbHandleCriticalSectionIW(Func<DbContext> databaseHandle, string connectionString) : base(databaseHandle, connectionString)
+        protected IntotechWheeloContext intotechWheeloContext;
+
+        public DbHandleCriticalSectionIW(IntotechWheeloContext databaseHandle, string connectionString) : base(null, connectionString)
         {
+            intotechWheeloContext = databaseHandle;
         }
 
         public override TModel Update(TModel model)
         {
             //DbContext context = FDatabaseHandle();
             //DbContext context = FDatabaseHandle();
-            using (IntotechWheeloContext context = new IntotechWheeloContext())
+            //using (IntotechWheeloContext context = new IntotechWheeloContext())
             {
-                context.Update(model);
+                intotechWheeloContext.Update(model);
 
-                context.SaveChanges();
+                intotechWheeloContext.SaveChanges();
 
                 //  DatabaseHandle?.Dispose();
 
@@ -38,9 +41,9 @@ namespace Intotech.Wheelo.Database
 
         public override IEnumerable<TModel> Select(Expression<Func<TModel, bool>> filter)
         {
-            using (IntotechWheeloContext context = new IntotechWheeloContext())
+            //using (IntotechWheeloContext context = new IntotechWheeloContext())
             {
-                IEnumerable<TModel> result = context.Set<TModel>().Where(filter).ToList();
+                IEnumerable<TModel> result = intotechWheeloContext.Set<TModel>().Where(filter).ToList();
 
                 //context.Dispose();
 
@@ -53,11 +56,11 @@ namespace Intotech.Wheelo.Database
             //
 
             // insert into product (id, ....) 
-            using (IntotechWheeloContext context = new IntotechWheeloContext())
+            //using (IntotechWheeloContext context = new IntotechWheeloContext())
             {
-                EntityEntry entr = context.Set<TModel>().Add(model);
+                EntityEntry entr = intotechWheeloContext.Set<TModel>().Add(model);
 
-                context.SaveChanges();// here
+                intotechWheeloContext.SaveChanges();// here
 
                 // DatabaseHandle?.Dispose();
 
@@ -68,7 +71,7 @@ namespace Intotech.Wheelo.Database
 
         public override int Delete(TModel model)
         {
-                using (IntotechWheeloContext context = new IntotechWheeloContext())
+                //using (IntotechWheeloContext context = new IntotechWheeloContext())
                 {
                     try
                     {
@@ -77,8 +80,8 @@ namespace Intotech.Wheelo.Database
                         {
                             return 0;
                         }
-                        context.Remove(element);// HERE TO FIX
-                        context.SaveChanges();
+                        intotechWheeloContext.Remove(element);// HERE TO FIX
+                        intotechWheeloContext.SaveChanges();
                     }
                     catch (Exception ex)
                     {
