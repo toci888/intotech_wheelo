@@ -1,8 +1,10 @@
 using Intotech.Common;
+using Intotech.Common.Database.DbSetup;
 using Intotech.Wheelo.Bll.Bentley;
 using Intotech.Wheelo.Bll.Bentley.Interfaces;
 using Intotech.Wheelo.Bll.Persistence;
 using Intotech.Wheelo.Bll.Persistence.Interfaces;
+using Intotech.Wheelo.Seed.Common.Wheelo.Dictionaries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,13 +33,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    string solutionDirectory = EnvironmentUtils.GetSolutionDirectory();
+    /*8string solutionDirectory = EnvironmentUtils.GetSolutionDirectory();
 
-    //new SeedCarsModelsParser().Insert();
-    ////new SeedCars().Insert();
-    //new CarsXmlParser().Insert();
-    //new ColourTxtParser().Insert();
-    //new ProfessionsTxtParser().Insert();
+    DbSetupEntity dbSetupEntity = new DbSetupEntity("beatka", "Intotech.Wheelo.Dictionaries")
+    {
+        //ParentProjectFolderPath = "Toci.Driver.Bll.Porsche.Interfaces",
+        ProjectName = "Intotech.Wheelo.Dictionaries.Database.Persistence",
+        SqlFilePath = Path.Combine(solutionDirectory, EnvironmentUtils.IsDockerEnv ? "SQL/dictionaries.sql" : "SQL\\dictionaries.sql")
+    };
+
+    DbSetupFacade dbSetup = new DbSetupFacade(dbSetupEntity, "intotech_wheelo/Toci.Driver.Bll.Porsche.Interfaces");
+
+    bool res = dbSetup.RunAll(true);*/
+
+    new DictionariesSeedManager().SeedAllDb();
 }
 
 app.UseHttpsRedirection();

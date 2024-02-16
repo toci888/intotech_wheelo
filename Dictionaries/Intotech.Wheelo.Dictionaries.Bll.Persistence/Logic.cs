@@ -1,6 +1,7 @@
 ﻿using Intotech.Common.Bll;
 using Intotech.Common.Bll.Interfaces;
 using Intotech.Wheelo.Database;
+using Intotech.Wheelo.Dictionaries.Database;
 using Intotech.Wheelo.Dictionaries.Database.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,7 +17,7 @@ namespace Intotech.Wheelo.Dictionaries.Bll.Persistence
     {
         public Logic() : base("Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka")
         {
-            DbHandle = new DbHandleCriticalSectionIW<TModel>(() => null, "Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka");
+            DbHandle = new DbHandleCriticalSectionIWD<TModel>(() => null, "Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka");
         }
 
         protected override DbContext GetEfHandle()

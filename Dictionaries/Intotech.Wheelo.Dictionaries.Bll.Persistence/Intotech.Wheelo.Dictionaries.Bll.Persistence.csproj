@@ -12,6 +12,7 @@
     <ProjectReference Include="..\..\Intotech.Wheelo.Database\Intotech.Wheelo.Database.csproj" />
     <ProjectReference Include="..\..\Intotech.Wheelo.Dictionaries.Database.Persistence\Intotech.Wheelo.Dictionaries.Database.Persistence.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Dictionaries.Bll.Persistence.Interfaces\Intotech.Wheelo.Dictionaries.Bll.Persistence.Interfaces.csproj" />
+    <ProjectReference Include="..\Intotech.Wheelo.Dictionaries.Database\Intotech.Wheelo.Dictionaries.Database.csproj" />
   </ItemGroup>
 
 </Project>

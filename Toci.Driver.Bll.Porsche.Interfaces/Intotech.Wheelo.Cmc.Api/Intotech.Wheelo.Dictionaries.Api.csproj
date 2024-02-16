@@ -28,6 +28,7 @@
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common.Microservices\Intotech.Common.Microservices.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Intotech.Common\Intotech.Common.csproj" />
     <ProjectReference Include="..\..\..\Intotech.Common\Toci.Common.Database\Intotech.Common.Database.csproj" />
+    <ProjectReference Include="..\..\Intotech.Wheelo.Seed.Common\Intotech.Wheelo.Seed.Common.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Bentley.Interfaces\Intotech.Wheelo.Bll.Bentley.Interfaces.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Bentley\Intotech.Wheelo.Bll.Bentley.csproj" />
     <ProjectReference Include="..\Intotech.Wheelo.Bll.Models\Intotech.Wheelo.Bll.Models.csproj" />
