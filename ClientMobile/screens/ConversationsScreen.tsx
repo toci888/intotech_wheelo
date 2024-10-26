@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
-  ActivityIndicator,
   FlatList,
   Pressable,
   RefreshControl,
@@ -9,38 +8,29 @@ import {
 } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
-
 import { useConversationsQuery } from "../hooks/queries/useConversationsQuery";
 import { Loading } from "../components/Loading";
 import { useUser } from "../hooks/useUser";
-import { SignUpOrSignInScreen } from "./SignUpOrSignInScreen";
-import { theme } from "../theme";
-import { Row } from "../components/Row";
 import { i18n } from "../i18n/i18n";
 import useTheme from "../hooks/useTheme";
 import { socket } from "../constants/socket";
+import { Row } from "../components/Row";
 
 export const ConversationsScreen = () => {
   const { user } = useUser();
   const conversations = useConversationsQuery();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
-  const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
-  console.log("conversations: ", conversations);
-  // navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
-  // if (!user) return <SignUpOrSignInScreen />;
 
-  if (conversations.isLoading) return <Loading />;
-
-  if (!conversations?.data || conversations.data.length === 0) {
-    return <Text>{i18n.t("YouHaveNoMessages")}</Text>;
-  }
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await conversations.refetch();
+    setRefreshing(false);
+  }, [conversations]);
 
   const handleMessagePress = async (roomId: string, recipientName: string) => {
     await socket.invoke("JoinRoom", roomId);
-    console.log("Message Pressed", roomId, recipientName);
-    // navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
     navigate("Chat", {
       screen: "Messages",
       params: {
@@ -50,18 +40,20 @@ export const ConversationsScreen = () => {
     });
   };
 
+  if (conversations.isLoading) return <Loading />;
+
+  if (!conversations?.data || conversations.data.length === 0) {
+    return <Text>{i18n.t("YouHaveNoMessages")}</Text>;
+  }
+
   return (
-    <View>
-      {refreshing ? <ActivityIndicator /> : null}
+    <View style={styles.container}>
       <FlatList
         showsVerticalScrollIndicator={true}
         data={conversations.data}
         keyExtractor={(item) => item.idRoom.toString()}
         refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={() => console.log("pull-to-refresh")}
-          />
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
         renderItem={({ item }) => (
           <Pressable
@@ -94,6 +86,9 @@ export const ConversationsScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   message: {
     justifyContent: "center",
     height: 100,
@@ -101,7 +96,14 @@ const styles = StyleSheet.create({
     borderBottomColor: theme["color-light-gray"],
     borderBottomWidth: 1,
   },
-  messageTitle: { fontWeight: "bold", width: "80%" },
-  row: { justifyContent: "space-between" },
-  messageText: { paddingTop: 10 },
+  messageTitle: {
+    fontWeight: "bold",
+    width: "80%",
+  },
+  row: {
+    justifyContent: "space-between",
+  },
+  messageText: {
+    paddingTop: 10,
+  },
 });
