@@ -14,9 +14,9 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Chat.Database
 {
-        public class DbHandleCriticalSectionIWC<TModel> : DbHandleCriticalSection<TModel>, IDbHandle<TModel>, IDisposable where TModel : ModelBase
+        public class DbHandleCriticalSectionIWC<TModel> : DbHandleCriticalSection<TModel>, IDbHandle<TModel> where TModel : ModelBase
         {
-            public DbHandleCriticalSectionIWC(Func<DbContext> databaseHandle, string connectionString) : base(databaseHandle, connectionString)
+            public DbHandleCriticalSectionIWC(Func<DbContext> databaseHandle, string connectionString) : base(databaseHandle(), connectionString)
             {
             }
 

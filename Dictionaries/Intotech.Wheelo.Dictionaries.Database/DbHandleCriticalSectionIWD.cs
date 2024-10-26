@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 
 namespace Intotech.Wheelo.Dictionaries.Database
 {
-    public class DbHandleCriticalSectionIWD<TModel> : DbHandleCriticalSection<TModel>, IDbHandle<TModel>, IDisposable where TModel : ModelBase
+    public class DbHandleCriticalSectionIWD<TModel> : DbHandleCriticalSection<TModel>, IDbHandle<TModel> where TModel : ModelBase
     {
-        public DbHandleCriticalSectionIWD(Func<DbContext> databaseHandle, string connectionString) : base(databaseHandle, connectionString)
+        public DbHandleCriticalSectionIWD(Func<DbContext> databaseHandle, string connectionString) : base(databaseHandle(), connectionString)
         {
         }
 

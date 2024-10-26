@@ -15,7 +15,7 @@ namespace Intotech.Wheelo.Dictionaries.Bll.Persistence
 {
     public abstract class Logic<TModel> : LogicBaseCs<TModel> where TModel : ModelBase, new()
     {
-        public Logic() : base("Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka")
+        public Logic() : base(true)
         {
             DbHandle = new DbHandleCriticalSectionIWD<TModel>(() => null, "Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka");
         }

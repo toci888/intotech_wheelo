@@ -13,6 +13,7 @@ using Toci.Driver.Database.Persistence.Models;
 using Intotech.Wheelo.Common.Interfaces.Models;
 using System.Security.Principal;
 using System.Xml.Linq;
+using Npgsql;
 
 namespace Toci.Driver.Api.Controllers
 {
@@ -53,7 +54,13 @@ namespace Toci.Driver.Api.Controllers
             //};
 
             //return new ReturnedResponse<TripGenCollocationDto>(result, I18nTranslationDep.Translation(I18nTags.Success), true, Intotech.Wheelo.Common.Interfaces.ErrorCodes.Success);
-            return Service.SetWorkTripGetCollocations(workTripGen);
+            ReturnedResponse<TripGenCollocationDto> result = Service.SetWorkTripGetCollocations(workTripGen);
+
+            //NpgsqlConnection.ClearAllPools();
+            //NpgsqlConnection.ClearPool();
+
+            return result;
+
         }
 
         [HttpGet("collocated-account")]

@@ -3,8 +3,10 @@ using Intotech.Common.Database;
 using Intotech.Common.Database.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -13,13 +15,20 @@ using Toci.Driver.Database.Persistence.Models;
 
 namespace Intotech.Wheelo.Database
 {
-    public class DbHandleCriticalSectionIW<TModel> : DbHandleCriticalSection<TModel>, IDbHandle<TModel>, IDisposable where TModel : ModelBase
+    public class DbHandleCriticalSectionIW<TModel> : DbHandleCriticalSection<TModel>, IDbHandle<TModel> where TModel : ModelBase
     {
-        protected IntotechWheeloContext intotechWheeloContext;
+        private static IntotechWheeloContext intotechWheeloContext;
+        private static DbConnection dbConnection;
 
         public DbHandleCriticalSectionIW(IntotechWheeloContext databaseHandle, string connectionString) : base(null, connectionString)
         {
-            intotechWheeloContext = databaseHandle;
+            if (intotechWheeloContext == null)
+            {
+                intotechWheeloContext = databaseHandle;
+                dbConnection = intotechWheeloContext.Database.GetDbConnection();
+                
+                //dbConnection.ConnectionString = connectionString;
+            }
         }
 
         public override TModel Update(TModel model)
@@ -28,11 +37,22 @@ namespace Intotech.Wheelo.Database
             //DbContext context = FDatabaseHandle();
             //using (IntotechWheeloContext context = new IntotechWheeloContext())
             {
+                //intotechWheeloContext.Database.SetDbConnection(dbConnection);
+                //dbConnection.Open();
                 intotechWheeloContext.Update(model);
 
                 intotechWheeloContext.SaveChanges();
 
                 //  DatabaseHandle?.Dispose();
+                NpgsqlConnection connection = intotechWheeloContext.Database.GetDbConnection() as NpgsqlConnection;
+
+                if (connection != null)
+                {
+                   // NpgsqlConnection.ClearPool(connection);
+
+                    //connection.Close();
+                    // connection.Dispose();
+                }
 
                 return model;
             }
@@ -43,9 +63,20 @@ namespace Intotech.Wheelo.Database
         {
             //using (IntotechWheeloContext context = new IntotechWheeloContext())
             {
+                //intotechWheeloContext.Database.SetDbConnection(dbConnection);
+                //dbConnection.Open();
+
                 IEnumerable<TModel> result = intotechWheeloContext.Set<TModel>().Where(filter).ToList();
 
                 //context.Dispose();
+                NpgsqlConnection connection = intotechWheeloContext.Database.GetDbConnection() as NpgsqlConnection;
+
+                if (connection != null)
+                {
+                   // NpgsqlConnection.ClearPool(connection);
+                    //connection.Close();
+                    // connection.Dispose();
+                }
 
                 return result;
             }
@@ -58,11 +89,22 @@ namespace Intotech.Wheelo.Database
             // insert into product (id, ....) 
             //using (IntotechWheeloContext context = new IntotechWheeloContext())
             {
+                //intotechWheeloContext.Database.SetDbConnection(dbConnection);
+                //dbConnection.Open();
+               
                 EntityEntry entr = intotechWheeloContext.Set<TModel>().Add(model);
 
                 intotechWheeloContext.SaveChanges();// here
 
                 // DatabaseHandle?.Dispose();
+                NpgsqlConnection connection = intotechWheeloContext.Database.GetDbConnection() as NpgsqlConnection;
+
+                if (connection != null)
+                {
+                    //NpgsqlConnection.ClearPool(connection);
+                    //connection.Close();
+                   // connection.Dispose();
+                }
 
                 return (TModel)(entr.Entity);
             }
@@ -72,26 +114,38 @@ namespace Intotech.Wheelo.Database
         public override int Delete(TModel model)
         {
                 //using (IntotechWheeloContext context = new IntotechWheeloContext())
+                
+            //intotechWheeloContext.Database.SetDbConnection(dbConnection);
+            //dbConnection.Open();
+            try
+            {
+                TModel element = Select(m => m.Id == model.Id).FirstOrDefault();
+                if (element == null)
                 {
-                    try
-                    {
-                        TModel element = Select(m => m.Id == model.Id).FirstOrDefault();
-                        if (element == null)
-                        {
-                            return 0;
-                        }
-                        intotechWheeloContext.Remove(element);// HERE TO FIX
-                        intotechWheeloContext.SaveChanges();
-                    }
-                    catch (Exception ex)
-                    {
-
-                    }
-
-                    // DatabaseHandle?.Dispose();
-
-                    return 1;
+                    return 0;
                 }
+                intotechWheeloContext.Remove(element);// HERE TO FIX
+                intotechWheeloContext.SaveChanges();
+
+                NpgsqlConnection connection = intotechWheeloContext.Database.GetDbConnection() as NpgsqlConnection;
+
+                if (connection != null)
+                {
+                    //NpgsqlConnection.ClearPool(connection);
+
+                    //connection.Close();
+                    // connection.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            // DatabaseHandle?.Dispose();
+
+            return 1;
+                
             
         }
     }

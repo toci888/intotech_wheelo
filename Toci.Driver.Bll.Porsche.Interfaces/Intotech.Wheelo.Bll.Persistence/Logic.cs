@@ -8,7 +8,7 @@ namespace Intotech.Wheelo.Bll.Persistence
 {
     public class Logic<TModel> : LogicBaseCs<TModel> where TModel : ModelBase
     {
-        public Logic() : base("Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka")
+        public Logic() : base(true)
         {
             DbHandle = new DbHandleCriticalSectionIW<TModel>(new IntotechWheeloContext(), "Host=localhost;Database=Intotech.Wheelo;Username=postgres;Password=beatka");
         }
